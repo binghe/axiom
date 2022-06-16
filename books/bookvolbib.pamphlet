@@ -17079,13 +17079,13 @@ paragraph for those unfamiliar with the terms.
     subtyping based on a set C of basic subtyping judgements, and show
     that coercive subtyping is a conservative extension and, in a more
     general sense, a definitional extension.  We introduce an intermediate
-    system, the star-calculus T[C]∗ , in which the positions that 
-    require coercion insertions are marked, and show that T[C]∗ is a
-    conservative extension of T and that T[C]∗ is equivalent to T[C].
+    system, the star-calculus T[C]* , in which the positions that 
+    require coercion insertions are marked, and show that T[C]* is a
+    conservative extension of T and that T[C]* is equivalent to T[C].
     This makes clear what we mean by coercive subtyping being a
     conservative extension, on the one hand, and amends a technical
     problem that has led to a gap in the earlier conservativity proof, on
-    the other. We also compare coercive subtyping with the ‘ordinary'
+    the other. We also compare coercive subtyping with the `ordinary'
     notion of subtyping - subsumptive subtyping, and show that the former
     is adequate for type theories with canonical objects while the latter
     is not. An improved implementation of coercive subtyping is done in
@@ -18348,7 +18348,7 @@ paragraph for those unfamiliar with the terms.
   pages = "245-285",
   abstract =
     "Subtyping appears in a variety of programming languages, in the form
-    of the ‘automatic coercion' of integers to reals, Pascal subranges,
+    of the `automatic coercion' of integers to reals, Pascal subranges,
     and subtypes arising from class hierarchies in languages with
     inheritance. A general framework based on untyped lambda calculus
     provides a simple semantic model of subtyping and is used to
@@ -32797,7 +32797,7 @@ when shown in factored form.
     this. The human defines concepts, constructs algorithms and provides
     proofs, while the machine checks that the definitions are well formed
     and the proofs and computations are correct. Results formalized so far
-    demonstrate the feasibility of this ‘computer mathematics'. Also there
+    demonstrate the feasibility of this `computer mathematics'. Also there
     are very good applications. The challenge is to make the systems more
     mathematician-friendly, by building libraries and tools. The eventual
     goal is to help humans to learn, develop, communicate, referee and
@@ -38157,11 +38157,11 @@ when shown in factored form.
     problem in computer algebra. While most previous results have
     focused on the worst-case complexity, we instead employ the
     technique of adaptive analysis to give an improvement in many
-    ‘‘easy'' cases. We present two adaptive measures and methods
+    ``easy'' cases. We present two adaptive measures and methods
     for polynomial multiplication, and also show how to effectively
     combine them to gain both advantages. One useful feature of these
     algorithms is that they essentially provide a gradient between
-    existing ‘‘sparse'' and ‘‘dense'' methods. We prove that these
+    existing ``sparse'' and ``dense'' methods. We prove that these
     approaches provide significant improvements in many cases but
     in the worst case are still comparable to the fastest existing
     algorithms.",
@@ -39238,19 +39238,19 @@ when shown in factored form.
     reality.  Many different axioms and their interrelationship are
     discussed.  We show that there is a fundamental problem in bish
     (Bishop's school of constructive mathematics) with regard to its
-    current definition of ‘continuous function'. This problem is closely
-    related to the definition in bish of ‘locally compact'.
+    current definition of `continuous function'. This problem is closely
+    related to the definition in bish of `locally compact'.
 
     Possible approaches to this problem are discussed. Topology seems to
     be a key to understanding many issues. We offer several new
     simplifying axioms, which can form bridges between the various
     branches of constructive mathematics and classical mathematics
-    (‘reuniting the antipodes').  We give a simplification of basic
-    intuitionistic theory, especially with regard to so-called ‘bar
+    (`reuniting the antipodes').  We give a simplification of basic
+    intuitionistic theory, especially with regard to so-called `bar
     induction'.  We then plead for a limited number of axiomatic systems,
     which differentiate between the various branches of mathematics.
     Finally, in the appendix we offer bish an elegant topological
-    definition of ‘locally compact', which unlike the current definition
+    definition of `locally compact', which unlike the current definition
     is equivalent to the usual classical and/or intuitionistic definition
     in classical and intuitionistic mathematics respectively.",
   paper = "Waal03.pdf"
@@ -39499,7 +39499,7 @@ when shown in factored form.
     The PVS system solves the problem of partial functions
     differently. PVS generates type-correctness conditions (TCCs) for
     statements in its language. These are proof obligations that have to
-    be satisfied ‘on the side' to show that statements are well-formed.
+    be satisfied `on the side' to show that statements are well-formed.
 
     We propose a TCC-like approach for the treatment of partial functions
     in type theory. We add domain conditions (DCs) to classical
@@ -39631,13 +39631,13 @@ when shown in factored form.
     judgements, and show that coercive subtyping is a conservative
     extension and, in a more general sense, a definitional extension.
     
-    We introduce an intermediate system, the star-calculus $T[C]^∗$ , in
+    We introduce an intermediate system, the star-calculus $T[C]^*$ , in
     which the positions that require coercion insertions are marked, and
-    show that $T[C]^∗$ is a conservative extension of $T$ and that $T[C]^*$
+    show that $T[C]^*$ is a conservative extension of $T$ and that $T[C]^*$
     is equivalent to $T[C]$.  Further more, in order to capture all the
     properties of the coercive subtyping framework, we introduce another
     intermediate system $T[C]_{0K}$ which does not contain the coercion
-    application rules.  We show that $T[C]^∗$ is actually a definitional
+    application rules.  We show that $T[C]^*$ is actually a definitional
     extension of $T[C]_{0K}$, which is a conservative extension of $T$.
     This makes clear what we mean by coercive subtyping being a
     conservative extension and amends a technical problem that has led to
@@ -41572,10 +41572,10 @@ when shown in factored form.
   volume = "47",
   pages = "859-882",
   abstract =
-    "We define the ‘‘combinatorial part'' of a Tarski formula in which
+    "We define the ``combinatorial part'' of a Tarski formula in which
     equalities and inequalities are in factored or partially-factored
     form. The combinatorial part of a formula contains only
-    ‘‘monomial inequalities'',which are sign conditions on monomials.  We 
+    ``monomial inequalities'',which are sign conditions on monomials.  We 
     give efficient algorithms for answering some basic questions about
     conjunctions of monomial inequalities and prove the
     NP-Completeness/Hardness of some others. By simplifying the
@@ -44736,7 +44736,7 @@ when shown in factored form.
     "There are two different styles for writing natural deduction proofs:
     the 'Gentzen' style in which a proof is a tree with the conclusion at
     the root and the assumptions at the leaves, and the 'Fitch' style
-    (also called ‘flag' style) in which a proof consists of lines that are
+    (also called `flag' style) in which a proof consists of lines that are
     grouped together in nested boxes.  
     
     In the world of proof assistants these two kinds of natural deduction
@@ -57390,7 +57390,7 @@ Proc ISSAC 97 pp172-175 (1997)
     \item numeric explicit computation in a special arithmetic domain: 
     exact rational or integer, high-precision software floating-point, 
     interval, or conventional hardware floating-point.
-    \item ‘symbolic' explicit computation with polynomial or other 
+    \item `symbolic' explicit computation with polynomial or other 
     expression entries,
     \item (implicit) matrix computation with symbols defined over a 
     (non-commuting) ring.
@@ -72894,7 +72894,7 @@ Math. and Computers in Simulation 42 pp 541-549 (1996)
     into an unperturbed Hamiltonian and a perturbing term, use of the
     basis formed by the eigenfunctions of the unperturbed Hamiltonian)
     while turning out to be a variational technique. Furthermore, it is
-    easily implemented by means of the widely used ‘‘electronic
+    easily implemented by means of the widely used ``electronic
     scratchpad,'' MathCAD 2.0, using an inexpensive computer. As an
     example of the method, the problem of a harmonic oscillator with a
     quartic perturbing term is examined.",
@@ -88213,7 +88213,7 @@ SIAM J. Sci. Statist. Comput. 3 387--407. (1982)
     proofs. Therefore, although a formal proof sketch contains gaps in
     the reasoning from a formal point of view (which is why we call it a
     sketch ), a mathematician probably would call such a text just a
-    ‘proof'.",
+    `proof'.",
   paper = "Wied03.pdf",
   keywords = "printed"
 }
