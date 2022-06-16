@@ -3611,7 +3611,7 @@ cflow --emacs -l -n -b -T --omit-arguments viewman.c
 #include <bstring.h>
 #endif
 #include <errno.h>
-#if !defined(BSDplatform)
+#if !defined(BSDplatform) && !defined(MACOSXplatform)
 #include <malloc.h>
 #endif
 #include <signal.h>
@@ -23306,11 +23306,7 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{bsdsignal.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/signal.h"
-#else
 #include <signal.h> 
-#endif
 
 \getchunk{include/bsdsignal.h1}
 
@@ -23391,14 +23387,10 @@ of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{cfuns-c.c}
 
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <stdlib.h>
 #include <string.h>
-#if !defined(BSDplatform)
+#if !defined(BSDplatform) && !defined(MACOSXplatform)
 #include <malloc.h>
 #endif
 #include <sys/types.h>
@@ -23690,11 +23682,7 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{edin.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <string.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -24805,11 +24793,7 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{fnct-key.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -26273,20 +26257,12 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{sockio-c.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <string.h>
-#if defined(MACOSXplatform)
-#include "/usr/include/signal.h"
-#else
 #include <signal.h>
-#endif
 
 #if defined(SGIplatform)
 #include <bstring.h>
@@ -27883,11 +27859,7 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{util.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <sys/types.h>
 #include <stdio.h>
 #include <errno.h>
@@ -28015,18 +27987,10 @@ build fails anyway. On MACOSX the [[/usr/include/sys]] versions
 of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{wct.c}
-#if defined(MACOSXplatform)
-#include "/usr/include/unistd.h"
-#else
 #include <unistd.h>
-#endif
 #include <string.h>
 #include <fcntl.h>
-#if defined(MACOSXplatform)
-#include "/usr/include/time.h"
-#else
 #include <time.h>
-#endif
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -28717,7 +28681,7 @@ find_wct(void)
 
 #include <stdio.h>
 #include <stdlib.h>
-#if !defined(BSDplatform)
+#if !defined(BSDplatform) && !defined(MACOSXplatform)
 #include <malloc.h>
 #endif
 
@@ -28919,7 +28883,7 @@ XDitherArcs(Display *display,Drawable  drawable, GC gc, XArc *arcs,int narcs)
 #ifndef MSYSplatform
 
 #include <stdio.h>
-#if !defined(BSDplatform)
+#if !defined(BSDplatform) && !defined(MACOSXplatform)
 #include <malloc.h>
 #endif
 #include <stdlib.h>
@@ -30086,7 +30050,7 @@ PSFiles= ${PS}/colorpoly.ps ${PS}/colorwol.ps  ${PS}/draw.ps      \
          ${PS}/end.ps       ${PS}/fillarc.ps   ${PS}/fillpoly.ps  \
          ${PS}/fillwol.ps   ${PS}/header.ps    ${PS}/setup.ps
 
-CFLAGS  = ${CCF} -I${SRC}/include
+CFLAGS  = ${CCF} -I${SRC}/include -I{SYS}platform
 LDFLAGS = ${LDF} -lX11 -lm -lXpm
 
 VLIBS=${LIB}/sockio-c.o ${LIB}/util.o  ${LIB}/bsdsignal.o 

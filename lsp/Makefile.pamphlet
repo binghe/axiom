@@ -950,7 +950,6 @@ This means that all other lisp derived images will know how to tangle.
                  ' (system::save-system "${OUT}/tangle"))' | ${OUT}/lisp )
 	@mv ${OUT}/tangle ${OUT}/lisp 
 	@echo 9999 lisp tangle version created
-           
 \end{chunk}
 GCL 2.5.2 changes are due to David Mentre (david.mentre@wanadoo.fr).
 The key problem to solve is that 2.5.2 uses the common lisp 2.0 standard.
@@ -1801,6 +1800,48 @@ gcldir:
 \getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
 \getchunk{gcl-2.6.13pre.collectfn.fix}
 \getchunk{gcl-2.6.13pre.gmp4.mpn.k8.fix}
+\getchunk{gcl-2.6.13pre.configure.patch}
+\getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
+\getchunk{gclConfigureMake}
+	@echo 13 finished system build on `date` | tee >gcldir
+
+ccldir: ${LSP}/ccl/Makefile
+	@echo 14 building CCL
+	@( cd ccl ; ${ENV} ${MAKE} )
+
+${LSP}/ccl/Makefile: ${LSP}/ccl/Makefile.pamphlet
+	@echo 15 making ${LSP}/ccl/Makefile from ${LSP}/ccl/Makefile.pamphlet
+	@( cd ccl ; ${DOCUMENT} ${NOISE} Makefile )
+
+document:
+	@echo 16 making docs in ${LSP}
+	@( cd ccl ; ${ENV} ${MAKE} document )
+
+clean:
+	@echo 17 cleaning ${LSP}/ccl
+	@( cd ccl ; ${ENV} ${MAKE} clean )
+
+\end{chunk}
+
+\subsection{The GCL-2.6.13pre114 stanza}
+This stanza will be written when the GCLVERSION variable is
+``gcl-2.6.13pre114''. It will overwrite the default version. See the 
+top level Makefile.pamphlet.
+\begin{chunk}{gcl-2.6.13pre114}
+# gcl version 2.6.13pre114
+OUT=${OBJ}/${SYS}/bin
+
+all:
+	@echo 1 building ${LSP} ${GCLVERSION}
+
+gcldir: 
+	@echo 2 building ${GCLVERSION}
+	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+\getchunk{gcl-2.6.13pre.h.linux.defs.patch}
+\getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
+\getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
+\getchunk{gcl-2.6.13pre.unixport.makefile.patch}
+\getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
 \getchunk{gcl-2.6.13pre.configure.patch}
 \getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
 \getchunk{gclConfigureMake}

@@ -1,0 +1,21 @@
+--- gcl-2.6.13pre114.orig/lsp/gcl_mislib.lsp	2022-06-16 12:11:29.000000000 +0200
++++ gcl-2.6.13pre114/lsp/gcl_mislib.lsp	2022-06-16 12:24:26.000000000 +0200
+@@ -124,7 +124,8 @@
+ (defun complement (fn)
+   (lambda (&rest args) (not (apply fn args))))
+ 
+-(defun default-system-banner ()
++(defun default-system-banner () "")
++#|
+   (let (gpled-modules)
+     (dolist (l '(:unexec :bfd :readline :xgcl))
+       (when (member l *features*)
+@@ -141,7 +142,7 @@
+ 	    "Modifications of this banner must retain notice of a compatible license"
+ 	    "Dedicated to the memory of W. Schelter"
+ 	    "Use (help) to get some basic information on how to use GCL.")))
+-
++|#
+  (defun lisp-implementation-version nil
+    (format nil "GCL ~a.~a.~a"
+ 	   *gcl-major-version*

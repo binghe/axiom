@@ -1,0 +1,11 @@
+--- gcl-2.6.13pre114.orig/cmpnew/gcl_cmpmain.lsp	2022-06-16 12:11:29.000000000 +0200
++++ gcl-2.6.13pre114/cmpnew/gcl_cmpmain.lsp	2022-06-16 12:19:42.000000000 +0200
+@@ -479,7 +479,7 @@
+ 	  (t (setq dir ".")))
+     (setq na  (namestring
+ 	       (make-pathname :name name :type (pathname-type(first args)))))
+-   (format nil  "~a ~a -I~a ~a ~a -c ~a -o ~a ~a"
++   (format nil  "~a ~a -I~a ~a ~a -c -w -std=gnu89 ~a -o ~a ~a"
+ 	   (if *prof-p* (remove-flag "-fomit-frame-pointer" *cc*) *cc*)
+ 	   (if *prof-p* " -pg " "")
+ 	   (concatenate 'string si::*system-directory* "../h")

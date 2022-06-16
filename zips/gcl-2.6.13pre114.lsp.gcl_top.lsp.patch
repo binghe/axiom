@@ -1,0 +1,16 @@
+--- gcl-2.6.13pre114.orig/lsp/gcl_top.lsp	2022-06-16 12:11:29.000000000 +0200
++++ gcl-2.6.13pre114/lsp/gcl_top.lsp	2022-06-16 12:25:49.000000000 +0200
+@@ -86,11 +86,11 @@
+ 	 ((when (fboundp 'probe-file) (probe-file "init.lsp")) (load "init.lsp"))))
+       (when (if (symbolp *top-level-hook*) (fboundp *top-level-hook*) (functionp *top-level-hook*))
+ 	(funcall *top-level-hook*)))
+-
++#|
+     (when (boundp '*system-banner*)
+       (format t *system-banner*)
+       (format t "Temporary directory for compiler files:~%~a~%" *tmp-dir*))
+-
++|#
+     (loop
+       (setq +++ ++ ++ + + -)
+       (if *no-prompt* (setq *no-prompt* nil)

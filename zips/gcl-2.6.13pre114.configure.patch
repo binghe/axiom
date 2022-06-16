@@ -1,0 +1,71 @@
+--- gcl-2.6.13pre114.orig/configure	2022-06-16 12:11:28.000000000 +0200
++++ gcl-2.6.13pre114/configure	2022-06-16 12:15:58.000000000 +0200
+@@ -2904,8 +2904,8 @@
+ 
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
++ac_compile='$CC -c -w -std=gnu89 $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_link='$CC -o conftest$ac_exeext -w -std=gnu89 $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+@@ -4615,6 +4615,8 @@
+ #	assert_arg_to_cflags -Wno-error=implicit-function-declaration
+ 	add_arg_to_cflags -Wno-incomplete-setjmp-declaration
+ 	assert_arg_to_ldflags -Wl,-no_pie
++        assert_arg_to_ldflags -w
++        assert_arg_to_ldflags -std=gnu89
+ 	if test "$build_cpu" = "x86_64" ; then
+ 	    assert_arg_to_cflags -m64
+ 	    assert_arg_to_ldflags -m64
+@@ -8513,48 +8515,6 @@
+ 
+ printf "%s\n" "#define USE_READLINE 1" >>confdefs.h
+ 
+-				 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for el_getc in -lreadline" >&5
+-printf %s "checking for el_getc in -lreadline... " >&6; }
+-if test ${ac_cv_lib_readline_el_getc+y}
+-then :
+-  printf %s "(cached) " >&6
+-else $as_nop
+-  ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lreadline  $LIBS"
+-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-char el_getc ();
+-int
+-main (void)
+-{
+-return el_getc ();
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-if ac_fn_c_try_link "$LINENO"
+-then :
+-  ac_cv_lib_readline_el_getc=yes
+-else $as_nop
+-  ac_cv_lib_readline_el_getc=no
+-fi
+-rm -f core conftest.err conftest.$ac_objext conftest.beam \
+-    conftest$ac_exeext conftest.$ac_ext
+-LIBS=$ac_check_lib_save_LIBS
+-fi
+-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_readline_el_getc" >&5
+-printf "%s\n" "$ac_cv_lib_readline_el_getc" >&6; }
+-if test "x$ac_cv_lib_readline_el_getc" = xyes
+-then :
+-
+-printf "%s\n" "#define READLINE_IS_EDITLINE 1" >>confdefs.h
+-
+-fi
+-
+ 				 # These tests discover differences between readline 4.1 and 4.3
+ 				 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for rl_completion_matches in -lreadline" >&5
+ printf %s "checking for rl_completion_matches in -lreadline... " >&6; }
