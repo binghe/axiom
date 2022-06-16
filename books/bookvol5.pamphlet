@@ -52368,9 +52368,9 @@ represents the integral of the sin function, but the encoding:
     </OMA>
   </OMOBJ>
 \end{verbatim}
-represents ∫sin(x)dx. This may appear overly complicated but it is
+represents $\int\sin(x)dx$. This may appear overly complicated but it is
 useful, for example when searching in a database for expressions which
-match ∫sin(y)dy . The definition of a symbol in the CD specifies
+match $\int\sin(y)dy$ . The definition of a symbol in the CD specifies
 whether or not it may be used to bind variables, which is why 
 \begin{verbatim}
    <OMS cd="calculus1" name="int"/> 
