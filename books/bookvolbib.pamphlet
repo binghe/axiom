@@ -56398,7 +56398,7 @@ Proc ISSAC 97 pp172-175 (1997)
     occurrences of the quantified variables. Moreover, for existential
     formulas $\phi$ of this kind it yields sample answers to the query
     represented by $\phi$. The method is implemented in REDUCE as part of the
-    REDLOG package (see [4, 5]). Experiments show that the method is
+    REDLOG package (see [4,5]). Experiments show that the method is
     applicable to a range of benchmark examples, where it runs in most
     cases significantly faster than the QEPCAD package of Collins and
     Hong. An extension of the method to higher degree polynomials using
