@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[landscape]{geometry}
 \usepackage{multicol}
-\usepackage{amsmath}
+%\usepackage{amsmath}
 \usepackage{amsfonts}
 \advance\topmargin-.8in
 \advance\textheight2in
