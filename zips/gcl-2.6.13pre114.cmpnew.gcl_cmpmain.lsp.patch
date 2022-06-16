@@ -5,7 +5,7 @@
      (setq na  (namestring
  	       (make-pathname :name name :type (pathname-type(first args)))))
 -   (format nil  "~a ~a -I~a ~a ~a -c ~a -o ~a ~a"
-+   (format nil  "~a ~a -I~a ~a ~a -c -w -std=gnu89 ~a -o ~a ~a"
++   (format nil  "~a ~a -I~a ~a ~a -c ~a -o ~a ~a"
  	   (if *prof-p* (remove-flag "-fomit-frame-pointer" *cc*) *cc*)
  	   (if *prof-p* " -pg " "")
  	   (concatenate 'string si::*system-directory* "../h")

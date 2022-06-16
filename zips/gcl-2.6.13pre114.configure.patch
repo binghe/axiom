@@ -1,25 +1,5 @@
 --- gcl-2.6.13pre114.orig/configure	2022-06-16 12:11:28.000000000 +0200
 +++ gcl-2.6.13pre114/configure	2022-06-16 12:15:58.000000000 +0200
-@@ -2904,8 +2904,8 @@
- 
- ac_ext=c
- ac_cpp='$CPP $CPPFLAGS'
--ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
--ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-+ac_compile='$CC -c -w -std=gnu89 $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-+ac_link='$CC -o conftest$ac_exeext -w -std=gnu89 $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
- ac_compiler_gnu=$ac_cv_c_compiler_gnu
- 
- 
-@@ -4615,6 +4615,8 @@
- #	assert_arg_to_cflags -Wno-error=implicit-function-declaration
- 	add_arg_to_cflags -Wno-incomplete-setjmp-declaration
- 	assert_arg_to_ldflags -Wl,-no_pie
-+        assert_arg_to_ldflags -w
-+        assert_arg_to_ldflags -std=gnu89
- 	if test "$build_cpu" = "x86_64" ; then
- 	    assert_arg_to_cflags -m64
- 	    assert_arg_to_ldflags -m64
 @@ -8513,48 +8515,6 @@
  
  printf "%s\n" "#define USE_READLINE 1" >>confdefs.h
