@@ -1614,8 +1614,8 @@ paragraph for those unfamiliar with the terms.
     "Proof assistants are complex applications whose development has
     never been properly systematized or documented. This work is a
     contribution in this direction, based on our experience with the
-    development of Matita: a new interactive theorem prover based—as
-    Coq—on the Calculus of Inductive Constructions (CIC). In particular,
+    development of Matita: a new interactive theorem prover based-as
+    Coq-on the Calculus of Inductive Constructions (CIC). In particular,
     we analyze its architecture focusing on the dependencies of its
     components, how they implement the main functionalities, and their
     degree of reusability. The work is a first attempt to provide a ground
@@ -2573,7 +2573,7 @@ paragraph for those unfamiliar with the terms.
     handle all possible regular or context-free grammars, it handles a
     surprisingly large fraction of the grammars encountered by Lisp
     programmers.  We show how META can be used to parse streams, strings
-    and lists—including Common Lisp's hairy lambda expression parameter
+    and lists-including Common Lisp's hairy lambda expression parameter
     lists.  Finally, we compare the execution time of this parsing method
     to the built-in methods of Common Lisp.",
   paper = "Bake91.pdf",
@@ -2635,7 +2635,7 @@ paragraph for those unfamiliar with the terms.
     "Common Lisp [CL84,CL90] includes a dynamic datatype system of
     moderate complexity, as well as predicates for checking the types of
     language objects. Additionally, an interesting predicate of two 'type
-    specifiers'— SUBTYPEP —is included in the language. This subtypep
+    specifiers'- SUBTYPEP -is included in the language. This subtypep
     predicate provides a mechanism with which to query the Common Lisp
     type system regarding containment relations among the various built-in
     and user-defined types. While subtypep is rarely needed by an
@@ -2655,7 +2655,7 @@ paragraph for those unfamiliar with the terms.
     trivial cases. In particular, most Common Lisp implementations of
     SUBTYPEP fail on the basic axioms of the Common Lisp type system
     itself [CL84,p.33]. This situation is particularly embarrassing for
-    Lisp—the premier 'symbol processing language'—in which the
+    Lisp-the premier 'symbol processing language'-in which the
     implementation of complex symbolic logical operations should be
     relatively easy. Since subtypep was presumably included in Common Lisp
     to answer the hard cases of type containment, this 'lazy evaluation'
@@ -5806,8 +5806,8 @@ paragraph for those unfamiliar with the terms.
     "We define a new, more semantic interpretation of gradual types and use
     it to ``gradualize'' two forms of polymorphism: subtyping polymorphism
     and implicit parametric polymorphism. In particular, we use the new
-    interpretation to define three gradual type systems —Hindley-Milner,
-    with subtyping, and with union and intersection types— in terms of two
+    interpretation to define three gradual type systems -Hindley-Milner,
+    with subtyping, and with union and intersection types- in terms of two
     preorders, subtyping and materialization. These systems are defined
     both declaratively and algorithmically. The declarative presentation
     consists in adding two subsumption-like rules, one for each preorder,
@@ -8216,7 +8216,7 @@ paragraph for those unfamiliar with the terms.
     axiomatization of computability and a proof of Church's Thesis, as
     Gödel and others suggested may be possible. In a similar way, but with
     a different set of basic oper- ations, one can prove Turing's Thesis,
-    characterizing the effective string functions, and—in particular—the
+    characterizing the effective string functions, and-in particular-the
     effectively-computable functions on string representations of numbers.",
   paper = "Ders08.pdf",
   keywords = "printed"
@@ -11196,8 +11196,8 @@ paragraph for those unfamiliar with the terms.
     I. Schur's construction. Then we derive a formula for the entries of
     the representing matrices which is much more concise and adapted to
     the effective use of computer calculations. Finally, we describe how
-    one obtains — using this time an orthogonal form of the ordinary
-    irreducible representations of symmetric groups — a version which
+    one obtains - using this time an orthogonal form of the ordinary
+    irreducible representations of symmetric groups - a version which
     yields a unitary representation when it is restricted to the unitary
     subgroup. In this way we adapt D. B. Hunter's results which heavily
     rely on Littlewood's methods, and boson polynomials come into the play
@@ -23585,8 +23585,8 @@ paragraph for those unfamiliar with the terms.
     paper was written after the course was finished. In spite of this, and
     only partly because of the shortage of time, the paper still retains
     many of the shortcomings of a lecture course. The chief of these are
-    an uncertainty of aim—it is never quite clear what sort of audience
-    there will be for such lectures—and an associated switching from
+    an uncertainty of aim-it is never quite clear what sort of audience
+    there will be for such lectures-and an associated switching from
     formal to informal modes of presentation which may well be less
     acceptable in print than it is natural in the lecture room. For these
     (and other) faults, I apologise to the reader.
@@ -25538,7 +25538,7 @@ paragraph for those unfamiliar with the terms.
     for proper parameterized specifications are developed. It is shown
     that the properties of proper specifications viz. of snowballing and
     impeccable types are preserved under application of parameterized
-    types — finally guaranteeing that the composition of proper small
+    types - finally guaranteeing that the composition of proper small
     specifications always leads to a proper large specification."
 }
 
@@ -32587,8 +32587,8 @@ when shown in factored form.
     considering structured parameterisation, we extend the range of
     effects to cover separated side-effects and multiple independent
     streams of I/O. We also present two typed $\lambda$-calculi that
-    soundly and completely model our categorical definitions — with and
-    without symmetric monoidal parameterisation — and act as prototypical
+    soundly and completely model our categorical definitions - with and
+    without symmetric monoidal parameterisation - and act as prototypical
     languages with parameterised effects.",
   paper = "Atke18a.pdf",
   keywords = "printed"
@@ -33866,7 +33866,7 @@ when shown in factored form.
     use it, without trusting it, to prove the fidelity of every Level n to
     Level 1: whenever Level n accepts a proof of some $\phi$, there exists a
     Level 1 proof of $\phi$. We then mechanically translate the Level 11 proof
-    for each Level n into a Level n - 1 proof—that is, we create a Level 1
+    for each Level n into a Level n - 1 proof-that is, we create a Level 1
     proof of Level 2's fidelity, a Level 2 proof of Level 3's fidelity,
     and so on. This layering shows that each level can be trusted, and
     allows us to manage the sizes of these proofs.
@@ -34454,9 +34454,9 @@ when shown in factored form.
   year = "2000",
   abstract =
     "A transformer is a function that maps expressions to expressions.
-    Many transformational operators -— such as expression evaluators and
+    Many transformational operators -- such as expression evaluators and
     simplifiers, rewrite rules, rules of inference, and decision
-    procedures -— can be represented by transformers. Computations and
+    procedures -- can be represented by transformers. Computations and
     deductions can be formed by applying sound transformers in
     sequence. This paper introduces machinery for defining sound
     transformers in the context of an axiomatic theory in a formal
@@ -34510,7 +34510,7 @@ when shown in factored form.
     simultaneously an axiomatic theory and an algorithmic theory. It
     represents mathematical knowledge both declaratively and procedurally.
     Since the algorithms of algorithmic theories manipulate th e syntax of
-    expressions, biform theories —- as well as algorithmic theories -— are
+    expressions, biform theories -- as well as algorithmic theories -- are
     difficult to formalize in a traditional logic without the means to
     reason about syntax. Chiron is a derivative of
     von-Neumann-Bernays-G̈odel ( NBG ) set theory that is intended to be a
@@ -35101,7 +35101,7 @@ when shown in factored form.
     We propose to use a more modest, small-scale form of reflection, to
     implement mathematical components. We use the type-derived metadata to
     indicate how symbols, definitions and lemmas should be used in other
-    theories, and functions to implement this usage — roughly, formalizing
+    theories, and functions to implement this usage - roughly, formalizing
     some of the exercize section of a textbook. We have applied
     successfully this more engineered approch to computer proofs in our
     past work on the Four Color Theorem, the Cayley-Hamilton Theorem, and
@@ -35638,8 +35638,8 @@ when shown in factored form.
     characterize modern functional languages: higher-order functions, lazy
     evaluation, equations and pattern-matching, strong static typing and
     type inference, and data abstraction.  In addition, current research
-    areas—such as parallelism, non-determinism, input/output, and
-    state-oriented computations—are examined with the goal of predicting
+    areas-such as parallelism, non-determinism, input/output, and
+    state-oriented computations-are examined with the goal of predicting
     the future development and application of functional languages.",
   paper = "Huda89.pdf",
   keywords = "printed"
@@ -39684,15 +39684,15 @@ when shown in factored form.
     evaluation order in an ad hoc way.
 
     This thesis aims to give a fresh take on the proofs-as-programs
-    analogy—one which better accounts for features of modern programming
-    languages—by starting from a different logical foundation.  Inspired
+    analogy-one which better accounts for features of modern programming
+    languages-by starting from a different logical foundation.  Inspired
     by Andreoli's focusing proofs for linear logic, we explain how to
     axiomatize certain canonical forms of logical reasoning through a
     notion of pattern.  Propositions come with an intrinsic polarity,
     based on whether they are defined by patterns of proof, or by patterns
     of refutation.  Applying the analogy, we then obtain a programming
     language with built-in support for pattern-matching, in which
-    evaluation order is explicitly reflected at the level of types—and
+    evaluation order is explicitly reflected at the level of types-and
     hence can be controlled locally, rather than being an ad hoc, global
     policy decision. As we show, different forms of continuation-passing
     style (one of the historical tools for analyzing evaluation order)
@@ -55975,7 +55975,7 @@ Proc ISSAC 97 pp172-175 (1997)
     the total result, cannot satisfactorily deal with interval constants
     in the input, and often generate huge output. As a remedy we propose
     an approximation method based on interval arithmetic. It uses a
-    generalization of the notion of cylindrical decomposition—as
+    generalization of the notion of cylindrical decomposition-as
     introduced by G. Collins. We describe an implementation of the method
     and demonstrate that, for quantified constraints without equalities,
     it can efficiently give approximate information on problems that are
@@ -78046,7 +78046,7 @@ IBM Research Division Technical Report RC19530 May 1994
     proven to be undecidable.
 
     Another fundamental concept for a type system of a computer algebra
-    system — at least for the purpose of a user interface — are coercions.
+    system - at least for the purpose of a user interface - are coercions.
     We will show that there are cases which can be modeled by coercions
     but not by an ``inheritance mechanism'', i. e. the concept of coercions
     is not only orthogonal to the one of type classes but also to more
@@ -78059,7 +78059,7 @@ IBM Research Division Technical Report RC19530 May 1994
     We shall also impose some conditions on the interaction between
     polymorphic operations defined in type classes and coercions that will
     yield a unique meaning of an expression independent of the type which
-    is assigned to it — if coercions are present there will very
+    is assigned to it - if coercions are present there will very
     frequently be several possibilities to assign types to expressions.
 
     Often it is not only possible to coerce one type into another but it
@@ -79303,7 +79303,7 @@ National Physical Laboratory. (1982)
     This paper gives an overview of the CASL design. The major issues that
     had to be resolved in the design process are indicated, and all the
     main concepts and constructs of CASL are briefly explained and
-    illustrated — the reader is referred to the CASL Language Summary for
+    illustrated - the reader is referred to the CASL Language Summary for
     further details. Some familiarity with the fundamental concepts of
     algebraic specification would be advantageous.",
   paper = "Aste02.pdf"
@@ -86510,12 +86510,12 @@ Acta Math. 68 (1937) 145-254.
     recursive functional programs and we discuss how they may be used for
     algorithm validation.  As usual, correctness (validation) is
     transformed into a set of first-order predicate logic
-    formulae—verification conditions.  As a distinctive feature of our
+    formulae-verification conditions.  As a distinctive feature of our
     method, these formulae are not only sufficient, but also necessary
     for the correctness. We demonstrate our method on the Nevilles
     algorithm for polynomial interpolation and show how it may be
     validated automatically. In fact, even if a small part of the
-    specification is missing—in the literature this is often a case --
+    specification is missing-in the literature this is often a case --
     the correctness cannot be proven. Furthermore, a relevant 
     counterexample may be constructed automatically.",
   paper = "Popo99a.pdf"
@@ -86716,7 +86716,7 @@ ACM Transactions on Mathematical Software, 32(2):180-194, June 2006.
   abstract =
    "Throughout the twentieth century, the automation of formal logics in
    computers has created unprecedented potential for practical
-   applications of logic—most prominently the mechanical verification of
+   applications of logic-most prominently the mechanical verification of
    mathematics and software. But the high cost of these applications
    makes them infeasible but for a few flagship projects, and even those
    are negligible compared to the ever-rising needs for verification. One
