@@ -5804,7 +5804,7 @@ paragraph for those unfamiliar with the terms.
   year = "2019",
   abstract =
     "We define a new, more semantic interpretation of gradual types and use
-    it to “gradualize” two forms of polymorphism: subtyping polymorphism
+    it to ``gradualize'' two forms of polymorphism: subtyping polymorphism
     and implicit parametric polymorphism. In particular, we use the new
     interpretation to define three gradual type systems —Hindley-Milner,
     with subtyping, and with union and intersection types— in terms of two
@@ -7089,7 +7089,7 @@ paragraph for those unfamiliar with the terms.
   pages = "674-688",
   abstract =
     "We propose a set of transformation rules for first order formulas
-    whose atoms are either equations between terms or “sort constraints” t
+    whose atoms are either equations between terms or ``sort constraints'' t
     ε s where s is a regular tree language (or a sort in the algebraic
     specification community). This set of rules is proved to be correct,
     terminating and complete. This shows in particular that the first
@@ -9612,7 +9612,7 @@ paragraph for those unfamiliar with the terms.
   year = "1993",
   abstract =
     "For 25 years, software engineers have sought methods which they hope
-    can provide a technological fix for the “software crisis.” Proponents
+    can provide a technological fix for the ``software crisis.'' Proponents
     of specific methods claim that their use leads to significantly
     improved quality and productivity. Such claims are rarely, if ever,
     backed up by hard evidence. We show that often, where real empirical
@@ -10096,7 +10096,7 @@ paragraph for those unfamiliar with the terms.
     developed with only minimal assumptions on the underlying theory of
     subtypes. As a consequence, it can be used as the basis for type
     inference with a broad class of subtype theories. For a particular
-    “structural” theory of subtypes, those engendered by inclusions
+    ``structural'' theory of subtypes, those engendered by inclusions
     between type constants only, we show that principal types are
     compactly expressible. This suggests that type inference for the
     structured theory of subtypes is feasible. We describe algorithms
@@ -25194,8 +25194,8 @@ paragraph for those unfamiliar with the terms.
     
     Several definitions for order-sorted algebras have been proposed. In
     some papers an operator symbol, which may be multiply declared, is
-    interpreted by a family of functions (“overloaded” algebras). In other
-    papers it is always interpreted by a single function (“nonoverloaded”
+    interpreted by a family of functions (``overloaded'' algebras). In other
+    papers it is always interpreted by a single function (``nonoverloaded''
     algebras). On the one hand, we try to demonstrate the differences
     between these two approaches with respect to equality, rewriting and
     completion; on the other hand, we prove that in fact both theories can
@@ -26862,7 +26862,7 @@ when shown in factored form.
     display ``honest'' graphs of 2-D mathematical curves.  By
     ``honest'' we mean that no significant features (such as the
     location of poles, the values at maxima or minima, or the behavior
-    of a curve at asymptotes) are misrepresented, By “mathematical” we
+    of a curve at asymptotes) are misrepresented, By ``mathematical'' we
     mean curves like those generally needed in scientific disciplines
     where functions are represented by composition of common
     mathematical operations: rational operations ($+, –, *, /$),
@@ -33174,7 +33174,7 @@ when shown in factored form.
   year = "1997",
   abstract =
     "Proofs in the Nuprl system, an implementation of a constructive
-    type theory, yield “correct-by-construction” programs.  In this
+    type theory, yield ``correct-by-construction'' programs.  In this
     paper a new methodology is presented for extracting efficient and
     readable programs from inductive proofs. The resulting extracted
     programs are in a form suitable for use in hierarchical
@@ -33840,7 +33840,7 @@ when shown in factored form.
   abstract =
     "Programs have precise semantics, so we can use mathematical proof to
     establish their properties. These proofs are often too large to
-    validate with the usual “social process” of mathematics, so instead we
+    validate with the usual ``social process'' of mathematics, so instead we
     create and check them with theorem-proving software. This software
     must be advanced enough to make the proof process tractable, but this
     very sophistication casts doubt upon the whole enterprise: who
@@ -33850,7 +33850,7 @@ when shown in factored form.
     proofs composed of the most primitive steps, like Instantiation and
     Cut. This program is so straightforward the ordinary, social process
     can establish its soundness and the consistency of the logical
-    theory it implements (so we know theorems are “always true”).
+    theory it implements (so we know theorems are ``always true'').
     
     Next, we develop a series of increasingly capable proof checkers,
     Level 2, Level 3, etc.  Each new proof checker accepts new kinds of
@@ -36650,9 +36650,9 @@ when shown in factored form.
     definition can be witnessed in ACL2. We describe a macro that allows
     the convenient introduction of arbitrary tail recursive functions, and
     we discuss how such functions can be used to prove theorems about
-    state machine models without reasoning about “clocks” or counting the
-    number of steps until termination. Our macro for introducing “partial
-    functions” also permits a variety of other recursive schemes, and we
+    state machine models without reasoning about ``clocks'' or counting the
+    number of steps until termination. Our macro for introducing ``partial
+    functions'' also permits a variety of other recursive schemes, and we
     briefly illustrate some of them.",
   paper = "Mano03.pdf",
   keywords = "printed, DONE"
@@ -38383,7 +38383,7 @@ when shown in factored form.
     "The paper (first written in 1969 and circulated privately) concerns
     the definition, axiomatization, and applications of the hereditarily
     monotone and continuous functionals generated from the integers and
-    the Booleans (plus “undefined” elements). The system is formulated as
+    the Booleans (plus ``undefined'' elements). The system is formulated as
     a typed system of combinators (or as a typed λ-calculus) with a
     recursion operator (the least fixed-point operator), and its proof
     rules are contrasted to a certain extent with those of the untyped
@@ -45930,7 +45930,7 @@ when shown in factored form.
     "Abstract data type declarations appear in typed programming languages
     like Ada, Alphard, CLU and ML. This form of declaration binds a list
     of identifiers to a type with associated operations, a composite
-    “value” we call a data algebra. We use a second-order typed lambda
+    ``value'' we call a data algebra. We use a second-order typed lambda
     calculus SOL to show how data algebras may be given types, passed as
     parameters, and returned as results of function calls. In the process,
     we discuss the semantics of abstract data type declarations and review
@@ -46013,7 +46013,7 @@ when shown in factored form.
     programming language, and a compile time type-checking algorithm $W$
     which enforces the discipline.  A Semantic Soundness Theorem (based on
     a formal semantics for the language) states that well-type programs
-    cannot “go wrong” and a Syntactic Soundness Theorem states that if $W$
+    cannot ``go wrong'' and a Syntactic Soundness Theorem states that if $W$
     accepts a program then it is well typed.  We also discuss extending
     these results to richer languages; a type-checking algorithm based on
     $W$ is in fact already implemented and working, for the metalanguage ML
@@ -46143,7 +46143,7 @@ when shown in factored form.
     point out some of the features of the Mizar system responsible for
     that. The formalization described in this paper allows also for
     contrasting the linguistic capability of the Mizar language and some
-    of the phrases commonly used in “informal” mathematical papers that
+    of the phrases commonly used in ``informal'' mathematical papers that
     the Mizar system lacks, and consequently presents the methods of how
     to cope with it during the formalization. Yet, apart from the
     problems, this paper shows some definite benefits from using a formal
@@ -51110,7 +51110,7 @@ Ph.D Diss. MIT, May 1961; also Computers and Thought, Feigenbaum and Feldman.
     "On the occasion of the conference we mention examples of Stieltjes'
     work on asymptotics of special functions. The remaining part of the
     paper gives a selection of asymptotic methods for integrals, in
-    particular on uniform approximations. We discuss several “standard”
+    particular on uniform approximations. We discuss several ``standard''
     problems and examples, in which known special functions (error
     functions, Airy functions, Bessel functions, etc.) are needed to
     construct uniform approximations. Finally, we discuss the recent
@@ -54264,7 +54264,7 @@ Proc ISSAC 97 pp172-175 (1997)
     throughout each cell. Two cells are adjacent if their union is 
     connected. We give an algorithm that determines the adjacent pairs 
     of cells as it constructs a cad of $E^3$. The general teehnlque 
-    employed for $^3$ adjacency determination is “projection” into $E^2$, 
+    employed for $^3$ adjacency determination is ``projection'' into $E^2$, 
     followed by application of an existing $E^2$ adjacency elgorlthm 
     (Arnon, Collins, McCallum, 1984). Our algorithm has the following 
     properties: (1) it requires no coordinate changes, end (2) in any 
@@ -57744,7 +57744,7 @@ Proc ISSAC 97 pp172-175 (1997)
     in part on the calculus of divided differences, for improving the form of
     results of symbolic mathematics systems. In particular, computer alge
     algebra systems must take explicit account of the possibility that they are
-    producing not “mathematics” but templates of programs consisting of se
+    producing not ``mathematics'' but templates of programs consisting of se
     sequences of arithmetic operations. In brief, mathematical correctness is
     not enough. Forms produced by rational integration programs are used
     for examples.",
@@ -57789,24 +57789,24 @@ Proc ISSAC 97 pp172-175 (1997)
   abstract =
     "Many ambitious computer algebra systems were initially designed in a
     flush of enthusiasm, with the goal of automating any symbolic
-    mathematical manipulation “correctly.” Historically, this approach
+    mathematical manipulation ``correctly.'' Historically, this approach
     resulted in programs that implicitly used certain identities to
     simplify expressions. These identities, which very likely seemed
     universally true to the programmers in the heat of writing the CAS,
     (and often were true in well-known abstract algebraic domains) later
     needed re-examination when such systems were extended for dealing with
     kinds of objects unanticipated in the original design. These new
-    objects are generally introduced to the CAS by extending “generically”
+    objects are generally introduced to the CAS by extending ``generically''
     the arithmetic or other operations.  For example, approximate floats
     do not have the mathematical properties of exact integers or
     rationals.  Complex numbers may strain a system designed for
     real-valued variables. In the situation examined here, we consider two
-    categories of “extended” numbers: ∞ or undefined, and real
+    categories of ``extended'' numbers: ∞ or undefined, and real
     intervals. We comment on issues raised by these two troublesome
     notions, how their introduction into a computer algebra system may
     require a (sometimes painful) reconsideration and redesign of parts of
     the program, and how they are related. An alternative (followed most
-    notably by the Axiom system is to essentially envision a “meta” CAS
+    notably by the Axiom system is to essentially envision a ``meta'' CAS
     defined in terms of categories and inheritance with only the most
     fundamental built-in concepts; from these one can build many variants
     of specific CAS features. This approach is appealing but can fails to
@@ -62680,7 +62680,7 @@ Universit{\"a}t Karsruhe, Karlsruhe, Germany 1994
     
     He received his PhD in mathematics from the University of Illinois at
     Urbana-Champaign in 1966. The title of his dissertation was
-    “Quadratic Differential Systems for Mathematical Models” and was
+    ``Quadratic Differential Systems for Mathematical Models'' and was
     written under the supervision of Donald Gilles. After completing his
     PhD, he was a post-doctoral fellow at Brookhaven National Laboratory
     on Long Island. In 1968 he joined IBM Research where he worked until
@@ -72768,7 +72768,7 @@ Math. and Computers in Simulation 42 pp 541-549 (1996)
     algorithms on free abelian groups of finite rank $n$ which, with each
     iteration, first select a random cyclic direct summand $\mathbb{Z}$ of
     the group and then apply one iteration of the standard Shor algorithm
-    to produce a random character of the “approximating” finite group
+    to produce a random character of the ``approximating'' finite group
     $\widetilde{A} = \mathbb{Z}_Q$, called the group probe. These
     characters are then in turn used to find either the order $P$ of a
     maximal cyclic subgroup $\mathbb{Z}_P$ of the hidden quotient group
@@ -81596,7 +81596,7 @@ Prentice-Hall.(1983)
     implemented this for pure equational logic using the unfailing
     Knuth-Bendix completion procedure as basic prover. In this paper we
     present three classes of experts working in a goal oriented
-    fashion. In general, goal oriented experts perform their job “unfair”
+    fashion. In general, goal oriented experts perform their job ``unfair''
     and so are often unable to solve a given problem alone. However, as
     team members in the team work method they perform highly efficiently,
     as we demonstrate by examples, some of which can only be proved using
@@ -85853,7 +85853,7 @@ Journal of the ACM, Vol. 25, No. 2, April 1978, pp. 271-282
   pages = "82-101",
   abstract =
     "Herewith, a fairly old concept is published for the first time and
-    named ”Lucas Interpretation”. This has been implemented in a
+    named ''Lucas Interpretation''. This has been implemented in a
     prototype, which has been proved useful in educational practice and
     has gained academic relevance with an emerging generation of
     educational mathematics assistants (EMA) based on Computer Theorem
@@ -86651,8 +86651,8 @@ ACM Transactions on Mathematical Software, 32(2):180-194, June 2006.
    
    While mathematical knowledge management (MKM) ``in the small'' is
    well-studied, scaling up to large, highly interconnected corpora
-   remains difficult. We hold that in order to realize MKM “in the
-   large”, we need representation languages and software architectures
+   remains difficult. We hold that in order to realize MKM ``in the
+   large'', we need representation languages and software architectures
    that are designed systematically with large-scale processing in mind.
    
    Therefore, we have designed and implemented the Mmt language – a
@@ -87343,7 +87343,7 @@ Num. Math. 16 205--223. (1970)
     identify a number of important patterns that arise in such proofs
     yielding to a workflow with which we feel personally comfortable; the
     resulting guidelines may serve as a starting point for a the
-    application of Isabelle / Isar for the “average” mathematical user
+    application of Isabelle / Isar for the ``average'' mathematical user
     (i.e, a mathematical user who is not interested in Isabelle / Isar per
     se but just wants to use it as a tool for computer-supported formal
     theory development).",
@@ -88494,7 +88494,7 @@ Math. Tables Aids Comput. 10 91--96. (1956)
     computer-supported formalisation of (parts of elementary)
     mathematics. It is a matter of fact, however, that mathematicians
     rarely use computer-support for the construction and verification of
-    proofs. This is mainly caused by the “unnaturalness” of the language
+    proofs. This is mainly caused by the ``unnaturalness'' of the language
     and the reasoning that such proof engines support.
 
     In the past, researchers in the area of automated reasoning have
