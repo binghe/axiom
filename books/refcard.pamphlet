@@ -1,7 +1,13 @@
+% This workarounds of potential bugs in amsmath package in TeXlive 2021+
+\AddToHook{package/amsmath/before}{%
+  \let\negmedspace\relax
+  \let\negthickspace\relax
+}
+
 \documentclass{article}
 \usepackage[landscape]{geometry}
 \usepackage{multicol}
-%\usepackage{amsmath}
+\usepackage{amsmath}
 \usepackage{amsfonts}
 \advance\topmargin-.8in
 \advance\textheight2in
