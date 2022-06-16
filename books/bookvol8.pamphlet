@@ -23298,13 +23298,6 @@ for SIGKILL or SIGSTOP
 
 \end{chunk}
 
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
-
 \begin{chunk}{bsdsignal.c}
 #include <signal.h> 
 
@@ -23377,13 +23370,6 @@ propogate that platform variable.
 
 #include <stdio.h>
 \end{chunk}
-
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{cfuns-c.c}
 
@@ -23673,13 +23659,6 @@ Cursor_shape(int shape)
 
 #include <stdlib.h>
 \end{chunk}
-
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{edin.c}
 #include <unistd.h>
@@ -24784,13 +24763,6 @@ everywhere.
         bsdSignal(SIGCLD, null_fnct,RestartSystemCalls);
 #endif
 \end{chunk}
-
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{fnct-key.c}
 #include <unistd.h>
@@ -26248,13 +26220,6 @@ back_over_current_char(void)
 #include <stdio.h>
 #include <stdlib.h>
 \end{chunk}
-
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{sockio-c.c}
 #include <unistd.h>
@@ -27851,13 +27816,6 @@ most closely matches our requested RGB values.
 #include <stdlib.h>
 \end{chunk}
 
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
-
 \begin{chunk}{util.c}
 #include <unistd.h>
 #include <sys/types.h>
@@ -27978,13 +27936,6 @@ getWindowSizeXY(Display *display,Window w)
 #include <stdio.h>
 #include <stdlib.h>
 \end{chunk}
-
-The MACOSX platform is broken because no matter what you do it seems to
-include files from [[/usr/include/sys]] ahead of [[/usr/include]]. On linux
-systems these files include themselves which causes an infinite regression
-of includes that fails. GCC gracefully steps over that problem but the
-build fails anyway. On MACOSX the [[/usr/include/sys]] versions 
-of files are badly broken with respect to the [[/usr/include]] versions.
 
 \begin{chunk}{wct.c}
 #include <unistd.h>
