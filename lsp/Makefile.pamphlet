@@ -1842,6 +1842,7 @@ gcldir:
 \getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
 \getchunk{gcl-2.6.13pre.unixport.makefile.patch}
 \getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
+\getchunk{gcl-2.6.13pre.collectfn.fix}
 \getchunk{gcl-2.6.13pre.configure.patch}
 \getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
 \getchunk{gclConfigureMake}

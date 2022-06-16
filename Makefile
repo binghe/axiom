@@ -86,7 +86,7 @@ BUILD:=full
 ACL2:=
 COQ:=
 
-
+##### environment variables
 ENV:= \
 ACL2=${ACL2} \
 AWK=${AWK} \

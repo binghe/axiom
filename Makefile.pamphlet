@@ -541,7 +541,7 @@ COQ:=
 
 \subsection{The ENV variable}
 \begin{chunk}{ENVAR}
-
+##### environment variables
 ENV:= \
 ACL2=${ACL2} \
 AWK=${AWK} \
