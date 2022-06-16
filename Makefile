@@ -72,7 +72,6 @@ BYE:=bye
 GCLVERSION=gcl-2.6.13pre114
 GCLDIR:=${LSP}/${GCLVERSION}
 GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
-#GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig --disable-dynsysgmp"
 LISP:=lsp
 
 ##### command line control

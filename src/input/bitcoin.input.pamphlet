@@ -78,7 +78,7 @@ We can use these properties to define two operations: point addition
 and point doubling.
 
 {\bf Point addition}, P + Q = R, is defined as the reflection through the
-x-axis of the third intersecting point R’ on a line that includes P
+x-axis of the third intersecting point R' on a line that includes P
 and Q. It's easiest to understand this using a diagram:
 
 \includegraphics[scale=0.5]{bitcoin2.eps}
@@ -562,8 +562,8 @@ Now that we have a private and public key pair, let's sign some data!
 
 The data can be of any length. The usual first step is to hash the
 data to generate a number containing the same number of bits (256) as
-the order of the curve. Here, for the sake of simplicity, we’ll skip
-the hashing step and just sign the raw data z. We’ll call G the base
+the order of the curve. Here, for the sake of simplicity, we'll skip
+the hashing step and just sign the raw data z. We'll call G the base
 point, n the order, and d the private key. The recipe for signing is
 as follows:
 
