@@ -33866,7 +33866,7 @@ when shown in factored form.
     use it, without trusting it, to prove the fidelity of every Level n to
     Level 1: whenever Level n accepts a proof of some $\phi$, there exists a
     Level 1 proof of $\phi$. We then mechanically translate the Level 11 proof
-    for each Level n into a Level n − 1 proof—that is, we create a Level 1
+    for each Level n into a Level n - 1 proof—that is, we create a Level 1
     proof of Level 2's fidelity, a Level 2 proof of Level 3's fidelity,
     and so on. This layering shows that each level can be trusted, and
     allows us to manage the sizes of these proofs.
@@ -37900,16 +37900,16 @@ when shown in factored form.
   link = "\url{http://www.risc.jku.at/publications/download/risc_3442/Math-Agents-for-SFB-2008-03-10-12h00.pdf}",
   abstract =
     "This report reviews the literature relevant for the research project
-    'Math−Agents: Mathematical Journals as Reasoning Agents' proposed by
+    'Math-Agents: Mathematical Journals as Reasoning Agents' proposed by
     Bruno Buchberger as a technology transfer project based on the results
     of the SFB Project 'Scientific Computing', in particular the project
-    SFB 1302, 'Theorema'. The project aims at computer−supporting the
+    SFB 1302, 'Theorema'. The project aims at computer-supporting the
     refereeing process of mathematical journals by tools that are mainly
     based on automated reasoning and also at building up the knowledge
     archived in mathematical journals in such a way that they can act as
     interactive and active reasoning agents later on.  In this report,
     we review current mathematical software systems with a focus on the
-    availability of tools that can contribute to the goals of the Math−
+    availability of tools that can contribute to the goals of the Math-
     Agents project.",
   paper = "Piro08.pdf",
   keywords = "axiomref, printed"
@@ -38854,15 +38854,15 @@ when shown in factored form.
     
     Compare the value of $(z^2 + z^3)^{3/2}$  with that of its 
     truncated series expansion about $z = 0$, approximated at 
-    $z = −0.01$. Does the series converge to a value that is
+    $z = -0.01$. Does the series converge to a value that is
     the negative of the correct value?  
 
     Compare the value of $ln(z^2 + z^3)$ with its truncated series
-    expansion about $z = 0$, approximated at $z= −0.01 + 0.1i$. Does 
+    expansion about $z = 0$, approximated at $z= -0.01 + 0.1i$. Does 
     the series converge to a value that is incorrect by $2\pi i$?  
 
-    Compare $arctanh(−2 + ln(z)z)$ with its truncated series
-    expansion about $z = 0$, approximated at $z = −0.01$. Does the series
+    Compare $arctanh(-2 + ln(z)z)$ with its truncated series
+    expansion about $z = 0$, approximated at $z = -0.01$. Does the series
     converge to a value that is incorrect by about $\pi i$?  
 
     At the time of this writing, most implementations that accommodate
@@ -55442,9 +55442,9 @@ Proc ISSAC 97 pp172-175 (1997)
     computation can be sufficiently reduced. An important component 
     of the CAD method is the projection operation. Given a set $A$ of 
     $r$-variate polynomials, the projection operation produces a 
-    certain set $P$ of ($r − l$)-variate polynomials such that a CAD 
+    certain set $P$ of ($r - l$)-variate polynomials such that a CAD 
     of $r$-dimensional space for $A$ can be constructed from a CAD 
-    of ($r − 1$)-dimensional space for $P$. The CAD algorithm begins 
+    of ($r - 1$)-dimensional space for $P$. The CAD algorithm begins 
     by applying the projection operation repeatedly, beginning 
     with the input polynomials, until univariate polynomials are
     obtained. This process is called the projection phase."
