@@ -5432,8 +5432,8 @@ paragraph for those unfamiliar with the terms.
     In this paper we describe in detail the type inference rules for
     Quest, and give them meaning using a partial equivalence relation
     model of types. Subtyping is interpreted as in previous work by Bruce
-    and Longo (1989), but the interpretation of some aspects – namely
-    subsumption, power kinds, and record subtyping – is novel. The latter
+    and Longo (1989), but the interpretation of some aspects - namely
+    subsumption, power kinds, and record subtyping - is novel. The latter
     is based on a new encoding of record types.
     
     We concentrate on modelling quantifiers and subtyping; recursion is
@@ -15399,7 +15399,7 @@ paragraph for those unfamiliar with the terms.
     style and language. The Theorema system (www. theorema.org) has 
     certain capabilities which make it appropriate for such a practical
     approach. Our approach to imperative program verification in Theorema
-    is based on Hoare– Logic and the Weakest Precondition Strategy. In
+    is based on Hoare- Logic and the Weakest Precondition Strategy. In
     this paper we present some practical aspect of our work, as well as a
     novel method for verification of pro- grams that contain loops, namely
     a method based on recurrence equation solvers for generating the
@@ -17086,7 +17086,7 @@ paragraph for those unfamiliar with the terms.
     conservative extension, on the one hand, and amends a technical
     problem that has led to a gap in the earlier conservativity proof, on
     the other. We also compare coercive subtyping with the ‘ordinary'
-    notion of subtyping – subsumptive subtyping, and show that the former
+    notion of subtyping - subsumptive subtyping, and show that the former
     is adequate for type theories with canonical objects while the latter
     is not. An improved implementation of coercive subtyping is done in
     the proof assistant Plastic.",
@@ -23591,7 +23591,7 @@ paragraph for those unfamiliar with the terms.
     acceptable in print than it is natural in the lecture room. For these
     (and other) faults, I apologise to the reader.
     
-    There are numerous references throughout the course to CPL [1–3]. This
+    There are numerous references throughout the course to CPL [1-3]. This
     is a programming language which has been under development since 1962
     at Cambridge and London and Oxford. It has served as a vehicle for
     research into both programming languages and the design of
@@ -26851,7 +26851,7 @@ when shown in factored form.
   abstract =
     "A computer program to honestly plot curves y = f(x) must locate
     maxima and minima in the domain of the graph.  To do so it may have to
-    solve a classic problem in computation – global optimization.
+    solve a classic problem in computation - global optimization.
     Reducing an easy problem to a hard one is usually not an advantage,
     but in fact there is a route to solving both problems if the function
     can be evaluated using interval arithmetic.  Since some computer
@@ -26865,7 +26865,7 @@ when shown in factored form.
     of a curve at asymptotes) are misrepresented, By ``mathematical'' we
     mean curves like those generally needed in scientific disciplines
     where functions are represented by composition of common
-    mathematical operations: rational operations ($+, –, *, /$),
+    mathematical operations: rational operations ($+, -, *, /$),
     exponential and log, trigonometric functions as well as continuous
     and differentiable functions from applied mathematics.",
   paper = "Fate92a.pdf"
@@ -34950,7 +34950,7 @@ when shown in factored form.
     "This paper gives an overview of progress made on the formal
     specification and verification of the ARM6 micro-architecture using
     the HOL proof system. The ARM6 is a commercial processor design preva-
-    lent in mobile and embedded systems – it features a 3-stage pipeline
+    lent in mobile and embedded systems - it features a 3-stage pipeline
     with a multi-cycle execute stage, six operating modes and a rich
     32-bit RISC instruction set. This paper describes some of the
     difficulties encountered when working with a full blown instruction
@@ -35996,8 +35996,8 @@ when shown in factored form.
     transformers correspond to state transformers, which are functions to
     conical powerdomains, which are the appropriate powerdomains for the
     combined forms of non-determinism. As with standard powerdomains for
-    non-deterministic choice, these come in three flavours – lower, upper
-    and (order-)convex – so there are also three kinds of predicate
+    non-deterministic choice, these come in three flavours - lower, upper
+    and (order-)convex - so there are also three kinds of predicate
     transformers. In order to make the connection, the powerdomains are
     first characterised in terms of relevant classes of functionals.  
     
@@ -38933,7 +38933,7 @@ when shown in factored form.
     making expertise difficult. Using mock dialog boxes, this article
     describes a proposed interactive general-purpose wizard for organizing
     optional transformations and allowing easy fine grain control over the
-    form of the result – even by amateurs. This wizard integrates ideas
+    form of the result - even by amateurs. This wizard integrates ideas
     including:
     \begin{itemize}
     \item flexible subexpression selection;
@@ -38951,7 +38951,7 @@ when shown in factored form.
     with a preview of their results, using ellipsis elisions if 
     necessary or helpful;
     \item allowing the user to retreat from a sequence of choices 
-    to explore other branches of the tree of alternatives – or to 
+    to explore other branches of the tree of alternatives - or to 
     return quickly to branches already visited;
     \item allowing the user to accumulate more than one of the 
     alternative forms;
@@ -47179,9 +47179,9 @@ when shown in factored form.
   school = "University of Tubingen",
   year = "1997",
   abstract =
-    "Although generic programming founds more and more attention –
+    "Although generic programming founds more and more attention -
     nowadays generic programming languages as well as generic libraries
-    exist – there are hardly approaches for the verification of generic
+    exist - there are hardly approaches for the verification of generic
     algorithms or generic libraries. This thesis deals with generic
     algorithms in the field of computer algebra. We propose the Mizar
     system as a theorem prover capable of verifying generic algorithms on
@@ -55043,7 +55043,7 @@ Proc ISSAC 97 pp172-175 (1997)
   abstract =
     "n the paper which inspired the $SC^2$ project, [E. Abraham,
     Building Bridges between Symbolic Computation and Satisfiability
-    Checking , Proc. ISSAC '15, pp. 1–6, ACM, 2015] the author identified
+    Checking , Proc. ISSAC '15, pp. 1-6, ACM, 2015] the author identified
     the use of sophisticated heuristics as a technique that the
     Satisfiability Checking community excels in and from which it is
     likely the Symbolic Computation community could learn and prosper.  To
@@ -55055,7 +55055,7 @@ Proc ISSAC 97 pp172-175 (1997)
     identified as initial actions for the new $SC^2$ community in the CSA
     project, as described in [E.́ Abraham et al., SC 2 : {\sl Satisfiability
     Checking meets Symbolic Computation (Project Paper)}, Intelligent
-    Computer Mathematics (LNCS 9761), pp.  28–43, Springer, 2015].",
+    Computer Mathematics (LNCS 9761), pp.  28-43, Springer, 2015].",
   paper = "Engl16.pdf"
 }
 
@@ -56348,7 +56348,7 @@ Proc ISSAC 97 pp172-175 (1997)
 \begin{chunk}{axiom.bib}
 @inproceedings{Weis94,
   author = "Weispfenning, V.",
-  title = {{Quantifier elimination for real algebra – the cubic case}},
+  title = {{Quantifier elimination for real algebra - the cubic case}},
   booktitle = "Proc ISSAC'94",
   publisher = "ACM",
   isbn = "0-89791-638-7",
@@ -57123,7 +57123,7 @@ Proc ISSAC 97 pp172-175 (1997)
     sequences of elements (60-115). (4) Implementations (118-139). (5)
     Supplement (142-171).
     
-    In chapters (1)–(3) various known results and algorithms are
+    In chapters (1)-(3) various known results and algorithms are
     collected, and new results are added and compared with those
     previously used. 
     
@@ -62562,7 +62562,7 @@ Universit{\"a}t Karsruhe, Karlsruhe, Germany 1994
   year = "2006",
   link = "\url{http://www.cas.mcmaster.ca/~carette/publications/ge.pdf}",
   abstract =
-    "The Gaussian Elimination algorithm is in fact an algorithm family –
+    "The Gaussian Elimination algorithm is in fact an algorithm family -
     common implementations contain at least six (mostly independent)
     ``design choices''. A generic implementation can easily be parametrized
     by all these design choices, but this usually leads to slow and
@@ -63034,7 +63034,7 @@ Proc. Natl. Acad. Sci. USA Vol 86 ,
     and let $\Theta \in k[{\bf X}]^G$ be a primitive polynomial invariant 
     of $G$ relative to $L$.
     When possible, it is convenient to choose $\Theta$ to be one of the
-    polynomials in $(F)$. – An algorithm is given that allows each polynomial
+    polynomials in $(F)$. - An algorithm is given that allows each polynomial
     $F_i$ to be expressed as $F_i({\bf X}) = H_i(\Pi_1,\cdots,\Pi_n,\Theta)$, 
     an algebraic fraction in $\Pi_1,\cdots,\Pi_n$ and a polynomial in
     $\Theta$. Now let $L$ be the minimal polynomial of $\Theta$ over 
@@ -64999,8 +64999,8 @@ and Laine, M. and Valkeila, E. pp1-12 University of Helsinki, Finland (1994)
   month = "February",
   abstract = 
     "A survey of symbolic methods for factoring linear differential
-    operators is given. Starting from basic notions – ring of operators,
-    differential Galois theory – methods for finding rational and
+    operators is given. Starting from basic notions - ring of operators,
+    differential Galois theory - methods for finding rational and
     exponential solutions that can provide first order right-hand factors
     are considered. Subsequently several known algorithms for
     factorization are presented. These include Singer's eigenring
@@ -67147,7 +67147,7 @@ LCCN QA155.7.E4 I57 1984
   abstract =
     "Computer Algebra (CA) is the name given to the discipline of
     algebraic, rather than numerical, computation. There are a number of
-    computer programs – Computer Algebra Systems (CASs) – available for
+    computer programs - Computer Algebra Systems (CASs) - available for
     doing this. The most widely used general-purpose systems that are
     currently available commercially are Axiom, Derive, Macsyma, Maple,
     Mathematica and REDUCE. The discipline of computer algebra began in
@@ -67189,9 +67189,9 @@ LCCN QA155.7.E4 I57 1984
     
     The book focuses on the core of computer algebra. The first chapter
     introduces the general concept and provides a very nice historical
-    survey. The next three chapters discuss the fundamental topics – data
+    survey. The next three chapters discuss the fundamental topics - data
     structures, representations and the basic arithmetic of integers,
-    rational numbers, multivariate polynomials and rational functions – on
+    rational numbers, multivariate polynomials and rational functions - on
     which the rest of the book is built.
     
     A major technique in CA involves projection onto one or more
@@ -72890,7 +72890,7 @@ Math. and Computers in Simulation 42 pp 541-549 (1996)
   abstract = 
     "The authors have developed a new method for doing numerical quantum
     mechanical perturbation theory. It has the flavor of
-    Rayleigh–Schrödinger perturbation theory (division of the Hamiltonian
+    Rayleigh-Schrödinger perturbation theory (division of the Hamiltonian
     into an unperturbed Hamiltonian and a perturbing term, use of the
     basis formed by the eigenfunctions of the unperturbed Hamiltonian)
     while turning out to be a variational technique. Furthermore, it is
@@ -76654,7 +76654,7 @@ Kognitive Systeme, Universit\"t Karlsruhe 1992
   abstract =
     "During the past decade, the mathematical computer software packages
     such as Mathematica, Maple, MATLAB (Axiom, Derive, Macsyma, MuPad are
-    some further examples of such software) [see Macsyma 2.3. Lite – the
+    some further examples of such software) [see Macsyma 2.3. Lite - the
     student edition (1998; Zbl 0911.68089); B. W. Char, K. O. Geddes,
     G. H. Gonnet, B. L. Leong, M. B. Monagan, and S. M. Watt, Maple V
     Library reference manual (1991; Zbl 0763.68046); J. L. Zachary,
@@ -81172,7 +81172,7 @@ A.K Peters, Natick, MA. (2003) ISBN 1-56881-134-9
     from such proofs extract the algorithms. Our main contribution is
     a reformulation of the standard theory of Groebner bases which
     uses generalised inductive definitions. We isolate the main
-    non–constructive part, a minimal bad sequence argument, and use
+    non-constructive part, a minimal bad sequence argument, and use
     the open induction principle [Rao88,Coq92] to interpret it by
     induction. This leads to short constructive proofs of Dickson's
     lemma and Hilbert's basis theorem, which are used to give an
@@ -84526,8 +84526,8 @@ Journal of Symbolic Computation (1989) 7, 445-456
     program correctness assertions are presented with the help of a
     special composition called Floyd-Hoare composition.  This composition
     is monotone and continuous. Considering the class of constructed
-    algebras as a semantic base we then define an extended logic – Partial
-    Floyd-Hoare Logic – and investigate its properties. This logic has
+    algebras as a semantic base we then define an extended logic - Partial
+    Floyd-Hoare Logic - and investigate its properties. This logic has
     rather complicated soundness constraints for inference rules,
     therefore simpler sufficient constraints are proposed. The logic
     constructed can be used for program verification.",
@@ -86655,7 +86655,7 @@ ACM Transactions on Mathematical Software, 32(2):180-194, June 2006.
    large'', we need representation languages and software architectures
    that are designed systematically with large-scale processing in mind.
    
-   Therefore, we have designed and implemented the Mmt language – a
+   Therefore, we have designed and implemented the Mmt language - a
    module system for mathematical theories. Mmt is designed as the
    simplest possible language that combines a module system, a
    foundationally uncommitted formal semantics, and web-scalable
