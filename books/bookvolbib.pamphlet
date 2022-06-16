@@ -4068,10 +4068,10 @@ paragraph for those unfamiliar with the terms.
   year = "2005",
   link = "\url{https://eb.host.cs.st-andrews.ac.uk/writings/thesis.pdf}",
   abstract = 
-    "Types express a program’s meaning, and checking types ensures that a
+    "Types express a program's meaning, and checking types ensures that a
     program has the intended meaning. In a dependently typed programming
     language types are predicated on values, leading to the possibility of
-    expressing invariants of a program’s behaviour in its type. Dependent
+    expressing invariants of a program's behaviour in its type. Dependent
     types allow us to give more detailed meanings to programs, and hence
     be more confident of their correctness.  
     
@@ -4079,7 +4079,7 @@ paragraph for those unfamiliar with the terms.
     typed programming language, using the Epigram notation defined by
     McBride and McKinna.  Epigram is a high level notation for dependently
     typed functional programming elaborating to a core type theory based
-    on Luo’s UTT, using Dybjer’s inductive families and elimination rules
+    on Luo's UTT, using Dybjer's inductive families and elimination rules
     to implement pattern matching. This gives us a rich framework for
     reasoning about programs.  However, a na ̈ıve implementation introduces
     several run-time overheads since the type sys- tem blurs the
@@ -4096,7 +4096,7 @@ paragraph for those unfamiliar with the terms.
     families; forcing, detagging and collapsing. I further introduce a
     compilation scheme from the core type theory to G-machine code,
     including a pattern matching compiler for elimination rules and a
-    compilation scheme for efficient run- time implementation of Peano’s
+    compilation scheme for efficient run- time implementation of Peano's
     natural numbers. We also see some low level optimisations for removal
     of identity functions, unused arguments and impossible case branches.
     As a result, we see that a dependent type theory is an effective base
@@ -8205,7 +8205,7 @@ paragraph for those unfamiliar with the terms.
   number = "3",
   year = "2008",
   abstract =
-    "Church’s Thesis asserts that the only numeric functions that can be
+    "Church's Thesis asserts that the only numeric functions that can be
     calculated by effective means are the recursive ones, which are the
     same, extensionally, as the Turing- computable numeric functions. The
     Abstract State Machine Theorem states that every classical algorithm
@@ -8213,9 +8213,9 @@ paragraph for those unfamiliar with the terms.
     presupposes three natural postulates about algorithmic
     computation. Here, we show that augmenting those postulates with an
     additional requirement regarding basic operations gives a natural
-    axiomatization of computability and a proof of Church’s Thesis, as
+    axiomatization of computability and a proof of Church's Thesis, as
     Gödel and others suggested may be possible. In a similar way, but with
-    a different set of basic oper- ations, one can prove Turing’s Thesis,
+    a different set of basic oper- ations, one can prove Turing's Thesis,
     characterizing the effective string functions, and—in particular—the
     effectively-computable functions on string representations of numbers.",
   paper = "Ders08.pdf",
@@ -11644,7 +11644,7 @@ paragraph for those unfamiliar with the terms.
   abstract =
     "We attempt to put the title problem and the Church-Turing thesis into
     a proper perspective and to clarify some common misconceptions
-    related to Turing’s analysis of computation. We examine two approaches 
+    related to Turing's analysis of computation. We examine two approaches 
     to the title problem, one well-known among philosophers and another 
     among logicians.",
   paper = "Gure12.pdf",
@@ -14672,7 +14672,7 @@ paragraph for those unfamiliar with the terms.
     rationals, and to multivariate polynomials with integral coefficients. 
     In particular, various squarefree decomposition algorithms and Hensel 
     lifting techniques are analyzed. An attempt is made to establish a 
-    complete historic trace for today’s methods. The exponential worst 
+    complete historic trace for today's methods. The exponential worst 
     case complexity nature of these algorithms receives attention.",
   paper = "Kalt83a.pdf"
 }
@@ -17085,7 +17085,7 @@ paragraph for those unfamiliar with the terms.
     This makes clear what we mean by coercive subtyping being a
     conservative extension, on the one hand, and amends a technical
     problem that has led to a gap in the earlier conservativity proof, on
-    the other. We also compare coercive subtyping with the ‘ordinary’
+    the other. We also compare coercive subtyping with the ‘ordinary'
     notion of subtyping – subsumptive subtyping, and show that the former
     is adequate for type theories with canonical objects while the latter
     is not. An improved implementation of coercive subtyping is done in
@@ -17747,7 +17747,7 @@ paragraph for those unfamiliar with the terms.
   abstract =
     "If programming is understood not as the writing of instructions for
     this or that computing machine but as the design of methods of
-    computation that it is the computer’s duty to execute (a difference
+    computation that it is the computer's duty to execute (a difference
     that Dijkstra has referred to as the difference between computer
     science and computing science), then it no longer seems possible to
     distinguish the discipline of programming from constructive
@@ -18348,7 +18348,7 @@ paragraph for those unfamiliar with the terms.
   pages = "245-285",
   abstract =
     "Subtyping appears in a variety of programming languages, in the form
-    of the ‘automatic coercion’ of integers to reals, Pascal subranges,
+    of the ‘automatic coercion' of integers to reals, Pascal subranges,
     and subtypes arising from class hierarchies in languages with
     inheritance. A general framework based on untyped lambda calculus
     provides a simple semantic model of subtyping and is used to
@@ -18419,17 +18419,17 @@ paragraph for those unfamiliar with the terms.
   year = "2009",
   link = "\url{https://www.win.tue.nl/~hzantema/semssm.pdf}",
   abstract = 
-    "In this paper we are going to describe the Wand’s type inference
-    algorithm and we’ll try to extend this algorithm with the notion of
-    polymorphic let.  By means of a type system, which we’re going to
+    "In this paper we are going to describe the Wand's type inference
+    algorithm and we'll try to extend this algorithm with the notion of
+    polymorphic let.  By means of a type system, which we're going to
     extend with some constraint language, we are able to extend the
-    algorithm’s first phase (generation of equations) with
+    algorithm's first phase (generation of equations) with
     let-polymorphism.  The second phase of the algorithm (solving of the
     generated equations) needs some modifications to be done on standard
     unification algorithms because the new generated equation constructs
     can not directly be fed in to the standard unification algorithm.  The
     correctness of the first phase of the algorithm is been proved by
-    extending the Wand’s soundness and completeness prove. Finally a
+    extending the Wand's soundness and completeness prove. Finally a
     simple example is given to clarify the idea behind the algorithm.",
   paper = "Moba09.pdf",
   keywords = "printed"
@@ -22252,7 +22252,7 @@ paragraph for those unfamiliar with the terms.
   abstract =
     "A formalism for constructing and using axiomatic specifications in an
     arbitrary logical system is presented.  This builds on the framework
-    provided by Goguen and Burstall’s work on the notion of an institution
+    provided by Goguen and Burstall's work on the notion of an institution
     as a formalisation of the concept of a logical system for writing
     specifications.  We show how to introduce free variables into the
     sentences of an arbitrary institution and how to add quantitiers which
@@ -23271,11 +23271,11 @@ paragraph for those unfamiliar with the terms.
   abstract =
     "The conventional wisdom presented in most computability books and
     historical papers is that there were several researchers in the early
-    1930’s working on various precise definitions and demonstrations of a
+    1930's working on various precise definitions and demonstrations of a
     function specified by a finite procedure and that they should all
     share approximately equal credit. This is incorrect. It was Turing
     alone who achieved the characterization, in the opinion of G ̈odel. We
-    also explore Turing’s oracle machine and its analogous properties in
+    also explore Turing's oracle machine and its analogous properties in
     analysis.",
   paper = "Soar07.pdf",
   keywords = "printed, DONE"
@@ -23986,7 +23986,7 @@ paragraph for those unfamiliar with the terms.
     date.  The architecture of the compiler, a sequence of intermediate
     languages through which high-level features are compiled away
     incrementally, enables verification of each compilation pass at an
-    appropriate level of semantic detail. Parts of the compiler’s
+    appropriate level of semantic detail. Parts of the compiler's
     implementation resemble mainstream (unverified) compilers for strict
     functional languages, and it supports several important features and
     optimisations. These include efficient curried multi-argument
@@ -24945,7 +24945,7 @@ paragraph for those unfamiliar with the terms.
     single construct. This permits the inheritance hierarchy to take over
     the function of lexical scoping in conventional languages.  Finally,
     because SELF does not distinguish state from behavior, it narrows the
-    gaps between ordinary objects, procedures, and closures.  SELF ’s
+    gaps between ordinary objects, procedures, and closures.  SELF 's
     simplicity and expressiveness offer new insights into object-oriented
     computation.",
   paper = "Unga91.pdf"
@@ -30736,7 +30736,7 @@ when shown in factored form.
   pages = "909-942",
   abstract =
     "In this paper, we report on a new theorem that generalizes
-    Liouville’s theorem on integration in finite terms. The new theorem
+    Liouville's theorem on integration in finite terms. The new theorem
     allows dilogarithms to occur in the integral in addition to
     transcendental elementary functions. The proof is based on two
     identities for the dilogarithm, that characterize all the possible
@@ -31215,7 +31215,7 @@ when shown in factored form.
     inherent in having quote and unquote implemented as keywords are
     highlighted. The fact that lambda terms are returned without typing
     information is discussed, and a solution is presented. Also provided
-    is a detailed users’ guide to the reflection API and a library of
+    is a detailed users' guide to the reflection API and a library of
     working code examples to illustrate how various common tasks can be
     performed, along with suggestions for an updated reflection API in a
     future version of Agda.",
@@ -32574,7 +32574,7 @@ when shown in factored form.
   link = "\url{https://bentnib.org/paramnotions-jfp.pdf}",
   year = "2018",
   abstract =
-    "Moggi’s Computational Monads and Power et al ’s equivalent notion of
+    "Moggi's Computational Monads and Power et al 's equivalent notion of
     Freyd category have captured a large range of computational effects
     present in programming languages. Examples include non-termination,
     non-determinism, exceptions, continuations, side-effects and
@@ -32797,7 +32797,7 @@ when shown in factored form.
     this. The human defines concepts, constructs algorithms and provides
     proofs, while the machine checks that the definitions are well formed
     and the proofs and computations are correct. Results formalized so far
-    demonstrate the feasibility of this ‘computer mathematics’. Also there
+    demonstrate the feasibility of this ‘computer mathematics'. Also there
     are very good applications. The challenge is to make the systems more
     mathematician-friendly, by building libraries and tools. The eventual
     goal is to help humans to learn, develop, communicate, referee and
@@ -32971,7 +32971,7 @@ when shown in factored form.
   link = "\url{}",
   year = "1995",
   abstract =
-    "We present an implementation of Barendregt’s $\lambda$-Cube in the
+    "We present an implementation of Barendregt's $\lambda$-Cube in the
     Isabelle proof system.  Isabelle provides many facilities for
     developing a useful specification and proving environment from the
     basic formulation of formal systems.  We used those facilities to
@@ -33207,7 +33207,7 @@ when shown in factored form.
     construction of a solution is often ensured by the use of numerical
     methods such as vote-counting, payoff functions, game theory and 
     economic criteria. In areas where there are no obvious numerical methods
-    for agents to use in assessing other agents’ contributions, many 
+    for agents to use in assessing other agents' contributions, many 
     questions still remain open for research. The paper reports a study of
     one such area: heuristic indefinite integration in terms of agents with
     different single heuristic abilities which must cooperate in finding
@@ -33346,7 +33346,7 @@ when shown in factored form.
     on fixed-point induction, first order programming logic is founded on
     deductive principles that are familiar to most programmers. Informal
     structural induction arguments (such as termination proofs for LISP
-    append, McCarthy’s 91-function, and Ackermann’s function) have direct
+    append, McCarthy's 91-function, and Ackermann's function) have direct
     formalizations within the system.
 
     The essential elements of first order programming logic are:
@@ -33788,8 +33788,8 @@ when shown in factored form.
     mini-ML functional language, we have mechanically verified the
     correctness of two CPS transformations for a call-by-value λ
     $\lambda$-calculus with n-ary functions, recursive functions, data
-    types and pattern-matching.  The transformations generalize Plotkin’s
-    original call-by-value transformation and Danvy and Nielsen’s
+    types and pattern-matching.  The transformations generalize Plotkin's
+    original call-by-value transformation and Danvy and Nielsen's
     optimized transformation, respectively. We used the Coq proof
     assistant to formalize the transformations and conduct and check the
     proofs. Originalities of this work include the use of big-step
@@ -33867,7 +33867,7 @@ when shown in factored form.
     Level 1: whenever Level n accepts a proof of some $\phi$, there exists a
     Level 1 proof of $\phi$. We then mechanically translate the Level 11 proof
     for each Level n into a Level n − 1 proof—that is, we create a Level 1
-    proof of Level 2’s fidelity, a Level 2 proof of Level 3’s fidelity,
+    proof of Level 2's fidelity, a Level 2 proof of Level 3's fidelity,
     and so on. This layering shows that each level can be trusted, and
     allows us to manage the sizes of these proofs.
     
@@ -33893,16 +33893,16 @@ when shown in factored form.
   link = "\url{https://www.cl.cam.ac.uk/~mom22/jitawa/}",
   abstract =
     "This paper presents, we believe, the most comprehensive evidence of a
-    theorem prover’s soundness to date. Our subject is the Milawa theorem
+    theorem prover's soundness to date. Our subject is the Milawa theorem
     prover. We present evidence of its soundness down to the machine
     code. Milawa is a theorem prover styled after NQTHM and ACL2. It is
-    based on an idealised version of ACL2’s computational logic and
-    provides the user with high-level tactics similar to ACL2’s. In
+    based on an idealised version of ACL2's computational logic and
+    provides the user with high-level tactics similar to ACL2's. In
     contrast to NQTHM and ACL2, Milawa has a small kernel that is somewhat
     like an LCF-style system. We explain how the Milawa theorem prover is
     constructed as a sequence of reflective extensions from its
     kernel. The kernel establishes the soundness of these extensions
-    during Milawa’s boot-strapping process. Going deeper, we explain how
+    during Milawa's boot-strapping process. Going deeper, we explain how
     we have shown that the Milawa kernel is sound using the HOL4 theorem
     prover. In HOL4, we have formalized its logic, proved the logic sound,
     and proved that the source code for the Milawa kernel (1,700 lines of
@@ -35343,8 +35343,8 @@ when shown in factored form.
     the interest in type theories, as they are not just the object of
     mere historical research, but have an active role in the development
     of computational science and core mathematics.  It is worth exploring
-    some of them in depth, particularly predicative Martin-Löf’s
-    intuitionistic type theory and impredicative Coquand’s calculus of
+    some of them in depth, particularly predicative Martin-Löf's
+    intuitionistic type theory and impredicative Coquand's calculus of
     constructions. The logical and philosophical differences and
     similarities between them will be studied, showing the relationship
     between these type theories and other fields of logic.",
@@ -37191,7 +37191,7 @@ when shown in factored form.
     that when Milawa is run on top of our verified Lisp, it will only
     print theorem statements that are semantically true. We believe that
     this top-level theorem is the most comprehensive formal evidence of a
-    theorem prover’s soundness to date.",
+    theorem prover's soundness to date.",
   paper = "Myre14.pdf",
   keywords = "printed, DONE"
 }
@@ -37212,7 +37212,7 @@ when shown in factored form.
     "This paper reports on a case study, which we believe is the first
     to produce a formally verified end-to-end implementation of a
     functional programming language running on commercial
-    processors. Interpreters for the core of McCarthy’s LISP 1.5
+    processors. Interpreters for the core of McCarthy's LISP 1.5
     were implemented in ARM, x86 and PowerPC machine code, and proved
     to correctly parse, evaluate and print LISP s-expressions. The
     proof of evaluation required working on top of verified
@@ -37951,7 +37951,7 @@ when shown in factored form.
     Huet. LEGO has been used for problems at the limits of our abilities
     to do formal mathematics.  
 
-    In this thesis I explain some aspects of the meta-theory of LEGO’s
+    In this thesis I explain some aspects of the meta-theory of LEGO's
     type systems leading to a machine-checked proof that typechecking is
     decidable for all three type theories supported by LEGO, and to a
     verified algorithm for deciding their typing judgements, assuming only
@@ -37966,7 +37966,7 @@ when shown in factored form.
 
     Having outlined a formal development far too large to be surveyed in
     detail by a human reader, I close with some thoughts on how the human
-    mathematician’s state of understanding and belief might be affected by
+    mathematician's state of understanding and belief might be affected by
     posessing such a thing.",
   paper = "Poll94.pdf"
 }
@@ -38157,11 +38157,11 @@ when shown in factored form.
     problem in computer algebra. While most previous results have
     focused on the worst-case complexity, we instead employ the
     technique of adaptive analysis to give an improvement in many
-    ‘‘easy’’ cases. We present two adaptive measures and methods
+    ‘‘easy'' cases. We present two adaptive measures and methods
     for polynomial multiplication, and also show how to effectively
     combine them to gain both advantages. One useful feature of these
     algorithms is that they essentially provide a gradient between
-    existing ‘‘sparse’’ and ‘‘dense’’ methods. We prove that these
+    existing ‘‘sparse'' and ‘‘dense'' methods. We prove that these
     approaches provide significant improvements in many cases but
     in the worst case are still comparable to the fastest existing
     algorithms.",
@@ -39237,20 +39237,20 @@ when shown in factored form.
     due to the way in which the different branches of mathematics reflect
     reality.  Many different axioms and their interrelationship are
     discussed.  We show that there is a fundamental problem in bish
-    (Bishop’s school of constructive mathematics) with regard to its
-    current definition of ‘continuous function’. This problem is closely
-    related to the definition in bish of ‘locally compact’.
+    (Bishop's school of constructive mathematics) with regard to its
+    current definition of ‘continuous function'. This problem is closely
+    related to the definition in bish of ‘locally compact'.
 
     Possible approaches to this problem are discussed. Topology seems to
     be a key to understanding many issues. We offer several new
     simplifying axioms, which can form bridges between the various
     branches of constructive mathematics and classical mathematics
-    (‘reuniting the antipodes’).  We give a simplification of basic
+    (‘reuniting the antipodes').  We give a simplification of basic
     intuitionistic theory, especially with regard to so-called ‘bar
-    induction’.  We then plead for a limited number of axiomatic systems,
+    induction'.  We then plead for a limited number of axiomatic systems,
     which differentiate between the various branches of mathematics.
     Finally, in the appendix we offer bish an elegant topological
-    definition of ‘locally compact’, which unlike the current definition
+    definition of ‘locally compact', which unlike the current definition
     is equivalent to the usual classical and/or intuitionistic definition
     in classical and intuitionistic mathematics respectively.",
   paper = "Waal03.pdf"
@@ -39326,11 +39326,11 @@ when shown in factored form.
     logical relation; and formulated a notion of parametricity satisfied
     by well-behaved models.  
     
-    We observe that the essence of Girard’s result is a projection from P2
-    into F2, and that the essence of Reynolds’s result is an embedding of
+    We observe that the essence of Girard's result is a projection from P2
+    into F2, and that the essence of Reynolds's result is an embedding of
     F2 into P2, and that the Reynolds embedding followed by the Girard
     projection is the identity. We show that the inductive naturals are
-    exactly those values of type natural that satisfy Reynolds’s notion of
+    exactly those values of type natural that satisfy Reynolds's notion of
     parametricity, and as a consequence characterize situations in which
     the Girard projection followed by the Reynolds embedding is also the
     identity.
@@ -39499,7 +39499,7 @@ when shown in factored form.
     The PVS system solves the problem of partial functions
     differently. PVS generates type-correctness conditions (TCCs) for
     statements in its language. These are proof obligations that have to
-    be satisfied ‘on the side’ to show that statements are well-formed.
+    be satisfied ‘on the side' to show that statements are well-formed.
 
     We propose a TCC-like approach for the treatment of partial functions
     in type theory. We add domain conditions (DCs) to classical
@@ -39544,17 +39544,17 @@ when shown in factored form.
   pages = "92-99",
   publisher = "Elsevier B.V",
   abstract =
-    "I review history, starting with Turing’s seminal paper, reaching
+    "I review history, starting with Turing's seminal paper, reaching
     back ultimately to when our species started to outperform other
     primates, searching for the questions that will help us develop a
     computational account of human intelligence. I answer that the
-    right questions are: What’s different between us and the other
-    primates and what’s the same.  I answer the {\sl what’s different}
+    right questions are: What's different between us and the other
+    primates and what's the same.  I answer the {\sl what's different}
     question by saying that we became symbolic in a way that enabled
     story understanding, directed perception, and easy communication,
-    and other species did not. I argue against Turing’s
+    and other species did not. I argue against Turing's
     reasoning-centered suggestions, offering that reasoning is just a
-    special case of story understanding. I answer the {\sl what’s the
+    special case of story understanding. I answer the {\sl what's the
     same} question by noting that our brains are largely engineered in
     the same exotic way, with information flowing in all directions at
     once. By way of example, I illustrate how these answers can
@@ -39674,8 +39674,8 @@ when shown in factored form.
     driving progress in programming languages, for example leading towards
     a better understanding of concepts such as abstract data types and
     polymorphism.  One of the best known instances of the analogy actually
-    rises to the level of an isomorphism: between Gentzen’s natural
-    deduction and Church’s lambda calculus.  However, as has been
+    rises to the level of an isomorphism: between Gentzen's natural
+    deduction and Church's lambda calculus.  However, as has been
     recognized for a while, lambda calculus fails to capture some of the
     important features of modern programming languages. Notably, it does
     not have an inherent notion of evaluation order, needed to make sense
@@ -39686,7 +39686,7 @@ when shown in factored form.
     This thesis aims to give a fresh take on the proofs-as-programs
     analogy—one which better accounts for features of modern programming
     languages—by starting from a different logical foundation.  Inspired
-    by Andreoli’s focusing proofs for linear logic, we explain how to
+    by Andreoli's focusing proofs for linear logic, we explain how to
     axiomatize certain canonical forms of logical reasoning through a
     notion of pattern.  Propositions come with an intrinsic polarity,
     based on whether they are defined by patterns of proof, or by patterns
@@ -40407,7 +40407,7 @@ when shown in factored form.
   abstract =
     "We describe a proof of the Central Limit Theorem that has been
     formally verified in the Isabelle proof assistant.  Our formalization
-    builds upon and extends Isabelle’s libraries for analysis and 
+    builds upon and extends Isabelle's libraries for analysis and 
     measure-theoretic probability.  The proof of the theorem uses
     characteristic functions , which are a kind of Fourier transform, to
     demonstrate that, under suitable hypotheses, sums of random
@@ -41487,7 +41487,7 @@ when shown in factored form.
     prover a decision procedure for a fragment of the logic.  An obvious
     goal when incorporating such a procedure is to reduce the search space
     explored by the heuristic component of the system, as would be
-    achieved by eliminating from the system’s data base some explicitly
+    achieved by eliminating from the system's data base some explicitly
     stated axioms.  For example, if a decision procedure for linear
     inequalities is added, one would hope to eliminate the explicit
     consideration of the transitivity axioms.  However, the decision
@@ -41572,10 +41572,10 @@ when shown in factored form.
   volume = "47",
   pages = "859-882",
   abstract =
-    "We define the ‘‘combinatorial part’’ of a Tarski formula in which
+    "We define the ‘‘combinatorial part'' of a Tarski formula in which
     equalities and inequalities are in factored or partially-factored
     form. The combinatorial part of a formula contains only
-    ‘‘monomial inequalities’’,which are sign conditions on monomials.  We 
+    ‘‘monomial inequalities'',which are sign conditions on monomials.  We 
     give efficient algorithms for answering some basic questions about
     conjunctions of monomial inequalities and prove the
     NP-Completeness/Hardness of some others. By simplifying the
@@ -42200,9 +42200,9 @@ when shown in factored form.
   year = "2010",
   pages = "157-157",
   abstract =
-    "In the 50 years since McCarthy’s 'Recursive Functions of Symbolic
+    "In the 50 years since McCarthy's 'Recursive Functions of Symbolic
     Expressions and Their Computation by Machine', what have we
-    learned about the realization of Leibniz’s dream of just being
+    learned about the realization of Leibniz's dream of just being
     able to utter 'Calculemus!' (Let us calculate!) when faced with a
     mathematical dilemma?  
 
@@ -44736,7 +44736,7 @@ when shown in factored form.
     "There are two different styles for writing natural deduction proofs:
     the 'Gentzen' style in which a proof is a tree with the conclusion at
     the root and the assumptions at the leaves, and the 'Fitch' style
-    (also called ‘flag’ style) in which a proof consists of lines that are
+    (also called ‘flag' style) in which a proof consists of lines that are
     grouped together in nested boxes.  
     
     In the world of proof assistants these two kinds of natural deduction
@@ -45121,7 +45121,7 @@ when shown in factored form.
   pages = "389-397",
   abstract =
     "In this paper we present a new approach to automated geometry theorem
-    proving that is based on Buchberger's Gröbner bases method. The goal
+    proving that is based on Buchberger's Gr\"{o}bner bases method. The goal
     is to automatically prove geometry theorems whose hypotheses and
     conjecture can be expressed algebraically, i.e. by polynomial
     equations. After shortly reviewing the problem considered and
@@ -45273,7 +45273,7 @@ when shown in factored form.
     of this verification task to a set of mathematical optimization
     problems that can be solved by off-the-shelf computer algebra
     systems. We use this analysis to prove the correctness of
-    implementations in Intel’s math library automatically. Prior to this
+    implementations in Intel's math library automatically. Prior to this
     work, these implementations could only be verified with significant
     manual effort.",
   paper = "Wony18.pdf",
@@ -45677,7 +45677,7 @@ when shown in factored form.
   pages = "171-184",
   abstract =
     "In this paper, we present the formal verification of a Common Lisp
-    implementation of Buchberger’s algorithm for computing Gröbner bases
+    implementation of Buchberger's algorithm for computing Gröbner bases
     of polynomial ideals. This work is carried out in the Acl2 system and
     shows how verified Computer Algebra can be achieved in an executable
     logic.",
@@ -45779,11 +45779,11 @@ when shown in factored form.
   link = "\url{http://ceur-ws.org/Vol-1010/paper-05.pdf}",
   year = "2013",
   abstract =
-    "This research compares the author’s experience in programming
+    "This research compares the author's experience in programming
     algebra in Haskell and in Agda (currently the former experience is
     large, and the latter is small). There are discussed certain hopes and
     doubts related to the dependently typed and verified programming of
-    symbolic computation. This concerns the 1) author’s experience
+    symbolic computation. This concerns the 1) author's experience
     history, 2) algebraic class hierarchy design, 3) proof cost overhead
     in evaluation and in coding, 4) other subjects. Various examples are
     considered.",
@@ -47188,7 +47188,7 @@ when shown in factored form.
     an appropriate abstract level. The main advantage of the MIZAR theorem
     prover is its special input language that enables textbook style
     presentation of proofs. For generic versions of Brown/Henrici addition
-    and of Euclidean’s algorithm we give complete correctness proofs
+    and of Euclidean's algorithm we give complete correctness proofs
     written in the MIZAR language.
     
     Moreover, we do not only prove algorithms correct in the usual
@@ -47544,7 +47544,7 @@ when shown in factored form.
   pages = "1-13",
   year = "1995",
   abstract = 
-    "Functional programming is a good idea, but we haven’t got it quite
+    "Functional programming is a good idea, but we haven't got it quite
     right yet.  What we have been doing up to now is weak (or partial)
     functional programming.  What we should be doing is strong (or
     total) functional programming - in which all computations terminate.
@@ -50620,7 +50620,7 @@ Comm. Math. Helv., Vol 18 pp 283-308, (1946)
     to model those functions in terms of suitable differential fields. If
     the integrand is Liouvillian, then the present algorithm considerably
     improves the efficiency of the corresponding algorithm given by Singer
-    et al. in 1985. Additionally, a generalization of Czichowski’s
+    et al. in 1985. Additionally, a generalization of Czichowski's
     algorithm for computing the logarithmic part of the integral is
     presented. Moreover, also partial generalizations to include other
     types of integrands are treated.
@@ -55043,7 +55043,7 @@ Proc ISSAC 97 pp172-175 (1997)
   abstract =
     "n the paper which inspired the $SC^2$ project, [E. Abraham,
     Building Bridges between Symbolic Computation and Satisfiability
-    Checking , Proc. ISSAC ’15, pp. 1–6, ACM, 2015] the author identified
+    Checking , Proc. ISSAC '15, pp. 1–6, ACM, 2015] the author identified
     the use of sophisticated heuristics as a technique that the
     Satisfiability Checking community excels in and from which it is
     likely the Symbolic Computation community could learn and prosper.  To
@@ -55094,7 +55094,7 @@ Proc ISSAC 97 pp172-175 (1997)
     algebraic numbers of degree up to 4. Our third contribution is an
     implementation in a new module of library SYNAPS v2.1. It improves
     significantly upon the efficiency of certain publicly available
-    implementations: Rioboo’s approach on AXIOM, the package of
+    implementations: Rioboo's approach on AXIOM, the package of
     Guibas-Karavelas-Russel, and CORE v1.6, MAPLE v9, and SYNAPS
     v2.0. Some existing limited tests had shown that it is faster than
     commercial library LEDA v4.5 for quadratic algebraic numbers.",
@@ -55628,7 +55628,7 @@ Proc ISSAC 97 pp172-175 (1997)
     single projection without carrying out a parametric existential
     decision over the reals. We find that the algorithm can tackle
     important and challenging problems, such as numerical stability
-    analysis of the widely-used MacCormack’s scheme. The problem has been
+    analysis of the widely-used MacCormack's scheme. The problem has been
     practically out of reach for standard QE algorithms in spite of many
     attempts to tackle it. However, the current implementation of VQE can
     solve it in about 12 hours. This paper extends the results reported at
@@ -55919,7 +55919,7 @@ Proc ISSAC 97 pp172-175 (1997)
   pages = "203-224",
   year = "1993",
   abstract =
-    "In this paper we show, by generalizing Hermite’s theorem to the
+    "In this paper we show, by generalizing Hermite's theorem to the
     multivariate setting, how to count the number of real or complex
     points of a discrete algebraic set which lie within some algebraic
     constraint region. We introduce a family of quadratic forms determined
@@ -56402,7 +56402,7 @@ Proc ISSAC 97 pp172-175 (1997)
     applicable to a range of benchmark examples, where it runs in most
     cases significantly faster than the QEPCAD package of Collins and
     Hong. An extension of the method to higher degree polynomials using
-    Thom’s lemma is sketched.",
+    Thom's lemma is sketched.",
   paper = "Weis97.pdf"
 }
 
@@ -57390,7 +57390,7 @@ Proc ISSAC 97 pp172-175 (1997)
     \item numeric explicit computation in a special arithmetic domain: 
     exact rational or integer, high-precision software floating-point, 
     interval, or conventional hardware floating-point.
-    \item ‘symbolic’ explicit computation with polynomial or other 
+    \item ‘symbolic' explicit computation with polynomial or other 
     expression entries,
     \item (implicit) matrix computation with symbols defined over a 
     (non-commuting) ring.
@@ -58685,7 +58685,7 @@ Proc ISSAC 97 pp172-175 (1997)
     differential systems initially investigated by Kukles in 1944. The
     obtained relations clarify recent rediscoveries of some known
     conditions of Cherkas. The computational difficulties of establishing
-    the complete center conditions for Kukles’ system, a problem that is
+    the complete center conditions for Kukles' system, a problem that is
     still open, are illustrated by interactive elimination. Some generated
     polynomial systems that need be solved are made available
     electronically for other developers to test elimination algorithms and
@@ -58798,7 +58798,7 @@ Proc ISSAC 97 pp172-175 (1997)
     \[1.6^x = 5054.4 - 122.35*x\]
     We will refer to equations of this type, with an exponential
     expression on one side and a linear one on the other, as
-    {\sl exponential-linear} equations. Numerical approaches such as Newton’s
+    {\sl exponential-linear} equations. Numerical approaches such as Newton's
     method or bisection quickly lead to accurate approximate solutions of
     exponential-linear equations. But in terms of the elementary functions
     of calculus and college algebra, there is no analytic solution.
@@ -58967,15 +58967,15 @@ Proc ISSAC 97 pp172-175 (1997)
     The first half of this book furnishes an introduction and represents a
     snapshot of the state of the art regarding systems of polynomial
     equations.  Afficionados of the well-known text books by Cox, Little,
-    and O’Shea will find familiar themes in the first five chapters:
+    and O'Shea will find familiar themes in the first five chapters:
     polynomials in one variable, Groebner bases of zero-dimensional
-    ideals, Newton polytopes and Bernstein’s Theorem, multidimensional
+    ideals, Newton polytopes and Bernstein's Theorem, multidimensional
     resultants, and primary decomposition.
     
     The second half of this book explores polynomial equations from a
     variety of novel and perhaps unexpected angles. Interdisciplinary
     connections are introduced, highlights of current research are
-    discussed, and the author’s hopes for future algorithms are
+    discussed, and the author's hopes for future algorithms are
     outlined. The topics in these chapters include computation of Nash
     equilibria in game theory, semidefinite programming and the real
     Nullstellensatz, the algebraic geometry of statistical models, the
@@ -60097,7 +60097,7 @@ Proc ISSAC 97 pp172-175 (1997)
     present the full model of such a system as well as a description of
     our prototype implementation showing the efficacy of such a system:
     for example, the prototype is able to obtain correct answers in cases
-    where computer algebra systems do not. We extend upon Fateman’s
+    where computer algebra systems do not. We extend upon Fateman's
     web-based table by including parametric limits of integration and
     queries with side conditions.",
   paper = "Adam99a.pdf",
@@ -60171,7 +60171,7 @@ Proc ISSAC 97 pp172-175 (1997)
     procedures with tactics, but the issue of securely adding new ones was
     not solved. In this paper, we show how to safely include user-defined
     decision procedures in theorem provers. The idea is to prove
-    properties of the procedure inside the prover’s logic and then invoke
+    properties of the procedure inside the prover's logic and then invoke
     a reflection rule to connect the procedure to the system. We also show
     that using a rich underlying logic permits an abstract account of the
     approach so that the results carry over to different implementations
@@ -60304,12 +60304,12 @@ Proc ISSAC 97 pp172-175 (1997)
     by Engquist and Majda, this approach proved to be well adapted to the
     construction of artificial boundary conditions. However, in the case
     of systems governed by pseudodifferential operators with variable
-    coefficients, Taylor’s method involves very elaborate calculations of
+    coefficients, Taylor's method involves very elaborate calculations of
     the symbols of the operators. Hence, a direct approach may be
     difficult when dealing with high-order conditions.
 
     This motivates the first part of this paper, where a recursive
-    explicit formulation of Taylor’s method is stated for microlocally
+    explicit formulation of Taylor's method is stated for microlocally
     strictly hyperbolic systems. Consequently, it provides an algorithm
     leading to symbolic calculations which can be handled by a computer
     algebra system. In the second part, an application of the method is
@@ -62566,7 +62566,7 @@ Universit{\"a}t Karsruhe, Karlsruhe, Germany 1994
     common implementations contain at least six (mostly independent)
     ``design choices''. A generic implementation can easily be parametrized
     by all these design choices, but this usually leads to slow and
-    bloated code. Using MetaOCaml’s staging facilities, we show how we can
+    bloated code. Using MetaOCaml's staging facilities, we show how we can
     produce a natural and type-safe implementation of Gaussian Elimination
     which exposes its design choices at code-generation time, so that
     these choices can effectively be specialized away, and where the
@@ -62726,9 +62726,9 @@ Universit{\"a}t Karsruhe, Karlsruhe, Germany 1994
     Dick was active in service to the computer algebra community as
     well. Here are some highlights. He served as Chair of ACM SIGSAM
     (1979-81) and Conference Co-chair (with J. A. van Hulzen) of EUROSAM
-    ’84, a precursor of the ISSAC meetings. Dick also had a long period of
+    '84, a precursor of the ISSAC meetings. Dick also had a long period of
     service on the editorial board of the {\sl Journal of Symbolic
-    Computation}. At ISSAC ’95 in Montreal, Dick was elected to the
+    Computation}. At ISSAC '95 in Montreal, Dick was elected to the
     initial ISSAC Steering Committee and was elected as the second Chair
     of the Committee in 1997. He, along with David Chudnovsky, organized
     the highly successful meetings on Computers and Mathematics that were
@@ -63340,7 +63340,7 @@ Coding Theory and Applications Proceedings. Springer-Verlag, Berlin, Germany
     \newline\refto{domain HDMP HomogeneousDistributedMultivariatePolynomial}",
   abstract =
     "Around 1980 two new directions in science and technique came
-    together. One was Buchberger’s algorithms in order to handle Groebner
+    together. One was Buchberger's algorithms in order to handle Groebner
     bases in an effective way for solving polynomial equations. The second
     one was the development of the personal computers. This was the
     starting point of a computational perspective in commutative algebra
@@ -63352,7 +63352,7 @@ Coding Theory and Applications Proceedings. Springer-Verlag, Berlin, Germany
     the book provides a bridge for the new, computational aspects in the
     field of commutative algebra and algebraic geometry.
 
-    To be more precise, the book gives an introduction to Buchberger’s
+    To be more precise, the book gives an introduction to Buchberger's
     algorithm with applications to syzygies, Hilbert polynomials, primary
     decompositions. There is an introduction to classical algebraic
     geometry with applications to the ideal membership problem, solving
@@ -64841,7 +64841,7 @@ May 1984
   year = "2001",
   abstract =
     "Two kinds of triangular systems are studied: normalized triangular
-    polynomial systems (a weaker form of Lazard’s triangular sets
+    polynomial systems (a weaker form of Lazard's triangular sets
     [D. Lazard, Discrete Appl. Math. 33, No. 1-3, 147-160 (1991; Zbl
     0753.13013)] and constructible triangular systems (involved in the
     dynamic constructible closure programs of T. Gomez-Díaz [Quelques
@@ -65003,9 +65003,9 @@ and Laine, M. and Valkeila, E. pp1-12 University of Helsinki, Finland (1994)
     differential Galois theory – methods for finding rational and
     exponential solutions that can provide first order right-hand factors
     are considered. Subsequently several known algorithms for
-    factorization are presented. These include Singer’s eigenring
+    factorization are presented. These include Singer's eigenring
     factorization algorithm, factorization via Newton polygons, van
-    Hoeij’s methods for local factorization, and an adapted version of
+    Hoeij's methods for local factorization, and an adapted version of
     Pade approximation.
     
     In addition a procedure based on pure algebraic methods for factoring
@@ -67184,7 +67184,7 @@ LCCN QA155.7.E4 I57 1984
     The authors are all associated with the group that began the
     development of Maple. Hence, the book reflects the approach taken by
     Maple, but the majority of the discussion is completely independent of
-    any actual system. The authors’ experience in implementing a practical
+    any actual system. The authors' experience in implementing a practical
     CAS comes across clearly.
     
     The book focuses on the core of computer algebra. The first chapter
@@ -67573,7 +67573,7 @@ LCCN QA76.95.I57 1988 Conference held jointly with AAECC-6
     members, and the evolution of the system over time. He compares the
     resulting system to MACSYMA, Mathematica, Reduce, Scratchpad and other
     systems. Gonnet also examines the licensing and distribution of Maple
-    and the project’s relations to its users. Maple was initially used for
+    and the project's relations to its users. Maple was initially used for
     teaching purposes within the university, but soon found users in other
     institutions. From 1984, distribution was handled by Watcom, a company
     associated with the university, and 1988, Gonnet and Geddes created a
@@ -67582,7 +67582,7 @@ LCCN QA76.95.I57 1988 Conference held jointly with AAECC-6
     algebra system. However, during the mid-1990s the company ran into
     trouble and disagreements with his colleagues caused Gonnet to
     withdraw from managerial involvement. Since then, he feels that Maple
-    has lost its battle with Mathematica. Gonnet also discusses Maple’s
+    has lost its battle with Mathematica. Gonnet also discusses Maple's
     relation to Matlab and its creator, Cleve Moler.
     
     From 1984 onward with Frank Tompa, Tim Bray, and other Waterloo
@@ -67842,7 +67842,7 @@ Schenectady, NY, USA, 1984
     compared to the result of a sole Groebner basis computation.  
     
     Of course, for special purposes a general CAS as a multipurpose
-    mathematical assistant can’t offer the same power as specialized
+    mathematical assistant can't offer the same power as specialized
     software with efficiently implemented and well adapted algorithms and
     data types. For polynomial system solving, such specialized software
     has to implement two algorithmically complex tasks, solving and
@@ -68811,9 +68811,9 @@ Vol. 8 No. 3 pp195-210 (2001)
   abstract =
     "Sophus Lie (1842-1899) pioneered the study of continuous
     transformation groups that leave systems of differential equations
-    invariant.  Lie’s work [l-3] brought diverse and ad hoc integration
+    invariant.  Lie's work [l-3] brought diverse and ad hoc integration
     methods for solving special classes of differential equations under a
-    common conceptual umbrella.  Indeed, Lie’s infinitesimal
+    common conceptual umbrella.  Indeed, Lie's infinitesimal
     transformation method provides a widely applicable technique to find
     closed form solutions of ordinary differential equations (ODES).
     Standard solution methods for first-order or linear ODES can be
@@ -68822,11 +68822,11 @@ Vol. 8 No. 3 pp195-210 (2001)
     either be reduced to lower-order ones or be completely integrated via
     group theoretic techniques.  
     
-    Applied to partial differential equations (PDEs), Lie’s method [2]
+    Applied to partial differential equations (PDEs), Lie's method [2]
     leads to group-invariant solutions and conservation laws.  Exploiting
     the symmetries of PDEs, new solutions can be derived from known ones,
     and PDEs can be classified into equivalence classes.  Furthermore,
-    group-invariant solutions obtained via Lie’s approach may provide
+    group-invariant solutions obtained via Lie's approach may provide
     insight into the physical models themselves, and explicit solutions
     can serve as benchmarks in the design, accuracy testing, and
     comparison of numerical algorithms.
@@ -68835,7 +68835,7 @@ Vol. 8 No. 3 pp195-210 (2001)
     development of mathematics and physics.  Indeed, the theory of Lie
     groups and Lie algebras is applied to diverse fields of mathematics
     including differential geometry, algebraic topology, bifurcation
-    theory, to name a few.  Lie’s original ideas greatly influenced the
+    theory, to name a few.  Lie's original ideas greatly influenced the
     study of physically important systems of differential equations in
     classical and quantum mechanics, fluid dynamics, elasticity, and many
     other applied areas [4-81].
@@ -68927,7 +68927,7 @@ Vol. 8 No. 3 pp195-210 (2001)
     $\omega_1=\frac{dz}{(1-z)}$. We give an algorithm which computes the
     monodromy of these special functions. This algorithm, implemented in
     AXIOM, is based on the computation of the associator $\Phi_{KZ}$ of
-    Drinfel’d, in factorized form. The monodromy formulae involve special
+    Drinfel'd, in factorized form. The monodromy formulae involve special
     constants, called multiple zeta values. We prove that the algebra of
     polylogarithms is isomorphic to a shuffle algebra.",
   paper = "Hoan00.pdf",
@@ -69233,9 +69233,9 @@ Developments. LIFL Univ. Lille, Lille France, 1993
     opening, as well as an explicit example of a family of polynomial
     vector fields replicating the above-described conditions and
     possessing five limit cycles. The methods employed are very diverse:
-    geometrical arguments (Thom’s theory of catastrophes and the theory of
+    geometrical arguments (Thom's theory of catastrophes and the theory of
     algebraic singularities), developments from Puiseux, the number of
-    major roots by Descartes’ law and calculated exactly by Sturm series,
+    major roots by Descartes' law and calculated exactly by Sturm series,
     and other specific methods for formal calculus, such as for example
     the cylindrical algebraic decomposition and the resolution of
     algebraic systems via the construction of Gröbner bases. The
@@ -70138,7 +70138,7 @@ Draft September 5, 1988
     interactive problem solving.
     
     Section 2 is a discussion of design issues contrasting AXIOM with
-    other symbolic systems.  Sections 3 and 4 is an assessment of AXIOM’s
+    other symbolic systems.  Sections 3 and 4 is an assessment of AXIOM's
     current design for building libraries and interactive use.  Section 5
     describes a new interface design for AXIOM, its resulting paradigms,
     and its underlying semantic model.  Section 6 compares this work with
@@ -71582,7 +71582,7 @@ SIGSAM Communications in Computer Algebra, 157 2006
     "In a previous paper we characterized, in the category theory setting,
     a class of implementations of abstract data types, which has been
     suggested by the way of programming in the EAT system. (EAT, Effective
-    Algebraic Topology, is one of Sergeraert’s systems for effective
+    Algebraic Topology, is one of Sergeraert's systems for effective
     homology and homotopy computation.) This characterization was
     established using classical tools, in an unrelated way to the current
     mainstream topics in the field of algebraic specifications. Looking
@@ -72240,7 +72240,7 @@ PhD thesis, Nov 2008 Florida State University
     (such as groups, rings, fields, etc.) are naturally
     hierarchical-modular.
     
-    The Institute of Cybernetics and the Kherson Teachers’ College have
+    The Institute of Cybernetics and the Kherson Teachers' College have
     developed an instruction-oriented computer algebra system AIST. The
     AIST kernel is a hierarchical structure of mathematical concepts
     described in the APS language. However, construction of new
@@ -72762,7 +72762,7 @@ Math. and Computers in Simulation 42 pp 541-549 (1996)
     as Axiom, Cayley, Maple, Mathematica, and Magma.
 
     As a spin-off of this effort, we create three different
-    generalizations of Shor’s quantum factoring algorithm to free abelian
+    generalizations of Shor's quantum factoring algorithm to free abelian
     groups of finite rank. We refer to these algorithms as wandering (or
     vintage $\mathbb{Z}_Q$) Shor algorithms. They are essentially quantum
     algorithms on free abelian groups of finite rank $n$ which, with each
@@ -72895,7 +72895,7 @@ Math. and Computers in Simulation 42 pp 541-549 (1996)
     basis formed by the eigenfunctions of the unperturbed Hamiltonian)
     while turning out to be a variational technique. Furthermore, it is
     easily implemented by means of the widely used ‘‘electronic
-    scratchpad,’’ MathCAD 2.0, using an inexpensive computer. As an
+    scratchpad,'' MathCAD 2.0, using an inexpensive computer. As an
     example of the method, the problem of a harmonic oscillator with a
     quartic perturbing term is examined.",
   keywords = "axiomref",
@@ -73603,7 +73603,7 @@ in [Wit87], pp17-18
     lexicographical ordering.
 
     We have implemented the heap algorithms in C with an interface to
-    Maple. For comparison we have also implemented Yan’s ``geobuckets'' data
+    Maple. For comparison we have also implemented Yan's ``geobuckets'' data
     structure. Our timings demonstrate that heaps of pointers are
     comparable in speed with geobuckets but use significantly less
     storage.",
@@ -73653,7 +73653,7 @@ in [Wit87], pp17-18
     dichotomic discussion of the different reduced Groebner bases
     depending on the values of the parameters, whose set of terminal
     vertices form a Comprehensive Groebner System (CGS). It is relevant
-    to obtain CGS’s having further properties in order to make them more
+    to obtain CGS's having further properties in order to make them more
     useful for the applications. In this paper the interest is focused on
     obtaining a canonical CGS. We define the objective, show the
     difficulties and formulate a natural conjecture. If the conjecture is
@@ -74039,7 +74039,7 @@ Invited Presentation in Milestones in Computer Algebra, May 2008, Tobago
     the computer algebra system Sage. As Sage is free and open source,
     students and educators of cryptology need not worry about paying
     license fees in order to use Sage, but can instead concentrate on
-    exploring cryptography using Sage’s built-in support for cryptography.",
+    exploring cryptography using Sage's built-in support for cryptography.",
   paper = "Nguy09.pdf",
   keywords = "axiomref"
 }
@@ -74654,11 +74654,11 @@ J. of Symbolic Computation 36 pp 513-533 (2003)
     capabilities nor dynamic capabilities. Meanwhile, the well-known DGSs
     do not provide algebraic facilities.
 
-    Maple’s and Derive’s paramGeo packages and the DGS-CAS translator (all
+    Maple's and Derive's paramGeo packages and the DGS-CAS translator (all
     freely available from the authors) make it possible to draw a
-    geometric configuration with the mouse (using The Geometer’s Sketchpad
+    geometric configuration with the mouse (using The Geometer's Sketchpad
     3 or 4) and to obtain the coordinates, equations, etc., of the drawn
-    configuration in Maple’s or Derive’s syntax. To obtain complicated
+    configuration in Maple's or Derive's syntax. To obtain complicated
     formulae, coordinates of points or equations of loci, to perform
     automatic theorem proving and to perform automatic discovery directly
     from sketches are examples of straightforward applications. Moreover,
@@ -75974,7 +75974,7 @@ Kognitive Systeme, Universit\"t Karlsruhe 1992
     polynomials associated with it (symmetric powers of $L$).
     
     Now there are the algorithms for the solution of the last problems for
-    $F=\mathbb{Q}(x)$ [see D. Yu. Grigor’ev, J. Symb. Comput. 10, 7-37
+    $F=\mathbb{Q}(x)$ [see D. Yu. Grigor'ev, J. Symb. Comput. 10, 7-37
     (1990; Zbl 0728.68067) and M. F. Singer, Am. J. Math. 103, 661-682
     (1981; Zbl 0477.12026)].
     
@@ -78403,7 +78403,7 @@ LCCN QA76.7.S54 v22:7 SIGPLAN Notices, vol 22, no 7 (July 1987)
     all other entries are 0. Under which conditions can 
     $d_1,d_2,\cdots,d_n$ be chosen in a radical extension of $L$ such that 
     the resulting 1-tridiagonal matrix has $f$ as its characteristic 
-    polynomial?  The author’s answer: for $n=3$ always. The $d_i,s_i$
+    polynomial?  The author's answer: for $n=3$ always. The $d_i,s_i$
     are related by a system of algebraic equations of the form
     $\overline{f}_i(d_1,d_2,d_3)=s_i$. If this is satisfied, then by 
     a resultant- or Groebner basis computation with respect to the 
@@ -78599,7 +78599,7 @@ LCCN QA76.7.S54 v22:7 SIGPLAN Notices, vol 22, no 7 (July 1987)
     chapters are concerned with applications of polynomial algorithms to
     higher level problems in computer algebra. In particular, a decision
     algorithm in the elementary theory of real closed fields, a
-    description of Gosper’s algorithm for solving summation problems, and
+    description of Gosper's algorithm for solving summation problems, and
     an algorithm for deciding whether an algebraic curve can be
     parametrized by rational functions (and if so for computing such a
     parametrization) is given. Along the way, the complexity of many of
@@ -81165,7 +81165,7 @@ A.K Peters, Natick, MA. (2003) ISBN 1-56881-134-9
   pages = "33-46",
   abstract =
     "We describe how the theory of Groebner bases, an important part
-    of computational algebra, can be developed within Martin-Lof’s
+    of computational algebra, can be developed within Martin-Lof's
     type theory. In particular, we aim for an integrated development
     of the algorithms for computing Groebner bases: we want to prove,
     constructively in type theory, the existence of Groebner bases and
@@ -81174,13 +81174,13 @@ A.K Peters, Natick, MA. (2003) ISBN 1-56881-134-9
     uses generalised inductive definitions. We isolate the main
     non–constructive part, a minimal bad sequence argument, and use
     the open induction principle [Rao88,Coq92] to interpret it by
-    induction. This leads to short constructive proofs of Dickson’s
-    lemma and Hilbert’s basis theorem, which are used to give an
-    integrated development of Buchberger’s algorithm. An important
+    induction. This leads to short constructive proofs of Dickson's
+    lemma and Hilbert's basis theorem, which are used to give an
+    integrated development of Buchberger's algorithm. An important
     point of this work is that the elegance and brevity of the
     original proofs are maintained while the new proofs also have a
     direct constructive content.  In the appendix we present a
-    computer formalisation of Dickson’s lemma and an abstract
+    computer formalisation of Dickson's lemma and an abstract
     existence proof of Groebner bases.",
   paper = "Coqu98.pdf"
 }
@@ -84493,7 +84493,7 @@ Journal of Symbolic Computation (1989) 7, 445-456
   link = "\url{}",
   abstract =
     "In the 1970 and 1980s, logic and constructive mathematics were an
-    important part of my life; it’s what I defended in my Master’s thesis,
+    important part of my life; it's what I defended in my Master's thesis,
     it was an important part of my PhD dissertation. I was privileged to
     work with the giants. I visited them in their homes. They were who I
     went to for advice.  And this is my story.",
@@ -85240,7 +85240,7 @@ AMS Chelsea Publishing ISBN 0821816462
     equality of points (and lines) are then proved in a constructive
     way. The duality principle as well as formal models of projective
     plane geometry are then studied and implemented in Coq. Finally, we
-    formally prove in Coq that Desargues’ property is independent of the
+    formally prove in Coq that Desargues' property is independent of the
     axioms of projective plane geometry.",
   paper = "Maga08.pdf"
 }
@@ -85831,7 +85831,7 @@ Journal of the ACM, Vol. 25, No. 2, April 1978, pp. 271-282
   abstract =
     "This paper is a tutorial introduction to univariate polynomial
     factorization over finite fields. The authors recall the classical
-    methods that induced most factorization algorithms (Berlekamp’s and
+    methods that induced most factorization algorithms (Berlekamp's and
     the Cantor-Zassenhaus ones) and some refinements which can be applied
     to these methods. Explicit algorithms are presented in a form suitable
     for almost immediate implementation. They give a detailed description
@@ -86726,7 +86726,7 @@ ACM Transactions on Mathematical Software, 32(2):180-194, June 2006.
    resources. Wherever possible, theoretical and practical results must
    be formulated generically so that they can be instantiated to
    arbitrary logics; this will allow reusing results in the face of
-   today’s multitude of application-oriented and therefore diverging
+   today's multitude of application-oriented and therefore diverging
    logical systems. Moreover, the software engineering problems
    concerning automation support must be decoupled from the theoretical
    problems of designing logics and calculi; this will allow researchers
@@ -87337,7 +87337,7 @@ Num. Math. 16 205--223. (1970)
     Isabelle and its proof development language Isar for formulating and
     proving formal mathematical statements. Our focus is on how to use
     classical predicate logic and well established proof principles for
-    this purpose, bypassing Isabelle’s meta-logic and related technical
+    this purpose, bypassing Isabelle's meta-logic and related technical
     aspects as much as possible.  By a small experiment on the proof of
     (part of a) verification condition for a program, we were able to
     identify a number of important patterns that arise in such proofs
@@ -87848,7 +87848,7 @@ J. Comput. Phys. 52 340--350. (1983)
   abstract =
     "Subtyping with coercion semantics allows a type inference system to
     correct some ill-typed programs by the automatic insertion of
-    implicit type conversions at run-time. This simplifies programmer’s
+    implicit type conversions at run-time. This simplifies programmer's
     life but has its price: the general typability problem for given base
     type subtype dependencies is NP-complete.  Nevertheless, if the given
     coercions define an order on types with certain properties, the
@@ -88213,7 +88213,7 @@ SIAM J. Sci. Statist. Comput. 3 387--407. (1982)
     proofs. Therefore, although a formal proof sketch contains gaps in
     the reasoning from a formal point of view (which is why we call it a
     sketch ), a mathematician probably would call such a text just a
-    ‘proof’.",
+    ‘proof'.",
   paper = "Wied03.pdf",
   keywords = "printed"
 }
@@ -88512,25 +88512,25 @@ Math. Tables Aids Comput. 10 91--96. (1956)
     hard to understand. For them, they are written in an unfamiliar and
     artificial language and much too detailed. Moreover, the sheer number
     of inference steps, while logically relevant, describe only trivial
-    mathematical details and make it difficult to follow a proof’s main
+    mathematical details and make it difficult to follow a proof's main
     underlying argumentation line. In practise, thus, mathematicians use
     proof generation engines rather seldom, if at all. The same is true
     with regard to proof verification tools. The amount of work that is
     required to verify a mathematical proof with such tools is
     considerable, if not prohibitive. Since proof verification systems
-    only accept formal proofs as input, the mathematician’s first task is
+    only accept formal proofs as input, the mathematician's first task is
     to manually translate the mathematical proof into the formal language
     that is accepted by the verifier. This in turn includes the
-    translation of the proof’s underlying mathematical argumentation into
+    translation of the proof's underlying mathematical argumentation into
     inference rules that are supported by the proof engine. Such
     translations and refinements are usually very time consuming, tedious,
     and prone to error themselves. Hence, how the proof verifier then
     judges the result of proof translation and proof refinement is only
     of limited relevance to the original mathematical proof. From the
-    mathematician’s point of view, there is thus a need for a proof
+    mathematician's point of view, there is thus a need for a proof
     verification system that is capable of processing mathematical proofs
-    automatically, at least with regard to translating the mathematicians’
-    expert language into the system’s artificial formal language. Such a
+    automatically, at least with regard to translating the mathematicians'
+    expert language into the system's artificial formal language. Such a
     system would have an enormous potential in the community of
     mathematics, and this potential has been recognised early. In the
     beginning of the 1960s, John McCarthy, one of the pioneers of
@@ -88546,13 +88546,13 @@ Math. Tables Aids Comput. 10 91--96. (1956)
     This thesis aims at contributing towards the realisation of a
     verifier for mathematical proofs. It attempts to provide a general
     framework as well as an implementation for such a proof
-    engine. The dissertation’s objects of study are short and simple
+    engine. The dissertation's objects of study are short and simple
     proofs that were taken from textbooks on elementary number
     theory. Fig. 1 depicts a proof of the mathematical truth that
     every positive integer greater than 1 can be represented as a
     product of one or more primes. The proof consists of only a few
     lines and little mathematical knowledge is necessary to follow the
-    proof author’s argumentation. It is this kind of short proof that
+    proof author's argumentation. It is this kind of short proof that
     we attempt to check automatically.",
   paper = "Zinn04.pdf"
 }
