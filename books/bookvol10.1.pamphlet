@@ -25714,9 +25714,9 @@ influence on the later methods.
 
 \subsubsection{Method}
 
-Tarski’s method carries out a series of reduction steps until it comes
+Tarski's method carries out a series of reduction steps until it comes
 down to some simple cases which are tackled using 
-Sturm’s theorem\cite{Stur1829} and its generalization.
+Sturm's theorem\cite{Stur1829} and its generalization.
 
 \vskip 0.5cm
 \noindent
@@ -25906,9 +25906,9 @@ the number of distinct real roots of $P$ is exactly $\alpha - \beta$.
 
 When there are no free variables in the formula
 ($1^{\prime\prime\prime}$), we only need
-to apply the Sturm’s method to see if the number of distinct real
+to apply the Sturm's method to see if the number of distinct real
 roots is indeed $k$. When there are free variables, we need to
-parametrize the Sturm’s method. We will have to do some easy but
+parametrize the Sturm's method. We will have to do some easy but
 tedius case analysis depending the signs of the leading coefficients.
 
 \vskip 0.5cm
@@ -26108,7 +26108,7 @@ has the same signs as $c$. Then, we can set
 {\bf CAD for $r>1$}.
 In order to do induction on the number of variables, it will be nice to
 have a finite subset $P$ of 
-$\mathbb{Z}[x_1,\ldots,x^{r−1}]$ such that we can
+$\mathbb{Z}[x_1,\ldots,x^{r-1}]$ such that we can
 ``easily build'' an $A$-sign invariant cylindrical algebraic decomposition
 $D$ of $\mathbb{R}^r$ from a $P$-sign invariant cylindrical algebraic 
 decomposition $E$ of $\mathbb{R}^{r-1}$.
@@ -26245,7 +26245,7 @@ over $c$ as described above
 
 \noindent
 
-Collins’ method allowed various improvements: 
+Collins' method allowed various improvements: 
 clustering\cite{Arno81}\cite{Mcca02},
 smaller projections \cite{Mcca84} \cite{Hong90} \cite{Brow01a},
 efficient order of projections\cite{Dolz04},
@@ -26285,7 +26285,7 @@ C &=& \{{\rm der}^k(a)~|~ a\in A, 0\le k < {\rm deg}(a)\}\\
 D^\prime &=& \{{\rm psc}_0(c,c^\prime)~|~c\in C\}
 \end{array}\]
 
-Note that these sets are much smaller than Collins’ original ones,
+Note that these sets are much smaller than Collins' original ones,
 because it does not involve reductums nor higher order principal
 subresultant coefficients.
 
@@ -26295,9 +26295,9 @@ could be restricted to (without any side conditions)
 0 \le k < {\rm min}({\rm deg}(a),{\rm deg}(b))\}\]
 
 The resulting projection set is smaller than the original one and
-larger than McCallum’s. But it can be useful since it, unlike
-McCallum’s, does not impose any condition on the polynomials and
-further McCallum’s projection requires that the clusters must be order
+larger than McCallum's. But it can be useful since it, unlike
+McCallum's, does not impose any condition on the polynomials and
+further McCallum's projection requires that the clusters must be order
 invariant. These can result in possibly smaller clusters.  
 Brown\cite{Brow01a} made a further improvement.
 
@@ -26362,7 +26362,7 @@ hours).
 
 Brown\cite{Brow99} provided a method that generates the augmented
 projection polynomials on demand, thus making the method complete
-(never fails, unlike Hong’s).
+(never fails, unlike Hong's).
 
 \vskip 0.5cm
 \noindent
@@ -26403,7 +26403,7 @@ The key observation is that the matrix is false if $A \ne 0$  regardless
 of the truth of $F$. Thus, we only need to ensure that the other
 polynomials (occurring in $F$) are sign-invariant on the sections of
 $A$. For a simple presentation, let us assume that the inputs
-polynomials are well-oriented (and thus McCallum’s projection theorem
+polynomials are well-oriented (and thus McCallum's projection theorem
 can be applied). Then, we only need to put the following into the
 projection set:
 \begin{itemize}[noitemsep]
@@ -26453,7 +26453,7 @@ the total complexity is singly exponential in the number of variables.
 Let $n$ be the number of variables in the input sentence, $m$ the number
 of polynomials, $d$ the degree, $L$ the bit length bound for the
 coefficients, and $n_i$ is the number of quantifiers in the $i$-th
-quantifier block. The ω best asymptotic bound so far (obtained by
+quantifier block. The $\omega$ Best asymptotic bound so far (obtained by
 Renegar) is is $L(log~L)(log~log~L)(md)^{\prod_{k=0}^\omega O(n_k)}$.
 
 \subsubsection{Method}
@@ -28158,7 +28158,7 @@ Thus the problem is reduced to the disjunction problem.
 Consider $F \equiv \forall x B$. 
 One way is to turn this into existential problem
 through double negation. But there is a better way. Let $B^1$ be a box
-in the box-set $B$ and let $B^∗$ be the box-set consisting of the
+in the box-set $B$ and let $B^*$ be the box-set consisting of the
 remaining boxes. Now observe:
 \[\begin{array}{rcl}
 F & \equiv & \forall x B\\

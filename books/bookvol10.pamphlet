@@ -20969,7 +20969,7 @@ points which the original function does not share.
 \item Where not otherwise determined, the value of a function on its branch 
 cut or cuts is obtained by taking a limit along a path which approaches the 
 branch cut in a counterclockwise manner around one of the branch points 
-which terminate the cut (“counterclockwise continuity”, or CCC for short).
+which terminate the cut (``counterclockwise continuity'', or CCC for short).
 \item Each inverse trigonometric or hyperbolic function must be real-valued 
 on the range of the corresponding trigonometric or hyperbolic function when 
 restricted to the real axis. 

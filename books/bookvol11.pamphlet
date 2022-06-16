@@ -12857,7 +12857,7 @@ In particular we try to show that Axiom conforms to published standards.
  </a>(Appendix B),
  <a href="http://dlmf.nist.gov/Contents/bib/L#luke:1975:mfa">
   Luke(1975)
- </a>(pp. 22–23), and 
+ </a>(pp. 22-23), and 
  <a href="http://dlmf.nist.gov/Contents/bib/W#weniger:2003:dig">
   Weniger(2003)
  </a>.
@@ -13007,7 +13007,7 @@ In particular we try to show that Axiom conforms to published standards.
  </m:math>. See 
  <a href="http://dlmf.nist.gov/Contents/bib/L#luke:1975:mfa">
   Luke(1975)
- </a>(pp. 22–23) for additional expansions.
+ </a>(pp. 22-23) for additional expansions.
 </p>
 
 <h4>Approximations in the Complex Plane</h4>
@@ -13133,7 +13133,7 @@ In particular we try to show that Axiom conforms to published standards.
  </a>.
  <a href="http://dlmf.nist.gov/Contents/bib/L#luke:1975:mfa">
   Luke(1975)
- </a>(pp. 13–16) provides explicit rational approximations for
+ </a>(pp. 13-16) provides explicit rational approximations for
 
  <m:math display="inline">
   <m:mrow>
@@ -18194,10 +18194,10 @@ where noted otherwise. In the next 4 equations it is assumed
 </a>. Also see 
 <a href="http://dlmf.nist.gov/Contents/bib/J#jones:1980:con">
    Jones and Thron(1980)
-</a>(pp. 348–350) and
+</a>(pp. 348-350) and
 <a href="http://dlmf.nist.gov/Contents/bib/L#lorentzen:1992:cfa">
    Lorentzen and Waadeland(1992)
-</a>(pp. 221–224) for further information.
+</a>(pp. 221-224) for further information.
 </p>
 \getchunk{page foot}
 \end{chunk}
@@ -21703,7 +21703,7 @@ allow you to choose "darken only".
        <m:mi>&#x03C0;</m:mi>
       </m:mrow>
      </m:mfrac>
-     <m:mo>⁢</m:mo>
+     <m:mo> </m:mo>
      <m:mrow>
       <m:msubsup>
        <m:mo>&#x222B;</m:mo>
@@ -29142,7 +29142,7 @@ for 31D values see
 <p>For further sums involving the psi function see
 <a href="http://dlmf.nist.gov/Contents/bib/H#hansen:1975:tsp">
    Hansen(1975)
-</a>(pp. 360–367). For sums of gamma functions see
+</a>(pp. 360-367). For sums of gamma functions see
 <a href="http://dlmf.nist.gov/Contents/bib/#andrews:1999:sfu">
    Andrews <em>et.al.</em>(1999)
 </a>(Chapters 2 and 3).
@@ -29836,7 +29836,7 @@ beta functions (Gauss and Jacobi sums) see
   <m:mrow>
    <m:mrow>
     <m:mrow>
-     <m:mi mathvariant="normal">ℑ</m:mi>
+     <m:mi mathvariant="normal">&#x2111;</m:mi>
      <m:mrow>
       <m:mi>&#x03C8;</m:mi>
       <m:mrow>
@@ -29887,7 +29887,7 @@ beta functions (Gauss and Jacobi sums) see
   <m:mrow>
    <m:mrow>
     <m:mrow>
-     <m:mi mathvariant="normal">ℑ</m:mi>
+     <m:mi mathvariant="normal">&#x2111;</m:mi>
      <m:mrow>
       <m:mi>&#x03C8;</m:mi>
       <m:mrow>
@@ -29937,7 +29937,7 @@ beta functions (Gauss and Jacobi sums) see
   <m:mrow>
    <m:mrow>
     <m:mrow>
-     <m:mi mathvariant="normal">ℑ</m:mi>
+     <m:mi mathvariant="normal">&#x2111;</m:mi>
      <m:mrow>
       <m:mi>&#x03C8;</m:mi>
       <m:mrow>
