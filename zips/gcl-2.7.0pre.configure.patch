@@ -1,6 +1,20 @@
---- gcl-2.7.0pre.orig/configure	2022-06-17 14:33:11.000000000 +0200
-+++ gcl-2.7.0pre/configure	2022-06-17 14:57:41.000000000 +0200
-@@ -10090,48 +10090,6 @@
+--- gcl-2.7.0pre/configure	2022-06-17 14:33:11.000000000 +0200
++++ gcl-2.7.0pre.new/configure	2022-06-17 15:49:57.000000000 +0200
+@@ -8643,8 +8643,13 @@
+ /* end confdefs.h.  */
+ 
+         #include <stdio.h>
++        #include <stdlib.h>
+         #include <complex.h>
+ 	#define EXTER
++        #define SIZEOF_LONG 8
++        #define SIZEOF_INT 4
++        #define SIZEOF_SHORT 2
++        #define SIZEOF_CHAR 1
+ 	#include "$MP_INCLUDE"
+ 	#include "./h/type.h"
+ 	#include "./h/lu.h"
+@@ -10090,48 +10095,6 @@
  
  printf "%s\n" "#define USE_READLINE 1" >>confdefs.h
  

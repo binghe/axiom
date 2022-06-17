@@ -1,0 +1,24 @@
+--- gcl-2.7.0pre/configure.in	2022-06-17 14:33:13.000000000 +0200
++++ gcl-2.7.0pre.new/configure.in	2022-06-17 15:49:41.000000000 +0200
+@@ -1634,8 +1634,13 @@
+ AC_MSG_CHECKING([for required object alignment])
+ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
+         #include <stdio.h>
++        #include <stdlib.h>
+         #include <complex.h>
+ 	#define EXTER
++        #define SIZEOF_LONG 8
++        #define SIZEOF_INT 4
++        #define SIZEOF_SHORT 2
++        #define SIZEOF_CHAR 1
+ 	#include "$MP_INCLUDE"
+ 	#include "./h/type.h"
+ 	#include "./h/lu.h"
+@@ -2206,7 +2211,6 @@
+     AC_CHECK_HEADERS([readline/readline.h],
+ 			AC_CHECK_LIB([readline],[rl_initialize],
+ 				[AC_DEFINE(USE_READLINE,1,[use readline library])
+-				 AC_CHECK_LIB([readline],[el_getc],AC_DEFINE(READLINE_IS_EDITLINE,1,[readline is editline]))
+ 				 # These tests discover differences between readline 4.1 and 4.3
+ 				 AC_CHECK_LIB([readline],[rl_completion_matches],
+ 					[AC_DEFINE(HAVE_DECL_RL_COMPLETION_MATCHES,1,[have readline completion matches])
