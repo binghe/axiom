@@ -89,8 +89,9 @@ PROVE=${PROOFS}/acl2.lisp ${PROOFS}/coq.lisp
 
 OTHER=  ${PDF}/refcard.pdf     ${PDF}/endpaper.pdf    ${PDF}/rosetta.pdf
 
+# TODO: there was ${PDF}/toc.pdf after ${BOOKPDF}
 all: announce tanglecopy ${PDF}/axiom.bib ${PDF}/master ${PROVE} ${OTHER} \
-     ${COOKPAGES} ${BOOKPDF} ${PDF}/toc.pdf spadedit axbook news design
+     ${COOKPAGES} ${BOOKPDF} spadedit axbook news design
 	@(cd ${PDF} ; ${RM} *.out *.toc *.sty *.def *.png *.bbl *.blg)
 
 ${PDF}/master: 
@@ -451,6 +452,7 @@ ${PDF}/toc.pdf: ${BOOKPDF}
 	@ cp ${BOOKS}/ps/axiomfront.ps ${PDF}
 	@ cp ${BOOKS}/ps/bluebayou.ps ${PDF}
 	@(cd ${PDF} ; \
+	echo "\\errorcontextlines=1000" >toc.tex ; \
 	echo "\\documentclass{book}" >toc.tex ; \
 	echo "\\setlength{\\textwidth}{400pt}" >>toc.tex ; \
 	echo "\\newcommand{\\VolumeName}{Axiom Table of Contexts}" >>toc.tex ;\

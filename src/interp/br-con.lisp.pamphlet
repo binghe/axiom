@@ -477,8 +477,7 @@
                             (PRINC |$tick| |outstream|)
                             (PRINC |defP| |outstream|)
                             (TERPRI |outstream|)
-                            (PRINC
-                                                                    "\\item\\newline{\\em \\menuitemstyle{}}{\\em "
+                            (PRINC "\\item\\newline{\\em \\menuitemstyle{}}{\\em "
                                 |htstream|)
                             (PRINC |name| |htstream|)
                             (PRINC "}\\space{}"
@@ -606,7 +605,7 @@
                                                 (|lastLineHadTick|
                                                  "")
                                                 (t
-                                                                                                   "\\blankline ")))
+                                                 "\\blankline ")))
                                              ((AND (> (|#| |last|) 0)
                                                (NEQUAL
                                                 (ELT |last|

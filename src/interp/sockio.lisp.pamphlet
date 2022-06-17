@@ -91,10 +91,11 @@ actual string buffer. We use [[sock_get_string_buf_wrapper]] to
 resolve the problem
 \begin{chunk}{*}
   (clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
-          "{ if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
+          "{ char *sock_get_string_buf(int purpose, char * buf, int buf_len);"
+          "  if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
           "  if (x->st.st_fillp<j)"
           "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0);"
-          "  return sock_get_string_buf(i, x->st.st_self, j); }")
+          "  return (int)sock_get_string_buf(i, x->st.st_self, j); }")
   (defentry open_server (string) (int "open_server"))
   (defentry sock_get_int (int) (int "sock_get_int"))
   (defentry sock_send_int (int int) (int "sock_send_int"))

@@ -1,0 +1,35 @@
+--- gcl-2.7.0pre.orig/lsp/gcl_top.lsp	2022-06-17 14:33:13.000000000 +0200
++++ gcl-2.7.0pre/lsp/gcl_top.lsp	2022-06-17 15:07:33.000000000 +0200
+@@ -137,11 +137,11 @@
+ 	 ((stat "init.lsp") (load "init.lsp"))))
+       (when (if (symbolp *top-level-hook*) (fboundp *top-level-hook*) (functionp *top-level-hook*))
+ 	(funcall *top-level-hook*)))
+-
++#|
+     (when (boundp '*system-banner*)
+       (format t *system-banner*)
+       (format t "Temporary directory for compiler files set to ~a~%" *tmp-dir*))
+-
++|#
+     (loop
+      (when 
+ 	 (catch +top-abort-tag+
+@@ -174,7 +174,8 @@
+ 	   nil)
+        (emergency-reset)))))
+   
+-(defun default-system-banner ()
++(defun default-system-banner () "")
++#|
+   (let (gpled-modules)
+     (dolist (l '(:unexec :bfd :readline :xgcl))
+       (when (member l *features*)
+@@ -191,7 +192,7 @@
+ 	    "Modifications of this banner must retain notice of a compatible license"
+ 	    "Dedicated to the memory of W. Schelter"
+ 	    "Use (help) to get some basic information on how to use GCL.")))
+-
++|#
+  (defvar *system-banner*)
+ 
+ (defun gcl-top-level nil
