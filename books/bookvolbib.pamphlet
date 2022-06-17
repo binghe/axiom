@@ -4081,7 +4081,7 @@ paragraph for those unfamiliar with the terms.
     typed functional programming elaborating to a core type theory based
     on Luo's UTT, using Dybjer's inductive families and elimination rules
     to implement pattern matching. This gives us a rich framework for
-    reasoning about programs.  However, a na ̈ıve implementation introduces
+    reasoning about programs.  However, a na\"{i}ve implementation introduces
     several run-time overheads since the type sys- tem blurs the
     distinction between types and values; these overheads include the
     duplication of values, and the storage of redundant information and
@@ -23274,7 +23274,7 @@ paragraph for those unfamiliar with the terms.
     1930's working on various precise definitions and demonstrations of a
     function specified by a finite procedure and that they should all
     share approximately equal credit. This is incorrect. It was Turing
-    alone who achieved the characterization, in the opinion of G ̈odel. We
+    alone who achieved the characterization, in the opinion of G\"{o}del. We
     also explore Turing's oracle machine and its analogous properties in
     analysis.",
   paper = "Soar07.pdf",
@@ -34513,7 +34513,7 @@ when shown in factored form.
     expressions, biform theories -- as well as algorithmic theories -- are
     difficult to formalize in a traditional logic without the means to
     reason about syntax. Chiron is a derivative of
-    von-Neumann-Bernays-G̈odel ( NBG ) set theory that is intended to be a
+    von-Neumann-Bernays-\"{G}odel ( NBG ) set theory that is intended to be a
     practical, general-purpose logic for mechanizing mathematics. It
     includes elements of type theory, a scheme for handling undefinedness,
     and a facility for reasoning about the syntax of expressions. It is an
@@ -34536,7 +34536,7 @@ when shown in factored form.
   number = "23",
   year = "2007",
   abstract =
-    "Chiron is a derivative of von-Neumann-Bernays-G̈odel ( NBG ) set
+    "Chiron is a derivative of von-Neumann-Bernays-\"{G}odel ( NBG ) set
     theory that is intended to be a practical, general-purpose logic for
     mechanizing mathematics. It supports several reasoning paradigms by
     integrating NBG set theory with elements of type theory, a scheme for
@@ -36187,7 +36187,7 @@ when shown in factored form.
     simplification of the definition of the subtype relation, which allows
     us to reduce the problem to the emptiness problem for a certain finite
     automaton with quadratically many states.  It is known that equality
-    of recursive types and the covariant B̈ohm order can be decided
+    of recursive types and the covariant \"{B}ohm order can be decided
     efficiently by means of finite automata, since they are just language
     equality and language inclusion, respectively.  Our results extend the
     automata-theoretic approach to handle orderings based on
@@ -55053,7 +55053,7 @@ Proc ISSAC 97 pp172-175 (1997)
     another area where Symbolic Computation could prosper from
     Satisfiability Checking expertise, noting that these have been
     identified as initial actions for the new $SC^2$ community in the CSA
-    project, as described in [E.́ Abraham et al., SC 2 : {\sl Satisfiability
+    project, as described in [\'{E}. Abraham et al., SC 2 : {\sl Satisfiability
     Checking meets Symbolic Computation (Project Paper)}, Intelligent
     Computer Mathematics (LNCS 9761), pp.  28-43, Springer, 2015].",
   paper = "Engl16.pdf"
@@ -57395,7 +57395,7 @@ Proc ISSAC 97 pp172-175 (1997)
     \item (implicit) matrix computation with symbols defined over a 
     (non-commuting) ring.
     \end{itemize}
-    Manipulations which involve matrices of indefinite size (n × m) or
+    Manipulations which involve matrices of indefinite size (n $\times$ m) or
     perhaps have components which are block submatrices of indefinite size
     have little or no support in general-purpose computer algebra systems,
     in spite of their importance in theorems, proofs, and generation of
@@ -57801,7 +57801,7 @@ Proc ISSAC 97 pp172-175 (1997)
     do not have the mathematical properties of exact integers or
     rationals.  Complex numbers may strain a system designed for
     real-valued variables. In the situation examined here, we consider two
-    categories of ``extended'' numbers: ∞ or undefined, and real
+    categories of ``extended'' numbers: $\infty$ or undefined, and real
     intervals. We comment on issues raised by these two troublesome
     notions, how their introduction into a computer algebra system may
     require a (sometimes painful) reconsideration and redesign of parts of
@@ -62866,12 +62866,12 @@ Universit{\"a}t Karsruhe, Karlsruhe, Germany 1994
   link = "\url{http://www.mmrc.iss.ac.cn/~xgao/papers/soft1.pdf}",
   abstract =
     "The methods of mechanizing mathematics are realized by means of
-    compputer software for solving scientiØc and engineering problems via
+    compputer software for solving scientific and engineering problems via
     symbolic and hybrid computation. This chapter provides a collection of
     geometric theorem provers and algebraic equations solvers that are
     pieces of mathematical software based mostly on Wu's method and were
     developed mainly by members of the extended Wu group. The early
-    theorem provers, though e±cient, were written in basic programming
+    theorem provers, though efficient, were written in basic programming
     languages and on primitive computers. Now there exist more powerful
     and mature geometric theorem provers of which some have already been
     published as commercial software. On the other hand, building 
@@ -66698,7 +66698,7 @@ LCCN QA155.7.E4 I57 1984
   publisher = "World Scientific, River Edge, NJ",
   abstract =
     "Systems and tools of computer algebra (Like AXIOM, Derive, FORM,
-    Mathematica, Maple, Mupad, REDUCE, Macsyma…) let us manipulate
+    Mathematica, Maple, Mupad, REDUCE, Macsyma...) let us manipulate
     extremely complex algebraic formulae symbolically on a
     computer. Contrary to numerics these computations are exact and there
     is no loss of accuracy. After decades of research and development,
@@ -67829,7 +67829,7 @@ Schenectady, NY, USA, 1984
     Among the methods to split polynomial systems into smaller pieces
     probably the Groebner factorizer method attracted the most
     theoretical attention, see Czapor ([4, 5]), Davenport ([6]), Melenk, M
-    ̈oller and Neun ([16, 17]) and Gr ̈abe ([13, 14]). General purpose
+   \"{o}ller and Neun ([16, 17]) and Gr\"{a}be ([13, 14]). General purpose
     Computer Algebra Systems (CAS) are well suited for such an approach,
     since they make available both a (more or less) well tuned
     implementation of the classical Groebner algorithm and an effective
@@ -68552,7 +68552,7 @@ in [Wit87], pp5-8
     related areas.  We shall begin with a brief description of the
     available systems and examine the data objects which they consider.
     As an example of the facilities which these systems can offer, we
-    shall then consider the problem of analytic integration, since this •
+    shall then consider the problem of analytic integration, since this
     is so fundamental to many of the calculational techniques used by high
     energy physicists.  Finally, we shall study the implications which the
     current developments in hardware technology hold for scientific
@@ -70048,7 +70048,7 @@ Draft September 5, 1988
     permits the compilation of algorithms described in their most natural
     mathematical setting. The use of categories guarantees user defined
     types and packages are compatible with each other and with built in
-    facilities. This system provides a single high‐level language with an
+    facilities. This system provides a single high-level language with an
     intepreter and compiler. The language can be used by the naive user
     for convenient interactive mathematics calculations and by the
     advanced user for the efficient implementation of
@@ -79691,7 +79691,7 @@ Comm.  ACM. 17, 6 319--320. (1974)
   pages = "1-15",
   abstract =
     "We propose a notion of pure type system with implicit coercions. In
-    our framework, judgements are extended with a context of coercions Δ
+    our framework, judgements are extended with a context of coercions $\Delta$
     and the application rule is modified so as to allow coercions to be
     left implicit. The setting supports multiple inheritance and can be
     applied to all type theories with $\Pi$-types. One originality of our
