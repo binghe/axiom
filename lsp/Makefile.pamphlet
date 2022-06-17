@@ -1844,7 +1844,48 @@ gcldir:
 \getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
 \getchunk{gcl-2.6.13pre.collectfn.fix}
 \getchunk{gcl-2.6.13pre.configure.patch}
-\getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
+\getchunk{gclConfigureMake}
+	@echo 13 finished system build on `date` | tee >gcldir
+
+ccldir: ${LSP}/ccl/Makefile
+	@echo 14 building CCL
+	@( cd ccl ; ${ENV} ${MAKE} )
+
+${LSP}/ccl/Makefile: ${LSP}/ccl/Makefile.pamphlet
+	@echo 15 making ${LSP}/ccl/Makefile from ${LSP}/ccl/Makefile.pamphlet
+	@( cd ccl ; ${DOCUMENT} ${NOISE} Makefile )
+
+document:
+	@echo 16 making docs in ${LSP}
+	@( cd ccl ; ${ENV} ${MAKE} document )
+
+clean:
+	@echo 17 cleaning ${LSP}/ccl
+	@( cd ccl ; ${ENV} ${MAKE} clean )
+
+\end{chunk}
+
+\subsection{The GCL-2.7.0pre stanza}
+This stanza will be written when the GCLVERSION variable is
+``gcl-2.7.0pre'' (unreleased git version).
+It will overwrite the default version. See the 
+top level Makefile.pamphlet.
+\begin{chunk}{gcl-2.7.0pre}
+# gcl version 2.7.0pre
+OUT=${OBJ}/${SYS}/bin
+
+all:
+	@echo 1 building ${LSP} ${GCLVERSION}
+
+gcldir: 
+	@echo 2 building ${GCLVERSION}
+	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+\getchunk{gcl-2.6.13pre.h.linux.defs.patch}
+\getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
+\getchunk{gcl-2.6.13pre.unixport.makefile.patch}
+\getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
+\getchunk{gcl-2.6.13pre.collectfn.fix}
+\getchunk{gcl-2.6.13pre.configure.patch}
 \getchunk{gclConfigureMake}
 	@echo 13 finished system build on `date` | tee >gcldir
 

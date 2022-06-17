@@ -1,5 +1,5 @@
---- gcl-2.7.0pre.orig/h/386-macosx.defs	2022-06-17 14:33:13.000000000 +0200
-+++ gcl-2.7.0pre/h/386-macosx.defs	2022-06-17 15:01:48.000000000 +0200
+--- gcl-2.7.0pre/h/386-macosx.defs	2022-06-17 14:33:13.000000000 +0200
++++ gcl-2.7.0pre.new/h/386-macosx.defs	2022-06-17 16:06:07.000000000 +0200
 @@ -1,5 +1,9 @@
  # powerpc-macosx.defs
  
@@ -10,3 +10,12 @@
  # Disable Apple's custom C preprocessor which gets confused when
  # preprocessing some of the *.d files in the o/ subdirectory.
  CC = gcc $(CPPFLAGS)
+@@ -9,7 +13,7 @@
+ LIBS := `echo $(LIBS) | sed -e 's/-lncurses/ /'`
+ 
+ # Set this for the linker to operate correctly.
+-MACOSX_DEPLOYMENT_TARGET = 10.2
++MACOSX_DEPLOYMENT_TARGET = 10.15
+ 
+ # Define this to build an executable rsym.
+ RSYM = rsym
