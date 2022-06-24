@@ -89,9 +89,8 @@ PROVE=${PROOFS}/acl2.lisp ${PROOFS}/coq.lisp
 
 OTHER=  ${PDF}/refcard.pdf     ${PDF}/endpaper.pdf    ${PDF}/rosetta.pdf
 
-# TODO: there was ${PDF}/toc.pdf after ${BOOKPDF}
 all: announce tanglecopy ${PDF}/axiom.bib ${PDF}/master ${PROVE} ${OTHER} \
-     ${COOKPAGES} ${BOOKPDF} spadedit axbook news design
+     ${COOKPAGES} ${BOOKPDF} ${PDF}/toc.pdf spadedit axbook news design
 	@(cd ${PDF} ; ${RM} *.out *.toc *.sty *.def *.png *.bbl *.blg)
 
 ${PDF}/master: 
