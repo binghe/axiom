@@ -42,7 +42,7 @@ CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
-LDF="-L/usr/X11/lib -L/usr/X11R6/lib64 -L/usr/local/lib64 -L/usr/openwin/lib64 -L/usr/lib64 "
+LDF="-L/usr/X11/lib -L/usr/X11R6/lib -L/usr/local/lib -L/usr/lib "
 O:=o
 
 ##### lisp related variables
@@ -76,8 +76,8 @@ LISP:=lsp
 
 ##### command line control
 NOISE:="-o ${TMP}/trace"
-PART:=	cprogs
-SUBPART:= everything
+PART:=cprogs
+SUBPART:=everything
 RUNTYPE:=serial
 # can be richtests, catstests, regresstests (see src/input/Makefile)
 # alltests, notests
