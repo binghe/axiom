@@ -1,0 +1,1876 @@
+#+BEGIN_HTML
+---
+layout: wiki
+title: "Axiom mail list"
+published: true
+categories: [axiom]
+---
+#+END_HTML
+
+* axiom mailing list
+** 2002
+Bill Page and Martin Rubey joined this year.
+
+** 2003-04
+#+BEGIN_QUOTE
+Re: [Axiom-developer] axiom on cmu cl
+Date: Mon, 28 Apr 2003 20:22:23 -0400
+
+My original sources are gone, IBM no longer has any, and NAG has them on exabyte
+tapes but no longer has an exabyte tape drive.
+
+There are many layers of cruft. The original code was a "chrybdis"
+printing system from the 1960s and parts of it still survive. If you're
+an ex-maclisp, vm/360 lisp or vm/370 lisp speaker you'll see idioms from
+those languages also. There will eventually be a field called software
+archeology and Axiom will be its major treasure trove.
+
+The plan is to take what I consider the best algebra system and make it
+the best it can be.
+#+END_QUOTE
+
+** 2003-10
+Ralf Hemmecke joins.
+#+BEGIN_QUOTE
+[Axiom-developer] axiom compilation problem (gcl)
+From: <hemmecke@risc.uni-linz.ac.at>
+Date: Mon, 27 Oct 2003 20:01:12 +0100 (CET)
+#+END_QUOTE
+
+** 2004-11
+#+BEGIN_QUOTE
+[Axiom-developer] Re: current state and CCL
+From: root <daly@idsi.net>
+Date: Thu, 18 Nov 2004 23:21:18 -0500
+
+axiom used to run on several lisps including vmlisp, maclisp,
+franz lisp, symbolics common lisp, golden common lisp, lucid
+common lisp, spice lisp (aka cmucl) and akcl (aka gcl)
+and i even had a scheme cover version for a brief
+moment in time but that was entirely interpreted.
+#+END_QUOTE
+
+** 2005-01
+Gabriel Dos Reis joins.
+
+#+BEGIN_QUOTE
+current CVS tree (axiom 3 beta) fails to build
+From: Gabriel Dos Reis <gdr@cs.tamu.edu>
+Date: 04 Jan 2005 16:34:51 -0600
+#+END_QUOTE
+
+Ralf Hemmecke joins again.
+
+#+BEGIN_QUOTE
+[Axiom-developer] Re: [Aldor-l] RE: Axiom domains and Aldor return types
+From: Ralf Hemmecke <hemmecke@risc.uni-linz.ac.at>
+Date: Wed, 12 Jan 2005 17:03:27 +0100
+#+END_QUOTE
+
+** 2005-08
+#+BEGIN_QUOTE
+file:///ssd/oldk1331/FRICAS_RELATED/axiom-maillists/axiom-developer/html/2005/3104.html
+
+[Axiom-developer] Dr. Dobbs article
+From: <daly_at_axiom-developer.org>
+Date: Tue, 23 Aug 2005 21:24:48 -0500
+
+I published an article in
+Byte magazine (WAY before your time) and it was a great learning experience.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Byte Magazine Volume 04 Number 02 - Robot Arm
+
+#+END_QUOTE
+
+** 2006-02
+#+BEGIN_QUOTE
+Re: [Axiom-developer] What is SubDomain (was: non extending category)
+From: Scott Morrison <scott.c.morrison@gmail.com>
+Date: Tue, 14 Feb 2006 07:28:41 -0800
+
+I do remember that I never liked SubDomain. We had all kinds of
+special-case code to deal with it, and it was only used for
+NonNegativeInteger and PositiveInteger. I believe the original motivation
+for sub-domains was to share implementations, but not categories. So
+PositiveInteger could share the all the implementation code from Integer,
+but not the categories of Integer, since they don't form a Group under
+addition, for example. In the end it caused a lot more mork than it saved.
+
+The concept of sub-domain never made it into Aldor, as far as I know, and
+that's a good thing.
+#+END_QUOTE
+
+** 2006-07
+#+BEGIN_QUOTE
+Re: [Aldor-l] [Axiom-developer] Re: exports and constants
+From: Gabriel Dos Reis <gdr_at_integrable-solutions.net>
+Date: 27 Jul 2006 20:37:01 +0200
+
+Aldor's type system appears to me to be far more complicated and intricate than
+that of Haskell.  Both share a good deal of functional core, though.
+#+END_QUOTE
+
+** 2006-10
+#+BEGIN_QUOTE
+[Axiom-developer] Fix for bug 294
+From: Waldek Hebisch <hebisch_at_math.uni.wroc.pl>
+Date: Sat, 7 Oct 2006 20:18:15 +0200 (CEST)
+
+integrate(simplify(D(((((((a)/(sqrt((sqrt(x))-(x))))+(x))*(x))+(1))*((((((1)-(log(x)))+(1))*(exp(exp(2))))*(2))*(((1)*((log((a)*(1)))*(a)))*(exp(((exp(x))*(x))-(exp(x)))))))*(a), x)), x)
+#+END_QUOTE
+
+FriCAS still can't handle that after all these years.
+
+#+BEGIN_QUOTE
+Re: [Axiom-developer] sourceforge/silver
+From: Waldek Hebisch <hebisch_at_math.uni.wroc.pl>
+Date: Fri, 27 Oct 2006 23:19:38 +0200 (CEST)
+
+Before Gaby effort I was consider doing my own fork
+or forgeting about Axiom at all.
+#+END_QUOTE
+
+** 2006-11                                                          :haskell:
+#+BEGIN_QUOTE
+Re: [Axiom-developer] Ping: file removals
+From: Waldek Hebisch <hebisch_at_math.uni.wroc.pl>
+Date: Mon, 6 Nov 2006 14:44:32 +0100 (CET)
+
+Tim, first I must question your monopoly on stating Axiom goals.
+In open source project all members choose goals. If members
+goals are fundamentally incompatible, then there is time to fork.
+However, (as I belive is in Axiom case) if goals differ slightly,
+it should be possible to work together (compromising on lesser
+goals if needed).
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2006-11#m34pss29km.fsf@zeus.integrable-solutions.net][Re: SPAD and Aldor again]]
+From: Gabriel Dos Reis
+
+Algebraic types without pattern matching is close to useless.  Boot
+(src/boot) has a primitive support for algebraic types and pattern
+matching. Its "case expression" is what you would expect.  I've been
+trying to figure out a way to get it work in SPAD without breaking the
+current syntax and semantics of SPAD.  It is pity SPAD's case
+expression was designed that way.
+
+| What are the valuable lesson from SML module system, Haskell type
+| class, and C++ template we can use ?
+
+People are still working on finding better expressive ways with type
+classes (predicate over types).  And there are very interesting
+problems there.  My impression is that Scratchpad invented a form of
+"type classes" before type classes where invented.  And this dates
+back to the 70's-80's.
+
+Over the years, people have found creative ways to convincing the C++
+template systems to do things it wasn't designed directly to do.  For
+example, people now use what is called "enable_if" to select functions
+templates based on predicates.  "Concepts" for C++ will subsume that
+creative use of templates.
+
+I think SPAD has to find its solution by introspection.
+#+END_QUOTE
+
+*** 2007-02
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2007-02#87bqk64vcy.fsf@soliton.cs.tamu.edu][Re: Algebra bootstrap]]
+From: Gabriel Dos Reis
+
+The glorious version of Integer is not needed wholesale when starting
+the boostrap process.  The glorification is a set that needs to come
+after.  Yes, post facto extensions are ways to achieve late
+glorification -- and if you look at the practice, this is not fancy;
+just think "type classes" (Haskell), which Axiom would have invented
+two decades ago if it had post facto extensions.
+#+END_QUOTE
+
+** 2007-01
+#+BEGIN_QUOTE
+Re: Parallelism in mathematical languages
+
+Thanks for your comments about Fortress and Axiom.
+I have seen older documents about Axiom, and you
+have given me some new ideas to think about.
+
+Yours,
+Guy Steele
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Re: [Axiom-commit] SF.net SVN: axiom: [426] branches/wh-sandbox
+
+an ugly fight
+#+END_QUOTE
+
+** 2007-02
+#+BEGIN_QUOTE
+Re: [Axiom-developer] Can you depend on it?
+From: Martin Rubey
+Date: 04 Feb 2007 14:43:26 +0100
+
+By the way, I think that most code in axiom is crap. It is a mere coincidence
+that it works roughly. If you want to see a well engineered system, look at the
+MuPAD sources. (I'm not saying that it couldn't be done better. But it's quite
+incredible how well it works. It's a pity that MuPAD is non-free now.)
+#+END_QUOTE
+
+** 2007-05
+#+BEGIN_QUOTE
+Re: [Axiom-developer] Compiler speed
+From: Gabriel Dos Reis <gdr@cs.tamu.edu>
+Date: 06 May 2007 21:14:15 -0500
+
+I'm rewriting part of the compiler in Spad -- it will take some
+time before it gets fully functional, but I do hope to make
+progress by the summer.
+
+
+Re: [Axiom-developer] Knuth's literate style
+From: Gabriel Dos Reis <gdr@cs.tamu.edu>
+Date: 14 May 2007 20:37:18 -0500
+
+Jacob Smith, a student of a colleague (Jaakko Järvi), took my class on
+symbolic computations last fall. For his class project, he choosed
+Algorithmic Differentiation in Axiom. We were able to implement both
+forward and backward modes in Axiom. As a by product, that led me to
+implement a small Axiom library for representing Spad programs (both
+interpreted and compiled) as typed abstract syntax tree -- which I'm
+now using in my "toy" Spad compiler written in Spad. That also
+pressed me to start (earlier than planned) a formal definition of Spad
+(not easy). The work will be presented at ISSAC'07.
+#+END_QUOTE
+
+** 2007-08                                                           :scheme:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2007-08#200708100536.l7A5atIC019891@axiom-developer.org][bootstrap Meta/Boot]]
+
+(ah, forth. i do so love forth)
+
+Scheme is quite nice.  My son implemented and sells a PHP compiler in
+scheme.  Scheme has two flaws from my point of view.  A minor flaw is
+that I end up implementing half of common lisp in scheme, and badly at
+that.
+
+A major flaw is that scheme broke the correspondence of nil == false
+== empty list which is the bridge between the procedural and data
+representations.  THE fundamental insight of lisp is that programs ==
+data.
+
+No other language gets this right.  Unfortunately there is no way to
+fake this connection in scheme.  So while I like the idea I think they
+blew THE fundamental detail.
+
+Tim
+#+END_QUOTE
+
+** 2011-10                                                          :haskell:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2011-10#1318898373.30722.494.camel@pewter][Re: Aldor]]
+
+Well I spent the night thinking about it and, frankly, I'd say that
+Haskell has taken over the niche where Aldor could have been.  Haskell
+has an interactive mode, a strong compiler, strong type checking,
+multi-core support, and a much larger user population.  I don't see
+that Aldor offers any advantages at this point.
+
+Its been on my queue of things to do to figure out how to generate
+haskell using the same mechanisms we use to generate Fortran.
+Something like =)set output haskell=
+
+Tim
+#+END_QUOTE
+
+** 2006-02                                                          :haskell:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2006-02#m33bid914c.fsf@uniton.integrable-solutions.net][Re: about Expression Integer]]
+From: Gabriel Dos Reis
+
+> I am curious why you wrote :-( ? Are you implying that you wish
+> that Aldor and Axiom did use a paradigm more advanced than object
+> orientation?
+
+yes, more or less.
+
+Many linguistic constructs one finds in Aldor and Axiom have been the
+"lead" at the time (at least two decades ago, though neither Aldor nor
+Axiom were called that way at the time) -- blending object orientation
+(in the style of categories and domains) and imperative higher order
+programming was rather powerful and "unique".  However, I'm kind of
+"disappointed" to see that virtual no progress has been since then.
+On the other hand, qualified type systems have emerged leading more
+"natural" expression of ideas (though posing more difficult
+challenges), and I'm sorry to say it, and we are here comparing Axiom
+to Java :-(
+
+> I think that is true and these ideas originated in Axiom itself,
+> which very considerably pre-dates "current trends in programming".
+> I think it is a pity that Axiom was/is not better known among
+> programming language designers.
+
+That was part my point.  The other part is that it is pity Axiom
+designers did not keep the lead on that front.
+
+In April 2004, there was a workshop organized at Adobe (San Jose) to
+talk about "concepts for C++".  I deliberately chosed to present two
+"main" type systems:  (1) type classes, and (2) "categories and
+domains" in Aldor.  That was also an opportunity for me to foster a
+deeper understand of the ideas work in both world (and later build
+an excuse of why I did not push for them :-).
+
+The linguistic construct I found the most useful in Aldor is "post
+facto extension".
+#+END_QUOTE
+
+** Others
+*** 2002-10
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2002-10#200210282328.g9SNSGk02459@localhost.localdomain][Axiom Development]]
+
+According to Daly's Hasty Generalization Theorem (TM) there are 3
+kinds of computer algebra system.
+
+Type 1 is the library approach.  The insight begins with the fact that
+their favorite language has a type system and there is a nice mapping
+from types to abstract algebra.  A large library gets built which
+no-one can use except the developers because it is complex.  An
+interpreter is usually placed over the library to make it more useable
+but the library is the key.
+
+Type 2 is the engineering approach.  Do whatever is necessary to make
+it work.  The key symptom is that you can subtract two types, say
+matrices, and get a 0 (integer).  Note the loss of type information
+because a 0 is a 0 is a 0, right?  These systems are easy to use at
+first but they have trouble scaling because the coercions that make it
+work also turn out to be the source of bugs in more complex
+situations.
+
+Type 3 is the theory approach.  The symptom is that a language is
+defined that is close to the mathematics you want to express.  This
+makes the algorithms clearer and, therefore, easier to get right.  The
+problem with these systems is that they have very steep learning
+curves making them hard to learn initially.  However, they scale
+better because they have good theoretical models and you can strongly
+argue for the correctness of the results.
+
+Axiom is a type 3 system.  It is harder to learn but, once learned, it
+becomes easier to write correct algorithms.
+#+END_QUOTE
+
+*** 2003-04
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2003-04#200304250646.h3P6kPQ28340@localhost.localdomain][Re: new/src/boot/Makefile.pamphlet]]
+
+Axiom's been around 30 years and it has the potential to be around a
+lot longer; provided we solve some fundamental software issues like
+making it maintainable, documenting it so the algorithms can be
+modified, etc.  I plan to spend the next 5 years leading the project
+and building the supporting code and social structures.  If it isn't
+at least mildly self-sustaining at that point I guess I will have
+failed.  I just hate to see such unbelievably good research go to
+waste.
+
+I spent last year while I was waiting for code release pondering the
+reasons that make a large software project like Axiom fail.  Most of
+the "grand vision" ideas come from that question.  After 33 years of
+programming I'm tired of watching systems vaporize.  Surely we can do
+better.  If mathematical software can't span the generations, what
+software can?  So, in a sense, this is a research project on software
+as much as it is a research project in mathematics.  Since my day job
+at City College is a joint venture of the math dept and comp sci it
+fits my interests.
+#+END_QUOTE
+
+*** 2003-06
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2003-06#200306081939.h58JdS721505@localhost.localdomain][RE: Value stack overflow bug]]
+
+If we were to pursue the aldor route I'd consider scrapping the axiom
+interpreter and going to a compile-time only environment.  This has
+been discussed several times and it is very, very hard.  Manuel
+Bronstein has done some work on this path before.  I don't know of
+anyone that would fund such an effort and I don't believe we would get
+the research-level expertise for free.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2003-06#200306090118.h591I9S21678@localhost.localdomain][RE: Value stack overflow bug]]
+
+> I have nothing against lisp as such.  But lisp has been around a
+> long time and for a lot of different reasons it has yet to reach
+> it's full potential.  I think there are good reasons why people are
+> still searching for better higher level languages.  Axiom (and
+> Aldor) seem to be moving in the right direction to me.  To return to
+> "just lisp" seems like a backward step, no?
+
+<RELIGION> <<tim-daly-and-symbolics-1>>
+
+Believe me, nobody I've talked to agrees with me on this so you're in
+the majority.  But I've worked on a Symbolics machine and I've seen
+the future, so to speak.  (Imagine a world where you can hit an error,
+edit the source, find the failing line of source code, change it,
+recompile it, load it, and CONTINUE FROM THE POINT OF FAILURE, all in
+less than 5 seconds.  I used to work that way and it was "just lisp").
+
+Block structured languages need, at minimum, special code
+walkers/manipulation tools in order to manipulate the sources.  (Think
+of all of the Axiom parsers).  Which is hardly the issue. The real
+issue is that languages determine what you can think.  The early
+concept of computer algebra comes about with the realization that you
+can symbolically differentiate program text.  The current generation
+manipulates program text for program proofs.  Lisp minimizes the
+distance between the thought and the code.
+
+All of Axiom, including the algebra, compiles to lisp.  It is
+currently possible to write code in lisp if you understand the magic.
+
+Axiom's language is very close to the algebra which is a huge win.  If
+you understand the domain you can read the Axiom code directly.
+That's the huge benefit of Axiom's language.  So it's unlikely to
+change any time soon.
+
+Not to worry, this is just a thought experiment anyway.
+
+</RELIGION>
+#+END_QUOTE
+
+*** 2003-08                                                         :history:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2003-08#200308311955.h7VJtYY22276@localhost.localdomain][Axiom Language and History tidbits]]
+
+Yes, Axiom is written in boot and common lisp.  I wrote most, if not
+all, of the common lisp.  I found the boot syntax (which is basically
+lisp except that parens are replaced by indentation) was impossible
+for me to use.  However other people on the project hate parens.  It
+was a religious difference that never got solved.
+
+Most of the MACLisp and VMLisp rewrites are in vmlisp.spad.pamphlet.
+
+Looking even deeper into the common lisp you'll find MODLisp, which
+was an effort by Dick Jenks, Dave Barton, and a few others.  Bits of
+it still survive.  It predated and fathered Scratchpad/Scratchpad II.
+
+And there are even MACLisp primitives still around like subrp (see
+src/interp/vmlisp.lisp.pamphlet).
+#+END_QUOTE
+
+*** 2007-07
+Axiom社区的分裂发生在这个月。
+http://lists.gnu.org/archive/html/axiom-developer/2007-07/msg00395.html
+
+*** 2009-04                                                  :history:design:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2009-04#200904101738.n3AHcHJx011038@axiom-developer.org][Re: OpenAxiom-1.2.1 released]]
+[[https://lists.gnu.org/archive/html/axiom-developer/2009-04/msg00036.html]]
+From: daly
+Date: Fri, 10 Apr 2009 12:38:17 -0500
+
+> As I understand it, you could easily prevent forking by pushing
+> Axiom to user more actively, it could have the functionality of
+> OpenAxiom or FriCAS, but it has lost the momentum. From user point
+> of view the confusion is of no importance as long as one of fors
+> works and another one does not.
+
+As I understand it, one fundamental difference between OpenAxiom and
+Axiom lies in the project goals related to the boot language.
+Approximately half of the Axiom internals is written directly in
+common lisp.  The other half is written in a "syntactic sugar
+language", called boot, which compiles to common lisp.
+
+The Axiom project had, since it was released as open source, the
+stated goal of removing the boot language code.  Indeed, this was a
+goal I had while working on Axiom before it was ever released from IBM
+in the late 80s.
+
+The OpenAxiom project has the exact opposite goal of writing
+everything in boot and developing boot as a language.
+
+Given that the goals of OpenAxiom are directly opposed to the stated
+project goals of Axiom, how do you see that this difference should be
+resolved?
+
+
+Date: Fri, 10 Apr 2009 22:26:53 -0700
+Subject: Re: [Axiom-developer] Re: OpenAxiom-1.2.1 released
+From: Scott Morrison <scott.c.morrison@gmail.com>
+
+As Dick Jenks explained it to me when I joined the Axiom project in 1984,
+the Boot language was intended as a boot-strap step to eventually implement
+the entire system in the Spad language.  The idea was first to convert to a
+language that was syntactically similar to Spad, then convert it to actually
+use Spad.  Of course the second step never happened.  That's why the
+language was named Boot.
+
+While Boot does have the semantics of Lisp, to me, the distinguishing
+feature is it's very nice syntax for list pattern matching.  You can do the
+same things in Lisp, but the syntactic elegance of Boot for pattern matching
+is undeniable.  It was so nice that we got away without real structured data
+throughout the entire project.  I love the syntax:
+#+END_QUOTE
+
+*** 2009-08
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2009-08#4A985FDD.4050705@axiom-developer.org][Interpreter changes]]
+[[http://lists.gnu.org/archive/html/axiom-developer/2009-08/msg00018.html]]
+
+All of the code for the interpreter proper is now pure lisp code.
+
+The code is being rewritten and refactored in detail, documented, and
+added to the interpreter book as literate code.  The src/interp
+directory should be gone in the near future.
+
+There are three side effects of this change.
+
+First, the VMLisp/MACLISP/etc legacy support will be rewritten into
+pure common lisp.
+
+Second, the boot translator code is no longer needed and will be
+removed in the coming weeks along with the src/boot directory.
+
+Third, the Aldor hooks are being removed since it is clear that Aldor
+will never become free and open source.  Instead of doing the
+translation of this legacy code the effort will be spent to improve
+and document the existing compiler.
+#+END_QUOTE
+
+*** 2010-02                                                           :Cohen:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2010-02#4B88E827.1000908@axiom-developer.org][Re: Axiom volunteer work ideas]]
+
+Axiom can handle several forms of output.  Some bright spot only needs
+to architect a generalization of the existing code, make it more
+table-driven, and ... bob's your uncle, as the Brits say.
+
+I did an FFT many years ago in lisp but it was on a very old,
+non-common-lisp.  I think the sources are on paper tape.  I suppose I
+could parse out the 7-bit ascii but I'm lazy.
+
+In any case, I'm just paging through my pile of notes to find
+something that doesn't seem too tedious for volunteers.  Nobody wants
+to resurrect the Doyen work, pretty up the website (not the content
+but the CSS), or struggle with a Mac port.  Other ideas like embedding
+ACL2 under Axiom for proof work are just too invasive and way too
+steep a learning curve for volunteers.
+
+I suppose I should journal more of these ideas to the mailing list so
+others can think about them.  I have partial implementations of a lot
+of things, like a Cohen algebra domain that allows explanations to be
+printed for each step in a solution.  It is based on Joel Cohen's
+Computer Algebra and Symbolic Computation books.  And I've done some
+more special function work but not had the cycles to put it into the
+algebra yet.
+
+Time, time, time.... sigh.
+#+END_QUOTE
+
+*** 2014-05
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2014-05#201405121010.s4CAAd9G002288@axiom-developer.org][Re: Must hear....]]
+
+Manuel gave me permission to use all of his writings to document the
+code...  It just takes time.
+
+I've asked several authors for permission to quote their papers, which
+is an exception permitted by copyright for research purposes.  All but
+one have said yes.  I have a whole directory of papers slated to be
+added as documentation to the related domains.  Each one is "expensive"
+because I have to learn the relevant background to write readable
+documentation and connect it to the domains but, hey, it's a 30 year
+horizon project :-)
+#+END_QUOTE
+
+*** 2014-09
+又大吵一架：
+[[http://lists.nongnu.org/archive/html/axiom-developer/2014-09/msg00034.html]]
+[[http://lists.nongnu.org/archive/html/axiom-developer/2014-09/msg00035.html]]
+[[http://lists.nongnu.org/archive/html/axiom-developer/2014-09/msg00040.html]]
+
+不过我觉得Axiom只用lisp实现不如只用spad实现……
+
+** 2015-10                                                            :risch:
+#+BEGIN_QUOTE
+[[rmail:~/github/axiom-maillists/axiom-developer/2015-10#E1ZhtUh-00057O-L7@hera.math.uni.wroc.pl][Re: Compiling Axiom on Ubuntu 14.04, 64 bit]]
+2015 Oct 2 by Waldek Hebisch
+
+Actually, while "most complete" when written Bronstein's
+implementation contained substantial gaps.  FriCAS contains
+significant enhancement of Bronstain's code.  AFAICS FriCAS is the
+only system which can resonably claim completeness in purely
+transcendental case.  For the old code is is relatively to build
+examples that either signal internal errors or return unevaluated.
+Completing this case required about 1500 lines, while in Bronstein's
+version about 2500 lines handle transcendental case.  So about 30% of
+code was missing.
+
+[[rmail:~/github/axiom-maillists/axiom-developer/2015-10#E1Zi3Y7-0004ol-GU@hera.math.uni.wroc.pl][Re: Hard integrals]]
+2015 Oct 2 by Waldek Hebisch
+
+Note: Rubi testsuite strongly favours pattern matchers and does not
+contain many difficulties which complete algorithm is supposed to
+handle.  Still, for some classes of integrals which FriCAS can do in
+systematic way you can find there examples which are beyond
+Mathematica and Maple.
+#+END_QUOTE
+
+** 2017-03                                                            :type:
+#+BEGIN_QUOTE
+[[https://lists.nongnu.org/archive/html/axiom-developer/2017-03/msg00005.html][Re: Ad-hoc polymorphism paper]]
+
+Reimplementing AXIOM systems with a Hindley-Milner style polymorphism will
+take the computer algebra community at least three or four decades back --
+with no improvement.
+
+-- Gaby
+#+END_QUOTE
+
+** Manuel Bronstein
+There are 4 emails from him!
+
+* sci.math.symbolic
+** 1992-09                                                          :history:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/YpmvvsUqWdw/QXdleXQpFA8J][commercial version of IBM's "new scratchpad"]]
+1992 Sept 8 by M. Creon Levit
+
+Ever since I started reading about it, I have considered new
+scratchpad to be the most significant symbolic computing package since
+macsyma, and now they are finally letting it out.
+
+This program is incredible.  It seems far beyond macsyma-,
+mathematica-, or maple-like programs.  I believe this is because it is
+implemented (and extended) in an object oriented fashion where the
+structure of the class heirarchy is based on the structure of the
+class heirarchy used in mathematics itself.
+
+
+(Richard J. Gaylord) writes:
+> i've been speaking to the NAG people about running AXIOM
+>
+>  they tell me that it requires 32 Mb RAM, 100 Mb of disk space and 100 Mb
+> swap space.
+>
+> i think that the swap space requirement may be an upper limit
+> recommentdation necessary only for graphics and such. i hope so as its
+> difficult to free up  200 Mb of space for this program.
+>
+> and i thought Mathematica was a machine hog.
+--
+
+Those numbers were indeed our recommendations for Release 1.0 of
+AXIOM.  For the current Release 1.1 we recommend 32 Mb RAM and at
+least 64 Mb of total swap (paging) space.  The AXIOM Release 1.1
+system takes up about 74 Mb of disk space (as reported by the "du"
+command).  This splits (roughly) into
+
+        Library modules         41 Mb
+        System code                 16 Mb
+        Hypertext documentation        12 Mb
+        Library source code          5 Mb
+
+More swap space should be provided for concurrent AXIOM sessions.
+______________________________________________________________________________
+ Themos Tsikas                      e-mail: themos@nag.co.uk
+ AXIOM Development Coordinator      tel.  : 44-(0)-865-511245
+                     Numerical Algorithms Group Ltd.
+           Wilkinson House, Jordan Hill Rd., Oxford, UK OX2 8DR
+#+END_QUOTE
+
+** 1992-11
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/nAI79JftETs/cWHk-saDZhAJ][Axiom (was ScratchPad II)--one more word.]]
+
+1992 Nov 3 by Charles Fletcher
+
+Since I have been running this (hopefully) informative thread on
+Axiom, here is one more piece.  In the latest (IEEE) Spectrum magazine
+in their "Special SOFTWARE Guide", the 'Math and graphics' section
+there is a nice quote on Axiom.  I quote (in violation of all copyright
+laws!-):
+
+#+BEGIN_CENTER
+As the table shows, many new products were introduced last year.  One
+noteworthy newcomer is Axiom, a huge computer algebra program that IBM
+Corp. began developing over 15 years ago.  Requiring 200 megabytes of
+disk space, it features extensive symbolic, numerical, and graphical
+capabilities, and already has a substantial user base, mostly within
+IBM.  It is distributed commercially for IBM workstations by Numerical
+Algorithms Group, Inc., Downers Grove, Ill.
+#+END_CENTER
+
+>        [Axiom,] requiring 200 megabytes of disk space,
+
+Maple, requiring 7 megabytes of disk space, runs on a Mac with 2 megabytes
+of RAM.
+
+Reply by Rainer Joswig: <<lispm-and-axiom-1992>>
+
+But on a Macintosh Quadra 950 with 32 MB RAM?  Why not?  Memory
+shouldn't be the problem.
+#+END_QUOTE
+
+** 1992-10
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/CB6yJ7QbZfw/oa3BJ1qjKyYJ][Re: New name for Scratchpad?]]
+1992 Oct 30 by Charles Fletcher
+
+> How does it compare to Mathematica?  I don't care
+> if it has large tables of special functions (I don't
+> even care if it has the gamma function.)
+
+It is hard for me to say in my limited use, but the "experts" I have
+heard say that the basic design of Axiom is *the* way a SA should
+be put together.  Tony Hearn (author of Reduce) said it is the
+correct approach.  The Chudvorsky brothers (please excuse my
+incredibly poor spelling of their names) love it.
+
+
+Reply by David Gurr:
+
+> Does it [Axiom] have object oriented programming?
+
+Aack!  No!  It has something far better, far sounder, and more general
+than oops.  (IMHO, and in my ignorant opinion as I still haven't
+actually used it, only read about it for years.)
+#+END_QUOTE
+
+** 1991-04                                                          :history:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/GQD9jso1-gM/gTK8_FDjhxIJ][Re: Scratchpad?? SCHOONSCHIP???]]
+1991 Apr 16 by Robert S. Sutor
+
+[I am reposting this since it doesn't seem to have made it out
+ to the rest of the world.]
+
+"Scratchpad" refers to two different computer algebra systems more
+or less developed by the same group in the Mathematical Sciences
+Department at the IBM T. J. Watson Research Center in Yorktown
+Heights, NY.
+
+The two systems have very little in common except that Dick Jenks was
+involved with both of them, as a group member (and maybe group manager
+at the end) for (old) Scratchpad and as manager for the current group
+which is developing (new) Scratchpad.  There are some syntactic
+similarities and both systems share the concept of delayed assignment
+("rules") though standard assignment is also available in the new
+system.
+
+A rather complete history of the old Scratchpad project was published
+in a Scratchpad newsletter a few years ago.  I can send/post a copy
+if anyone is interested.  Development terminated on that system
+around 1976.  It was available on IBM VM/CMS only.
+
+We usually date the start of the new Scratchpad project from 1980 when
+Barry Trager joined the group.  It was pretty much a two person (+
+visitors such as James Davenport) effort for several years.  In 1984,
+Scott Morrison, Stephen Watt and I joined the group (Scott is not
+"permanent", as IBM would say).  The current group includes Bill Burge
+and Tim Daly.  Patrizia Gianni (Pisa), James Davenport (Bath), Simon
+Robinson, Ruediger Gebauer (now at Springer-Verlag, NY), Larry Lambe,
+Michael Monagan (ETH), Manuel Bronstein (ETH), Clifton Williamson (UC
+something (sorry!)), George Andrews (Penn State), Albrecht Fortenbacher
+(IBM Heidelberg) and Johannes Grabmeier (IBM Heidelberg) have visited
+over the years and made important contributions to the project.
+(Please forgive me if I omitted anyone.)
+
+The new project has had several names over the years.  Internally, at
+least, it was called NEWSPAD (NEW ScratchPAD), Scratchpad 84,
+Scratchpad II and now back to Scratchpad.
+
+The system lived on VM/CMS over Lisp/VM for many years but now almost
+all the development occurs on AIX over Common Lisp.  The system is
+built around the strictly-typed Scratchpad language which has a
+compiler and an interactive environment.  This environment includes an
+interpreter for most of the language and sophisticated facilities for
+analyzing weakly-typed expressions so that user and library functions
+can be invoked.  The language itself permits function overloading,
+parametrized datatypes, polymorphism, multiple inheritance and the use
+of "categories" to provide lists of public functions, attributes and
+default definitions for domains (mathematical objects and data
+structures) and packages (utilities such as TeX output and
+implementations of such things as integration).  For example, the
+category CommutativeRing states that it is an extension of Ring and
+that multiplication is commutative.  FiniteLinearAggregate(R) describes
+the basic operations that such things as arrays and lists eventually
+implement.  FiniteField states that it is an extension of both Field
+and Finite (maybe now called FiniteSet?) and these operations are
+implemented by the various flavors of finite fields in the system (eg.,
+PrimeField and FiniteField Extension).
+
+In the extended version that supports X-windows, there is support for 2
+and 3-dimensional graphics, a hypertext-like support system that
+includes online help and documentation and a system browser, and
+multiple interpreter windows.
+
+In the past the system has been available under joint study agreements
+with individuals at universities.  It is not currently available but if
+that changes we will make an announcement. If you would like hardcopy
+information about the system, please send a note to
+wit...@watson.ibm.com.
+
+For completeness, I'll follow this up a bit later with more information
+about the library.
+
+                                Robert S. Sutor
+Department of Mathematics                    Mathematical Sciences Department
+Princeton University                         IBM T.J. Watson Research Center
+rss...@math.princeton.edu                   sutor@yktvmz, su...@watson.ibm.com
+#+END_QUOTE
+
+** 2006-08
+[[https://groups.google.com/d/msg/sci.math.symbolic/fV4ZRQs3gCY/3jEOsy57ROIJ][MACSYMA and AXIOM - the same failure pattern]]
+内容太多了...
+
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/fV4ZRQs3gCY/6uoRQfEmIhEJ]]
+2007 Mar 17 by Vladimir Bondarenko
+
+I invested into MuPAD a fraction of my soul.
+
+These days, upon considering the MuPAD development trajectory,
+the only question drills my mind,
+
+Is MuPAD going to join the MACSYMA and AXIOM commercial fate?
+#+END_QUOTE
+
+** Vladimir Bondarenko, 粉转黑
+#+BEGIN_QUOTE
+Re[2]: [Axiom-developer] Issue tracker: Language selection
+From: Vladimir Bondarenko <vb@cybertester.com>
+Date: Sun, 9 Jan 2005 07:36:43 +0200
+
+There were many days over the last 10 years when my daily meal
+consisted of 3 glasses of tomato juice of 230 ml, plus 500 grams of
+bread.
+#+END_QUOTE
+
+He seems to give many challenges in 2008.
+
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/lyttT9MmxDY/rQJSW0i4vq0J][Timothy P. Daly]]
+2006 Feb 8 by Vladimir Bondarenko
+
+Today I found some comments from a correspondent who, as a person
+belonging to the Axiom team, influenced my life in July of 1993.
+
+ISSAC'93 was held at Kiev, organized by Glushkov Institute of
+Cybernetics...
+
+A live whirligig Manuel Bronstein, staid Gaston Gonnet... Stars!
+
+http://www-sop.inria.fr/cafe/Manuel.Bronstein/
+http://www.inf.ethz.ch/personal/gonnet/
+
+Dan Richardson in the flesh (envy me, boys!)
+http://www.bath.ac.uk/~masdr/
+
+Axiom was shown publicly then...  Having seeing my eyes glowing
+with crazy interest, benevolent and noble Steve Hague of NAG
+
+http://www.nag.co.uk/about/shague.asp
+
+lent me his Axiom book for a night.
+
+Needless to say, I kept reading the Bible overnight, and I got
+really stunned with prospects it presumably shows!
+
+"What an inviting prospect!", I thought delightedly (in 1993).
+#+END_QUOTE
+
+** 1993-11                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/-M8EfEBR4E4/22QDOdhO_7EJ][Re: Risch's Algorithm Implemented? 4 pieces? Time Complexity?]]
+1993 November 25 by Manuel Bronstein
+
+Not to my knowledge (despite rumors to the contrary).  If you insist
+on "FULL", then no distributed computer algebra system provides a FULL
+implementation.  However, the extent to which it has been implemented
+varies tremendously between systems (as well as the honesty of those
+systems when they hit an unimplemented branch of the algorithm).
+#+END_QUOTE
+
+** 2004-01                                                            :Risch:
+#+BEGIN_QUOTE
+Re: LISP routines to do symbolic differentiation
+
+2004 January 31 by Richard Fateman
+[[https://groups.google.com/d/msg/sci.math.symbolic/LNk1bn1x7Ig/Kk_bGZhqbi0J]]
+
+You can study the various
+components of the Risch integration procedure which in some
+ways provides a decision for integrability, but that is subject
+to the ability to simplify expressions.  This latter task
+turns out to be undecidable for even a modestly complicated domain
+(Daniel Richardson, 1968), so even if Mathematica "implemented
+the Risch 'algorithm'" it might not solve a problem  posed in an
+unanticipated form.
+
+It would probably also be a mistake to believe that the Risch
+methods are fully implemented in Mathematica, though this
+might change from time to time.  Integration of special functions
+(like erf) might not use these methods anyway.
+
+
+2004 February 2 by Waldek Hebisch
+[[https://groups.google.com/d/msg/sci.math.symbolic/LNk1bn1x7Ig/hPO51zr6-5YJ]]
+
+Daniel Richardson result is an artifact of his definition of equalty of
+expressions.  If you take different definition of equality (used by Risch)
+and add an assumption about numbers ("no unexpected equalities between
+transcendental numbers") then equality of elementary functions is decidable.
+The needed assumption is a long standing open problem.
+
+
+2004 February 2 by Richard Fateman
+[[https://groups.google.com/d/msg/comp.lang.lisp/LNk1bn1x7Ig/Ovb1skfEFEcJ]]
+
+| The needed assumption is a long standing open problem.
+2. I believe you are referring to Schanuel's conjecture, but there is no
+expectation that this resolution will be easy.
+
+NOTES BY ME: TBD
+#+END_QUOTE
+
+** 2013-02
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/UB0udwILOSw/msxc57stRM8J][An independent integration test suite]]
+2013 Feb 24 by Martin
+
+191 posts, super long.
+#+END_QUOTE
+
+** 2013-06                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/W4IfDjjNJEA/D1GLYfcshVoJ][Re: Rubi 4 is now available]]
+2013 June 21 by Waldek Hebisch
+
+FYI, on run the second 3 on a fast machine overnight and
+the result is:
+
+#+BEGIN_EXAMPLE
+(1) -> )set messages time on
+(1) -> setSimplifyDenomsFlag(true)
+
+   (1)  false
+                                                                Type: Boolean
+                                       Time: 0.02 (IN) + 0.03 (OT) = 0.06 sec
+(2) -> integrate(sqrt(-x + sqrt(x)*sqrt(1 + x))/sqrt(1 + x), x)
+
+   (2)
+                                             +----------------+
+                    +-+ +-----+     +-+ +-+  | +-+ +-----+
+         +-+     (2\|2 \|x + 1  + 6\|2 \|x )\|\|x \|x + 1  - x
+       3\|2 atan(----------------------------------------------)
+                                     8x - 1
+     +
+                            +----------------+
+           +-----+     +-+  | +-+ +-----+
+       (12\|x + 1  + 4\|x )\|\|x \|x + 1  - x
+  /
+     8
+                                         Type: Union(Expression(Integer),...)
+                   Time: 0.00 (IN) + 22432.48 (EV) + 0.19 (OT) = 22432.67 sec
+#+END_EXAMPLE
+
+2013 June 21 by Waldek Hebisch
+[[https://groups.google.com/d/msg/sci.math.symbolic/W4IfDjjNJEA/aoKllD0q05sJ]]
+
+=setSimplifyDenomsFlag(true)= usually gives huge speedup on such
+integrals.  With this flag
+=integrate(sqrt(sqrt(x^4 + 1) + x^2)/((x + 1)^2*sqrt(x^4 + 1)), x)=
+takes 9.67 sec on the same machine.
+
+So, yes, this version of #3 is quite hard for FriCAS.
+
+I did not seroiusly try 'algint'.  Theoretically Davenport's method is
+slower, but a lot depends on implementation details.  For example
+FriCAS converts nested roots to a single algebraic element.  IIRC
+Davenport explicitly handled nested roots.  This can make nontrivial
+difference.
+#+END_QUOTE
+
+** 2015-10
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/1NRFet2LSKg/CFWfXpvDBgAJ][Re: Risch, antiderivatives, Bronstein, was Re: Announce: FriCAS 1.2.7 has been released]]
+2015 Oct 2 by Waldek Hebisch
+
+Richard Fateman wrote:
+> It's not that the Risch algorithm(?) is too hard, but that
+> it is not computing what you want...
+>
+> Returning to the integrand via differentiation putting you
+> on the wrong side of a branch cut?  Whose fault is that if
+> differential algebra doesn't even have that concept?
+
+Actually, if kernels in the input are independent, then
+algebraic approach has no problem with differentiating
+the result.  Namely, independence of kernels implies that
+for each choice of branches we get isomorphic differential
+field.  Risch algorithm produces answer from ingredients
+in the field and this answer as expression should differentiate
+back to original expression.  At algebraic level various
+substitutions are valid because they are isomorphisms
+of differential fields.  So, why troubles?  First, one
+have to be careful to undo substitutions.  Next, practical
+implementations take shortcuts compared to Risch algorithm
+and those shortcuts may introduce extra terms, outside
+differential field in question.  Also, there is problem
+with representing differential fields.  In FriCAS
+there is no explicit representation of differential fields.
+Instead, kernels appearing in a function implicitly
+determine the field.  But this interacts badly with
+automatic simplifications.  For example, we have
+sqrt(3/4) and this gets simplified to sqrt(3)/2.
+Lovers of principal branches consider this valid,
+but such change destroys structure of fields.
+So really trouble were due to imperfect implementation.
+Let me add that _most_ branch problem in FriCAS were
+due to non-Risch parts of the integrator.
+
+Of course dependent kernels cause trouble for algebraic
+approach, but this is more on pragmatic level.  Namely, should
+integrator try to solve potentially hard (unsolvable)
+problems which actually have little to do with integration.
+ATM in case of dependent kernels FriCAS assumes that
+branches will simplify.  But in principle other approaches
+are possible.
+#+END_QUOTE
+
+** 2016-02                                                    :Risch:Goursat:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/RxGfWeXPY1Q/Yr4q8DPEFAAJ][Re: Axiom web interface currently out of whack]]
+2016 Feb 12 by Martin:
+
+This depends on your needs and preferences:
+
+Hard-boiled politicos might end up conspiring to have Barry Trager
+abducted and an interrogation team put to work on him in the Polish
+backwoods.
+
+Practically-minded realists should try to implement Manuel Kauers'
+Groebner-basis scheme of 2008.  If that turns out to fail on the present
+integrand they could ask him to provide something better, at the threat
+of exposure if necessary.
+
+Nostalgic purists may want to analyze transformation properties of the
+integrand under Moebius transformations that map radicand roots onto
+each other, thus adapting Goursat's 1887 approach from square roots of
+quadratics (and cubics) to cube roots of cubics (and quadratics).
+
+Rubi wouldn't be Rubi if it didn't come up with still another solution;
+lazybones could simply rest up and wait for this to happen.  Meanwhile,
+beware of gravitational waves!
+#+END_QUOTE
+
+** 2016-03
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math.symbolic/1NRFet2LSKg/4_6ZggQ6IwAJ][Re: Who is fastest?]]
+2016 Mar 30 by Waldek Hebisch:
+
+Remark: 'lfintegrate' gives correct result only if certain
+assumptions are satisfied.  'integrate' transforms integrals
+so that 'lfintegrate' can handle them, calls 'lfintegrate'
+and then tries to make the result nicer.  Your integrals
+are simple and well-behaved, so can be sent directly to
+'lfintegrate'.
+#+END_QUOTE
+
+** Martin
+clicliclic@freenet.de
+
+Seems like a Derive guy.
+
+First post in sci.math.symbolic in 2008.
+
+http://mathforum.org/kb/profile.jspa?userID=507659
+
+Other account: =dwel_@_eb.de=
+
+http://mathforum.org/kb/profile.jspa?userID=643258
+
+#+BEGIN_QUOTE
+http://mathforum.org/kb/message.jspa?messageID=7363166
+
+PS: My knowledge of Risch integration is based on Bronstein's "Symbolic
+Integration Tutorial", which I read a few years ago (but without working
+through all the details).
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Another one is using this account?
+
+http://mathforum.org/kb/message.jspa?messageID=7483655
+
+I must attend to my colonies now, and Martin is free to take to the helm
+again and deliver the delayed ninth installment of his compilation of
+two-term recurrences for integrals of trigonometric functions.
+
+Holmes.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+http://mathforum.org/kb/message.jspa?messageID=7640670
+
+PS: This newsgroup must not turn into a one-man show!
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+https://groups.google.com/d/msg/sci.math.symbolic/cBTipgMWTi8/jpdxh7E6BAAJ
+
+Being 20+ years old, my machine presumably wouldn't be able to run it.
+But if you have a Windows-98 executable of a few Megabytes size, I will
+certainly give it a try.  Text-only input/output would be entirely
+satisfactory.
+#+END_QUOTE
+
+* [[http://axiom-wiki.newsynthesis.org][axiom wiki]]
+** [[http://axiom-wiki.newsynthesis.org/PanAxiomCommunity][PanAxiomCommunity]]
+#+BEGIN_QUOTE
+Axiom started out like any other home-grown system, called Scratchpad.
+However it was started at a time that major funding was available
+(computer algebra was considered to be a branch of artificial
+intelligence). It was heavily funded by both the U.S. government and
+IBM Research for about 23 years. Many researchers came to visit, many
+people worked on the system, many algorithms were created in a broad
+range of areas. This is the "dream realized" for the authors of the
+many free "library" systems. Fortunately Axiom started out as a
+"theory" system and not a "library". (See the footnote)
+#+END_QUOTE
+
+** [[http://axiom-wiki.newsynthesis.org/AxiomDevelopment][AxiomDevelopment]]
+Some history.
+
+** [[http://axiom-wiki.newsynthesis.org/RischImplementationStatus][RischImplementationStatus]]
+Core integrator should be complete for for purely transcendental
+functions. More preciesely, in the past there were gaps in
+transcendental part.  In 2014 offending code was rewritten eliminating
+all known reasons for incompleteness.
+
+For integrands involving algebraic quantities situation is more
+complicated.  If highest rank kernel is transcendental FriCAS still
+can use main part of transcendental algorithm, but there are gaps in
+auxiliary routines.  More precisely, extended integration routine is
+implemented only in two cases, one if algebraic extension is a single
+root, the second is purely algebraic. Solver for Risch differential
+equation can only handle purely algebraic case.  Logarithmic
+derivative problem is unimplemented in algebraic case.
+
+Together implemented part and shortcuts cover a lot of typical
+examples of elementary functions, but in fact large part of Risch
+algorithm dealing with algebraic extensions remain unimplemented.
+
+** [[http://axiom-wiki.newsynthesis.org/FriCASAlgebra][FriCASAlgebra]]
+Historically building algebra was a compilcated process.  FriCAS has
+special support to simplify it.  Basic idea is that once declarations
+of constructors and exported functions are known we can compile
+implementation parts in any order.  FriCAS contains special function
+which performs first part of algebra build collecting information
+about constructors.
+
+** [[http://axiom-wiki.newsynthesis.org/FriCASCompiler][FriCAS Compiler]]
+Currently Spad does not support object oriented programming, however
+generic programming features present in Spad in may cases give similar
+effect.
+
+* others
+** maxima mailing list
+*** 2013-02
+The reference of "3rd generation" was made in "Computerized Symbolic
+Manipulation in Mechanics", P86, 1994; also in "Modern Computer Algebra",
+P18, second edition, 2003.
+
+The reference of "the new generation" was made in "Trends in Computer Algebra",
+P2, 1987.
+
+#+BEGIN_QUOTE
+[[http://def.fe.up.pt/pipermail/maxima-discuss/2013/043859.html][Re: A dangerous question - Axiom vs Maxima?]]
+2013 Feb 27 by Harald
+
+Maxima is what is called a CAS of the 2nd generation.  (As are
+Mma, Maple and most other popular CAS).  OTOH in the same terminology
+Axiom is a CAS of the 3rd generation.  The main difference being
+the introduction of mathematical types for expressions: In Maxima
+there is just one (core) simplifier that produces roughly one
+canonical form of expressions but can be adjusted by a zillion flags.
+In Axiom there are many types of expressions, each one having its
+own canonical form and thus (in some sense) its own simplifier.
+(Probably employing polymorphism and similar "modern" concepts
+of computer science.)
+
+From the point of view of somebody implementing a CAS, Axiom is
+great.  Actually several former developers of Maxima joined Axiom
+after it was released as free software.
+But this hierarchical system of mathematical types also adds a lot
+of complexity and requires lots of knowledge (probably being a
+few years into studying math) to actually fully understand.
+
+We wanted something that we could recommend to students in their
+first year, so Axiom finally wasn't really an option.  Also people
+coming from an engineering context probably will like Maxima
+better.  If you are in an environment where everbody else uses
+Mma, then Maxima is the obvious free alternative.
+
+If your interest is mainly research on symbolic computation then
+Axiom likely provides you lots of useful infrastructure, that
+Maxima will never have by design.
+
+<sarcasm>
+In my experience the question somewhat boils down to: You want to
+develop a CAS or you actually want to use it?
+</sarcasm>
+
+As you note the communities of both systems are so completely split,
+that they don't even compare with each other.  There is some tragedy
+in this as both probably could learn a lot from each other.
+
+
+[[http://def.fe.up.pt/pipermail/maxima-discuss/2013/043860.html][2013 Feb 27 by Richard Fateman:]]
+
+I'm not sure that the claims that have appeared from time to time, that
+the Axiom system has a better implementation of integration, matters.
+Even if it has a more complete version of the Risch "algorithm", that
+may not add to its usefulness, and the additional hacking and heuristics
+of other systems may be more important to programmers.
+#+END_QUOTE
+
+** IRC #lisp
+#+BEGIN_QUOTE
+[[http://ircbrowse.net/browse/lisp?id=847193&timestamp=1033114709#t1033114709]]
+2002-09-27 +0200
+
+|10:18:29|<lispm-wim2>|hmm, it seems like Axiom (a computer algebra system written in Lisp) will be available as GNU software... ?!
+
+[[http://ircbrowse.net/browse/lisp?events_page=28189]]
+2003-01-05 +0100
+
+|20:36:08|<lispm-wim2>|in a few months there will also an Axiom version fro GCL, I read
+|20:37:20|<lispm-wim2>|I think the next logical step for CMUCL and SBCL will be the integration of contributed stuff and the support for applications like Axiom...
+|20:40:14|<lispm-wim2>|Axiom might be even more interesting, IMHO
+|20:40:55|<lispm-wim2>|Axiom is a more modern Computer Algebra system - an open source version will be published soon
+|20:41:14|<lispm-wim2>|it is pretty cool
+|20:42:19|<lispm-wim2>|it has a programming language that is a bit like Haskell
+|20:42:38|<lispm-wim2>|type inferencing and stuff. compiling to Lisp
+
+[[http://ircbrowse.net/browse/lisp?id=1216002&timestamp=1056160776#t1056160776]]
+2003-06-21 +0200
+
+|03:59:36|<tim>|axiom, the large algebra package my dad works on, has at least 7 different parsers, he says.
+
+[[http://ircbrowse.net/browse/lisp?events_page=35309]]
+2003-07-08 +0200
+
+|03:50:33|lispm-wim2  |(~lispm-wim@c139152.adsl.hansenet.de) joined #lisp
+|03:51:02|<lispm-wim2>|wow, a first binary of Axiom is available for Linux...
+|04:00:04|<lispm-wim2>|will that be the death to maxima???
+|04:00:26|<lispm-wim2>|the source code of maxima is really worst case Lisp.
+|04:01:38|<lispm-wim2>|I wonder why people didn't let macsyma die in peace.
+|04:04:02|<lispm-wim2>|maybe, but the source code of maxima is really embarassing for Lisp
+|04:05:13|<lispm-wim2>|it could have been rewritten
+|04:20:02|lispm-wim2  |(Remote closed the connection)
+
+[[http://ircbrowse.net/browse/lisp?events_page=36227]]
+2003-07-25 +0200
+
+|19:46:26|<lispm-wim2>|wow, seems like Axiom gets momentum...
+|19:52:58|<lispm-wim2>|I think it is quite a bit cooler than maxima
+|19:53:30|<lispm-wim2>|Axiom has a very cool programming language, functional, statically type checked
+|19:53:40|<lispm-wim2>|compiles to Lisp
+|19:54:08|<lispm-wim2>|it looks a bit like Haskell (indentation, type inference, ...)
+
+[[http://ircbrowse.net/browse/lisp?events_page=38007]]
+2003-08-29 +0200
+
+|20:48:06|<lispm-wim2>|Axiom is out in a first source code release for redhat
+|20:49:24|<Krystof_>  |Tim Daly, Sr. (Tim Daly, Jr. is responsible for cl-gtk these days)
+
+[[http://ircbrowse.net/browse/lisp?events_page=41611]]
+2003-11-09 +0100
+
+|11:40:11|<tim>    |did anybody see my bug report on sbcl-dev?
+|11:44:46|<Xach>   |i saw the report, mr. daly jr
+|11:45:10|<Krystof>|ah, that's who you are
+|11:46:34|<tim>    |I have to put the jr. on there, because my dad is a lisper too.
+|11:51:07|<Krystof>|tim: I know, I met him at LSM in Metz this year
+|11:51:39|<tim>    |oh yeah? That's cool. You gotta help him port axiom to a real lisp. ;)
+|11:53:00|<Krystof>|tim: tell me about it. I explained the virtues of sbcl's build process to him
+|11:53:08|<Krystof>|"look, it's reproducible!" :-)
+|11:53:55|<tim>    |It's hard to overestimate how wonderful that is.
+
+[[http://ircbrowse.net/browse/lisp?events_page=56734]]
+2004-08-17 +0200
+
+|16:53:39|daly      |(~root@234.178.252.64.snet.net) joined #lisp
+|16:53:55|<daly>    |is xach here?
+|16:55:15|<Xophe>   |Hm. tim daly the elder or tim daly the younger? (he was a few minutes ago)
+|16:55:31|<daly>    |tim, the elder
+|16:55:34|<timjr>   |I'm the younger :)
+|16:55:42|<timjr>   |we're taking over
+|16:56:09|<chandler>|daly: IRCing as root is a no-no
+|16:56:40|<Xophe>   |daly: hello! we met (briefly) at LSM in Metz
+|16:56:58|<daly>    |aloha.
+|16:57:39|<nyef>    |chandler: Heh. When someone finally does up a working LispOS, they should make 'root' the default non-admin account, just to piss everyone off.
+
+[[http://ircbrowse.net/browse/lisp?events_page=62614]]
+2004-12-06 +0100 <<tim-daly-and-symbolics-2>>
+
+|18:09:13|<Baughn>|axiom: Did you ever use a Lisp machine?
+|18:09:52|<axiom> |yeah. i had a symbolics 3600 on my desk at ibm (there were several things that went by the name of "lisp machine", such as TI's offering
+|18:10:35|<Baughn>|axiom: I'm only familiar with Symbolics, but that's probably close enough. You know how a command-line Lisp is lacking, then.
+|18:10:43|<axiom> |the symbolics was not to be believed. hit a bug, pop into their emacs, fix the bug, recompile, reload and CONTINUE FROM THE BREAK!!!
+|18:11:13|<Baughn>|axiom: Allegro CL can do that...
+|18:11:25|<axiom> |and it popped you into emacs at the point of the failure
+|18:11:32|<axiom> |sweetest machine i've ever used.
+|18:12:06|<axiom> |i used allegro when it first came out just to port axiom to it. methinks i was one of their early customers.
+|18:12:09|<Baughn>|axiom: I can believe that. Still, Franz has made major inroads in that area.
+|18:12:35|<Baughn>|axiom: Grab their trial and see how it's changed. ;)
+|18:12:49|<axiom> |i spent whole days on their support line. the woman i spoke to and i were nearly dating :-)
+|18:13:07|<axiom> |is it free? (allegro, not the trial)
+|18:13:36|<Baughn>|axiom: Free? *Allegro*?
+|18:13:40|Baughn  |laughs maniacally.
+|18:14:01|<d-bug> |it's free if you have a spare kidney :)
+|18:22:04|<axiom> |i wrote a lot of the lisp code and i use very vanilla lisp. axiom was originally in maclisp, then vmlisp, then i moved it to zetalisp (symbolics) then spice then common lisp
+|18:30:24|<axiom> |axiom's code is all low-level X calls. we originally wrote it in X10
+
+[[http://ircbrowse.net/browse/lisp?events_page=64258]]
+2005-01-05 +0100
+
+|18:39:28|<axiom> |i used to have a symbolics machine and loved M-.                                             |
+|18:45:39|<axiom> |once i start creating the graphics pgm using mcclim i'll be far away from the standard image |
+|18:49:39|<axiom> |in another 20 years the symbolics environment will come back to life...be patient.           |
+|18:50:14|<cliini>|It will only come back to life if we resurrect it, no point in patience.                     |
+|18:50:15|<nyef>  |20 years? We're impatient.                                                                   |
+|18:50:31|<Xach>  |beach can't wait that long, for sure                                                         |
+
+[[http://ircbrowse.net/browse/lisp?events_page=154922]]
+2009-05-13 +0200
+
+|21:20:00|<jmbr>  | I like axiom's design much more than maxima's      |
+|21:27:38|<jthing>| so let's get together and revive Axiom :)          |
+|21:28:14|<jthing>| After all it deserves a second life.               |
+|21:30:44|<jmbr>  | indeed it deserves a second life                   |
+|21:42:27|<jthing>| thm: I am working on a web interface to open-axiom |
+#+END_QUOTE
+
+** [[https://groups.google.com/d/msg/sage-devel/uR_bv7PrZpk/XK6KaX-JUSoJ]]
+** sympy
+[[Axiom and Bronstein's source code][https://groups.google.com/forum/#!msg/sympy/nCvLAYm5KNU/hxnMRfyOZbwJ]]
+
+** comp.lang.lisp
+#+BEGIN_ASCII
+Axiom or Maxima?
+https://groups.google.com/d/topic/comp.lang.lisp/SY14_1AZOCc/discussion
+
+Reply by Waldek Hebisch:
+https://groups.google.com/d/msg/comp.lang.lisp/SY14_1AZOCc/BVP6KKbWupsJ
+
+Boot and Spad compilers are written in Boot and generate Lisp.  In
+FriCAS there is about 18 thousends of lines of hand-written Lisp, and
+about 15 thousends of lines of machine generated Lisp used for
+bootstrap.  There is about 70 thousends of lines of Boot code and
+about 120 thousends of lines of Spad code.  Mathematical functionality
+is implemented almost exclusively in Spad.
+
+Reply by Richard Fateman:
+https://groups.google.com/d/msg/comp.lang.lisp/SY14_1AZOCc/LSEKBnafdnAJ
+
+> whereas in FriCAS
+> maintains a rather huge hierarchy of types, and functions producing
+> types: "Polynomial" is a function that takes an argument of type "Ring",
+> which could be Integer, Float, Matrix Integer, PrimeField 1783, etc.
+
+This has potential advantages.  Most users of systems like Mathematica
+do not know the difference between a finite field and a corn field,
+and so the advantages are somewhat muted in practice.
+
+Initial work on SPAD predated the refinement of the common lisp object
+system design. which might be a suitable framework.  There has been at
+least one attempt to do the "right thing" more specifically in CLOS (by
+Rich Zippel when he was at Cornell), but it was not funded.  So whether
+one could/should write a new CAS in Lisp using CLOS has not been
+examined fully.  (I've defined a package for "more generic" arithmetic
+that pushes that envelope a bit.)
+
+Reply by Rainer Joswig:
+https://groups.google.com/d/msg/comp.lang.lisp/SY14_1AZOCc/6770YquhdQIJ
+
+Wouldn't it be great if the USA could fund computer science and
+mathematics from non-defense-related research agencies? This would
+also help to ensure that the developed technologies survive in the
+marketplace a bit longer.
+
+Kind of tragic that the USA wastes so much engineering brain cells on
+military research. It helped create the AI bubble and also helped to
+ensure that the AI technology was too expensive, over-engineered and
+without civil use.
+
+For Lisp and AI DARPA was (and still is) the kiss of death.
+
+Add to that the questionable size of the military-industrial complex.
+
+Isn't there any funding for CAS research outside of DARPA?
+
+
+Reply to Rainer Joswig by Richard Fateman:
+https://groups.google.com/d/msg/comp.lang.lisp/SY14_1AZOCc/Wg-T2v6-qz0J
+
+Consider also the fact that the grant must (generally) pay for the
+tuition and living expenses of the graduate students, and often the
+summer salary of the faculty.  Thus each student costs, after all is
+covered, maybe $60,000 per year.  Additional costs for faculty
+research time, computer maintenance, travel, staff, etc.  run the cost
+to $100,000.  That is a minimum.  Figure $250,000/year for a few
+years.
+
+Compare to typical European university (or Canada!) where the grant
+pays for "extra expenses" but the salaries and tuition are part of the
+educational grant.  Running a project might cost the equivalent of
+$30,000(US)/year.
+#+END_ASCII
+
+** omp.soft-sys.math.mathematica
+#+BEGIN_ASCII
+Re: If Integrate returns no result, can we conclude that no closed-form
+https://groups.google.com/d/msg/comp.soft-sys.math.mathematica/SOF-TQNRrMI/cNfe1ptYMc4J
+
+The Risch algorithm consists of two parts.  The first deals with so
+called "transcendental elementary functions".  This is the easy part
+and is very similar to the Hermite's method of integrating arbitrary
+rational functions (a part of which is taught in calculus courses).
+However, the second part, which deals with algebraic functions is much
+harder and uses some quite advanced computational algebraic geometry.
+
+The problem lies, of course, with the part involving computational
+algebraic geometry.  Algorithms in computational algebraic geometry
+are often very hard to implement (and the number of people who
+understand them and can program at the professional level and also
+have the time that would be needed for this is surely rather limited).
+#+END_ASCII
+
+** Rainer Joswig
+[[lispm-and-axiom-1992]]
+
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/comp.lang.lisp/BsTuXnTo3ZA/6aHMb9loCfQJ][Great mysteries of our time]]
+2010 Apr 15 by Tim Bradshaw:
+
+It's pretty clear from the documentation to Mathematica that whoever
+wrote it has a head which is bigger than the universe.  So I have two
+questions:
+
+1. How is this possible?
+2. Given the extreme size of their head, why did they fail so dismally
+to solve the most basic language design issues?  I mean, if you think
+CL has problems with macro hygene, you ought to see Mathematica.  And
+hygene problems are some minute fraction of the ailments it suffers
+from.
+
+Sorry, this has nothing to do with anything, and actually Mathematica
+is pretty much ideal for the kind of tinkering-with-applied-maths that
+I do in my spare time (and much better than the combination of REDUCE
+gnuplot, sealing wax and cow gum I used to use). But, seriously, fuck
+the combination of patronising arrogance that it reeks of combined with
+total failure to be a decent language design.
+
+
+[[https://groups.google.com/d/msg/comp.lang.lisp/BsTuXnTo3ZA/FSK0GwOpvWIJ][2010 Apr 15 by Rainer Joswig:]]
+
+I always found Axiom pretty cool:
+
+http://axiom-developer.org/
+
+Nowadays it comes in three variants: Axiom, Open Axiom and FriCAS.
+
+There is a very nice book about it, which was originally
+published by Springer.  Which I have. :-)
+
+PDF variant: http://axiom-developer.org/axiom-website/bookvol0.pdf
+The website has some newer documentation.
+
+I've recently used FriCAS.  FriCAS should be easy to build with
+one of the supported Common Lisps.
+
+  http://fricas.sourceforge.net/
+
+Bonus: Axiom runs on top of Common Lisp and is open source & free.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/comp.lang.lisp/TX7tehB_LuE/_aIyx_Y_RWUJ][Re: Is Xlisp-Stat Dead?]]
+2008 Jan 23 by Ross Ihaka:
+
+I'm one of the two originators of R.  After reading Jan's
+paper I wrote to him and said I thought it was interesting
+that he was choosing to jump from Lisp to R at the same
+time I was jumping from R to Common Lisp.
+
+Building something like R is a big task though.  The
+capabilities in R reflect the specialist contributions
+of hundreds of research statisticians.  Currently there
+is a very small group of us scoping out ways to create
+a Lisp-based framework in which similar contributions
+could be made.
+
+
+[[https://groups.google.com/d/msg/comp.lang.lisp/TX7tehB_LuE/GtpwwuCmIKUJ][2008 Jan 23 by Ross Ihaka:]]
+
+We started work on R in the early '90s.  At the time
+decent Lisp implementations required much more resources
+than our target machines had.  We therefore wrote a small
+scheme-like interpreter and implemented over that.
+
+Being rank amateurs we didn't do a great job of the
+implementation and the semantics of the S language which
+we borrowed also don't lead to efficiency (there is a
+lot of copying of big objects).
+
+R is now being applied to much bigger problems than we
+ever anticipated and efficiency is a real issue.  What
+we're looking at now is implementing a thin syntax over
+Common Lisp.  The reason for this is that while Lisp is
+great for  programming it is not good for carrying out
+interactive data analysis.  That requires a mindset better
+expressed by standard math notation.  We do plan to make
+the syntax thin enough that it is possible to still work
+at the Lisp level.  (I believe that the use of Lisp syntax
+was partially responsible for why XLispStat failed to gain
+a large user community).
+
+The payoff (we hope) will be much greater flexibility and
+a big boost in performance (we are working with SBCL so
+we gain from compilation).  For some simple calculations
+we are seeing orders of magnitude increases in performance
+over R, and quite big gains over Python.
+
+There is lots to do.  We're experimenting with syntax and
+making a start on assembling quality numerics libraries.
+Creating a fully-featured system will require buy-in from
+the statistical specialists who can contribute implementations
+of their methodology, so we also thinking about issues
+associated with community building (eg. licensing).
+
+
+[[https://groups.google.com/d/msg/comp.lang.lisp/TX7tehB_LuE/O2VdcdJKYJYJ][2008 Jan 24 by Rainer Joswig:]]
+
+Ideally one would start a Lisp, load Axiom into it, have a command line
+for it and another one for Lisp - so that one can use both.  Many
+Lisp implementations are multi-threaded and allow more than one
+command loop at the same time.  So one could work on
+mathematical algorithms on the command line and implement
+some other stuff in a Lisp command line.  Both would
+be running in one Lisp system.  Say, one would use the user environment
+of McCLIM (including Climacs (the editor) and the McCLIM command loops)
+and use Axiom in it - even develop some integration for Axiom
+into the McCLIM environment - so for example that Axiom results
+can be presented in McCLIM (graphically and textually).
+
+Is that possible?
+
+
+[[https://groups.google.com/d/msg/comp.lang.lisp/TX7tehB_LuE/okMXf-dyS6gJ][2008 Jan 28 by Waldek Hebisch:]]
+
+With current FriCAS (SVN revision 213) it is just:
+
+#+BEGIN_SRC lisp
+(let ((*default-pathname-defaults*
+       #P"/var/tmp/hebisch/axp2/ax-build4/src/interp/"))
+     (load "../lisp/fricas-package.lisp")
+     (load "../lisp/fricas-lisp")
+     (load "makeint.lisp"))
+(in-package "BOOT")
+(fricas-init)
+#+END_SRC
+
+Of course, you need to plug in the correct path to the build tree.
+Also, the above works with sbcl, clisp and Closure CL.  Ecl and
+gcl do things differently and would require special support.
+#+END_QUOTE
+
+** Waldek Hebisch
+*** gentoo
+#+BEGIN_QUOTE
+https://lists.gnu.org/archive/html/axiom-developer/2006-09/msg00750.html
+
+On debian sarge i386 and gentoo amd64 build works both with system gcl
+and with bundled gcl (using `--without-gcl') option.
+
+https://lists.gnu.org/archive/html/axiom-developer/2006-10/msg00554.html
+From: 	Waldek Hebisch
+
+I wanted to try hypertex in silver on Gentoo Linux.  It turned out
+that I can not start sman, becouse 'ptyopen' was failing.  After
+a little investigation I found out that the machine (which otherwise
+uses bleeding edge new software) has only old legacy pty's -- the
+new '/dev/ptmx' and '/dev/pts' were not enabled.
+
+
+https://groups.google.com/d/msg/aldor-devel/qBTWbTEJ6Kw/zOsT0z4S8HoJ
+
+I have tried to build Aldor on recent Gentoo (updated yesterday).
+
+
+http://sourceforge.net/p/ecls/mailman/message/19498413/
+
+On Gentoo I have randomize_va_space set to 1.
+
+
+https://groups.google.com/d/msg/comp.lang.lisp/GElNf6wip3s/etMhwduqXX0J
+Reply by Waldek Hebisch at 2015 June 9
+(NOTES BY ME: this is my first clue)
+
+Clisp is in major Linux distribution: Debian, Gentoo etc.  In
+Debian just use 'apt-get install clisp' and it works.  Building
+Clisp from source is another story, apparently Clisp maintainers
+are not interested to make it easier.
+#+END_QUOTE
+
+*** history
+First mail on axiom-developer:
+#+BEGIN_QUOTE
+Date: Sun, 19 Sep 2004 21:09:12 +0200 (CEST)
+From: Waldek Hebisch <hebisch@math.uni.wroc.pl>
+Subject: [Axiom-developer] Build on AMD64
+#+END_QUOTE
+
+3 mails about building axiom in 2004-12.
+
+Silent in whole 2005.
+
+Emerge again briefly in 2006-01 with 2 insightful replies about
+integration.
+
+Active since 2006-09.  Post 9 mails about building axiom.
+
+*** sci.math.symbolic
+#+BEGIN_QUOTE
+Re: integral for fun
+2014 March 7 by Waldek Hebisch
+https://groups.google.com/d/msg/sci.math.symbolic/MvuTXYqoDcY/Vo-L9qooaYAJ
+
+Richard Fateman wrote:
+| So the integration "problem" as envisioned by Liouville may
+| be more pure mathematics than applied mathematics.  That is,
+| as the subject line suggests, integral for fun.
+
+To put this differently, having symbolic integral is rare event (even
+when using enlarged class of integrands) which when happens have some
+significance (for example some kind of singularities can not appear in
+elementary functions, larger classes allow more singularities but
+still of restricted kind).  So it makes sense to search for closed
+forms, even if they are rare.
+
+Concerning applications: given current industrial secrecy it it hard
+to say what is really applied -- there are things which are claimed to
+be used but my impression is that play no real role and there are used
+things kept secret.  On research side a lot of "applied" research
+looks like bad theory to me: bad because it solve neither real applied
+problem nor any fundamental question.  Compared to this symbolic
+integration has _some_ applications and background theory tell
+something about algebraic nature of functions.  This to me looks
+better than average "applied" research.
+#+END_QUOTE
+
+** sci.math
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/sci.math/onumXwIUWUI/lKxx4rgHvEQJ][Risch algorithm]]
+1992 September 27 by Richard Fateman
+
+There seems to be some problem understanding what the Risch algorithm
+might do, versus what it actually does in the context of a symbolic
+math system.
+
+In a nutshell, any algorithm that only guarantees algebraic
+"closed-form antiderivatives", like the Risch algorithm, is perfectly
+entitled to give you f(x) instead of 0 for an answer to the
+"antiderivative of 0".
+#+END_QUOTE
+
+** julia-dev
+#+BEGIN_QUOTE
+Re: [julia-dev] Re: Symbolic Math: try a translation of Axiom to Julia?
+2014 March 20 by Konrad Hinsen
+https://groups.google.com/d/msg/julia-dev/NTfS9fJuIcE/iecoWW8VIwEJ
+
+IMHO, Axiom is way bigger and more complex than Julia plus all Julia
+code written to this date.
+#+END_QUOTE
+
+** Richard Fateman
+#+BEGIN_QUOTE
+Re: Axiom and Bronstein's source code
+2014 June 5 by Richard Fateman
+https://groups.google.com/d/msg/sympy/nCvLAYm5KNU/jo8FLrCpvtQJ
+
+I came across this discussion when searching for info on FriCAS and
+sympy together, and found the comments to be worthy of some response.
+
+The Axiom languages do not go back to the 1960s.  Anything you might
+say about them blaming defects on historical ignorance of those
+ancient times is probably misplaced.  While there were predecessors to
+Axiom going back to the Scratchpad project at IBM (which was late
+1960s), the view from the IBM group was that to automate all of
+mathematics one needed an appropriate programming language substrate,
+and none of the existing programming languages was suitable.
+
+Frankly, the thought that python is suitable for a CAS base is easily
+shown to be false by looking at Sage, and the uncomfortable syntax and
+misfit between Sage types and python types that have the same
+underlying concept.
+
+So python/Sage is wrong.
+
+But the idea that the existence of SPAD and ALDOR is a hindrance to
+development --- eh, not obvious.  Unless you have tried to write the
+same algebraic symbolic code with and without them, (in lower level,
+say Lisp), you are not in a position to judge.
+
+So first impressions of the ease of conversion from ALDOR etc to
+python might also be false.
+
+The thought that all mathematics would be simple to encode given the
+right programming language has been unsuccessfully pursued for about
+60 years.  I supervised a PhD thesis circa 1984 on this general topic.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+https://groups.google.com/d/msg/sci.math.symbolic/1NRFet2LSKg/skQiLNe5BgAJ
+#+END_QUOTE
+
+** Gabriel Dos Reis
+#+BEGIN_QUOTE
+Categories are predicates
+2011 August 20
+https://groups.google.com/d/msg/fricas-devel/ogU1qlP18ng/nqmXdSBQyxAJ
+
+Categories are predicates, not types in the traditional sense of
+a prescription of data representation -- unlike domains.  A value
+/belongs/ to a *unique* domain.  That is one of the reasons why it is some
+simple to talk about "first class object": you know how to represent
+their storage, how to pass them around, etc.  A domain /can satisfy/
+several categories (e.g. predicates) at the same time.  If you treat a
+category as a type that prescribes representation, then their is a
+question of how do you express the notion that a value has several
+representation -- has opposed to one.  How do you go from one
+representation to the next?  How do you know which representation is
+going to be needed down the pipeline after several calls?
+
+Interestingly the Haskell folks also ran into similar issue in the past.
+During a recent 4-day visit at TAMU [1], Simon Peyton Jones and I
+violently agreed that categories or C++ concepts or Haskell type classes
+(we were discussing similarities and dissimilatiries between C++
+concepts and Haskell type classes) are best treated as not types in the
+traditional sense of describing data -- or else, one might run into
+serious logical an implementation issues.   They are
+non-representational predicates.
+
+In OpenAxiom, we sidestep the issue by saying that there is a domain
+called Domain that represents all domains as *values*.  Similarly, we
+have a domain named Category that represents all categories as
+*values* -- yes that `Category' that you put as a return type of a
+category constructor is a real domain (not a fake one) in OpenAxiom.
+
+(I believe Haskell has similar functionality through its Template
+Haskell extension[2])
+
+[1] https://parasol.tamu.edu/seminar/abstract.php?talk_id=659
+[2] http://www.haskell.org/haskellwiki/Template_Haskell
+#+END_QUOTE
+
+** Renaud Rioboo
+http://www.ensiie.fr/~renaud.rioboo/
+
+#+BEGIN_QUOTE
+Re: Mathematica doesn't know that Pi is a positive number.
+1993 December 16 by Manuel Bronstein
+[[https://groups.google.com/d/msg/sci.math.symbolic/upLb7Z7sIDs/vAUFVtKFCm0J]]
+
+Jerry Keiper <kei...@dragonfly.wri.com> wrote:
+>
+>BTW, Mathematica uses a posteriori error bounds given by the much
+>misunderstood arithmetic it uses.
+
+Oh, so everytime we get an incorrect numerical result from
+Mathematica, it is not due to a bug or to the fact that significance
+arithmetic is an unsuitable model, but to our misunderstanding of the
+arithmetic.
+
+Thanks for this useful bit of information.  Now does the same hold
+also for incorrect symbolic results?
+
+
+1993 December 20 by Renaud Rioboo
+[[https://groups.google.com/d/msg/sci.math.symbolic/upLb7Z7sIDs/4KdD9FNABS0J]]
+
+I wrote a real closure constructor in Axiom, this is still
+experimental, but works faster than at the time of ISSAC'92.
+
+Here, real algebraic numbers are objects of the computations and no
+approximation of any kind is done.  With the advantage that this works
+for any real roots of any univariate polynomials.
+
+Arbitrarily difficult examples can be deduced from these ones, and I
+think that a heuristic approach will always fail at some time.
+Moreover, using a limited set of functions like sqrt is of no help for
+the general real algebraic problem.
+
+In general it is very difficult to predict how accurate must an
+intermediate approximation be in order to guarantee an approximation
+of the final result.  This is the problem with many software, the user
+must use try and error methods to check the final precision.  One of
+the advantages of symbolic computations is that we (should) produce
+exact results.
+#+END_QUOTE
+** mathmu
+#+BEGIN_QUOTE
+http://mathforum.org/kb/message.jspa?messageID=7511313
+
+by Moony Chou zmy9032_@_mail.com 2011 Aug 2
+
+P.S. I and some of my friends are trying to bring out a symbolic integration
+system by integrate the Albi (our nickname for Algorithm Based Integrator) and
+Rubi. We are working on replace our old rule based system with Rubi 3.
+#+END_QUOTE
+
+** Tim Daly
+#+BEGIN_EXAMPLE
+https://news.ycombinator.com/item?id=13799681
+
+Apparently you've avoided one of the greatest joys of open source... forks.
+
+I worked for 7 years on an open source project with hundreds of people
+subscribed. My most trusted maintainer started a drumbeat about project goals
+that ended up causing two forks, decimating the user community, and destroying a
+lot of potential. Even more interesting is that all I ever seem to get, if I get
+mentioned at all, is negative press. But, as John Gorka once said, "What matters
+most is what you do for free".
+
+As for the worry about combining open source and money... forget it. William
+Stein, lead developer of Sage, built Sage using grant funds and graduate
+students. Unfortunately the grant money dried up and the students graduated. He
+has since taken a leave of absence and started a company in the hope of keeping
+the project alive. Wish him luck.
+
+I've looked for funding from a number of different sources, government,
+industry, and a separate business, all without success. I spent an average of
+$3,000 per year for the last 16 years, all out of personal funds. That's
+assuming my time is $0/hour.
+
+Rest assured, mixing open source and money is the least of your worries.
+
+So why do open source programming? Real musicians MUST make music, in spite of
+poverty wages. It's not what they DO, it's what they ARE. Similarly, I'm a
+programmer... it is what I am, not what I do.
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+https://news.ycombinator.com/item?id=13903740
+
+I bought a new computer with Windows 10 for my wife, an artist.
+#+END_EXAMPLE
+
+** others
+#+BEGIN_QUOTE
+https://news.ycombinator.com/item?id=13318535
+
+#+END_QUOTE

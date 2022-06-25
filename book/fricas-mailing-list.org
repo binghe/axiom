@@ -1,0 +1,818 @@
+* fricas mailing list
+** 2008-04
+#+BEGIN_QUOTE
+Re: [fricas-devel] Re: Sage, Maxima, Lisp
+Waldek Hebisch
+2008 April 23
+
+For FriCAS in longer run dropping Lisp is likely -- most Lisp code
+is machine generated during FriCAS build. With enough effort we could
+directly generate C code. Currently effort to drop Lisp would
+be prohibitive, but the FriCAS code is constanly cleaned up and
+simplified so in the future such change will be much easier.
+#+END_QUOTE
+
+** 2010-06                                                         :compiler:
+rewrite interp in spad
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/j1Dy0RextZw/dokLODCj8HMJ][Re: SF.net SVN: fricas: 879 trunk]]
+2010 June 22 by Waldek Hebisch
+
+My plan is to eventually (say around 2030) have "interp" rewritten in
+Spad.  If you want to rewrite interpreter in Spad you can start now.
+To be more precise, in "interp" directory we have Spad runtime
+support, Spad compiler, browser (Hyperdoc) support and interpreter
+proper.  For
+browser and interpreter proper the "only" problem is time needed to do
+the rewrite -- calling Spad from Boot is not very nice but works OK
+and if you rewrite the whole interpreter, then interface with other
+parts will be reasonably simple.  For Spad compiler there is bootstrap
+problem, but it is not very hard.  The most tricky part is Spad runtime
+support, some support routines will be in Lisp (or whatever our target
+language will be).  However, most of runtime support should be written
+is Spad.  This is tricky, because large part of runtime support is
+handling domain/package initialization and function calls.  Given that
+all Spad code lives in domains/packages and all nontrivial code uses
+function calls, if you tried today to rewrite runtime support in Spad
+you would get infinite recursion.  But I believe that small
+modification to Spad compiler will allow generating code which runs
+with no runtime support and such code can be used to implement support
+routines.
+
+
+[[https://groups.google.com/d/msg/fricas-devel/j1Dy0RextZw/pGlyuNlrWsIJ][Reply by Gabriel Dos Reis]]:
+
+PS: since "Old Boot" disappeared from OpenAxiom, I did not feel that
+keeping the unofficial "Shoe" was relevant -- I just call it Boot.
+And it lives in src/boot :-)
+
+PS\^2: I am able to translate Boot to basic C++; but translating Spad
+to very good AND higher level C++ is a bit trickier than I expected.
+This matters only if you expect a human to read the generated code.
+#+END_QUOTE
+
+** 2011-05                                                          :history:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/AJGY5qOvmzM/tUh4ETDT2UUJ][Recent changes]]
+2011 May 7 by Waldek Hebisch
+
+Old Boot is now gone.  Interpreter is build using Shoe.  Also the
+')boot' command uses Shoe.  Part of compiler common to Spad and Boot
+(low level handling of iterators) is rewitten and simplified (it can
+no longer handle Boot).
+
+There may be some instability due to the changes, but thank to the
+removal of Boot future changes to Spad compiler will be easier.
+#+END_QUOTE
+
+** 2010-11                                                          :history:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/-caEpjK3-Sc/2NGZuncjI3sJ][3 years of FriCAS]]
+2010 November 5 by Waldek Hebisch
+
+It is slightly more than 3 years from creation of FriCAS project.  I
+think it is desirable to write a bit about what was done in that time
+and how this correlates with expectations.
+
+First, compared to Axiom September 2005, FriCAS contains 51 new
+constructors having 13651 lines in total.  Given that the whole
+algebra has 142992 lines, this means that about 10% of algebra is in
+new constructors.  There were several mass edits which changed of
+order of 10000 lines of code.  There are additions to existing
+constructors (of order of 3000 lines).  There are tens of fixed bugs.
+Speed of many core operations (polynomial operations, kernel
+manipulations, coercions) improved significantly (test-suite runs
+about 2.5 times faster than before, some coercions are hundred time
+faster).  Main new additions are:
+
+-  output routines (MathML and HTML format, new graphic framework)
+-  guessing package
+-  new special functions
+-  improvements to integrator and normalization
+-  tensoring framework
+
+I think the main observation is that we achieved normal speed of
+algebra development (we are close to 30 years average).
+
+Spad compiler is significantly faster than it used to be in the past,
+several bugs are fixed and few new constructs (nested functions,
+closures via '+->', type-valued arguments and return values) added.
+There is new parser written in Boot and new pass which expands most
+macros before compilation.
+
+In general FriCAS code undergone a significant cleanup.
+
+Compared to expectations:
+
+-  in general, changes go much slower than hoped for
+-  in particular Spad compiler needs a rewrite and this goes on
+   slowly
+
+Still, for me balance looks quite positive.  I think that compared to
+other systems and taking into account small number of developers that
+we have we are doing quite well.
+
+
+[[https://groups.google.com/d/msg/fricas-devel/-caEpjK3-Sc/UFgCJtP4WQ0J][Reply by Waldek Hebisch]]:
+
+As I wrote, for FriCAS lexer generator would help.  But we have working
+lexer, it has few hundred lines so not using lexer generator is not a
+big deal.  I have doubts if parser generator would help: Spad syntax is
+very well suited to existing parser and not so well typical parser
+generators.  More precisely, bulk of syntax is in operator priorities.
+Because we use /four/ priorities per operator Spad priorities are
+awkward to describe in a parser generator.  OTOH part of FriCAS parser
+handling priorities is quite small and the other parts of Spad syntax
+are rather simple, so it is easy to handle them in hand written
+parser.  For some comparison, current parser has 543 lines, /including/
+priority tables.  Previous version using a home-grown parser generator
+(META) has slightly more than 200 lines.  Grammar rules of PL/1 parser
+have more than 600 lines.  Grammar plus actions for GNU Pascal have
+more than 2000 lines.  So, potential gain form using parser generator
+is quite limited.
+#+END_QUOTE
+
+** 2010-10
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/eszu0H7ZGN8/sPApnNFjNR8J][Computation Framework - Curry-Howard Part 2]]
+2010 October 10 by Martin Baker
+
+The last update to computation framework represented variable types by
+using the intuitionistic logic domain.  I would like to implement the
+other part of Curry-Howard correspondence, 'proof as a program'.  That
+is, implement an equivalence between a proof in propositional logic
+and the lambda domain.
+#+END_QUOTE
+
+** 2011-11
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/v8Dw2DPYD3g/Hg4esoFnzrUJ][Re: on Axiom book]]
+2011 Nov 10 by Waldek Hebisch
+
+Spad allows much heavier overloading than it's possible in Haskell.
+From abstract point of view this may sound trivial (in principle
+one can rename functions so that names are unique), but traditional
+math notations is also overloaded, and overloading in Spad allows
+staying closer to established notations.
+
+Categories in FriCAS are analogs to Haskell type classes, but they
+behave differently enough that you may be forced to substantially
+restructure program.
+
+Anyway, FriCAS categories have parameters which may be types or
+normal values -- my impression is that Haskell type classes
+only allow types as parameters.  In FriCAS parameters to
+categories itself have types.  Both interface part (exported
+signatures) and implementation part may be conditioned on
+types of parameters.  Parameters to types may be computed
+at runtime and effect of conditionals depends on actual
+type.  In absence of conditionals type checking uses
+static information (given by categories).
+#+END_QUOTE
+
+** 2008-10
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/kzMVgt58_TE/ulCMrslbTfwJ][Re: problem with anonymous functions]]
+2008 Oct 9 by Waldek Hebisch:
+
+In the past I looked at code handling closures and my impression
+was that the code was "broken by design".  More precisely, to
+correctly handle closures one needs precise information about
+scopes (including information which symbols represent variables).
+It seems that part of scope information is never collected and
+part is alredy lost when closures are handled.
+
+I may be wrong and it is possible a simple fix will cure things.
+However, given that I do not believe in a simple fix to closure
+problem I did not spent much time searching for such fix.
+
+
+Reply by Gabriel Dos Reis:
+
+| In the past I looked at code handling closures and my impression
+| was that the code was "broken by design".  More precisely, to
+| correctly handle closures one needs precise information about
+| scopes (including information which symbols represent variables).
+| It seems that part of scope information is never collected and
+| part is alredy lost when closures are handled.
+
+That part of information is collected.  It is just that it is
+overwritten by accident, not design.
+#+END_QUOTE
+
+** 2011-04                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/jTeaKzcEJgs/bH5XSL3FHiUJ][Re: Definite integrals and real valued parameters.]]
+2011 April 27 by Waldek Hebisch
+
+Should be not hard in principle but waits for for new limit routine
+based on Gruntz algorithm (Gruntz algorithm is better than our current
+algoritm at handling limits in essential singularities).
+
+When integrand is elementary then Risch-Norman is less capable than
+Risch, but Risch-Norman can handle some non-elementary integrands
+which are hard for extended Risch.  Simple version of Risch-Norman
+should be easy to do -- we already have most of the code in existing
+integrator, and the extra code probably will be of order of 50 lines.
+OTOH to get reasonable speed on big integrals may require
+significantly more work.
+
+For a class definite integrals Mathematica and Maple use reduction
+to MeijerG function.  Simple version should be doable with limited
+effort but production version is likely to take 1000-3000 lines
+of code.
+#+END_QUOTE
+
+** 2013-06                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/EwBSoCKcBm8/ZB_OCZchCVgJ][Re: Shi and Chi again]]
+2013 June 03 by Waldek Hebisch
+
+AFAIK what Maxima is doing is mostly smoke and mirrors.  More
+precisely, they have routine which matches single term to various
+special functions.  Something like our pattern matcher, but much
+bigger and smarter.  But in order to handle integrals having many
+terms they need to split them.  Maxima integrator uses rather simple
+minded tactic, basically it seem to split according to plus/minus signs
+in expression.  In simple cases it works very well.  I was amazed to
+see Maxima doing some complicated example.  But then I realized that
+splitting at powers reduced it to sum of terms which were not hard to
+do separately.  After shift such naive splitting did no longer work
+and Maxima failed.
+
+This clearly shows that Maxima has nothing like modern "Risch"
+algorithm (the example is one of the simplest possible examples
+of SPDE algorithm due to Rothstein).
+
+
+[[https://groups.google.com/d/msg/fricas-devel/EwBSoCKcBm8/WT3z6Y4P64kJ][Reply by Waldek Hebisch]]:
+
+Well, core integrator is 'lfintegrate' routine in
+=intef.spad=.  'lfintegrate' first uses Risch algorithm to
+produce "integrable" part and possible "non-integrable" remainder.
+Then pattern matcher is tried on the remainder.  Risch integrator can
+only handle functions of specific form.  General Risch integrator must
+have elementary functions written in terms of 'exp' and 'log'.  It has
+incomplete support for primitives in the integrand.  There is also
+special part to handle integrands containing unevaluated derivatives
+(the only way an expression containing uninterpreted function can
+posses a symbolic integral is to also contain unevaluated derivative
+of this functions and the code should handle many such cases).  There
+are one or two tricks to handle general functions, but normally Risch
+integrator will give up on nonelementary integrals.  Risch integrator
+needs to have all algebraic dependencies in explicit form:
+transcendental functions must produce algebraically independent results
+and algebraic extensions (in particular roots) should be independent.
+
+There is also special Risch integrator which handles functions of
+single tangent.  More precisely, functions of form R(x, t) where R is
+a rational function in x and t and t is a tangent of a rational
+function of x.
+
+For users main entry to the integrator is via 'integrate' routine in
+FSINT package (file =integrat.spad=).  'integrate' transforms
+integrand to the form expected by 'lfintegrate' calls integration
+routine and then transforms the result back to make it more readable.
+At the very beginning 'integrate' passes to 'complexIntegrate'
+integrals that can not be handled in real way.  Then it uses
+'realLiouvillian' and 'rischNormalize' to express integrand in terms
+of 'exp', 'log', 'tan' and 'atan'.  General case of integrands
+containing 'tan' or 'atan' is converted to 'exp' and 'log' by
+introducing complex coefficients.  The result of integration is than
+converted back to real function.
+
+When there is single 'tan' and no other transcendentals or algebraics
+then the integrand is handled without introducing complex numbers by
+special Risch integrator.  Of course, if there are only 'exp'-s and
+'log'-s there is no need for complex numbers.
+
+Currently 'integrate' calls 'postSubst' routine to (partially) undo
+changes done via 'realLiouvillian' and 'rischNormalize' and convert
+result to real form.  Conversion to real form is done by calling the
+'real' function from 'TrigonometricManipulations' package.  However,
+this is not right, we should have special purpose function to rewrite
+integrals into real from.
+#+END_QUOTE
+
+** 2012-09                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/M38TO0isazg/UKruUxjwQOEJ][Re: Integration by rules]]
+2012 September 14 by Waldek Hebisch
+
+One impossibility result is due to Richardson, to integrate you need
+to be able to decide equality of functions (in particular constants)
+and Richardson proved that if you build expressions from %pi,
+variable, trigonometric functions and absolute value then equality is
+undecidable (actually Richardson required also exponential function,
+but it is not necessary).  So if your "constants" involve one
+parameter, usual operations and absolute value then equality of
+constants is undecidable.  Note that real difficulty is to decide if a
+constant is zero.  This theorem does not give much information about
+rules versus procedural code -- one way of reading it is that
+semantically simple expression (that is 0) can be expressed using
+arbitrary complicated syntax and that syntax alone say little about
+semantics (which depends on diofantine relations between integer
+parameters).
+
+There is different impossibility result due to Risch, which says that
+there is no algorithm to decide if some branch of a multi-valued
+function is zero.  Again semantics of his example depends on integer
+parameters and diofantine relations between them.
+
+AFAICS ATM there is no known theoretical obstacle for integration
+beyond equality problem for functions.  When we talk about special
+functions there are two sub-problems:
+
+1) integrating expressions containing special functions
+2) integrating elementary functions in terms of special functions
+
+More generally, you have a function in some differential field and
+look for its integral.  You may limit interals to functions which are
+elementary over original field, and then Liouville-Ostrovski theorem
+says that all you need are functions from original field and
+logarithms of such functions.  Or you may search for integrals in
+larger field.  However, normally, one only considers liouvillian
+extensions (other typically are of no help).  For example, I have a
+theorem saying that if you can integrate elementary function in terms
+of Bessel functions and elementary functions then you can integrate in
+terms of elementary functions.
+
+For finding integral in elementary extension one usually divides
+problem into three steps:
+
+1) Rational integrations, which removes multiple factor from denominators
+2) Finding logarithmic terms
+3) "polynomial part", that is handling expressions with "special"
+   denominator.
+
+Part 1) and 2) work in quite general setting (currently FriCAS can do
+them only for liouvillian extensions).  The "polynomial part" seem to
+be most tricky, naive approach leads to system of linear ODE-s and
+ODE-s seem harder than integration.
+
+For integration in bigger extensions, it seems that there are five
+main cases:
+
+1) li and equivalents (here I mean li which can not naturally be
+   written as Ei)
+2) Ei and variants (like Si, Ci, ...).  Again here I mean Ei
+   which can not naturally be written as li.
+3) Gamma incomplete -- here I exclude degenerate case which
+   is equivalent to Ei, but include erf and Fresnel integrals
+4) elliptic integrals
+5) integrals of form x^k/(1 + exp(x)) (form of polylog)
+6) other polylogs of natural order
+
+AFAICS they cover most of Rubi test-cases which are integrable in term
+of special functions.
+
+Currently FriCAS (more precisely intden.spad.pamphlet) handles
+1) and 5).  If there are no algebraic extensions than
+the method is theoretically a decision procedure (but I omitted one
+step, so FriCAS implementation is not a decision procedure).  When
+there are algebraic extensions, then one need to modify the method.  I
+think that modified version would be a decision procedure, but if
+implemented it would be quite slow, so I did not work out details.
+
+For Ei there is an algorithm, ATM it expect that implementation will
+take similar effort as intden.spad.pamphlet.  Again the method handles
+well purely transcendental cases and ATM did not seriously consider
+algebraic extensions.
+
+Gamma incomplete (at least many interesting cases) should be doable
+using variation of Cherry-Knowles procedure.  Let me say that the
+procedure reduces problem to exponential time simpler terms and then
+proceeds in two steps.  In first step one collect candidate Gammas
+which may appear in the integral.  In the second step uses modified
+variant of Risch procedure to find elementary part and constant
+coefficients of Gammas.  Comparing this with pattern matchers: pattern
+matcher will probably consider only one possibility for Gamma term,
+but Cherry and Knowles gives examples where correct Gamma term is not
+apparent from syntactic structure and there are cases where single
+exponential may lead to several Gamma terms.  Let me add that
+"obvious" candidates for Gamma terms could be found in few lines of
+code, but the other require much more work.
+
+For polylogs (other than x^k/(1 + exp(x)) case) it seems that
+currently theory is incomplete.  But there is a method which will find
+many of them (maybe all, but that is unproven).  Transcendental case
+of this has some similarity to Ei, so effort to implement it should be
+similar.
+
+Elliptic integrals are a subclass of integrals in algebraic
+extensions.  Modern trend is to consider them as integrals of rational
+functions on appropriate algebraic curve.  Normally one get elliptic
+interals from integrals on elliptic curves.  There is an algorithm to
+decide if given algebraic curve is an elliptic curve and this could be
+used for integration.  It seems that naive implementation of this
+would be incomplete, but has good chance of handling many interesting
+cases.
+
+So, there is a collection of algorithm substantially extending Risch
+algorithm.  For some cases they give decision procedure, but sometimes
+we have partial algorithms, which handle many cases, but give up on
+some integrable ones.
+
+Let me add that core problem already appears for rational functions.
+Rubi handles them by decomposing into partial fractions (using
+Mathematica Apart function).  However, since it factors denominator
+over base field in some cases this is not necessary, in other cases it
+is not enough (since integral really needs algebraic extensions).
+#+END_QUOTE
+
+** 2009-01                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/hfUnh4qYHiQ/S0cgAXcYf_MJ][Re: fricas slow in integration?]]
+2009 January 04 by Waldek Hebisch
+
+First, the advantage of FriCAS is generality -- as long as one have
+limited number of test cases heuristics may work better.  In purely
+transcendental case I think that Maxima and Reduce use Risch-Norman
+(parallel) algorithm.  I was unable to find description of this
+algorithm on the net, but I have reasons to believe that in some
+(rather complicated) cases this algorithm is much slower than full
+Risch algorithm.  OTOH experimental evidence in "typical" cases is
+that Risch-Norman is faster.
+
+FriCAS is very slow when working with algebraic expressions.  AFAICS
+the core problem is that we keep algebraic quantities both in
+numerator and in denominator and get huge intermediate expression
+swell due to common factor (in one case that I analyzed more carefully
+coefficients having thousands of digits instead of tens of digits).
+In purely transcendental case we can simplify fractions using gcd.
+But once we extend polynomial ring using nontrivial algebraic
+quantities, we in general loose unique factorization, so we can no
+longer compute gcd.
+
+One possible solution is to move all algebraic quantities to the
+numerator.  In the literature all papers discourage such solution,
+because expressions like (1/(sqrt(2)+sqrt(3)+..+sqrt(673))) will
+get much (exponentially) bigger when we move irrationals to
+the numerator.  But I do not think that we can realistically
+handle many (say more than 10) algebraic kernels and blowup that
+we have now looks worse than expected blowup when moving few kernels
+to the numerator.  I tried to modify Expression so that algebraic
+kernels are eliminated from denominator, but ATM my version crashes
+due to infinite recursion (unfortunately, Lisp debugger seem to be
+unable to tell me functions involved in call chain, so it will take
+some time to find out reasons).
+
+Another possibility is to use algorithms which are aware of algebraic
+quantities.  In principle this can give best speed but implementing
+(and tuning) such algorithms will take time.  For example I have
+modular routine to compute gcd of polynomials having algebraic
+coefficients.  However currently this routine on simple cases is
+slower than our current routine (it is faster on more complicated
+cases) -- the reason being that modular computations are suffer large
+low-level overhead (basically all operations are done via function
+calls and go trough complicated runtime dispatch).
+
+In short term we may get nice speedups using Grobner bases for
+algebraic computations.  More precisely, we can represent quantities
+as polynomials modulo appropriate ideal.  Manuel Kauers at ISSAC spoke
+about heuristic to compute logarithmic part of an algebraic integral
+and claims that this heuristic is much faster (and works in more
+cases) than our current implementation.  AFAICS we should be able to
+replace a few critical parts of integration algorithm by Grobner bases
+-- our specialized algorithms are supposed to be faster, but as
+apparently in algebraic case currently Grobner bases are faster.
+#+END_QUOTE
+
+** 2014-11                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/TzTI6wp-CG0/-bOKDajmdloJ][Extended integration]]
+2014 November 27 by Waldek Hebisch
+
+Let me add that old code on hitting incompleteness would silently
+claim that function is not integrable.  For elementary functions new
+code will signal error for unimplemented parts.
+
+Let me add that unimplemented parts are about general algebraic
+integrands (completely unhandled by old code), bounds in RDE (old code
+makes assumption which may be invalid, new code tries to solve
+parametric logarithmic derivative problem for which no good complete
+algorithm is known) and RDE in general algebraic case (again completely
+unhandled by old code).
+
+In several cases old code took a shortcut (usually via substitution),
+which may lower execution time or handle some cases that would be
+otherwise unhandled.  Currently new code takes almost no shortcuts.
+One reason is that I tried to keep code simple (without extra cases).
+Also, it is not clear how effective are the shortcuts (I suspect that
+they help only a little).  If there are performance regressions I will
+add faster paths for important special cases, but I prefer to do this
+only after having enough evidence.
+
+
+[[https://groups.google.com/d/msg/fricas-devel/TzTI6wp-CG0/StWJQePuBlQJ][Reply by Waldek Hebisch]]:
+
+I am afraid that what I did is considered unpublishable.  More
+precisely, extended integration is like normal integration, except
+that we do not need to look for logarithms (which makes things easier)
+and we need to handle several functions simultaneously (which
+complicated code a lot but is trivial from conceptual point of view).
+Transcendental case uses methods mostly form Bronstein "Symbolic
+Integration" (more so than old Bronstein code).  Base algebraic case
+uses substitution to avoid poles, Hermite integration and property
+that after hermite integration without poles logarithmic parts must
+exactly cancel.  Algebraic extension over exp or log works only for
+roots and uses fact that integrating polynomial part is equivalent to
+solving Risch differential equation (RDE).  RDE in algebraic case uses
+reduction to system of differential equations -- this is essentially
+Bronstein code, but I had to generalize it to several functions and
+fix a few bugs.  For logarithmic derivative problem I use method
+described in PhD thesis by Raab (he may be first to describe it but I
+am sure that idea is not new).
+
+So in current text related math is considered trivial (trivial
+modification of integration algorithm).  My improvement is that
+instead of saying that this is trivial I actually implemented it.  I
+was surprised to note how incomplete the old code was.  But
+explanation may be as follows: this is sizable piece of code which is
+considered conceptually trivial, so it is hard to publish a paper
+about it.  So Bronstein had little or no incentive to complete it...
+I guess my best chance to publish something about this would be
+article with title "Current publishing model considered harmful"
+explaining pitfalls in "trivial" parts.
+#+END_QUOTE
+
+** 2016-01                                                            :Risch:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/LZh0EfOFrxQ/j9v6y4d4CQAJ][Re: Introduction to FriCAS/Axiom]]
+2016 Jan 4 by Waldek Hebisch
+
+Implementation in Axiom had substantial gaps.  Basically,
+decision procedure due to Risch, Rothstein, Davenport,
+Trager, Bronstein, etc. called "Risch algorithm" has three
+main stages.
+
+Preparatory stage:
+ - choose top transcendental kernel
+ - write integrand as an algebraic function of top transcendetal
+   with coefficient depending on other kernels
+ - remove irrationalities from denominator
+
+First stage (Hermite reduction):
+ - use integration by parts to remove multiple factors
+   from denominator
+
+Second stage:
+ - find logarithmic part of the integral
+
+After the fist two stages remaining integrand has trivial
+denominator and also integral (if exists) must have
+trivial denominator.
+
+Third stage:
+ - handle the remaining part (called polynomial part).  In
+   general this involves recursion and "simpler" version
+   of integration problem.
+
+First stage, that is Hermite reduction was fully implemented
+in Axiom by Bronstein.  The second stage that is finding
+logarithmic part was implemented for transcendental functions
+(in full generality) and for purely algebraic functions
+having "simple" residues.  For example, if you had
+function of form
+
+f = (c_1*log(a_1) + c_2*log(a_2))
+
+where c_1 and c_2 were general algebraic constants and
+a_1 and a_2 were purely algebraic functions, then Axiom
+could not handle such function -- genaral c_1 and c_2
+mean that residues are too complicated (not "simple").
+FriCAS contains heuristic code which can handle many
+such cases, but it is still quite far from general
+algorithm for purely algebraic integrands.
+
+For algebraic integrands which are not purely algebraic
+both FriCAS and Axiom can not find logarithmic part.
+
+The third stage that in finding "polynomial part" may
+look trivial at first, but in fact biggest hole were
+there: algorithm in Axiom was incomplete even for
+purely transcendetal integrands (sometimes Axiom would
+print weird error message, sometimes return unevaluated
+integral).  In FriCAS this part for purely transcendental
+functions is complete.  For functions where top
+kernel is algebraic this part is unimplemented.  In
+fact currently is not needed: for purely algebraic
+functions one can change variables so that already
+Hermite reduction produces "polynomial part", so
+separate code to get "polynomial part" is not needed.
+For algebraic functions depending on a transcendental,
+before computing "polynomial part" we need to find
+logaritmic part.  But since finding logaritmic part
+is unimplemented we can not get to "polynomial part"...
+There is somewhat tricky situation with mixed
+functions where top kernel is tanscendental, but
+coefficients are algebraic.  In such case our code
+for "polynomial part" is incomplete, in fact when
+computing polynomial part we may recursively call
+a variant of code computing logaritmic part, so
+core problem for mixed functions basically is that
+directly or after some recursion we may be forced
+to determine logarithmic part of algebraic integral.
+
+Let me add that it is quite easy to find integrals
+which are not handled by our implementations of
+Risch algorithm.  However, beside Risch algorithm
+integrator has a bunch of tricks to handle
+common simple cases.  So one have to pile a few
+difficulties together -- still there are relatively
+small examples showing incompleteness.
+
+
+[[https://groups.google.com/d/msg/fricas-devel/LZh0EfOFrxQ/CAoASVeYCwAJ]]
+
+> "Integration of Elementary Functions, 1990"
+
+Bronstein's remark above is about algebraic case of Risch differential
+equation (which is needed as part of full algorithm).  Current code in
+Axiom and FriCAS uses a different method: it "just" uses differential
+equation solver.  Current solver can only handle differential
+equations with purely algebraic coefficients.  However Singer
+proposed a method that in principle should be able to solve
+differential equations with elementary coefficients.  IIUC
+it is "rational", but I would expect it to be quite inefficient
+because it replaces single equation over big field by a (probably
+quite large) system of equations over smaller field.  However
+C Raab recently made progress with this, so at least some
+systems should be efficiently solvable.
+
+I also looked at this problem and I think I can adapt method
+for transcendental case.  I did not work out all details, but
+basically the most problematic part is getting bounds in
+so called "third case".  Here, for elementary functions
+finding bounds is essentially the same as finding logaritmic
+part of an auxiliary integral.
+
+The word "efficient" is frequently misused.  Using it together
+with "rational" may create wrong impression.  Namely simplistic
+reading of this is that one should avoid factorization and
+introducing algebraic extensions.  Now, avoiding _useless_
+extensions helps efficiency.  However factorization may
+be faster than "rational" methods.
+
+There are natural limitations to speed of integration
+algorithm.  First, a small integrand can have huge integral,
+so integration may fail or be too slow simply because output
+is too large.  Second, size of intermediate quantities
+is somewhat correlated to size of output.  And basic
+algorithms (like polynomial multiplication) in practice
+are at least quadratic, so for large output compute time
+probably will be more limiting than size.
+
+"constant residues" and "has polynomial part" are about mixed
+integrals (algebraic extension over transcendental) -- they
+simply represent fact that mixed case is mostly unimplemented.
+"irrational residues" in itself should be no longer a
+problem.  However, to decide that integral is nonelementary
+we need to know all integer relations between residues.
+In general this could be done via computation of splitting
+field, but that is quite expensive procedure so FriCAS
+does not try it.  Instead FriCAS gives up if it can
+not find integral and relations between residues are
+too complicated (typically you will get the
+"residue poly has multiple non-linear factors" message,
+but also may print "impossible" (I thought that certain
+problematic case can not exist, but it happens ...).
+I am not sure if "irrational residues" may be reported,
+but if yes then it is misleading now.
+
+
+[[https://groups.google.com/d/msg/fricas-devel/LZh0EfOFrxQ/JSGcJ2ouDAAJ]]
+
+Well, if you want numbers use numerical methods.  However,
+I care about formulas.  And Risch algorithm is a powerful
+method to produce new formulas.
+
+Let me add a philosophical remark: theory behind Risch algorithm
+deals with fundamental properties of symbolically defined
+functions.  In analogy to number theory it could be called
+function theory, only most mathematicians hearing "function
+theory" would imagine quite a different thing.  Interestingly,
+non-constant functions in a sense are better behaved than numbers.
+And results of such study seem to be more useful for computations
+than results of number theory.
+
+Concerning future of Risch algorithm, there is still theoretical
+work to do.  First, finding more efficient variant for elementary
+functions.  Second, extending algorithm to larger classes of
+functions.  Some generalizations are already implemented, for example
+several parts written by Bronstein deal with so called monomial
+extensions.  I added code to handle undefined functions.
+
+I wrote about method to find integral in terms of exponential integrals
+and incomplete Gamma functions (with rational first argument).  However
+we would like to allow more Liouvilian functions as integrals,
+in particular polylogaritms.
+
+To put it differently, there is a long way to go.  Most attention
+will probably go into handling special functions (both as part
+of integrand and as possible integrals).  Certainly we want
+to "complete" implementation for elementary functions and possibly
+for larger classes.  For algebraic functions probably most
+important is work on other parts of FriCAS: we could greatly
+improve speed for such integrals using better algorithms for
+gcd, determinants, resultants, etc...  For definite integrals
+we need to improve limits.  So beside Risch algorithm we need
+to work on other parts to get a smoothly working whole.
+#+END_QUOTE
+
+** 2009-11                                                         :Compiler:
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/5bl7a1uGPmo/KsZ6p1C975YJ][Re: Spad for OO Programmers]]
+2009 November 26 by Waldek Hebisch
+
+Spad distinctive feature is its type system.  Spad is "statically
+typed" meaning that compiler knows how to compute "static" type for
+each quantity.  I put "static" in quotes because in Spad types are
+actually computed at runtime (in some cases Spad compiler can
+determine type already during compilation, but frequently it can
+not).  Spad is different from dynamically typed languages which bundle
+type information with actual data -- in Spad type information is
+separate.  This means that Spad compiler has a lot of opportunities to
+omit computations on types.  Spad approach is also different than
+typical OO approach: in Java interface is statically known but at
+runtime you may have any object which satisfies given interface.  So
+in practice Java also have to bundle object type (class) with data.
+In Spad OO type inheritance is available only for categories (types
+of types), but not for normal data.  So for normal data type computed
+by the compiler exactly agrees with actual type of data.
+
+I should mention here that many of Spad types are parameterized, for
+each tuple of parameters you get distinct type.  Spad types may be
+passed as arguments to functions and returned as values -- this in
+principle gives quite a lot of possibilities to do computations on
+types.  Let me add that types computed at runtime pose a significant
+challenge for the compiler, especially that Spad has type-based
+overloading -- there is a risk that compiler will be forced the
+generate very inefficient code.  Spad solves most of this problem
+putting some extra restrictions: you are not allowed to do general
+runtime computation on categories, all categories (except for exact
+values of parameters) must be known to the compiler at compile
+time.  Moreover, for resolving overloading Spad does not use actual
+type (which is known only at runtime), but only category of the
+type.  This means that in most cases compiler is able to resolve
+overloading at compile time (if it can not resolve some case the
+compiler simply uses first match, or signals error if it has
+insufficient information to find any match).
+
+You probably want to know how Spad decides which function to call.
+This is two stage process.  The first stage is overload resolution at
+compile time.  In given call place there may be several (or none)
+visible definitions for given function.  Each definition comes from
+some domain or package.  Recall that domains and package are computed
+at runtime: the Spad compiler knows how to compute appropriate domains
+and for each of them knows associated category.  Note that category is
+known at compile time and gives list of functions available in the
+domain (the domain may export more functions, but the compiler only
+uses compile-time information about available functions).  Given list
+of available functions Spad compiler tries each in turn to see if types
+of arguments agree with function declaration and if the result type is
+acceptable.  Note that Spad allows you to have multiple functions with
+the same argument types, which differ only in the result type, so the
+expected result type affects choice and complicates the resolution
+process.  Let me say that it may be hard for programmer to predict
+which function will be used by the compiler, if that is a problem the
+programmer may explicitly specify types.
+
+Let me add that code for resolving overloading in the compiler is not
+very large, but in a sense it is most complicated part of Spad
+compiler.  Actually, the problem with overloading is that it is
+impossible to do "right thing" with reasonable efficiency, so the
+compiler takes shortcuts which make hard to describe what the compiler
+is actually doing.
+
+Now, you may think that overload resolution chooses concrete function
+to call, but in fact there is more to this.  First, list of available
+functions is known at compile-time, but the domain may be only known
+at runtime -- this is quite similar to Java where interface in
+statically known, but actually object class in known only at
+runtime.  Second, the function in not necessarily implemented in given
+domain -- it may be inherited.  This requires runtime search.  While
+inheritance have similarity to typical OO languages, there are
+significant differences.
+#+END_QUOTE
+
+** 2016-03
+#+BEGIN_QUOTE
+[[https://groups.google.com/d/msg/fricas-devel/SM4nRqvpA-s/xHEuuR_fAgAJ][Re: FreeAbelianMonoid]]
+2016 Mar 14 by Waldek Hebisch <<super-domain>>
+
+Currently Record do not propagate any properties (it lies
+and unconditionally exports SetCategory), in particular
+do not propagate Comparable.
+
+I am not sure what to do with Record: I do not want to hardcode
+properties of Record in Boot code implementing it.  But writing Record
+as a library domain would require support for variable number of
+arguments.  This in principle can be done Aldor way, having
+appropriate Tuple type as official argument type.  However, even with
+this it is not clear how type propagation should work.  We would need
+some way to recurse on types.  This recursion should happen at compile
+time.  Also we want to produce efficient object code: sequentially
+going through all fields and invoking function for coordinate is fine.
+But creating simpler intermediate records is a no go...
+#+END_QUOTE
