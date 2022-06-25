@@ -30075,44 +30075,44 @@ libspad.a: ${BOOK}
 	@ echo ======================================
 	@ ( cd ${LIB} ; \
 	 ${BOOKS}/tanglec ${BOOK} "bsdsignal.c"  >bsdsignal.c ; \
-	 ${CC} ${CCF} -c bsdsignal.c ; \
+	 ${CC} ${CFLAGS} -c bsdsignal.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "cfuns-c.c"    >cfuns-c.c ; \
-	 ${CC} ${CCF} -c cfuns-c.c ; \
+	 ${CC} ${CFLAGS} -c cfuns-c.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "cursor.c"     >cursor.c ; \
-	 ${CC} ${CCF} -c cursor.c ; \
+	 ${CC} ${CFLAGS} -c cursor.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "edin.c"       >edin.c ; \
-	 ${CC} ${CCF} -c edin.c ; \
+	 ${CC} ${CFLAGS} -c edin.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "fnct-key.c"   >fnct-key.c ; \
-	 ${CC} ${CCF} -c fnct-key.c ; \
+	 ${CC} ${CFLAGS} -c fnct-key.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "halloc.c"     >halloc.c ; \
-	 ${CC} ${CCF} -c halloc.c ; \
+	 ${CC} ${CFLAGS} -c halloc.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "hash.c"       >hash.c ; \
-	 ${CC} ${CCF} -c hash.c ; \
+	 ${CC} ${CFLAGS} -c hash.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "openpty.c"    >openpty.c ; \
-	 ${CC} ${CCF} -c openpty.c ; \
+	 ${CC} ${CFLAGS} -c openpty.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "pixmap.c"     >pixmap.c ; \
-	 ${CC} ${CCF} -c pixmap.c ; \
+	 ${CC} ${CFLAGS} -c pixmap.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "prt.c"        >prt.c ; \
-	 ${CC} ${CCF} -c prt.c ; \
+	 ${CC} ${CFLAGS} -c prt.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "sockio-c.c"   >sockio-c.c ; \
-	 ${CC} ${CCF} -c sockio-c.c ; \
+	 ${CC} ${CFLAGS} -c sockio-c.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "spadcolors.c" >spadcolors.c ; \
-	 ${CC} ${CCF} -c spadcolors.c ; \
+	 ${CC} ${CFLAGS} -c spadcolors.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "util.c"       >util.c ; \
-	 ${CC} ${CCF} -c util.c ; \
+	 ${CC} ${CFLAGS} -c util.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "wct.c"        >wct.c ; \
-	 ${CC} ${CCF} -c wct.c ; \
+	 ${CC} ${CFLAGS} -c wct.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "xdither.c"    >xdither.c ; \
-	 ${CC} ${CCF} -c xdither.c ; \
+	 ${CC} ${CFLAGS} -c xdither.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "xshade.c"     >xshade.c ; \
-	 ${CC} ${CCF} -c xshade.c ; \
+	 ${CC} ${CFLAGS} -c xshade.c ; \
 	 ${BOOKS}/tanglec ${BOOK} "xspadfill.c"  >xspadfill.c ; \
-	 ${CC} ${CCF} -c xspadfill.c ; \
+	 ${CC} ${CFLAGS} -c xspadfill.c ; \
 	 ar ru libspad.a *.o ; \
 	 ${RANLIB} libspad.a )
 	@ ( cd ${LIB} ; \
 	 ${BOOKS}/tanglec ${BOOK} "edible.c"  >edible.c ; \
-	 ${CC} ${CCF} -c edible.c )
+	 ${CC} ${CFLAGS} -c edible.c )
 
 \end{chunk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
