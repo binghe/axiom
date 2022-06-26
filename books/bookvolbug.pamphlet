@@ -789,7 +789,7 @@ v81crcp27-2.1.2.1-3.eps differs from CRC (see bookvol8.1)
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7266: integration failure for 1/(sin(x)\^4+1)}
+\subsection{bug 7266: integration failure for 1/(sin(x)\texttt{\^}4+1)}
 \begin{verbatim}
 
 f:=1/(sin(x)^4+1)
@@ -1482,7 +1482,7 @@ todo 330: fix the inheritance graph for these
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7249: radicalSolve(z\^7=1, z)}
+\subsection{bug 7249: radicalSolve(z\texttt{\^}7=1, z)}
 \begin{verbatim}
 
 Obviously, all the roots of the equation z^7 = 1 can be expressed in
@@ -1761,7 +1761,7 @@ BUT
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7142: exp\^log(x) Cannot take first of an empty list}
+\subsection{bug 7142: exp\texttt{\^}log(x) Cannot take first of an empty list}
 \begin{verbatim}
 
 WS> ElementaryFunctionCategory(): Category == with
@@ -2088,7 +2088,7 @@ condition should be. OrderedSet?
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7251: integrate(1/(1+z\^4), z=0..1) :: Complex Float}
+\subsection{bug 7251: integrate(1/(1+z\texttt{\^}4), z=0..1) :: Complex Float}
 \begin{verbatim}
 
 integrate(1/(1+z^4), z=0..1) :: Complex Float
@@ -2154,7 +2154,7 @@ integrate(t1,x)
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7267: src/input/liu \^ is not always **}
+\subsection{bug 7267: src/input/liu \texttt{\^} is not always **}
 \begin{verbatim}
 
 This makes it clear that the exponential operation semantics is different
@@ -14299,7 +14299,7 @@ Waldek comments:
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7207: integrate(1/(2-3*x)\^(1/2)/(2+3*x)\^(1/2),x)}
+\subsection{bug 7207: integrate(1/(2-3*x)\texttt{\^}(1/2)/(2+3*x)\texttt{\^}(1/2),x)}
 \begin{verbatim}
 
 should be 1/3*asin(3/2*x)
@@ -15017,7 +15017,7 @@ ref: CRC Standard Mathematical Tables and Formulae p547
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7159: rootsOf(2*z\^4+z\^3-z-2) is wrong}
+\subsection{bug 7159: rootsOf(2*z\texttt{\^}4+z\texttt{\^}3-z-2) is wrong}
 \begin{verbatim}
 
    (1)  [%z0,%z1,%z1,- %z1]
@@ -15181,7 +15181,7 @@ but NAG version gives
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7157: 0::CARD\^0::CARD should be 1?}
+\subsection{bug 7157: 0::CARD\texttt{\^}0::CARD should be 1?}
 \begin{verbatim}
 
 (1) -> 0::CARD
@@ -15550,7 +15550,7 @@ interpolate(x,[1,2,3],[1/y(i) for i in 1..3])$PINTERP(x,FRAC POLY INT)
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7147: integrate(1/(1+x\^4),x=\%minusInfinity..\%plusInfinity)}
+\subsection{bug 7147: integrate(1/(1+x\texttt{\^}4),x=\%minusInfinity..\%plusInfinity)}
 \begin{verbatim}
 
 
@@ -17478,7 +17478,7 @@ todo 310: /research/femlisp (finite element meshes)
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7123: cannot simplify forms (ax+b)(ax+b)\^n into (ax+b)\^(n+1)}
+\subsection{bug 7123: cannot simplify forms (ax+b)(ax+b)\texttt{\^}n into (ax+b)\texttt{\^}(n+1)}
 \begin{verbatim}
 
 bug 7123: cannot simplify forms like (ax+b)(ax+b)^n into (ax+b)^(n+1)
@@ -17887,7 +17887,7 @@ bug 7105: [print [i,i*exp(-i)*Ei(i/10.0)] for i in 20..70]
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7104: integrate(\%e\^(a*x)/x\^2,x)}
+\subsection{bug 7104: integrate(\%e\texttt{\^}(a*x)/x\texttt{\^}2,x)}
 \begin{verbatim}
 
 bug 7104: integrate(%e^(a*x)/x^2,x)
@@ -18775,7 +18775,7 @@ integrate(e^u/u,u=%minusInfinity..-1,"noPole")
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{bug 7048: cannot simplify expression using e\^(x log e)}
+\subsection{bug 7048: cannot simplify expression using e\texttt{\^}(x log e)}
 \begin{verbatim}
 
 integrate(e^x,x)
