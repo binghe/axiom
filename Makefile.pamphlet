@@ -506,6 +506,7 @@ RANLIB:=ranlib
 TAR:=tar
 TOUCH:=touch
 UNCOMPRESS:=gunzip
+MAKE:=make
 
 ####K C Related variables
 PLF=${SYS}platform
@@ -1722,7 +1723,52 @@ all: srcsetup srcdir
 \getchunk{clean}
 
 \end{chunk}
-\newpage
+\subsection{Makefile.SOLARIS}
+On Solaris 10, the \texttt{MAKE} variable must be set to \texttt{gmake} (the default
+\texttt{make} command cannot support building Axiom), \texttt{TAR} to \texttt{gtar},
+and \texttt{AWK} to \texttt{gawk}, all can be installed by OpenCSW third-party Solaris
+packages (\texttt{/opt/csw/bin/pkgutil}).
+
+GCC 5.5.0 (OpenCSW installed) is preferred as the C compiler.
+
+\begin{chunk}{Makefile.SOLARIS}
+
+\getchunk{ENVDEFAULTS}
+
+MAKE=gmake
+TAR=gtar
+AWK=gawk
+
+####K C Related variables
+PLF=SUNplatform
+CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
+     -I/usr/X11/include \
+     -Wno-absolute-value -std=gnu89 -w" 
+INC:=${SPD}/src/include
+CC:=gcc
+XLIB:=/usr/X11R6/lib
+LDF="-L/usr/X11R6/lib/64 -L/usr/local/lib/64 -L/usr/openwin/lib/64 -L/usr/lib/64 "
+O:=o
+
+\getchunk{GCLOPTS-MACPORT}
+\getchunk{ENVAR}
+
+all: srcsetup srcdir
+	@echo 45 Makefile.linux called
+	@echo 46 Environment : ${ENV} 
+	@echo 47 finished system build on `date` | tee >lastBuildDate
+	@- if [ "${TESTSET}" != "notests" ] ; \
+            then  grep "result FAILED" int/input/*.regress || true ; fi
+
+\getchunk{literate commands}
+\getchunk{srcsetup}
+\getchunk{src}
+\getchunk{lsp}
+\getchunk{document}
+\getchunk{clean}
+
+\end{chunk}
+\newpage\newpage
 \begin{thebibliography}{99}
 \bibitem{1} CMUCL {\bf http://www.cons.org/cmucl}
 \bibitem{2} GCL {\bf http://savannah.gnu.org/projects/gcl}

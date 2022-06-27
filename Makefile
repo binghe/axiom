@@ -33,6 +33,7 @@ RANLIB:=ranlib
 TAR:=tar
 TOUCH:=touch
 UNCOMPRESS:=gunzip
+MAKE:=make
 
 ####K C Related variables
 PLF=${SYS}platform
