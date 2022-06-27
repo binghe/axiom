@@ -14232,6 +14232,48 @@ This function performs those setup commands.
 \calls{init-memory-config}{allocate-contiguous-pages}
 \calls{init-memory-config}{allocate-relocatable-pages}
 \calls{init-memory-config}{set-hole-size}
+
+\begin{remark}
+Starting from GCL 2.6.10, the call of \texttt{system:set-hole-size} has become
+a \emph{noop}. Instead, we should either call nothing or call another function
+\texttt{SET-STARTING-HOLE-DIVISOR} instead. Below are notes taken from GCL's
+mailing list:
+\begin{verbatim}
+[Gcl-devel] SET-STARTING-HOLE-DIVISOR
+
+From:	 Camm Maguire
+Subject: [Gcl-devel] SET-STARTING-HOLE-DIVISOR
+Date:	 Thu, 10 Jul 2014 14:41:06 -0400
+
+Greetings!
+
+2.6.10 has a significantly improved memory layout and fixnum handling.
+Much work was also done on graceful oom handling encountered by some
+acl2 jobs on 'lesser' machines.  The statically compiled maxpage
+variable was replaced with a runtime probe of the maximum number of
+pages that can be brk'ed at each image startup.  The upshot is that GCL
+needed to scale the hole dynamically, so #'si::set-hole-size had to
+become a noop.
+
+You can 
+
+1) safely ignore the error
+2) remove the set-hole-size call and let gcl handle the memory, or
+3) replace the call with si::set-starting-hole-divisor, which will set
+the initial hole size as a fraction of the probed maxpages.
+
+This is simply a performance tweak.  A generous hole lowers the starting
+gc overhead.  GCL will try to optimize this by itself, but you can
+change the initial placement if you want to.
+
+Take care,
+-- 
+Camm Maguire                                        address@hidden
+==========================================================================
+"The earth is but one country, and mankind its citizens."  --  Baha'u'llah
+\end{verbatim}
+\end{remark}
+
 \begin{chunk}{defun init-memory-config 0}
 (defun init-memory-config (&key
                            (cons 500)
@@ -14245,7 +14287,7 @@ This function performs those setup commands.
                            (rpages 1000)
                            (hole 2000) )
   ;; initialize AKCL memory allocation parameters
-  #+:AKCL
+  #+:AKCL ; GCL
   (progn
     (system:allocate 'cons cons)
     (system:allocate 'fixnum fixnum)
@@ -14256,7 +14298,7 @@ This function performs those setup commands.
     (system:allocate 'cfun cfun)
     (system:allocate-contiguous-pages cpages)
     (system:allocate-relocatable-pages rpages)
-    (system:set-hole-size hole))
+    (system:set-starting-hole-divisor hole)) ; 2.6.10+ (was: set-hole-size)
   #-:AKCL
   nil)
 
