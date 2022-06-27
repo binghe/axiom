@@ -23318,6 +23318,24 @@ We needed to change [[SIGCLD]] to [[SIGCHLD]] for the [[MAC OSX]] platform
 and we need to create a new platform variable. This change is made to 
 propogate that platform variable.
 
+\begin{remark}
+On Solaris 10, the compilation of bsdsignal.c ever failed because SA\_INTERRUPT
+is not defined. The follow notes (by Eric Mandel) were found on Internet%
+\footnote{\url{https://cygwin.cygwin.narkive.com/6SboEld2/connect-not-interrupted-by-sigalrm}}: 
+\begin{quote}
+The SA\_INTERRUPT flag was used by older systems such as Solaris 2.4,
+where, contrary to current expectations, all interrupted system calls
+were automatically restarted. On those systems, if you set the
+SA\_INTERRUPT flag, the call would not be restarted, giving the
+behavior we now expect. (i.e. its behavior is the opposite of the
+SA\_RESTART flag that we ordinarily use now to ensure restart of an
+interrupted system call. See Stevens Unix Network Programming, p. 121).
+\end{quote}
+
+This also indicates that the correct platform name when compiling Axiom on Solaris 10
+should be {\bf SUN4OS5}.  The platform code SUN is for Solaris prior to 2.4.
+\end{remark}
+
 \begin{chunk}{bsdsignal.c}
 #if defined(LINUXplatform)
  if(restartSystemCall) in.sa_flags = SA_RESTART;

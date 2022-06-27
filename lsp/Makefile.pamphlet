@@ -978,7 +978,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.5.2.fortran.patch}
 \getchunk{gcl-2.5.2.objecttofloat.patch}
 \getchunk{gcl-2.5.2.in-package.patch}
@@ -1035,7 +1035,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.1.socket.patch}
 \getchunk{gcl-2.6.1.libspad.patch}
 \getchunk{gcl-2.6.1.toploop.patch}
@@ -1085,7 +1085,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.2.socket.patch}
 \getchunk{gcl-2.6.2.libspad.patch}
 \getchunk{gcl-2.6.2.toploop.patch}
@@ -1140,7 +1140,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.2a-mvdir}
 \getchunk{gcl-2.6.2a.socket.patch}
 \getchunk{gcl-2.6.2a.libspad.patch}
@@ -1187,7 +1187,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.3-mvdir}
 \getchunk{gcl-2.6.3.socket.patch}
 \getchunk{gcl-2.6.3.libspad.patch}
@@ -1227,7 +1227,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.5.socket.patch}
 \getchunk{gcl-2.6.5.libspad.patch}
 \getchunk{gcl-2.6.5.toploop.patch}
@@ -1262,7 +1262,7 @@ top level Makefile.pamphlet.
 This is version for Windows. We have moved forward several patches
 from the GCL standard but are not ready to accept the latest GCL
 version because it breaks Axiom. We only include the patches that
-are needed for Windows. We untar the gcl-2.6.5 version and then
+are needed for Windows. We un${TAR} the gcl-2.6.5 version and then
 rename it to gcl-2.6.5w
 \begin{chunk}{gcl-2.6.5w}
 # gcl version 2.6.5w
@@ -1273,7 +1273,7 @@ all:
 
 gcldir: 
 	@echo 111 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/gcl-2.6.5.tgz
+	@${TAR} -zxf ${ZIPS}/gcl-2.6.5.tgz
 	@mv gcl-2.6.5 ${GCLVERSION}
 \getchunk{gcl-2.6.5w.socket.patch}
 \getchunk{gcl-2.6.5w.libspad.patch}
@@ -1318,7 +1318,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.6.h.linux.h.patch}
 \getchunk{gcl-2.6.6.socket.patch}
 \getchunk{gcl-2.6.6.libspad.patch}
@@ -1358,7 +1358,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.7pre.socket.patch}
 \getchunk{gcl-2.6.7pre.libspad.patch}
 \getchunk{gcl-2.6.7pre.toploop.patch}
@@ -1396,7 +1396,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.7.configure.in.patch}
 \getchunk{gcl-2.6.7.socket.patch}
 \getchunk{gcl-2.6.7.libspad.patch}
@@ -1435,7 +1435,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.8pre.socket.patch}
 \getchunk{gcl-2.6.8pre.libspad.patch}
 \getchunk{gcl-2.6.8pre.toploop.patch}
@@ -1473,7 +1473,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.8pre2.socket.patch}
 \getchunk{gcl-2.6.8pre2.libspad.patch}
 \getchunk{gcl-2.6.8pre2.toploop.patch}
@@ -1511,7 +1511,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.8pre3.socket.patch}
 \getchunk{gcl-2.6.8pre3.libspad.patch}
 \getchunk{gcl-2.6.8pre3.toploop.patch}
@@ -1550,7 +1550,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.8pre4.socket.patch}
 \getchunk{gcl-2.6.8pre4.libspad.patch}
 \getchunk{gcl-2.6.8pre4.toploop.patch}
@@ -1589,7 +1589,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.8pre7.h.linux.defs.patch}
 \getchunk{gcl-2.6.8pre7.o.read.d.patch}
 \getchunk{gcl-2.6.8pre7.unixport.initgcl.lsp.in.patch}
@@ -1628,7 +1628,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.9.h.linux.defs.patch}
 \getchunk{gcl-2.6.9.o.read.d.patch}
 \getchunk{gcl-2.6.9.lsp.gcl.mislib.lsp.patch}
@@ -1667,7 +1667,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.10.h.linux.defs.patch}
 \getchunk{gcl-2.6.10.o.read.d.patch}
 \getchunk{gcl-2.6.10.lsp.gcl.mislib.lsp.patch}
@@ -1706,7 +1706,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.11.h.linux.defs.patch}
 \getchunk{gcl-2.6.11.o.read.d.patch}
 \getchunk{gcl-2.6.11.lsp.gcl.mislib.lsp.patch}
@@ -1746,7 +1746,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.12.h.linux.defs.patch}
 \getchunk{gcl-2.6.12.h.386-macosx.defs.patch}
 \getchunk{gcl-2.6.12.o.read.d.patch}
@@ -1791,7 +1791,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.13pre.h.linux.defs.patch}
 \getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
 \getchunk{gcl-2.6.13pre.o.read.d.patch}
@@ -1836,7 +1836,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.13pre.h.linux.defs.patch}
 \getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
 \getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
@@ -1879,7 +1879,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.6.13pre.h.linux.defs.patch}
 \getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
 \getchunk{gcl-2.6.13pre.unixport.makefile.patch}
@@ -1990,7 +1990,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 	@mv gcl ${GCLVERSION}
 \getchunk{gcl-2.5.socket.patch}
 \getchunk{gcl-2.5.fortran.patch}
@@ -2126,7 +2126,7 @@ all:
 
 gcldir: 
 	@echo 15 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 \getchunk{gcl-2.4.1.socket.patch}
 \getchunk{gcl-2.4.1.fortran.patch}
 \getchunk{gcl-2.4.1.libspad.patch}
@@ -2208,7 +2208,7 @@ all:
 
 gcldir: 
 	@echo 2 building ${GCLVERSION}
-	@tar -zxf ${ZIPS}/${GCLVERSION}.tgz
+	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
 	(cd ${GCLVERSION} ; \
 	./configure ${GCLOPTS} ; \
 	${ENV} ${MAKE} ; \

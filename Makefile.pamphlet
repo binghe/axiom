@@ -1723,7 +1723,7 @@ all: srcsetup srcdir
 \getchunk{clean}
 
 \end{chunk}
-\subsection{Makefile.SOLARIS}
+\subsection{Makefile.SUN4OS5}
 On Solaris 10, the \texttt{MAKE} variable must be set to \texttt{gmake} (the default
 \texttt{make} command cannot support building Axiom), \texttt{TAR} to \texttt{gtar},
 and \texttt{AWK} to \texttt{gawk}, all can be installed by OpenCSW third-party Solaris
@@ -1740,7 +1740,6 @@ TAR=gtar
 AWK=gawk
 
 ####K C Related variables
-PLF=SUNplatform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
      -Wno-absolute-value -std=gnu89 -w" 
