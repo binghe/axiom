@@ -512,7 +512,7 @@ MAKE:=make
 PLF=${SYS}platform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -Wno-absolute-value -std=gnu89 -w" 
+     -std=gnu89 -w" 
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -1698,7 +1698,7 @@ AWK=awk
 PLF=BSDplatform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -Wno-absolute-value -std=gnu89 -w" 
+     -std=gnu89 -w" 
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -1742,7 +1742,7 @@ AWK=gawk
 ####K C Related variables
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -Wno-absolute-value -std=gnu89 -w" 
+     -std=gnu89 -w" 
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
