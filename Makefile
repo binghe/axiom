@@ -39,7 +39,7 @@ MAKE:=make
 PLF=${SYS}platform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -Wno-absolute-value -std=gnu89 -w" 
+     -std=gnu89 -w" 
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -301,7 +301,7 @@ book:
 
 tanglec: books/tanglec.c
 	@echo t01 making tanglec from books/tanglec.c
-	@( cd books ; gcc -o tanglec tanglec.c )
+	@( cd books ; ${CC} -o tanglec tanglec.c )
 
 install:
 	@echo 78 installing Axiom in ${DESTDIR}

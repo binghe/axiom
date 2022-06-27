@@ -627,7 +627,7 @@ book:
 
 tanglec: books/tanglec.c
 	@echo t01 making tanglec from books/tanglec.c
-	@( cd books ; gcc -o tanglec tanglec.c )
+	@( cd books ; ${CC} -o tanglec tanglec.c )
 
 \end{chunk}
 
@@ -1634,13 +1634,13 @@ all: srcsetup srcdir
 
 \end{chunk}
 \subsection{Makefile.MACOSX}
-On the MAC OSX someone decided (probably a BSDism) to rename the
+On the Mac OS X someone decided (probably a BSDism) to rename the
 SIGCLD signal to SIGCHLD. In order to handle this in the 
 low level C socket code (in particular, in \verb|src/lib/fnct_key.c|)
 we change the platform variable to be MACOSXplatform and create
 this new stanza.
 
-It appears that the MAC OSX does not include gawk or nawk by 
+It appears that the Mac OS X does not include gawk or nawk by 
 default so we change the AWK variable to use awk.
 
 \begin{chunk}{Makefile.MACOSX}
@@ -1653,7 +1653,7 @@ AWK=awk
 PLF=MACOSXplatform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -Wno-absolute-value -std=gnu89 -w" 
+     -std=gnu89 -w" 
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
