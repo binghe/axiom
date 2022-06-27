@@ -1262,7 +1262,7 @@ top level Makefile.pamphlet.
 This is version for Windows. We have moved forward several patches
 from the GCL standard but are not ready to accept the latest GCL
 version because it breaks Axiom. We only include the patches that
-are needed for Windows. We un${TAR} the gcl-2.6.5 version and then
+are needed for Windows. We untar the gcl-2.6.5 version and then
 rename it to gcl-2.6.5w
 \begin{chunk}{gcl-2.6.5w}
 # gcl version 2.6.5w
