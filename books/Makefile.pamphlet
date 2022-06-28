@@ -460,8 +460,8 @@ ${PDF}/toc.pdf: ${BOOKPDF}
 	echo "\\documentclass[dvips]{book}" >toc.tex ; \
 	echo "\\setlength{\\textwidth}{400pt}" >>toc.tex ; \
 	echo "\\newcommand{\\VolumeName}{Axiom Table of Contexts}" >>toc.tex ;\
-        echo "\\usepackage[dvips,final,colorlinks=true,pdfstartview=FitH]{hyperref}" >>toc.tex ; \
-        echo "\\usepackage{amssymb}" >>toc.tex ; \
+	echo "\\usepackage[dvips,final,colorlinks=true,pdfstartview=FitH]{hyperref}" >>toc.tex ; \
+	echo "\\usepackage{amssymb}" >>toc.tex ; \
 	echo "\\usepackage{graphics}" >>toc.tex ; \
 	echo "\\begin{document}" >>toc.tex ; \
 	echo "\\begin{titlepage}" >>toc.tex ; \
