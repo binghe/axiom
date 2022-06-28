@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[dvipdfmx]{book}
 \newcommand{\VolumeName}{Volume 10.1: Axiom Algebra: Theory}
 \usepackage{amsmath}
 \input{bookheader.tex}

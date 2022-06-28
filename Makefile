@@ -34,6 +34,7 @@ TAR:=tar
 TOUCH:=touch
 UNCOMPRESS:=gunzip
 MAKE:=make
+LATEX:=latex
 
 ####K C Related variables
 PLF=${SYS}platform
@@ -142,8 +143,6 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	@ echo 1 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 2 Environment ${ENV}
 	@ ${BOOKS}/tanglec Makefile.pamphlet "Makefile.${SYS}" >Makefile.${SYS}
-	@ cp ${BOOKS}/dvipdfm.def ${MNT}/${SYS}/doc
-	@ cp ${BOOKS}/changepage.sty ${MNT}/${SYS}/doc
 	@ ${EXTRACT} Makefile.pamphlet
 	@ cp Makefile.pdf ${MNT}/${SYS}/doc/src/root.Makefile.pdf
 	@ if [ "${RUNTYPE}" = "parallel" ] ; then \
