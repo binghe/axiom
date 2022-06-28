@@ -43,6 +43,7 @@ DIRS=${SRCDIRS}
 VOL11=${BOOKS}/bookvol11.pamphlet
 
 \end{chunk}
+
 \subsection{The sman directory}
 Superman (sman) is the master process that runs all of the other
 processes including axiom, clef, nagman, graphics, and hyperdoc
@@ -54,6 +55,7 @@ smandir: ${SPD}/books/bookvol6.pamphlet
            ${ENV} ${MAKE} )
 
 \end{chunk}
+
 \subsection{The share directory}
 The {\bf share} directory files that are shared by all version of the
 system.
@@ -113,6 +115,7 @@ bootclean: ${SRC}/boot/Makefile
 	@rm -f ${SRC}/boot/Makefile.dvi
 
 \end{chunk}
+
 \subsection{The interp directory}
 Once {\bf bootsys} exists we need to build {\bf depsys}
 and {\bf interpsys}. Since these two images share a lot of
@@ -157,6 +160,7 @@ interpclean: ${SRC}/interp/Makefile
 	@rm -f ${SRC}/interp/Makefile.dvi
 
 \end{chunk}
+
 \subsection{The input directory}
 The input directory contains code used for examples, regression
 testing, and bug tracking. In a shipped system the working examples
@@ -197,12 +201,14 @@ inputclean: ${SRC}/input/Makefile
 	@rm -f ${SRC}/input/Makefile.dvi
 
 \end{chunk}
+
 \subsection{The etc directory}
 The etc directory contains code used as tools surrounding Axiom.
 
 The asq \cite{2} command, contained in this directory, is useful
 for finding detailed information about domains, packages, and
 categories from the shell without running Axiom.
+
 \begin{chunk}{etcdir}
 etcdir: ${SRC}/etc/Makefile
 	@echo 37 making ${SRC}/etc
@@ -226,6 +232,7 @@ etcclean: ${SRC}/etc/Makefile
 	@rm -f ${SRC}/etc/Makefile.dvi
 
 \end{chunk}
+
 \subsection{The doc directory}
 The doc directory contains code used for documenting Axiom.
 
@@ -250,6 +257,7 @@ docdir:
 	  rm -f Makefile11 )
 
 \end{chunk}
+
 \subsection{Volume 7:Axiom Hyperdoc book}
 Hyperdoc is the Axiom document browser.
 \begin{chunk}{hyperdir}
@@ -273,6 +281,7 @@ graphdir: ${SPD}/books/bookvol8.pamphlet
 	  ${ENV} ${MAKE} )
 
 \end{chunk}
+
 \subsection{The algebra directory}
 The algebra directory contains code written in Axiom's computer
 algebra language called {\bf spad}. There are two compilers for
@@ -349,6 +358,7 @@ algebraclean: ${SRC}/algebra/Makefile
 	@rm -f ${SRC}/algebra/Makefile.dvi
 
 \end{chunk}
+
 \subsection{Volume 11: Axiom Browser book}
 These are the pages for the Axiom Firefox browser interface.
 They can be expanded in parallel since they (currently) need no
@@ -368,8 +378,8 @@ browserdir: ${SPD}/books/bookvol11.pamphlet
 
 The second call will execute the {\bf all} stanza. This stanza walks 
 all of the lower level directories.
-\begin{chunk}{*}
 
+\begin{chunk}{*}
 \getchunk{environment}
 
 all: announce ${DIRS}
@@ -397,6 +407,7 @@ setup: ${SETUP}
 \getchunk{browserdir}
 
 \end{chunk}
+
 \eject
 \begin{thebibliography}{99}
 \bibitem{1} Watt, Stephen, The Aldor compiler, {\bf www.aldor.org}
