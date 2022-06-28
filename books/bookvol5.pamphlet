@@ -1,4 +1,4 @@
-\documentclass[dvips]{book}
+\documentclass[dvipdfmx]{book}
 \newcommand{\VolumeName}{Volume 5: Axiom Interpreter}
 \input{bookheader.tex}
 \pagenumbering{arabic}

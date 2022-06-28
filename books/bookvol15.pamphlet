@@ -1,4 +1,4 @@
-\documentclass[dvips]{book}
+\documentclass[dvipdfmx]{book}
 
 % We have a name on every volume, specificed here
 \newcommand{\VolumeName}{Volume 15: The Sane Compiler}
