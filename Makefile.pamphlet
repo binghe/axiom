@@ -292,9 +292,9 @@ The SPAD environment variable is normally specified.
 It is expected to be a path to the top level directory of the
 shipped system. For example, if we want to build a linux system
 the SPAD variable should look like:
-\begin{verbatim}
+\begin{alltt}
     `pwd`/new/mnt/{\bf linux}
-\end{verbatim}
+\end{alltt}
 \subsubsection{SYS}
 From the SPAD variable we look at the last directory name
 and create a version of Axiom for that system. The SYS
