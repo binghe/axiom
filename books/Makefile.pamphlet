@@ -67,7 +67,6 @@ IN=${SPD}/books
 LATEX=latex
 MAKEINDEX=makeindex
 BIBTEX=bibtex
-DVIPDFM=dvipdfmx
 DVIPS=dvips -Ppdf
 PS2PDF=ps2pdf
 RM=rm -f
@@ -198,14 +197,16 @@ ${COOKBOOK}/%.pdf: ${COOKIN}/%.pamphlet
 	    ${BIBTEX} $*.aux ; \
 	    ${LATEX} $*.pamphlet >/dev/null ; \
 	    ${LATEX} $*.pamphlet >/dev/null ; \
-	    ${DVIPDFM} $*.dvi 2>/dev/null ; \
+	    ${DVIPS} $*.dvi 2>/dev/null ; \
+	    ${PS2PDF} $*.ps 2>/dev/null ; \
 	  else \
 	    ${LATEX} $*.pamphlet >${TMP}/trace ; \
 	    ${MAKEINDEX} $*.idx  1>/dev/null 2>/dev/null ; \
 	    ${BIBTEX} $*.aux  1>/dev/null 2>/dev/null ; \
 	    ${LATEX} $*.pamphlet >${TMP}/trace ; \
 	    ${LATEX} $*.pamphlet >${TMP}/trace ; \
-	    ${DVIPDFM} $*.dvi 2>${TMP}/trace ; \
+	    ${DVIPS} $*.dvi 2>${TMP}/trace ; \
+	    ${PS2PDF} $*.ps 2>${TMP}/trace ; \
 	  fi ; \
 	  ${RM} $*.aux $*.dvi $*.log $*.ps $*.idx $*.tex $*.pamphlet ; \
 	  ${RM} $*.ilg $*.ind *.bbl *.blg *.sty)
@@ -244,7 +245,8 @@ ${PDF}/bookvol2.pdf: ${IN}/bookvol2.pamphlet \
 	    ${BIBTEX} bookvol2.aux  1>/dev/null 2>/dev/null ; \
 	    ${LATEX} bookvol2.pamphlet >${TMP}/trace ; \
 	    ${LATEX} bookvol2.pamphlet >${TMP}/trace ; \
-	    ${DVIPDFM} bookvol2.dvi 2>${TMP}/trace ; \
+	    ${DVIPS} bookvol2.dvi 2>${TMP}/trace ; \
+	    ${PS2PDF} bookvol2.ps 2>${TMP}/trace ; \
 	    ${RM} bookvol2.aux bookvol2.dvi bookvol2.log \
 	    ${RM} bookvol2.ps bookvol2.idx bookvol2.tex \
 	    ${RM} bookvol2.pamphlet ; \
@@ -292,7 +294,8 @@ ${PDF}/bookvol10.1.pdf: ${IN}/bookvol10.1.pamphlet \
 	    ${BIBTEX} bookvol10.1.aux  1>/dev/null 2>/dev/null ; \
 	    ${LATEX} bookvol10.1.pamphlet >${TMP}/trace ; \
 	    ${LATEX} bookvol10.1.pamphlet >${TMP}/trace ; \
-	    ${DVIPDFM} bookvol10.1.dvi 2>${TMP}/trace ; \
+	    ${DVIPS} bookvol10.1.dvi 2>${TMP}/trace ; \
+	    ${PS2PDF} bookvol10.1.ps 2>${TMP}/trace ; \
 	    ${RM} bookvol10.1.aux bookvol10.1.dvi bookvol10.1.log \
 	    ${RM} bookvol10.1.ps bookvol10.1.idx bookvol10.1.tex \
 	    ${RM} bookvol10.1.pamphlet ; \
@@ -391,7 +394,8 @@ ${PDF}/%.pdf: ${IN}/%.pamphlet ${PDF}/axiom.bib ${PDF}/axiom.bst
 	    ${BIBTEX} $*.aux ; \
 	    ${LATEX} $*.pamphlet >/dev/null ; \
 	    ${LATEX} $*.pamphlet >/dev/null ; \
-	    ${DVIPDFM} $*.dvi 2>/dev/null ; \
+	    ${DVIPS} $*.dvi 2>/dev/null ; \
+	    ${PS2PDF} $*.ps 2>/dev/null ; \
 	    ${RM} $*.aux $*.dvi $*.log $*.ps $*.idx $*.tex $*.pamphlet ; \
 	    ${RM} $*.ilg $*.ind *.sigs signatures.tex ; \
 	    ${RM} bookheader.tex ; \
@@ -403,7 +407,8 @@ ${PDF}/%.pdf: ${IN}/%.pamphlet ${PDF}/axiom.bib ${PDF}/axiom.bst
 	    ${BIBTEX} $*.aux  1>/dev/null 2>/dev/null ; \
 	    ${LATEX} $*.pamphlet >${TMP}/trace ; \
 	    ${LATEX} $*.pamphlet >${TMP}/trace ; \
-	    ${DVIPDFM} $*.dvi 2>${TMP}/trace ; \
+	    ${DVIPS} $*.dvi 2>${TMP}/trace ; \
+	    ${PS2PDF} $*.ps 2>${TMP}/trace ; \
 	    ${RM} $*.aux $*.dvi $*.log $*.ps $*.idx $*.tex $*.pamphlet ; \
 	    ${RM} $*.ilg $*.ind ; \
 	    ${RM} $*.ilg $*.ind *.sigs signatures.tex ; \

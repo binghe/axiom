@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{book}
+\documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume 4: Axiom Developers Guide}
 \input{bookheader.tex}
 \pagenumbering{arabic}
@@ -1054,7 +1054,6 @@ Makefile
            6a2a copy book*.pamphlet to AXIOM/doc
            6a2b extract latex for each book
            6a2c latex each book
-           6a2d dvipdfmx each dvi file
        6a3 make AXIOM/doc/toc.pdf
   7 extract AXIOM/doc/hypertex/Makefile1 from BOOKS/bookvol11
     7a make AXIOM/doc/hypertex/Makefile1
