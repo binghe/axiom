@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{book}
+\documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume BugList: Axiom Bugs}
 \input{bookheader.tex}
 \pagenumbering{arabic}

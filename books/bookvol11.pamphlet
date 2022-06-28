@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{book}
+\documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume 11: Axiom Browser}
 \input{bookheader.tex}
 \pagenumbering{arabic}

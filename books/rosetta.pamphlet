@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{article}
+\documentclass{article}
 \normalsize\baselineskip=12pt
 \parskip=0pt
 \parindent=10pt

@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{book}
+\documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume Bibliography: Axiom Literature Citations}
 \input{bookheader.tex}
 \pagenumbering{arabic}
@@ -88177,16 +88177,6 @@ Springer-Verlag. 614--630. (1982)
 \bibitem[Wesseling 82b]{Wes82b} Wesseling, P.
   title = {{Theoretical Aspects of a Multigrid Method}},
 SIAM J. Sci. Statist. Comput. 3 387--407. (1982)
-
-\end{chunk}
-
-\index{Wicks, Mark}
-\index{Carlisle, David}
-\index{Rahtz, Sebastian}
-\begin{chunk}{ignore}
-\bibitem[Wicks 89]{Wic89} Wicks, Mark; Carlisle, David, Rahtz, Sebastian
-  title = {{dvipdfm.def}},
-  link = "\url{http://web.mit.edu/texsrc/source/latex/graphics/dvipdfm.def}",
 
 \end{chunk}
 

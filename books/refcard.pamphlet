@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{article}
+\documentclass{article}
 \usepackage[landscape]{geometry}
 \usepackage{multicol}
 \usepackage{amsmath}

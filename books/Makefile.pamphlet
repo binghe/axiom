@@ -68,6 +68,8 @@ LATEX=latex
 MAKEINDEX=makeindex
 BIBTEX=bibtex
 DVIPDFM=dvipdfmx
+DVIPS=dvips -Ppdf
+PS2PDF=ps2pdf
 RM=rm -f
 OUT1=${MNT}/${SYS}/lib
 OUTBIN=${MNT}/${SYS}/bin
@@ -177,7 +179,8 @@ ${PDF}/endpaper.pdf: ${IN}/endpaper.pamphlet
 	  ${LATEX} endpaper.pamphlet ; \
 	  ${BIBTEX} endpaper.aux ; \
 	  ${LATEX} endpaper.pamphlet ; \
-	  ${DVIPDFM} endpaper.dvi ; \
+	  ${DVIPS} endpaper.dvi ; \
+	  ${PS2PDF} endpaper.ps ; \
 	  ${RM} endpaper.aux endpaper.dvi endpaper.log endpaper.out ; \
 	  ${RM} endpaper.pamphlet endpaper.ps endpaper.toc )
 
@@ -227,7 +230,8 @@ ${PDF}/bookvol2.pdf: ${IN}/bookvol2.pamphlet \
 	    ${BIBTEX} bookvol2.aux ; \
 	    ${LATEX} bookvol2.pamphlet >/dev/null ; \
 	    ${LATEX} bookvol2.pamphlet >/dev/null ; \
-	    ${DVIPDFM} bookvol2.dvi 2>/dev/null ; \
+	    ${DVIPS} bookvol2.dvi 2>/dev/null ; \
+	    ${PS2PDF} bookvol2.ps 2>/dev/null ; \
 	    ${RM} bookvol2.aux bookvol2.dvi bookvol2.log \
 	    ${RM} bookvol2.ps bookvol2.idx bookvol2.tex \
 	    ${RM} bookvol2.pamphlet ; \
@@ -274,7 +278,8 @@ ${PDF}/bookvol10.1.pdf: ${IN}/bookvol10.1.pamphlet \
 	    ${BIBTEX} bookvol10.1.aux ; \
 	    ${LATEX} bookvol10.1.pamphlet >/dev/null ; \
 	    ${LATEX} bookvol10.1.pamphlet >/dev/null ; \
-	    ${DVIPDFM} bookvol10.1.dvi 2>/dev/null ; \
+	    ${DVIPS} bookvol10.1.dvi 2>/dev/null ; \
+	    ${PS2PDF} bookvol10.1.ps 2>/dev/null ; \
 	    ${RM} bookvol10.1.aux bookvol10.1.dvi bookvol10.1.log \
 	    ${RM} bookvol10.1.ps bookvol10.1.idx bookvol10.1.tex \
 	    ${RM} bookvol10.1.pamphlet ; \
@@ -334,7 +339,8 @@ ${PDF}/bookvol15.pdf: ${IN}/bookvol15.pamphlet \
 	    sbcl --noinform --eval '(load "SigSort")' ; \
 	    detex -w bookvol15.pamphlet | sort -uf >bookvol15.words ; \
 	    ${LATEX} bookvol15.pamphlet >/dev/null ; \
-	    ${DVIPDFM} bookvol15.dvi 2>/dev/null ; \
+	    ${DVIPS} bookvol15.dvi 2>/dev/null ; \
+	    ${PS2PDF} bookvol15.ps 2>/dev/null ; \
 	  else \
 	    ${LATEX} bookvol15.pamphlet >${TMP}/trace ; \
 	    cp signatures.tex bookvol15.sigs ; \
@@ -350,7 +356,8 @@ ${PDF}/bookvol15.pdf: ${IN}/bookvol15.pamphlet \
 	    sbcl --noinform --eval '(load "SigSort")' ; \
 	    detex -w bookvol15.pamphlet | sort -uf >bookvol15.words ; \
 	    ${LATEX} bookvol15.pamphlet >${TMP}/trace ; \
-	    ${DVIPDFM} bookvol15.dvi >${TMP}/trace ; \
+	    ${DVIPS} bookvol15.dvi >${TMP}/trace ; \
+	    ${PS2PDF} bookvol15.ps >${TMP}/trace ; \
 	  fi ; \
 	  ${RM} bookvol15.aux bookvol15.dvi bookvol15.log ; \
 	  ${RM} bookvol15.ps bookvol15.idx bookvol15.tex ; \
@@ -597,12 +604,14 @@ ${PDF}/toc.pdf: ${BOOKPDF}
             <bookvolbib.toc >>toc.toc ; \
 	if [ -z "${NOISE}" ] ; then \
 	  ${LATEX} toc.tex ; \
-	  ${DVIPDFM} toc.dvi 2>/dev/null ; \
+	  ${DVIPS} toc.dvi 2>/dev/null ; \
+	  ${PS2PDF} toc.ps 2>/dev/null ; \
 	  ${RM} -f toc.aux toc.dvi toc.log toc.ps toc.tex toc.toc ; \
 	  ${RM} -f bluebayou.ps axiomfront.ps ; \
 	else \
 	  ${LATEX} toc.tex >${TMP}/trace ; \
-	  ${DVIPDFM} toc.dvi 2>${TMP}/trace ; \
+	  ${DVIPS} toc.dvi 2>${TMP}/trace ; \
+	  ${PS2PDF} toc.ps 2>${TMP}/trace ; \
 	  ${RM} -f toc.aux toc.dvi toc.log toc.ps toc.tex toc.toc ; \
 	  ${RM} -f bluebayou.ps axiomfront.ps ; \
 	fi )

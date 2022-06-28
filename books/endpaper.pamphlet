@@ -1,14 +1,7 @@
-\documentclass[dvipdfmx]{book}
+\documentclass[dvips]{book}
 %\usepackage{axiom}
 %
-% 2006-04-08.  The original (correct) usepackage line below
-%\usepackage[dvips,final,colorlinks=true,pdfstartview=FitH]{hyperref}
-% has been changed to the following one inorder to ease the
-% compilation of axiom on distributions (like Debian sarge) that have
-% an older version of hyperref TeX package (where the `final' option
-% is missing). It should be restored once the latest version (>=
-% 2003/11/30 v6.74m) of hyperref are more widespread.
-\usepackage[dvips,colorlinks=true,pdfstartview=FitH]{hyperref}
+\usepackage[dvips,final,colorlinks=true,pdfstartview=FitH]{hyperref}
 \usepackage{pstricks}
 \usepackage{pst-node}
 \begin{document}
