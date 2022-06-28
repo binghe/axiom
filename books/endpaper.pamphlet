@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[dvipdfmx]{book}
 %\usepackage{axiom}
 %
 % 2006-04-08.  The original (correct) usepackage line below
