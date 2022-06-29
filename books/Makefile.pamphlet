@@ -96,7 +96,7 @@ ${PDF}/master:
 	@ echo ==================================
 	@ echo COPY GIT HEAD TO DOC
 	@ echo ==================================
-	@ cp ${SPD}/.git/refs/heads/master ${PDF}/master
+	@ git rev-parse HEAD > ${PDF}/master
 
 tanglecopy:
 	@ echo ==================================
