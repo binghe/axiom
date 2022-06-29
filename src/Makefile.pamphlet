@@ -50,7 +50,8 @@ processes including axiom, clef, nagman, graphics, and hyperdoc
 \begin{chunk}{smandir}
 smandir: ${SPD}/books/bookvol6.pamphlet
 	@echo 5 making ${SRC}/sman
-	@( cd sman ; \
+	@( mkdir -p sman ; \
+	   cd sman ; \
 	   ${BOOKS}/tanglec ${BOOKS}/bookvol6.pamphlet >Makefile ; \
            ${ENV} ${MAKE} )
 
