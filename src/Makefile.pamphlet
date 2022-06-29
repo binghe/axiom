@@ -53,7 +53,7 @@ smandir: ${SPD}/books/bookvol6.pamphlet
 	@( mkdir -p sman ; \
 	   cd sman ; \
 	   ${BOOKS}/tanglec ${BOOKS}/bookvol6.pamphlet >Makefile ; \
-           ${ENV} ${MAKE} )
+	   ${ENV} ${MAKE} )
 
 \end{chunk}
 
@@ -70,8 +70,8 @@ ${SRC}/share/Makefile: ${SRC}/share/Makefile.pamphlet
 	@echo 10 making ${SRC}/share/Makefile from \
            ${SRC}/share/Makefile.pamphlet
 	@( cd share ; \
-           ${EXTRACT} Makefile ; \
-           cp Makefile.pdf ${MNT}/${SYS}/doc/src/share.Makefile.pdf )
+	   ${EXTRACT} Makefile ; \
+	   cp Makefile.pdf ${MNT}/${SYS}/doc/src/share.Makefile.pdf )
 
 sharedocument: ${SRC}/share/Makefile
 	@echo 11 documenting ${SRC}/share
