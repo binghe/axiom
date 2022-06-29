@@ -1708,26 +1708,27 @@ all: srcsetup srcdir
 \getchunk{clean}
 \end{chunk}
 
-\subsection{Makefile.SUN4OS5}
-On Solaris 10, the \texttt{MAKE} variable must be set to \texttt{gmake} (the default
+\subsection{Makefile.solaris64}
+On Solaris 10 x86, the \texttt{MAKE} variable must be set to \texttt{gmake} (the default
 \texttt{make} command cannot support building Axiom), \texttt{TAR} to \texttt{gtar},
 and \texttt{AWK} to \texttt{gawk}, all can be installed by OpenCSW third-party Solaris
 packages (\texttt{/opt/csw/bin/pkgutil}).
 
-GCC 5.5.0 (OpenCSW installed) is preferred as the C compiler.
+Oracle DeveloperStudio is the preferred C compiler.
 
-\begin{chunk}{Makefile.SOLARIS}
+\begin{chunk}{Makefile.solaris64}
 \getchunk{ENVDEFAULTS}
 MAKE=gmake
 TAR=gtar
 AWK=gawk
+PLF=SUN4OS5platform
 
 ####K C Related variables
-CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
+CCF="-m64 -O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -std=gnu89 -w" 
+     -std=gnu89 -w"
 INC:=${SPD}/src/include
-CC:=gcc
+CC:=cc
 XLIB:=/usr/X11R6/lib
 LDF="-L/usr/X11R6/lib/64 -L/usr/local/lib/64 -L/usr/openwin/lib/64 -L/usr/lib/64 "
 O:=o
