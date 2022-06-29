@@ -149,20 +149,20 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	   ( echo p4 starting parallel make of input files ; \
 	     ${ENV} ${MAKE} input ${NOISE} & ) ; \
 	  else \
-           if [ "${BUILD}" = "full" ] ; then \
+	   if [ "${BUILD}" = "full" ] ; then \
 	   ( echo s4 starting serial make of input files ; \
-             cd ${MNT}/${SYS}/doc/src/input ; \
+	     cd ${MNT}/${SYS}/doc/src/input ; \
 	     cp ${BOOKS}/axiom.sty . ; \
-             cp ${SRC}/input/*.eps . ; \
+	     cp ${SRC}/input/*.eps . ; \
 	     for i in `ls ${SRC}/input/*.input.pamphlet` ; do \
 	      if [ .${NOISE} = . ] ; \
 	      then \
-               ${LATEX} $$i ; \
+	       ${LATEX} $$i ; \
 	      else \
 	       ( echo p4a making $$i ; \
-	         ${LATEX} $$i >${TMP}/trace ) ; \
+		 ${LATEX} $$i >${TMP}/trace ) ; \
 	      fi ; \
-             done ; \
+	     done ; \
 	     rm -f *~ ; \
 	     rm -f *.pamphlet~ ; \
 	     rm -f *.log ; \
@@ -173,19 +173,19 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	@ if [ "${RUNTYPE}" = "parallel" ] ; then \
 	    ( echo s2 starting parallel make of books ; \
 	      echo s3 ${SPD}/books/Makefile from \
-                   ${SPD}/books/Makefile.pamphlet ; \
+		   ${SPD}/books/Makefile.pamphlet ; \
 	      cd ${SPD}/books ; \
-              ${EXTRACT} Makefile ; \
-              cp Makefile.pdf ${MNT}/${SYS}/doc/src/books.Makefile.pdf ; \
+	      ${EXTRACT} Makefile ; \
+	      cp Makefile.pdf ${MNT}/${SYS}/doc/src/books.Makefile.pdf ; \
 	      ${ENV} ${MAKE} & ) ; \
 	  else \
 	    ( echo s2 starting serial make of books ; \
 	      echo s3 ${SPD}/books/Makefile from \
-                   ${SPD}/books/Makefile.pamphlet ; \
+		   ${SPD}/books/Makefile.pamphlet ; \
 	      cd ${SPD}/books ; \
-              ${EXTRACT} Makefile ; \
-              cp Makefile.pdf ${MNT}/${SYS}/doc/src/books.Makefile.pdf ; \
-              if [ "${BUILD}" = "full" ] ; then \
+	      ${EXTRACT} Makefile ; \
+	      cp Makefile.pdf ${MNT}/${SYS}/doc/src/books.Makefile.pdf ; \
+	      if [ "${BUILD}" = "full" ] ; then \
 	      ${ENV} ${MAKE} ; fi ) ; \
 	  fi
 	@ echo p7 starting make of src
@@ -208,7 +208,7 @@ ${LSP}/Makefile: ${LSP}/Makefile.pamphlet
 	 ${EXTRACT} Makefile.pamphlet ; \
 	 if [ "${GCLVERSION}" != "gcl-2.4.1" ] ; then \
 	 ${BOOKS}/tanglec Makefile.pamphlet ${GCLVERSION} >Makefile ; \
-         fi ; \
+	 fi ; \
 	 cp Makefile.pdf ${MNT}/${SYS}/doc/src/lsp.Makefile.pdf )
 
 lspclean:
@@ -224,7 +224,7 @@ libspad:
 	@ echo 11a making libspad
 	@ ( cd ${OBJ}/${SYS}/lib ; \
 	    ${BOOKS}/tanglec ${BOOKS}/bookvol8.pamphlet Makefile >Makefile ; \
-            ${ENV} ${MAKE} libspad.a )
+	    ${ENV} ${MAKE} libspad.a )
 
 axiom.sty:
 	@ echo 11c copying books/axiom.sty
@@ -270,8 +270,8 @@ input:
 	  ( cd ${MNT}/${SYS}/doc/src/input ; \
 	    cp ${BOOKS}/axiom.sty . ; \
 	    for i in `ls ${SRC}/input/*.input.pamphlet` ; \
-              do ${LATEX} $$i ; \
-              done ; \
+	      do ${LATEX} $$i ; \
+	      done ; \
 	     rm -f *~ ; \
 	     rm -f *.pamphlet~ ; \
 	     rm -f *.log ; \
@@ -284,7 +284,7 @@ book:
 	@ cp ${SRC}/doc/book.pamphlet ${MNT}/${SYS}/doc
 	@ cp -pr ${SRC}/doc/ps ${MNT}/${SYS}/doc
 	@ (cd ${MNT}/${SYS}/doc ; \
-          if [ .${NOISE} = . ] ; then \
+	  if [ .${NOISE} = . ] ; then \
 	    ( ${LATEX} book.pamphlet --interaction nonstopmode ; \
 	      ${LATEX} book.pamphlet --interaction nonstopmode ) ; \
 	   else \
