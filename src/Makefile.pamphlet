@@ -40,8 +40,6 @@ up to the top level Makefile.pamphlet. If you add a new
 stanza to this Makefile you should check that list. 
 \begin{chunk}{environment}
 DIRS=${SRCDIRS}
-VOL11=${BOOKS}/bookvol11.pamphlet
-
 \end{chunk}
 
 \subsection{The sman directory}
