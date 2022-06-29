@@ -390,7 +390,7 @@ browserdir: ${SPD}/books/bookvol11.pamphlet
 	@(cd ${MNT}/${SYS}/doc/hypertex ; \
 	  ${BOOKS}/tanglec ${SPD}/books/bookvol11.pamphlet >Makefile11 ; \
 	  ${ENV} ${MAKE} -j 10 -f Makefile11 ; \
-	  echo rm -f Makefile11 )
+	  rm -f Makefile11 )
 
 \end{chunk}
 
