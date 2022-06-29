@@ -6638,7 +6638,7 @@ LIB=	${OBJ}/${SYS}/lib
 LDFLAGS= -L${LIB} -lspad ${LDF}
 
 all:	announce ${OUTLIB}/session ${OUTLIB}/spadclient ${OUT}/sman \
-        ${OUT}/axiom finish
+	${OUT}/axiom finish
 
 announce:
 	@ echo ==================================================
@@ -6653,13 +6653,13 @@ finish:
 ${OUTLIB}/session: ${LIB}/libspad.a
 	@ echo 1 making ${OUTLIB}/session from ${BOOK}
 	@ (cd ${LIB} ; \
-           ${BOOKS}/tanglec ${BOOK} session.c >session.c ; \
+	   ${BOOKS}/tanglec ${BOOK} session.c >session.c ; \
 	   ${CC} ${CCF} -o ${OUTLIB}/session session.c libspad.a )
 
 ${OUTLIB}/spadclient: ${LIB}/libspad.a
 	@ echo 2 making ${OUTLIB}/spadclient from ${BOOK}
 	@ (cd ${LIB} ; \
-           ${BOOKS}/tanglec ${BOOK} spadclient.c >spadclient.c ; \
+	   ${BOOKS}/tanglec ${BOOK} spadclient.c >spadclient.c ; \
 	   ${CC} ${CCF} -o ${OUTLIB}/spadclient spadclient.c libspad.a )
 
 ${OUT}/axiom: ${BOOK}
@@ -6670,7 +6670,7 @@ ${OUT}/axiom: ${BOOK}
 ${OUT}/sman: ${LIB}/libspad.a
 	@ echo 4 making ${OUT}/sman from ${BOOK}
 	@ (cd ${LIB} ; \
-           ${BOOKS}/tanglec ${BOOK} sman.c >sman.c ; \
+	   ${BOOKS}/tanglec ${BOOK} sman.c >sman.c ; \
 	   ${CC} ${CCF} -o ${OUT}/sman sman.c libspad.a )
 
 \end{chunk}
