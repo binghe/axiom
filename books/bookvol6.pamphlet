@@ -6621,8 +6621,21 @@ real line in general but could, for instance, range over the complex plane.
 
 Note that the provisos need not be an interval. They could be anything
 such as a polynomial or a property like ``$f(x)$ is entire''.
+
 \chapter{Makefile}
-\begin{chunk}{*}
+
+\begin{remark}
+The following piece of chunk for generating a ``Makefile'', does not make
+any sense. The generated Makefile will be at ``src/Makefile'' of Axiom
+source directory, replacing the one generated from Makefile.pamphlet.
+
+After the initial full build, e.g. on Mac OS X, the next call of
+\texttt{make -f Makefile.MACOSX} will fail because the Makefile in ``src''
+folder is wrong. As a possible solution, the following Makefile is
+disabled.  -- Chun Tian, 29 June 2022.
+\end{remark}
+
+\begin{chunk}{unused}
 
 BOOK=${SPD}/books/bookvol6.pamphlet
 
