@@ -157,10 +157,10 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	     for i in `ls ${SRC}/input/*.input.pamphlet` ; do \
 	      if [ .${NOISE} = . ] ; \
 	      then \
-               latex $$i ; \
+               ${LATEX} $$i ; \
 	      else \
 	       ( echo p4a making $$i ; \
-	         latex $$i >${TMP}/trace ) ; \
+	         ${LATEX} $$i >${TMP}/trace ) ; \
 	      fi ; \
              done ; \
 	     rm -f *~ ; \
@@ -270,7 +270,7 @@ input:
 	  ( cd ${MNT}/${SYS}/doc/src/input ; \
 	    cp ${BOOKS}/axiom.sty . ; \
 	    for i in `ls ${SRC}/input/*.input.pamphlet` ; \
-              do latex $$i ; \
+              do ${LATEX} $$i ; \
               done ; \
 	     rm -f *~ ; \
 	     rm -f *.pamphlet~ ; \
@@ -285,11 +285,11 @@ book:
 	@ cp -pr ${SRC}/doc/ps ${MNT}/${SYS}/doc
 	@ (cd ${MNT}/${SYS}/doc ; \
           if [ .${NOISE} = . ] ; then \
-	    ( latex book.pamphlet --interaction nonstopmode ; \
-	      latex book.pamphlet --interaction nonstopmode ) ; \
+	    ( ${LATEX} book.pamphlet --interaction nonstopmode ; \
+	      ${LATEX} book.pamphlet --interaction nonstopmode ) ; \
 	   else \
-	    ( latex book.pamphlet --interaction nonstopmode >${TMP}/trace ; \
-	      latex book.pamphlet --interaction nonstopmode >${TMP}/trace ) ; \
+	    ( ${LATEX} book.pamphlet --interaction nonstopmode >${TMP}/trace ; \
+	      ${LATEX} book.pamphlet --interaction nonstopmode >${TMP}/trace ) ; \
 	  fi ; \
 	  rm book.pamphlet ; \
 	  rm book.toc ; \
