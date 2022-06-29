@@ -387,10 +387,10 @@ post processing. Thus the "-j 10" argument to make. We use
 \begin{chunk}{browserdir}
 browserdir: ${SPD}/books/bookvol11.pamphlet
 	@echo 11 making browser from bookvol11
-#	@(cd ${MNT}/${SYS}/doc/hypertex ; \
-#	  ${BOOKS}/tanglec ${SPD}/books/bookvol11.pamphlet >Makefile11 ; \
-#	  ${ENV} ${MAKE} -j 10 -f Makefile11 ; \
-#	  rm -f Makefile11 )
+	@(cd ${MNT}/${SYS}/doc/hypertex ; \
+	  ${BOOKS}/tanglec ${SPD}/books/bookvol11.pamphlet >Makefile11 ; \
+	  ${ENV} ${MAKE} -j 10 -f Makefile11 ; \
+	  echo rm -f Makefile11 )
 
 \end{chunk}
 
