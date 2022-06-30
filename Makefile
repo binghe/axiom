@@ -73,7 +73,8 @@ GCLVERSION=gcl-2.6.12
 #GCLVERSION=gcl-2.6.13pre
 #GCLVERSION=gcl-2.6.13pre114
 GCLDIR:=${LSP}/${GCLVERSION}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
+GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+         --disable-tclconfig --enable-static"
 LISP:=lsp
 
 ##### command line control

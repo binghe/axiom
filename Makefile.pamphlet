@@ -926,8 +926,17 @@ for building which vary from system
 to system. We create an environment variable here so we can add options
 to the configure command in the lsp/Makefile.pamphlet.
 
+\begin{remark}
+On June 30, 2022, two new options ``--disable-tclconfig'' and
+``--enable-static''. With the latter option, GCL-produced Axiom binaries
+get rid of libreadline versions only available on the building systems.
+This change will make the prebuilt Axiom distribution run on more Linux
+distributions.
+\end{remark}
+
 \begin{chunk}{GCLOPTS} 
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
+GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+         --disable-tclconfig --enable-static"
 \end{chunk}
 It turns out that we can successfully build GCL on many more systems
 if we set the GCLOPTS to build a local BFD.
