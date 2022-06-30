@@ -928,15 +928,15 @@ to the configure command in the lsp/Makefile.pamphlet.
 
 \begin{remark}
 On June 30, 2022, two new options ``--disable-tclconfig'' and
-``--enable-static''. With the latter option, GCL-produced Axiom binaries
+``--disable-readline''. With the latter one, GCL-produced Axiom binaries
 get rid of libreadline versions only available on the building systems.
 This change will make the prebuilt Axiom distribution run on more Linux
-distributions.
+distributions. (Axiom has its own readline facility, clef.)
 \end{remark}
 
 \begin{chunk}{GCLOPTS} 
 GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
-         --disable-tclconfig --enable-static"
+         --disable-tclconfig --disable-readline"
 \end{chunk}
 It turns out that we can successfully build GCL on many more systems
 if we set the GCLOPTS to build a local BFD.
