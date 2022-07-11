@@ -865,6 +865,7 @@ constructive suggestions on drafts of this book.
 %Original Page 1
 
 \setcounter{chapter}{0} % Chapter 0
+\setcounter{section}{0}
 \chapter{Introduction to Axiom}
 %\addcontentsline{toc}{chapter}{Introduction to Axiom}
 \label{ugNewIntro}
@@ -1381,6 +1382,7 @@ between your code and that of colleagues and system implementers.
 %Original Page 9
 
 \setcounter{chapter}{1} % Chapter 1
+\setcounter{section}{0}
 \chapter{A Technical Introduction to AXIOM}
 \label{ugTechIntro}
 Axiom has both an {\it interactive language} for user
@@ -4178,7 +4180,7 @@ General-Distributed-Mul-ti-var-iate-Poly-nomial
 }
 
 %\mainmatter
-\setcounter{chapter}{1} % Chapter 1
+\setcounter{chapter}{2} % Chapter 1
 \setcounter{section}{0}
 \chapter{An Overview of Axiom}
 \begin{quote}
@@ -7345,7 +7347,7 @@ This concludes your tour of Axiom.
 To disembark, issue the system command {\tt )quit} to leave Axiom
 and return to the operating system.
 
-\setcounter{chapter}{2}
+\setcounter{chapter}{3}
 \setcounter{section}{0}
 \chapter{Using Types and Modes}
 \begin{quote}
@@ -9658,7 +9660,7 @@ domains belonging to {\tt ComplexCategory} is {\tt Complex}.  See
 
 %Original Page 93
 
-\setcounter{chapter}{3}
+\setcounter{chapter}{4}
 \setcounter{section}{0}
 \chapter{Using HyperDoc}
 \label{ugHyper}
@@ -9988,7 +9990,7 @@ The default value is {\tt white}
 
 %Original Page 99
 
-\setcounter{chapter}{4}
+\setcounter{chapter}{5}
 \setcounter{section}{0}
 \chapter{Input Files and Output Styles}
 \label{ugInOut}
@@ -10573,7 +10575,7 @@ $$
 
 %Original Page 
 
-\setcounter{chapter}{5}
+\setcounter{chapter}{6}
 \setcounter{section}{0}
 \chapter{Overview of Interactive Language}
 \label{ugLang}
@@ -12470,7 +12472,7 @@ it left off.
 
 %Original Page 135
 
-\setcounter{chapter}{6}
+\setcounter{chapter}{7}
 \setcounter{section}{0}
 \chapter{User-Defined Functions, Macros and Rules}
 \label{ugUser}
@@ -15621,7 +15623,7 @@ application.
 
 %Original Page 179
 
-\setcounter{chapter}{7}
+\setcounter{chapter}{8}
 \setcounter{section}{0}
 \chapter{Graphics}
 \label{ugGraph}
@@ -18946,7 +18948,7 @@ three-di\-men\-sion\-al control-panel.
 
 %Original Page 227
 
-\setcounter{chapter}{8}
+\setcounter{chapter}{9}
 \setcounter{section}{0}
 \chapter{Advanced Problem Solving}
 \label{ugProblem}
@@ -25974,7 +25976,7 @@ AlgebraGivenByStructuralConstants(Fraction Integer,4,[AB,Ab,aB,ab],
 
 %Original Page 309
 
-\setcounter{chapter}{9}
+\setcounter{chapter}{10}
 \setcounter{section}{0}
 \chapter{Some Examples of Domains and Packages}
 In this chapter we show examples of many of the most commonly used
@@ -58346,7 +58348,7 @@ $$
 
 %Original Page 483
 
-\setcounter{chapter}{10}
+\setcounter{chapter}{11}
 \setcounter{section}{0}
 \chapter{Interactive Programming}
 \label{ugIntProg}
@@ -59444,8 +59446,6 @@ $drawComplex(g^3,-3..3,-3..3)$
 \end{center}
 \end{minipage}
 
-%\setcounter{chapter}{10} % Chapter 11
-
 \hyphenation{
 In-dexed-Aggre-gate
 Lin-ear-Aggre-gate
@@ -59462,7 +59462,7 @@ A function is just an object that has a mapping type.
 
 %Original Page 501
 
-\setcounter{chapter}{11}
+\setcounter{chapter}{12}
 \setcounter{section}{0}
 \chapter{Packages}
 \label{ugPackages}
@@ -60255,7 +60255,7 @@ environment and produces the result.
 
 %Original Page 515
 
-\setcounter{chapter}{12}
+\setcounter{chapter}{13}
 \setcounter{section}{0}
 \chapter{Categories}
 \label{ugCategories}
@@ -61044,7 +61044,7 @@ Quad-rat-ic-Form
 
 %Original Page 527
 
-\setcounter{chapter}{13}
+\setcounter{chapter}{14}
 \setcounter{section}{0}
 \chapter{Domains}
 \label{ugDomains}
@@ -62284,7 +62284,7 @@ How many distinct names of operations involving matrices are there?
 
 %Original Page 547
 
-\setcounter{chapter}{14}
+\setcounter{chapter}{15}
 \setcounter{section}{0}
 \chapter{Browse}
 \label{ugBrowse}
@@ -63298,8 +63298,8 @@ For example, for the category default package
 %Original Page 568
 
 
-%\setcounter{chapter}{14} % Chapter 15 
-
+\setcounter{chapter}{16}
+\setcounter{section}{0}
 \chapter{What's New in Axiom Version 2.0}
 \label{ugWhatsNew}
 
@@ -64301,7 +64301,8 @@ compilers.
 
 %Original Page 571
 
-\setcounter{chapter}{1} % Appendix A
+\setcounter{chapter}{17} % Appendix A
+\setcounter{section}{0}
 \chapter{Axiom System Commands}
 \label{ugSysCmd}
 
@@ -66763,7 +66764,8 @@ The command synonym  {\tt )apropos} is equivalent to
 
 %Original Page 595
 
-\setcounter{chapter}{2} % Appendix B
+\setcounter{chapter}{18} % Appendix B
+\setcounter{section}{0}
 \chapter{Categories}
 \label{ugAppCategories}
 
@@ -67393,7 +67395,8 @@ polynomial quoByVar series}
 
 %Original Page 601
 
-\setcounter{chapter}{3} % Appendix C
+\setcounter{chapter}{19} % Appendix C
+\setcounter{section}{0}
 \chapter{Domains}
 \label{ugAppDomains}
 
@@ -69263,7 +69266,8 @@ sorted? swap! vector zero}
 
 %Original Page 619
 
-\setcounter{chapter}{4} % Appendix D
+\setcounter{chapter}{20} % Appendix D
+\setcounter{section}{0}
 \chapter{Packages}
 \label{ugAppPackages}
 
@@ -70176,7 +70180,8 @@ listSquaredFactors}
 
 %%Original Page 627
 {
-\setcounter{chapter}{5} % Appendix E
+\setcounter{chapter}{21} % Appendix E
+\setcounter{section}{0}
 \chapter{Operations}
 \label{ugAppOperations}
 
@@ -86552,7 +86557,7 @@ of the points on the curve \smath{c}.
 
 %Original Page 691
 
-\setcounter{chapter}{6} % Appendix F
+\setcounter{chapter}{22} % Appendix F
 \setcounter{section}{0}
 \chapter{Programs for Axiom Images}
 \label{ugAppGraphics}
@@ -87374,7 +87379,7 @@ drawOneScherk(s) ==
 
 %Original Page 703
 {
-\setcounter{chapter}{7} % Appendix G
+\setcounter{chapter}{23} % Appendix G
 \chapter{Glossary}
 \label{ugGlossary}
 
@@ -89296,7 +89301,9 @@ Each interactive {\it frame} has its own workspace.
 
 \vfill
 \eject
-%\setcounter{chapter}{7} % Appendix H
+
+\setcounter{chapter}{24} % Appendix H
+\setcounter{section}{0}
 \chapter{BackMatter Quotes}
 \begin{quote}
 ``AXIOM is a milestone in the history of computation. It sets a new
