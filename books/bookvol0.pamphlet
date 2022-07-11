@@ -864,7 +864,7 @@ constructive suggestions on drafts of this book.
 
 %Original Page 1
 
-\setcounter{chapter}{0} % Chapter 0
+%\setcounter{chapter}{0} % Chapter 0
 \chapter{Introduction to Axiom}
 %\addcontentsline{toc}{chapter}{Introduction to Axiom}
 \label{ugNewIntro}
@@ -876,7 +876,7 @@ from symbolics, to numerics, to graphics.
 
 This introduction is a quick overview of what Axiom offers.
 
-\subsection{Symbolic Computation}
+\section{Symbolic Computation}
 Axiom provides a wide range of simple commands for symbolic
 mathematical problem solving.  Do you need to solve an equation, to
 expand a series, or to obtain an integral?  If so, just ask Axiom
@@ -922,7 +922,7 @@ gives you the answer when an answer exists.  If one does not, it
 provides a proof that there is no answer.  Integration is just one of
 a multitude of symbolic operations that Axiom provides.
 
-\subsection{Numeric Computation}
+\section{Numeric Computation}
 Axiom has a numerical library that includes operations for linear
 algebra, solution of equations, and special functions.  For many of
 these operations, you can select any number of floating point digits
@@ -981,7 +981,7 @@ algebra, basic statistics, step-wise regression, analysis of variance,
 time series analysis, mathematical programming, and special functions.
 Contact the Numerical Algorithms Group Limited, Oxford, England.
 
-\subsection{Graphics}
+\section{Graphics}
 You may often want to visualize a symbolic formula or draw
 a graph from a set of numerical values.
 To do this, you can call upon the Axiom
@@ -1005,7 +1005,7 @@ zoom, change the coloring, lighting, shading, and perspective on the
 picture.  You can also generate a PostScript copy of your graph to
 produce hard-copy output.
 
-\subsection{HyperDoc}
+\section{HyperDoc}
 
 \begin{figure}[htbp]
 %\includegraphics[bbllx=1, bblly=1, bburx=298, bbury=290]{ps/v0hroot.eps}
@@ -1030,7 +1030,7 @@ series of HyperDoc windows shown in \figureref{fig-intro-br}
 and the specified mouse clicks, you and
 HyperDoc generate the correct command to issue to compute the answer.
 
-\subsection{Interactive Programming }
+\section{Interactive Programming }
 Axiom's interactive programming language lets you define your
 own functions.  A simple example of a user-defined function is one
 that computes the successive Legendre polynomials.  Axiom lets
@@ -1105,7 +1105,7 @@ In general, a user function is type-analyzed and compiled on first use.
 Later, if you use it with a different kind of object, the function
 is recompiled if necessary.
 
-\subsection{Data Structures}
+\section{Data Structures}
 
 A variety of data structures are available for interactive use.  These
 include strings, lists, vectors, sets, multisets, and hash tables.  A
@@ -1200,7 +1200,7 @@ $$
 $$
 \returnType{Type: Expression Integer}
 
-\subsection{Mathematical Structures}
+\section{Mathematical Structures}
 Axiom also has many kinds of mathematical structures.  These
 range from simple ones (like polynomials and matrices) to more
 esoteric ones (like ideals and Clifford algebras).  Most structures
@@ -1239,7 +1239,7 @@ $$
 $$
 \returnType{Type: Union(Matrix Fraction Polynomial Complex Integer,...)}
 
-\subsection{Pattern Matching}
+\section{Pattern Matching}
 
 %Original Page 7
 
@@ -1298,7 +1298,7 @@ Using input files, you can create your own library of transformation
 rules relevant to your applications, then selectively apply the rules
 you need.
 
-\subsection{Polymorphic Algorithms}
+\section{Polymorphic Algorithms}
 All components of the Axiom algebra library are written in the
 Axiom library language.  This language is similar to the
 interactive language except for protocols that authors are obliged to
@@ -1365,7 +1365,7 @@ with equations over any ``field.''  Examples of fields are the
 rational numbers, floating point numbers, rational functions, power
 series, and general expressions involving radicals.
 
-\subsection{Extensibility}
+\section{Extensibility}
 
 Users and system developers alike can augment the Axiom library,
 all using one common language.  Library code, like interpreter code,
@@ -1380,7 +1380,7 @@ between your code and that of colleagues and system implementers.
 
 %Original Page 9
 
-\setcounter{chapter}{0} % Chapter 0
+%\setcounter{chapter}{0} % Chapter 0
 \chapter{A Technical Introduction to AXIOM}
 \label{ugTechIntro}
 Axiom has both an {\it interactive language} for user
