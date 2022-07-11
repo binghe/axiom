@@ -951,11 +951,13 @@ with the message
 Error: Cannot get relocated section contents
 \end{verbatim}
 \begin{chunk}{GCLOPTS-LOCBFD}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
+GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+         --disable-tclconfig --disable-readline"
 \end{chunk}
 For the gcl-2.6.8pre7 version we move to using the custreloc option.
 \begin{chunk}{GCLOPTS-CUSTRELOC}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
+GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+         --disable-tclconfig --disable-readline"
 \end{chunk}
 For the MACOSX port we need the following options. The ``--disable-nls'' means 
 that we will not be supporting natural language internationalization.
@@ -965,7 +967,8 @@ setting of the ``canonical'' variable, which is in turn set by a shell script.
 We need to add ``--enable-locbfd'' and ``--disable-dlopen'' due to the error
 ``unexec: not enough room for load commands for new \_\_DATA segments''.
 \begin{chunk}{GCLOPTS-MACPORT}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig"
+GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+         --disable-tclconfig --disable-readline"
 \end{chunk}
 
 \subsection{Makefile.freebsd}

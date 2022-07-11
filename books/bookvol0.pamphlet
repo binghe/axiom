@@ -864,7 +864,7 @@ constructive suggestions on drafts of this book.
 
 %Original Page 1
 
-%\setcounter{chapter}{0} % Chapter 0
+\setcounter{chapter}{0} % Chapter 0
 \chapter{Introduction to Axiom}
 %\addcontentsline{toc}{chapter}{Introduction to Axiom}
 \label{ugNewIntro}
@@ -1380,7 +1380,7 @@ between your code and that of colleagues and system implementers.
 
 %Original Page 9
 
-%\setcounter{chapter}{0} % Chapter 0
+\setcounter{chapter}{1} % Chapter 1
 \chapter{A Technical Introduction to AXIOM}
 \label{ugTechIntro}
 Axiom has both an {\it interactive language} for user
