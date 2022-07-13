@@ -1,0 +1,28 @@
+)abbrev category ABELSG AbelianSemiGroup
+++ Description:
+++ The class of all additive (commutative) semigroups, that is,
+++ a set with a commutative and associative operation \spadop{+}.
+++
+++ Axioms\br
+++ \tab{5}\spad{associative("+":(%,%)->%)}\tab{5}\spad{(x+y)+z = x+(y+z)}\br
+++ \tab{6}\spad{commutative("+":(%,%)->%)}\tab{5}\spad{x+y = y+x}
+
+AbelianSemiGroup() : Category == SIG where
+
+  SIG ==> SetCategory with
+
+    "+" : (%,%) -> %
+      ++ x+y computes the sum of x and y.
+
+    "*" : (PositiveInteger,%) -> %
+      ++ n*x computes the left-multiplication of x by the positive 
+      ++ integer n. This is equivalent to adding x to itself n times.
+
+   add
+
+     import RepeatedDoubling(%)
+
+     if not (% has Ring) then
+
+        n:PositiveInteger * x:% == double(n,x)
+

@@ -1,0 +1,34 @@
+)abbrev category SFRTCAT SquareFreeRegularTriangularSetCategory
+++ Author: Marc Moreno Maza
+++ Date Created: 09/03/1996
+++ Date Last Updated: 09/10/1998  
+++ References :
+++ SALSA Solvers for Algebraic Systems and Applications
+++ Kalk91 Three contributions to elimination theory
+++ Kalk98 Algorithmic properties of polynomial rings
+++ Aubr96 Triangular Sets for Solving Polynomial Systems: 
+++ Aubr99 On the Theories of Triangular Sets
+++ Aubr99a Triangular Sets for Solving Polynomial Systems: 
+++ Laza91 A new method for solving algebraic systems of positive dimension
+++ Maza95 Polynomial Gcd Computations over Towers of Algebraic Extensions
+++ Maza97 Calculs de pgcd au-dessus des tours d'extensions simples et 
+++        resolution des systemes d'equations algebriques
+++ Maza98 A new algorithm for computing triangular decomposition of 
+++        algebraic varieties
+++ Maza00 On Triangular Decompositions of Algebraic Varieties
+++ Description:
+++ The category of square-free regular triangular sets.
+++ A regular triangular set \spad{ts} is square-free if
+++ the gcd of any polynomial \spad{p} in \spad{ts} and 
+++ differentiate(p,mvar(p)) w.r.t. collectUnder(ts,mvar(p))
+++ has degree zero w.r.t. \spad{mvar(p)}. Thus any square-free regular
+++ set defines a tower of square-free simple extensions.
+
+SquareFreeRegularTriangularSetCategory(R,E,V,P) : Category == SIG where
+  R : GcdDomain
+  E : OrderedAbelianMonoidSup
+  V : OrderedSet
+  P : RecursivePolynomialCategory(R,E,V)
+
+  SIG ==> RegularTriangularSetCategory(R,E,V,P) 
+

@@ -1,0 +1,62 @@
+)abbrev package REALSOLV RealSolvePackage
+++ Description: 
+++ This package provides numerical solutions of systems of
+++ polynomial equations for use in ACPLOT
+
+RealSolvePackage() : SIG == CODE where
+
+  I    ==> Integer
+  IE   ==> IndexedExponents Symbol
+  L    ==> List
+  NF   ==> Float
+  P    ==> Polynomial
+  RN   ==> Fraction Integer
+  SE   ==> Symbol
+  RFI  ==> Fraction Polynomial Integer
+  LIFT ==> PolynomialCategoryLifting(IE,SE,RN,P RN, RFI)
+  SOLV ==> FloatingRealPackage Float
+
+  SIG ==> with
+
+    solve : (P RN,NF) -> L NF
+      ++ solve(p,eps) finds the real zeroes of a
+      ++ univariate rational polynomial p with precision eps.
+      ++
+      ++X p := 4*x^3 - 3*x^2 + 2*x - 4
+      ++X solve(p::POLY(FRAC(INT)),0.01)$REALSOLV
+
+    solve : (P I,NF) -> L NF
+      ++ solve(p,eps) finds the real zeroes of a univariate
+      ++ integer polynomial p with precision eps.
+      ++
+      ++X p := 4*x^3 - 3*x^2 + 2*x - 4
+      ++X solve(p,0.01)$REALSOLV
+
+    realSolve : (L P I,L SE,NF) -> L L NF
+      ++ realSolve(lp,lv,eps) = compute the list of the real
+      ++ solutions of the list lp of polynomials with integer
+      ++ coefficients with respect to the variables in lv,
+      ++ with precision eps.
+      ++
+      ++X p1 := x**2*y*z + y*z
+      ++X p2 := x**2*y**2*z + x + z
+      ++X p3 := x**2*y**2*z**2 +  z + 1
+      ++X lp := [p1, p2, p3]
+      ++X realSolve(lp,[x,y,z],0.01)
+
+  CODE ==> add
+
+    prn2rfi: P RN -> RFI
+    prn2rfi p ==
+      map(x+->x::RFI, x+->(numer(x)::RFI)/(denom(x)::RFI), p)$LIFT
+
+    pi2rfi: P I -> RFI
+    pi2rfi p == p :: RFI
+
+    solve(p:P RN,eps:NF) == realRoots(prn2rfi p, eps)$SOLV
+
+    solve(p:P I,eps:NF)  == realRoots(p::RFI, eps)$SOLV
+
+    realSolve(lp,lv,eps) ==
+      realRoots(map(pi2rfi, lp)$ListFunctions2(P I,RFI),lv,eps)$SOLV
+

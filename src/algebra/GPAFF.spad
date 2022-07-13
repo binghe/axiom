@@ -1,0 +1,661 @@
+)abbrev package GPAFF GeneralPackageForAlgebraicFunctionField
+++ Author: Gaetan Hache
+++ Date created: June 1995
+++ Date Last Updated: May 2010 by Tim Daly
+++ References:
+++ Hach95 Effective construction of algebraic geometry codes
+++ Walk78 Algebraic Curves
+++ Vogl07 Genus of a Plane Curve
+++ Fult08 Algebraic Curves: An Introduction to Algebraic Geometry
+++ Description: 
+++ A package that implements the Brill-Noether algorithm. Part of the
+++ PAFF package.
+
+GeneralPackageForAlgebraicFunctionField(K, symb, PolyRing, E, ProjPt, 
+     PCS, Plc, DIVISOR, InfClsPoint, DesTree, BLMET) : SIG == CODE where
+  K : Field
+  symb : List(Symbol)
+  OV ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+  InfClsPoint : InfinitlyClosePointCategory(K,symb,PolyRing,E,ProjPt,_
+                                            PCS,Plc,DIVISOR,BLMET)
+  DesTree : DesingTreeCategory(InfClsPoint)
+  BLMET : BlowUpMethodCategory
+
+  FRACPOLY ==> Fraction PolyRing
+  OF       ==> OutputForm
+  INT      ==> Integer
+  NNI      ==> NonNegativeInteger
+  PI       ==> PositiveInteger
+  UP       ==> UnivariatePolynomial
+  UPZ      ==> UP(t, Integer) 
+  UTSZ     ==> UnivariateTaylorSeriesCZero(Integer,t)
+  SUP      ==> SparseUnivariatePolynomial
+  PPFC1    ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+  ParamPackFC ==> LocalParametrizationOfSimplePointPackage(K,symb,PolyRing,_
+                                                             E,ProjPt,PCS,Plc)
+  ParamPack   ==> ParametrizationPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc)
+  RatSingPack ==> ProjectiveAlgebraicSetPackage(K,symb,PolyRing,E,ProjPt)
+  IntDivPack  ==> IntersectionDivisorPackage(K,symb,PolyRing,E,ProjPt,PCS,_
+                                        Plc,DIVISOR,InfClsPoint,DesTree,BLMET)
+  IntFrmPack  ==> InterpolateFormsPackage(K,symb,PolyRing,E,ProjPt,PCS,_
+                                          Plc,DIVISOR)
+  DesTrPack   ==> DesingTreePackage(K,symb,PolyRing,E,ProjPt,PCS,_
+                                        Plc,DIVISOR,InfClsPoint,DesTree,BLMET)
+  PackPoly    ==> PackageForPoly(K,PolyRing,E,#symb)
+
+  SIG ==> with
+
+    reset : () -> Void
+
+    setCurve : PolyRing -> PolyRing
+      ++ setCurve sets the defining polynomial
+
+    homogenize : (PolyRing,Integer) -> PolyRing
+
+    printInfo : List Boolean -> Void
+      ++ printInfo(lbool) prints some information comming from various 
+      ++ package and domain used by this package.
+
+    theCurve : () -> PolyRing
+      ++ theCurve returns the specified polynomial for the package.
+
+    genus : () -> NNI
+      ++ genus returns the genus of the curve defined by the polynomial 
+      ++ given to the package.
+
+    genusNeg : () -> INT
+
+    desingTree : () -> List DesTree
+      ++ desingTree returns the desingularisation trees at all singular 
+      ++ points of the curve defined by the polynomial given to the package.
+
+    desingTreeWoFullParam : () -> List DesTree
+      ++ desingTreeWoFullParam returns the desingularisation trees at all 
+      ++ singular points of the curve defined by the polynomial given to 
+      ++ the package. The local parametrizations are not computed.
+
+    setSingularPoints : List ProjPt -> List ProjPt
+      ++ setSingularPoints(lpt) sets the singular points to be used. 
+      ++ Beware: no attempt is made to check if the points are singular 
+      ++ or not, nor if all of the singular points are presents. Hence, 
+      ++ results of some computation maybe false. It is intend to be use
+      ++ when one want to compute the singular points are computed by other 
+      ++ means than to use the function singularPoints.
+
+    singularPoints : () -> List(ProjPt)
+      ++ singularPoints() returns the singular points of the
+      ++ curve defined by the polynomial given to the package.
+      ++ If the singular points lie in an extension of the specified ground 
+      ++ field an error message is issued specifying the extension degree 
+      ++ needed to find all singular points.
+
+    parametrize : (PolyRing,Plc) -> PCS
+      ++ parametrize(f,pl) returns a local parametrization of f at the place 
+      ++ pl.
+
+    lBasis : DIVISOR -> Record(num:List PolyRing, den: PolyRing)
+      ++ lBasis computes a basis associated to the specified divisor
+
+    findOrderOfDivisor : (DIVISOR,Integer,Integer) -> _
+                    Record(ord:Integer,num:PolyRing,den:PolyRing,upTo:Integer)
+
+    interpolateForms : (DIVISOR,NNI) -> List(PolyRing)
+      ++ interpolateForms(d,n) returns a basis of the interpolate forms of 
+      ++ degree n of the divisor d.
+
+    interpolateFormsForFact : (DIVISOR,List PolyRing) -> List(PolyRing)
+
+    eval : (PolyRing,Plc) -> K
+      ++ eval(f,pl) evaluate f at the place pl.
+
+    eval : (PolyRing,PolyRing,Plc) -> K
+      ++ eval(f,g,pl) evaluate the function f/g at the place pl.
+
+    eval : (FRACPOLY,Plc) -> K
+      ++ eval(u,pl) evaluate the function u at the place pl.
+
+    evalIfCan : (PolyRing,Plc) -> Union(K,"failed")
+      ++ evalIfCan(f,pl) evaluate f at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    evalIfCan : (PolyRing,PolyRing,Plc) -> Union(K,"failed")
+      ++ evalIfCan(f,g,pl) evaluate the function f/g at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    evalIfCan : (FRACPOLY,Plc) -> Union(K,"failed")
+      ++ evalIfCan(u,pl) evaluate the function u at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    intersectionDivisor : PolyRing -> DIVISOR
+      ++ intersectionDivisor(pol) compute the intersection divisor 
+      ++ (the Cartier divisor) of the form pol with the curve. If some 
+      ++ intersection points lie in an extension of the ground field,
+      ++ an error message is issued specifying the extension degree 
+      ++ needed to find all the intersection  points.
+      ++ (If pol is not homogeneous an error message is issued).
+
+    adjunctionDivisor : () -> DIVISOR
+      ++ adjunctionDivisor computes the adjunction divisor of the plane 
+      ++ curve given by the polynomial crv.
+
+    placesAbove : ProjPt -> List Plc
+
+    pointDominateBy : Plc -> ProjPt
+      ++ pointDominateBy(pl) returns the projective point dominated 
+      ++ by the place pl.
+
+    if K has Finite then --should we say LocallyAlgebraicallyClosedField??
+
+      rationalPlaces : () -> List Plc
+        ++ rationalPlaces returns all the rational places of  the
+        ++ curve defined by the polynomial given to the package.
+
+      rationalPoints : () -> List(ProjPt)
+
+      LPolynomial : () -> SparseUnivariatePolynomial Integer
+        ++ LPolynomial() returns the L-Polynomial of the curve.
+
+      LPolynomial : PI -> SparseUnivariatePolynomial Integer
+        ++ LPolynomial(d) returns the L-Polynomial of the curve in
+        ++ constant field extension of degree d. 
+
+      classNumber : () -> Integer
+        ++ classNumber() returns the class number of the curve.
+
+      placesOfDegree : PI -> List Plc
+        ++ placesOfDegree(d) returns all places of degree d of the
+        ++ curve.
+
+      numberOfPlacesOfDegree : PI -> Integer
+        ++ numberOfPlacesOfDegree(pi) returns the number of places 
+        ++ of the given degree
+
+      numberRatPlacesExtDeg : PI -> Integer
+        ++ numberRatPlacesExtDeg(n) returns the number of rational
+        ++ places in the constant field extenstion of degree n
+
+      numberPlacesDegExtDeg : (PI, PI) -> Integer
+        ++ numberPlacesDegExtDeg(d, n) returns the number of 
+        ++ places of degree d in the constant field extension of
+        ++ degree n
+
+      ZetaFunction : () -> UTSZ
+        ++ ZetaFunction() returns the Zeta function of the curve.
+        ++ Calculated by using the L-Polynomial
+
+      ZetaFunction : PI -> UTSZ
+        ++ ZetaFunction(pi) returns the Zeta function of the curve in 
+        ++ constant field extension. Calculated by using the L-Polynomial
+        
+  CODE ==> add
+
+    import PPFC1
+    import PPFC2
+    import DesTrPack
+    import IntFrmPack
+    import IntDivPack
+    import RatSingPack
+    import ParamPack
+    import ParamPackFC
+    import PackPoly
+
+    crvLocal:PolyRing:=1$PolyRing
+
+    -- flags telling such and such is already computed.
+
+    genusCalc?:Boolean:= false()$Boolean
+    theGenus:INT:=0
+
+    desingTreeCalc?:Boolean:=false()$Boolean
+    theTree:List DesTree := empty()
+
+    desingTreeWoFullParamCalc?:Boolean:=false()$Boolean
+
+    adjDivCalc?:Boolean:=false()$Boolean
+    theAdjDiv:DIVISOR:=0
+
+    singularPointsCalc?:Boolean:=false()$Boolean
+    lesPtsSing:List(ProjPt):=empty()
+
+    rationalPointsCalc?:Boolean:=false()$Boolean
+    lesRatPts:List(ProjPt):=empty()
+
+    rationalPlacesCalc?:Boolean:=false()$Boolean
+    lesRatPlcs:List(Plc):=empty()
+
+    zf:UTSZ:=1$UTSZ
+    zfCalc : Boolean := false()$Boolean
+
+    DegOfPlacesFound: List Integer := empty()
+
+    -- see package IntersectionDivisorPackage
+    intersectionDivisor(pol)==
+      if ^(pol =$PolyRing homogenize(pol,1)) then _
+        error _
+         "From intersectionDivisor: the input is NOT a homogeneous polynomial"
+      intersectionDivisor(pol,theCurve(),desingTree(),singularPoints())
+
+    lBasis(divis)==
+      d:=degree divis
+      d < 0 => [[0$PolyRing],1$PolyRing]
+      A:=adjunctionDivisor()
+      -- modifie le 08/05/97: avant c'etait formToInterp:=divOfZero(divis) + A
+      formToInterp:=  divOfZero(divis + A)
+      degDpA:=degree  formToInterp
+      degCrb:=totalDegree(theCurve())$PackPoly
+      dd:=divide(degDpA,degCrb pretend Integer)
+      dmin:NNI:=
+        if ^zero?(dd.remainder) then (dd.quotient+1) pretend NNI
+        else dd.quotient pretend NNI
+      print("Trying to interpolate with forms of degree:"::OF)
+      print(dmin::OF)
+      lg0:List PolyRing:=interpolateForms(formToInterp,dmin)
+      while zero?(first lg0) repeat
+        dmin:=dmin+1
+        print("Trying to interpolate with forms of degree:"::OF)
+        print(dmin::OF)
+        lg0:=interpolateForms(formToInterp,dmin)
+      print("Denominator found"::OF)
+      g0:PolyRing:=first lg0
+      dg0:=intersectionDivisor(g0)
+      print("Intersection Divisor of Denominator found"::OF)
+      lnumer:List PolyRing:=interpolateForms(dg0-divis,dmin)
+      [lnumer,g0]
+
+    genus==
+      if ^(genusCalc?) then
+        degCrb:=totalDegree(theCurve())$PackPoly
+        theGenus:=genusTreeNeg(degCrb,desingTreeWoFullParam())
+        genusCalc?:=true()$Boolean
+      theGenus < 0 => 
+        print(("Too many infinitly near points")::OF)
+        print(("The curve may not be absolutely irreducible")::OF)
+        error "Have a nice day"
+      theGenus pretend NNI
+
+    genusNeg==
+      if ^(genusCalc?) then
+        degCrb:=totalDegree(theCurve())$PackPoly
+        theGenus:=genusTreeNeg(degCrb,desingTreeWoFullParam())
+        genusCalc?:=true()$Boolean
+      theGenus 
+
+    homogenize(pol,n)== homogenize(pol,n)$PackPoly
+
+    fPl(pt:ProjPt,desTr:DesTree):Boolean ==
+      nd:=value desTr
+      lpt:=pointV nd
+      pt = lpt
+
+
+    placesAbove(pt)==
+      -- verifie si le point est simple, si c'est le cas, 
+      -- on retourne la place correpondante
+      -- avec pointToPlace qui cre' la place si necessaire.
+      ^member?(pt,singularPoints()) => _
+        [pointToPlace(pt,theCurve())$ParamPackFC]
+      -- les quatres lignes suivantes trouvent les feuilles qui 
+      -- sont au-dessus du point.
+      theTree:= desingTree()
+      cTree:= find(fPl(pt,#1),theTree)
+      cTree case "failed" => error "Big error in placesAbove"
+        -- G. Hache, gaetan.hache@inria.fr"
+      lvs:=leaves cTree
+      -- retourne les places correspondant aux feuilles en "consultant" 
+      -- les diviseurs exceptionnels.
+      concat [supp excpDivV(l) for l in lvs]
+
+    pointDominateBy(pl)== pointDominateBy(pl)$ParamPackFC
+
+    reduceForm(p1:PolyRing,p2:PolyRing):PolyRing==
+      normalForm(p1,[p2])$GroebnerPackage(K,E,OV,PolyRing)
+
+    evalIfCan(f:PolyRing,pl:Plc)==
+      u:=reduceForm(f, theCurve() ) 
+      zero?(u) => 0
+      pf:= parametrize(f,pl)
+      ord:INT:=order pf 
+      ord < 0 => "failed"
+      ord > 0 => 0
+      coefOfFirstNonZeroTerm pf
+
+    eval(f:PolyRing,pl:Plc)==
+      eic:=evalIfCan(f,pl)
+      eic case "failed" => _
+        error "From eval (function at place): its a pole !!!"
+      eic    
+
+    setCurve(pol)==
+      crvLocal:=pol
+      ^(crvLocal =$PolyRing homogenize(crvLocal,1)) =>
+        print(("the defining polynomial is not homogeneous")::OF)
+        error "Have a nice day"
+      reset()
+      theCurve()
+      
+    reset == 
+      setFoundPlacesToEmpty()$Plc
+      genusCalc?:Boolean:= false()$Boolean
+      theGenus:INT:=0
+      desingTreeCalc?:Boolean:=false()$Boolean
+      desingTreeWoFullParamCalc?:Boolean:=false()$Boolean
+      theTree:List DesTree := empty()
+      adjDivCalc?:Boolean:=false()$Boolean
+      theAdjDiv:DIVISOR:=0
+      singularPointsCalc?:Boolean:=false()$Boolean
+      lesPtsSing:List(ProjPt):=empty()
+      rationalPointsCalc?:Boolean:=false()$Boolean
+      lesRatPts:List(ProjPt):=empty()
+      rationalPlacesCalc?:Boolean:=false()$Boolean
+      lesRatPlcs:List(Plc):=empty()
+      DegOfPlacesFound: List Integer := empty()
+      zf:UTSZ:=1$UTSZ
+      zfCalc:Boolean := false$Boolean
+
+    foundPlacesOfDeg?(i:PositiveInteger):Boolean ==
+      ld: List Boolean := [zero?(a rem i) for a in DegOfPlacesFound]
+      entry?(true$Boolean,ld)
+
+    findOrderOfDivisor(divis,lb,hb) ==
+      ^zero?(degree divis) => error("The divisor is NOT of degre zero !!!!")
+      A:=adjunctionDivisor()
+      formToInterp:=divOfZero ( hb*divis + A )
+      degDpA:=degree formToInterp
+      degCrb:=totalDegree( theCurve())$PackPoly
+      dd:=divide(degDpA,degCrb pretend Integer)
+      dmin:NNI:=
+        if ^zero?(dd.remainder) then (dd.quotient+1) pretend NNI
+        else dd.quotient pretend NNI
+      lg0:List PolyRing:=interpolateForms(formToInterp,dmin)
+      while zero?(first lg0) repeat
+        dmin:=dmin+1
+        lg0:=interpolateForms(formToInterp,dmin)
+      g0:PolyRing:=first lg0
+      dg0:=intersectionDivisor(g0)
+      nhb:=hb
+      while effective?(dg0 - nhb*divis - A) repeat
+        nhb:=nhb+1
+      nhb:=nhb-1
+      ftry:=lb
+      lnumer:List PolyRing:=interpolateForms(dg0-ftry*divis,dmin)
+      while zero?(first lnumer) and ftry < nhb repeat
+        ftry:=ftry + 1
+        lnumer:List PolyRing:=interpolateForms(dg0-ftry*divis,dmin)
+      [ftry,first lnumer,g0,nhb]
+
+    theCurve==
+      one?(crvLocal) => error "The defining polynomial has not been set yet!"
+      crvLocal
+
+    printInfo(lbool)==
+      printInfo(lbool.2)$ParamPackFC
+      printInfo(lbool.3)$PCS
+      void()
+
+    desingTree==
+      theTree:= desingTreeWoFullParam()
+      if ^(desingTreeCalc?) then
+        for arb in theTree repeat
+          fullParamInit(arb)
+        desingTreeCalc?:=true()$Boolean
+      theTree
+
+    desingTreeWoFullParam==
+      if ^(desingTreeWoFullParamCalc?) then
+        theTree:=[desingTreeAtPoint(pt,theCurve())  for pt in singularPoints()]
+        desingTreeWoFullParamCalc?:=true()$Boolean
+      theTree
+
+    -- compute the adjunction divisor of the curve using adjunctionDivisor 
+    -- from DesingTreePackage
+    adjunctionDivisor()==
+      if ^(adjDivCalc?) then
+        theAdjDiv:=_
+          reduce("+",[adjunctionDivisor(tr) for tr in desingTree()],0$DIVISOR)
+        adjDivCalc?:=true()$Boolean
+      theAdjDiv
+
+    -- returns the singular points using the function singularPoints 
+    -- from ProjectiveAlgebraicSetPackage
+    singularPoints==
+      if ^(singularPointsCalc?) then
+        lesPtsSing:=singularPoints(theCurve())
+        singularPointsCalc?:=true()$Boolean
+      lesPtsSing
+
+    setSingularPoints(lspt)==
+      singularPointsCalc?:=true()$Boolean
+      lesPtsSing:= lspt
+ 
+    -- returns the rational points using the function rationalPoints 
+    -- from ProjectiveAlgebraicSetPackage
+
+    -- compute the local parametrization of f at the place pl 
+    -- (from package ParametrizationPackage)
+    parametrize(f,pl)==parametrize(f,pl)$ParamPack
+
+    -- compute the interpolating forms (see package InterpolateFormsPackage)
+    interpolateForms(d,n)==
+      lm:List PolyRing:=listAllMono(n)$PackPoly
+      interpolateForms(d,n,theCurve(),lm)
+
+    interpolateFormsForFact(d,lm)==
+      interpolateFormsForFact(d,lm)$IntFrmPack
+
+    evalIfCan(f:PolyRing,g:PolyRing,pl:Plc)==
+      fu:=reduceForm(f,theCurve())
+      gu:=reduceForm(g,theCurve())
+      zero?(fu) and ^zero?(gu) => 0
+      ^zero?(fu) and zero?(gu) => "failed"
+      pf:= parametrize(fu,pl)
+      pg:= parametrize(gu,pl)
+      ordf:INT:=order pf
+      ordg:INT:=order pg
+      cf:=coefOfFirstNonZeroTerm pf
+      cg:=coefOfFirstNonZeroTerm pg
+      (ordf - ordg) < 0 => "failed"
+      (ordf - ordg) > 0 => 0
+      cf * inv cg
+
+    eval(f:PolyRing,g:PolyRing,pl:Plc)==
+      eic:=evalIfCan(f,g,pl)
+      eic case "failed" => error "From eval (function at place): its a pole"
+      eic
+
+    evalIfCan(u:FRACPOLY,pl:Plc)==
+      f:PolyRing := numer u
+      g:PolyRing := denom u
+      evalIfCan(f,g,pl)
+      
+    eval(u:FRACPOLY,pl:Plc)==
+      f:PolyRing := numer u
+      g:PolyRing := denom u
+      eval(f,g,pl)
+    
+    thedeg:PI := 1
+    
+    crap(p:Plc):Boolean ==
+      degree(p)$Plc = thedeg
+    
+    if K has Finite then 
+      rationalPlaces == 
+        K has PseudoAlgebraicClosureOfFiniteFieldCategory => _
+           placesOfDegree(1$PI)
+        --non good pour LACF !!!!
+        rationalPlacesCalc? => lesRatPlcs
+        ltr:List(DesTree):=desingTree()
+        ratP:List(ProjPt):=rationalPoints()
+        singP:List(ProjPt):=singularPoints()
+        simRatP:List(ProjPt):=setDifference(ratP,singP)
+        for pt in simRatP repeat
+          pointToPlace(pt,theCurve())$ParamPackFC
+        rationalPlacesCalc? := true()$Boolean
+        lesRatPlcs:=foundPlaces()$Plc
+        lesRatPlcs
+
+      rationalPoints==
+        if ^(rationalPointsCalc?) then
+          if K has Finite then
+            lesRatPts:= rationalPoints(theCurve(),1)$RatSingPack
+            rationalPointsCalc?:=true()$Boolean
+          else
+            error "Can't find rationalPoints when the field is not finite"
+        lesRatPts
+    
+      ZetaFunction() ==
+        if not zfCalc then
+          zf:= ZetaFunction(1)
+          zfCalc:= true$Boolean
+        zf
+                  
+      ZetaFunction(d) ==
+          lp:= LPolynomial(d)
+          if K has PseudoAlgebraicClosureOfFiniteFieldCategory then
+            setTower!(1$K)
+          q:INT := size()$K ** d
+          lpt:UPZ := unmakeSUP(lp)$UPZ
+          lps:UTSZ := coerce(lpt)$UTSZ
+          x:= monomial(1,1)$UTSZ
+          mul: UTSZ := (1-x)*(1 - q * x)
+          invmul:Union(UTSZ,"failed") := recip(mul)$UTSZ
+          ivm: UTSZ
+          if not (invmul case "failed") then 
+            ivm := invmul pretend UTSZ
+          else
+            ivm := 1
+          lps * ivm
+      
+      calculatedSer: List UTSZ:= [1]
+        --in index i is the "almost ZetaFunction" summed to i-1. 
+        --Except calculatedSer.1 which is 1
+      
+      numberOfPlacesOfDegreeUsingZeta(degree:PI): Integer  == 
+        --is at most called once for each degree. Will calculate the
+        --entries in calculatdSer. 
+        ser:UTSZ := 1
+        x:= monomial(1,1)$UTSZ
+        pol:UTSZ
+        polser:Union(UTSZ,"failed")
+        serdel:UTSZ
+        i:PI := maxIndex(calculatedSer) pretend PI
+        while i < degree repeat
+          serdel:= 1
+          if (n:= numberOfPlacesOfDegree(i)) > 0 then 
+            pol:= (1-x**i) ** (n pretend PI)
+            polser:= recip(pol)$UTSZ -- coerce(pol)$UTSZ)$UTSZ
+            if not (polser case "failed") then
+              serdel:= (polser pretend UTSZ)
+            else
+              error "In numberOfPlacesOfDegreeUsingZeta. This shouldn't happen"
+          ser:= serdel * calculatedSer.i
+          calculatedSer:= concat(calculatedSer, ser)
+          i:= i + 1
+        if degree = 1 then 
+          coefficient(ZetaFunction(),degree)
+        else
+          coefficient(ZetaFunction(),degree) - _
+           coefficient(calculatedSer.degree, degree)
+
+      calculatedNP: List Integer := empty()
+        --local variable, in index i is number of places of degree i.
+      
+      numberOfPlacesOfDegree(i:PI): Integer ==
+         if zfCalc then
+           if (m := maxIndex(calculatedNP)) < i then
+             calculatedNP:= _
+               concat(calculatedNP, _
+                 [numberOfPlacesOfDegreeUsingZeta(j pretend PI) _
+                   for j in ((m+1) pretend PI)..i])
+           calculatedNP.i
+         else
+           # placesOfDegree(i) --maybe we should make an improvement in this
+                                  
+      placesOfDegree(i) ==
+        if (not foundPlacesOfDeg?(i)) then
+           if characteristic()$K**i > (2**16 - 1) then
+             print("If you are using a prime field and"::OF)
+             print("GB this will not work."::OF)
+           desingTree()
+           placesOfDegree(i,theCurve(),singularPoints())
+           DegOfPlacesFound:= concat(DegOfPlacesFound, i)
+        thedeg:= i
+        select(crap(#1), foundPlaces()$Plc)
+        
+      numberRatPlacesExtDeg(extDegree:PI): Integer ==
+        numberPlacesDegExtDeg(1,extDegree)
+        
+      numberPlacesDegExtDeg(degree:PI, extDegree:PI): Integer ==
+        res:Integer:=0
+        m:PI := degree * extDegree
+        d: PI
+        while m > 0 repeat
+          d:= gcd(m, extDegree)
+          if (m quo d) = degree then
+            res:= res + (numberOfPlacesOfDegree(m) * d)
+          m:= (m - 1) pretend PI
+        res
+        
+      calculateS(extDeg:PI): List Integer ==
+        g := genus()
+        sizeK:NNI := size()$K ** extDeg
+        i:PositiveInteger := g pretend PI
+        S: List Integer := [0 for j in 1..g]
+        good:Boolean := true()$Boolean
+        while good repeat
+          S.i := numberRatPlacesExtDeg(i*extDeg) - ((sizeK **$NNI i) + 1)
+          j:Integer := i - 1
+          if (not (j = 0))  then
+            i:= (j pretend PI)
+          else good:= false()$Boolean
+        S
+      
+      LPolynomial(): SparseUnivariatePolynomial Integer ==
+        LPolynomial(1)
+      
+      LPolynomial(extDeg:PI): SparseUnivariatePolynomial Integer ==
+        --when translating to AxiomXL rewrite this function!
+        g := genus()
+        zero?(g) => 1
+        coef: List Integer := [1]
+        if K has PseudoAlgebraicClosureOfFiniteFieldCategory then
+          setTower!(1$K)
+        sizeK:Integer := size()$K ** extDeg  --need to do a setExtension before
+        coef:= concat(coef,[0 for j in 1..(2*g)])
+        S: List Integer := calculateS(extDeg)
+        i:PI := 1
+        tmp:Integer
+        while i < g + 1 repeat
+          j:PI := 1
+          tmp:= 0
+          while j < i + 1 repeat
+            tmp:= tmp + S.j * coef((i + 1 - j) pretend PI)
+            j:= j + 1
+          coef.(i+1) := tmp quo i
+          i:= i + 1
+        i:= 1
+        while i < g + 1 repeat
+          ss: Integer := sizeK **$Integer ((g + 1 - i) pretend PI)
+          val:Integer := ss * coef.i
+          coef.((2*g+2 - i) pretend PI) := val
+          i:= i + 1
+        x:= monomial(1,1)$SUP(INT)
+        result: SparseUnivariatePolynomial(Integer):= _
+          1$SparseUnivariatePolynomial(Integer)
+        coef:= rest(coef)        
+        i:= 1
+        while i < 2 * g + 1 repeat
+          pol: SUP(INT) := (first(coef) :: Integer) * (x ** i)
+          result:= result + pol --(first(coef) :: Integer) * (x ** i)
+          coef:= rest(coef)
+          i:= i + 1
+        result
+                
+      classNumber():Integer ==
+        LPolynomial()(1)      
+

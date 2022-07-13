@@ -1,0 +1,34 @@
+)abbrev package ORDCOMP2 OrderedCompletionFunctions2
+++ Author: Manuel Bronstein
+++ Date Created: 4 Oct 1989
+++ Date Last Updated: 4 Oct 1989
+++ Description: 
+++ Lifting of maps to ordered completions.
+
+OrderedCompletionFunctions2(R, S) : SIG == CODE where
+  R : SetCategory
+  S : SetCategory
+
+  ORR ==> OrderedCompletion R
+  ORS ==> OrderedCompletion S
+
+  SIG ==> with
+
+    map : (R -> S, ORR) -> ORS
+      ++ map(f, r) lifts f and applies it to r, assuming that
+      ++ f(plusInfinity) = plusInfinity and that
+      ++ f(minusInfinity) = minusInfinity.
+
+    map : (R -> S, ORR, ORS, ORS) -> ORS
+      ++ map(f, r, p, m) lifts f and applies it to r, assuming that
+      ++ f(plusInfinity) = p and that f(minusInfinity) = m.
+
+  CODE ==> add
+
+    map(f, r) == map(f, r, plusInfinity(), minusInfinity())
+
+    map(f, r, p, m) ==
+      zero?(n := whatInfinity r) => (f retract r)::ORS
+      (n = 1) => p
+      m
+

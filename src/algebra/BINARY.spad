@@ -1,0 +1,32 @@
+)abbrev domain BINARY BinaryExpansion
+++ Author: Clifton J. Williamson
+++ Date Created: April 26, 1990
+++ Date Last Updated: May 15, 1991
+++ Description:
+++ This domain allows rational numbers to be presented as repeating
+++ binary expansions.
+
+BinaryExpansion() : SIG == CODE where
+
+  SIG ==> QuotientFieldCategory(Integer) with
+
+    coerce : % -> Fraction Integer
+      ++ coerce(b) converts a binary expansion to a rational number.
+
+    coerce : % -> RadixExpansion(2)
+      ++ coerce(b) converts a binary expansion to a radix expansion with base 2
+
+    fractionPart : % -> Fraction Integer
+      ++ fractionPart(b) returns the fractional part of a binary expansion.
+
+    binary : Fraction Integer -> %
+      ++ binary(r) converts a rational number to a binary expansion.
+      ++
+      ++X binary(22/7)
+
+  CODE ==> RadixExpansion(2) add
+
+    binary r == r :: %
+
+    coerce(x:%): RadixExpansion(2) == x pretend RadixExpansion(2)
+

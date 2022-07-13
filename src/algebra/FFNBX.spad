@@ -1,0 +1,43 @@
+)abbrev domain FFNBX FiniteFieldNormalBasisExtension
+++ Authors: J.Grabmeier, A.Scheerhorn
+++ Date Created: 26.03.1991
+++ References:
+++ Grab92 Finite Fields in Axiom
+++ Lidl83 Finite Field, Encyclopedia of Mathematics and Its Applications
+++ Description:
+++ FiniteFieldNormalBasisExtensionByPolynomial(GF,n)  implements a
+++ finite extension field of degree n over the ground field GF.
+++ The elements are represented by coordinate vectors with respect
+++ to a normal basis,
+++ a basis consisting of the conjugates \spad{(q-powers)} of an element,
+++ in this case called normal element. This is chosen as a root of the extension
+++ polynomial, created by createNormalPoly from
+++ \spadtype{FiniteFieldPolynomialPackage}
+
+FiniteFieldNormalBasisExtension(GF,extdeg) : SIG == CODE where
+  GF    : FiniteFieldCategory                -- the ground field
+  extdeg: PositiveInteger                    -- the extension degree
+
+  NNI ==> NonNegativeInteger
+  FFF ==> FiniteFieldFunctions(GF)
+  TERM ==> Record(value:GF,index:SingleInteger)
+
+  SIG ==> FiniteAlgebraicExtensionField(GF)  with
+
+    getMultiplicationTable : () -> Vector List TERM
+      ++ getMultiplicationTable() returns the multiplication
+      ++ table for the normal basis of the field.
+      ++ This table is used to perform multiplications between field elements.
+
+    getMultiplicationMatrix : () -> Matrix GF
+      ++ getMultiplicationMatrix() returns the multiplication table in
+      ++ form of a matrix.
+
+    sizeMultiplication : () -> NNI
+      ++ sizeMultiplication() returns the number of entries in the
+      ++ multiplication table of the field. Note: the time of multiplication
+      ++ of field elements depends on this size.
+
+  CODE ==> FiniteFieldNormalBasisExtensionByPolynomial(GF,_
+                    createLowComplexityNormalBasis(extdeg)$FFF)
+

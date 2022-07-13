@@ -1,0 +1,15 @@
+)abbrev category FORTCAT FortranProgramCategory
+++ Author: Mike Dewar
+++ Date Created: November 1992
+++ Description:
+++ FortranProgramCategory provides various models of FORTRAN subprograms.  
+++ These can be transformed into actual FORTRAN code.
+
+FortranProgramCategory() : Category == SIG where
+
+  SIG ==> Join(Type,CoercibleTo OutputForm) with
+
+    outputAsFortran : $ -> Void
+      ++ \axiom{outputAsFortran(u)} translates \axiom{u} into a legal FORTRAN
+      ++ subprogram.
+

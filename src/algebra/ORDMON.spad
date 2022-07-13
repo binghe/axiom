@@ -1,0 +1,13 @@
+)abbrev category ORDMON OrderedMonoid
+++ Description:
+++ Ordered sets which are also monoids, such that multiplication
+++ preserves the ordering.
+++
+++ Axioms\br
+++ \tab{5}\spad{x < y => x*z < y*z}\br
+++ \tab{5}\spad{x < y => z*x < z*y}
+
+OrderedMonoid() : Category == SIG where
+
+  SIG ==> Join(OrderedSet, Monoid)
+

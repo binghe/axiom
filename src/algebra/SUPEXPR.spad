@@ -1,0 +1,53 @@
+)abbrev domain SUPEXPR SparseUnivariatePolynomialExpressions
+++ Author: Mark Botch
+++ Description:
+++ This domain has no description
+
+SparseUnivariatePolynomialExpressions(R) : SIG == CODE where
+  R : Ring
+
+  SIG ==> UnivariatePolynomialCategory R with
+
+    if R has TranscendentalFunctionCategory
+    then TranscendentalFunctionCategory 
+
+  CODE ==> SparseUnivariatePolynomial R add
+
+    if R has TranscendentalFunctionCategory then
+
+      log(p: %): % ==
+        ground? p => coerce log ground p
+        output(hconcat("log p for p= ", p::OutputForm))$OutputPackage
+        error
+           "SUPTRAFUN: log only defined for elements of the coefficient ring"
+
+      exp(p: %): % ==
+        ground? p => coerce exp ground p
+        output(hconcat("exp p for p= ", p::OutputForm))$OutputPackage
+        error 
+          "SUPTRAFUN: exp only defined for elements of the coefficient ring"
+
+      sin(p: %): % ==
+        ground? p => coerce sin ground p
+        output(hconcat("sin p for p= ", p::OutputForm))$OutputPackage
+        error
+          "SUPTRAFUN: sin only defined for elements of the coefficient ring"
+
+      asin(p: %): % ==
+        ground? p => coerce asin ground p
+        output(hconcat("asin p for p= ", p::OutputForm))$OutputPackage
+        error
+          "SUPTRAFUN: asin only defined for elements of the coefficient ring"
+
+      cos(p: %): % ==
+        ground? p => coerce cos ground p
+        output(hconcat("cos p for p= ", p::OutputForm))$OutputPackage
+        error
+           "SUPTRAFUN: cos only defined for elements of the coefficient ring"
+
+      acos(p: %): % ==
+        ground? p => coerce acos ground p
+        output(hconcat("acos p for p= ", p::OutputForm))$OutputPackage
+        error 
+         "SUPTRAFUN: acos only defined for elements of the coefficient ring"
+

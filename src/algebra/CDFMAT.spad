@@ -1,0 +1,55 @@
+)abbrev domain CDFMAT ComplexDoubleFloatMatrix
+++ Author: Waldek Hebisch
+++ Description:
+++ This is a low-level domain which implements matrices
+++ (two dimensional arrays) of complex double precision floating point
+++ numbers.  Indexing is 0 based, there is no bound checking (unless
+++ provided by lower level).
+
+ComplexDoubleFloatMatrix() : SIG == CODE where
+
+  SIG ==> MatrixCategory(Complex DoubleFloat,
+                         ComplexDoubleFloatVector,
+                         ComplexDoubleFloatVector) with
+
+    qnew : (Integer, Integer) -> %
+      ++ qnew(n, m) creates a new uninitialized n by m matrix.
+      ++
+      ++X t1:CDFMAT:=qnew(3,4)
+
+  CODE ==> add
+
+    NNI ==> Integer
+    Qelt2 ==> CDAREF2$Lisp
+    Qsetelt2 ==> CDSETAREF2$Lisp
+    Qnrows ==> CDANROWS$Lisp
+    Qncols ==> CDANCOLS$Lisp
+    Qnew ==> MAKE_-CDOUBLE_-MATRIX$Lisp
+    
+    minRowIndex x == 0
+
+    minColIndex x == 0
+
+    nrows x == Qnrows(x)
+
+    ncols x == Qncols(x)
+
+    maxRowIndex x == Qnrows(x) - 1
+
+    maxColIndex x == Qncols(x) - 1
+
+    qelt(m, i, j) == Qelt2(m, i, j)
+
+    qsetelt_!(m, i, j, r) == Qsetelt2(m, i, j, r)
+
+    empty() == Qnew(0$Integer, 0$Integer)
+
+    qnew(rows, cols) == Qnew(rows, cols)
+
+    new(rows, cols, a) ==
+        res := Qnew(rows, cols)
+        for i in 0..(rows - 1) repeat
+            for j in 0..(cols - 1) repeat
+                Qsetelt2(res, i, j, a)
+        res
+

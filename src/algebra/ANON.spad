@@ -1,0 +1,14 @@
+)abbrev domain ANON AnonymousFunction
+++ Author: Mark Botch
+++ Description:
+++ This domain implements anonymous functions
+
+AnonymousFunction() : SIG == CODE where
+
+  SIG ==> SetCategory 
+
+  CODE ==> add
+
+    coerce(x:%):OutputForm == 
+      x pretend OutputForm
+

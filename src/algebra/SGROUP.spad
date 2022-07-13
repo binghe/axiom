@@ -1,0 +1,32 @@
+)abbrev category SGROUP SemiGroup
+++ Description:
+++ the class of all multiplicative semigroups, that is, a set
+++ with an associative operation \spadop{*}.
+++
+++ Axioms\br
+++ \tab{5}\spad{associative("*":(%,%)->%)}\tab{5}\spad{(x*y)*z = x*(y*z)}
+++
+++ Conditional attributes\br
+++ \tab{5}\spad{commutative("*":(%,%)->%)}\tab{5}\spad{x*y = y*x}
+
+SemiGroup() : Category == SIG where
+
+  SIG ==> SetCategory with
+
+    "*" : (%,%) -> %                  
+      ++ x*y returns the product of x and y.
+
+    "**" : (%,PositiveInteger) -> %   
+      ++ x**n returns the repeated product of x n times, exponentiation.
+
+    "^" : (%,PositiveInteger) -> %    
+      ++ x^n returns the repeated product of x n times, exponentiation.
+
+   add
+
+     import RepeatedSquaring(%)
+
+     x:% ** n:PositiveInteger == expt(x,n)
+
+     _^(x:%, n:PositiveInteger):% == x ** n
+

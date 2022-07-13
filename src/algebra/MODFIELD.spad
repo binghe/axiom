@@ -1,0 +1,31 @@
+)abbrev domain MODFIELD ModularField
+++ Author: Mark Botch
+++ Description:
+++ These domains are used for the factorization and gcds
+++ of univariate polynomials over the integers in order to work modulo
+++ different  primes.
+++ See \spadtype{ModularRing}, \spadtype{EuclideanModularRing} 
+
+ModularField(R,Mod,reduction,merge,exactQuo) : SIG == CODE where
+  R : CommutativeRing
+  Mod : AbelianMonoid
+  reduction : (R,Mod) -> R
+  merge : (Mod,Mod) -> Union(Mod,"failed")
+  exactQuo : (R,R,Mod) -> Union(R,"failed")
+
+  SIG ==> Field with
+
+    modulus : % -> Mod
+      ++ modulus(x) is not documented
+
+    coerce : % -> R
+      ++ coerce(x) is not documented
+
+    reduce : (R,Mod) -> %
+      ++ reduce(r,m) is not documented
+
+    exQuo : (%,%) -> Union(%,"failed")
+      ++ exQuo(x,y) is not documented
+
+  CODE ==> ModularRing(R,Mod,reduction,merge,exactQuo)
+

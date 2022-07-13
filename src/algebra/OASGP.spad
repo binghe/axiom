@@ -1,0 +1,12 @@
+)abbrev category OASGP OrderedAbelianSemiGroup
+++ Description:
+++ Ordered sets which are also abelian semigroups, such that the addition
+++ preserves the ordering.\br
+++
+++ Axiom\br
+++ \tab{5} x < y => x+z < y+z
+
+OrderedAbelianSemiGroup() : Category == SIG where
+
+  SIG ==> Join(OrderedSet, AbelianSemiGroup)
+

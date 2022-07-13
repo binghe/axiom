@@ -1,0 +1,74 @@
+)abbrev domain GPOLSET GeneralPolynomialSet
+++ Author: Marc Moreno Maza
+++ Date Created: 04/26/1994
+++ Date Last Updated: 12/15/1998
+++ Description: 
+++ A domain for polynomial sets.
+
+GeneralPolynomialSet(R,E,VarSet,P) : SIG == CODE where
+  R : Ring
+  E : OrderedAbelianMonoidSup
+  VarSet : OrderedSet
+  P : RecursivePolynomialCategory(R,E,VarSet)
+
+  LP ==> List P
+  PtoP ==> P -> P
+
+  SIG ==> PolynomialSetCategory(R,E,VarSet,P)  with
+
+     convert : LP -> $
+       ++ \axiom{convert(lp)} returns the polynomial set whose members 
+       ++ are the polynomials of \axiom{lp}.
+
+     finiteAggregate
+
+     shallowlyMutable
+
+  CODE ==> add
+
+     Rep := List P
+
+     construct lp ==
+       (removeDuplicates(lp)$List(P))::$
+
+     copy ps ==
+       construct(copy(members(ps)$$)$LP)$$
+
+     empty() ==
+       []
+
+     parts ps ==
+       ps pretend LP
+
+     map (f : PtoP, ps : $) : $ ==
+       construct(map(f,members(ps))$LP)$$
+
+     map! (f : PtoP, ps : $) : $  ==
+       construct(map!(f,members(ps))$LP)$$
+
+     member? (p,ps) ==
+       member?(p,members(ps))$LP
+
+     ps1 = ps2 ==
+       {p for p in parts(ps1)} =$(Set P) {p for p in parts(ps2)}
+
+     coerce(ps:$) : OutputForm ==
+       lp : List(P) := sort(infRittWu?,members(ps))$(List P)
+       brace([p::OutputForm for p in lp]$List(OutputForm))$OutputForm
+
+     mvar ps ==
+       empty? ps => error"Error from GPOLSET in mvar : #1 is empty"
+       lv : List VarSet := variables(ps)
+       empty? lv => 
+        error "Error from GPOLSET in mvar : every polynomial in #1 is constant"
+       reduce(max,lv)$(List VarSet)
+
+     retractIfCan(lp) ==
+       (construct(lp))::Union($,"failed")
+
+     coerce(ps:$) : (List P) ==
+       ps pretend (List P)
+
+     convert(lp:LP) : $ ==
+       construct lp
+

@@ -1,0 +1,17 @@
+)abbrev domain INTABL InnerTable
+++ Author: Barry Trager
+++ Date Created: 1992
+++ Date Last Updated: Sept 15, 1992
+++ Description:
+++ This domain is used to provide a conditional "add" domain
+++ for the implementation of \spadtype{Table}.
+
+InnerTable(Key,Entry,addDom) : SIG == CODE where
+  Key : SetCategory
+  Entry : SetCategory
+  addDom : TableAggregate(Key, Entry) with finiteAggregate
+
+  SIG ==> TableAggregate(Key, Entry) with finiteAggregate
+
+  CODE ==> addDom
+

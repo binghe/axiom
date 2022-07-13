@@ -1,0 +1,8 @@
+)abbrev category ORDFIN OrderedFinite
+++ Description:
+++ Ordered finite sets.
+
+OrderedFinite() : Category == SIG where
+
+  SIG ==> Join(OrderedSet, Finite)
+

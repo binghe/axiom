@@ -1,0 +1,8 @@
+)abbrev category ATRUNIT RightUnitaryAttribute
+++ Description:
+++ RightUnitary is true if \spad{x * 1 = x} for all x.
+
+RightUnitaryAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

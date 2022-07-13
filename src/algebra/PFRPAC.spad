@@ -1,0 +1,55 @@
+)abbrev package PFRPAC PartialFractionPackage
+++ Author: Barry M. Trager
+++ Date Created: 1992
+++ Description:
+++ The package \spadtype{PartialFractionPackage} gives an easier
+++ to use interfact the domain \spadtype{PartialFraction}.
+++ The user gives a fraction of polynomials, and a variable and
+++ the package converts it to the proper datatype for the
+++ \spadtype{PartialFraction} domain.
+
+PartialFractionPackage(R) : SIG == CODE where
+  R : Join(EuclideanDomain, CharacteristicZero)
+
+  FPR ==> Fraction Polynomial R
+  INDE ==> IndexedExponents Symbol
+  PR ==> Polynomial R
+  SUP ==> SparseUnivariatePolynomial
+
+  SIG ==> with
+
+    partialFraction : (FPR, Symbol) -> Any
+      ++ partialFraction(rf, var) returns the partial fraction decomposition
+      ++ of the rational function rf with respect to the variable var.
+      ++
+      ++X a:=x+1/(y+1)
+      ++X partialFraction(a,y)$PFRPAC(INT)
+
+    partialFraction : (PR, Factored PR, Symbol) -> Any
+      ++ partialFraction(num, facdenom, var) returns the partial fraction
+      ++ decomposition of the rational function whose numerator is num and
+      ++ whose factored denominator is facdenom with respect to the 
+      ++ variable var.
+
+  CODE ==> add
+
+    partialFraction(rf, v) ==
+      df := factor(denom rf)$MultivariateFactorize(Symbol, INDE,R,PR)
+      partialFraction(numer rf, df, v)
+
+    makeSup(p:Polynomial R, v:Symbol) : SparseUnivariatePolynomial FPR ==
+      up := univariate(p,v)
+      map((z1:PR):FPR +-> z1::FPR,up)_
+        $UnivariatePolynomialCategoryFunctions2(PR, SUP PR, FPR, SUP FPR)
+
+    partialFraction(p, facq, v) ==
+      up := UnivariatePolynomial(v, Fraction Polynomial R)
+      fup := Factored up
+      ffact : List(Record(irr:up,pow:Integer))
+      ffact:=[[makeSup(u.factor,v) pretend up,u.exponent]
+                   for u in factors facq]
+      fcont:=makeSup(unit facq,v) pretend up
+      nflist:fup := fcont*(*/[primeFactor(ff.irr,ff.pow) for ff in ffact])
+      pfup:=partialFraction(makeSup(p,v) pretend up,nflist)$PartialFraction(up)
+      coerce(pfup)$AnyFunctions1(PartialFraction up)
+

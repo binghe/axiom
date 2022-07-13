@@ -1,0 +1,34 @@
+)abbrev domain RGCHAIN RegularChain
+++ Author: Marc Moreno Maza
+++ Date Created: 01/1999
+++ Date Last Updated: 23/01/1999
+++ Description: 
+++ A domain for regular chains (regular triangular sets) over
+++ a Gcd-Domain and with a fix list of variables.
+++ This is just a front-end for the \spadtype{RegularTriangularSet}
+++ domain constructor.
+
+RegularChain(R,ls) : SIG == CODE where
+  R : GcdDomain
+  ls : List Symbol
+
+  V ==> OrderedVariableList ls
+  E ==> IndexedExponents V
+  P ==> NewSparseMultivariatePolynomial(R,V)
+  TS ==> RegularTriangularSet(R,E,V,P)
+
+  SIG ==> RegularTriangularSetCategory(R,E,V,P) with
+
+     zeroSetSplit : (List P, Boolean, Boolean) -> List $
+       ++ \spad{zeroSetSplit(lp,clos?,info?)} returns a list \spad{lts} of
+       ++ regular chains such that the union of the closures of their regular
+       ++ zero sets equals the affine variety associated with \spad{lp}. 
+       ++ Moreover, if \spad{clos?} is \spad{false} then the union of the 
+       ++ regular zero set of the \spad{ts} (for \spad{ts} in \spad{lts}) 
+       ++ equals this variety.
+       ++ If \spad{info?} is \spad{true} then some information is 
+       ++ displayed during the computations. See 
+       ++ zeroSetSplit from RegularTriangularSet.
+
+  CODE ==> RegularTriangularSet(R,E,V,P) 
+

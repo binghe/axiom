@@ -1,0 +1,45 @@
+)abbrev domain ROMAN RomanNumeral
+++ Author: Mark Botch
+++ Description:
+++ \spadtype{RomanNumeral} provides functions for converting
+++ integers to roman numerals.
+
+RomanNumeral() : SIG == CODE where
+
+  SIG ==> IntegerNumberSystem with
+
+    canonical
+      ++ mathematical equality is data structure equality.
+
+    canonicalsClosed
+      ++ two positives multiply to give positive.
+
+    noetherian
+      ++ ascending chain condition on ideals.
+
+    convert : Symbol  -> %
+      ++ convert(n) creates a roman numeral for symbol n.
+
+    roman : Symbol  -> %
+      ++ roman(n) creates a roman numeral for symbol n.
+
+    roman : Integer -> %
+      ++ roman(n) creates a roman numeral for n.
+
+  CODE ==> Integer add
+
+    import NumberFormats()
+
+    roman(n:Integer) == n::%
+
+    roman(sy:Symbol) == convert sy
+
+    convert(sy:Symbol):%    == ScanRoman(string sy)::%
+
+    coerce(r:%):OutputForm ==
+      n := convert(r)@Integer
+      -- okay, we stretch it
+      zero? n => n::OutputForm
+      negative? n => - ((-r)::OutputForm)
+      FormatRoman(n::PositiveInteger)::Symbol::OutputForm
+

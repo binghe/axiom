@@ -1,0 +1,8 @@
+)abbrev category CHARZ CharacteristicZero
+++ Description:
+++ Rings of Characteristic Zero.
+
+CharacteristicZero() : Category == SIG where
+
+  SIG ==> Ring
+

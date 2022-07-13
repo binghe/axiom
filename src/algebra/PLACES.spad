@@ -1,0 +1,16 @@
+)abbrev domain PLACES Places
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+Places(K) : SIG == CODE where
+  K : Field
+
+  PCS ==> NeitherSparseOrDensePowerSeries(K)
+  
+  SIG ==> PlacesCategory(K,PCS) 
+    
+  CODE ==> Plcs(K,PCS)
+  

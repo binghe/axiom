@@ -1,0 +1,38 @@
+)abbrev package NORMMA NormInMonogenicAlgebra
+++ Author: Manuel Bronstein
+++ Date Created: 23 February 1995
+++ Date Last Updated: 23 February 1995
+++ Description:
+++ This package implements the norm of a polynomial with coefficients
+++ in a monogenic algebra (using resultants)
+
+NormInMonogenicAlgebra(R, PolR, E, PolE) : SIG == CODE where
+  R : GcdDomain
+  PolR : UnivariatePolynomialCategory R
+  E : MonogenicAlgebra(R, PolR)
+  PolE : UnivariatePolynomialCategory E
+
+  SUP ==> SparseUnivariatePolynomial
+
+  SIG ==> with
+
+    norm : PolE -> PolR
+      ++ norm q returns the norm of q,
+      ++ the product of all the conjugates of q.
+
+  CODE ==> add
+
+    import UnivariatePolynomialCategoryFunctions2(R, PolR, PolR, SUP PolR)
+
+    PolR2SUP: PolR -> SUP PolR
+    PolR2SUP q == map(x +-> x::PolR, q)
+
+    defpol := PolR2SUP(definingPolynomial()$E)
+
+    norm q ==
+      p:SUP PolR := 0
+      while q ~= 0 repeat
+        p := p + monomial(1,degree q)$PolR * PolR2SUP lift leadingCoefficient q
+        q := reductum q
+      primitivePart resultant(p, defpol)
+

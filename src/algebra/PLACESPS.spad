@@ -1,0 +1,16 @@
+)abbrev domain PLACESPS PlacesOverPseudoAlgebraicClosureOfFiniteField
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+PlacesOverPseudoAlgebraicClosureOfFiniteField(K) : SIG == CODE where
+  K : FiniteFieldCategory
+
+  KK  ==> PseudoAlgebraicClosureOfFiniteField(K)
+  PCS ==> NeitherSparseOrDensePowerSeries(KK)
+  
+  SIG ==> PlacesCategory(KK,PCS) 
+    
+  CODE ==> Plcs(KK,PCS)
+

@@ -1,0 +1,28 @@
+)abbrev domain VARIABLE Variable
+++ Author: Mark Botch
+++ Description:
+++ This domain implements variables
+
+Variable(sym) : SIG == CODE where
+  sym : Symbol
+
+  SIG ==> Join(SetCategory, CoercibleTo Symbol) with
+
+    coerce  : % -> Symbol
+      ++ coerce(x) returns the symbol
+
+    variable: () -> Symbol
+      ++ variable() returns the symbol
+
+  CODE ==> add
+
+        coerce(x:%):Symbol     == sym
+
+        coerce(x:%):OutputForm == sym::OutputForm
+
+        variable()             == sym
+
+        x = y                  == true
+
+        latex(x:%):String      == latex sym
+

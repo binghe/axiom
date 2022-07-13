@@ -1,0 +1,44 @@
+)abbrev domain ITUPLE InfiniteTuple
+++ Author: Clifton J. Williamson
+++ Date Created: 16 February 1990
+++ Date Last Updated: 16 February 1990
+++ Description:
+++ This package implements 'infinite tuples' for the interpreter.
+++ The representation is a stream.
+
+InfiniteTuple(S) : SIG == CODE where
+  S : Type
+
+  SIG ==> CoercibleTo OutputForm with
+
+    map : (S -> S, %) -> %
+      ++ map(f,t) replaces the tuple t
+      ++ by \spad{[f(x) for x in t]}.
+
+    filterWhile : (S -> Boolean, %) -> %
+      ++ filterWhile(p,t) returns \spad{[x for x in t while p(x)]}.
+
+    filterUntil : (S -> Boolean, %) -> %
+      ++ filterUntil(p,t) returns \spad{[x for x in t while not p(x)]}.
+
+    select : (S -> Boolean, %) -> %
+      ++ select(p,t) returns \spad{[x for x in t | p(x)]}.
+
+    generate : (S -> S,S) -> %
+      ++ generate(f,s) returns \spad{[s,f(s),f(f(s)),...]}.
+
+    construct : % -> Stream S
+      ++ construct(t) converts an infinite tuple to a stream.
+
+  CODE ==> Stream S add
+
+    generate(f,x) == generate(f,x)$Stream(S) pretend %
+
+    filterWhile(f, x) == filterWhile(f,x pretend Stream(S))$Stream(S) pretend %
+
+    filterUntil(f, x) == filterUntil(f,x pretend Stream(S))$Stream(S) pretend %
+
+    select(f, x) == select(f,x pretend Stream(S))$Stream(S) pretend %
+
+    construct x == x pretend Stream(S)
+

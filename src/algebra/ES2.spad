@@ -1,0 +1,25 @@
+)abbrev package ES2 ExpressionSpaceFunctions2
+++ Author: Manuel Bronstein
+++ Date Created: 23 March 1988
+++ Date Last Updated: 19 April 1991
+++ Description:
+++ This package allows a mapping E -> F to be lifted to a kernel over E;
+++ This lifting can fail if the operator of the kernel cannot be applied
+++ in F; Do not use this package with E = F, since this may
+++ drop some properties of the operators.
+
+ExpressionSpaceFunctions2(E, F) : SIG == CODE where
+  E : ExpressionSpace
+  F : ExpressionSpace
+
+  SIG ==> with
+
+    map : (E -> F, Kernel E) -> F
+      ++ map(f, k) returns \spad{g = op(f(a1),...,f(an))} where
+      ++ \spad{k = op(a1,...,an)}.
+
+  CODE ==> add
+
+    map(f, k) ==
+      (operator(operator k)$F) [f x for x in argument k]$List(F)
+

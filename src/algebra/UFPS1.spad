@@ -1,0 +1,20 @@
+)abbrev package UFPS1 UnivariateFormalPowerSeriesFunctions
+++ Description:
+++ This package has no description
+
+UnivariateFormalPowerSeriesFunctions(Coef) : SIG == CODE where
+  Coef : Ring
+
+  UFPS ==> UnivariateFormalPowerSeries Coef
+
+  SIG ==> with
+
+    hadamard : (UFPS, UFPS) -> UFPS
+
+  CODE ==> add
+
+    hadamard(f, g) ==
+      series map((z1:Coef,z2:Coef):Coef +-> z1*z2, 
+                  coefficients f, coefficients g)
+                   $StreamFunctions3(Coef, Coef, Coef) 
+

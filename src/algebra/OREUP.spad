@@ -1,0 +1,32 @@
+)abbrev domain OREUP UnivariateSkewPolynomial
+++ Author: Manuel Bronstein
+++ Date Created: 19 October 1993
+++ Date Last Updated: 1 February 1994
+++ References:
+++ Bron95 On radical solutions of linear ordinary differential equations
+++ Abra01 On Solutions of Linear Functional Systems
+++ Muld95 Primitives: Orepoly and Lodo
+++ Description:
+++ This is the domain of univariate skew polynomials over an Ore
+++ coefficient field in a named variable.
+++ The multiplication is given by \spad{x a = \sigma(a) x + \delta a}.
+
+UnivariateSkewPolynomial(x,R,sigma,delta) : SIG == CODE where
+  x : Symbol
+  R : Ring
+  sigma : Automorphism R
+  delta : R -> R
+
+  SIG ==> UnivariateSkewPolynomialCategory R with
+
+   coerce : Variable x -> %
+     ++ coerce(x) returns x as a skew-polynomial.
+
+  CODE ==> SparseUnivariateSkewPolynomial(R, sigma, delta) add
+
+     Rep := SparseUnivariateSkewPolynomial(R, sigma, delta)
+
+     coerce(v:Variable(x)):% == monomial(1, 1)
+
+     coerce(p:%):OutputForm  == outputForm(p, outputForm x)$Rep
+

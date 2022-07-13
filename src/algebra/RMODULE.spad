@@ -1,0 +1,20 @@
+)abbrev category RMODULE RightModule
+++ Description:
+++ The category of right modules over an rng (ring not necessarily 
+++ with unit). This is an abelian group which supports right 
+++ multiplication by elements of the rng.
+++
+++ Axioms\br
+++ \tab{5}\spad{x*(a*b) = (x*a)*b}\br
+++ \tab{5}\spad{x*(a+b) = (x*a)+(x*b)}\br
+++ \tab{5}\spad{(x+y)*x = (x*a)+(y*a)}
+
+RightModule(R) : Category == SIG where
+  R : Rng
+
+  SIG ==> AbelianGroup with
+
+    "*" : (%,R) -> %  
+      ++ x*r returns the right multiplication of the module element x
+      ++ by the ring element r.
+

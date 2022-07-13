@@ -1,0 +1,46 @@
+)abbrev category SKAGG StackAggregate
+++ Author: Michael Monagan; revised by Manuel Bronstein and Richard Jenks
+++ Date Created: August 87 through August 88
+++ Date Last Updated: April 1991
+++ Description:
+++ A stack is a bag where the last item inserted is the first item extracted.
+
+StackAggregate(S) : Category == SIG where
+  S : Type
+
+  SIG ==> BagAggregate S with
+
+    finiteAggregate
+
+    push_! : (S,%) -> S
+      ++push!(x,s) pushes x onto stack s, that is, destructively changing s
+      ++ so as to have a new first (top) element x.
+      ++ Afterwards, pop!(s) produces x and pop!(s) produces the original s.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X push! a
+      ++X a
+
+    pop_! : % -> S
+      ++pop!(s) returns the top element x, destructively removing x from s.
+      ++ Note that Use \axiom{top(s)} to obtain x without removing it from s.
+      ++ Error: if s is empty.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X pop! a
+      ++X a
+
+    top : % -> S
+      ++top(s) returns the top element x from s; s remains unchanged.
+      ++ Note that Use \axiom{pop!(s)} to obtain x and remove it from s.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X top a
+
+    depth : % -> NonNegativeInteger
+      ++depth(s) returns the number of elements of stack s.
+      ++ Note that \axiom{depth(s) = #s}.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X depth a
+

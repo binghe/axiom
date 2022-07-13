@@ -1,0 +1,236 @@
+)abbrev domain STACK Stack
+++ Author: Michael Monagan, Stephen Watt, Timothy Daly
+++ Date Created:June 86 and July 87
+++ Date Last Updated:Feb 09
+++ Description:
+++ Linked List implementation of a Stack
+--% Dequeue and Heap data types
+ 
+Stack(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> StackAggregate S with
+
+    stack : List S -> %
+      ++ stack([x,y,...,z]) creates a stack with first (top)
+      ++ element x, second element y,...,and last element z.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+
+    -- Inherited Signatures repeated for examples documentation
+
+    pop_! : % -> S
+      ++ pop! returns the top element of the stack, destructively
+      ++ modifying the stack to remove that element.
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X pop! a
+      ++X a
+
+    extract_! : % -> S
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X extract! a
+      ++X a
+
+    push_! : (S,%) -> S
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X push!(9,a)
+      ++X a
+
+    insert_! : (S,%) -> %
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X insert!(8,a)
+      ++X a
+
+    inspect : % -> S
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X inspect a
+
+    top : % -> S
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X top a
+
+    depth : % -> NonNegativeInteger
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X depth a
+
+    less? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X less?(a,9)
+
+    more? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X more?(a,9)
+
+    size? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X size?(a,5)
+
+    bag : List S -> %
+      ++
+      ++X bag([1,2,3,4,5])$Stack(INT)
+
+    empty? : % -> Boolean
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X empty? a
+
+    empty : () -> %
+      ++
+      ++X b:=empty()$(Stack INT)
+
+    sample : () -> %
+      ++
+      ++X sample()$Stack(INT)
+
+    copy : % -> %
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X copy a
+
+    eq? : (%,%) -> Boolean
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X b:=copy a
+      ++X eq?(a,b)
+
+    map :  ((S -> S),%) -> %
+      ++
+      ++X a:Stack INT:= stack [1,2,3,4,5]
+      ++X map(x+->x+10,a)
+      ++X a
+
+    if $ has shallowlyMutable then
+
+      map! :  ((S -> S),%) -> %
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X map!(x+->x+10,a)
+        ++X a
+
+    if S has SetCategory then
+
+      latex : % -> String
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X latex a
+
+      hash : % -> SingleInteger
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X hash a
+
+      coerce : % -> OutputForm
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X coerce a
+
+      "=": (%,%) -> Boolean
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X b:Stack INT:= stack [1,2,3,4,5]
+        ++X (a=b)@Boolean
+
+      "~=" : (%,%) -> Boolean
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X b:=copy a
+        ++X (a~=b)
+
+    if % has finiteAggregate then
+
+      every? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X every?(x+->(x=4),a)
+
+      any? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X any?(x+->(x=4),a)
+
+      count :  ((S -> Boolean),%) -> NonNegativeInteger
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X count(x+->(x>2),a)
+
+      _# : % -> NonNegativeInteger
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X #a
+
+      parts : % -> List S
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X parts a
+
+      members : % -> List S
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X members a
+
+    if % has finiteAggregate and S has SetCategory then
+
+      member? : (S,%) -> Boolean
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X member?(3,a)
+
+      count : (S,%) -> NonNegativeInteger
+        ++
+        ++X a:Stack INT:= stack [1,2,3,4,5]
+        ++X count(4,a)
+
+  CODE ==> add
+
+    Rep := Reference List S
+
+    s = t == deref s = deref t
+
+    coerce(d:%): OutputForm == bracket [e::OutputForm for e in deref d]
+
+    copy s == ref copy deref s
+
+    depth s == # deref s
+
+    # s == depth s
+
+    pop_! (s:%):S ==
+        empty? s => error "empty stack"
+        e := first deref s
+        setref(s,rest deref s)
+        e
+
+    extract_! (s:%):S == pop_! s
+
+    top (s:%):S ==
+        empty? s => error "empty stack"
+        first deref s
+
+    inspect s == top s
+
+    push_!(e,s) == (setref(s,cons(e,deref s));e)
+
+    insert_!(e:S,s:%):% == (push_!(e,s);s)
+
+    empty() == ref nil()$List(S)
+
+    empty? s == null deref s
+
+    stack s == ref copy s
+
+    parts s == copy deref s
+
+    map(f,s) == ref map(f,deref s)
+
+    map!(f,s) == ref map!(f,deref s)
+

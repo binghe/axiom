@@ -1,0 +1,19 @@
+)abbrev category VSPACE VectorSpace
+++ Description:
+++ Vector Spaces (not necessarily finite dimensional) over a field.
+
+VectorSpace(S) : Category == SIG where
+  S : Field
+
+  SIG ==> Module(S) with
+
+    "/" : (%, S) -> %
+      ++ x/y divides the vector x by the scalar y.
+
+    dimension : () -> CardinalNumber
+      ++ dimension() returns the dimensionality of the vector space.
+
+   add
+
+     (v:% / s:S):% == inv(s) * v
+

@@ -1,0 +1,8 @@
+)abbrev category ATFINAG FiniteAggregateAttribute
+++ Description:
+++ The class of all aggregates with a finite number of arguments
+
+FiniteAggregateAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

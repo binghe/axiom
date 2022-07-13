@@ -1,0 +1,36 @@
+)abbrev category NTSCAT NormalizedTriangularSetCategory
+++ Author: Marc Moreno Maza
+++ Date Created: 10/07/1998
+++ Date Last Updated: 12/12/1998
+++ References :
+++ SALSA Solvers for Algebraic Systems and Applications
+++ Kalk91 Three contributions to elimination theory
+++ Kalk98 Algorithmic properties of polynomial rings
+++ Aubr96 Triangular Sets for Solving Polynomial Systems: 
+++ Aubr99 On the Theories of Triangular Sets
+++ Aubr99a Triangular Sets for Solving Polynomial Systems: 
+++ Laza91 A new method for solving algebraic systems of positive dimension
+++ Maza95 Polynomial Gcd Computations over Towers of Algebraic Extensions
+++ Maza97 Calculs de pgcd au-dessus des tours d'extensions simples et 
+++        resolution des systemes d'equations algebriques
+++ Maza98 A new algorithm for computing triangular decomposition of 
+++        algebraic varieties
+++ Maza00 On Triangular Decompositions of Algebraic Varieties
+++ Description:
+++ The category of normalized triangular sets. A triangular
+++ set ts is said normalized if for every algebraic
+++ variable v of ts the polynomial select(ts,v)
+++ is normalized w.r.t. every polynomial in collectUnder(ts,v).
+++ A polynomial p is said normalized w.r.t. a non-constant 
+++ polynomial q if p is constant or degree(p,mdeg(q)) = 0
+++ and init(p) is normalized w.r.t. q. One of the important
+++ features of normalized triangular sets is that they are regular sets.
+
+NormalizedTriangularSetCategory(R,E,V,P) : Category == SIG where
+  R : GcdDomain
+  E : OrderedAbelianMonoidSup
+  V : OrderedSet
+  P : RecursivePolynomialCategory(R,E,V)
+
+  SIG ==> RegularTriangularSetCategory(R,E,V,P) 
+

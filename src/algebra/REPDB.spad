@@ -1,0 +1,32 @@
+)abbrev package REPDB RepeatedDoubling
+++ Description:
+++ Implements multiplication by repeated addition
+ 
+-- the following package is only instantiated over %
+-- thus shouldn't be cached. We prevent it
+-- from being cached by declaring it to be mutableDomains
+
+)bo PUSH('RepeatedDoubling, $mutableDomains) 
+
+RepeatedDoubling(S) : SIG == CODE where
+  S : SetCategory with 
+
+    "+" : (%,%)->%
+      ++ x+y returns the sum of x and y
+
+  SIG ==>with
+
+    double : (PositiveInteger,S) -> S 
+      ++ double(i, r) multiplies r by i using repeated doubling.
+
+  CODE ==> add
+
+     x: S
+     n: PositiveInteger
+
+     double(n,x) ==
+        (n = 1) => x
+        odd?(n)$Integer =>
+           x + double(shift(n,-1) pretend PositiveInteger,(x+x))
+        double(shift(n,-1) pretend PositiveInteger,(x+x))
+

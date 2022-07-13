@@ -1,0 +1,18 @@
+)abbrev package PRINT PrintPackage
+++ Author: Scott Morrison
+++ Date Created: Aug. 1, 1990
+++ Description: 
+++ PrintPackage provides a print function for output forms.
+
+PrintPackage() : SIG == CODE where
+
+  SIG ==>with
+
+    print : OutputForm ->  Void
+      ++ print(o) writes the output form o on standard output using the
+      ++ two-dimensional formatter.
+
+  CODE ==> add
+
+    print(x) == print(x)$OutputForm
+

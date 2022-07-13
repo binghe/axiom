@@ -1,0 +1,157 @@
+)abbrev domain ALGFF AlgebraicFunctionField
+++ Author: Manuel Bronstein
+++ Date Created: 3 May 1988
+++ Date Last Updated: 24 Jul 1990
+++ Description:
+++ Function field defined by f(x, y) = 0.
+
+AlgebraicFunctionField(F, UP, UPUP, modulus) : SIG == CODE where
+  F : Field
+  UP : UnivariatePolynomialCategory F
+  UPUP : UnivariatePolynomialCategory Fraction UP
+  modulus: UPUP
+
+  N   ==> NonNegativeInteger
+  Z   ==> Integer
+  RF  ==> Fraction UP
+  QF  ==> Fraction UPUP
+  UP2 ==> SparseUnivariatePolynomial UP
+  SAE ==> SimpleAlgebraicExtension(RF, UPUP, modulus)
+  INIT ==> if (deref brandNew?) then startUp false
+
+  SIG ==> FunctionFieldCategory(F, UP, UPUP) with
+
+    knownInfBasis : N -> Void
+      ++ knownInfBasis(n) is not documented
+
+  CODE ==> SAE add
+
+    import ChangeOfVariable(F, UP, UPUP)
+    import InnerCommonDenominator(UP, RF, Vector UP, Vector RF)
+    import MatrixCommonDenominator(UP, RF)
+    import UnivariatePolynomialCategoryFunctions2(RF, UPUP, UP, UP2)
+
+    startUp    : Boolean -> Void
+    vect       : Matrix RF -> Vector $
+    getInfBasis: () -> Void
+
+    brandNew?:Reference(Boolean) := ref true
+    infBr?:Reference(Boolean) := ref true
+    discPoly:Reference(RF) := ref 0
+    n  := degree modulus
+    n1 := (n - 1)::N
+    ibasis:Matrix(RF)     := zero(n, n)
+    invibasis:Matrix(RF)  := copy ibasis
+    infbasis:Matrix(RF)   := copy ibasis
+    invinfbasis:Matrix(RF):= copy ibasis
+
+    branchPointAtInfinity?() == 
+      (INIT; infBr?())
+
+    discriminant() == 
+      (INIT; discPoly())
+
+    integralBasis() == 
+      (INIT; vect ibasis)
+
+    integralBasisAtInfinity() == 
+      (INIT; vect infbasis)
+
+    integralMatrix() == 
+      (INIT; ibasis)
+
+    inverseIntegralMatrix() == 
+      (INIT; invibasis)
+
+    integralMatrixAtInfinity() == 
+      (INIT; infbasis)
+
+    branchPoint?(a:F) == 
+      zero?((retract(discriminant())@UP) a)
+
+    definingPolynomial() == 
+      modulus
+
+    inverseIntegralMatrixAtInfinity() == 
+      (INIT; invinfbasis)
+
+    vect m ==
+      [represents row(m, i) for i in minRowIndex m .. maxRowIndex m]
+
+    integralCoordinates f ==
+      splitDenominator(coordinates(f) * inverseIntegralMatrix())
+
+    knownInfBasis d ==
+      if deref brandNew? then
+        alpha := [monomial(1, d * i)$UP :: RF for i in 0..n1]$Vector(RF)
+        ib := diagonalMatrix
+          [inv qelt(alpha, i) for i in minIndex alpha .. maxIndex alpha]
+        invib := diagonalMatrix alpha
+        for i in minRowIndex ib .. maxRowIndex ib repeat
+          for j in minColIndex ib .. maxColIndex ib repeat
+            infbasis(i, j)    := qelt(ib, i, j)
+            invinfbasis(i, j) := invib(i, j)
+      void
+
+    getInfBasis() ==
+      x           := inv(monomial(1, 1)$UP :: RF)
+      invmod      := map(s +-> s(x), modulus)
+      r           := mkIntegral invmod
+      degree(r.poly) ^= n => error "Should not happen"
+      ninvmod:UP2 := map(s +-> retract(s)@UP, r.poly)
+      alpha       := [(r.coef ** i) x for i in 0..n1]$Vector(RF)
+      invalpha := [inv qelt(alpha, i)
+                   for i in minIndex alpha .. maxIndex alpha]$Vector(RF)
+      invib       := integralBasis()$FunctionFieldIntegralBasis(UP, UP2,
+                             SimpleAlgebraicExtension(UP, UP2, ninvmod))
+      for i in minRowIndex ibasis .. maxRowIndex ibasis repeat
+        for j in minColIndex ibasis .. maxColIndex ibasis repeat
+          infbasis(i, j)    := ((invib.basis)(i,j) / invib.basisDen) x
+          invinfbasis(i, j) := ((invib.basisInv) (i, j)) x
+      ib2    := infbasis * diagonalMatrix alpha
+      invib2 := diagonalMatrix(invalpha) * invinfbasis
+      for i in minRowIndex ib2 .. maxRowIndex ib2 repeat
+        for j in minColIndex ibasis .. maxColIndex ibasis repeat
+          infbasis(i, j)    := qelt(ib2, i, j)
+          invinfbasis(i, j) := invib2(i, j)
+      void
+
+    startUp b ==
+      brandNew?() := b
+      nmod:UP2    := map(retract, modulus)
+      ib          := integralBasis()$FunctionFieldIntegralBasis(UP, UP2,
+                                SimpleAlgebraicExtension(UP, UP2, nmod))
+      for i in minRowIndex ibasis .. maxRowIndex ibasis repeat
+        for j in minColIndex ibasis .. maxColIndex ibasis repeat
+          qsetelt_!(ibasis, i, j, (ib.basis)(i, j) / ib.basisDen)
+          invibasis(i, j) := ((ib.basisInv) (i, j))::RF
+      if zero?(infbasis(minRowIndex infbasis, minColIndex infbasis))
+        then getInfBasis()
+      ib2    := coordinates normalizeAtInfinity vect ibasis
+      invib2 := inverse(ib2)::Matrix(RF)
+      for i in minRowIndex ib2 .. maxRowIndex ib2 repeat
+        for j in minColIndex ib2 .. maxColIndex ib2 repeat
+          ibasis(i, j)    := qelt(ib2, i, j)
+          invibasis(i, j) := invib2(i, j)
+      dsc  := resultant(modulus, differentiate modulus)
+      dsc0 := dsc * determinant(infbasis) ** 2
+      degree(numer dsc0) > degree(denom dsc0) =>error "Shouldn't happen"
+      infBr?() := degree(numer dsc0) < degree(denom dsc0)
+      dsc := dsc * determinant(ibasis) ** 2
+      discPoly() := primitivePart(numer dsc) / denom(dsc)
+      void
+
+    integralDerivationMatrix d ==
+      w := integralBasis()
+      splitDenominator(coordinates([differentiate(w.i, d)
+          for i in minIndex w .. maxIndex w]$Vector($))
+               * inverseIntegralMatrix())
+
+    integralRepresents(v, d) ==
+      represents(coordinates(represents(v, d)) * integralMatrix())
+
+    branchPoint?(p:UP) ==
+      INIT
+      (r:=retractIfCan(p)@Union(F,"failed")) case F =>branchPoint?(r::F)
+      not ground? gcd(retract(discriminant())@UP, p)
+

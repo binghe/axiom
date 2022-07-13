@@ -1,0 +1,35 @@
+)abbrev package MMAP MultipleMap
+++ Author: Manuel Bronstein
+++ Date Created: May 1988
+++ Date Last Updated: 11 Jul 1990
+++ Description: 
+++ Lifting of a map through 2 levels of polynomials;
+
+MultipleMap(R1,UP1,UPUP1,R2,UP2,UPUP2) : SIG == CODE where
+  R1   : IntegralDomain
+  UP1  : UnivariatePolynomialCategory R1
+  UPUP1: UnivariatePolynomialCategory Fraction UP1
+  R2   : IntegralDomain
+  UP2  : UnivariatePolynomialCategory R2
+  UPUP2: UnivariatePolynomialCategory Fraction UP2
+
+  Q1 ==> Fraction UP1
+  Q2 ==> Fraction UP2
+
+  SIG ==> with
+
+    map : (R1 -> R2, UPUP1) -> UPUP2
+      ++ map(f, p) lifts f to the domain of p then applies it to p.
+
+  CODE ==> add
+
+    import UnivariatePolynomialCategoryFunctions2(R1, UP1, R2, UP2)
+
+    rfmap: (R1 -> R2, Q1) -> Q2
+
+    rfmap(f, q) == map(f, numer q) / map(f, denom q)
+
+    map(f, p) ==
+      map(x +-> rfmap(f,x),
+          p)$UnivariatePolynomialCategoryFunctions2(Q1, UPUP1, Q2, UPUP2)
+

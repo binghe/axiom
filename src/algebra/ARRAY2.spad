@@ -1,0 +1,19 @@
+)abbrev domain ARRAY2 TwoDimensionalArray
+++ Author: Mark Botch
+++ Description:
+++ A TwoDimensionalArray is a two dimensional array with
+++ 1-based indexing for both rows and columns.
+
+TwoDimensionalArray(R) : SIG == CODE where
+  R : Type
+
+  Row ==> OneDimensionalArray R
+  Col ==> OneDimensionalArray R
+
+  SIG ==> TwoDimensionalArrayCategory(R,Row,Col) with
+
+    shallowlyMutable
+      ++ One may destructively alter TwoDimensionalArray's.
+
+  CODE ==> InnerIndexedTwoDimensionalArray(R,1,1,Row,Col)
+

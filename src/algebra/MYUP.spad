@@ -1,0 +1,51 @@
+)abbrev domain MYUP MyUnivariatePolynomial
+++ Author: Mark Botch
+++ Description:
+++ This domain has no description
+
+MyUnivariatePolynomial(x,R) : SIG == CODE where
+  x : Symbol
+  R : Ring
+
+  SIG ==> UnivariatePolynomialCategory(R) with
+
+    RetractableTo Symbol;
+
+    coerce : Variable(x) -> %
+      ++ coerce(x) converts the variable x to a univariate polynomial.
+
+    fmecg : (%,NonNegativeInteger,R,%) -> %
+        ++ fmecg(p1,e,r,p2) finds x : p1 - r * x**e * p2
+
+    if R has univariate: (R, Symbol) -> SparseUnivariatePolynomial R
+    then
+
+      coerce : R -> %
+
+    coerce : Polynomial R -> %
+
+  CODE ==> SparseUnivariatePolynomial(R) add
+
+    Rep := SparseUnivariatePolynomial(R)
+
+    coerce(p: %):OutputForm  == outputForm(p, outputForm x)
+
+    coerce(x: Symbol): % == monomial(1, 1)
+
+    coerce(v: Variable(x)):% == monomial(1, 1)
+
+    retract(p: %): Symbol == 
+        retract(p)@SingletonAsOrderedSet
+        x
+
+    if R has univariate: (R, Symbol) -> SparseUnivariatePolynomial R then
+
+      coerce(p: R): % == univariate(p, x)$R
+
+    coerce(p: Polynomial R): % == 
+        poly: SparseUnivariatePolynomial(Polynomial R) 
+             := univariate(p, x)$(Polynomial R)
+        map((z1:Polynomial R):R +-> retract(z1), poly)_
+             $UnivariatePolynomialCategoryFunctions2(Polynomial R,
+                    SparseUnivariatePolynomial Polynomial R, R, %)
+

@@ -1,0 +1,14 @@
+)abbrev category CHARNZ CharacteristicNonZero
+++ References:
+++ Grab92 Finite Fields in Axiom
+++ Description:
+++ Rings of Characteristic Non Zero
+
+CharacteristicNonZero() : Category == SIG where
+
+  SIG ==> Ring with
+
+    charthRoot : % -> Union(%,"failed")
+      ++ charthRoot(x) returns the pth root of x
+      ++ where p is the characteristic of the ring.
+

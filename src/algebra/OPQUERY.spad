@@ -1,0 +1,17 @@
+)abbrev package OPQUERY OperationsQuery
+++ Description:
+++ This package exports tools to create AXIOM Library information databases.
+
+OperationsQuery() : SIG == CODE where
+
+  SIG ==> with
+
+    getDatabase : String -> Database(IndexCard)
+      ++ getDatabase("char") returns a list of appropriate entries in the
+      ++ browser database.  The legal values for "char" are "o" (operations),
+      ++ "k" (constructors), "d" (domains), "c" (categories) or "p" (packages).
+
+  CODE ==> add
+
+    getDatabase(s) == getBrowseDatabase(s)$Lisp
+

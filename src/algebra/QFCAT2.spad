@@ -1,0 +1,21 @@
+)abbrev package QFCAT2 QuotientFieldCategoryFunctions2
+++ Description:
+++ This package extends a function between integral domains
+++ to a mapping between their quotient fields.
+
+QuotientFieldCategoryFunctions2(A, B, R, S) : SIG == CODE where
+  A : IntegralDomain
+  B : IntegralDomain
+  R : QuotientFieldCategory(A)
+  S : QuotientFieldCategory(B)
+
+  SIG ==> with
+
+    map : (A -> B, R) -> S
+      ++ map(func,frac) applies the function func to the numerator
+      ++ and denominator of frac.
+
+  CODE ==> add
+
+    map(f, r) == f(numer r) / f(denom r)
+

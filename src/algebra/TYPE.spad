@@ -1,0 +1,11 @@
+)abbrev category TYPE Type
+++ Author: Richard Jenks
+++ Date Created: 14 May 1992
+++ Date Last Updated: 14 May 1992
+++ Description:
+++ The fundamental Type.
+
+Type() : Category == SIG where
+
+  SIG ==> with nil
+

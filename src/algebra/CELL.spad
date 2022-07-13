@@ -1,0 +1,76 @@
+)abbrev domain CELL Cell
+
+Cell(TheField) : SIG == CODE where
+  TheField : RealClosedField
+
+  ThePols ==> Polynomial(TheField)
+  O       ==> OutputForm
+  B       ==> Boolean
+  Z       ==> Integer
+  N       ==> NonNegativeInteger
+  BUP     ==> SparseUnivariatePolynomial(TheField)
+  SCELL   ==> SimpleCell(TheField,BUP)
+
+  SIG ==> CoercibleTo(O) with
+
+     samplePoint : % -> List(TheField)
+
+     dimension : % -> N
+
+     hasDimension? :  (%,Symbol) -> B
+
+     makeCell : List(SCELL) -> %
+
+     makeCell : (SCELL,%) -> %
+
+     mainVariableOf : % -> Symbol
+
+     variablesOf : % -> List Symbol
+
+     projection : % -> Union(%,"failed")
+
+  CODE ==> add
+
+    Rep := List(SCELL)
+
+    coerce(c:%):O == 
+      paren [sc::O for sc in c]
+
+    projection(cell) ==
+      null cell => error "projection: should not appear"
+      r := rest(cell)
+      null r => "failed"
+      r
+
+    makeCell(l:List(SCELL)) == l
+
+    makeCell(scell,toAdd) == cons(scell,toAdd)
+
+    mainVariableOf(cell) == 
+      null(cell) => 
+        error "Should not appear"
+      variableOf(first(cell))
+
+    variablesOf(cell) ==
+      null(cell) => []
+      cons(mainVariableOf(cell),variablesOf(rest(cell)::%))
+
+    dimension(cell) ==
+      null(cell) => 0
+      hasDimension?(first(cell)) => 1+dimension(rest(cell))
+      dimension(rest(cell))
+
+    hasDimension?(cell,var) ==
+      null(cell) => 
+        error "Should not appear"
+      sc : SCELL := first(cell)
+      v := variableOf(sc)
+      v = var => hasDimension?(sc)
+      v < var => false
+      v > var => true
+      error "Caca Prout"
+
+    samplePoint(cell) ==
+      null(cell) => []
+      cons(samplePoint(first(cell)),samplePoint(rest(cell)))
+

@@ -1,0 +1,101 @@
+)abbrev domain BSD BasicStochasticDifferential
+++ Author: Wilfrid S. Kendall
+++ Date Last Updated: July 26, 1999
+++ Related Domains: StochasticDifferential(R)
+++ References: Ito (1975), Kendall (1991a,b; 1993a,b; 1999a,b).
+++ Description:
+++ Based on Symbol: a domain of symbols representing basic stochastic 
+++ differentials, used in StochasticDifferential(R) in the underlying
+++ sparse multivariate polynomial representation.
+++
+++ We create new BSD only by coercion from Symbol using a special 
+++ function introduce! first of all to add to a private set SDset. 
+++ We allow a separate function convertIfCan which will check whether the
+++ argument has previously been declared as a BSD.
+
+BasicStochasticDifferential() : SIG == CODE where
+
+  INT ==> Integer
+  OF  ==> OutputForm
+
+  SIG ==> OrderedSet with
+
+    ConvertibleTo(Symbol)
+
+    convertIfCan : Symbol -> Union(%, "failed")
+      ++ convertIfCan(ds) transforms \axiom{dX} into a \axiom{BSD}
+      ++ if possible (if \axiom{introduce(X,dX)} has
+      ++ been invoked previously).
+
+    convert : Symbol -> %
+      ++ convert(dX) transforms \axiom{dX} into a \axiom{BSD}
+      ++ if possible and otherwise produces an error.
+
+    introduce! : (Symbol,Symbol) -> Union(%, "failed")
+      ++ introduce!(X,dX) returns \axiom{dX} as \axiom{BSD} if it
+      ++ isn't already in \axiom{BSD}
+      ++
+      ++X introduce!(t,dt) -- dt is a new stochastic differential
+      ++X copyBSD()
+
+    d : Symbol -> Union(%,INT)
+      ++ d(X) returns \axiom{dX} if \axiom{tableIto(X)=dX}
+      ++ and otherwise returns \axiom{0}
+
+    copyBSD : () -> List %
+      ++ copyBSD() returns \axiom{setBSD} as a list of \axiom{BSD}.
+      ++
+      ++X introduce!(t,dt) -- dt is a new stochastic differential
+      ++X copyBSD()
+
+    copyIto : () -> Table(Symbol,%)
+      ++ copyIto() returns the table relating semimartingales
+      ++ to basic stochastic differentials.
+      ++
+      ++X introduce!(t,dt) -- dt is a new stochastic differential
+      ++X copyIto()
+
+    getSmgl : % -> Union(Symbol,"failed")
+      ++ getSmgl(bsd) returns the semimartingale \axiom{S} related
+      ++ to the basic stochastic differential \axiom{bsd} by
+      ++ \axiom{introduce!}
+      ++
+      ++X introduce!(t,dt) -- dt is a new stochastic differential
+      ++X getSmgl(dt::BSD)
+
+  CODE ==> Symbol add 
+
+    Rep := Symbol
+
+    setBSD := empty()$Set(Symbol)
+    tableIto:Table(Symbol,%) := table()
+    tableBSD:Table(%,Symbol) := table()
+
+    convertIfCan(ds:Symbol):Union(%,"failed") ==
+     not(member?(ds,setBSD)) => "failed"
+     ds::%
+
+    convert(ds:Symbol):% ==
+     (du:=convertIfCan(ds)) 
+      case "failed" =>
+       print(hconcat(ds::Symbol::OF,
+         message(" is not a stochastic differential")$OF))
+       error "above causes failure in convert$BSD"
+     du
+
+    introduce!(X,dX) == 
+     member?(dX,setBSD) => "failed"
+     insert!(dX,setBSD)
+     tableBSD(dX::%) := X
+     tableIto(X) := dX::%
+
+    d(X) ==
+     search(X,tableIto) case "failed" => 0::INT
+     tableIto(X)
+
+    copyBSD() == [ds::% for ds in members(setBSD)]
+
+    copyIto() == tableIto
+
+    getSmgl(ds:%):Union(Symbol,"failed") == tableBSD(ds)
+

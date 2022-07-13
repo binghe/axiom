@@ -1,0 +1,63 @@
+)abbrev domain PDEPROB NumericalPDEProblem
+++ Author: Brian Dupee
+++ Date Created: December 1997
+++ Date Last Updated: December 1997
+++ References:
+++ Dupe95 Using Computer Algebra to Choose and Apply Numerical Routines
+++ Dewa92 Using Computer Algebra to Select Numerical Algorithms
+++ Description:
+++ \axiomType{NumericalPDEProblem} is a \axiom{domain}
+++ for the representation of Numerical PDE problems for use
+++ by ANNA. 
+++
+++ The representation is of type: 
+++
+++ \axiomType{Record}(pde:\axiomType{List Expression DoubleFloat}, \br
+++ constraints:\axiomType{List PDEC}, \br
+++ f:\axiomType{List List Expression DoubleFloat},\br
+++ st:\axiomType{String},\br
+++ tol:\axiomType{DoubleFloat})
+++
+++ where \axiomType{PDEC} is of type:
+++
+++ \axiomType{Record}(start:\axiomType{DoubleFloat}, \br
+++ finish:\axiomType{DoubleFloat},\br
+++ grid:\axiomType{NonNegativeInteger},\br
+++ boundaryType:\axiomType{Integer},\br
+++ dStart:\axiomType{Matrix DoubleFloat}, \br
+++ dFinish:\axiomType{Matrix DoubleFloat})
+
+NumericalPDEProblem() : SIG == CODE where
+
+  DFC   ==> DoubleFloat
+  NNIC  ==> NonNegativeInteger
+  INTC  ==> Integer
+  MDFC  ==> Matrix DoubleFloat
+  PDECC ==> Record(start:DFC, finish:DFC, grid:NNIC, boundaryType:INTC,
+                 dStart:MDFC, dFinish:MDFC)
+  LEDFC ==> List Expression DoubleFloat
+  PDEBC ==> Record(pde:LEDFC, constraints:List PDECC, f:List LEDFC, 
+                     st:String, tol:DFC)
+
+  SIG ==> SetCategory with
+
+    coerce : PDEBC -> %
+      ++ coerce(x) is not documented
+
+    coerce : % -> OutputForm
+      ++ coerce(x) is not documented
+
+    retract : % -> PDEBC
+      ++ retract(x) is not documented
+
+  CODE ==> add
+
+      Rep := PDEBC
+ 
+      coerce(s:PDEBC) == s
+
+      coerce(x:%):OutputForm ==
+        (retract(x))::OutputForm
+
+      retract(x:%):PDEBC == x :: Rep
+

@@ -1,0 +1,756 @@
+)abbrev package DFSFUN DoubleFloatSpecialFunctions
+++ Author: Bruce W. Char, Timothy Daly, Stephen M. Watt
+++ Date Created:  1990
+++ Date Last Updated: Jan 19, 2008
+++ References:
+++ Losc60 Tables of Higher Functions
+++ Pear56 Pearcey Table of the Fresnel Integral
+++ Luke The Special FUnctions and their Approximations
+++ Segl98 A compact analytical fit to the exponential integral E1(x)
+++ WikiG Gamma Function
+++ Description:
+++ This package provides special functions for double precision
+++ real and complex floating point.
+
+DoubleFloatSpecialFunctions() : SIG == CODE where
+
+  NNI  ==> NonNegativeInteger
+  PI   ==> Integer
+  R    ==> DoubleFloat
+  C    ==> Complex DoubleFloat
+  OPR  ==> OnePointCompletion R
+  F    ==> Float
+  LF   ==> List Float
+
+  SIG ==> with
+
+    Gamma : R -> R
+      ++ Gamma(x) is the Euler gamma function, \spad{Gamma(x)}, defined by
+      ++   \spad{Gamma(x) = integrate(t^(x-1)*exp(-t), t=0..%infinity)}.
+
+    Gamma : C -> C
+      ++ Gamma(x) is the Euler gamma function, \spad{Gamma(x)}, defined by
+      ++   \spad{Gamma(x) = integrate(t^(x-1)*exp(-t), t=0..%infinity)}.
+
+    E1 : R -> OPR
+      ++ E1(x) is the Exponential Integral function
+      ++ The current implementation is a piecewise approximation
+      ++ involving one poly from -4..4 and a second poly for x > 4
+
+    En : (PI,R) -> OPR
+      ++ En(n,x) is the nth Exponential Integral Function
+
+    Ei : (OPR) -> OPR
+      ++ Ei(opr) is the Exponential Integral function
+      ++ This is computed using a 6 part piecewise approximation.
+      ++ DoubleFloat can only preserve about 16 digits but the
+      ++ Chebyshev approximation used can give 30 digits.
+
+    Ei1 : (OPR) -> OPR
+      ++ Ei1(opr) is the first approximation of Ei where the result is
+      ++ x*%e^-x*Ei(x) from -infinity to -10 (preserves digits)
+
+    Ei2 : (OPR) -> OPR
+      ++ Ei2(opr) is the first approximation of Ei where the result is
+      ++ x*%e^-x*Ei(x) from -10 to -4 (preserves digits)
+
+    Ei3 : (OPR) -> OPR
+      ++ Ei3(opr) is the first approximation of Ei where the result is
+      ++ (Ei(x)-log |x| - gamma)/x from -4 to 4 (preserves digits)
+
+    Ei4 : (OPR) -> OPR
+      ++ Ei4(opr) is the first approximation of Ei where the result is
+      ++ x*%e^-x*Ei(x) from 4 to 12 (preserves digits)
+
+    Ei5 : (OPR) -> OPR
+      ++ Ei5(opr) is the first approximation of Ei where the result is
+      ++ x*%e^-x*Ei(x) from 12 to 32 (preserves digits)
+
+    Ei6 : (OPR) -> OPR
+      ++ Ei6(opr) is the first approximation of Ei where the result is
+      ++ x*%e^-x*Ei(x) from 32 to infinity (preserves digits)
+
+    Beta : (R, R) -> R
+      ++ Beta(x, y) is the Euler beta function, \spad{B(x,y)}, defined by
+      ++   \spad{Beta(x,y) = integrate(t^(x-1)*(1-t)^(y-1), t=0..1)}.
+      ++ This is related to \spad{Gamma(x)} by
+      ++   \spad{Beta(x,y) = Gamma(x)*Gamma(y) / Gamma(x + y)}.
+
+    Beta : (C, C) -> C
+      ++ Beta(x, y) is the Euler beta function, \spad{B(x,y)}, defined by
+      ++   \spad{Beta(x,y) = integrate(t^(x-1)*(1-t)^(y-1), t=0..1)}.
+      ++ This is related to \spad{Gamma(x)} by
+      ++   \spad{Beta(x,y) = Gamma(x)*Gamma(y) / Gamma(x + y)}.
+
+    logGamma : R -> R
+      ++ logGamma(x) is the natural log of \spad{Gamma(x)}.
+      ++ This can often be computed even if \spad{Gamma(x)} cannot.
+      ++
+      ++X a:DoubleFloat:=3.5
+      ++X logGamma(a)
+
+    logGamma : C -> C
+      ++ logGamma(x) is the natural log of \spad{Gamma(x)}.
+      ++ This can often be computed even if \spad{Gamma(x)} cannot.
+      ++
+      ++X a:Complex(DoubleFloat):=3.5*%i
+      ++X logGamma(a)
+
+    digamma : R -> R
+      ++ digamma(x) is the function, \spad{psi(x)}, defined by
+      ++   \spad{psi(x) = Gamma'(x)/Gamma(x)}.
+
+    digamma : C -> C
+      ++ digamma(x) is the function, \spad{psi(x)}, defined by
+      ++   \spad{psi(x) = Gamma'(x)/Gamma(x)}.
+
+    polygamma : (NNI, R) -> R
+      ++ polygamma(n, x) is the n-th derivative of \spad{digamma(x)}.
+
+    polygamma : (NNI, C) -> C
+      ++ polygamma(n, x) is the n-th derivative of \spad{digamma(x)}.
+
+    besselJ : (R,R) -> R
+      ++ besselJ(v,x) is the Bessel function of the first kind,
+      ++ \spad{J(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) + (x^2-v^2)w(x) = 0}.
+
+    besselJ : (C,C) -> C
+      ++ besselJ(v,x) is the Bessel function of the first kind,
+      ++ \spad{J(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) + (x^2-v^2)w(x) = 0}.
+
+    besselY : (R, R) -> R
+      ++ besselY(v,x) is the Bessel function of the second kind,
+      ++ \spad{Y(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) + (x^2-v^2)w(x) = 0}.
+      ++ Note that the default implementation uses the relation
+      ++   \spad{Y(v,x) = (J(v,x) cos(v*%pi) - J(-v,x))/sin(v*%pi)}
+      ++ so is not valid for integer values of v.
+
+    besselY : (C, C) -> C
+      ++ besselY(v,x) is the Bessel function of the second kind,
+      ++ \spad{Y(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) + (x^2-v^2)w(x) = 0}.
+      ++ Note that the default implementation uses the relation
+      ++   \spad{Y(v,x) = (J(v,x) cos(v*%pi) - J(-v,x))/sin(v*%pi)}
+      ++ so is not valid for integer values of v.
+
+    besselI : (R,R) -> R
+      ++ besselI(v,x) is the modified Bessel function of the first kind,
+      ++ \spad{I(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) - (x^2+v^2)w(x) = 0}.
+
+    besselI : (C,C) -> C
+      ++ besselI(v,x) is the modified Bessel function of the first kind,
+      ++ \spad{I(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) - (x^2+v^2)w(x) = 0}.
+
+    besselK : (R, R) -> R
+      ++ besselK(v,x) is the modified Bessel function of the second kind,
+      ++ \spad{K(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) - (x^2+v^2)w(x) = 0}.
+      ++ Note that the default implementation uses the relation
+      ++   \spad{K(v,x) = %pi/2*(I(-v,x) - I(v,x))/sin(v*%pi)}.
+      ++ so is not valid for integer values of v.
+
+    besselK : (C, C) -> C
+      ++ besselK(v,x) is the modified Bessel function of the second kind,
+      ++ \spad{K(v,x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{x^2 w''(x) + x w'(x) - (x^2+v^2)w(x) = 0}.
+      ++ Note that the default implementation uses the relation
+      ++   \spad{K(v,x) = %pi/2*(I(-v,x) - I(v,x))/sin(v*%pi)}
+      ++ so is not valid for integer values of v.
+
+    airyAi : C -> C
+      ++ airyAi(x) is the Airy function \spad{Ai(x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{Ai''(x) - x * Ai(x) = 0}.
+
+    airyAi : R -> R
+      ++ airyAi(x) is the Airy function \spad{Ai(x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{Ai''(x) - x * Ai(x) = 0}.
+
+    airyBi : R -> R
+      ++ airyBi(x) is the Airy function \spad{Bi(x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{Bi''(x) - x * Bi(x) = 0}.
+
+    airyBi : C -> C
+      ++ airyBi(x) is the Airy function \spad{Bi(x)}.
+      ++ This function satisfies the differential equation:
+      ++   \spad{Bi''(x) - x * Bi(x) = 0}.
+
+    hypergeometric0F1 : (R, R) -> R
+      ++ hypergeometric0F1(c,z) is the hypergeometric function
+      ++ \spad{0F1(; c; z)}.
+
+    hypergeometric0F1 : (C, C) -> C
+      ++ hypergeometric0F1(c,z) is the hypergeometric function
+      ++ \spad{0F1(; c; z)}.
+
+    fresnelS : F -> F
+      ++ fresnelS(f) denotes the Fresnel integral S
+      ++
+      ++X fresnelS(1.5)
+
+    fresnelC : F -> F
+      ++ fresnelC(f) denotes the Fresnel integral C
+      ++
+      ++X fresnelC(1.5)
+
+  CODE ==> add
+        a, v, w, z: C
+        n, x, y: R
+
+
+        Gamma z == CGAMMA(z)$Lisp
+        Gamma x == RGAMMA(x)$Lisp
+
+        E1(x:R):OPR ==
+         x = 0.0::R => infinity()
+         x > 4.0::R =>
+          t1:R:=0.14999948967737774608E-15::R
+          t2:R:=0.9999999999993112::R
+          ta:R:=(t1*x+t2)
+          t3:R:=0.99999999953685760001::R
+          tb:R:=(ta*x-t3)
+          t4:R:=1.9999998808293376::R
+          tc:R:=(tb*x+t4)
+          t5:R:=5.999983407661056::R
+          td:R:=(tc*x-t5)
+          t6:R:=23.9985380938481664::R
+          te:R:=(td*x+t6)
+          t7:R:=119.9108830382784512::R
+          tf:R:=(te*x-t7)
+          t8:R:=716.01351020920176641::R
+          tg:R:=(tf*x+t8)
+          t9:R:=4903.3466623370985473::R
+          th:R:=(tg*x-t9)
+          t10:R:=36601.25841454446674::R
+          ti:R:=(th*x+t10)
+          t11:R:=279913.28608482691646::R
+          tj:R:=(ti*x-t11)
+          t12:R:=2060518.7020296525186::R
+          tk:R:=(tj*x+t12)
+          t13:R:=13859772.093039815059::R
+          tl:R:=(tk*x-t13)
+          t14:R:=81945572.630072918857::R
+          tm:R:=(tl*x+t14)
+          t15:R:=413965714.82128317479::R
+          tn:R:=(tm*x-t15)
+          t16:R:=1747209536.2595547568::R
+          to:R:=(tn*x+t16)
+          t17:R:=6036182333.96179427::R
+          tp:R:=(to*x-t17)
+          t18:R:=16693683576.106267572::R
+          tq:R:=(tp*x+t18)
+          t19:R:=35938625644.58286097::R
+          tr:R:=(tq*x-t19)
+          t20:R:=57888657293.609258888::R
+          ts:R:=(tr*x+t20)
+          t21:R:=65523779423.11290127::R
+          tt:R:=(ts*x-t21)
+          t22:R:=46422751473.201760309::R
+          tu:R:=(tt*x+t22)
+          t23:R:=15474250491.067253436::R
+          tv:R:=(tu*x-t23)
+          tw:R:=(-1.0::R*x)
+          tx:R:=exp(tw)
+          ty:R:=tv*tx
+          tz:R:=x**22
+          taz:R:=ty/tz
+          taz::OPR
+         x > -4.0::R => 
+          a1:R:=0.476837158203125E-22::R
+          a2:R:=0.10967254638671875E-20::R
+          aa:R:=(-a1*x+a2)
+          a3:R:=0.20217895507812500001E-19::R
+          ab:R:=(aa*x-a3)
+          a4:R:=0.42600631713867187501E-18::R
+          ac:R:=(ab*x+a4)
+          a5:R:=0.868625640869140625E-17::R
+          ad:R:=(ac*x-a5)
+          a6:R:=0.16553192138671875E-15::R
+          ae:R:=(ad*x+a6)
+          a7:R:=0.29870208740234375E-14::R
+          af:R:=(ae*x-a7)
+          a8:R:=0.5097890777587890625E-13::R
+          ag:R:=(af*x+a8)
+          a9:R:=0.81934069213867187499E-12::R
+          ah:R:=(ag*x-a9)
+          a10:R:=0.1235313123779296875E-10::R
+          ai:R:=(ah*x+a10)
+          a11:R:=0.1739729620849609375E-9::R
+          aj:R:=(ai*x-a11)
+          a12:R:=0.22774642697021484375E-8::R
+          ak:R:=(aj*x+a12)
+          a13:R:=0.275573192853515625E-7::R
+          al:R:=(ak*x-a13)
+          a14:R:=0.30619243635087890625E-6::R
+          am:R:=(al*x+a14)
+          a15:R:=0.000003100198412519140625::R
+          an:R:=(am*x-a15)
+          a16:R:=0.00002834467120045546875::R
+          ao:R:=(an*x+a16)
+          a17:R:=0.00023148148148176953125::R
+          ap:R:=(ao*x-a17)
+          a18:R:=0.0016666666666686609375::R
+          aq:R:=(ap*x+a18)
+          a19:R:=0.01041666666666646875::R
+          ar:R:=(aq*x-a19)
+          a20:R:=0.055555555555554168751::R
+          as:R:=(ar*x+a20)
+          a21:R:=0.2500000000000000375::R
+          at:R:=(as*x-a21)
+          a22:R:=1.000000000000000325::R
+          au:R:=(at*x+a22)
+          a23:R:=0.5772156649015328::R
+          av:R:=au*x-a23
+          aw:R:=- 1.0::R*log(abs(x)) + av
+          aw::OPR
+         error "E1: no approximation available"
+        En(n:PI,x:R):OPR == 
+          n=1 => E1(x) 
+          v:R:=retract(En((n-1)::PI,x))
+          w:R:=1/(n-1)*(exp(-x)-x*v)
+          w::OPR
+
+
+        Ei(y:OPR):OPR ==
+          infinite? y => 1
+          x:R:=retract(y)
+          x < -10.0::R => 
+            ei:R:=retract(Ei1(y))
+            (ei/(x*exp(-x)))::OPR
+          x <  -4.0::R =>
+            ei:R:=retract(Ei2(y))
+            (ei/(x*exp(-x)))::OPR
+          x <   4.0::R => 
+            ei3:R:=retract(Ei3(y))
+            gamma:R:=0.577215664901532860606512090082::R
+            (ei3*x+log(abs(x))+gamma)::OPR
+          x <  12.0::R => 
+            ei:R:=retract(Ei4(y))
+            (ei/(x*exp(-x)))::OPR
+          x <  32.0::R => 
+            ei:R:=retract(Ei5(y))
+            (ei/(x*exp(-x)))::OPR
+          ei:R:=retract(Ei6(y))
+          (ei/(x*exp(-x)))::OPR
+
+
+        Ei1(y:OPR):OPR ==
+          infinite? y => 1
+          x:R:=retract(y)
+          t:R:=acos((-20.0::R/x)-1.0::R)::R
+          t01:=    0.191217322586055345391519326510E1::R*cos(0.0::R)/2.0::R
+          t02:=t01-0.420835505286848437550974986680E-01::R*cos(t::R)::R
+          t03:=t02+0.172281962728432678337118157835E-02::R*cos( 2.0::R*t)
+          t04:=t03-0.991578217344456364559842322973E-04::R*cos( 3.0::R*t)
+          t05:=t04+0.717609316802277505265590665592E-05::R*cos( 4.0::R*t)
+          t06:=t05-0.615273314509512696827956791331E-06::R*cos( 5.0::R*t)
+          t07:=t06+0.602485710656275831293999701610E-07::R*cos( 6.0::R*t)
+          t08:=t07-0.657384884528830482295894189637E-08::R*cos( 7.0::R*t)
+          t09:=t08+0.785316754183239981994810079871E-09::R*cos( 8.0::R*t)
+          t10:=t09-0.101373028800387898554202774257E-09::R*cos( 9.0::R*t)
+          t11:=t10+0.139977041322676860277823488623E-10::R*cos(10.0::R*t)
+          t12:=t11-0.205100837678381899618962318711E-11::R*cos(11.0::R*t)
+          t13:=t12+0.316838872600247781814907985818E-12::R*cos(12.0::R*t)
+          t14:=t13-0.513276008283918065415984751899E-13::R*cos(13.0::R*t)
+          t15:=t14+0.868093304076654934187433687383E-14::R*cos(14.0::R*t)
+          t16:=t15-0.152701504090308497198572355351E-14::R*cos(15.0::R*t)
+          t17:=t16+0.278468625164935739650105251453E-15::R*cos(16.0::R*t)
+          t18:=t17-0.524989043742176696808472933696E-16::R*cos(17.0::R*t)
+          t19:=t18+0.102071799124856129247455787226E-16::R*cos(18.0::R*t)
+          t20:=t19-0.204226467989971841308462421876E-17::R*cos(19.0::R*t)
+          t21:=t20+0.419706417272648474408827228562E-18::R*cos(20.0::R*t)
+          t22:=t21-0.884450817617281050816483737536E-19::R*cos(21.0::R*t)
+          t23:=t22+0.190827262959471741995060168262E-19::R*cos(22.0::R*t)
+          t24:=t23-0.420974622293519950336450865676E-20::R*cos(23.0::R*t)
+          t25:=t24+0.948390405819837327641500214512E-21::R*cos(24.0::R*t)
+          t26:=t25-0.217946786013667431994032574014E-21::R*cos(25.0::R*t)
+          t27:=t26+0.510393686907145094993452562741E-22::R*cos(26.0::R*t)
+          t28:=t27-0.121688311333441509089746779693E-22::R*cos(27.0::R*t)
+          t29:=t28+0.295128916644787519294773757144E-23::R*cos(28.0::R*t)
+          t30:=t29-0.727535376377284689714438950920E-24::R*cos(29.0::R*t)
+          t31:=t30+0.182163904862307396121667115976E-24::R*cos(30.0::R*t)
+          t32:=t31-0.462962996316331716612753482064E-25::R*cos(31.0::R*t)
+          t33:=t32+0.119353979097157791523052371292E-25::R*cos(32.0::R*t)
+          t34:=t33-0.311949328522014244931062147473E-26::R*cos(33.0::R*t)
+          t35:=t34+0.826141973453346642284170028518E-27::R*cos(34.0::R*t)
+          t36:=t35-0.221580337366098298302591177697E-27::R*cos(35.0::R*t)
+          t37:=t36+0.601603167165426389045303124429E-28::R*cos(36.0::R*t)
+          t38:=t37-0.165272509838212659649744302314E-28::R*cos(37.0::R*t)
+          t39:=t38+0.459223035877302702795636377166E-29::R*cos(38.0::R*t)
+          t40:=t39-0.129006276721326384737453212670E-29::R*cos(39.0::R*t)
+          t41:=t40+0.366271848103200259081177078922E-30::R*cos(40.0::R*t)
+          t41::OPR
+
+
+        Ei2(y:OPR):OPR ==
+          x:R:=retract(y)
+          t:R:=acos((x+7.0::R)/3.0::R)::R
+          t01:=    0.175755649606129373848762834691E1::R*cos(0.0::R)/2.0::R
+          t02:=t01-0.435854151773616611705001867964E-01::R*cos(t)
+          t03:=t02-0.797950713955842540133217027492E-02::R*cos( 2.0::R*t)
+          t04:=t03-0.148437232730371213850970210001E-02::R*cos( 3.0::R*t)
+          t05:=t04-0.280030198437751457486203954948E-03::R*cos( 4.0::R*t)
+          t06:=t05-0.534864851286579323039177361553E-04::R*cos( 5.0::R*t)
+          t07:=t06-0.103286724357355486610233266460E-04::R*cos( 6.0::R*t)
+          t08:=t07-0.201408331300553687732226198639E-05::R*cos( 7.0::R*t)
+          t09:=t08-0.396175843427386645822338443500E-06::R*cos( 8.0::R*t)
+          t10:=t09-0.785387276709663163067607656069E-07::R*cos( 9.0::R*t)
+          t11:=t10-0.156792598100746982624616270279E-07::R*cos(10.0::R*t)
+          t12:=t11-0.315005593937639988250007372851E-08::R*cos(11.0::R*t)
+          t13:=t12-0.636509682252420373040380263972E-09::R*cos(12.0::R*t)
+          t14:=t13-0.129288811328056318356593121259E-09::R*cos(13.0::R*t)
+          t15:=t14-0.263869099965925576132149942808E-10::R*cos(14.0::R*t)
+          t16:=t15-0.540895828704506873491922207896E-11::R*cos(15.0::R*t)
+          t17:=t16-0.111322278460108989997676692708E-11::R*cos(16.0::R*t)
+          t18:=t17-0.229962472607446246184338864145E-12::R*cos(17.0::R*t)
+          t19:=t18-0.476668238949519026223913482091E-13::R*cos(18.0::R*t)
+          t20:=t19-0.991175674733527094506246643371E-14::R*cos(19.0::R*t)
+          t21:=t20-0.206710358049570724000900805021E-14::R*cos(20.0::R*t)
+          t22:=t21-0.432277678338338505645764394579E-15::R*cos(21.0::R*t)
+          t23:=t22-0.906301479966501725514905603356E-16::R*cos(22.0::R*t)
+          t24:=t23-0.190466997958166139744015963342E-16::R*cos(23.0::R*t)
+          t25:=t24-0.401179232635027866346744227520E-17::R*cos(24.0::R*t)
+          t26:=t25-0.846777213001683223134166334685E-18::R*cos(25.0::R*t)
+          t27:=t26-0.179084273365869665555826492204E-18::R*cos(26.0::R*t)
+          t28:=t27-0.379449063817147824401106175166E-19::R*cos(27.0::R*t)
+          t29:=t28-0.805399923679827985260999654058E-20::R*cos(28.0::R*t)
+          t30:=t29-0.171233901123620129743228671244E-20::R*cos(29.0::R*t)
+          t31:=t30-0.364627405877496862086576562816E-21::R*cos(30.0::R*t)
+          t32:=t31-0.777596963889394794353098157647E-22::R*cos(31.0::R*t)
+          t33:=t32-0.166062849844840205662531950966E-22::R*cos(32.0::R*t)
+          t34:=t33-0.355117862578825093005927145352E-23::R*cos(33.0::R*t)
+          t35:=t34-0.760372268594135809295734653294E-24::R*cos(34.0::R*t)
+          t36:=t35-0.163007413725849002889638374755E-24::R*cos(35.0::R*t)
+          t37:=t36-0.349857520272863223507538497255E-25::R*cos(36.0::R*t)
+          t38:=t37-0.751717962789009882460645145143E-26::R*cos(37.0::R*t)
+          t39:=t38-0.161687744005272276298777317918E-26::R*cos(38.0::R*t)
+          t40:=t39-0.348127008572475691748202271565E-27::R*cos(39.0::R*t)
+          t41:=t40-0.750270777550246547010642233720E-28::R*cos(40.0::R*t)
+          t42:=t41-0.161845436449591026807612330206E-28::R*cos(41.0::R*t)
+          t43:=t42-0.349436677170516166749482836452E-29::R*cos(42.0::R*t)
+          t44:=t43-0.755103690612616785856037026797E-30::R*cos(43.0::R*t)
+          t44::OPR
+
+
+        Ei3(y:OPR):OPR ==
+          x:R:=retract(y)
+          x = 0.0::R => 1
+          t:R:=acos(x/4.0::R)::R
+          t01:=    0.329370010376739129393905231421E1::R*cos(0.0::R)/2.0::R
+          t02:=t01+0.167983505237130291565505796064E1::R*cos(t)
+          t03:=t02+0.722043610567875435240299679644E0::R*cos( 2.0::R*t)
+          t04:=t03+0.260031236054809561713740181192E0::R*cos( 3.0::R*t)
+          t05:=t04+0.801049430817375022394742889237E-01::R*cos( 4.0::R*t)
+          t06:=t05+0.215140366397633375480552483005E-01::R*cos( 5.0::R*t)
+          t07:=t06+0.511620778993033120621968910894E-02::R*cos( 6.0::R*t)
+          t08:=t07+0.109093286100739135605066199014E-02::R*cos( 7.0::R*t)
+          t09:=t08+0.210741532023938916318348675226E-03::R*cos( 8.0::R*t)
+          t10:=t09+0.371990451665188857095940815956E-04::R*cos( 9.0::R*t)
+          t11:=t10+0.604349163712387875704767032866E-05::R*cos(10.0::R*t)
+          t12:=t11+0.909295427396260952649596541772E-06::R*cos(11.0::R*t)
+          t13:=t12+0.127380516065926478865567184969E-06::R*cos(12.0::R*t)
+          t14:=t13+0.166918574841098907390896143814E-07::R*cos(13.0::R*t)
+          t15:=t14+0.205441702640104792547612484551E-08::R*cos(14.0::R*t)
+          t16:=t15+0.238358444446681765914052321417E-09::R*cos(15.0::R*t)
+          t17:=t16+0.261538637888544296669068664148E-10::R*cos(16.0::R*t)
+          t18:=t17+0.272185862285416706446550268995E-11::R*cos(17.0::R*t)
+          t19:=t18+0.269375003198357929925326427442E-12::R*cos(18.0::R*t)
+          t20:=t19+0.254122094670726355467884089307E-13::R*cos(19.0::R*t)
+          t21:=t20+0.229013040686503709418510620516E-14::R*cos(20.0::R*t)
+          t22:=t21+0.197546573907462299401057650412E-15::R*cos(21.0::R*t)
+          t23:=t22+0.163402455192893174068635419984E-16::R*cos(22.0::R*t)
+          t24:=t23+0.129823543707963760991961293204E-17::R*cos(23.0::R*t)
+          t25:=t24+0.992258792507371059644632581302E-19::R*cos(24.0::R*t)
+          t26:=t25+0.730625280672210329447230880087E-20::R*cos(25.0::R*t)
+          t27:=t26+0.518967683460434512720780080019E-21::R*cos(26.0::R*t)
+          t28:=t27+0.356040945409970681128043162227E-22::R*cos(27.0::R*t)
+          t29:=t28+0.236197943257938642370187203948E-23::R*cos(28.0::R*t)
+          t30:=t29+0.151683776772145297549624516819E-24::R*cos(29.0::R*t)
+          t31:=t30+0.943908972224487442925310405245E-26::R*cos(30.0::R*t)
+          t32:=t31+0.569722755950369211989581737831E-27::R*cos(31.0::R*t)
+          t33:=t32+0.333833362779543303156597939562E-28::R*cos(32.0::R*t)
+          t34:=t33+0.190062601281619148526680482237E-29::R*cos(33.0::R*t)
+          t34::OPR
+
+
+        Ei4(y:OPR):OPR ==
+          x:R:=retract(y)
+          t:R:=acos((x-8.0::R)/4.0::R)::R
+          t01:=    0.245513353878129528673420457043E1::R*cos(0.0::R)/2.0::R
+          t02:=t01-0.162438379130376524396002276856E0::R*cos(t)
+          t03:=t02+0.449575308093572641480785417193E-01::R*cos( 2.0::R*t)
+          t04:=t03-0.674157867998922998848718835050E-02::R*cos( 3.0::R*t)
+          t05:=t04-0.130669714280329428051599341387E-02::R*cos( 4.0::R*t)
+          t06:=t05+0.138108314600072576020202089820E-02::R*cos( 5.0::R*t)
+          t07:=t06-0.585022879015965798687368242394E-03::R*cos( 6.0::R*t)
+          t08:=t07+0.174929934107891970038740976432E-03::R*cos( 7.0::R*t)
+          t09:=t08-0.404728149905293035522869333800E-04::R*cos( 8.0::R*t)
+          t10:=t09+0.721710241217099750035752600049E-05::R*cos( 9.0::R*t)
+          t11:=t10-0.861277697019867752414815450193E-06::R*cos(10.0::R*t)
+          t12:=t11-0.251447529653225597779084739054E-09::R*cos(11.0::R*t)
+          t13:=t12+0.379474713820149510814074505574E-07::R*cos(12.0::R*t)
+          t14:=t13-0.144211796952119806160265640172E-07::R*cos(13.0::R*t)
+          t15:=t14+0.393504929597610131087190848042E-08::R*cos(14.0::R*t)
+          t16:=t15-0.928468940106331753047289210353E-09::R*cos(15.0::R*t)
+          t17:=t16+0.203178956800654613366090995698E-09::R*cos(16.0::R*t)
+          t18:=t17-0.429249850499236831427918026902E-10::R*cos(17.0::R*t)
+          t19:=t18+0.899264717778123935268001544182E-11::R*cos(18.0::R*t)
+          t20:=t19-0.190086911841210975242396635722E-11::R*cos(19.0::R*t)
+          t21:=t20+0.409219891222373834526121178338E-12::R*cos(20.0::R*t)
+          t22:=t21-0.899925343729319019825435824585E-13::R*cos(21.0::R*t)
+          t23:=t22+0.201965467082426383354948543451E-13::R*cos(22.0::R*t)
+          t24:=t23-0.461293026138308207194950531726E-14::R*cos(23.0::R*t)
+          t25:=t24+0.106902307293863695668857256409E-14::R*cos(24.0::R*t)
+          t26:=t25-0.250703007057007295692572254042E-15::R*cos(25.0::R*t)
+          t27:=t26+0.593732250379155160706073763509E-16::R*cos(26.0::R*t)
+          t28:=t27-0.141773458243766252344732005648E-16::R*cos(27.0::R*t)
+          t29:=t28+0.340920375436080893426806402093E-17::R*cos(28.0::R*t)
+          t30:=t29-0.824829026950549379288702529656E-18::R*cos(29.0::R*t)
+          t31:=t30+0.200636971262144231398824095937E-18::R*cos(30.0::R*t)
+          t32:=t31-0.490385166796742224403498152027E-19::R*cos(31.0::R*t)
+          t33:=t32+0.120373448234833217166664609324E-19::R*cos(32.0::R*t)
+          t34:=t33-0.296628244714136825381453572575E-20::R*cos(33.0::R*t)
+          t35:=t34+0.733551238428807599242142328436E-21::R*cos(34.0::R*t)
+          t36:=t35-0.181992414290851127344263485604E-21::R*cos(35.0::R*t)
+          t37:=t36+0.452862937429576060217359526404E-22::R*cos(36.0::R*t)
+          t38:=t37-0.112998004375060961338906717853E-22::R*cos(37.0::R*t)
+          t39:=t38+0.282668125129011656923764408445E-23::R*cos(38.0::R*t)
+          t40:=t39-0.708771797716904961666732640699E-24::R*cos(39.0::R*t)
+          t41:=t40+0.178110452401870951534401530034E-24::R*cos(40.0::R*t)
+          t42:=t41-0.448500407661896357312006142358E-25::R*cos(41.0::R*t)
+          t43:=t42+0.113154029257547662245053090840E-25::R*cos(42.0::R*t)
+          t44:=t43-0.285995789977932163790414326136E-26::R*cos(43.0::R*t)
+          t45:=t44+0.724077580692267361758172726753E-27::R*cos(44.0::R*t)
+          t46:=t45-0.183613223412577898050666710105E-27::R*cos(45.0::R*t)
+          t47:=t46+0.466312873522730486582600122073E-28::R*cos(46.0::R*t)
+          t48:=t47-0.118595958891902887946724005478E-28::R*cos(47.0::R*t)
+          t49:=t48+0.302029059055671310731137614875E-29::R*cos(48.0::R*t)
+          t50:=t49-0.770165054816636606098827057102E-30::R*cos(49.0::R*t)
+          t50::OPR
+
+
+        Ei5(y:OPR):OPR ==
+          x:R:=retract(y)
+          t:R:=acos((x-22.0::R)/10.0::R)::R
+          t01:=    0.211702864043698668329789991614E1::R*cos(0.0::R)::R/2.0::R
+          t02:=t01-0.320423727375485794990618303177E-01::R*cos(t)
+          t03:=t02+0.889173207735316835890182400335E-02::R*cos( 2.0::R*t)
+          t04:=t03-0.250795280518929937088352442063E-02::R*cos( 3.0::R*t)
+          t05:=t04+0.720278946595987548875760902487E-03::R*cos( 4.0::R*t)
+          t06:=t05-0.210349005850113053423531441256E-03::R*cos( 5.0::R*t)
+          t07:=t06+0.620573231827693216588857730842E-04::R*cos( 6.0::R*t)
+          t08:=t07-0.182656674981670265449155689733E-04::R*cos( 7.0::R*t)
+          t09:=t08+0.527065157528936375807788296811E-05::R*cos( 8.0::R*t)
+          t10:=t09-0.145966654761994575323066719367E-05::R*cos( 9.0::R*t)
+          t11:=t10+0.378171997358963671980484193981E-06::R*cos(10.0::R*t)
+          t12:=t11-0.884258128284071920077971589012E-07::R*cos(11.0::R*t)
+          t13:=t12+0.174174919853839361377350309156E-07::R*cos(12.0::R*t)
+          t14:=t13-0.231351774704369063506474480152E-08::R*cos(13.0::R*t)
+          t15:=t14-0.122860981918086238832104835230E-09::R*cos(14.0::R*t)
+          t16:=t15+0.234996623632286370478311381926E-09::R*cos(15.0::R*t)
+          t17:=t16-0.110071940102726287690738963049E-09::R*cos(16.0::R*t)
+          t18:=t17+0.384827515786120711149705563369E-10::R*cos(17.0::R*t)
+          t19:=t18-0.114844096749001589658439301603E-10::R*cos(18.0::R*t)
+          t20:=t19+0.305687629308852082630893626200E-11::R*cos(19.0::R*t)
+          t21:=t20-0.738827872928473566454163131431E-12::R*cos(20.0::R*t)
+          t22:=t21+0.163093309416594110564148013749E-12::R*cos(21.0::R*t)
+          t23:=t22-0.327698937331271249657111774748E-13::R*cos(22.0::R*t)
+          t24:=t23+0.589811434707131961711164283918E-14::R*cos(23.0::R*t)
+          t25:=t24-0.909970763595649204643554720718E-15::R*cos(24.0::R*t)
+          t26:=t25+0.104075238266955386585405697541E-15::R*cos(25.0::R*t)
+          t27:=t26-0.180981542605922793227163355935E-17::R*cos(26.0::R*t)
+          t28:=t27-0.377709884256394773369593494417E-17::R*cos(27.0::R*t)
+          t29:=t28+0.158033290102847957136759888420E-17::R*cos(28.0::R*t)
+          t30:=t29-0.468429175880882730648433752957E-18::R*cos(29.0::R*t)
+          t31:=t30+0.119951685259198093707533478542E-18::R*cos(30.0::R*t)
+          t32:=t31-0.282359474984186517679349931117E-19::R*cos(31.0::R*t)
+          t33:=t32+0.629373806564463522627520190349E-20::R*cos(32.0::R*t)
+          t34:=t33-0.135241024950479756305343973177E-20::R*cos(33.0::R*t)
+          t35:=t34+0.283710605385529141590980426210E-21::R*cos(34.0::R*t)
+          t36:=t35-0.586700742024638323531936371015E-22::R*cos(35.0::R*t)
+          t37:=t36+0.120524763609547311112449686917E-22::R*cos(36.0::R*t)
+          t38:=t37-0.247444661699884869728416011246E-23::R*cos(37.0::R*t)
+          t39:=t38+0.509996258583785008142986465688E-24::R*cos(38.0::R*t)
+          t40:=t39-0.105838257877542240887093294733E-24::R*cos(39.0::R*t)
+          t41:=t40+0.221527624507048278566429387155E-25::R*cos(40.0::R*t)
+          t42:=t41-0.467927875475696258671852546231E-26::R*cos(41.0::R*t)
+          t43:=t42+0.997287299060207704824269828079E-27::R*cos(42.0::R*t)
+          t44:=t42-0.214326794521678804591907805844E-27::R*cos(43.0::R*t)
+          t45:=t42+0.464065690883818114338414829515E-28::R*cos(44.0::R*t)
+          t46:=t42-0.101144734921151390948461800780E-28::R*cos(45.0::R*t)
+          t47:=t42+0.221721152271007711093046878345E-29::R*cos(46.0::R*t)
+          t48:=t42-0.488489046924378553224914645512E-30::R*cos(47.0::R*t)
+          t48::OPR
+
+
+        Ei6(y:OPR):OPR ==
+          infinite? y => 1
+          x:R:=retract(y)
+          m:R:=64.0::R/x-1.0::R
+          t:R:=acos(m::R)::R
+          t01:=    0.203284394579616699087873844202E1::R*cos(0.0::R)::R/2.0::R
+          t02:=t01+0.166992045203136285147618434339E-01::R*cos(t)
+          t03:=t02+0.284528472436134680742489985325E-03::R*cos( 2.0::R*t)
+          t04:=t03+0.756394435851620648948786693854E-05::R*cos( 3.0::R*t)
+          t05:=t04+0.279897128945085915750484318090E-06::R*cos( 4.0::R*t)
+          t06:=t05+0.135790182853453106952556392593E-07::R*cos( 5.0::R*t)
+          t07:=t06+0.834359620204046925585610289412E-09::R*cos( 6.0::R*t)
+          t08:=t07+0.637097172764024843827524337306E-10::R*cos( 7.0::R*t)
+          t09:=t08+0.600724760881186123576083084850E-11::R*cos( 8.0::R*t)
+          t10:=t09+0.702287617467977359075059216588E-12::R*cos( 9.0::R*t)
+          t11:=t10+0.101830267370368769309667322152E-12::R*cos(10.0::R*t)
+          t12:=t11+0.176181290343088004040656741554E-13::R*cos(11.0::R*t)
+          t13:=t12+0.325082861423536069424072007647E-14::R*cos(12.0::R*t)
+          t14:=t13+0.507177002550581867881479300685E-15::R*cos(13.0::R*t)
+          t15:=t14+0.166517738704329429853520036957E-16::R*cos(14.0::R*t)
+          t16:=t15-0.316675389079751440072410018963E-16::R*cos(15.0::R*t)
+          t17:=t16-0.158840376366414151548423134074E-16::R*cos(16.0::R*t)
+          t18:=t17-0.417551325613801883089626455063E-17::R*cos(17.0::R*t)
+          t19:=t18-0.289234774970714188202868862358E-18::R*cos(18.0::R*t)
+          t20:=t19+0.280062590339660807289978777339E-18::R*cos(19.0::R*t)
+          t21:=t20+0.132293863953927089140532005364E-18::R*cos(20.0::R*t)
+          t22:=t21+0.180444744417730199585334811191E-19::R*cos(21.0::R*t)
+          t23:=t22-0.790538408652261656202021080364E-20::R*cos(22.0::R*t)
+          t24:=t23-0.443571136636957344718167314045E-20::R*cos(23.0::R*t)
+          t25:=t24-0.426410399497810261760579779746E-21::R*cos(24.0::R*t)
+          t26:=t25+0.392010176693714390725625388636E-21::R*cos(25.0::R*t)
+          t27:=t26+0.152737805134396364472804486402E-21::R*cos(26.0::R*t)
+          t28:=t27-0.102484952704949060786953149788E-22::R*cos(27.0::R*t)
+          t29:=t28-0.213490787477108937948904287231E-22::R*cos(28.0::R*t)
+          t30:=t29-0.323913947516023687614279789345E-23::R*cos(29.0::R*t)
+          t31:=t30+0.214218376229645970296249355934E-23::R*cos(30.0::R*t)
+          t32:=t31+0.823460941961899553169207838151E-24::R*cos(31.0::R*t)
+          t33:=t32-0.152465282962067210811495038147E-24::R*cos(32.0::R*t)
+          t34:=t33-0.137820828248824401290438126477E-24::R*cos(33.0::R*t)
+          t35:=t34+0.213131120142873706791513005998E-26::R*cos(34.0::R*t)
+          t36:=t35+0.201264965187132665859213006507E-25::R*cos(35.0::R*t)
+          t37:=t36+0.199553566205637402320607178286E-26::R*cos(36.0::R*t)
+          t38:=t37-0.279899581220179711426020884464E-26::R*cos(37.0::R*t)
+          t39:=t38-0.553451183050700250949784942560E-27::R*cos(38.0::R*t)
+          t40:=t39+0.388499542268455253129749000696E-27::R*cos(39.0::R*t)
+          t41:=t40+0.112130440723307012540043264712E-27::R*cos(40.0::R*t)
+          t42:=t41-0.556656828674459488057823816866E-28::R*cos(41.0::R*t)
+          t43:=t42-0.204548261246513576288865878722E-28::R*cos(42.0::R*t)
+          t44:=t43+0.845381406448938089437361193598E-29::R*cos(43.0::R*t)
+          t45:=t44+0.356575515120151526590791715785E-29::R*cos(44.0::R*t)
+          t46:=t45-0.138365242347797751810195772006E-29::R*cos(45.0::R*t)
+          t47:=t46-0.606214265320934505767865286306E-30::R*cos(46.0::R*t)
+          t47::OPR
+
+        fresnelC(z:F):F ==
+          z < 0 => error "fresnelC not defined for negative argument"
+          z = 0 => 0
+          n:PI:= 100
+          sqrt((2.0/pi()$F)*z)*_
+           reduce(_+,[(-1)**k*z**(2*k)/(factorial(2*k)*(4*k+1))_
+             for k in 0..n])$LF
+
+        fresnelS(z:F):F ==
+          z < 0 => error "fresnelS not defined for negative argument"
+          z = 0 => 0
+          n:PI:= 100
+          sqrt((2.0/pi()$F)*z)*_
+           reduce(_+,
+            [(-1)**k*(z**(2*k+1))/(factorial(2*k+1)*(4*k+3)) _
+             for k in 0..n])$LF
+
+
+        polygamma(k,z)  == CPSI(k, z)$Lisp
+
+        polygamma(k,x)  == RPSI(k, x)$Lisp
+
+
+        logGamma z      == CLNGAMMA(z)$Lisp
+
+        logGamma x      == RLNGAMMA(x)$Lisp
+
+        besselJ(v,z)    == CBESSELJ(v,z)$Lisp
+
+        besselJ(n,x)    == RBESSELJ(n,x)$Lisp
+
+        besselI(v,z)    == CBESSELI(v,z)$Lisp
+
+        besselI(n,x)    == RBESSELI(n,x)$Lisp
+
+        hypergeometric0F1(a,z) == CHYPER0F1(a, z)$Lisp
+
+        hypergeometric0F1(n,x) == retract hypergeometric0F1(n::C, x::C)
+
+
+        -- All others are defined in terms of these.
+        digamma x == polygamma(0, x)
+
+        digamma z == polygamma(0, z)
+
+        Beta(x,y) == Gamma(x)*Gamma(y)/Gamma(x+y)
+
+        Beta(w,z) == Gamma(w)*Gamma(z)/Gamma(w+z)
+
+        fuzz := (10::R)**(-7)
+
+        import IntegerRetractions(R)
+        import IntegerRetractions(C)
+
+        besselY(n,x) ==
+            if integer? n then n := n + fuzz
+            vp := n * pi()$R
+            (cos(vp) * besselJ(n,x) - besselJ(-n,x) )/sin(vp)
+
+        besselY(v,z) ==
+            if integer? v then v := v + fuzz::C
+            vp := v * pi()$C
+            (cos(vp) * besselJ(v,z) - besselJ(-v,z) )/sin(vp)
+
+        besselK(n,x) ==
+            if integer? n then n := n + fuzz
+            p    := pi()$R
+            vp   := n*p
+            ahalf:= 1/(2::R)
+            p * ahalf * ( besselI(-n,x) - besselI(n,x) )/sin(vp)
+
+        besselK(v,z) ==
+            if integer? v then v := v + fuzz::C
+            p    := pi()$C
+            vp   := v*p
+            ahalf:= 1/(2::C)
+            p * ahalf * ( besselI(-v,z) - besselI(v,z) )/sin(vp)
+
+        airyAi x ==
+            ahalf  := recip(2::R)::R
+            athird := recip(3::R)::R
+            eta := 2 * athird * (-x) ** (3*ahalf)
+            (-x)**ahalf * athird * (besselJ(-athird,eta) + besselJ(athird,eta))
+
+        airyAi z ==
+            ahalf  := recip(2::C)::C
+            athird := recip(3::C)::C
+            eta := 2 * athird * (-z) ** (3*ahalf)
+            (-z)**ahalf * athird * (besselJ(-athird,eta) + besselJ(athird,eta))
+
+        airyBi x ==
+            ahalf  := recip(2::R)::R
+            athird := recip(3::R)::R
+            eta := 2 * athird * (-x) ** (3*ahalf)
+            (-x*athird)**ahalf * ( besselJ(-athird,eta) - besselJ(athird,eta) )
+
+        airyBi z ==
+            ahalf  := recip(2::C)::C
+            athird := recip(3::C)::C
+            eta := 2 * athird * (-z) ** (3*ahalf)
+            (-z*athird)**ahalf * ( besselJ(-athird,eta) - besselJ(athird,eta) )
+

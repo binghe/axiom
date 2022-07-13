@@ -1,0 +1,32 @@
+)abbrev package UNISEG2 UniversalSegmentFunctions2
+++ Date Last Updated: June 4, 1991
+++ Description:
+++ This package provides operations for mapping functions onto segments.
+
+UniversalSegmentFunctions2(R,S) : SIG == CODE where
+  R : Type
+  S : Type
+
+  SIG ==> with
+
+    map : (R -> S, UniversalSegment R) -> UniversalSegment S
+      ++ map(f,seg) returns the new segment obtained by applying
+      ++ f to the endpoints of seg.
+
+    if R has OrderedRing then
+
+      map : (R -> S, UniversalSegment R) -> Stream S
+        ++ map(f,s) expands the segment s, applying \spad{f} to each value.
+
+  CODE ==> add
+
+    map(f:R -> S, u:UniversalSegment R):UniversalSegment S ==
+      s := f lo u
+      hasHi u => segment(s, f hi u)
+      segment s
+
+    if R has OrderedRing then
+
+      map(f:R -> S, u:UniversalSegment R): Stream S ==
+        map(f, expand u)$StreamFunctions2(R, S)
+

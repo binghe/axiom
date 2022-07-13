@@ -1,0 +1,21 @@
+)abbrev category LMODULE LeftModule
+++ Description:
+++ The category of left modules over an rng 
+++ \spad{(ring not necessarily with unit)}.
+++ This is an abelian group which supports left multiplication by elements of
+++ the rng.
+++
+++ Axioms\br
+++ \tab{5}\spad{(a*b)*x = a*(b*x)}\br
+++ \tab{5}\spad{(a+b)*x = (a*x)+(b*x)}\br
+++ \tab{5}\spad{a*(x+y) = (a*x)+(a*y)}
+
+LeftModule(R) : Category == SIG where
+  R : Rng
+
+  SIG ==> AbelianGroup with
+
+    "*" : (R,%) -> %     
+      ++ r*x returns the left multiplication of the module element x
+      ++ by the ring element r.
+

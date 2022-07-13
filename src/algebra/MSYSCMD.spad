@@ -1,0 +1,21 @@
+)abbrev package MSYSCMD MoreSystemCommands
+++ Description:
+++ \spadtype{MoreSystemCommands} implements an interface with the
+++ system command facility. These are the commands that are issued
+++ from source files or the system interpreter and they start with
+++ a close parenthesis, for example, the "what" commands.
+ 
+MoreSystemCommands() : SIG == CODE where
+ 
+  SIG ==> with
+ 
+    systemCommand : String -> Void
+      ++ systemCommand(cmd) takes the string \spadvar{cmd} and passes
+      ++ it to the runtime environment for execution as a system
+      ++ command. Although various things may be printed, no usable
+      ++ value is returned.
+ 
+  CODE ==> add
+ 
+    systemCommand cmd == doSystemCommand(cmd)$Lisp
+

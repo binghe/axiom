@@ -1,0 +1,18 @@
+)abbrev category CACHSET CachableSet
+++ Author: Manuel Bronstein
+++ Date Created: 31 Oct 1988
+++ Date Last Updated: 14 May 1991
+++ Description:
+++ A cachable set is a set whose elements keep an integer as part
+++ of their structure.
+
+CachableSet() : Category == SIG where
+
+  SIG ==> OrderedSet with
+
+    position : % -> NonNegativeInteger
+      ++ position(x) returns the integer n associated to x.
+  
+    setPosition : (%, NonNegativeInteger) -> Void
+      ++ setPosition(x, n) associates the integer n to x.
+

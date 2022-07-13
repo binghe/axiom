@@ -1,0 +1,298 @@
+)abbrev package BLAS1 BlasLevelOne
+++ Author: Timothy Daly
+++ Date Created: 2010
+++ Date March 24, 2010
+++ Reference: Chellappa, Franchetti and Puschel 
+++ How to Write Fast Numerical Code: A Small Introduction
+++ Description:
+++ This package provides an interface to the Blas library (level 1)
+BlasLevelOne() : Exports == Implementation where
+
+  SI   ==> SingleInteger
+  INT  ==> Integer
+  DF   ==> DoubleFloat
+  SX   ==> PrimitiveArray(Float)
+  DX   ==> PrimitiveArray(DoubleFloat)
+  CDF  ==> Complex(DoubleFloat)
+  LDX  ==> List(PrimitiveArray(DoubleFloat))
+  PCDF ==> PrimitiveArray(Complex(DoubleFloat))
+  PCF  ==> PrimitiveArray(Complex(Float))
+
+  Exports == with
+
+    dcabs1 : CDF -> DF
+      ++ dcabs1(z) computes (+ (abs (realpart z)) (abs (imagpart z)))
+      ++
+      ++X t1:Complex DoubleFloat := complex(1.0,0)
+      ++X dcabs1(t1)
+
+    dasum : (SI, DX, SI) -> DF
+      ++ dasum(n,array,incx) computes the sum of n elements in array
+      ++ using a stride of incx
+      ++
+      ++X dx:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0,6.0]]
+      ++X dasum(6,dx,1)
+      ++X dasum(3,dx,2)
+
+    daxpy : (SI, DF, DX, SI, DX, SI) -> DX 
+      ++ daxpy(n,da,x,incx,y,incy) computes a y = a*x + y
+      ++ for each of the chosen elements of the vectors x and y
+      ++ and a constant multiplier a
+      ++ Note that the vector y is modified with the results.
+      ++
+      ++X x:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0,6.0]]
+      ++X y:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0,6.0]]
+      ++X daxpy(6,2.0,x,1,y,1)
+      ++X y
+      ++X m:PRIMARR(DFLOAT):=[[1.0,2.0,3.0]]
+      ++X n:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0,6.0]]
+      ++X daxpy(3,-2.0,m,1,n,2)
+      ++X n
+
+    dcopy : (SI, DX, SI, DX, SI) -> DX 
+      ++ dcopy(n,x,incx,y,incy) copies y from x
+      ++ for each of the chosen elements of the vectors x and y
+      ++ Note that the vector y is modified with the results.
+      ++
+      ++X x:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0,6.0]]
+      ++X y:PRIMARR(DFLOAT):=[[0.0,0.0,0.0,0.0,0.0,0.0]]
+      ++X dcopy(6,x,1,y,1)
+      ++X y
+      ++X m:PRIMARR(DFLOAT):=[[1.0,2.0,3.0]]
+      ++X n:PRIMARR(DFLOAT):=[[0.0,0.0,0.0,0.0,0.0,0.0]] 
+      ++X dcopy(3,m,1,n,2)
+      ++X n
+
+    ddot : (SI, DX, SI, DX, SI) -> DF
+      ++ ddot(n,x,incx,y,incy) computes the vector dot product
+      ++ of elements from the vector x and the vector y
+      ++ If the indicies are negative the elements are taken
+      ++ relative to the far end of the vector.
+      ++
+      ++X x:PRIMARR(DFLOAT):=[[1.0,2.0,3.0,4.0,5.0]]
+      ++X y:PRIMARR(DFLOAT):=[[5.0,6.0,7.0,8.0,9.0]]
+      ++X ddot(0,a,1,b,1) -- handle 0 elements ==> 0
+      ++X ddot(3,a,1,b,1) -- (1,2,3) * (5,6,7) ==> 38.0
+      ++X ddot(3,a,1,b,2) -- increment = 2 in b (1,2,3) * (5,7,9) ==> 46.0
+      ++X ddot(3,a,2,b,1) -- increment = 2 in a (1,3,5) * (5,6,7) ==> 58.0
+      ++X ddot(3,a,1,b,-2) -- increment = -2 in b (1,2,3) * (9,7,5) ==> 38.0
+      ++X ddot(2,a,-2,b,1) -- increment = -2 in a (5,3,1) * (5,6,7) ==> 50.0
+      ++X ddot(3,a,-2,b,-2) -- (5,3,1) * (9,7,5) ==> 71.0
+
+    dnrm2 : (SI, DX, SI) -> DF
+      ++ dnrm2 takes the norm of the vector, ||x||
+      ++
+      ++X a:PRIMARR(DFLOAT):=[[3.0, -4.0, 5.0, -7.0, 9.0]]
+      ++X dnrm2(3,a,1) -- 7.0710678118654755 = sqrt(3.0^2 + -4.0^2 + 5.0^2)
+      ++X dnrm2(5,a,1) -- 13.416407864998739 = sqrt(180.0)
+      ++X dnrm2(3,a,2) -- 10.72380529476361  = sqrt(115.0)
+
+    drotg : (DF, DF, DF, DF) -> DX
+      ++ drotg computes a 2D plane Givens rotation spanned by two
+      ++ coordinate axes.
+      ++
+      ++X a:MATRIX(DFLOAT):=[[6,5,0],[5,1,4],[0,4,3]]
+      ++X drotg(elt(a,1,1),elt(a,1,2),0.0D0,0.0D0)
+
+    drot : (SI, DX, SI, DX, SI, DF, DF) -> LDX
+      ++ drot computes a 2D plane Givens rotation spanned by two
+      ++ coordinate axes. It modifies the arrays in place.
+      ++ The call drot(n,dx,incx,dy,incy,c,s) has the dx array which
+      ++ contains the y axis locations and dy which contains the
+      ++ y axis locations. They are rotated in parallel where 
+      ++ c is the cosine of the angle and s is the sine of the angle and
+      ++ \spad{c^2+s^2 = 1}
+      ++
+      ++X dx:PRIMARR(DFLOAT):=[[6,0, 1.0, 4.0, -1.0, -1.0]]
+      ++X dy:PRIMARR(DFLOAT):=[[5.0, 1.0, -4.0, 4.0, -4.0]]
+      ++X drot(5,dx,1,dy,1,0.707106781,0.707106781) -- rotate by 45 degrees
+      ++X dx -- dx has been modified
+      ++X dy -- dy has been modified
+      ++X drot(5,dx,1,dy,1,0.707106781,-0.707106781) -- rotate by -45 degrees
+      ++X dx -- dx has been modified
+      ++X dy -- dy has been modified
+
+    dscal : (SI, DF, DX, SI) -> DX
+      ++ dscal scales each element of the vector by the scalar so
+      ++ dscal(n,da,dx,incx) = da*dx for n elements, incremented by incx
+      ++ Note that the dx array is modified in place.
+      ++
+      ++X dx:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dscal(6,2.0,dx,1)
+      ++X dx
+      ++X dx:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dscal(3,0.5,dx,1)
+      ++X dx
+
+    dswap : (SI, DX, SI, DX, SI) -> LDX
+      ++ dswap swaps elements from the first vector with the second
+      ++ Note that the arrays are modified in place.
+      ++
+      ++X dx:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dy:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dswap(5,dx,1,dy,1)
+      ++X dx:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dy:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dswap(3,dx,2,dy,2)
+      ++X dx:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dy:PRIMARR(DFLOAT):=[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]]
+      ++X dswap(5,dx,1,dy,-1)
+
+    dzasum : (SI, PCDF, SI) -> DF
+      ++ dzasum takes the sum over all of the array where each
+      ++ element of the array sum is the sum of the absolute
+      ++ value of the real part and the absolute value of the
+      ++ imaginary part of each array element:
+      ++   for i in array do sum = sum + (real(a(i)) + imag(a(i)))
+      ++
+      ++X d:PRIMARR(COMPLEX(DFLOAT)):=[[1.0+2.0*%i,-3.0+4.0*%i,5.0-6.0*%i]]
+      ++X dzasum(3,d,1) -- 21.0
+      ++X dzasum(3,d,2) -- 14.0
+      ++X dzasum(-3,d,1) -- 0.0
+
+    dznrm2 : (SI, PCDF, SI) -> DF
+      ++ dznrm2 returns the norm of a complex vector. It computes
+      ++ sqrt(sum(v*conjugate(v)))
+      ++
+      ++X a:PRIMARR(COMPLEX(DFLOAT))
+      ++X a:=[[3.+4.*%i,-4.+5.*%i,5.+6.*%i,7.-8.*%i,-9.-2.*%i]]
+      ++X dznrm2(5,a,1)   -- should be 18.028
+      ++X dznrm2(3,a,2)   -- should be 13.077
+      ++X dznrm2(3,a,1)   -- should be 11.269
+      ++X dznrm2(3,a,-1)  -- should be 0.0
+      ++X dznrm2(-3,a,-1) -- should be 0.0
+      ++X dznrm2(1,a,1)   -- should be 5.0
+      ++X dznrm2(1,a,2)   -- should be 5.0
+
+    icamax : (INT, PCF, INT) -> INT
+      ++ icamax computes the largest absolute value of the elements
+      ++ of the array and returns the index of the first instance
+      ++ of the maximum
+      ++
+      ++X a:PRIMARR(COMPLEX(FLOAT))
+      ++X a:=[[3.+4.*%i,-4.+5.*%i,5.+6.*%i,7.-8.*%i,-9.-2.*%i]]
+      ++X icamax(5,a,1)  -- should be 3
+      ++X icamax(0,a,1)  -- should be -1
+      ++X icamax(5,a,-1) -- should be -1
+      ++X icamax(3,a,1)  -- should be 2
+      ++X icamax(3,a,2)  -- should be 1 
+
+    idamax : (INT, DX, INT) -> INT
+      ++ idamax computes the largest absolute value of the elements
+      ++ of the array and returns the index of the first instance
+      ++ of the maximum.
+      ++
+      ++X a:PRIMARR(DFLOAT):=[[3.0, 4.0, -3.0, 5.0, -1.0]]
+      ++X idamax(5,a,1)  -- should be 3
+      ++X idamax(3,a,1)  -- should be 1
+      ++X idamax(0,a,1)  -- should be -1
+      ++X idamax(-5,a,1) -- should be -1
+      ++X idamax(5,a,-1) -- should be -1 
+      ++X idamax(5,a,2)  -- should be 0
+      ++X idamax(1,a,0)  -- should be -1 
+      ++X idamax(1,a,-1) -- should be -1 
+      ++X a:PRIMARR(DFLOAT):=[[3.0, 4.0, -3.0, -5.0, -1.0]]
+      ++X idamax(5,a,1)  -- should be 3
+
+    isamax : (INT, SX, INT) -> INT
+      ++ isamax computes the largest absolute value of the elements
+      ++ of the array and returns the index of the first instance
+      ++ of the maximum.
+      ++
+      ++X a:PRIMARR(FLOAT):=[[3.0, 4.0, -3.0, 5.0, -1.0]]
+      ++X isamax(5,a,1)  -- should be 3
+      ++X isamax(3,a,1)  -- should be 1
+      ++X isamax(0,a,1)  -- should be -1
+      ++X isamax(-5,a,1) -- should be -1
+      ++X isamax(5,a,-1) -- should be -1 
+      ++X isamax(5,a,2)  -- should be 0
+      ++X isamax(1,a,0)  -- should be -1 
+      ++X isamax(1,a,-1) -- should be -1 
+      ++X a:PRIMARR(FLOAT):=[[3.0, 4.0, -3.0, -5.0, -1.0]]
+      ++X isamax(5,a,1)  -- should be 3
+
+    izamax : (SI, PCDF, SI) -> INT
+      ++ izamax computes the largest absolute value of the elements
+      ++ of the array and returns the index of the first instance
+      ++ of the maximum.
+      ++
+      ++X a:PRIMARR(COMPLEX(DFLOAT))
+      ++X a:=[[3.+4.*%i,-4.+5.*%i,5.+6.*%i,7.-8.*%i,-9.-2.*%i]]
+      ++X izamax(5,a,1)  -- should be 3
+      ++X izamax(0,a,1)  -- should be -1
+      ++X izamax(5,a,-1) -- should be -1
+      ++X izamax(3,a,1)  -- should be 2
+      ++X izamax(3,a,2)  -- should be 1 
+
+    zaxpy : (SI, CDF, PCDF, SI, PCDF, SI) -> PCDF 
+      ++ zaxpy(n,da,x,incx,y,incy) computes a y = a*x + y
+      ++ for each of the chosen elements of the vectors x and y
+      ++ and a constant multiplier a
+      ++ Note that the vector y is modified with the results.
+      ++
+      ++X a:PRIMARR(COMPLEX(DFLOAT))
+      ++X a:=[[3.+4.*%i, -4.+5.*%i, 5.+6.*%i, 7.-8.*%i, -9.-2.*%i]]
+      ++X b:PRIMARR(COMPLEX(DFLOAT))
+      ++X b:=[[3.+4.*%i, -4.+5.*%i, 5.+6.*%i, 7.-8.*%i, -9.-2.*%i]]
+      ++X zaxpy(3,2.0,a,1,b,1)
+      ++X b:=[[3.+4.*%i, -4.+5.*%i, 5.+6.*%i, 7.-8.*%i, -9.-2.*%i]]
+      ++X zaxpy(5,2.0,a,1,b,1)
+      ++X b:=[[3.+4.*%i, -4.+5.*%i, 5.+6.*%i, 7.-8.*%i, -9.-2.*%i]]
+      ++X zaxpy(3,2.0,a,3,b,3)
+      ++X b:=[[3.+4.*%i, -4.+5.*%i, 5.+6.*%i, 7.-8.*%i, -9.-2.*%i]]
+      ++X zaxpy(4,2.0,a,2,b,2)
+
+  Implementation  == add
+
+    dcabs1(z:CDF):DF == 
+      DCABS1(COMPLEX(real(z),imag(z))$Lisp)$Lisp
+
+    dasum(n:SI,dx:DX,incx:SI):DF == 
+      DASUM(n,dx,incx)$Lisp
+
+    daxpy(n:SI,da:DF,dx:DX,incx:SI,dy:DX,incy:SI):DX ==
+      DAXPY(n,da,dx,incx,dy,incy)$Lisp
+
+    dcopy(n:SI,dx:DX,incx:SI,dy:DX,incy:SI):DX ==
+      DCOPY(n,dx,incx,dy,incy)$Lisp
+
+    ddot(n:SI,dx:DX,incx:SI,dy:DX,incy:SI):DF ==
+      DDOT(n,dx,incx,dy,incy)$Lisp
+
+    dnrm2(n:SI,dx:DX,incx:SI):DF ==
+      DNRM2(n,dx,incx)$Lisp
+
+    drotg(a:DF,b:DF,c:DF,s:DF):DX ==
+      DROTG(a,b,c,s)$Lisp
+
+    drot(n:SI,dx:DX,incx:SI,dy:DX,incy:SI,c:DF,s:DF):LDX ==
+      DROT(n,dx,incx,dy,incy,c,s)$Lisp
+
+    dscal(n:SI,da:DF,dx:DX,incx:SI):DX ==
+      DSCAL(n,da,dx,incx)$Lisp
+
+    dswap(n:SI,dx:DX,incx:SI,dy:DX,incy:SI):LDX ==
+      DSWAP(n,dx,incx,dy,incx)$Lisp
+
+    dzasum(n:SI,dz:PCDF,incx:SI):DF ==
+      DZASUMSPAD(n,dz,incx)$Lisp
+
+    dznrm2(n:SI,dz:PCDF,incx:SI):DF ==
+      DZNRM2SPAD(n,dz,incx)$Lisp
+
+    icamax(n:INT,dz:PCF,incx:INT):INT ==
+      ICAMAXSPAD(n,dz,incx)$Lisp
+
+    idamax(n:INT,dz:DX,incx:INT):INT ==
+      IDAMAX(n,dz,incx)$Lisp
+
+    isamax(n:INT,dz:SX,incx:INT):INT ==
+      ISAMAXSPAD(n,dz,incx)$Lisp
+
+    izamax(n:SI,dz:PCDF,incx:SI):INT ==
+      IZAMAXSPAD(n,dz,incx)$Lisp
+
+    zaxpy(n:SI,da:CDF,dx:PCDF,incx:SI,dy:PCDF,incy:SI):PCDF ==
+      ZAXPYSPAD(n,da,dx,incx,dy,incy)$Lisp
+
+

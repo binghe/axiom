@@ -1,0 +1,62 @@
+)abbrev category PLACESC PlacesCategory
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:
+++ This is part of the PAFF package, related to projective space.
+
+PlacesCategory(K,PCS) : Category == SIG where
+  K : Field
+  PCS : LocalPowerSeriesCategory(K)
+
+  SIG ==> SetCategoryWithDegree with
+
+    "+" : (%,%) -> Divisor(%)
+
+    "+" : (Divisor(%) , % ) -> Divisor(%)
+
+    "+" : (%, Divisor(%)) -> Divisor(%)
+
+    "-" : (%,%) -> Divisor(%)
+
+    "-" : (Divisor(%) , % ) -> Divisor(%)
+
+    "-" : (%, Divisor(%)) -> Divisor(%)
+
+    "-" : % -> Divisor(%)
+
+    "*" : (Integer,%) -> Divisor(%)
+
+    reduce : List %   -> Divisor(%)
+
+    create : List K -> %
+
+    create : Symbol -> %
+
+    localParam : % -> List PCS
+      ++ localParam(pl) returns the local parametrization associated 
+      ++ to the place pl.
+
+    setParam_! : (%,List PCS)  -> Void
+      ++ setParam!(pl,ls) set the local parametrization of pl to ls.
+
+    setDegree_! : (%,PositiveInteger)  -> Void
+      ++ setDegree!(pl,ls) set the degree.
+
+    leaf? : % -> Boolean
+      ++ leaf?(pl) test if the place pl correspond to a leaf of a 
+      ++ desingularisation tree.
+
+    itsALeaf_! : % -> Void
+
+    foundPlaces : () -> List %
+      ++ foundPlaces() returns the list of all "created" places up to now.
+
+    setFoundPlacesToEmpty : () -> List %
+      ++ setFoundPlacesToEmpty() does what it says. 
+      ++ (this should not be used)!!!
+
+    elt : (%,Integer) -> K
+      ++ elt returns the value of a specified coordinates if the places 
+      ++ correspnd to a simple point
+

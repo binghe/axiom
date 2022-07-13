@@ -1,0 +1,71 @@
+)abbrev domain BTREE BinaryTree
+++ Author: Mark Botch
+++ Description: 
+++ \spadtype{BinaryTree(S)} is the domain of all
+++ binary trees. A binary tree over \spad{S} is either empty or has
+++ a \spadfun{value} which is an S and a \spadfun{right}
+++ and \spadfun{left} which are both binary trees.
+
+BinaryTree(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> BinaryTreeCategory(S) with
+
+   binaryTree : S -> %
+    ++ binaryTree(v) is an non-empty binary tree
+    ++ with value v, and left and right empty.
+    ++
+    ++X t1:=binaryTree([1,2,3])
+    
+   binaryTree : (%,S,%) -> %    
+    ++ binaryTree(l,v,r) creates a binary tree with
+    ++ value v with left subtree l and right subtree r.
+    ++
+    ++X t1:=binaryTree([1,2,3])
+    ++X t2:=binaryTree([4,5,6])
+    ++X binaryTree(t1,[7,8,9],t2)
+    
+  CODE ==> add
+
+     Rep := List Tree S
+
+     t1 = t2 == (t1::Rep) =$Rep (t2::Rep)
+
+     empty()== [] pretend %
+
+     node(l,v,r) == cons(tree(v,l:Rep),r:Rep)
+
+     binaryTree(l,v,r) == node(l,v,r)
+
+     binaryTree(v:S) == node(empty(),v,empty())
+
+     empty? t == empty?(t)$Rep
+
+     leaf? t  == empty? t or empty? left t and empty? right t
+
+     right t ==
+       empty? t => error "binaryTree:no right"
+       rest t
+
+     left t ==
+       empty? t => error "binaryTree:no left"
+       children first t
+
+     value t==
+       empty? t => error "binaryTree:no value"
+       value first t
+
+     setvalue_! (t,nd)==
+       empty? t => error "binaryTree:no value to set"
+       setvalue_!(first(t:Rep),nd)
+       nd
+
+     setleft_!(t1,t2) ==
+       empty? t1 => error "binaryTree:no left to set"
+       setchildren_!(first(t1:Rep),t2:Rep)
+       t1
+
+     setright_!(t1,t2) ==
+       empty? t1 => error "binaryTree:no right to set"
+       setrest_!(t1:List Tree S,t2)
+

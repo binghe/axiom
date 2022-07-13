@@ -1,0 +1,52 @@
+)abbrev package LPEFRAC LinearPolynomialEquationByFractions
+++ Author: James Davenport
+++ Description:
+++ Given a PolynomialFactorizationExplicit ring, this package
+++ provides a defaulting rule for the \spad{solveLinearPolynomialEquation}
+++ operation, by moving into the field of fractions, and solving it there
+++ via the \spad{multiEuclidean} operation.
+
+LinearPolynomialEquationByFractions(R) : SIG == CODE where
+  R : PolynomialFactorizationExplicit
+
+  SIG ==> with
+
+    solveLinearPolynomialEquationByFractions: ( _
+           List SparseUnivariatePolynomial R, _
+           SparseUnivariatePolynomial R) ->   _
+           Union(List SparseUnivariatePolynomial R, "failed")
+      ++ solveLinearPolynomialEquationByFractions([f1, ..., fn], g)
+      ++ (where the fi are relatively prime to each other)
+      ++ returns a list of ai such that
+      ++ \spad{g/prod fi = sum ai/fi}
+      ++ or returns "failed" if no such exists.
+
+  CODE ==> add
+
+    SupR ==> SparseUnivariatePolynomial R
+    F ==> Fraction R
+    SupF ==> SparseUnivariatePolynomial F
+    import UnivariatePolynomialCategoryFunctions2(R,SupR,F,SupF)
+    lp : List SupR
+    pp: SupR
+    pF: SupF
+
+    pullback : SupF -> Union(SupR,"failed")
+    pullback(pF) ==
+      pF = 0 => 0
+      c:=retractIfCan leadingCoefficient pF
+      c case "failed" => "failed"
+      r:=pullback reductum pF
+      r case "failed" => "failed"
+      monomial(c,degree pF) + r
+
+    solveLinearPolynomialEquationByFractions(lp,pp) ==
+      lpF:List SupF:=[map((x:R):F +-> x@R::F,u) for u in lp]
+      pF:SupF:=map((x:R):F +-> x::F,pp)
+      ans:= solveLinearPolynomialEquation(lpF,pF)$F
+      ans case "failed" => "failed"
+      [(vv:= pullback v;
+        vv case "failed" => return "failed";
+         vv)
+          for v in ans]
+

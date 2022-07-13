@@ -1,0 +1,30 @@
+)abbrev package STREAM1 StreamFunctions1
+++ Authors: Burge, Watt; updated by Clifton J. Williamson
+++ Date Created: July 1986
+++ Date Last Updated: 29 January 1990
+++ Description:
+++ Functions defined on streams with entries in one set.
+
+StreamFunctions1(S) : SIG == CODE where
+  S : Type
+
+  ST  ==> Stream
+
+  SIG ==> with
+
+    concat : ST ST S -> ST S
+      ++ concat(u) returns the left-to-right concatentation of the 
+      ++ streams in u. Note that \spad{concat(u) = reduce(concat,u)}.
+      ++
+      ++X m:=[i for i in 10..]
+      ++X n:=[j for j in 1.. | prime? j]
+      ++X p:=[m,n]::Stream(Stream(PositiveInteger))
+      ++X concat(p)
+
+  CODE ==> add
+
+    concat z == delay
+      empty? z => empty()
+      empty?(x := frst z) => concat rst z
+      concat(frst x,concat(rst x,concat rst z))
+

@@ -1,0 +1,9 @@
+)abbrev category OAGROUP OrderedAbelianGroup
+++ Description:
+++ Ordered sets which are also abelian groups, such that the 
+++ addition preserves the ordering.
+
+OrderedAbelianGroup() : Category == SIG where
+
+  SIG ==> Join(OrderedCancellationAbelianMonoid, AbelianGroup)
+

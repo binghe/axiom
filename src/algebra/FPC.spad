@@ -1,0 +1,37 @@
+)abbrev category FPC FieldOfPrimeCharacteristic
+++ Author: J. Grabmeier, A. Scheerhorn
+++ Date Created: 10 March 1991
+++ Date Last Updated: 31 March 1991
+++ References:
+++ Grab92 Finite Fields in Axiom
+++ Description:
+++ FieldOfPrimeCharacteristic is the category of fields of prime
+++ characteristic, for example, finite fields, algebraic closures of
+++ fields of prime characteristic, transcendental extensions of
+++ of fields of prime characteristic.
+
+FieldOfPrimeCharacteristic() : Category == SIG where
+
+  SIG ==> Join(Field,CharacteristicNonZero) with
+
+    order : $ -> OnePointCompletion PositiveInteger
+      ++ order(a) computes the order of an element in the multiplicative
+      ++ group of the field.
+      ++ Error: if \spad{a} is 0.
+
+    discreteLog : ($,$) -> Union(NonNegativeInteger,"failed")
+      ++ discreteLog(b,a) computes s with \spad{b**s = a} if such an s exists.
+
+    primeFrobenius : $ -> $
+      ++ primeFrobenius(a) returns \spad{a**p} where p is the characteristic.
+
+    primeFrobenius : ($,NonNegativeInteger) -> $
+      ++ primeFrobenius(a,s) returns \spad{a**(p**s)} where p
+      ++ is the characteristic.
+
+   add
+
+     primeFrobenius(a) == a ** characteristic()
+
+     primeFrobenius(a,s) == a ** (characteristic()**s)
+

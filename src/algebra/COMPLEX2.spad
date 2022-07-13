@@ -1,0 +1,18 @@
+)abbrev package COMPLEX2 ComplexFunctions2
+++ Description:
+++ This package extends maps from underlying rings to maps between
+++ complex over those rings.
+
+ComplexFunctions2(R, S) : SIG == CODE where
+  R : CommutativeRing
+  S : CommutativeRing
+
+  SIG ==> with
+
+    map : (R -> S, Complex R) -> Complex S
+      ++ map(f,u) maps f onto real and imaginary parts of u.
+
+  CODE ==> add
+
+    map(fn, gr) == complex(fn real gr, fn imag gr)
+

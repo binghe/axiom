@@ -1,0 +1,24 @@
+)abbrev package PCOMP PolynomialComposition
+++ References: Kozen and Landau, Cornell University  TR 86-773
+++ Description:
+++ Polynomial composition and decomposition functions\br
+++ If f = g o h then g=leftFactor(f,h) and h=rightFactor(f,g)
+
+PolynomialComposition(UP,R) : SIG == CODE where
+  UP : UnivariatePolynomialCategory(R)
+  R : Ring
+
+  SIG ==> with
+
+    compose : (UP, UP) -> UP
+      ++ compose(p,q) \undocumented
+
+  CODE ==> add
+
+    compose(g, h) ==
+      r: UP := 0
+      while g ^= 0 repeat
+        r := leadingCoefficient(g)*h**degree(g) + r
+        g := reductum g
+      r
+

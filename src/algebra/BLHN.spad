@@ -1,0 +1,38 @@
+)abbrev domain BLHN BlowUpWithHamburgerNoether
+++ Authors: Gaetan Hache
+++ Date Created: june 1996 
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This domain is part of the PAFF package
+
+BlowUpWithHamburgerNoether() : SIG == CODE where
+
+  MetRec ==> Record(_
+     ex:Integer, tr:Integer, ch:Integer , quotVal:Integer, _
+     ramif:Integer, infClsPt:Boolean, _
+     type:Union("left","center","right","vertical","horizontal") )
+
+  SIG ==> BlowUpMethodCategory with HamburgerNoether
+    
+  CODE ==>  add
+
+    Rep := MetRec
+
+    infClsPt_? a == a.infClsPt
+
+    createHN( a,b,c,d,e,f,g)==[a,b,c,d,e,f,g]$Rep
+
+    excepCoord a == a.ex
+
+    chartCoord a == a.ch
+
+    transCoord a == a.tr
+
+    ramifMult a == a.ramif
+
+    quotValuation a == a.quotVal
+
+    type a == a.type
+
+    coerce(c:%):OutputForm== ( (c :: Rep ) :: MetRec) :: OutputForm  
+

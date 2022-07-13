@@ -1,0 +1,25 @@
+)abbrev category BLMETCT BlowUpMethodCategory
+
+BlowUpMethodCategory() : Category == SIG where
+
+  SIG ==> SetCategory with
+
+    coerce : List Integer -> %
+  
+    excepCoord : % -> Integer
+  
+    chartCoord : % -> Integer
+  
+    transCoord : % -> Integer
+  
+    createHN : ( Integer, Integer, Integer , Integer, Integer, Boolean,_
+                 Union("left","center","right","vertical","horizontal")) -> %
+  
+    ramifMult : % -> Integer
+  
+    infClsPt_? : % -> Boolean
+  
+    quotValuation : % -> Integer
+  
+    type : % -> Union("left","center","right","vertical","horizontal")
+

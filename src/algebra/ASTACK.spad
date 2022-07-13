@@ -1,0 +1,248 @@
+)abbrev domain ASTACK ArrayStack
+++ Author: Michael Monagan, Stephen Watt, Timothy Daly
+++ Date Created:June 86 and July 87
+++ Date Last Updated:Feb 92
+++ Description:
+++ A stack represented as a flexible array.
+--% Dequeue and Heap data types
+ 
+ArrayStack(S) : SIG == CODE where 
+  S : SetCategory
+
+  SIG ==> StackAggregate(S) with
+
+    arrayStack : List S -> %
+      ++ arrayStack([x,y,...,z]) creates an array stack with first (top)
+      ++ element x, second element y,...,and last element z.
+      ++
+      ++X c:ArrayStack INT:= arrayStack [1,2,3,4,5]
+
+    pop_! : % -> S
+      ++ pop! destructively modifies its argument and returns the 
+      ++ first item of the argument
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X pop! a
+      ++X a
+
+    extract_! : % -> S
+      ++ extract! destructively modifies its argument and returns the 
+      ++ first item of the argument
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X extract! a
+      ++X a
+
+    push_! : (S,%) -> S
+      ++ push! destructively modifies its argument and returns a new
+      ++ list with the element add to the front of the list
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X push!(9,a)
+      ++X a
+
+    insert_! : (S,%) -> %
+      ++ insert! destructively modifies its argument and returns a new
+      ++ list with the element add to the front of the list
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X insert!(8,a)
+      ++X a
+
+    inspect : % -> S
+      ++ inspect returns the first item of the list without modifing the list
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X inspect a
+
+    top : % -> S
+      ++ top returns the first item of the list without modifing the list
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X top a
+
+    depth : % -> NonNegativeInteger
+      ++ depth returns the number of elements
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X depth a
+
+    less? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X less?(a,9)
+
+    more? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X more?(a,9)
+
+    size? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X size?(a,5)
+
+    bag : List S -> %
+      ++
+      ++X bag([1,2,3,4,5])$ArrayStack(INT)
+
+    empty? : % -> Boolean
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X empty? a
+
+    empty : () -> %
+      ++
+      ++X b:=empty()$(ArrayStack INT)
+
+    sample : () -> %
+      ++
+      ++X sample()$ArrayStack(INT)
+
+    copy : % -> %
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X copy a
+
+    eq? : (%,%) -> Boolean
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X b:=copy a
+      ++X eq?(a,b)
+
+    map :  ((S -> S),%) -> %
+      ++
+      ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+      ++X map(x+->x+10,a)
+      ++X a
+
+    if $ has shallowlyMutable then
+
+      map! :  ((S -> S),%) -> %
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X map!(x+->x+10,a)
+        ++X a
+
+    if S has SetCategory then
+
+      latex : % -> String
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X latex a
+
+      hash : % -> SingleInteger
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X hash a
+
+      coerce : % -> OutputForm
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X coerce a
+
+      "=" : (%,%) -> Boolean
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X b:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X (a=b)@Boolean
+
+      "~=" : (%,%) -> Boolean
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X b:=copy a
+        ++X (a~=b)
+
+    if % has finiteAggregate then
+
+      every? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X every?(x+->(x=4),a)
+
+      any? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X any?(x+->(x=4),a)
+
+      count : ((S -> Boolean),%) -> NonNegativeInteger
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X count(x+->(x>2),a)
+
+      _# : % -> NonNegativeInteger
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X #a
+
+      parts : % -> List S
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X parts a
+
+      members : % -> List S
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X members a
+
+    if % has finiteAggregate and S has SetCategory then
+
+      member? : (S,%) -> Boolean
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X member?(3,a)
+
+      count : (S,%) -> NonNegativeInteger
+        ++
+        ++X a:ArrayStack INT:= arrayStack [1,2,3,4,5]
+        ++X count(4,a)
+
+  CODE ==> add
+
+    Rep := IndexedFlexibleArray(S,0)
+ 
+    -- system operations
+    # s == _#(s)$Rep
+
+    s = t == s =$Rep t
+
+    copy s == copy(s)$Rep
+
+    coerce(d):OutputForm ==
+        empty? d => empty()$(List S) ::OutputForm
+        [(d.i::OutputForm) for i in 0..#d-1] ::OutputForm
+ 
+    -- stack operations
+
+    depth s == # s
+
+    empty? s == empty?(s)$Rep 
+
+    extract_! s == pop_! s
+
+    insert_!(e,s) == (push_!(e,s);s)
+
+    push_!(e,s) == (concat(e,s); e)
+
+    pop_! s ==
+        if empty? s then error "empty stack"
+        r := s.0
+        delete_!(s,0)
+        r
+
+    top s == if empty? s then error "empty stack" else s.0
+
+    arrayStack l == construct(l)$Rep
+
+    empty() == new(0,0 pretend S)
+
+    parts s == [s.i for i in 0..#s-1]::List(S)
+
+    map(f,s) == construct [f(s.i) for i in 0..#s-1]
+
+    map!(f,s) == ( for i in 0..#s-1 repeat qsetelt!(s,i,f(s.i)) ; s )
+
+    inspect(s) ==  
+        if empty? s then error "empty stack"
+        qelt(s,0)
+

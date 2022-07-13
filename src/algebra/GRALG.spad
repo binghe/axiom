@@ -1,0 +1,44 @@
+)abbrev category GRALG GradedAlgebra
+++ Author: Stephen M. Watt
+++ Date Created: May 20, 1991
+++ Date Last Updated: May 20, 1991
+++ References: 
+++ Iyan60 Encyclopedic Dictionary of Mathematics, MIT Press, 1977
+++ Description:
+++ GradedAlgebra(R,E) denotes ``E-graded R-algebra''.
+++ A graded algebra is a graded module together with a degree preserving
+++ R-linear map, called the product.
+++
+++ The name ``product'' is written out in full so inner and outer products
+++ with the same mapping type can be distinguished by name.
+
+GradedAlgebra(R,E) : Category == SIG where
+  R : CommutativeRing
+  E : AbelianMonoid
+
+  SIG ==> Join(GradedModule(R, E),RetractableTo(R)) with
+
+    1 : constant -> %
+      ++ \spad{1} is the identity for \spad{product}.
+  
+    product : (%, %) -> %
+      ++ product(a,b) is the degree-preserving R-linear product:
+      ++
+      ++ \spad{degree product(a,b) = degree a + degree b}
+      ++ \spad{product(a1+a2,b) = product(a1,b) + product(a2,b)}
+      ++ \spad{product(a,b1+b2) = product(a,b1) + product(a,b2)}
+      ++ \spad{product(r*a,b) = product(a,r*b) = r*product(a,b)}
+      ++ \spad{product(a,product(b,c)) = product(product(a,b),c)}
+  
+   add
+
+     if not (R is %) then
+  
+       0: % == (0$R)::%
+  
+       1: % == 1$R::%
+  
+       (r: R)*(x: %) == product(r::%, x)
+  
+       (x: %)*(r: R) == product(x, r::%)
+

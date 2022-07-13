@@ -1,0 +1,9 @@
+)abbrev category OAMON OrderedAbelianMonoid
+++ Description:
+++ Ordered sets which are also abelian monoids, such that the addition
+++ preserves the ordering.
+
+OrderedAbelianMonoid() : Category == SIG where
+
+  SIG ==> Join(OrderedAbelianSemiGroup, AbelianMonoid)
+

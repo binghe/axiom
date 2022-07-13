@@ -1,0 +1,65 @@
+)abbrev category LOCPOWC LocalPowerSeriesCategory
+LocalPowerSeriesCategory(K) : Category == SIG where
+  K : Field
+
+  INT   ==> Integer
+  TERM  ==> Record(k:INT,c:K)
+  SER   ==> Stream(TERM)
+  NNI   ==> NonNegativeInteger
+
+  SIG ==> Join(Field,UnivariatePowerSeriesCategory(K,INT))  with 
+
+    order : % -> Integer
+      ++ order(s) returns the order of s.
+
+    findCoef : (%,Integer) -> K
+
+    coerce : SER -> %
+
+    coerce : % -> SER
+
+    posExpnPart : % -> %
+      ++ posExpnPart(s) returns the series s less the terms with 
+      ++ negative exponant.
+
+    orderIfNegative : % -> Union(Integer,"failed")
+
+    removeFirstZeroes : % -> %
+    
+    sbt : (%,%) -> %
+
+    delay : ( () -> % ) -> %
+      ++ delay delayed the computation of the next term of the series given
+      ++ by the input function.
+
+    monomial2series : (List %, List NNI, INT) -> %
+      ++ monomial2series(ls,le,n) returns 
+      ++ t**n * reduce("*",[s ** e for s in ls for e in le])
+
+    removeZeroes : (INT,%) -> %
+      ++ removeZeroes(n,s) removes the zero terms in the first n terms of s.
+
+    removeZeroes : % -> %
+      ++ removeZeroes(s) removes the zero terms in  s.
+
+    series : (INT,K,%) -> %
+      ++ series(e,c,s) create the series c*t**e + s.
+
+    shift : (%,INT) -> %
+      ++ shift(s,n) returns t**n * s
+
+    filterUpTo : (%,INT)  -> %
+      ++ filterUpTo(s,n) returns the series consisting of the terms 
+      ++ of s having degree strictly less than n.
+      
+    coefOfFirstNonZeroTerm : % -> K
+      ++ coefOfFirstNonZeroTerm(s) returns the first non zero coefficient 
+      ++ of the series.
+
+    printInfo : Boolean -> Boolean
+      ++ printInfo(b) set a flag such that when true (b <- true) prints 
+      ++ some information during some critical computation.
+
+    printInfo : () -> Boolean
+      ++ printInfo() returns the value of the \spad{printInfo} flag.
+

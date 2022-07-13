@@ -1,0 +1,30 @@
+)abbrev package PINTERP PolynomialInterpolation
+++ Description:
+++ This package exports interpolation algorithms
+
+PolynomialInterpolation(xx, F) : SIG == CODE where
+  xx : Symbol
+  F :  Field
+
+  UP  ==> UnivariatePolynomial
+  SUP ==> SparseUnivariatePolynomial
+ 
+  SIG ==> with
+
+    interpolate : (UP(xx,F), List F, List F) -> UP(xx,F)
+      ++ interpolate(u,lf,lg) \undocumented
+
+    interpolate : (List F, List F) -> SUP F
+      ++ interpolate(lf,lg) \undocumented
+ 
+  CODE ==> add
+
+        PIA ==> PolynomialInterpolationAlgorithms
+ 
+        interpolate(qx, lx, ly) ==
+            px := LagrangeInterpolation(lx, ly)$PIA(F, UP(xx, F))
+            elt(px, qx)
+ 
+        interpolate(lx, ly) ==
+            LagrangeInterpolation(lx, ly)$PIA(F, SUP F)
+

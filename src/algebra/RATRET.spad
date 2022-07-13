@@ -1,0 +1,32 @@
+)abbrev package RATRET RationalRetractions
+++ Author: Manuel Bronstein
+++ Date Created: March 1990
+++ Date Last Updated: 9 April 1991
+++ Description: 
+++ Rational number testing and retraction functions.
+
+RationalRetractions(S) : SIG == CODE where
+  S : RetractableTo(Fraction Integer)
+
+  SIG ==> with
+
+    rational : S -> Fraction Integer
+      ++ rational(x) returns x as a rational number;
+      ++ error if x is not a rational number;
+
+    rational? : S -> Boolean
+      ++ rational?(x) returns true if x is a rational number,
+      ++ false otherwise;
+
+    rationalIfCan : S -> Union(Fraction Integer, "failed")
+      ++ rationalIfCan(x) returns x as a rational number,
+      ++ "failed" if x is not a rational number;
+
+  CODE ==> add
+
+    rational s      == retract s
+
+    rational? s     == retractIfCan(s) case Fraction(Integer)
+
+    rationalIfCan s == retractIfCan s
+

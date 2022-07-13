@@ -1,0 +1,55 @@
+)abbrev domain IFAMON InnerFreeAbelianMonoid
+++ Author: Manuel Bronstein
+++ Date Created: November 1989
+++ Date Last Updated: 6 June 1991
+++ Description:
+++ Internal implementation of a free abelian monoid on any set of generators
+
+InnerFreeAbelianMonoid(S,E,un) : SIG == CODE where
+  S : SetCategory
+  E : CancellationAbelianMonoid
+  un : E
+
+  SIG ==> FreeAbelianMonoidCategory(S, E)
+
+  CODE ==> ListMonoidOps(S, E, un) add
+
+        Rep := ListMonoidOps(S, E, un)
+
+        0 == makeUnit()
+
+        zero? f == empty? listOfMonoms f
+
+        terms f == copy listOfMonoms f
+
+        nthCoef(f, i) == nthExpon(f, i)
+
+        nthFactor(f, i) == nthFactor(f, i)$Rep
+
+        s:S + f:$ == plus(s, un, f)
+
+        f:$ + g:$ == plus(f, g)
+
+        (f:$ = g:$):Boolean == commutativeEquality(f,g)
+
+        n:E * s:S == makeTerm(s, n)
+
+        n:NonNegativeInteger * f:$ == mapExpon(x +-> n*x, f)
+
+        coerce(f:$):OutputForm == outputForm(f, "+", (x,y) +-> y*x, 0)
+
+        mapCoef(f, x) == mapExpon(f, x)
+
+        mapGen(f, x) == mapGen(f, x)$Rep
+
+        coefficient(s, f) ==
+          for x in terms f repeat
+            x.gen = s => return(x.exp)
+          0
+
+        if E has OrderedAbelianMonoid then
+
+          highCommonTerms(f, g) ==
+            makeMulti [[x.gen, min(x.exp, n)] for x in listOfMonoms f |
+                                       (n := coefficient(x.gen, g)) > 0]
+

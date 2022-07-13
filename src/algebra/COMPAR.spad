@@ -1,0 +1,12 @@
+)abbrev category COMPAR Comparable
+++ Description:
+++ The class of set equipped with possibly unnatural linear order
+++ (needed for technical reasons).
+
+Comparable() : Category == SIG where
+
+  SIG ==> SetCategory with
+
+    smaller? : (%,%) -> Boolean
+      ++ smaller?(x, y) is a strict total ordering on the elements of the set.
+

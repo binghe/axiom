@@ -1,0 +1,55 @@
+)abbrev category MONOID Monoid
+++ Description:
+++ The class of multiplicative monoids, that is, semigroups with a
+++ multiplicative identity element.
+++
+++ Axioms\br
+++ \tab{5}\spad{leftIdentity("*":(%,%)->%,1)}\tab{5}\spad{1*x=x}\br
+++ \tab{5}\spad{rightIdentity("*":(%,%)->%,1)}\tab{4}\spad{x*1=x}
+++
+++ Conditional attributes\br
+++ \tab{5}unitsKnown - \spadfun{recip} only returns "failed" on non-units
+
+Monoid() : Category == SIG where
+
+  SIG ==> SemiGroup with
+
+    1 : constant ->  %
+      ++ \axiom{1} is the multiplicative identity. 
+
+    sample : constant -> %
+      ++ sample yields a value of type %
+
+    one? : % -> Boolean
+      ++ one?(x) tests if x is equal to 1.
+
+    "**" : (%,NonNegativeInteger) -> %
+      ++ x**n returns the repeated product
+      ++ of x n times, that is, exponentiation.
+
+    "^" : (%,NonNegativeInteger) -> %   
+      ++ x^n returns the repeated product
+      ++ of x n times, that is, exponentiation.
+
+    recip : % -> Union(%,"failed")
+      ++ recip(x) tries to compute the multiplicative inverse for x
+      ++ or "failed" if it cannot find the inverse (see unitsKnown).
+
+   add
+
+      import RepeatedSquaring(%)
+
+      _^(x:%, n:NonNegativeInteger):% == x ** n
+
+      one? x == x = 1
+
+      sample() == 1
+
+      recip x ==
+        (x = 1) => x
+        "failed"
+
+      x:% ** n:NonNegativeInteger ==
+         zero? n => 1
+         expt(x,n pretend PositiveInteger)
+

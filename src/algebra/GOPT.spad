@@ -1,0 +1,188 @@
+)abbrev domain GOPT GuessOption
+++ Author: Martin Rubey
+++ Description:
+++ GuessOption is a domain whose elements are various options used
+++ by Guess.
+
+GuessOption() : SIG == CODE where
+
+  SIG ==> SetCategory with
+
+    maxDerivative : Union(NonNegativeInteger, "arbitrary") -> %
+      ++ maxDerivative(d) specifies the maximum derivative in an algebraic
+      ++ differential equation.  This option is expressed in the form
+      ++ \spad{maxDerivative == d}.
+
+    maxShift : Union(NonNegativeInteger, "arbitrary") -> %
+      ++ maxShift(d) specifies the maximum shift in a recurrence
+      ++ equation.  This option is expressed in the form \spad{maxShift == d}.
+
+    maxSubst : Union(PositiveInteger, "arbitrary") -> %
+      ++ maxSubst(d) specifies the maximum degree of the monomial substituted
+      ++ into the function we are looking for.  That is, if \spad{maxSubst ==
+      ++ d}, we look for polynomials such that $p(f(x), f(x^2), ...,
+      ++ f(x^d))=0$.  equation.  This option is expressed in the form
+      ++ \spad{maxSubst == d}.
+
+    maxPower : Union(PositiveInteger, "arbitrary") -> %
+      ++ maxPower(d) specifies the maximum degree in an algebraic differential
+      ++ equation. For example, the degree of (f'')^3 f' is 4. maxPower(-1)
+      ++ specifies that the maximum exponent can be arbitrary. This option is
+      ++ expressed in the form \spad{maxPower == d}.
+
+    homogeneous : Union(PositiveInteger, Boolean) -> %
+      ++ homogeneous(d) specifies whether we allow only homogeneous algebraic
+      ++ differential equations.  This option is expressed in the form
+      ++ \spad{homogeneous == d}.  If true, then maxPower must be
+      ++ set, too, and ADEs with constant total degree are allowed.
+      ++ If a PositiveInteger is given, only ADE's with this total degree are
+      ++ allowed.
+
+    Somos : Union(PositiveInteger, Boolean) -> %
+      ++ Somos(d) specifies whether we want that the total degree of the
+      ++ differential operators is constant, and equal to d, or maxDerivative
+      ++ if true. If true, maxDerivative must be set, too.
+
+    maxLevel : Union(NonNegativeInteger, "arbitrary") -> %
+      ++ maxLevel(d) specifies the maximum number of recursion levels operators
+      ++ guessProduct and guessSum will be applied. This option is expressed in
+      ++ the form spad{maxLevel == d}.
+
+    maxDegree : Union(NonNegativeInteger, "arbitrary") -> %
+      ++ maxDegree(d) specifies the maximum degree of the coefficient
+      ++ polynomials in an algebraic differential equation or a recursion with
+      ++ polynomial coefficients. For rational functions with an exponential
+      ++ term, \spad{maxDegree} bounds the degree of the denominator
+      ++ polynomial.
+      ++ This option is expressed in the form \spad{maxDegree == d}.
+
+    maxMixedDegree : NonNegativeInteger -> %
+      ++ maxMixedDegree(d) specifies the maximum q-degree of the coefficient
+      ++ polynomials in a recurrence with polynomial coefficients, in the case
+      ++ of mixed shifts.  Although slightly inconsistent, maxMixedDegree(0)
+      ++ specifies that no mixed shifts are allowed. This option is expressed
+      ++ in the form \spad{maxMixedDegree == d}.
+
+    allDegrees : Boolean -> %
+      ++ allDegrees(d) specifies whether all possibilities of the degree vector
+      ++ - taking into account maxDegree - should be tried. This is mainly
+      ++ interesting for rational interpolation. This option is expressed in
+      ++ the form \spad{allDegrees == d}.
+
+    safety : NonNegativeInteger -> %
+      ++ safety(d) specifies the number of values reserved for testing any
+      ++ solutions found. This option is expressed in the form \spad{safety ==
+      ++ d}.
+
+    check : Union("skip", "MonteCarlo", "deterministic") -> %
+      ++ check(d) specifies how we want to check the solution.  If
+      ++ the value is "skip", we return the solutions found by the
+      ++ interpolation routine without checking.  If the value is
+      ++ "MonteCarlo", we use a probabilistic check.  This option is
+      ++ expressed in the form \spad{check == d}
+
+    checkExtraValues : Boolean -> %
+      ++ checkExtraValues(d) specifies whether we want to check the
+      ++ solution beyond the order given by the degree bounds. This
+      ++ option is expressed in the form \spad{checkExtraValues == d}
+
+    one : Boolean -> %
+      ++ one(d) specifies whether we are happy with one solution. This option
+      ++ is expressed in the form \spad{one == d}.
+
+    debug : Boolean -> %
+      ++ debug(d) specifies whether we want additional output on the
+      ++ progress. This option is expressed in the form \spad{debug == d}.
+
+    functionName : Symbol -> %
+      ++ functionName(d) specifies the name of the function given by the
+      ++ algebraic differential equation or recurrence. This option is
+      ++ expressed in the form \spad{functionName == d}.
+
+    functionNames : List(Symbol) -> %
+      ++ functionNames(d) specifies the names for the function in
+      ++ algebraic dependence. This option is
+      ++ expressed in the form \spad{functionNames == d}.
+
+    variableName : Symbol -> %
+      ++ variableName(d) specifies the variable used in by the algebraic
+      ++ differential equation. This option is expressed in the form
+      ++ \spad{variableName == d}.
+
+    indexName : Symbol -> %
+      ++ indexName(d) specifies the index variable used for the formulas. This
+      ++ option is expressed in the form \spad{indexName == d}.
+
+    displayKind : Symbol -> %
+      ++ displayKind(d) specifies kind of the result: generating function,
+      ++ recurrence or equation. This option should not be set by the
+      ++ user, but rather by the HP-specification.
+
+    option : (List %, Symbol) -> Union(Any, "failed")
+      ++ option(l, option) returns which options are given.
+
+  CODE ==> add
+
+    import AnyFunctions1(Boolean)
+    import AnyFunctions1(Symbol)
+    import AnyFunctions1(NonNegativeInteger)
+    import AnyFunctions1(Union(NonNegativeInteger, "arbitrary"))
+    import AnyFunctions1(Union(PositiveInteger, "arbitrary"))
+    import AnyFunctions1(Union(PositiveInteger, Boolean))
+    import AnyFunctions1(Union("skip", "MonteCarlo", "deterministic"))
+
+    Rep := Record(keyword: Symbol, value: Any)
+
+    maxLevel d       == ['maxLevel,       d::Any]
+
+    maxDerivative d  == ['maxDerivative,  d::Any]
+
+    maxShift d       == maxDerivative d
+
+    maxSubst d       ==
+        if d case PositiveInteger
+        then maxDerivative((d::Integer-1)::NonNegativeInteger)
+        else maxDerivative d
+
+    maxDegree d        == ['maxDegree,        d::Any]
+
+    maxMixedDegree d   == ['maxMixedDegree,   d::Any]
+
+    allDegrees d       == ['allDegrees,       d::Any]
+
+    maxPower d         == ['maxPower,         d::Any]
+
+    safety d           == ['safety,           d::Any]
+
+    homogeneous d      == ['homogeneous,      d::Any]
+
+    Somos d            == ['Somos,            d::Any]
+
+    debug d            == ['debug,            d::Any]
+
+    check d            == ['check,            d::Any]
+
+    checkExtraValues d == ['checkExtraValues, d::Any]
+
+    one d              == ['one,              d::Any]
+
+    functionName d     == ['functionName,     d::Any]
+
+    functionNames d ==
+        ['functionNames, coerce(d)$AnyFunctions1(List(Symbol))]
+
+    variableName d     == ['variableName,     d::Any]
+
+    indexName d        == ['indexName,        d::Any]
+
+    displayKind d      == ['displayKind,      d::Any]
+
+    coerce(x:%):OutputForm == x.keyword::OutputForm = x.value::OutputForm
+
+    x:% = y:%              == x.keyword = y.keyword and x.value = y.value
+
+    option(l, s) ==
+      for x in l repeat
+        x.keyword = s => return(x.value)
+      "failed"
+

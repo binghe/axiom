@@ -1,0 +1,44 @@
+)abbrev domain ORESUP SparseUnivariateSkewPolynomial
+++ Author: Manuel Bronstein
+++ Date Created: 19 October 1993
+++ Date Last Updated: 1 February 1994
+++ References:
+++ Bron95 On radical solutions of linear ordinary differential equations
+++ Abra01 On Solutions of Linear Functional Systems
+++ Muld95 Primitives: Orepoly and Lodo
+++ Description:
+++ This is the domain of sparse univariate skew polynomials over an Ore
+++ coefficient field.
+++ The multiplication is given by \spad{x a = \sigma(a) x + \delta a}.
+
+SparseUnivariateSkewPolynomial(R,sigma,delta) : SIG == CODE where
+  R : Ring
+  sigma : Automorphism R
+  delta : R -> R
+
+  SIG ==> UnivariateSkewPolynomialCategory R with
+
+      outputForm : (%, OutputForm) -> OutputForm
+        ++ outputForm(p, x) returns the output form of p using x for the
+        ++ otherwise anonymous variable.
+
+  CODE ==> SparseUnivariatePolynomial R add
+
+      import UnivariateSkewPolynomialCategoryOps(R, %)
+ 
+      x:% * y:%      == times(x, y, sigma, delta)
+
+      apply(p, c, r) == apply(p, c, r, sigma, delta)
+ 
+      if R has IntegralDomain then
+
+          monicLeftDivide(a, b)  == monicLeftDivide(a, b, sigma)
+
+          monicRightDivide(a, b) == monicRightDivide(a, b, sigma)
+ 
+      if R has Field then
+
+          leftDivide(a, b)  == leftDivide(a, b, sigma)
+
+          rightDivide(a, b) == rightDivide(a, b, sigma)
+

@@ -1,0 +1,30 @@
+)abbrev domain UP UnivariatePolynomial
+++ Author: Mark Botch
+++ Description:
+++ This domain represents univariate polynomials in some symbol
+++ over arbitrary (not necessarily commutative) coefficient rings.
+++ The representation is sparse
+++ in the sense that only non-zero terms are represented.
+++ Note that if the coefficient ring is a field, then this domain 
+++ forms a euclidean domain.
+
+UnivariatePolynomial(x,R) : SIG == CODE where
+  x : Symbol
+  R : Ring
+
+  SIG ==> UnivariatePolynomialCategory(R) with
+
+    coerce : Variable(x) -> %
+      ++ coerce(x) converts the variable x to a univariate polynomial.
+
+    fmecg : (%,NonNegativeInteger,R,%) -> %
+      ++ fmecg(p1,e,r,p2) finds x : p1 - r * x**e * p2
+
+  CODE ==> SparseUnivariatePolynomial(R) add
+
+    Rep:=SparseUnivariatePolynomial(R)
+
+    coerce(p:%):OutputForm  == outputForm(p, outputForm x)
+
+    coerce(v:Variable(x)):% == monomial(1, 1)
+

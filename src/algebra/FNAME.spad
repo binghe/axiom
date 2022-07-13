@@ -1,0 +1,37 @@
+)abbrev domain FNAME FileName
+++ Author: Stephen M. Watt
+++ Date Created: 1985
+++ Date Last Updated: June 20, 1991
+++ Description:
+++ This domain provides an interface to names in the file system.
+ 
+FileName() : SIG == CODE where
+
+  SIG ==> FileNameCategory
+
+  CODE ==> add
+ 
+    f1 = f2 == EQUAL(f1, f2)$Lisp
+
+    coerce(f: %): OutputForm == f::String::OutputForm
+
+    coerce(f: %): String == NAMESTRING(f)$Lisp
+
+    coerce(s: String): % == PARSE_-NAMESTRING(s)$Lisp
+
+    filename(d,n,e) == fnameMake(d,n,e)$Lisp
+
+    directory(f:%): String == fnameDirectory(f)$Lisp
+
+    name(f:%): String == fnameName(f)$Lisp
+
+    extension(f:%): String == fnameType(f)$Lisp
+ 
+    exists? f == fnameExists?(f)$Lisp
+
+    readable? f == fnameReadable?(f)$Lisp
+
+    writable? f == fnameWritable?(f)$Lisp
+
+    new(d,pref,e) == fnameNew(d,pref,e)$Lisp
+

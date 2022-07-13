@@ -1,0 +1,30 @@
+)abbrev category RING Ring
+++ Description:
+++ The category of rings with unity, always associative, but
+++ not necessarily commutative.
+
+Ring() : Category == SIG where
+
+  SIG ==> Join(Rng,Monoid,LeftModule(%)) with
+
+    characteristic : () -> NonNegativeInteger
+      ++ characteristic() returns the characteristic of the ring
+      ++ this is the smallest positive integer n such that
+      ++ \spad{n*x=0} for all x in the ring, or zero if no such n
+      ++ exists.
+      --We can not make this a constant, since some domains are mutable
+
+    coerce : Integer -> %
+      ++ coerce(i) converts the integer i to a member of the given domain.
+
+    unitsKnown
+      ++ recip truly yields
+      ++ reciprocal or "failed" if not a unit.
+      ++ Note that \spad{recip(0) = "failed"}.
+
+   add
+
+     n:Integer
+
+     coerce(n) == n * 1$%
+

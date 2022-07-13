@@ -1,0 +1,73 @@
+)abbrev domain OPTPROB NumericalOptimizationProblem
+++ Author: Brian Dupee
+++ Date Created: December 1997
+++ Date Last Updated: December 1997
+++ References:
+++ Dupe95 Using Computer Algebra to Choose and Apply Numerical Routines
+++ Dewa92 Using Computer Algebra to Select Numerical Algorithms
+++ Description:
+++ \axiomType{NumericalOptimizationProblem} is a \axiom{domain}
+++ for the representation of Numerical Optimization problems for use
+++ by ANNA. 
+++
+++ The representation is a Union of two record types - one for optimization of
+++ a single function of one or more variables:
+++
+++ \axiomType{Record}(\br
+++ fn:\axiomType{Expression DoubleFloat},\br
+++ init:\axiomType{List DoubleFloat},\br
+++ lb:\axiomType{List OrderedCompletion DoubleFloat},\br
+++ cf:\axiomType{List Expression DoubleFloat},\br
+++ ub:\axiomType{List OrderedCompletion DoubleFloat})
+++
+++ and one for least-squares problems that is, optimization of a set of
+++ observations of a data set:
+++
+++ \axiomType{Record}\spad{(}lfn:\axiomType{List Expression DoubleFloat},\br
+++ init:\axiomType{List DoubleFloat}\spad{)}.
+
+NumericalOptimizationProblem() : SIG == CODE where
+
+  LDFD     ==> List DoubleFloat
+  LEDFD    ==> List Expression DoubleFloat
+  LSAD     ==> Record(lfn:LEDFD, init:LDFD)
+  UNOALSAD ==> Union(noa:NOAD,lsa:LSAD)
+  EDFD     ==> Expression DoubleFloat
+  LOCDFD   ==> List OrderedCompletion DoubleFloat
+  NOAD     ==> Record(fn:EDFD, init:LDFD, lb:LOCDFD, cf:LEDFD, ub:LOCDFD)
+
+  SIG ==> SetCategory with
+
+    coerce : NOAD -> %
+      ++ coerce(x) is not documented
+
+    coerce : LSAD -> %
+      ++ coerce(x) is not documented
+
+    coerce : UNOALSAD -> %
+      ++ coerce(x) is not documented
+
+    coerce : % -> OutputForm
+      ++ coerce(x) is not documented
+
+    retract : % -> UNOALSAD
+      ++ retract(x) is not documented
+
+  CODE ==> add
+
+      Rep := UNOALSAD
+ 
+      coerce(s:NOAD) == [s]
+
+      coerce(s:LSAD) == [s]
+
+      coerce(x:UNOALSAD) == x
+
+      coerce(x:%):OutputForm ==
+        (x) case noa => (x.noa)::OutputForm
+        (x.lsa)::OutputForm
+
+      retract(x:%):UNOALSAD ==
+        (x) case noa => [x.noa]
+        [x.lsa]
+

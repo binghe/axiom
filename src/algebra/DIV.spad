@@ -1,0 +1,144 @@
+)abbrev domain DIV Divisor
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+Divisor(S) : SIG == CODE where
+  S : SetCategoryWithDegree
+
+  PT      ==> Record(gen:S,exp: Integer)
+  INT     ==> Integer
+  BOOLEAN ==> Boolean
+  LIST    ==> List
+
+  SIG ==> DivisorCategory(S) with
+
+    head : % -> PT
+
+    reductum : % -> %
+
+  CODE ==> List PT add
+
+    Rep := List PT
+    
+    incr(d)==
+      [ [ pt.gen , pt.exp + 1 ] for pt in d ]    
+    
+    inOut: PT -> OutputForm
+
+    inOut(pp)==
+      one?(pp.exp) => pp.gen :: OutputForm
+      bl:OutputForm:= " " ::OutputForm
+      (pp.exp :: OutputForm) * hconcat(bl,pp.gen :: OutputForm) 
+
+    coerce(d:%):OutputForm==
+      zero?(d) => ("0"::OutputForm)
+      ll:List OutputForm:=[inOut df  for df in d]
+      reduce("+",ll)
+
+    reductum(d)==
+      zero?(d) => d
+      dl:Rep:= d pretend Rep
+      dlr := rest dl
+      empty?(dlr) => 0
+      dlr
+
+    head(d)==
+      zero?(d) => error "Cannot take head of zero"
+      dl:Rep:= d pretend Rep
+      first dl
+
+    coerce(s:S) == [[s,1]$PT]::%
+
+    split(a) == 
+      zero?(a) => []
+      [[r]::% for r in a]
+
+    coefficient(s,a)==
+      r:INT:=0
+      for pt in terms(a) repeat
+        if pt.gen=s then
+          r:=pt.exp
+      r
+
+    terms(a)==a::Rep
+
+    0==empty()$Rep
+
+    supp(a)==
+      aa:=terms(collect(a))
+      [p.gen for p in aa | ^zero?(p.exp)]  
+
+    suppOfZero(a)==
+      aa:=terms(collect(a))
+      [p.gen for p in aa | (p.exp) > 0 ]  
+
+    suppOfPole(a)==
+      aa:=terms(collect(a))
+      [p.gen for p in aa | p.exp < 0 ]  
+
+    divOfZero(a)==
+      aa:=terms(collect(a))
+      [p for p in aa | (p.exp) > 0 ]::%  
+
+    divOfPole(a)==
+      aa:=terms(collect(a))
+      [p for p in aa | p.exp < 0 ]::%  
+
+    zero?(a)==
+      ((collect(a)::Rep)=empty()$Rep)::BOOLEAN
+
+    collect(d)==
+      a:=d::Rep
+      empty?(a) => 0      
+      t:Rep:=empty()
+      ff:PT:=first(a)
+      one?(#(a)) =>
+        if zero?(ff.exp) then
+          t::%
+        else
+          a::%
+      inList?:Boolean:=false()
+      newC:INT
+      restred:=terms(collect((rest(a)::%)))
+      zero?(ff.exp) =>
+        restred::%
+      for bb in restred repeat
+        b:=bb::PT
+        if b.gen=ff.gen then
+          newC:=b.exp+ff.exp
+          if ^zero?(newC) then
+            t:=concat(t,[b.gen,newC]$PT)
+          inList?:=true()
+        else
+          t:=concat(t,b)
+      if ^inList? then
+        t:=cons(ff,t)
+      t::%  
+
+    a:% + b:% ==
+      collect(concat(a pretend Rep,b pretend Rep))
+
+    a:% - b:% ==
+      a + (-1)*b 
+
+    -a:% == (-1)*a
+
+    n:INT * a:% ==
+      zero?(n) => 0
+      t:Rep:=empty()
+      for p in a pretend Rep repeat
+        t:=concat(t,[ p.gen, n*p.exp]$PT)
+      t::%
+
+    a:% <= b:% ==
+      bma:= b - a
+      effective? bma => true 
+      false
+
+    effective?(a)== empty?(suppOfPole(a))
+
+    degree(d:%):Integer==
+      reduce("+",[(p.exp * degree(p.gen)) for p in d @ Rep],0$INT)          

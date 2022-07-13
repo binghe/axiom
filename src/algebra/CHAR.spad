@@ -1,0 +1,164 @@
+)abbrev domain CHAR Character
+++ Author: Stephen M. Watt
+++ Date Created: July 1986
+++ Date Last Updated: June 20, 1991
+++ Description:
+++ This domain provides the basic character data type.
+
+Character() : SIG == CODE where
+
+  SIG ==> OrderedFinite() with
+
+    ord : % -> Integer
+      ++ord(c) provides an integral code corresponding to the
+      ++character c.  It is always true that \spad{char ord c = c}.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [ord c for c in chars]
+
+    char : Integer  -> %
+      ++char(i) provides a character corresponding to the integer
+      ++code i. It is always true that \spad{ord char i = i}.
+      ++
+      ++X [char c for c in [97,65,88,56,43]]
+
+    char : String   -> %
+      ++char(s) provides a character from a string s of length one.
+      ++
+      ++X [char c for c in ["a","A","X","8","+"]]
+
+    space : () -> %
+      ++space() provides the blank character.
+      ++
+      ++X space()
+
+    quote : () -> %
+      ++quote() provides the string quote character, \spad{"}.
+      ++
+      ++X quote()
+
+    escape : () -> %
+      ++escape() provides the escape character, \spad{_}, which
+      ++is used to allow quotes and other characters within strings.
+      ++
+      ++X escape()
+
+    upperCase : % -> %
+      ++upperCase(c) converts a lower case letter to the corresponding
+      ++upper case letter.  If c is not a lower case letter, then
+      ++it is returned unchanged.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [upperCase c for c in chars]
+
+    lowerCase : % -> %
+      ++lowerCase(c) converts an upper case letter to the corresponding
+      ++lower case letter.  If c is not an upper case letter, then
+      ++it is returned unchanged.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [lowerCase c for c in chars]
+
+    digit? : % -> Boolean
+      ++digit?(c) tests if c is a digit character, for example, one of 0..9.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [digit? c for c in chars]
+
+    hexDigit? : % -> Boolean
+      ++hexDigit?(c) tests if c is a hexadecimal numeral,
+      ++for example, one of 0..9, a..f or A..F.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [hexDigit? c for c in chars]
+
+    alphabetic? : % -> Boolean
+      ++alphabetic?(c) tests if c is a letter,
+      ++for example, one of a..z or A..Z.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [alphabetic? c for c in chars]
+
+    upperCase? : % -> Boolean
+      ++upperCase?(c) tests if c is an upper case letter,
+      ++for example, one of A..Z.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [upperCase? c for c in chars]
+
+    lowerCase? : % -> Boolean
+      ++lowerCase?(c) tests if c is an lower case letter,
+      ++for example, one of a..z.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [lowerCase? c for c in chars]
+
+    alphanumeric? : % -> Boolean
+      ++alphanumeric?(c) tests if c is either a letter or number,
+      ++for example, one of 0..9, a..z or A..Z.
+      ++
+      ++X chars := [char "a", char "A", char "X", char "8", char "+"]
+      ++X [alphanumeric? c for c in chars]
+
+  CODE ==> add
+
+    Rep := SingleInteger  -- 0..255
+
+    CC ==> CharacterClass()
+    import CC
+
+    OutChars:PrimitiveArray(OutputForm) :=
+     construct [CODE_-CHAR(i)$Lisp for i in 0..255]
+
+    minChar := minIndex OutChars
+
+    a = b == a =$Rep b
+
+    a < b == a <$Rep b
+
+    size() == 256
+
+    index n == char((n - 1)::Integer)
+
+    lookup c == (1 + ord c)::PositiveInteger
+
+    char(n:Integer) == n::%
+
+    ord c == convert(c)$Rep
+
+    random() == char(random()$Integer rem size())
+
+    space == QENUM("   ", 0$Lisp)$Lisp
+
+    quote == QENUM("_" ", 0$Lisp)$Lisp
+
+    escape == QENUM("__ ", 0$Lisp)$Lisp
+
+    coerce(c:%):OutputForm == OutChars(minChar + ord c)
+
+    digit? c == member?(c pretend Character, digit())
+
+    hexDigit? c == member?(c pretend Character, hexDigit())
+
+    upperCase? c == member?(c pretend Character, upperCase())
+
+    lowerCase? c == member?(c pretend Character, lowerCase())
+
+    alphabetic? c == member?(c pretend Character, alphabetic())
+
+    alphanumeric? c == member?(c pretend Character, alphanumeric())
+
+    latex c ==
+      concat("\mbox{`", concat(new(1,c pretend Character)$String, "'}")_
+         $String)$String
+
+    char(s:String) ==
+     (#s) = 1 => s(minIndex s) pretend %
+     error "String is not a single character"
+
+    upperCase c ==
+      QENUM(PNAME(UPCASE(CODE_-CHAR(ord c)$Lisp)$Lisp)$Lisp,0$Lisp)$Lisp
+
+    lowerCase c ==
+      QENUM(PNAME(DOWNCASE(CODE_-CHAR(ord c)$Lisp)$Lisp)$Lisp,0$Lisp)$Lisp
+

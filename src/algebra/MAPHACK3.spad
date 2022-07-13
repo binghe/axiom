@@ -1,0 +1,20 @@
+)abbrev package MAPHACK3 MappingPackageInternalHacks3
+++ Description: 
+++ Various Currying operations.
+
+MappingPackageInternalHacks3(A,B,C) : SIG == CODE where
+  A : SetCategory
+  B : SetCategory
+  C : SetCategory
+
+  NNI ==> NonNegativeInteger
+ 
+  SIG ==> with
+
+    comp : (B->C, A->B, A) -> C
+      ++\spad{comp(f,g,x)} is \spad{f(g x)}.
+ 
+  CODE ==> add
+
+    comp(g,h,x) == g h x
+

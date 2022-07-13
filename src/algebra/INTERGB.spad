@@ -1,0 +1,75 @@
+)abbrev package INTERGB InterfaceGroebnerPackage
+++ Author: Gaetan Hache
+++ Date Created: September 1996
+++ Date Last Updated: April, 2010, by Tim Daly
+++ References:
+++ Normxx Notes 13: How to Compute a Groebner Basis
+++ Description:
+++ Part of the Package for Algebraic Function Fields in one variable PAFF
+
+InterfaceGroebnerPackage(K,symb,E,OV,R) : SIG == CODE where
+  K : Field
+  symb : List Symbol
+  E : OrderedAbelianMonoidSup
+  OV : OrderedSet
+  R : PolynomialCategory(K,E,OV)
+
+  SIG ==>  with
+
+    groebner : List R -> List R
+      
+  CODE ==>  add
+
+    if ^(K has FiniteFieldCategory) then
+
+      GBPackR ==> GroebnerPackage(K,E,OV,R)  
+      groebner(l)==groebner(l)$GBPackR
+
+    else 
+
+      q:PositiveInteger:=(characteristic()$K pretend PositiveInteger)
+  
+      PF ==> PrimeField(q)
+      DPF ==> DistributedMultivariatePolynomial(symb,PF)
+      D ==> DistributedMultivariatePolynomial(symb,K)
+      JCFGBPack ==> GroebnerPackage(PF,E,OV,DPF)
+      GBPack ==> GroebnerPackage(K,E,OV,D)  
+
+      coerceKtoPF: K -> PF
+      coerceKtoPF(a:K):PF==
+        index(lookup(a)$K)$PF
+
+      coercePFtoK: PF -> K  
+      coercePFtoK(a:PF):K==
+        index(lookup(a)$PF)$K
+  
+      coerceRtoDwithPF: R -> DPF
+      coerceRtoDwithPF(pol) ==
+        map(coerceKtoPF(#1),pol)$MPolyCatFunctions2(OV,E,E,K,PF,R,DPF)
+  
+      coerceDtoRwithPF: DPF->R 
+      coerceDtoRwithPF(pol) ==
+        map(coercePFtoK(#1),pol)$MPolyCatFunctions2(OV,E,E,PF,K,DPF,R)
+
+      coerceRtoD: R -> D
+      coerceRtoD(pol) == map(#1,pol)$MPolyCatFunctions2(OV,E,E,K,K,R,D)
+  
+      coerceDtoR: D->R 
+      coerceDtoR(pol) == map(#1,pol)$MPolyCatFunctions2(OV,E,E,K,K,D,R)
+
+      gs:= size()$K
+
+      if gs = q and (representationType()$K case "prime")  then 
+
+        groebner(l)==
+          ldmp:List DPF:= [coerceRtoDwithPF(pol) for pol in l]
+          gg:=groebner(ldmp)$JCFGBPack
+          [coerceDtoRwithPF(pol) for pol in gg]
+
+      else
+
+        groebner(l)==
+          ldmp:List D:= [coerceRtoD(pol) for pol in l]
+          gg:=groebner(ldmp)$GBPack
+          [coerceDtoR(pol) for pol in gg]
+

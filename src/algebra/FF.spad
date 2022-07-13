@@ -1,0 +1,24 @@
+)abbrev domain FF FiniteField
+++ Author: Mark Botch
+++ Date Created: ???
+++ Date Last Updated: 29 May 1990
+++ Reference:
+++ Grab92 Finite Fields in AXIOM.
+++ Lidl83 Finite Field, Encyclopedia of Mathematics and Its Applications
+++ Description:
+++ FiniteField(p,n) implements finite fields with p**n elements.
+++ This packages checks that p is prime.
+++ For a non-checking version, see \spadtype{InnerFiniteField}.
+
+FiniteField(p:PositiveInteger, n:PositiveInteger) : SIG == CODE where
+ 
+  SIG ==> FiniteAlgebraicExtensionField(PrimeField p) 
+
+  CODE ==>
+
+    FiniteFieldExtensionByPolynomial(PrimeField p,_
+        createIrreduciblePoly(n)$FiniteFieldPolynomialPackage(PrimeField p))
+  -- old code for generating irreducible polynomials:
+  -- now "better" order (sparse polys first)
+  -- generateIrredPoly(n)$IrredPolyOverFiniteField(GF))
+

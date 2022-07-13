@@ -1,0 +1,10 @@
+)abbrev category ATUNIKN UnitsKnownAttribute
+++ Description:
+++ The class of all monoids (multiplicative semigroups with a 1)
+++ such that the operation recop can only return "failed"
+++ if its argument is not a unit.
+
+UnitsKnownAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

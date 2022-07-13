@@ -1,0 +1,100 @@
+)abbrev package LOP LinesOpPack
+++ Authors: G. Hache
+++ Date Created: 21 sept 1994
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ A package that exports several linear algebra operations over lines 
+++ of matrices. Part of the PAFF package.
+
+LinesOpPack(K) : SIG == CODE where
+  K:Field
+
+  SIG ==> with
+
+    rowEchWoZeroLinesWOVectorise : Matrix(K) -> Matrix(K) 
+
+    rowEchWoZeroLines : Matrix(K) -> Matrix(K) 
+
+    reduceRow : List(List(K)) -> List(List(K))
+      ++ reduceRow(llk) if the input is considered as a matrix, the output would
+      ++ be the row reduction matrix. It's almost the rowEchelon form
+      ++ except that no permution of lines is performed.
+
+    quotVecSpaceBasis : (List(List(K)),List(List(K))) -> List(List(K))
+      ++ quotVecSpaceBasis(b1,b2) returns a basis of V1/V2 where
+      ++ V1 and V2 are vector space with basis b1  and b2 resp. and
+      ++ V2 is suppose to be include in V1; Note that if
+      ++ it is not the case then it returs the basis of V1/W
+      ++ where W = intersection of V1 and V2
+
+    reduceLineOverLine : (List(K),List(K),K) -> List(K)
+      ++reduceLineOverLine(v1,v2,a) returns v1-a*v1 where
+      ++ v1 and v2 are considered as vector space.
+
+    reduceRowOnList : (List(K),List(List(K))) -> List(List(K))
+      ++ reduceRowOnList(v,lvec) applies a row reduction on each of the 
+      ++ element of lv using v according to a pivot in v which is set to 
+      ++ be the first non nul element in v.
+
+  CODE ==> add
+
+    localRowEchelon: Matrix(K) -> Matrix(K)
+    localRowEchelon(m)==
+      ^(K has PseudoAlgebraicClosureOfPerfectFieldCategory )  => rowEchelon m
+      llm:List(List(K)):= listOfLists m
+      l:= first llm
+      maxT:= maxTower l
+      lv := [vectorise(a,maxT)$K for a in l]
+      subMatl := transpose  matrix [entries(v) for v in lv]
+      matl:= subMatl
+      for l in rest llm repeat
+        maxT:= maxTower l
+        lv := [vectorise(a,maxT)$K for a in l]
+        subMatl := transpose  matrix [entries(v) for v in lv]
+        matl:=vertConcat(matl,subMatl)
+      rowEchelon  matl
+
+    rowEchWoZeroLines(m)==
+      mm:=localRowEchelon m
+      ll:=listOfLists mm
+      n:= # first ll
+      lZero:=new(n pretend NonNegativeInteger,0)$List(K)
+      llll:= [ l for l in ll | ^(lZero = l) ]
+      empty?(llll) => matrix [lZero]
+      matrix llll
+
+    rowEchWoZeroLinesWOVectorise(m)==
+      mm:=rowEchelon  m
+      ll:=listOfLists mm
+      n:= # first ll
+      lZero:=new(n pretend NonNegativeInteger,0)$List(K)
+      llll:= [ l for l in ll | ^(lZero = l) ]
+      empty?(llll) => matrix [lZero]
+      matrix llll
+
+    quotVecSpaceBasis(l2,l1)==
+      redBasis:=reduceRow(concat(l1,l2))
+      tempRes:=rest(redBasis,#l1)
+      allZero:=new(#l1.1,0$K)
+      [l for l in tempRes | ^(l=allZero)]
+
+    reduceRowOnList(line,listOfLine)==
+      frsNonNul:Integer:=position(^zero?(#1),line)
+      ^(frsNonNul > 0) => listOfLine
+      a:= line.frsNonNul
+      inva:= inv a
+      newLine:=[inva*c for c in line]
+      [reduceLineOverLine(newLine,l,l.frsNonNul) for l in listOfLine]
+
+    reduceLineOverLine(l1,l2,b)==
+      [c2 - b*c1 for c2 in l2 for c1 in l1]
+
+    reduceRow(m:List(List(K)))==
+      n:=#m
+      mcopy:List(List(K)):=copy m
+      newBottom:List(List(K))
+      for i in 1..(n-1) repeat
+        newBottom:=reduceRowOnList(mcopy.i,[mcopy.j for j in (i+1)..n])
+        mcopy:=concat([mcopy.k for k in 1..i] :: List(List(K)),newBottom)
+      mcopy
+

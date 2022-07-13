@@ -1,0 +1,52 @@
+)abbrev domain STRING String
+++ Author: Mark Botch
+++ References:
+++ Corl00 According to Abramowitz and Stegun or arccoth needn't be Uncouth
+++ Fate01a A Critique of OpenMath and Thoughts on Encoding Mathematics
+++ Description:
+++ This is the domain of character strings. Strings are 1 based.
+
+String() : SIG == CODE where
+
+  SIG ==> StringCategory 
+
+  CODE ==> IndexedString(1) add 
+
+    string n == PRINC_-TO_-STRING(n)$Lisp
+
+    OMwrite(x: %): String ==
+      s: String := ""
+      sp := OM_-STRINGTOSTRINGPTR(s)$Lisp
+      dev: OpenMathDevice := OMopenString(sp pretend String, OMencodingXML)
+      OMputObject(dev)
+      OMputString(dev, x pretend String)
+      OMputEndObject(dev)
+      OMclose(dev)
+      s := OM_-STRINGPTRTOSTRING(sp)$Lisp pretend String
+      s
+
+    OMwrite(x: %, wholeObj: Boolean): String ==
+      s: String := ""
+      sp := OM_-STRINGTOSTRINGPTR(s)$Lisp
+      dev: OpenMathDevice := OMopenString(sp pretend String, OMencodingXML)
+      if wholeObj then
+        OMputObject(dev)
+      OMputString(dev, x pretend String)
+      if wholeObj then
+        OMputEndObject(dev)
+      OMclose(dev)
+      s := OM_-STRINGPTRTOSTRING(sp)$Lisp pretend String
+      s
+
+    OMwrite(dev: OpenMathDevice, x: %): Void ==
+      OMputObject(dev)
+      OMputString(dev, x pretend String)
+      OMputEndObject(dev)
+
+    OMwrite(dev: OpenMathDevice, x: %, wholeObj: Boolean): Void ==
+      if wholeObj then
+        OMputObject(dev)
+      OMputString(dev, x pretend String)
+      if wholeObj then
+        OMputEndObject(dev)
+

@@ -1,0 +1,10 @@
+)abbrev category ATCS CommutativeStarAttribute
+++ Description:
+++ The class of all commutative semigroups in multiplicative notation.
+++ In other words domain \spad{D} with \spad{"*": (D,D) -> D} which is 
+++ commutative. Typically applied to rings.
+
+CommutativeStarAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

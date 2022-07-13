@@ -1,0 +1,8 @@
+)abbrev category ATAPPRO ApproximateAttribute
+++ Description:
+++ An approximation to the real numbers.
+
+ApproximateAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

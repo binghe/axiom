@@ -1,0 +1,180 @@
+)abbrev package FSFUN FloatSpecialFunctions
+
+FloatSpecialFunctions() : SIG == CODE where
+
+  SIG ==> with
+
+    logGamma : Float -> Float
+      ++ logGamma(x) is the natural log of \spad{Gamma(x)}.
+      ++
+      ++X logGamma(3.5)
+
+    logGamma : (Complex Float) -> (Complex Float)
+      ++ logGamma(x) is the natural log of \spad{Gamma(x)}.
+      ++
+      ++X a:Complex(Float):=3.5*%i
+      ++X logGamma(a)
+
+    Gamma : Float -> Float
+      ++ Gamma(x) is the Euler Gamma function
+      ++
+      ++X Gamma(3.5)
+
+    Gamma : (Complex Float) -> (Complex Float)
+      ++ Gamma(x) is the Euler Gamma function
+      ++
+      ++X a:Complex(Float):=3.5*%i
+      ++X Gamma(a)
+
+  CODE ==> add
+
+-- incomplete formula
+-- The bernoulli function is 0 for odd numbers
+-- bk are the bernoulli coefficients
+-- \[\ln\Gamma{(z)} \approx z\ln{(z)}-z-
+-- \frac{1}{2}\ln{\left(\frac{z}{2\pi}\right)
+-- + \frac{1}{12z}- \frac{1}{360z^3}+ \frac{1}{1260z^5}
+-- where the coefficients are
+-- \frac{B_k}{k(k-1)} where B_k are the bernoulli numbers
+-- https://en.wikipedia.org/wiki/Gamma\_function
+
+    bernoulli_gamma_series(z : Complex Float, n : Integer) : Complex Float ==
+       zinv := 1/z
+       zk := zinv
+       z2inv := zinv*zinv
+       s := zk*((1/12)::(Complex Float))
+       for k in 1..n repeat
+           zk := zk*z2inv
+           kinv := (1::Float)/(((2*k +2)*(2*k+1))::Float)
+           bk := (bernoulli(2*k+2)$IntegerNumberTheoryFunctions)::Float
+           s := s + ((bk*kinv)::(Complex Float))*zk
+       s
+
+
+    logGamma_a1(z : Complex Float) : Complex Float ==
+       (z - ((1/2)::(Complex Float)))*log(z) - z _
+           + ((1/2)::(Complex Float))_
+             *((log((2 :: Float)*pi()))::(Complex Float))
+
+    -- in exact arithmetic |imag(logGamma_a1(z) - logGamma(z))| < pi/2
+    logGamma_lift(z : Complex Float, lg2 : Complex Float) : Complex Float ==
+        lg2i := imag(lg2)
+        k := round((imag(logGamma_a1(z)) - lg2i)/(2*pi()))
+        lg2 + (imaginary()$(Complex Float))*
+              ((k*(2::Float)*pi())::(Complex Float))
+
+    logGamma_asymptotic(z : Complex Float, n : Integer) : Complex Float ==
+       lg1 := logGamma_a1(z)
+       lg1 + bernoulli_gamma_series(z, n)
+
+    gamma_series(z : Complex Float, l : Float, n : Integer) : Complex Float ==
+       tk := exp(z*(log(l)::(Complex Float)))/z
+       s := tk
+       for k in 1..n repeat
+          tk := tk*(l::(Complex Float))/(z + (k::(Complex Float)))
+          s := s + tk
+       s*(exp(-l)::(Complex Float))
+
+
+    Gamma(z : Complex Float) : Complex Float ==
+        not(base()$Float =$Integer 2) =>
+            error "Gamma can only handle base 2 Float-s"
+        l0 := bits()
+        l := max(l0 + 5, 20)
+        re_z := real(z)
+        re_z < (1/2)::Float =>
+            bits (l + 5)
+            re_zint := round(re_z)
+            z1 := z - re_zint::Complex Float
+            sign : Float :=
+                odd?(retract(re_zint)@Integer) => -1
+                1
+            z1 = 0 =>
+                bits(l0)
+                error "Pole of Gamma"
+            c_pi := (pi())::(Complex Float)
+            one := 1::(Complex Float)
+            result := (sign::Float)*c_pi/(Gamma(one - z)*sin(c_pi * z1))
+            bits(l0)
+            result
+        abs_z := real(abs(z))
+        l :: Float > 6*abs_z =>
+            oz := max(order(abs_z), 5) :: PositiveInteger
+            lz := length(oz) :: PositiveInteger
+            bits(oz+lz+30)
+            loss := real(logGamma_a1(real(z)::(Complex Float))) - _
+                    real(logGamma_a1(z))
+            len:Float:= 2*real(z) + 2*(loss + log2() * (l :: Float)) + 3::Float
+            l1a := (l + order(len) + wholePart(loss/log2()) + 12)
+            l1 := max(l1a, wholePart(abs_z*log(len)/log2()) +
+                           10)::PositiveInteger
+            bits(l1)
+            result := gamma_series(z, len, 3*wholePart(len) + 6)
+            bits(l0)
+            result
+        llog := max(order(real(abs(logGamma_a1(z)))), 5) :: PositiveInteger
+        -- we sum l term, so need length(l) extra bits to
+        -- compensate roundoff error
+        -- we need llog extra bits in logGamma to avoid loss of
+        -- accuracy due to exponential
+        -- 12 extra bits to compensate for constant factor
+        -- and inaccuracy in computing number of bits
+        l1 := l + llog + (length(l)::PositiveInteger) + 12
+        bits(l1)
+        result := exp(logGamma_asymptotic(z, l quo 6 + 1 ))
+        bits(l0)
+        result
+
+    Gamma(x : Float) : Float ==
+      real(Gamma(x :: (Complex Float)))
+
+
+    logGamma(z : Complex Float) : Complex Float ==
+        not(base()$Float =$Integer 2) =>
+            error "Gamma can only handle base 2 Float-s"
+        l0 := bits()
+        l := max(l0 + 5, 20)
+        re_z := real(z)
+        one := 1::(Complex Float)
+        re_z < (1/2)::Float =>
+            bits (l + 5)
+            re_zint := round(re_z)
+            z1 := z - re_zint::Complex Float
+            lsign : Float :=
+                odd?(retract(re_zint)@Integer) => 1
+                0
+            z1 = 0 =>
+                bits(l0)
+                error "Pole of Gamma"
+            bits (l + 5)
+            c_pi := (pi())::(Complex Float)
+            result := log(c_pi) + complex(0, lsign)*c_pi
+                       - logGamma(one - z) - log(sin(c_pi * z1))
+            result := logGamma_lift(z, result)
+            bits(l0)
+            result
+        abs_z := real(abs(z))
+        l :: Float > 6*abs_z =>
+            l := l + 5
+            if real(abs(z - one)) < ((1/4)::Float) or _
+               real(abs(z - one - one)) < ((1/4)::Float) then
+                l := 2*l
+            bits(l)
+            result := logGamma_lift(z, log(Gamma(z)))
+            bits(l0)
+            result
+        -- we sum l term, so need length(l) extra bits to
+        -- compensate roundoff error
+        -- 12 extra bits to compensate for inaccuracy in computing
+        -- number of bits and constant factor
+        l1 := l + length(l)::PositiveInteger + 12
+        bits(l1)
+        result := logGamma_asymptotic(z, l quo 6 + 1 )
+        bits(l0)
+        result
+
+    logGamma(x : Float) : Float ==
+        x <= 0 =>
+            error "Argument to logGamma <= 0"
+        real(logGamma(x :: (Complex Float)))
+

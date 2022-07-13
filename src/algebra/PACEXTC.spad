@@ -1,0 +1,30 @@
+)abbrev category PACEXTC PseudoAlgebraicClosureOfAlgExtOfRationalNumberCategory
+++ Authors: Gaetan Hache
+++ Date Created: jan 1998
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This category exports the function for the domain 
+++ PseudoAlgebraicClosureOfAlgExtOfRationalNumber which implement dynamic 
+++ extension using the simple notion of tower extensions. A tower extension 
+++ T of the ground field K is any sequence of field extension 
+++ (T : K0, K1, ..., Ki...,Kn) where K0 = K and for i =1,2,...,n, 
+++ Ki is an extension of K{i-1} of degree > 1 and defined by an 
+++ irreducible polynomial p(Z) in K{i-1}.
+++ Two towers (T1: K01, K11,...,Ki1,...,Kn1) and
+++ (T2: K02, K12,...,Ki2,...,Kn2)
+++ are said to be related if T1 <= T2 (or T1 >= T2), 
+++ that is if Ki1 = Ki2 for i=1,2,...,n1 (or i=1,2,...,n2). 
+++ Any algebraic operations defined for several elements 
+++ are only defined if all of the concerned elements are comming from 
+++ a set of related tour extensions. 
+
+PseudoAlgebraicClosureOfAlgExtOfRationalNumberCategory() : 
+ Category == SIG where
+
+  Q   ==> PseudoAlgebraicClosureOfRationalNumber
+  PAC ==> PseudoAlgebraicClosureOfRationalNumberCategory
+  RT  ==> RetractableTo(Q)
+  EF  ==> ExtensionField(Q)
+
+  SIG ==> Join(PAC,RT,EF)
+

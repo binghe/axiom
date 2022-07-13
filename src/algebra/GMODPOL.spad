@@ -1,0 +1,75 @@
+)abbrev domain GMODPOL GeneralModulePolynomial
+++ Author: Mark Botch
+++ Description:
+++ This package is undocumented
+
+GeneralModulePolynomial(vl, R, IS, E, ff, P) : SIG == CODE where
+  vl : List(Symbol)
+  R : CommutativeRing
+  IS : OrderedSet
+  NNI ==> NonNegativeInteger
+  E : DirectProductCategory(#vl, NNI)
+  MM ==> Record(index:IS, exponent:E)
+  ff : (MM, MM) -> Boolean
+  OV  ==> OrderedVariableList(vl)
+  P : PolynomialCategory(R, E, OV)
+
+  ModMonom ==> ModuleMonomial(IS, E, ff)
+
+  SIG ==> Join(Module(P), Module(R))  with
+
+    leadingCoefficient : $ -> R
+      ++ leadingCoefficient(x) is not documented
+
+    leadingMonomial : $ -> ModMonom
+      ++ leadingMonomial(x) is not documented
+
+    leadingExponent : $ -> E
+      ++ leadingExponent(x) is not documented
+
+    leadingIndex : $ -> IS
+      ++ leadingIndex(x) is not documented
+
+    reductum : $ -> $
+      ++ reductum(x) is not documented
+
+    monomial : (R, ModMonom) -> $
+      ++ monomial(r,x) is not documented
+
+    unitVector : IS -> $
+      ++ unitVector(x) is not documented
+
+    build : (R, IS, E) -> $
+      ++ build(r,i,e) is not documented
+
+    multMonom : (R, E, $) -> $
+      ++ multMonom(r,e,x) is not documented
+
+    "*" : (P,$) -> $
+      ++ p*x is not documented
+
+  CODE ==> FreeModule(R, ModMonom)  add
+
+        Rep:= FreeModule(R, ModMonom)
+
+        leadingMonomial(p:$):ModMonom == leadingSupport(p)$Rep
+
+        leadingExponent(p:$):E == exponent(leadingMonomial p)
+
+        leadingIndex(p:$):IS == index(leadingMonomial p)
+
+        unitVector(i:IS):$ == monomial(1,[i, 0$E]$ModMonom)
+
+        build(c:R, i:IS, e:E):$  ==  monomial(c, construct(i, e))
+
+     ----   WARNING: assumes c ^= 0
+        multMonom(c:R, e:E, mp:$):$  ==
+            zero? mp => mp
+            monomial(c * leadingCoefficient mp, [leadingIndex mp,
+                     e + leadingExponent mp]) + multMonom(c, e, reductum mp)
+
+        ((p:P) * (mp:$)):$  ==
+            zero? p => 0
+            multMonom(leadingCoefficient p, degree p, mp) +
+               reductum(p) * mp
+

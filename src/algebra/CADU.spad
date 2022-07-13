@@ -1,0 +1,44 @@
+)abbrev package CADU CylindricalAlgebraicDecompositionUtilities
+
+CylindricalAlgebraicDecompositionUtilities(R,P) : SIG == CODE where
+  R : GcdDomain
+  P : UnivariatePolynomialCategory(R)
+
+  SIG ==> with
+
+    squareFreeBasis : List(P) -> List(P)
+      ++ 
+
+    gcdBasis : List(P) -> List(P)
+      ++ gcdBasis(lp) decomposes a list of polynomials into pairwise
+      ++ relatively prime polynomials
+
+    gcdBasisAdd : (P,List(P)) -> List(P)
+      ++ gcdBasisAdd(p,lp) adds one polynomial to list of pairwise
+      ++ relatively prime polynomials
+
+  CODE ==> add
+
+     squareFreeBasis(lpols) ==
+       lpols = [] => []
+       pol := first(lpols)
+       sqpol := unitCanonical(squareFreePart(pol))
+       gcdBasis(cons(sqpol,squareFreeBasis(rest(lpols))))
+         
+     gcdBasisAdd(p,lpols) ==
+       (degree(p) = 0) => lpols
+       null lpols => [unitCanonical p]
+       p1 := first(lpols)
+       g := gcd(p,p1)
+       (degree(g) = 0) => cons(p1,gcdBasisAdd(p,rest lpols))
+       p := (p exquo g)::P
+       p1 := (p1 exquo g)::P
+       basis := gcdBasisAdd(p,rest(lpols))
+       if degree(p1) > 0 then basis := cons(p1,basis)
+       gcdBasisAdd(g,basis)
+       
+     gcdBasis(lpols) ==
+       (#lpols <= 1) => lpols
+       basis := gcdBasis(rest lpols)
+       gcdBasisAdd(first(lpols),basis)
+

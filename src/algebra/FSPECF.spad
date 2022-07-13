@@ -1,0 +1,363 @@
+)abbrev package FSPECF FunctionalSpecialFunction
+++ Author: Manuel Bronstein
+++ Date Created: 18 Apr 1989
+++ Date Last Updated: 4 October 1993
+++ Description: 
+++ Provides some special functions over an integral domain.
+
+FunctionalSpecialFunction(R, F) : SIG == CODE where
+  R : Join(OrderedSet, IntegralDomain)
+  F : FunctionSpace R
+
+  OP  ==> BasicOperator
+  K   ==> Kernel F
+  SE  ==> Symbol
+  SPECIALDIFF  ==> "%specialDiff"
+
+  SIG ==> with
+
+    belong? : OP -> Boolean
+      ++ belong?(op) is true if op is a special function operator;
+
+    operator : OP -> OP
+      ++ operator(op) returns a copy of op with the domain-dependent
+      ++ properties appropriate for F;
+      ++ error if op is not a special function operator
+
+    abs : F -> F
+      ++ abs(f) returns the absolute value operator applied to f
+
+    Gamma : F -> F
+      ++ Gamma(f) returns the formal Gamma function applied to f
+
+    Gamma : (F,F) -> F
+      ++ Gamma(a,x) returns the incomplete Gamma function applied to a and x
+
+    Beta : (F,F) -> F
+      ++ Beta(x,y) returns the beta function applied to x and y
+
+    digamma : F->F
+      ++ digamma(x) returns the digamma function applied to x 
+
+    polygamma : (F,F) ->F
+      ++ polygamma(x,y) returns the polygamma function applied to x and y
+
+    besselJ : (F,F) -> F
+      ++ besselJ(x,y) returns the besselj function applied to x and y
+
+    besselY : (F,F) -> F
+      ++ besselY(x,y) returns the bessely function applied to x and y
+
+    besselI : (F,F) -> F
+      ++ besselI(x,y) returns the besseli function applied to x and y
+
+    besselK : (F,F) -> F
+      ++ besselK(x,y) returns the besselk function applied to x and y
+
+    airyAi : F -> F
+      ++ airyAi(x) returns the airyai function applied to x 
+
+    airyBi : F -> F
+      ++ airyBi(x) returns the airybi function applied to x
+
+    iiGamma : F -> F
+      ++ iiGamma(x) should be local but conditional;
+    iiabs     : F -> F
+      ++ iiabs(x) should be local but conditional;
+    iiBeta     : List F -> F
+      ++ iiBeta(x) should be local but conditional;
+    iidigamma  : F -> F
+      ++ iidigamma(x) should be local but conditional;
+    iipolygamma: List F -> F
+      ++ iipolygamma(x) should be local but conditional;
+    iiBesselJ  : List F -> F
+      ++ iiBesselJ(x) should be local but conditional;
+    iiBesselY  : List F -> F
+      ++ iiBesselY(x) should be local but conditional;
+    iiBesselI  : List F -> F
+      ++ iiBesselI(x) should be local but conditional;
+    iiBesselK  : List F -> F
+      ++ iiBesselK(x) should be local but conditional;
+    iiAiryAi   : F -> F
+      ++ iiAiryAi(x) should be local but conditional;
+    iiAiryBi   : F -> F
+      ++ iiAiryBi(x) should be local but conditional;
+
+  CODE ==> add
+
+    iabs      : F -> F
+    iGamma    : F -> F
+    iBeta     : (F, F) -> F
+    idigamma  : F -> F
+    iiipolygamma: (F, F) -> F
+    iiiBesselJ  : (F, F) -> F
+    iiiBesselY  : (F, F) -> F
+    iiiBesselI  : (F, F) -> F
+    iiiBesselK  : (F, F) -> F
+    iAiryAi   : F -> F
+    iAiryBi   : F -> F
+
+    opabs       := operator("abs"::Symbol)$CommonOperators
+    opGamma     := operator("Gamma"::Symbol)$CommonOperators
+    opGamma2    := operator("Gamma2"::Symbol)$CommonOperators
+    opBeta      := operator("Beta"::Symbol)$CommonOperators
+    opdigamma   := operator("digamma"::Symbol)$CommonOperators
+    oppolygamma := operator("polygamma"::Symbol)$CommonOperators
+    opBesselJ   := operator("besselJ"::Symbol)$CommonOperators
+    opBesselY   := operator("besselY"::Symbol)$CommonOperators
+    opBesselI   := operator("besselI"::Symbol)$CommonOperators
+    opBesselK   := operator("besselK"::Symbol)$CommonOperators
+    opAiryAi    := operator("airyAi"::Symbol)$CommonOperators
+    opAiryBi    := operator("airyBi"::Symbol)$CommonOperators
+
+    abs x         == opabs x
+
+    Gamma(x)      == opGamma(x)
+
+    Gamma(a,x)    == opGamma2(a,x)
+
+    Beta(x,y)     == opBeta(x,y)
+
+    digamma x     == opdigamma(x)
+
+    polygamma(k,x)== oppolygamma(k,x)
+
+    besselJ(a,x)  == opBesselJ(a,x)
+
+    besselY(a,x)  == opBesselY(a,x)
+
+    besselI(a,x)  == opBesselI(a,x)
+
+    besselK(a,x)  == opBesselK(a,x)
+
+    airyAi(x)     == opAiryAi(x)
+
+    airyBi(x)     == opAiryBi(x)
+
+    belong? op == has?(op, "special")
+
+    operator op ==
+      is?(op, "abs"::Symbol)      => opabs
+      is?(op, "Gamma"::Symbol)    => opGamma
+      is?(op, "Gamma2"::Symbol)   => opGamma2
+      is?(op, "Beta"::Symbol)     => opBeta
+      is?(op, "digamma"::Symbol)  => opdigamma
+      is?(op, "polygamma"::Symbol)=> oppolygamma
+      is?(op, "besselJ"::Symbol)  => opBesselJ
+      is?(op, "besselY"::Symbol)  => opBesselY
+      is?(op, "besselI"::Symbol)  => opBesselI
+      is?(op, "besselK"::Symbol)  => opBesselK
+      is?(op, "airyAi"::Symbol)   => opAiryAi
+      is?(op, "airyBi"::Symbol)   => opAiryBi
+
+      error "Not a special operator"
+
+    -- Could put more unconditional special rules for other functions here
+    iGamma x ==
+      (x = 1) => x
+      kernel(opGamma, x)
+
+    iabs x ==
+      zero? x => 0
+      is?(x, opabs) => x
+      x < 0 => kernel(opabs, -x)
+      kernel(opabs, x)
+
+    iBeta(x, y) == kernel(opBeta, [x, y])
+    idigamma x == kernel(opdigamma, x)
+    iiipolygamma(n, x) == kernel(oppolygamma, [n, x])
+    iiiBesselJ(x, y) == kernel(opBesselJ, [x, y])
+    iiiBesselY(x, y) == kernel(opBesselY, [x, y])
+    iiiBesselI(x, y) == kernel(opBesselI, [x, y])
+    iiiBesselK(x, y) == kernel(opBesselK, [x, y])
+    iAiryAi x == kernel(opAiryAi, x)
+    iAiryBi x == kernel(opAiryBi, x)
+
+
+    -- Could put more conditional special rules for other functions here
+
+    if R has abs : R -> R then
+
+      iiabs x ==
+        (r := retractIfCan(x)@Union(Fraction Polynomial R, "failed"))
+          case "failed" => iabs x
+        f := r::Fraction Polynomial R
+        (a := retractIfCan(numer f)@Union(R, "failed")) case "failed" or
+          (b:= retractIfCan(denom f)@Union(R,"failed")) case "failed" => iabs x
+        abs(a::R)::F / abs(b::R)::F
+
+    else 
+
+      iiabs x == iabs x
+
+    if R has SpecialFunctionCategory then
+
+      iiGamma x ==
+        (r:=retractIfCan(x)@Union(R,"failed")) case "failed" => iGamma x
+        Gamma(r::R)::F
+
+      iiBeta l ==
+        (r:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (s:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iBeta(first l, second l)
+        Beta(r::R, s::R)::F
+
+      iidigamma x ==
+        (r:=retractIfCan(x)@Union(R,"failed")) case "failed" => idigamma x
+        digamma(r::R)::F
+
+      iipolygamma l ==
+        (s:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (r:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iiipolygamma(first l, second l)
+        polygamma(s::R, r::R)::F
+
+      iiBesselJ l ==
+        (r:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (s:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iiiBesselJ(first l, second l)
+        besselJ(r::R, s::R)::F
+
+      iiBesselY l ==
+        (r:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (s:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iiiBesselY(first l, second l)
+        besselY(r::R, s::R)::F
+
+      iiBesselI l ==
+        (r:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (s:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iiiBesselI(first l, second l)
+        besselI(r::R, s::R)::F
+
+      iiBesselK l ==
+        (r:=retractIfCan(first l)@Union(R,"failed")) case "failed" or _
+        (s:=retractIfCan(second l)@Union(R,"failed")) case "failed" _
+            => iiiBesselK(first l, second l)
+        besselK(r::R, s::R)::F
+
+      iiAiryAi x ==
+        (r:=retractIfCan(x)@Union(R,"failed")) case "failed" => iAiryAi x
+        airyAi(r::R)::F
+
+      iiAiryBi x ==
+        (r:=retractIfCan(x)@Union(R,"failed")) case "failed" => iAiryBi x
+        airyBi(r::R)::F
+
+    else
+      if R has RetractableTo Integer then
+
+        iiGamma x ==
+          (r := retractIfCan(x)@Union(Integer, "failed")) case Integer
+            and (r::Integer >= 1) => factorial(r::Integer - 1)::F
+          iGamma x
+
+      else
+
+        iiGamma x == iGamma x
+
+      iiBeta l == iBeta(first l, second l)
+
+      iidigamma x == idigamma x 
+
+      iipolygamma l == iiipolygamma(first l, second l)
+
+      iiBesselJ l == iiiBesselJ(first l, second l) 
+
+      iiBesselY l == iiiBesselY(first l, second l)
+
+      iiBesselI l == iiiBesselI(first l, second l)
+
+      iiBesselK l == iiiBesselK(first l, second l)
+
+      iiAiryAi x == iAiryAi x
+
+      iiAiryBi x == iAiryBi x
+
+    -- Default behaviour is to build a kernel
+
+    evaluate(opGamma, iiGamma)$BasicOperatorFunctions1(F)
+
+    evaluate(opabs, iiabs)$BasicOperatorFunctions1(F)
+
+    evaluate(opBeta      ,iiBeta     )$BasicOperatorFunctions1(F)
+
+    evaluate(opdigamma   ,iidigamma  )$BasicOperatorFunctions1(F)
+
+    evaluate(oppolygamma ,iipolygamma)$BasicOperatorFunctions1(F)
+
+    evaluate(opBesselJ   ,iiBesselJ  )$BasicOperatorFunctions1(F)
+
+    evaluate(opBesselY   ,iiBesselY  )$BasicOperatorFunctions1(F)
+
+    evaluate(opBesselI   ,iiBesselI  )$BasicOperatorFunctions1(F)
+
+    evaluate(opBesselK   ,iiBesselK  )$BasicOperatorFunctions1(F)
+
+    evaluate(opAiryAi    ,iiAiryAi   )$BasicOperatorFunctions1(F)
+
+    evaluate(opAiryBi    ,iiAiryBi   )$BasicOperatorFunctions1(F)
+
+    import Fraction Integer
+    ahalf:  F    := recip(2::F)::F
+    athird: F    := recip(2::F)::F
+    twothirds: F := 2*recip(3::F)::F
+    dummyArg: SE := new()$SE
+    opdiff := operator first kernels D((operator(new()$SE)$BasicOperator)
+                                            (dummyArg::F), dummyArg)
+    dm := new()$SE :: F
+
+    iBesselJ(l: List F, t: SE): F ==
+        n := first l; x := second l
+        differentiate(n, t)*kernel(opdiff, [opBesselJ [dm, x], dm, n])
+          + differentiate(x, t) * ahalf * (besselJ (n-1,x) - besselJ (n+1,x))
+
+    iBesselY(l: List F, t: SE): F ==
+        n := first l; x := second l
+        differentiate(n, t)*kernel(opdiff, [opBesselY [dm, x], dm, n])
+          + differentiate(x, t) * ahalf * (besselY (n-1,x) - besselY (n+1,x))
+
+    iBesselI(l: List F, t: SE): F ==
+        n := first l; x := second l
+        differentiate(n, t)*kernel(opdiff, [opBesselI [dm, x], dm, n])
+          + differentiate(x, t)* ahalf * (besselI (n-1,x) + besselI (n+1,x))
+
+    iBesselK(l: List F, t: SE): F ==
+        n := first l; x := second l
+        differentiate(n, t)*kernel(opdiff, [opBesselK [dm, x], dm, n])
+          - differentiate(x, t)* ahalf * (besselK (n-1,x) + besselK (n+1,x))
+
+    ipolygamma(l: List F, x: SE): F ==
+        member?(x, variables first l) =>
+            error "cannot differentiate polygamma with respect to the first argument"
+        n := first l; y := second l
+        differentiate(y, x)*polygamma(n+1, y)
+    iBetaGrad1(l: List F): F ==
+        x := first l; y := second l
+        Beta(x,y)*(digamma x - digamma(x+y))
+    iBetaGrad2(l: List F): F ==
+        x := first l; y := second l
+        Beta(x,y)*(digamma y - digamma(x+y))
+
+    if F has ElementaryFunctionCategory then
+      iGamma2(l: List F, t: SE): F ==
+        a := first l; x := second l
+        differentiate(a, t)*kernel(opdiff, [opGamma2 [dm, x], dm, a])
+          - differentiate(x, t)* x ** (a - 1) * exp(-x)
+      setProperty(opGamma2, SPECIALDIFF, iGamma2@((List F, SE)->F) 
+                                                 pretend None)
+    derivative(opabs,       (x:F):F +-> abs(x) * inv(x))
+    derivative(opGamma,     (x:F):F +-> digamma x * Gamma x)
+    derivative(opBeta,      [iBetaGrad1, iBetaGrad2])
+    derivative(opdigamma,   (x:F):F +-> polygamma(1, x))
+    setProperty(oppolygamma, SPECIALDIFF, ipolygamma@((List F, SE)->F)
+                                                     pretend None)
+    setProperty(opBesselJ, SPECIALDIFF, iBesselJ@((List F, SE)->F) 
+                                                 pretend None)
+    setProperty(opBesselY, SPECIALDIFF, iBesselY@((List F, SE)->F) 
+                                                 pretend None)
+    setProperty(opBesselI, SPECIALDIFF, iBesselI@((List F, SE)->F) 
+                                                 pretend None)
+    setProperty(opBesselK, SPECIALDIFF, iBesselK@((List F, SE)->F) 
+                                                 pretend None)
+

@@ -1,0 +1,9 @@
+)abbrev category ATPOSET PartiallyOrderedSetAttribute
+++ Description:
+++ PartiallyOrderedSet is true if a set with \spad{<} is transitive,
+++ but \spad{not(a <b or a = b)}. It does not imply \spad{b < a}
+
+PartiallyOrderedSetAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

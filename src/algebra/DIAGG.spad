@@ -1,0 +1,36 @@
+)abbrev category DIAGG Dictionary
+++ Author: Michael Monagan; revised by Manuel Bronstein and Richard Jenks
+++ Date Created: August 87 through August 88
+++ Date Last Updated: April 1991
+++ Description:
+++ A dictionary is an aggregate in which entries can be inserted,
+++ searched for and removed. Duplicates are thrown away on insertion.
+++ This category models the usual notion of dictionary which involves
+++ large amounts of data where copying is impractical.
+++ Principal operations are thus destructive (non-copying) ones.
+
+Dictionary(S) : Category == SIG where
+  S : SetCategory
+
+  SIG ==> DictionaryOperations S 
+
+   add
+
+     dictionary l ==
+       d := dictionary()
+       for x in l repeat insert_!(x, d)
+       d
+
+     if % has finiteAggregate then
+
+       select_!(f, t) == remove_!((x:S):Boolean +-> not f(x), t)
+
+       s = t ==
+         eq?(s,t) => true
+         #s ^= #t => false
+         _and/[member?(x, t) for x in parts s]
+
+       remove_!(f:S->Boolean, t:%) ==
+         for m in parts t repeat if f m then remove_!(m, t)
+         t
+

@@ -1,0 +1,108 @@
+)abbrev domain BOOLEAN Boolean
+++ Author: Stephen M. Watt
+++ Description: 
+++ \spadtype{Boolean} is the elementary logic with 2 values:
+++ true and false
+
+Boolean() : SIG == CODE where
+
+  SIG ==> Join(OrderedSet, Finite, Logic, ConvertibleTo InputForm) with
+
+    true : constant -> %
+      ++ \axiom{true} is a logical constant.
+
+    false : constant -> %
+      ++ \axiom{false} is a logical constant.
+
+    _^ : % -> %
+      ++ ^ n returns the negation of n.
+
+    _not : % -> %
+      ++ not n returns the negation of n.
+
+    _and : (%, %) -> %
+      ++ a and b  returns the logical and of Boolean \spad{a} and b.
+
+    _or : (%, %) -> %
+      ++ a or b returns the logical inclusive or
+      ++ of Boolean \spad{a} and b.
+
+    xor : (%, %) -> %
+      ++ xor(a,b) returns the logical exclusive or
+      ++ of Boolean \spad{a} and b.
+
+    nand : (%, %) -> %
+      ++ nand(a,b) returns the logical negation of \spad{a} and b.
+
+    nor : (%, %) -> %
+      ++ nor(a,b) returns the logical negation of \spad{a} or b.
+
+    implies : (%, %) -> %
+      ++ implies(a,b) returns the logical implication
+      ++ of Boolean \spad{a} and b.
+
+    test : % -> Boolean
+      ++ test(b) returns b and is provided for compatibility with the 
+      ++ new compiler.
+
+  CODE ==> add
+
+    nt: % -> %
+
+    test a        == a pretend Boolean
+
+    nt b          == (b pretend Boolean => false; true)
+
+    true          == EQ(2,2)$Lisp   --well, 1 is rather special
+
+    false         == NIL$Lisp
+
+    sample()      == true
+
+    not b         == (test b => false; true)
+
+    _^ b          == (test b => false; true)
+
+    _~ b          == (test b => false; true)
+
+    _and(a, b)    == (test a => b; false)
+
+    _/_\(a, b)    == (test a => b; false)
+
+    _or(a, b)     == (test a => true; b)
+
+    _\_/(a, b)     == (test a => true; b)
+
+    xor(a, b)     == (test a => nt b; b)
+
+    nor(a, b)     == (test a => false; nt b)
+
+    nand(a, b)    == (test a => nt b; true)
+
+    a = b         == BooleanEquality(a, b)$Lisp
+
+    implies(a, b) == (test a => b; true)
+
+    a < b         == (test b => not(test a);false)
+
+    size()        == 2
+
+    index i       ==
+      even?(i::Integer) => false
+      true
+
+    lookup a      ==
+      a pretend Boolean => 1
+      2
+    random()      ==
+      even?(random()$Integer) => false
+      true
+
+    convert(x:%):InputForm ==
+      x pretend Boolean => convert("true"::Symbol)
+      convert("false"::Symbol)
+
+    coerce(x:%):OutputForm ==
+      x pretend Boolean => message "true"
+      message "false"
+

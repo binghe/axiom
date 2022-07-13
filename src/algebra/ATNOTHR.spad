@@ -1,0 +1,8 @@
+)abbrev category ATNOTHR NotherianAttribute
+++ Description:
+++ Notherian is true if all of its ideals are finitely generated.
+
+NotherianAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

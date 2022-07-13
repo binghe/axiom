@@ -1,0 +1,13 @@
+)abbrev domain PADIC PAdicInteger
+++ Author: Clifton J. Williamson
+++ Date Created: 20 August 1989
+++ Date Last Updated: 15 May 1990
+++ Description:
+++ Stream-based implementation of Zp: p-adic numbers are represented as
+++ sum(i = 0.., a[i] * p^i), where the a[i] lie in 0,1,...,(p - 1).
+
+PAdicInteger(p) == CODE where
+  p : Integer
+
+  CODE ==> InnerPAdicInteger(p,true$Boolean)
+

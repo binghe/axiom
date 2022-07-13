@@ -1,0 +1,20 @@
+)abbrev category BASTYPE BasicType
+--% BasicType
+++ Description:
+++ BasicType is the basic category for describing a collection
+++ of elements with = (equality).
+
+BasicType() : Category == SIG where
+
+  SIG ==> with
+
+    "=" : (%,%) -> Boolean
+      ++ x=y tests if x and y are equal.
+
+    "~=" : (%,%) -> Boolean   
+      ++ x~=y tests if x and y are not equal.
+
+   add
+
+     _~_=(x:%,y:%) : Boolean == not(x=y)
+

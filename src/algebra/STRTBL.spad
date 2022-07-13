@@ -1,0 +1,12 @@
+)abbrev domain STRTBL StringTable
+++ Author: Stephen M. Watt
+++ Date Last Updated: June 21, 1991
+++ Description:
+++ This domain provides tables where the keys are strings.
+++ A specialized hash function for strings is used.
+
+StringTable(Entry) == CODE where
+  Entry : SetCategory
+
+  CODE ==> HashTable(String, Entry, "CVEC")
+

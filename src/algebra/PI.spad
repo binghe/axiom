@@ -1,0 +1,24 @@
+)abbrev domain PI PositiveInteger
+++ Author:
+++ Description: 
+++ \spadtype{PositiveInteger} provides functions for positive integers.
+
+PositiveInteger() : SIG == CODE where
+
+  SIG ==> Join(AbelianSemiGroup, OrderedSet, Monoid) with
+
+    gcd : (%, %) -> %
+      ++ gcd(a, b) computes the greatest common divisor of two
+      ++ positive integers \spad{a} and b.
+
+    commutative("*")
+      ++ commutative("*") means multiplication is commutative : x*y = yu*x
+
+    qcoerce : Integer -> %
+      ++ qcoerce(n) coerces \spad{n} to \spad{%} trusting that
+      ++ \spad{n} is positive
+
+  CODE ==> SubDomain(NonNegativeInteger, #1 > 0) add
+
+    qcoerce(n) == n pretend %
+

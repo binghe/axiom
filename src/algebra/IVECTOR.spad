@@ -1,0 +1,14 @@
+)abbrev domain IVECTOR IndexedVector
+++ Author: Mark Botch
+++ Description:
+++ This type represents vector like objects with varying lengths
+++ and a user-specified initial index.
+ 
+IndexedVector(R,mn) : SIG == CODE where
+  R : Type
+  mn : Integer
+
+  SIG ==> VectorCategory R 
+
+  CODE ==> IndexedOneDimensionalArray(R, mn)
+ 

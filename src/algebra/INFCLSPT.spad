@@ -1,0 +1,176 @@
+)abbrev domain INFCLSPT InfinitlyClosePoint
+++ Authors: Gaetan Hache
+++ Date Created: june 1996 
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This domain is part of the PAFF package
+InfinitlyClosePoint(K,symb,PolyRing,E,ProjPt,PCS,Plc,DIVISOR,BLMET) :
+ SIG == CODE where
+  K : Field
+  symb : List Symbol
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  OV ==> OrderedVariableList(symb)
+  PolyRing :  PolynomialCategory(K,E,OV)
+  PCS : LocalPowerSeriesCategory(K)
+  ProjPt : ProjectiveSpaceCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+  BLMET : BlowUpMethodCategory
+
+  bls      ==> ['X,'Y]
+  BlUpRing ==> DistributedMultivariatePolynomial(bls , K)
+  E2       ==> DirectProduct( #bls , NonNegativeInteger )
+  outRec   ==> Record(name:Symbol,mult:NonNegativeInteger)
+  AFP      ==> AffinePlane(K)
+  OV2      ==> OrderedVariableList( bls )
+  
+  bigoutRecBLQT ==> Record(dominate:ProjPt,_
+                       name:Symbol,_
+                       mult:NonNegativeInteger,_
+                       defCurve:BlUpRing,_
+                       localPoint:AFP,_
+                       chart:BLMET,_ 
+                       expD:DIVISOR) 
+
+  bigoutRecHN  ==> Record(dominate:ProjPt,_
+                       name:Symbol,_
+                       mult:NonNegativeInteger,_
+                       defCurve:BlUpRing,_
+                       localPoint:AFP,_
+                       chart:BLMET,_ 
+                       subMultip: NonNegativeInteger,_
+                       expD:DIVISOR) 
+
+
+  representation   ==>  Record(point:ProjPt,_
+                               curve:BlUpRing,_
+                               localPoint:AFP,_
+                               mult:NonNegativeInteger,_
+                               chrt:BLMET,_
+                               subMultiplicity:NonNegativeInteger,_
+                               excpDiv:DIVISOR,_
+                               localParam:List(PCS),_
+                               actualExtension:K,_
+                               symbName:Symbol)
+
+
+  SIG ==> InfinitlyClosePointCategory(K,symb,PolyRing,E,ProjPt,PCS,Plc,
+                                      DIVISOR,BLMET) with 
+
+    fullOut : % -> OutputForm
+      ++ fullOut(tr) yields a full output of tr (see function fullOutput).
+
+    fullOutput : Boolean -> Boolean
+      ++ fullOutput(b) sets a flag such that when true, a coerce to 
+      ++ OutputForm yields the full output of tr, otherwise encode(tr) is 
+      ++ output (see encode function). The default is false.
+
+    fullOutput : () -> Boolean
+      ++ fullOutput returns the value of the flag set by fullOutput(b).   
+     
+  CODE ==> representation add
+
+    Rep := representation
+
+    polyRing2BiRing: (PolyRing, Integer) -> BlUpRing
+    polyRing2BiRing(pol,nV)==
+      zero? pol => 0$BlUpRing
+      d:= degree pol
+      lc:= leadingCoefficient pol
+      dd: List NonNegativeInteger := entries d
+      ddr:=vector([dd.i for i in 1..#dd | ^(i=nV)])$Vector(NonNegativeInteger)
+      ddre:E2 := directProduct( ddr )$E2
+      monomial(lc,ddre)$BlUpRing  + polyRing2BiRing( reductum pol , nV )
+
+    projPt2affPt: (ProjPt, Integer) -> AFP
+    projPt2affPt(pt,nV)==
+      ll:= pt :: List(K)
+      l:= [ ll.i for i in 1..#ll | ^(i = nV )]
+      affinePoint( l)
+
+    fullOut(a)==
+      oo: bigoutRecBLQT
+      oo2: bigoutRecHN
+      BLMET has BlowUpWithQuadTrans =>
+        oo:=  [ pointV(a), symbNameV(a), multV(a), curveV(a), _
+              localPointV(a), chartV(a),  excpDivV(a) ]$bigoutRecBLQT
+        oo :: OutputForm
+      BLMET has BlowUpWithHamburgerNoether => 
+        oo2:=  [ pointV(a), symbNameV(a), multV(a), curveV(a), _
+              localPointV(a), chartV(a), subMultV(a), excpDivV(a) ]$bigoutRecHN
+        oo2 :: OutputForm
+
+    fullOutputFlag:Boolean:=false()
+
+    fullOutput(f)== fullOutputFlag:=f
+
+    fullOutput == fullOutputFlag
+
+    coerce(a:%):OutputForm== 
+      fullOutput() => fullOut(a)
+      oo:outRec:= [ symbNameV(a) , multV(a) ]$outRec
+      oo :: OutputForm
+
+    degree(a)==
+      K has PseudoAlgebraicClosureOfPerfectFieldCategory  => _
+        extDegree actualExtensionV a
+      1
+      
+    create(pointA,curveA,localPointA,multA,chartA,subM,excpDivA,atcL,aName)==
+      ([pointA,curveA,localPointA,multA,chartA,subM,_
+        excpDivA,empty()$List(PCS),atcL,aName]$Rep)::%
+
+    create(pointA,curveA)==
+      nV := lastNonNul pointA
+      localPointA := projPt2affPt(pointA,nV)
+      multA:NonNegativeInteger:=0$NonNegativeInteger
+      chartA:BLMET 
+      if BLMET has QuadraticTransform then 
+        chartA:=( [0,0, nV] :: List Integer ) :: BLMET   -- CHH
+      if BLMET has HamburgerNoether then
+        chartA := createHN( 0,0,nV,0,0,true,"right")   -- A changer le "right" 
+      excpDivA:DIVISOR:= 0$DIVISOR
+      actL:K:=definingField pointA
+      aName:Symbol:=new(P)$Symbol
+      affCurvA : BlUpRing := polyRing2BiRing(curveA,nV)
+      create(pointA,affCurvA,localPointA,multA,chartA,_
+             0$NonNegativeInteger,excpDivA,actL,aName)
+      
+    subMultV(a:%)== (a:Rep)(subMultiplicity)
+
+    setsubmult_!(a:%,sm:NonNegativeInteger)== (a:Rep)(subMultiplicity) := sm
+
+    pointV(a:%)     ==(a:Rep)(point)
+
+    symbNameV(a:%)     ==(a:Rep)(symbName)
+
+    curveV(a:%)  ==(a:Rep)(curve)
+
+    localPointV(a:%)   ==(a:Rep)(localPoint)
+
+    multV(a:%)    ==(a:Rep)(mult)
+
+    chartV(a:%)   ==(a:Rep)(chrt)  -- CHH
+
+    excpDivV(a:%) ==(a:Rep)(excpDiv)
+
+    localParamV(a:%) ==(a:Rep)(localParam)
+    
+    actualExtensionV(a:%) == (a:Rep)(actualExtension)
+
+    setpoint_!(a:%,n:ProjPt)       ==(a:Rep)(point):=n
+
+    setcurve_!(a:%,n:BlUpRing)   ==(a:Rep)(curve):=n
+
+    setlocalPoint_!(a:%,n:AFP)  ==(a:Rep)(localPoint):=n
+
+    setmult_!(a:%,n:NonNegativeInteger)         ==(a:Rep)(mult):=n
+
+    setchart_!(a:%,n:BLMET)  ==(a:Rep)(chrt):=n  -- CHH
+
+    setlocalParam_!(a:%,n:List(PCS)) ==(a:Rep)(localParam):=n
+
+    setexcpDiv_!(a:%,n:DIVISOR) ==(a:Rep)(excpDiv):=n
+
+    setsymbName_!(a:%,n:Symbol) ==(a:Rep)(symbName):=n
+

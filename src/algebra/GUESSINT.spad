@@ -1,0 +1,14 @@
+-- concerning algebraic functions, it may make sense to look at A.J.van der
+-- Poorten, Power Series Representing Algebraic Functions, Section 6.
+)abbrev package GUESSINT GuessInteger
+++ References: 
+++ Rube06 Extended rate, more GFUN
+++ Hebi10 Extended Rate, more GFUN
+++ Description:
+++ This package exports guessing of sequences of rational numbers
+
+GuessInteger() == Guess(Fraction Integer, Integer, Expression Integer, 
+                     Fraction Integer,
+                     id$MappingPackage1(Fraction Integer), 
+                     coerce$Expression(Integer))
+

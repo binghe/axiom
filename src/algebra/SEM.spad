@@ -1,0 +1,770 @@
+)abbrev domain SEM SparseEchelonMatrix
+++ Description:
+++  \spad{SparseEchelonMatrix(C, D)} implements sparse matrices whose columns
+++  are enumerated by the \spadtype{OrderedSet} \spad{C} and whose entries
+++  belong to the \spadtype{GcdDomain} \spad{D}. The basic operation of
+++  this domain is the computation of an row echelon form. The used algorithm
+++  tries to maintain the sparsity and is especially adapted to matrices who
+++  are already close to a row echelon form.
+
+SparseEchelonMatrix(C,D) : SIG == CODE where
+  C : OrderedSet
+  D : Ring
+
+  Sy  ==> Symbol
+  L   ==> List
+  V   ==> Vector
+  VD  ==> Vector D
+  MD  ==> Matrix D
+  FD  ==> Fraction D
+  MFD ==> Matrix FD
+  I   ==> Integer
+  NNI ==> NonNegativeInteger
+  B   ==> Boolean
+  OUT ==> OutputForm
+  ROWREC ==> Record(Indices : L C, Entries : L D)
+  iter ==> "iterated"::Sy
+  rand ==> "random"::Sy
+
+  SIG ==> CoercibleTo OUT with
+
+    shallowlyMutable
+      ++ Matrices may be altered destructively.
+
+    finiteAggregate
+      ++ Matrices are finite.
+
+    coerce : % -> MD
+      ++ \spad{coerce(A)} yields the matrix \spad{A} in the usual matrix type.
+
+    copy : % -> %
+      ++ \spad{copy(A)} returns a copy of the matrix \spad{A}.
+
+    ncols : % -> NNI
+      ++ \spad{ncols(A)} returns the number of columns of the matrix \spad{A}.
+
+    nrows : % -> NNI
+      ++ \spad{nrows(A)} returns the number of rows of the matrix \spad{A}.
+
+    allIndices : % -> L C
+      ++ \spad{allIndices(A)} returns all indices used for enumerating the
+      ++ columns of the matrix \spad{A}.
+
+    elimZeroCols! : % -> Void
+      ++ \spad{elimZeroCols!(A)} removes columns which contain only zeros.
+      ++ This effects basically only the value of \spad{allIndices(A)}.
+
+    purge! : (%, C-> B) -> Void
+      ++ \spad{purge!(A, crit)} eliminates all columns belonging to an index
+      ++ \spad{c} such that \spad{crit(c)} yields \spad{true}.
+
+    sortedPurge! : (%, C-> B) -> Void
+      ++ \spad{sortedPurge!(A, crit)} is like \spad{purge}, however, with the
+      ++ additional assumption that \spad{crit} respects the ordering of the
+      ++ indices.
+
+    new : (L C, I) -> %
+      ++ \spad{new(inds, nrows)} generates a new matrix with \spad{nrows}
+      ++ rows and columns enumerated by the indices \spad{inds}. The matrix
+      ++ is empty, the zero matrix.
+
+    elt : (%, I, C) -> D
+      ++ \spad{elt(A, i, c)} returns the entry of the matrix \spad{A} in row
+      ++ \spad{i} and in the column with index \spad{c}.
+
+    setelt! : (%, I, C, D) -> Void
+      ++ \spad{setelt!(A, i, c, d)} sets the entry of the matrix \spad{A} in
+      ++ row \spad{i} and in the column with index \spad{c} to the value
+      ++ \spad{d}.
+
+    row : (%, I) -> ROWREC
+      ++ \spad{row(A, i)} returns the \spad{i}-th row of the matrix \spad{A}.
+
+    setRow! : (%, I, ROWREC) -> Void
+      ++ \spad{setRow!(A, i, ind, ent)} sets the \spad{i}-th row of the matrix
+      ++ \spad{A} to the value \spad{r}.
+
+    setRow! : (%, I, L C, L D) -> Void
+      ++ \spad{setRow!(A, i, ind, ent)} sets the \spad{i}-th row of the matrix
+      ++ \spad{A}. Its indices are \spad{ind}; the entries \spad{ent}.
+
+    deleteRow! : (%, I) -> Void
+      ++ \spad{deleteRow(A, i)} deletes the \spad{i}-th row of the matrix
+      ++ \spad{A}.
+
+    consRow! : (%, ROWREC) -> Void
+      ++ \spad{consRow!(A, r)} inserts the row \spad{r} at the top of the
+      ++ matrix \spad{A}.
+
+    appendRow! : (%, ROWREC) -> Void
+      ++ \spad{appendRow!(A, r)} appends the row \spad{r} at the end of the
+      ++ matrix \spad{A}.
+
+    extract : (%, I, I) -> %
+      ++ \spad{extract(A, i1, i2)} extracts the rows \spad{i1} to \spad{i2}
+      ++ and returns them as a new matrix.
+
+    rowEchelon : % -> Record(Ech : %, Lt : MD, Pivots : L D, Rank : NNI)
+      ++ \spad{primitiveRowEchelon(A)} computes a row echelon form for the
+      ++ matrix \spad{A}. The algorithm used is fraction-free elimination.
+      ++ It is especially adapted to matrices already close to row echelon
+      ++ form. The transformation matrix, the used pivots and the rank of the
+      ++ matrix are also returned.
+
+    if D has GcdDomain then
+
+      setGcdMode : Sy -> Sy
+        ++ \spad{setGcdMode(s)} sets a new value for the flag deciding on
+        ++ the method used to compute gcd`s for lists. Possible values for
+        ++ \spad{s} are \spad{iterated} and \spad{random}.
+
+      primitiveRowEchelon: % -> Record(Ech:%, Lt:MFD, Pivots:L D, Rank:NNI)
+        ++ \spad{primitiveRowEchelon(A)} computes a row echelon form for the
+        ++ matrix \spad{A}. The algorithm used is fraction-free elimination.
+        ++ Every row is made primitive by division by the gcd. The algorithm
+        ++ is especially adapted to matrices already close to row echelon
+        ++ form. The transformation matrix, the used pivots and the rank of the
+        ++ matrix are also returned.
+
+    pivot : (%, I) -> Record(Index : C, Entry : D)
+      ++ \spad{pivot(A, i)} returns the leading entry of the \spad{i}-th row
+      ++ of the matrix \spad{A} together with its index.
+
+    pivots : % -> ROWREC
+      ++ \spad{pivots(A)} returns all leading entries of the matrix \spad{A}
+      ++ together with their indices.
+
+    "*" : (MD, %) -> %
+      ++ \spad{L*A} implements left multiplication with a usual matrix.
+
+    if D has IntegralDomain then
+
+      "*" : (MFD, %) -> %
+        ++ \spad{L*A} implements left multiplication with a usual matrix over
+        ++ the quotient field of \spad{D}.
+
+    join : (%, %) -> %
+      ++ \spad{join(A, B)} vertically concats the matrices \spad{A} and
+      ++ \spad{B}.
+
+    horizJoin : (%, %) -> %
+      ++ \spad{horizJoin(A, B)} horizontally concats the matrices \spad{A} and
+      ++ \spad{B}. It is assumed that all indices of \spad{B} are smaller than
+      ++ those of \spad{A}.
+
+    horizSplit : (%, C) -> Record(Left : %, Right : %)
+      ++ \spad{horizSplit(A, c)} splits the matrix \spad{A} into two at the
+      ++ column given by \spad{c}. The first column of the right matrix is
+      ++ enumerated by the first index less or equal to \spad{c}.
+
+  CODE ==> add
+
+    minInd : I := minIndex([i for i in 1..1])
+    offset : I := minInd-1
+    emptyRec : ROWREC := [empty, empty]
+    noChecks? : B := D has lazyRepresentation  -- flag for lazy representation
+    seed : I := 113                   -- seed for random number generation
+    GCDmode : Sy := iter              -- flag for gcd algorithm
+
+    greater(r1 : ROWREC, r2 : ROWREC) : B ==
+        empty? r1.Indices => false
+        empty? r2.Indices => true
+        first(r2.Indices) < first(r1.Indices)
+
+    -- -------------- --
+    -- Representation --
+    -- -------------- --
+
+    -- For efficiency reasons most checks for correct index ranges are omitted.
+
+    Rep := Record(NCols : NNI, NRows : NNI, AllInds : L C, Rows : V ROWREC)
+
+    ncols(A : %) : NNI == A.NCols
+
+    nrows(A : %) : NNI == A.NRows
+
+    allIndices(A : %) : L C == copy A.AllInds
+
+    row(A : %, i : I) : ROWREC ==
+        -- i < 0 or i > A.NRows => error "index out of range"
+        qelt(A.Rows, i)
+
+    setRow!(A : %, i : I, r : ROWREC) : Void ==
+        -- i < 0 or i > A.NRows => error "index out of range"
+        qsetelt!(A.Rows, i, r)
+        void
+
+    setRow!(A : %, i : I, inds : L C, ents : L D) : Void ==
+        -- i < 0 or i > A.NRows => error "index out of range"
+        -- #inds  ^=  #ents => error "improper row"
+        qsetelt!(A.Rows, i, [inds, ents])
+        void
+
+    new(inds : L C, n : I) : % ==
+        [#inds, n::NNI, inds, [copy emptyRec  for i in 1..n]]
+
+    elt(A : %, i : I, c : C) : D ==
+        r := row(A, i)
+        pos := position(c, r.Indices)
+        pos < minInd => 0$D
+        qelt(r.Entries, pos)
+
+    setelt!(A : %, i : I, c : C, d : D) : Void ==
+        r := row(A, i)
+        pos := position(c, r.Indices)
+        if pos >= minInd then
+            qsetelt!(r.Entries, pos, d)
+        else
+            j := minInd
+            for ind in r.Indices  while c < ind repeat
+                j := j+1
+            r.Indices := insert!(c, r.Indices, j)
+            r.Entries := insert!(d, r.Entries, j)
+        qsetelt!(A.Rows, i, r)
+        void
+
+    coerce(A : %) : MD ==
+        zero? A.NCols => error "cannot coerce matrix with zero columns"
+        AA : MD := new(A.NRows, A.NCols, 0$D)
+        for r in entries(A.Rows)  for i in minRowIndex(AA).. repeat
+            inds := r.Indices
+            ents := r.Entries
+            for ind in A.AllInds  for j in minColIndex(AA).. _
+                    while not empty? inds repeat
+                if ind = first inds then
+                    qsetelt!(AA, i, j, first ents)
+                    inds := rest inds
+                    ents := rest ents
+        AA
+
+    coerce(A : %) : OUT ==
+        zero? A.NCols => 0$D ::OUT
+        A::MD::OUT
+
+    copy(A : %) : % ==
+        resRows : V ROWREC := new(A.NRows, emptyRec)
+        for l in 1..A.NRows repeat
+            r := qelt(A.Rows, l)
+            qsetelt!(resRows, l, [copy r.Indices, copy r.Entries])
+        [A.NCols, A.NRows, copy A.AllInds, resRows]
+
+    -- ----------------------- --
+    -- Basic Matrix Operations --
+    -- ----------------------- --
+
+    elimZeroCols!(A : %) : Void ==
+        newInds : L C := empty
+        for r in entries(A.Rows) repeat
+            newInds := removeDuplicates! merge!((x, y) +-> y < x,
+                                                newInds, r.Indices)
+        A.AllInds := newInds
+        void
+
+    purge!(A : %, crit : C-> B) : Void ==
+        newInds : L C := empty
+        for c in A.AllInds repeat
+            if not crit c then
+                newInds := cons(c, newInds)
+        newInds := reverse! newInds
+        if #newInds  ^=  #A.AllInds then
+            A.AllInds := newInds
+            for l in 1..A.NRows repeat
+                r := qelt(A.Rows, l)
+                newInds : L C := empty
+                newEnts : L D := empty
+                for c in r.Indices   for e in r.Entries repeat
+                    if not crit c then
+                        newInds := cons(c, newInds)
+                        newEnts := cons(e, newEnts)
+                qsetelt!(A.Rows, l, [reverse! newInds, reverse! newEnts])
+        void
+
+    sortedPurge!(A : %, crit : C-> B) : Void ==
+        if crit first A.AllInds then
+            while not(empty? A.AllInds) and crit first A.AllInds repeat
+                A.AllInds := rest A.AllInds
+            for l in 1..A.NRows repeat
+                r := qelt(A.Rows, l)
+                while not(empty? r.Indices) and crit first r.Indices repeat
+                    r.Indices := rest r.Indices
+                    r.Entries := rest r.Entries
+                qsetelt!(A.Rows, l, r)
+        void
+
+    deleteRow!(A : %, i : I) : Void ==
+        i > A.NRows => A
+        nr := (A.NRows-1)::NNI
+        resRows : V ROWREC := new(nr, emptyRec)
+        for l in 1..(i-1) repeat
+            qsetelt!(resRows, l, qelt(A.Rows, l))
+        for l in (i+1)..A.NRows repeat
+            qsetelt!(resRows, l-1, qelt(A.Rows, l))
+        A.NRows := nr
+        A.Rows := resRows
+        void
+
+    consRow!(A : %, r : ROWREC) : Void ==
+        A.NRows := A.NRows + 1
+        newRows : L ROWREC := cons(r, entries A.Rows)
+        A.Rows := construct newRows
+        newInds := setDifference(r.Indices, A.AllInds)
+        if not empty? newInds then
+            A.AllInds := merge((x, y) +-> y < x, A.AllInds,
+                               sort!((x, y) +-> y < x, newInds))
+        void
+
+    appendRow!(A : %, r : ROWREC) : Void ==
+        A.NRows := A.NRows + 1
+        newRows : L ROWREC := concat(entries A.Rows, r)
+        A.Rows := construct newRows
+        newInds := setDifference(r.Indices, A.AllInds)
+        if not empty? newInds then
+            A.AllInds := merge((x, y) +-> y < x, A.AllInds,
+                               sort!((x, y) +-> y < x, newInds))
+        void
+
+    extract(A : %, i1 : I, i2 : I) : % ==
+        nr := (i2-i1+1)::NNI
+        resRows : V ROWREC := new(nr, emptyRec)
+        newInds : L C := empty
+        for i in i1..i2 repeat
+            qsetelt!(resRows, i-i1+1, row(A, i))
+            newInds := removeDuplicates! merge((x, y) +-> y < x,
+                                               newInds, row(A, i).Indices)
+        [A.NCols, nr, newInds, resRows]
+
+    join(A1 : %, A2 : %) : % ==
+        newInds := removeDuplicates! merge((x : C, y : C) : Boolean +-> y < x,
+                                           A1.AllInds, A2.AllInds)
+        newNRows := A1.NRows + A2.NRows
+        newRows : V ROWREC := new(newNRows, emptyRec)
+        for l in 1..A1.NRows repeat
+            qsetelt!(newRows, l, qelt(A1.Rows, l))
+        for l in 1..A2.NRows repeat
+            qsetelt!(newRows, A1.NRows+l, qelt(A2.Rows, l))
+        [#newInds, newNRows, newInds, newRows]
+
+    horizJoin(A1 : %, A2 : %) : % ==
+        A1.NRows ^= A2.NRows => error "incompatible dimensions in horizJoin"
+        newInds := append(A1.AllInds, A2.AllInds)
+        res : % := new(newInds, A1.NRows)
+        for i in 1..A1.NRows repeat
+            r1 := row(A1, i)
+            r2 := row(A2, i)
+            setRow!(res, i, append(r1.Indices, r2.Indices), _
+                            append(r1.Entries, r2.Entries))
+        res
+
+    horizSplit(A : %, c : C) : Record(Left : %, Right : %) ==
+        rinds : L C := allIndices A
+        linds : L C := empty
+        while not(empty? rinds) and (first(rinds) > c) repeat
+            linds := cons(first(rinds), linds)
+            rinds := rest rinds
+        empty? linds => [new(linds, A.NRows), A]
+        linds := reverse! linds
+        empty? rinds => [A, new(rinds, A.NRows)]
+        LA : % := new(linds, A.NRows)
+        RA : % := new(rinds, A.NRows)
+        for i in 1..A.NRows repeat
+            r := row(A, i)
+            ri : L C := r.Indices
+            re : L D := r.Entries
+            li : L C := empty
+            le : L D := empty
+            while not(empty? ri) and (first(ri) > c) repeat
+                li := cons(first(ri), li)
+                le := cons(first re, le)
+                ri := rest ri
+                re := rest re
+            if not empty? li then
+                li := reverse! li
+                le := reverse! le
+                setRow!(LA, i, li, le)
+            if not empty? ri then
+                setRow!(RA, i, ri, re)
+        [LA, RA]
+
+    -- ----------- --
+    -- Row Echelon --
+    -- ----------- --
+
+    addRows(d1 : D, r1 : ROWREC, d2 : D, r2 : ROWREC) : ROWREC ==
+        -- Computes linear combination of two rows.
+        -- Local function.
+        empty? r1.Indices =>
+            one? d2 => r2
+            [r2.Indices, [d2*e2  for e2 in r2.Entries]]
+        empty? r2.Indices =>
+            one? d1 => r1
+            [r1.Indices, [d1*e1  for e1 in r1.Entries]]
+        resI : L C := empty
+        resE : L D := empty
+        lent1 : L D
+        lent2 : L D
+        if not(noChecks?) and one? d1 then
+            lent1 := r1.Entries
+        else
+            lent1 := [d1*e1  for e1 in r1.Entries]
+        if not(noChecks?) and one? d2 then
+            lent2 := copy r2.Entries
+        else
+            lent2 := [d2*e2  for e2 in r2.Entries]
+        lind2 := copy r2.Indices
+
+        for c1 in r1.Indices  for e1 in lent1 repeat
+            while not(empty? lind2) and c1 < first(lind2) repeat
+                resI := cons(first lind2, resI)
+                resE := cons(first(lent2), resE)
+                lind2 := rest lind2
+                lent2 := rest lent2
+            if not(empty? lind2) and first(lind2) = c1 then
+                sum := e1+first(lent2)
+                if noChecks? or not zero? sum then
+                    resI := cons(c1, resI)
+                    resE := cons(sum, resE)
+                lind2 := rest lind2
+                lent2 := rest lent2
+            else
+                resI := cons(c1, resI)
+                resE := cons(e1, resE)
+
+        resI := concat!(reverse! resI, lind2)
+        resE := concat!(reverse! resE, lent2)
+        while not(empty? resE) and zero? first resE repeat
+            resI := rest resI
+            resE := rest resE
+        [resI, resE]
+
+    pivot(A : %, i : I) : Record(Index : C, Entry : D) ==
+        r := row(A, i)
+        empty? r.Indices => error "empty row"
+        [first r.Indices, first r.Entries]
+
+    pivots(A : %) : ROWREC ==
+        resI : L C := empty
+        resE : L D := empty
+        for r in entries A.Rows | not empty? r.Indices repeat
+            resI := cons(first r.Indices, resI)
+            resE := cons(first r.Entries, resE)
+        [reverse! resI, reverse! resE]
+
+    rowEchelon(AA : %) : Record(Ech : %, Lt : MD, Pivots : L D, Rank : NNI) ==
+        A := copy AA
+        LTr : MD := diagonalMatrix [1$D  for i in 1..A.NRows]
+        Pivs : L D := empty
+
+        -- check pivots
+        for i in 1..A.NRows repeat
+            r := qelt(A.Rows, i)
+            changed? : B := false
+            while not(empty? r.Entries) and zero? first r.Entries repeat
+                r.Entries := rest r.Entries
+                r.Indices := rest r.Indices
+                changed? := true
+            if changed? then
+                qsetelt!(A.Rows, i, r)
+
+        -- sort rows by pivots (bubble sort)
+        sorted? : B := false
+        until sorted? repeat
+            sorted? := true
+            oldr := qelt(A.Rows, 1)
+            for i in 2..A.NRows repeat
+                newr := qelt(A.Rows, i)
+                if greater(newr, oldr) then
+                    qsetelt!(A.Rows, i, oldr)
+                    qsetelt!(A.Rows, i-1, newr)
+                    swapRows!(LTr, i-1, i)
+                    sorted? := false
+                else
+                    oldr := newr
+
+        -- fraction-free elimination
+        finished? : B := false
+        pivlen, pivrow, rk : NNI
+        for i in 1..A.NRows  until finished? repeat
+            r := qelt(A.Rows, i)
+            finished? := empty? r.Indices
+            if finished? then
+                rk : NNI := (i-1)::NNI
+            else                         -- search good pivot
+                pivind := first r.Indices
+                pivlen := #r.Indices
+                pivrow := i
+                k : I := 0
+                for j in (i+1)..A.NRows _
+                        while not(empty? qelt(A.Rows, j).Indices) and _
+                            pivind = first(qelt(A.Rows, j).Indices) repeat
+                    len := #qelt(A.Rows, j).Indices
+                    k := k+1
+                    if len < pivlen then
+                        pivlen := len
+                        pivrow := j
+                piv : D := first qelt(A.Rows, pivrow).Entries
+                Pivs := cons(piv, Pivs)
+
+                -- elimination necessary?
+                if k > 0 then
+                    if pivrow ^= i then
+                        pr := qelt(A.Rows, pivrow)
+                        qsetelt!(A.Rows, pivrow, qelt(A.Rows, i))
+                        qsetelt!(A.Rows, i, pr)
+                        swapRows!(LTr, i, pivrow)
+
+                    -- elimination (and resorting of rows)
+                    pr := copy qelt(A.Rows, i)
+                    pr.Indices := rest pr.Indices
+                    pr.Entries := rest pr.Entries
+                    for j in (i+1)..(i+k) repeat
+                        r := copy qelt(A.Rows, i+1)
+                        c := first r.Entries
+                        r.Indices := rest r.Indices
+                        r.Entries := rest r.Entries
+                        r := addRows(piv, r, -c, pr)
+                        for l in 1..A.NRows repeat
+                            f := piv*qelt(LTr, i+1, l) - c*qelt(LTr, i, l)
+                            qsetelt!(LTr, i+1, l, f)
+                        for l in (i+2)..(2*i+k+1-j) repeat
+                            qsetelt!(A.Rows, l-1, qelt(A.Rows, l))
+                            swapRows!(LTr, l-1, l)
+                        for l in (2*i+k+2-j)..A.NRows _
+                                while greater(qelt(A.Rows, l), r) repeat
+                            qsetelt!(A.Rows, l-1, qelt(A.Rows, l))
+                            swapRows!(LTr, l-1, l)
+                        qsetelt!(A.Rows, l-1, r)
+
+        if not finished? then
+            rk : NNI := A.NRows
+        [A, LTr, Pivs, rk]
+
+    if D has GcdDomain then
+
+        setGcdMode(s : Sy) : Sy ==
+            tmp := GCDmode
+            (s = iter) or (s = rand) =>
+                GCDmode := s
+                tmp
+            error "unknown gcd mode"
+
+        randomGCD(le : L D) : D ==
+            -- Probabilistic technique.
+            #le = 2 => gcd(first le, second le)
+            f := first le
+            g := second le
+            l := rest rest le
+            while not empty? l repeat
+                one? first l => return 1$D
+                f := f + (1+random(113)$I)*first(l)
+                l := rest l
+                if not empty? l then
+                    one? first l => return 1$D
+                    g := g + (1+random(113)$I)*first(l)
+                    l := rest l
+            h := gcd(f, g)
+            l := [h]
+            for e in le repeat
+                tmp := e exquo h
+                if tmp case "failed" then
+                    l := cons(e, l)
+            one?(#l) => h
+            randomGCD l
+
+        iteratedGCD(le : L D) : D ==
+            -- Computes gcd iteratively
+            res := gcd(first le, second le)
+            l := rest rest le
+            while not(empty?(l) or one?(res)) repeat
+                res := gcd(res, first l)
+                l := rest l
+            res
+
+        makePrimitive(r : ROWREC) : Record(GCD : D, Row : ROWREC) ==
+            -- remove common gcd of row
+            le := r.Entries
+            one?(#le) => [first le, [r.Indices, [1$D]]]
+            g : D
+            if GCDmode = 'iterated then
+                g := iteratedGCD le
+            else
+                g := randomGCD le
+            one? g => [1, r]
+            le := [(e exquo g)::D  for e in le]
+            [g, [r.Indices, le]]
+
+        primitiveRowEchelon(AA : %) : _
+                Record(Ech : %, Lt : MFD, Pivots : L D, Rank : NNI) ==
+            A := copy AA
+            LTr : MFD := diagonalMatrix [1$FD  for i in 1..A.NRows]
+            Pivs : L D := empty
+
+            -- check pivots
+            for i in 1..A.NRows repeat
+                r := qelt(A.Rows, i)
+                changed? : B := false
+                while not(empty? r.Entries) and zero? first r.Entries repeat
+                    r.Entries := rest r.Entries
+                    r.Indices := rest r.Indices
+                    changed? := true
+                if changed? then
+                    qsetelt!(A.Rows, i, r)
+
+            -- sort rows by pivots (bubble sort)
+            sorted? : B := false
+            until sorted? repeat
+                sorted? := true
+                oldr := qelt(A.Rows, 1)
+                for i in 2..A.NRows repeat
+                    newr := qelt(A.Rows, i)
+                    if greater(newr, oldr) then
+                        qsetelt!(A.Rows, i, oldr)
+                        qsetelt!(A.Rows, i-1, newr)
+                        swapRows!(LTr, i-1, i)
+                        sorted? := false
+                    else
+                        oldr := newr
+
+            -- primitive fraction-free elimination
+            finished? : B := false
+            pivlen, pivrow, rk : NNI
+            for i in 1..A.NRows  until finished? repeat
+                r := qelt(A.Rows, i)
+                finished? := empty? r.Indices
+                if finished? then
+                    rk : NNI := (i-1)::NNI
+                else                          -- search good pivot
+                    pivind := first r.Indices
+                    pivlen := #r.Indices
+                    pivrow := i
+                    k : I := 0
+                    for j in (i+1)..A.NRows _
+                            while not(empty? qelt(A.Rows, j).Indices) and _
+                              pivind = first(qelt(A.Rows, j).Indices) repeat
+                        len := #qelt(A.Rows, j).Indices
+                        k := k+1
+                        if len < pivlen then
+                            pivlen := len
+                            pivrow := j
+
+                    -- make row primitive
+                    tmp := makePrimitive qelt(A.Rows, pivrow)
+                    if not one? tmp.GCD then
+                        qsetelt!(A.Rows, pivrow, tmp.Row)
+                        q : FD := 1/tmp.GCD
+                        for l in 1..A.NRows | not zero? qelt(LTr, pivrow, l) _
+                                repeat
+                            qsetelt!(LTr, pivrow, l, q*qelt(LTr, pivrow, l))
+                    piv : D := first qelt(A.Rows, pivrow).Entries
+                    Pivs := cons(piv, Pivs)
+
+                    -- elimination necessary?
+                    if k > 0 then
+                        if pivrow ^= i then
+                            pr := qelt(A.Rows, pivrow)
+                            qsetelt!(A.Rows, pivrow, qelt(A.Rows, i))
+                            qsetelt!(A.Rows, i, pr)
+                            swapRows!(LTr, i, pivrow)
+
+                        -- elimination (and resorting of rows)
+                        pr := copy tmp.Row
+                        pr.Indices := rest pr.Indices
+                        pr.Entries := rest pr.Entries
+                        for j in (i+1)..(i+k) repeat
+                            r := copy qelt(A.Rows, i+1)
+                            c := first r.Entries
+                            r.Indices := rest r.Indices
+                            r.Entries := rest r.Entries
+                            r := addRows(piv, r, -c, pr)
+                            for l in 1..A.NRows repeat
+                                fd : FD := piv *$FD qelt(LTr, i+1, l) - _
+                                           (c*qelt(LTr, i, l))::FD
+                                qsetelt!(LTr, i+1, l, fd)
+                            for l in (i+2)..(2*i+k+1-j) repeat
+                                qsetelt!(A.Rows, l-1, qelt(A.Rows, l))
+                                swapRows!(LTr, l-1, l)
+                            for l in (2*i+k+2-j)..A.NRows _
+                                    while greater(qelt(A.Rows, l), r) repeat
+                                qsetelt!(A.Rows, l-1, qelt(A.Rows, l))
+                                swapRows!(LTr, l-1, l)
+                            qsetelt!(A.Rows, l-1, r)
+
+            if not finished? then
+                rk : NNI := A.NRows
+            [A, LTr, Pivs, rk]
+
+    -- -------------- --
+    -- Multiplication --
+    -- -------------- --
+
+    L : MD * AA : % ==
+        ncols(L) ^= AA.NRows => error "improper matrix dimensions"
+        A := copy AA
+        rlen := nrows L
+        res : % := new(A.AllInds, rlen)
+
+        for c in A.AllInds repeat
+            tmp : V D := new(rlen, 0$D)
+            for i in 1..A.NRows repeat
+                r := qelt(A.Rows, i)
+                inds := r.Indices
+                if not(empty? inds) and first(inds) = c then
+                    for k in 1..rlen | not zero? qelt(L, k, i) repeat
+                        qsetelt!(tmp, k, qelt(tmp, k) + qelt(L, k, i)* _
+                                 first(r.Entries))
+                    r.Entries := rest r.Entries
+                    r.Indices := rest inds
+                    qsetelt!(A.Rows, i, r)
+            for k in 1..rlen | not zero? qelt(tmp, k) repeat
+                r := qelt(res.Rows, k)
+                r.Indices := cons(c, r.Indices)
+                r.Entries := cons(qelt(tmp, k), r.Entries)
+                qsetelt!(res.Rows, k, r)
+
+        for k in 1..rlen repeat
+            r := qelt(res.Rows, k)
+            r.Indices := reverse! r.Indices
+            r.Entries := reverse! r.Entries
+            qsetelt!(res.Rows, k, r)
+        res
+
+    if D has IntegralDomain then
+
+        mult(f : FD, d : D) : D ==
+            res := numer(f)*d
+            tmp := res exquo denom(f)
+            tmp case "failed" => error "cannot divide in mult"
+            tmp::D
+
+        L : MFD * AA : % ==
+            ncols(L) ^= AA.NRows => error "improper matrix dimensions"
+            A := copy AA
+            rlen := nrows L
+            res : % := new(A.AllInds, rlen)
+
+            for c in A.AllInds repeat
+                tmp : V FD := new(rlen, 0$FD)
+                for i in 1..A.NRows repeat
+                    r := qelt(A.Rows, i)
+                    inds := r.Indices
+                    if not(empty? inds) and first(inds) = c then
+                        for k in 1..rlen | not zero? qelt(L, k, i) repeat
+                            qsetelt!(tmp, k, qelt(tmp, k) + qelt(L, k, i)* _
+                                     first(r.Entries))
+                        r.Entries := rest r.Entries
+                        r.Indices := rest inds
+                        qsetelt!(A.Rows, i, r)
+                for k in 1..rlen | not zero? qelt(tmp, k) repeat
+                    d : Union(D, "failed") := retractIfCan qelt(tmp, k)
+                    d case "failed" => error "cannot divide in *"
+                    r := qelt(res.Rows, k)
+                    r.Indices := cons(c, r.Indices)
+                    r.Entries := cons(d::D, r.Entries)
+                    qsetelt!(res.Rows, k, r)
+
+            for k in 1..rlen repeat
+                r := qelt(res.Rows, k)
+                r.Indices := reverse! r.Indices
+                r.Entries := reverse! r.Entries
+                qsetelt!(res.Rows, k, r)
+            res
+

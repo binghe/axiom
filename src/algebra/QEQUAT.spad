@@ -1,0 +1,30 @@
+)abbrev domain QEQUAT QueryEquation
+++ Author: Mark Botch
+++ Description:
+++ This domain implements simple database queries 
+
+QueryEquation() : SIG == CODE where
+
+  SIG ==> CoercibleTo(OutputForm) with
+
+    equation : (Symbol,String) -> %
+      ++ equation(s,"a") creates a new equation.
+
+    variable : % -> Symbol
+      ++ variable(q) returns the variable (left hand side) of \axiom{q}.
+
+    value : % -> String
+      ++ value(q) returns the value (right hand side) of \axiom{q}.
+
+  CODE ==> add
+
+    Rep := Record(var:Symbol, val:String)
+
+    coerce(u) == coerce(u.var)$Symbol = coerce(u.val)$String
+
+    equation(x,s) == [x,s]
+
+    variable q == q.var
+
+    value q == q.val
+

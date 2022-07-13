@@ -1,0 +1,38 @@
+)abbrev domain BLQT BlowUpWithQuadTrans
+++ Authors: Gaetan Hache
+++ Date Created: june 1996 
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This domain is part of the PAFF package
+
+BlowUpWithQuadTrans() : SIG == CODE where
+
+  MetRec ==> Record( ex:Integer, tr: Integer, ch: Integer , ramif: Integer )
+  outRec ==> Record( exCoord:Integer, affNeigh: Integer )
+
+  SIG ==> BlowUpMethodCategory with 
+
+    QuadraticTransform
+    
+  CODE ==> add
+
+    Rep := MetRec
+
+    coerce(la:List(Integer)):% == [la.1, la.2,la.3,  1 ]$Rep
+
+    ramifMult a == One$Integer
+
+    excepCoord a == a.ex
+
+    chartCoord a == a.ch
+
+    transCoord a == a.tr
+
+    ramifMult a == a.ramif
+
+    quotValuation a == One$Integer
+
+    coerce(c:%):OutputForm== 
+      oo: outRec := [ excepCoord(c) , chartCoord(c) ]$outRec
+      oo :: OutputForm 
+

@@ -1,0 +1,19 @@
+)abbrev package NONE1 NoneFunctions1
+++ Description:
+++ \spadtype{NoneFunctions1} implements functions on \spadtype{None}.
+++ It particular it includes a particulary dangerous coercion from
+++ any other type to \spadtype{None}.
+
+NoneFunctions1(S) : SIG == CODE where
+  S : Type
+
+  SIG ==> with
+
+    coerce : S -> None
+      ++ coerce(x) changes \spad{x} into an object of type
+      ++ \spadtype{None}.
+
+  CODE ==> add
+
+    coerce(s:S):None == s pretend None
+

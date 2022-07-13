@@ -1,0 +1,241 @@
+)abbrev package LPARSPT LocalParametrizationOfSimplePointPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ This package is part of the PAFF package
+
+LocalParametrizationOfSimplePointPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc) :
+ SIG == CODE where
+  K : Field
+  symb : List(Symbol)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  OV  ==> OrderedVariableList(symb)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt   : ProjectiveSpaceCategory(K)
+  PCS      : LocalPowerSeriesCategory(K)
+  Plc      : PlacesCategory(K,PCS)
+
+  PI       ==> PositiveInteger
+  NNI      ==> NonNegativeInteger
+  PPFC1    ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+  PackPoly ==> PackageForPoly(K,PolyRing,E,#symb)
+  UP       ==> SparseUnivariatePolynomial(K)
+  UPUP     ==> SparseUnivariatePolynomial(UP)
+
+  SIG ==>  with
+
+    printInfo : Boolean -> Boolean
+      ++ printInfo(b) set a flag such that when true (b <- true) prints 
+      ++ some information during some critical computation.
+
+    printInfo : () -> Boolean
+      ++ printInfo() returns the value of the \spad{printInfo} flag.
+
+    pointToPlace : (ProjPt,PolyRing) -> Plc
+      ++ pointToPlace(pt,pol) takes for input a simple point pt on the curve 
+      ++ defined by pol and set the local parametrization of the point.
+
+    localParamOfSimplePt : (ProjPt,PolyRing,Integer) -> List PCS
+      ++ localParamOfSimplePt(pt,pol,n) computes the local parametrization 
+      ++ of the simple point pt on the curve defined by pol. This local 
+      ++ parametrization is done according to the standard open affine 
+      ++ plane set by n
+
+    pointDominateBy : Plc -> ProjPt
+      ++ pointDominateBy(pl) returns the projective point dominated 
+      ++ by the place pl.
+
+    localize : (PolyRing,ProjPt,PolyRing,Integer) -> _
+                Record(fnc:PolyRing,crv:PolyRing,chart:List(Integer))
+      ++ localize(f,pt,crv,n) returns a record containing the polynomials f 
+      ++ and crv translate to the origin with respect to pt. The last 
+      ++ element of the records, consisting of three integers contains 
+      ++ information about the local parameter that will be used 
+      ++ (either x or y): the first integer correspond to the variable 
+      ++ that will be used as a local parameter.
+
+  CODE ==> add
+
+    import PCS
+    import PolyRing
+    import PPFC1
+    import PackPoly
+    
+    valuationAndMore: (UPUP,UPUP) -> _
+                       Record(ord:Integer,value:K,fnc:UPUP,crv:UPUP)
+
+    localize2: (PolyRing,ProjPt,PolyRing,Integer) -> _
+               Record(fnc2:UPUP,crv2:UPUP)
+
+    coerceToUPUP: (PolyRing,List Integer) -> UPUP
+
+    paramAtOrigin: (UPUP,UPUP,Integer) -> PCS
+  
+    strictTransform: (UPUP,NNI) -> UPUP
+
+    translate: (UPUP,K) -> UPUP
+
+    constant: UPUP -> K
+
+    intCoord: UPUP  -> K
+
+    localMultiplicity: UPUP -> NNI
+
+    mapDegree: (NNI,NNI,NNI) -> NNI
+
+    listVar:List(OV):= [index(i::PI)$OV for i in 1..#symb]
+
+    listMonoPols:List(PolyRing):=listVariable()
+
+    pointDominateBy(pl)==
+      lpl:List PCS:=localParam(pl)
+      empty? lpl => _
+       error "LPARSPT:pointDominateBy::parametrization of point not done yet"
+      lK:List K:=[ findCoef(s,0) for s in lpl]
+      projectivePoint(lK)
+    
+    localParamOfSimplePt(pt,curve,nV)==
+      mult:NNI:=multiplicity(curve,pt,nV)
+      ^one?(mult) => _
+        error "The point is not simple or is not on the curve !"
+      lcl:=[localize2(var,pt,curve,nV) for var in listMonoPols]
+      [paramAtOrigin(l.fnc2,l.crv2,0) for l in lcl]
+
+    pointToPlace(pt,curve)==
+      -- define the chart for strictTransform (of simple point)
+      nV:Integer:=lastNonNull pt
+      pth:=homogenize(pt,nV)
+      chart:List Integer:=[0,0,nV]
+      mult:NNI:=multiplicity(curve,pth,nV)
+      ^one?(mult) => 
+        error "The point is not simple or is not on the curve"
+      -- create a place from the simple point. This is done by giving
+      -- a name to the place: in this case it is the coordinate of 
+      -- the projective point.
+      lpth:List K:= pth :: List(K)
+      plc:Plc:=create(lpth)$Plc
+      ^empty?(localParam(plc)) => plc
+      lcl:=[localize2(var,pth,curve,nV) for var in listMonoPols]
+      lPar:=[paramAtOrigin(l.fnc2,l.crv2,0) for l in lcl]
+      setParam!(plc,lPar)
+      dd:=degree pth 
+      setDegree!(plc,dd)
+      plc
+
+    localVarForPrintInfo:Boolean:=false()$Boolean
+
+    printInfo()==localVarForPrintInfo
+
+    printInfo(flag)==localVarForPrintInfo:=flag
+
+    mapDegree(n,mx,m)==
+      dd:=(n+mx-m) 
+      dd < 0 => _
+        error "LPARSPT:mapDegree called by PARAMP:strictTransform failed"
+      dd  pretend NNI
+
+    strictTransform(pol,m)==
+      zero?(pol) => 0
+      tc:=leadingCoefficient pol
+      tk:= degree pol
+      newTc:= mapExponents(mapDegree(#1,tk,m),tc)
+      monomial(newTc,tk)$UPUP + strictTransform(reductum pol,m)
+
+    Y == monomial(1,1)$UPUP
+
+    trY: (K,NonNegativeInteger) -> UPUP
+    trY(a,n)== (monomial(monomial(a,0)$UP,0)$UPUP + Y)**n
+
+    translate(pol,a)==
+      zero?(pol) => 0 
+      tc:=leadingCoefficient pol
+      tk:= degree pol
+      trY(a,tk) * tc + translate(reductum pol, a)
+
+    constant(pol)==coefficient(coefficient(pol,0)$UPUP,0)$UP
+
+    intCoord(pol)==
+      coefY:=coefficient(coefficient(pol,1)$UPUP,0)$UP
+      cnst:=constant(pol)
+      -cnst * inv coefY
+
+    localMultiplicity(pol)==
+      zero?(pol) => error "Cannot compute the multiplicity for 0"
+      redPol:= reductum pol
+      tc:=leadingCoefficient pol
+      tk:= degree pol
+      m:=tk + minimumDegree(tc)$UP
+      zero?(redPol) => m
+      min( m, localMultiplicity(redPol))
+
+    coerceToUPUP(pol,chart)==
+      zero?(pol) => 0
+      lExp:=parts degree pol
+      lCoef:=leadingCoefficient pol
+      expX:=lExp(chart.1)
+      expY:=lExp(chart.2)
+      monomial(monomial(lCoef,expX)$UP,expY)$UPUP + _
+        coerceToUPUP(reductum(pol),chart)
+
+    -- testing this function. See paramPack for original version. 
+    valuationAndMore(f:UPUP,curve:UPUP)==
+      -- this function evaluate the function f at the origin 
+      -- which must be a simple point on the curve define by "curve"
+      val:= constant(f)
+      ^zero?(val) => [0,val,f,curve]
+      sTrCurve:=strictTransform(curve,1)
+      slp:=intCoord sTrCurve  
+      multPtf:Integer:= localMultiplicity(f)  pretend Integer 
+      sTrFnc:=strictTransform(f,multPtf pretend NNI)
+      newCurve:=translate(sTrCurve,slp)
+      f2:=translate(sTrFnc,slp)
+      val:= constant(f2)
+      [multPtf, val, f2, newCurve]
+
+    paramAtOrigin(f:UPUP,curve:UPUP,ex:Integer)== delay
+      -- this function must be
+      -- called for parametrization a the origin
+      u:=f
+      zero?(u) => 0
+      tt:=u exquo curve 
+      ^(tt case "failed") => 0
+      firstTerm:=valuationAndMore(u,curve)
+      od:=firstTerm.ord    
+      coef:=firstTerm.value
+      newU:=firstTerm.fnc - monomial(monomial(coef,0)$UP,0)$UPUP
+      newCurve:=firstTerm.crv
+      series(od+ex,coef,paramAtOrigin(newU,newCurve,ex+od))
+
+    localize(f:PolyRing,pt:ProjPt,curve:PolyRing,nV:Integer)==
+      curveT:=translateToOrigin(curve,pt,nV)
+      ft:=translateToOrigin(f,pt,nV)
+      fm:=minimalForm(curveT)
+      zero?(d:=totalDegree(fm)$PackPoly) => _
+        error "the point is not on the curve"
+      ^one?(d) => error "the point is singular"
+      subChart:=[i for i in 1..#symb | ^(i= (nV pretend PI))]
+      cf1:=degOneCoef(fm,(subChart.1) pretend PI)
+      cf2:=degOneCoef(fm,(subChart.2) pretend PI)
+      crt:List(Integer)
+      sc:List(Integer):=[(i pretend Integer) for i in subChart]
+      zero?(cf1) =>
+        crt:=concat(sc,nV)
+        [ft,curveT,crt]
+      zero?(cf2) =>
+        crt:=concat(reverse(sc),nV)
+        [ft,curveT,crt]
+      deg1:=degree(curveT,listVar(subChart.1))
+      deg2:=degree(curveT,listVar(subChart.2))
+      deg1 > deg2 =>
+        crt:=concat(sc,nV)
+        [ft,curveT,crt]
+      crt:=concat(reverse(sc),nV)
+      [ft,curveT,crt]
+
+    localize2(f:PolyRing,pt:ProjPt,curve:PolyRing,nV:Integer)==
+      recBlowUp:=localize(f,pt,curve,nV)
+      f2:=coerceToUPUP(recBlowUp.fnc,recBlowUp.chart)
+      curve2:=coerceToUPUP(recBlowUp.crv,recBlowUp.chart)
+      [f2,curve2]
+

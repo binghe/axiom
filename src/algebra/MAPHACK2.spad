@@ -1,0 +1,24 @@
+)abbrev package MAPHACK2 MappingPackageInternalHacks2
+++ Description: 
+++ Various Currying operations.
+
+MappingPackageInternalHacks2(A,C) : SIG == CODE where
+  A : SetCategory
+  C : SetCategory
+
+  NNI ==> NonNegativeInteger
+ 
+  SIG ==> with
+
+    arg1 : (A, C) -> A
+      ++\spad{arg1(a,c)} selects its first argument.
+
+    arg2 : (A, C) -> C
+      ++\spad{arg2(a,c)} selects its second argument.
+ 
+  CODE ==> add
+
+    arg1(a, c) == a
+
+    arg2(a, c) == c
+

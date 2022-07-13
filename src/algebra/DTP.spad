@@ -1,0 +1,409 @@
+)abbrev package DTP DesingTreePackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: 31 jan 95
+++ Description:  
+++ The following is all the categories, domains and package
+++ used for the desingularisation be means of 
+++ monoidal transformation (Blowing-up)
+
+DesingTreePackage(K, symb, PolyRing, E, ProjPt, PCS, Plc, DIVISOR,
+                  InfClsPoint, DesTree, BLMET) : SIG == CODE where
+  K : Field
+  symb : List(Symbol)
+  OV ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+  InfClsPoint : InfinitlyClosePointCategory(K,symb,PolyRing,E,ProjPt,
+                                            PCS,Plc,DIVISOR,BLMET)
+  DesTree : DesingTreeCategory(InfClsPoint)
+  BLMET : BlowUpMethodCategory
+  
+  bls         ==> ['X,'Y]
+  BlUpRing    ==> DistributedMultivariatePolynomial( bls , K)
+  E2          ==> DirectProduct( #bls , NonNegativeInteger )
+  AFP         ==> AffinePlane(K)
+  OV2         ==> OrderedVariableList( bls )
+  PI          ==> PositiveInteger
+  INT         ==> Integer
+  NNI         ==> NonNegativeInteger
+  LPARSPT     ==> LocalParametrizationOfSimplePointPackage
+  PARAMP      ==> ParametrizationPackage
+  PRALGPK     ==> ProjectiveAlgebraicSetPackage
+  PackPoly    ==> PackageForPoly(K,PolyRing,E,#symb)
+  PACKBL      ==> PackageForPoly( K , BlUpRing , E2 , #bls )
+  NP          ==> NewtonPolygon(K,BlUpRing,E2,#bls)
+  PPFC1       ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+  PPFC2       ==> BlowUpPackage(K,symb,PolyRing,E, BLMET) 
+  ParamPackFC ==> LPARSPT(K,symb,PolyRing,E,ProjPt,PCS,Plc)
+  ParamPack   ==> PARAMP(K,symb,PolyRing,E,ProjPt,PCS,Plc)
+  PrjAlgPack  ==>  PRALGPK(K,symb,PolyRing,E,ProjPt)
+
+  SIG ==> with
+
+    blowUp : InfClsPoint -> List InfClsPoint    
+
+    divisorAtDesingTree : (PolyRing,DesTree) -> DIVISOR
+      ++ divisorAtDesingTree(f,tr) computes the local 
+      ++ divisor of f at a desingularisation tree tr of
+      ++ a singular point.
+
+    adjunctionDivisor : DesTree -> DIVISOR
+      ++ adjunctionDivisor(tr) compute the local 
+      ++ adjunction divisor of a desingularisation tree tr of
+      ++ a singular point.
+
+    blowUpWithExcpDiv : DesTree -> Void -- DesTree
+
+    desingTreeAtPoint : (ProjPt,PolyRing) -> DesTree
+      ++ desingTreeAtPoint(pt,pol) computes 
+      ++ the desingularisation tree at the point pt
+      ++ on the curve defined by pol. 
+      ++ This function recursively compute the tree. 
+    
+    desingTree : PolyRing -> List DesTree
+      ++ desingTree(pol) returns all the desingularisation 
+      ++ trees of all singular points on the curve
+      ++ defined by pol.
+
+    fullParamInit : DesTree -> Void
+      ++ fullParamInit(tr) initialize the local 
+      ++ parametrization at all places (leaves of tr),
+      ++ computes the local exceptional divisor 
+      ++ at each infinytly close points in the tree.
+      ++ This function is equivalent to the following called: 
+      ++ initParLocLeaves(tr)
+      ++ initializeParamOfPlaces(tr)
+      ++ blowUpWithExcpDiv(tr) 
+
+    initParLocLeaves : DesTree -> Void
+      ++ initParLocLeaves(tr) initialize the local 
+      ++ parametrization at simple points corresponding to
+      ++ the leaves of tr.
+
+    initializeParamOfPlaces : DesTree -> Void
+      ++ initializeParamOfPlaces(tr) initialize the local 
+      ++ parametrization at places corresponding to
+      ++ the leaves of tr.
+
+    initializeParamOfPlaces : (DesTree,List PolyRing) -> Void
+      ++ initializeParamOfPlaces(tr,listOfFnc) initialize 
+      ++ the local parametrization at places corresponding to
+      ++ the leaves of tr according to the given 
+      ++ list of functions in listOfFnc.
+
+    genus : PolyRing -> NNI
+      ++ genus(pol) computes the genus of the curve defined by pol.
+
+    genusNeg : PolyRing -> INT
+      ++ genusNeg(pol) computes the "genus" of a curve 
+      ++ that may be not absolutly irreducible. 
+      ++ A "negative" genus means that
+      ++ the curve is reducible !!.
+
+    genusTree : (NNI,List(DesTree)) -> NNI
+      ++ genusTree(n,listOfTrees) computes the genus of a curve, 
+      ++ where n is the degree of a  polynomial pol
+      ++ defining the curve and listOfTrees is all 
+      ++ the desingularisation trees at all singular points
+      ++ on the curve defined by pol.
+
+    inBetweenExcpDiv : DesTree -> DIVISOR
+
+    genusTreeNeg : (NNI,List(DesTree)) -> INT
+      ++ genusTreeNeg(n,listOfTrees)  computes the "genus" 
+      ++ of a curve that may be not absolutly irreducible, 
+      ++ where n is the degree of a  polynomial pol
+      ++ defining the curve and listOfTrees is all the 
+      ++ desingularisation trees at all singular points
+      ++ on the curve defined by pol.
+      ++ A "negative" genus means that
+      ++ the curve is reducible !!.
+
+  CODE ==>  add
+
+    import PackPoly
+    import PPFC1
+    import PPFC2
+    import PolyRing
+    import DesTree
+
+    divisorAtDesingTreeLocal: (BlUpRing , DesTree ) -> DIVISOR
+
+    polyRingToBlUpRing: (PolyRing, BLMET) -> BlUpRing
+
+    makeMono: DesTree -> BlUpRing
+      
+    inBetweenExcpDiv( tr )== 
+      -- trouve le diviseur excp. d'un pt inf voisin PRECEDENT !
+      -- qV est egal a : 1 +  nombre de fois que ce point est repete 
+      -- dans un chaine (le plus un correspond au point d'origine du
+      -- point dont il est question ici.
+      -- mp est la multiciplicite du point.
+      -- cette fonction n'est et ne peut etre qu'utiliser pour 
+      -- calculer le diviseur d'adjonction ( a cause du mp -1).      
+      noeud:= value tr
+      chart:= chartV noeud
+      qV:= quotValuation chart 
+      one? qV => 0$DIVISOR
+      expDiv := divisorAtDesingTreeLocal(makeMono(tr),tr)
+      mp:= degree expDiv
+      ((qV - 1) * (mp -1)) *$DIVISOR expDiv
+    
+    polyRingToBlUpRing(pol,chart)==
+      zero? pol => 0
+      lc:= leadingCoefficient pol
+      d:=entries degree pol
+      ll:= [ d.i for i in 1..3 | ^( i = chartCoord(chart) ) ]
+      e:= directProduct( vector( ll)$Vector(NNI) )$E2
+      monomial(lc , e )$BlUpRing + polyRingToBlUpRing( reductum pol, chart )
+
+    affToProj(pt:AFP, chart:BLMET ):ProjPt==
+      nV:= chartCoord chart
+      d:List(K) := list(pt)$AFP
+      ll:List K:= 
+        nV = 1 => [ 1$K , d.1  , d.2 ]
+        nV = 2 => [ d.1  , 01$K , d.2 ]
+        [d.1 , d.2 , 1 ]
+      projectivePoint( ll )$ProjPt
+
+    biringToPolyRing: (BlUpRing, BLMET) -> PolyRing
+
+    biringToPolyRing(pol,chart)==
+      zero? pol => 0
+      lc:= leadingCoefficient pol
+      d:=entries degree pol
+      nV:= chartCoord chart
+      ll:List NNI:= 
+        nV = 1 => [ 0$NNI , d.1  , d.2 ]
+        nV = 2 => [ d.1  , 0$NNI , d.2 ]
+        [d.1 , d.2 , 0$NNI ]
+      e:= directProduct( vector( ll)$Vector(NNI) )$E
+      monomial(lc , e )$PolyRing  + biringToPolyRing( reductum pol, chart )
+
+    minus  : (NNI,NNI) -> NNI
+
+    minus(a,b)==
+        d:=subtractIfCan(a,b)
+        d case "failed" => error "cannot substract a-b if b>a for NNI"
+        d
+      
+    -- returns the exceptional coordinate function
+
+    makeExcpDiv: List DesTree -> DIVISOR
+
+    desingTreeAtPointLocal: InfClsPoint  -> DesTree
+
+    subGenus: DesTree -> NNI
+    
+    lVar:List PolyRing := _
+      [monomial(1,index(i pretend PI)$OV,1)$PolyRing for i in 1..#symb]
+
+    divisorAtDesingTreeLocal(pol,tr)==
+      --  BLMET has QuadraticTransform ; marche aussi avec 
+      -- Hamburger-Noether mais surement moins efficace
+      noeud:=value(tr)
+      pt:=localPointV(noeud)
+      chart:= chartV noeud
+      -- ram:= ramifMult chart -- ???
+      -- new way to compute in order not to translate twice pol
+      polTrans:BlUpRing:=translate(pol,list(pt)$AFP)$PACKBL
+      multPol:=degreeOfMinimalForm(polTrans)
+      chtr:=children(tr)
+      parPol:PCS
+      ord:Integer
+      empty?(chtr) =>
+        parPol:=parametrize(biringToPolyRing(pol,chartV(noeud))_
+                            ,localParamV(noeud))$ParamPack
+        ord:=order(parPol)$PCS
+        ord * excpDivV(noeud)  -- Note: le div excp est une fois la place.
+      (multPol *$DIVISOR excpDivV(noeud)) +$DIVISOR _
+         reduce("+",[divisorAtDesingTreeLocal(_
+                      quadTransform(polTrans,multPol,(chartV(value(child)))),_
+                        child)_
+                          for child in chtr])
+
+    desingTreeAtPointLocal(ipt) ==
+      -- crb:PolyRing,pt:ProjPt,lstnV:List(INT),origPoint:ProjPt,actL:K)==
+      -- peut etre est-il preferable, avant d'eclater, de tester
+      -- si le point est simple avec les derives, et non
+      -- verifier si le point est simple ou non apres translation. 
+      -- ???? 
+      blbl:=blowUp ipt
+      multPt:=multV ipt
+      one?(multPt) =>
+        tree( ipt )$DesTree
+      subTree:List DesTree:= [desingTreeAtPointLocal( iipt )  for iipt in blbl]
+      tree( ipt, subTree )$DesTree
+
+    blowUp(ipt)==
+      crb:=curveV ipt
+      pt:= localPointV ipt
+      lstnV := chartV ipt   -- CHH  no modif needed
+      actL:= actualExtensionV ipt
+      origPoint:= pointV ipt
+      blbl:=stepBlowUp(crb,pt,lstnV,actL) -- CHH no modif needed
+      multPt:=blbl.mult
+      sm:= blbl.subMult
+      -- la multiplicite et la frontiere du polygone de Newton (ou la forme 
+      -- minimale selon BLMET) du point ipt est assigne par effet de bord !
+      setmult!(ipt,multPt)
+      setsubmult!(ipt, sm)
+      one?(multPt) => empty()
+      [create(origPoint,_
+              rec(recTransStr),_
+              rec(recPoint) ,_
+              0,_
+              rec(recChart),_
+              0,
+              0$DIVISOR,_
+              rec(definingExtension),_ 
+              new(I)$Symbol )$InfClsPoint  for rec in blbl.blUpRec] 
+            
+    makeMono(arb)==
+      monomial(1,index(excepCoord(chartV(value(arb))) pretend PI)$OV2,_
+                  1)$BlUpRing 
+
+    makeExcpDiv(lstSsArb)==
+      reduce("+", _
+         [divisorAtDesingTreeLocal(makeMono(arb),arb) for arb in lstSsArb],0)
+
+    adjunctionDivisorForQuadTrans: DesTree -> DIVISOR
+    adjunctionDivisorForHamburgeNoether: DesTree -> DIVISOR
+
+    adjunctionDivisor( tr )==
+      BLMET has QuadraticTransform => adjunctionDivisorForQuadTrans( tr )
+      BLMET has HamburgerNoether =>   adjunctionDivisorForHamburgeNoether( tr )
+      error _
+       " The algorithm to compute the adjunction divisor is not defined for the blowing method you have chosen"
+
+    adjunctionDivisorForHamburgeNoether( tr )==
+      noeud:=value tr
+      chtr:= children tr
+      empty?(chtr) => 0$DIVISOR  -- on suppose qu'un noeud sans feuille 
+                                 -- est une feulle, donc non singulier. !
+      multPt:= multV noeud
+      ( minus(multPt,1)  pretend INT)  *$DIVISOR excpDivV(noeud) +$DIVISOR _
+         reduce("+",[inBetweenExcpDiv( arb ) for arb in chtr ]) +$DIVISOR _ 
+         reduce("+",[adjunctionDivisorForHamburgeNoether(arb) for arb in chtr])
+
+    adjunctionDivisorForQuadTrans(tr)==
+      noeud:=value(tr)
+      chtr:=children(tr)
+      empty?(chtr) => 0$DIVISOR 
+      multPt:=multV(noeud)
+      ( minus(multPt,1)  pretend INT)  *$DIVISOR excpDivV(noeud) +$DIVISOR _
+          reduce("+",[adjunctionDivisorForQuadTrans(child) for child in chtr])
+
+    divisorAtDesingTree( pol , tr)==
+      chart:= chartV value(tr)
+      pp:= polyRingToBlUpRing( pol, chart )
+      divisorAtDesingTreeLocal( pp, tr ) 
+      
+    subGenus(tr)==
+      noeud:=value tr
+      mult:=multV(noeud)
+      chart := chartV noeud
+      empty?(chdr:=children(tr)) => 0     -- degree(noeud)* mult* minus(mult,1)
+      degree(noeud)* ( mult*minus( mult, 1 ) + subMultV( noeud ) ) + 
+          reduce("+",[subGenus(ch) for ch in chdr])
+      
+    initializeParamOfPlaces(tr,lpol)==
+      noeud:=value(tr)
+      pt:=localPointV(noeud)
+      crb:=curveV(noeud)
+      chart:=chartV(noeud) -- CHH
+      nV:INT:=chartCoord chart 
+      chtr:List DesTree:=children(tr)
+      plc:Plc
+      lParam:List PCS
+      dd:PositiveInteger:=degree noeud
+      lcoef:List K
+      lll:Integer
+      lParInf:List(PCS)
+      lpar:List PCS
+      empty?(chtr) =>
+        lPar:=localParamOfSimplePt( affToProj(pt, chart) , _
+                               biringToPolyRing(crb, chart),nV)$ParamPackFC
+        setlocalParam!(noeud,lPar)
+        lParam:=[parametrize( f , lPar)$ParamPack for f in lpol]
+        plc:= create( symbNameV(noeud) )$Plc
+        setParam!(plc,lParam)
+        setDegree!(plc,dd)
+        itsALeaf!(plc)
+        setexcpDiv!(noeud, plc :: DIVISOR )
+        void()
+      lpolTrans:List PolyRing:=_
+        [translateToOrigin( pol, affToProj(pt, chart) , nV) for pol in lpol]
+      lpolBlUp:List PolyRing
+      chartBl:BLMET
+      for arb in chtr repeat
+        chartBl:=chartV value arb  
+        lpolBlUp:=[applyTransform(pol,chartBl) for pol in lpolTrans]
+        initializeParamOfPlaces(arb,lpolBlUp)
+      void()
+      
+    blowUpWithExcpDiv(tr:DesTree)==
+      noeud:=value(tr)
+      pt:=localPointV(noeud)
+      crb:=curveV(noeud)
+      chtr:List DesTree:=children(tr)
+      empty?(chtr) => void() -- tr
+      for arb in chtr repeat 
+        blowUpWithExcpDiv(arb) 
+      setexcpDiv!(noeud,makeExcpDiv( chtr  ))
+      void()
+
+    fullParamInit(tr)==
+      initializeParamOfPlaces(tr)
+      blowUpWithExcpDiv(tr)
+      void()
+
+    initializeParamOfPlaces(tr)==initializeParamOfPlaces(tr,lVar)
+
+    desingTreeAtPoint(pt,crb)==
+      ipt:= create(pt,crb)$InfClsPoint
+      desingTreeAtPointLocal ipt
+
+    genus(crb)==
+      if BLMET has HamburgerNoether then _
+         print(("  BUG BUG corige le bug GH ---- ")::OutputForm)
+      degCrb:=totalDegree(crb)$PackPoly
+      genusTree(degCrb,desingTree(crb))
+
+    genusNeg(crb)==
+      degCrb:=totalDegree(crb)$PackPoly
+      genusTreeNeg(degCrb,desingTree(crb))
+
+    desingTree(crb)==
+      [desingTreeAtPoint(pt,crb) for pt in singularPoints(crb)$PrjAlgPack]
+
+    genusTree(degCrb,listArbDes)==
+      -- le test suivant est necessaire 
+      -- ( meme s'il n'y a pas de point singulier dans ce cas)
+      -- car avec sousNNI on ne peut retourner un entier negatif
+      (degCrb <$NNI 3::NNI) and ^empty?(listArbDes) =>
+        print(("Too many infinitly near points")::OutputForm)
+        print(("The curve may not be absolutely irreducible")::OutputForm)
+        error "Have a nice day"
+      (degCrb <$NNI 3::NNI)  => 0
+      ga:= ( minus(degCrb,1)*minus(degCrb ,2) ) quo$NNI 2
+      empty?(listArbDes) => ga
+      --calcul du nombre de double point
+      dp:= reduce("+",[subGenus(arbD) for arbD in listArbDes]) quo$NNI 2
+      (dp >$NNI ga) =>
+        print(("Too many infinitly near points")::OutputForm)
+        print(("The curve may not be absolutely irreducible")::OutputForm)
+        error "Have a nice day"
+      minus(ga,dp)
+
+    genusTreeNeg(degCrb,listArbDes)==
+      -- (degCrb <$NNI 3::NNI) => 0
+      ga:= (degCrb-1)*(degCrb-2) quo$INT 2
+      empty?(listArbDes) => ga 
+      ga-( reduce("+",[subGenus(arbD) for arbD in listArbDes]) quo$NNI 2)::INT
+

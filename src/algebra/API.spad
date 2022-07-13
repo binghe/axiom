@@ -1,0 +1,59 @@
+)abbrev package API ApplicationProgramInterface
+++ Author: Timothy Daly, Martin Rubey
+++ Date Created: 3 March 2009
+++ Date Last Updated: 24 March 2012
+++ Description: 
+++ This package contains useful functions that expose Axiom system internals
+
+ApplicationProgramInterface() : SIG == CODE where
+
+  SIG ==> with
+
+    getDomains : Symbol -> Set Symbol
+      ++ getDomains(s) takes a category and returns the list of domains
+      ++ that have that category
+      ++
+      ++X getDomains 'IndexedAggregate
+
+    getAncestors : Symbol -> Set Symbol
+      ++ getAncestors(s) takes a category and returns the list of domains
+      ++ that have that category as ancestors
+      ++
+      ++X getAncestors 'IndexedAggregate
+
+    credits : () -> Void
+      ++ credits() prints a list of people who contributed to Axiom
+      ++
+      ++X credits()
+
+    summary : () -> Void
+      ++ summary() prints a short list of useful console commands
+      ++
+      ++X summary()
+
+    reportInstantiations : Boolean -> Void
+      ++ reportInstantiations(bool) is a debugging tool to show
+      ++ instantiation information
+      ++
+      ++X reportInstantiations(true)
+      ++X 1
+      ++X reportInstantiations(false)
+
+  CODE ==> add
+
+    getDomains(cat:Symbol):Set(Symbol) == 
+      set [symbol car first destruct a _
+        for a in (destruct domainsOf(cat,NIL$Lisp)$Lisp)::List(SExpression)]
+
+    getAncestors(cat:Symbol):Set(Symbol) == 
+      set [symbol car first destruct a _
+        for a in (destruct ancestorsOf(cat,NIL$Lisp)$Lisp)::List(SExpression)]
+
+    credits() == ( credits()$Lisp ; void() )
+
+    summary() == ( summary()$Lisp ; void() )
+
+    reportInstantiations(b:Boolean): Void ==
+      REPORTINSTANTIATIONS(b)$Lisp
+      void
+

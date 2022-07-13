@@ -1,0 +1,11 @@
+)abbrev domain SEX SExpression
+++ Author: S.M.Watt
+++ Date Created: July 1987
+++ Date Last Modified: 23 May 1991
+++ Description:
+++ This domain allows the manipulation of the usual Lisp values;
+
+SExpression() == CODE where
+
+  CODE ==> SExpressionOf(String, Symbol, Integer, DoubleFloat, OutputForm)
+

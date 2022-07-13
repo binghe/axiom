@@ -1,0 +1,42 @@
+)abbrev domain OWP OrdinaryWeightedPolynomials
+++ Author: James Davenport
+++ Date Created:  17 April 1992
+++ Date Last Updated: 12 July 1992
+++ Description:
+++ This domain represents truncated weighted polynomials over the
+++ "Polynomial" type. The variables must be
+++ specified, as must the weights.
+++ The representation is sparse
+++ in the sense that only non-zero terms are represented.
+
+OrdinaryWeightedPolynomials(R,vl,wl,wtlevel) : SIG == CODE where
+  R : Ring
+  vl : List Symbol
+  wl : List NonNegativeInteger
+  wtlevel : NonNegativeInteger
+
+  SIG ==> Ring with
+
+     if R has CommutativeRing then Algebra(R)
+
+     coerce : $ -> Polynomial(R)
+       ++ coerce(p) converts back into a Polynomial(R), ignoring weights
+
+     coerce : Polynomial(R) -> $
+       ++ coerce(p) coerces a Polynomial(R) into Weighted form,
+       ++ applying weights and ignoring terms
+
+     if R has Field then
+  
+       "/" : ($,$) -> Union($,"failed")
+         ++ x/y division (only works if minimum weight
+         ++ of divisor is zero, and if R is a Field)
+
+     changeWeightLevel : NonNegativeInteger -> Void
+       ++ changeWeightLevel(n) This changes the weight level to the 
+       ++ new value given:
+       ++ NB: previously calculated terms are not affected
+
+  CODE ==> WeightedPolynomials(R,Symbol,IndexedExponents(Symbol),
+                           Polynomial(R), vl,wl,wtlevel)
+

@@ -1,0 +1,73 @@
+)abbrev package PLOTTOOL PlotTools
+++ Description:
+++ This package exports plotting tools 
+
+PlotTools() : SIG == CODE where
+
+  L   ==> List
+  SEG ==> Segment
+  SF  ==> DoubleFloat
+  Pt ==> Point(SF)
+  PLOT ==> Plot 
+  DROP ==> DrawOption
+  S    ==> String
+  VIEW2D ==> TwoDimensionalViewport
+
+  SIG ==> with
+
+    calcRanges : L L Pt -> L SEG SF
+      ++ calcRanges(l) \undocumented
+ 
+  CODE ==> add
+
+    import GraphicsDefaults
+    import PLOT
+    import TwoDimensionalPlotClipping
+    import DrawOptionFunctions0
+    import ViewportPackage
+    import POINT
+    import PointPackage(SF)
+ 
+    --%Local functions
+    xRange0: L Pt -> SEG SF
+    xRange: L L Pt -> SEG SF
+    yRange0: L Pt -> SEG SF
+    yRange: L L Pt -> SEG SF
+    drawToScaleRanges: (SEG SF,SEG SF) -> L SEG SF
+  
+    drawToScaleRanges(xVals,yVals) ==
+      xDiff := (xHi := hi xVals) - (xLo := lo xVals)
+      yDiff := (yHi := hi yVals) - (yLo := lo yVals)
+      pad := abs(yDiff - xDiff)/2
+      yDiff > xDiff => [segment(xLo - pad,xHi + pad),yVals]
+      [xVals,segment(yLo - pad,yHi + pad)]
+ 
+    select : (L Pt,Pt -> SF,(SF,SF) -> SF) -> SF
+    select(l,f,g) ==
+      m := f first l
+      for p in rest l repeat m := g(m,f p)
+      m
+ 
+    xRange0(list:L Pt) == select(list,xCoord,min) .. select(list,xCoord,max)
+
+    yRange0(list:L Pt) == select(list,yCoord,min) .. select(list,yCoord,max)
+ 
+    select2: (L L Pt,L Pt -> SF,(SF,SF) -> SF) -> SF
+    select2(l,f,g) ==
+      m := f first l
+      for p in rest l repeat m := g(m,f p)
+      m
+ 
+    xRange(list:L L Pt) ==
+      select2(list,(u1:L(Pt)):SF +-> lo(xRange0(u1)),min) _
+         .. select2(list,(v1:L(Pt)):SF +-> hi(xRange0(v1)),max)
+ 
+    yRange(list:L L Pt) ==
+      select2(list,(u1:L(Pt)):SF +-> lo(yRange0(u1)),min) _
+         .. select2(list,(v1:L(Pt)):SF +-> hi(yRange0(v1)),max)
+
+    --%Exported Functions
+    calcRanges(llp) ==
+      drawToScale() => drawToScaleRanges(xRange llp, yRange llp)
+      [xRange llp, yRange llp]
+

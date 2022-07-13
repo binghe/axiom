@@ -1,0 +1,63 @@
+)abbrev domain MYEXPR MyExpression
+++ Author: Mark Botch
+++ Description:
+++ This domain has no description
+
+MyExpression(q,R) : SIG == CODE where
+  q : Symbol
+  R : Join(Ring, OrderedSet, IntegralDomain)
+
+  UP ==> MyUnivariatePolynomial(q, R)
+
+  SIG ==> Join(FunctionSpace R, IntegralDomain,
+                RetractableTo UP, RetractableTo Symbol, 
+                RetractableTo Integer, CombinatorialOpsCategory,
+                PartialDifferentialRing Symbol) with
+
+    _* : (%,%) -> %
+
+    _/ : (%,%) -> %
+
+    _*_* : (%,%) -> %
+
+    numerator : % -> %
+
+    denominator : % -> %
+
+    ground? : % -> Boolean 
+
+    coerce : Fraction UP -> %
+
+    retract : % -> Fraction UP
+
+  CODE ==> Expression R add
+
+    Rep := Expression R
+
+    iunivariate(p: Polynomial R): UP ==
+        poly: SparseUnivariatePolynomial(Polynomial R) 
+             := univariate(p, q)$(Polynomial R)
+        map((z1:Polynomial R):R +-> retract(z1), poly)_
+          $UnivariatePolynomialCategoryFunctions2(Polynomial R,
+                    SparseUnivariatePolynomial Polynomial R, 
+                    R, UP)
+
+    retract(p: %): Fraction UP == 
+        poly: Fraction Polynomial R := retract p
+        upoly: UP := iunivariate numer poly
+        vpoly: UP := iunivariate denom poly
+
+        upoly / vpoly
+
+    retract(p: %): UP == iunivariate retract p
+
+    coerce(r: Fraction UP): % == 
+       num: SparseUnivariatePolynomial R := makeSUP numer r
+       den: SparseUnivariatePolynomial R := makeSUP denom r
+       u: Polynomial R := multivariate(num, q)
+       v: Polynomial R := multivariate(den, q)
+
+       quot: Fraction Polynomial R := u/v
+
+       quot::(Expression R)
+

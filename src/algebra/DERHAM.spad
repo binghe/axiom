@@ -1,0 +1,396 @@
+)abbrev domain DERHAM DeRhamComplex
+++ Author: Larry A. Lambe and Kurt Pagani
+++ Date    : 01/26/91.
+++ Revised : 12/01/91.
+++ References:
+++ Flan03 Differential Forms with Applications to the Physical Sciences
+++ Description:
+++ The deRham complex of Euclidean space, that is, the
+++ class of differential forms of arbitary degree over a coefficient ring.
+++ See Flanders, Harley, Differential Forms, With Applications to the Physical
+++ Sciences, New York, Academic Press, 1963.
+ 
+DeRhamComplex(CoefRing,listIndVar) : SIG == CODE where
+  CoefRing :  Join(Ring, OrderedSet)
+  listIndVar : List Symbol
+
+  ASY     ==> AntiSymm(R,listIndVar)
+  DIFRING ==> DifferentialRing
+  LALG    ==> LeftAlgebra
+  FMR     ==> FreeMod(R,EAB)
+  I       ==> Integer
+  L       ==> List
+  EAB     ==> ExtAlgBasis  -- these are exponents of basis elements in order
+  NNI     ==> NonNegativeInteger
+  O       ==> OutputForm
+  R       ==> Expression(CoefRing)
+  SMR     ==> SquareMatrix(#listIndVar,R)
+  REABR   ==> Record(k : EAB, c : R)
+ 
+  SIG ==> Join(LALG(R), RetractableTo(R)) with
+
+    leadingCoefficient : % -> R
+      ++ leadingCoefficient(df) returns the leading
+      ++ coefficient of differential form df.
+      ++
+      ++X der:=DERHAM(Integer,[x,y,z])
+      ++X [dx,dy,dz]:=[generator(i)$der for i in 1..3]
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X leadingCoefficient sigma
+
+    leadingBasisTerm : % -> %
+      ++ leadingBasisTerm(df) returns the leading
+      ++ basis term of differential form df.
+      ++
+      ++X der:=DERHAM(Integer,[x,y,z])
+      ++X [dx,dy,dz]:=[generator(i)$der for i in 1..3]
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X leadingBasisTerm sigma
+
+    reductum : % -> %
+      ++ reductum(df), where df is a differential form, returns df minus 
+      ++ the leading term of df if df has two or more terms, and
+      ++ 0 otherwise.
+      ++
+      ++X der:=DERHAM(Integer,[x,y,z])
+      ++X [dx,dy,dz]:=[generator(i)$der for i in 1..3]
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X reductum sigma
+
+    coefficient : (%,%) -> R 
+      ++ coefficient(df,u), where df is a differential form,
+      ++ returns the coefficient of df containing the basis term u
+      ++ if such a term exists, and 0 otherwise.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X R := Expression(Integer)
+      ++X [dx,dy,dz] := [generator(i)$der for i in 1..3]
+      ++X f : R := x**2*y*z-5*x**3*y**2*z**5
+      ++X g : R := z**2*y*cos(z)-7*sin(x**3*y**2)*z**2 
+      ++X h : R :=x*y*z-2*x**3*y*z**2 
+      ++X alpha : der := f*dx + g*dy + h*dz
+      ++X beta  : der := cos(tan(x*y*z)+x*y*z)*dx + x*dy
+      ++X gamma := alpha * beta
+      ++X coefficient(gamma, dx*dy)
+
+    generator : NNI -> %
+      ++ generator(n) returns the nth basis term for a differential form.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X [dx,dy,dz] := [generator(i)$der for i in 1..3]
+
+    homogeneous? : % -> Boolean
+      ++ homogeneous?(df) tests if all of the terms of 
+      ++ differential form df have the same degree.
+      ++
+      ++X der:=DERHAM(Integer,[x,y,z])
+      ++X [dx,dy,dz]:=[generator(i)$der for i in 1..3]
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X homogeneous? sigma
+      ++X a:BOP:=operator('a)
+      ++X b:BOP:=operator('b)
+      ++X c:BOP:=operator('c)
+      ++X theta:=a(x,y,z)*dx*dy + b(x,y,z)*dx*dz + c(x,y,z)*dy*dz
+      ++X homogeneous? (sigma+theta)
+
+    retractable? : % -> Boolean
+      ++ retractable?(df) tests if differential form df is a 0-form,
+      ++ if degree(df) = 0.
+      ++
+      ++X der:=DERHAM(Integer,[x,y,z])
+      ++X [dx,dy,dz]:=[generator(i)$der for i in 1..3]
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X retractable? sigma
+
+    degree : % -> NNI
+      ++ degree(df) returns the homogeneous degree of differential form df.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X t1 := generator(1)$der
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:der:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X a:BOP:=operator('a)
+      ++X b:BOP:=operator('b)
+      ++X c:BOP:=operator('c)
+      ++X theta:der:=a(x,y,z)*dx*dy + b(x,y,z)*dx*dz + c(x,y,z)*dy*dz
+      ++X [degree x for x in [sigma,theta,t1]]
+
+    map : (R -> R, %) -> %
+      ++ map(f,df) replaces each coefficient x of differential 
+      ++ form df by \spad{f(x)}.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:der:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X R := Expression(Integer)
+      ++X T(x:R):R == x^2
+      ++X map(T,sigma)
+
+    totalDifferential : R -> %
+      ++ totalDifferential(x) returns the total differential 
+      ++ (gradient) form for element x.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X a : BOP := operator('a)
+      ++X totalDifferential(a(x,y,z))$der 
+      ++X totalDifferential(x^2+y^2+sin(x)*z^2)$der
+
+    exteriorDifferential : % -> %
+      ++ exteriorDifferential(df) returns the exterior 
+      ++ derivative (gradient, curl, divergence, ...) of
+      ++ the differential form df.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X R := Expression(Integer)
+      ++X [dx,dy,dz] := [generator(i)$der for i in 1..3]
+      ++X f : R := x**2*y*z-5*x**3*y**2*z**5
+      ++X g : R := z**2*y*cos(z)-7*sin(x**3*y**2)*z**2 
+      ++X h : R :=x*y*z-2*x**3*y*z**2 
+      ++X alpha : der := f*dx + g*dy + h*dz
+      ++X exteriorDifferential alpha
+
+    dim : % -> NNI
+      ++ dim(s) returns the dimension of the underlying space
+      ++ that is, dim ExtAlg = 2^dim
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:der:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X dim sigma
+
+    hodgeStar : (%,SMR) -> %
+      ++ hodgeStar(a,s) computes the Hodge dual of the differential 
+      ++ form with respect to the metric g.
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:der:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X G:SquareMatrix(3,Integer):=diagonalMatrix([1,1,1])
+      ++X hodgeStar(sigma,G)
+
+    dot : (%,%,SMR) -> R
+      ++ dot(a,b,s) compute the inner product of two differential 
+      ++ forms w.r.t. g
+      ++
+      ++X der := DeRhamComplex(Integer,[x,y,z])
+      ++X f:BOP:=operator('f)
+      ++X g:BOP:=operator('g)
+      ++X h:BOP:=operator('h)
+      ++X sigma:der:=f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X G:SquareMatrix(3,Integer):=diagonalMatrix([1,1,1])
+      ++X dot(sigma,sigma,G)
+
+    proj : (%,NNI) -> %
+      ++ proj(a,n) projection to homogeneous terms of degree p
+      ++
+      ++X coefRing := Integer
+      ++X R3 : List Symbol := [x,y,z]
+      ++X D := DERHAM(coefRing,R3)
+      ++X [dx,dy,dz] := [generator(i)$D for i in 1..3]
+      ++X proj(dx+dy*dz+dx*dy*dz,2)
+
+    interiorProduct : (Vector(R),%,SMR) -> %
+      ++ interiorProduct(vr,a,s) calculates the interior product 
+      ++ i_X(a) of the vector field X
+      ++ with the differential form a (w.r.t. metric g)
+      ++
+      ++X coefRing := Integer
+      ++X R3 : List Symbol := [x,y,z]
+      ++X D := DERHAM(coefRing,R3)
+      ++X [dx,dy,dz] := [generator(i)$D for i in 1..3]
+      ++X f : BOP := operator('f)
+      ++X g : BOP := operator('g)
+      ++X h : BOP := operator('h)
+      ++X a : BOP := operator('a)
+      ++X b : BOP := operator('b)
+      ++X c : BOP := operator('c)
+      ++X U : BOP := operator('U)
+      ++X V : BOP := operator('V)
+      ++X W : BOP := operator('W)
+      ++X v := vector[U(x,y,z),V(x,y,z),W(x,y,z)]
+      ++X sigma := f(x,y,z)*dx + g(x,y,z)*dy + h(x,y,z)*dz
+      ++X theta := a(x,y,z)*dx*dy + b(x,y,z)*dx*dz + c(x,y,z)*dy*dz
+      ++X G := diagonalMatrix([1,1,1])
+      ++X interiorProduct(v,sigma,G)
+      ++X interiorProduct(v,theta,G)
+
+    lieDerivative : (Vector(R),%,SMR) -> %
+      ++ lieDerivative(vr,a,s) calculates the Lie derivative L_X(a) 
+      ++ of the differential form a with respect to the vector 
+      ++ field X (w.r.t. metric g)
+      ++
+      ++X coefRing := Integer
+      ++X R3 : List Symbol := [x,y,z]
+      ++X D := DERHAM(coefRing,R3)
+      ++X [dx,dy,dz] := [generator(i)$D for i in 1..3]
+      ++X a : BOP := operator('a)
+      ++X b : BOP := operator('b)
+      ++X c : BOP := operator('c)
+      ++X U : BOP := operator('U)
+      ++X V : BOP := operator('V)
+      ++X W : BOP := operator('W)
+      ++X v := vector[U(x,y,z),V(x,y,z),W(x,y,z)]
+      ++X theta := a(x,y,z)*dx*dy + b(x,y,z)*dx*dz + c(x,y,z)*dy*dz
+      ++X G := diagonalMatrix([1,1,1])
+      ++X eta := lieDerivative(v,theta,G)
+
+  CODE ==> ASY add
+
+      Rep := ASY 
+
+      dim := #listIndVar
+
+      totalDifferential(f) ==
+        divs:=[differentiate(f,listIndVar.i)*generator(i)$ASY for i in 1..dim]
+        reduce("+",divs)
+
+      termDiff : (R, %) -> %
+      termDiff(r,e) ==
+        totalDifferential(r) * e
+
+      exteriorDifferential(x) ==
+        x = 0 => 0
+        termDiff(leadingCoefficient(x)$Rep,leadingBasisTerm x) + _
+          exteriorDifferential(reductum x)
+
+      lv := [concat("d",string(liv))$String::Symbol for liv in listIndVar]
+
+      displayList:EAB -> O
+      displayList(x):O ==
+        le: L I := exponents(x)$EAB
+        reduce(_*,[(lv.i)::O for i in 1..dim | ((le.i) = 1)])$L(O)
+
+      makeTerm:(R,EAB) -> O
+      makeTerm(r,x) ==
+      -- we know that r ^= 0
+        x = Nul(dim)$EAB  => r::O
+        (r = 1) => displayList(x)
+        r::O * displayList(x)
+
+      terms : % -> List Record(k: EAB, c: R)
+      terms(a) ==
+        -- it is the case that there are at least two terms in a
+        a pretend List Record(k: EAB, c: R)
+        
+      err1:="CoefRing has not IntegralDomain"
+      err2:="Metric tensor is not symmetric"
+      err3:="Degenerate metric"
+      err4:="Index out of range" 
+
+      -- coord space dimension
+      dim(f) == dim
+
+      -- flip 0->1, 1->0
+      flip(b:ExtAlgBasis):ExtAlgBasis ==
+        bl := b pretend List(NNI)
+        [(i+1) rem 2 for i in bl] pretend ExtAlgBasis
+
+      -- list the positions of a's (a=0,1) in x
+      pos(x:EAB, a:NNI):List(NNI) ==
+        y:= x pretend List(NNI)
+        [j for j in 1..#y | y.j=a]
+
+      -- compute dot of singletons
+      dot1(r:Record(k:EAB,c:R),s:Record(k:EAB,c:R),g:SMR):R ==
+        not CoefRing has IntegralDomain => error(err1)
+        test(r.k ^= s.k) => 0::R
+        idx := pos(r.k,1)
+        idx = [] => r.c * s.c
+        reduce("*",[1/g(j,j) for j in idx]::List(R))*r.c*s.c
+
+      -- compute dot of singleton terms, general symmetric g
+      dot2(r:REABR, s:REABR, g:SMR):R ==
+        not CoefRing has IntegralDomain => error(err1)
+        pr := pos(r.k,1) -- list positions of 1 in r
+        ps := pos(s.k,1) -- list positions of 1 in s
+        test(#pr ^= #ps) => 0::R -- not same degree => 0
+        pr = [] => r.c * s.c -- empty pr,ps => product of coefs
+        G := inverse(g)::SMR -- compute the inverse of the metric g
+        test(#pr = 1) => G(pr.1,ps.1)::R * r.c * s.c -- only one element
+        M:Matrix(R) -- the minor
+        M := matrix([[G(pr.i,ps.j)::R for j in 1..#ps] for i in 1..#pr])
+        determinant(M)::R * r.c * s.c
+
+      -- export
+      dot(x,y,g) ==
+        not symmetric? g => error(err2)
+        tx:=terms(x)
+        ty:=terms(y)
+        tx = [] or ty = [] => 0::R
+        if diagonal? g then -- better performance
+          reduce("+",[dot2(tx.j,ty.j,g) for j in 1..#tx])
+        else
+          reduce("+",[dot1(tx.j,ty.j,g) for j in 1..#tx])
+     
+      -- export
+      hodgeStar(x,g) ==
+        not CoefRing has IntegralDomain => error(err1)
+        not diagonal? g => error(err2)
+        v := sqrt(abs(determinant(g))) -- volume factor
+        v = 0 => error(err3)
+        t:=terms(x)
+        s:=[copy(r) for r in t] -- we need a copy of x
+        for j in 1..#t repeat
+          s.j.k := flip(s.j.k)
+          fs:=[s.j] pretend %
+          ft:=[t.j] pretend %
+          s.j.c := s.j.c * v * dot1(t.j,t.j,g)/leadingCoefficient(ft*fs)
+        s pretend %
+
+      -- export
+      proj(x,p) ==
+        p < 0 or p > dim => error(err4)
+        t := terms(x)
+        idx := [j for j in 1..#t | #pos(t.j.k,1)=p]
+        s := [copy(t.j) for j in idx::List(NNI)]
+        s pretend %
+
+      interiorProduct(v,x,g) ==
+        not CoefRing has IntegralDomain => error(err1)
+        f := reduce("+",[generator(i)$% for i in 1..dim]::List(%))
+        t := terms(f)
+        for j in 1..dim repeat
+          t.(dim-j+1).c := g(j,j)*v(j) -- reverse order
+        f -- term manipulations are destructive
+        dg:R := determinant(g)
+        sg:R := dg/abs(dg)
+        if odd?(dim) then
+          m:R := sg
+        else
+          m:R := (-1)**degree(x)*sg
+        m * hodgeStar(f*hodgeStar(x,g),g)
+
+      lieDerivative(v,x,g) ==
+        a:= exteriorDifferential(interiorProduct(v,x,g))
+        b:= interiorProduct(v,exteriorDifferential(x),g)
+        a+b
+
+      coerce(a):O ==
+        a = 0$Rep => 0$I::O
+        ta := terms a
+        null ta.rest => makeTerm(ta.first.c, ta.first.k)
+        reduce(_+,[makeTerm(t.c,t.k) for t in ta])$L(O)
+

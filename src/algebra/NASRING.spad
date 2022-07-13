@@ -1,0 +1,27 @@
+)abbrev category NASRING NonAssociativeRing
+++ Author: J. Grabmeier, R. Wisbauer
+++ Date Created: 01 March 1991
+++ Date Last Updated: 11 June 1991
+++ Reference:
+++ Scha66 An Introduction to Nonassociative Algebras
+++ Description:
+++ A NonAssociativeRing is a non associative rng which has a unit,
+++ the multiplication is not necessarily commutative or associative.
+
+NonAssociativeRing() : Category == SIG where
+
+  SIG ==> Join(NonAssociativeRng,MonadWithUnit) with
+
+    characteristic : -> NonNegativeInteger
+      ++ characteristic() returns the characteristic of the ring.
+      --we can not make this a constant, since some domains are mutable
+
+    coerce : Integer -> %
+      ++ coerce(n) coerces the integer n to an element of the ring.
+
+   add
+
+     n:Integer
+
+     coerce(n) == n * 1$%
+

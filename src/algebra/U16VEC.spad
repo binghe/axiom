@@ -1,0 +1,71 @@
+)abbrev domain U16VEC U16Vector
+++ Author: Waldek Hebisch
+++ Description:
+++ This is a low-level domain which implements vectors
+++ (one dimensional arrays) of unsigned 16-bit numbers.  Indexing
+++ is 0 based, there is no bound checking (unless provided by
+++ lower level).
+
+U16Vector() : SIG == CODE where
+
+ SIG ==> OneDimensionalArrayAggregate Integer 
+
+ CODE ==> add
+
+   Qsize   ==> QVLENU16$Lisp
+   Qelt    ==> ELTU16$Lisp
+   Qsetelt ==> SETELTU16$Lisp
+   Qnew    ==> GETREFVU16$Lisp
+
+   #x                          == Qsize x
+     ++ returns the length of the vector
+     ++
+     ++X t1:=new(10,10)$U16Vector
+     ++X #t1
+
+   minIndex x                  == 0
+     ++ minIndex returns the minimum index of the vector
+     ++
+     ++X t1:=new(10,10)$U16Vector
+     ++X minIndex t1
+
+   empty()                     == Qnew(0$Lisp, 0$Lisp)
+     ++ empty() returns a new vector of length 0
+     ++
+     ++X t1:=empty()$U16Vector
+
+   new(n, x)                   == Qnew (n, x)
+     ++ new(n, x) returns a new vector of length n filled with x
+     ++
+     ++X t1:=new(10,7)$U16Vector
+
+   qelt(x, i)                  == Qelt(x, i)
+     ++ qelt(x, i) returns the i-th element of x
+     ++
+     ++X t1:=new(10,7)$U16Vector
+     ++X qelt(t1,3)
+
+   elt(x:%, i:Integer)         == Qelt(x, i)
+     ++ elt(x, i) returns the i-th element of x
+     ++
+     ++X t1:=new(10,7)$U16Vector
+     ++X elt(t1,3)
+
+   qsetelt_!(x, i, s)          == Qsetelt(x, i, s)
+     ++ qsetelt(x, i, s) modifies the i-th element of x to be s
+     ++
+     ++X t1:=new(10,7)$U16Vector
+     ++X qsetelt!(t1,3,9)
+
+   setelt(x:%, i:Integer, s:Integer) == Qsetelt(x, i, s)
+     ++ setelt(x, i, s) modifies the i-th element of x to be s
+     ++
+     ++X t1:=new(10,7)$U16Vector
+     ++X setelt(t1,3,9)
+
+   fill_!(x, s) == (for i in 0..((Qsize x) - 1) repeat Qsetelt(x, i, s); x)
+     ++ fill!(x, s) modifies a vector x so every element has value s
+     ++
+     ++X t1:=new(10,7)$U16Vector
+     ++X fill!(t1,9)
+

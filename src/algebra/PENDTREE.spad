@@ -1,0 +1,60 @@
+)abbrev domain PENDTREE PendantTree
+++ Author: Mark Botch
+++ Description:
+++ A PendantTree(S) is either a leaf? and is an S or has
+++ a left and a right both PendantTree(S)'s
+
+PendantTree(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> BinaryRecursiveAggregate(S) with
+
+   ptree : S->%
+     ++ ptree(s) is a leaf? pendant tree
+     ++
+     ++X t1:=ptree([1,2,3])
+       
+   ptree : (%, %)->%
+     ++ ptree(x,y) is not documented
+     ++
+     ++X t1:=ptree([1,2,3])
+     ++X ptree(t1,ptree([1,2,3]))
+
+   coerce : %->Tree S
+     ++ coerce(x) is not documented
+     ++
+     ++X t1:=ptree([1,2,3])
+     ++X t2:=ptree(t1,ptree([1,2,3]))
+     ++X t2::Tree List PositiveInteger
+
+  CODE ==> add
+
+     Rep := Tree S
+     import Tree S
+
+     coerce (t:%):Tree S == t pretend Tree S
+
+     ptree(n) == tree(n,[])$Rep pretend %
+
+     ptree(l,r) == tree(value(r:Rep)$Rep,cons(l,children(r:Rep)$Rep)):%
+
+     leaf? t == empty?(children(t)$Rep)
+
+     t1=t2 == (t1:Rep) = (t2:Rep)
+
+     left b ==
+       leaf? b => error "ptree:no left"
+       first(children(b)$Rep)
+
+     right b ==
+       leaf? b => error "ptree:no right"
+       tree(value(b)$Rep,rest (children(b)$Rep))
+
+     value b ==
+       leaf? b => value(b)$Rep
+       error "the pendant tree has no value"
+
+     coerce(b:%): OutputForm ==
+       leaf? b => value(b)$Rep :: OutputForm
+       paren blankSeparate [left b::OutputForm,right b ::OutputForm]
+

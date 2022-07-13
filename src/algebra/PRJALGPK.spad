@@ -1,0 +1,161 @@
+)abbrev package PRJALGPK ProjectiveAlgebraicSetPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+ProjectiveAlgebraicSetPackage(K,symb,PolyRing,E,ProjPt) : SIG == CODE where
+  K : Field
+  symb: List(Symbol)
+  OV  ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt   : ProjectiveSpaceCategory(K)
+  
+  OF     ==> OutputForm
+  PI     ==> PositiveInteger
+  RFP    ==> RootsFindingPackage
+  SUP    ==> SparseUnivariatePolynomial
+  PPFC1  ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+  SPWRES ==> AffineAlgebraicSetComputeWithResultant(K,symb,PolyRing,E,ProjPt)
+  SPWGRO ==> AffineAlgebraicSetComputeWithGroebnerBasis(K,symb,PolyRing,E,ProjPt)
+
+  SIG ==> with
+
+    singularPointsWithRestriction : (PolyRing,List(PolyRing)) -> List(ProjPt)
+      ++ singularPointsWithRestriction(p,lp) return the singular points that 
+      ++ annihilate  
+
+    singularPoints : PolyRing -> List(ProjPt)
+      ++ singularPoints(p) returns the singular points 
+
+    algebraicSet : List(PolyRing) -> List(ProjPt)
+      ++ algebraicSet(lp) returns the algebraic set if finite (dimension 0).
+
+    rationalPoints : (PolyRing,PI) -> List(ProjPt)
+      ++ \axiom{rationalPoints(f,d)} returns all points on the curve \axiom{f}
+      ++ in the extension of the ground field of degree \axiom{d}.
+      ++ For \axiom{d > 1} this only works if \axiom{K} is a 
+      ++ \axiomType{LocallyAlgebraicallyClosedField}
+
+  CODE ==> add
+
+    import PPFC1
+    import PolyRing
+    import ProjPt
+    
+    listVar:List(OV):= [index(i::PI)$OV for i in 1..#symb]
+    polyToX10 : PolyRing -> SUP(K)
+      
+    --fonctions de resolution de sys. alg. de dim 0
+    singularPoints(crb)==
+      F:=crb
+      Fx:=differentiate(F,index(1)$OV)
+      Fy:=differentiate(F,index(2)$OV)
+      Fz:=differentiate(F,index(3)$OV)
+      idealT:List PolyRing:=[F,Fx,Fy,Fz]
+      idealToX10: List SUP(K) := [polyToX10 pol for pol in idealT]
+      recOfZerosX10:= distinguishedCommonRootsOf(idealToX10,1)$RFP(K)      
+      listOfExtDeg:List Integer:=[recOfZerosX10.extDegree]
+      degExt:=lcm listOfExtDeg
+      zero?(degExt) =>
+        error("------- Infinite number of points ------")
+      ^one?(degExt) =>
+        print(("You need an extension of degree")::OF)
+        print(degExt::OF)
+        error("-------------Have a nice day-------------")
+      listPtsIdl:= [projectivePoint([a,1,0]) for a in recOfZerosX10.zeros]
+      tempL:= affineSingularPoints(crb)$SPWRES
+      if tempL case "failed" then
+        print(("failed with resultant")::OF)
+        print("The singular points will be computed using grobner basis"::OF)
+        tempL := affineSingularPoints(crb)$SPWGRO
+      tempL case "Infinite" =>      
+        error("------- Infinite number of points ------")
+      tempL case Integer => 
+        print(("You need an extension of degree")::OF)
+        print(tempL ::OF)
+        error("-------------Have a nice day-------------")
+      listPtsIdl2:List(ProjPt)
+      if tempL case List(ProjPt) then 
+        listPtsIdl2:= ( tempL :: List(ProjPt))
+      else 
+        error" From ProjectiveAlgebraicSetPackage: this should not happen"
+      listPtsIdl := concat( listPtsIdl , listPtsIdl2)
+      if  pointInIdeal?(idealT,projectivePoint([1,0,0]))$PPFC1 then
+        listPtsIdl:=cons(projectivePoint([1,0,0]),listPtsIdl)
+      listPtsIdl
+
+    algebraicSet(idealT:List(PolyRing)) ==
+      idealToX10: List SUP(K) := [polyToX10 pol for pol in idealT]
+      recOfZerosX10:= distinguishedCommonRootsOf(idealToX10,1)$RFP(K)      
+      listOfExtDeg:List Integer:=[recOfZerosX10.extDegree]
+      degExt:=lcm listOfExtDeg
+      zero?(degExt) =>
+        error("------- Infinite number of points ------")
+      ^one?(degExt) =>
+        print(("You need an extension of degree")::OF)
+        print(degExt::OF)
+        error("-------------Have a nice day-------------")
+      listPtsIdl:= [projectivePoint([a,1,0]) for a in recOfZerosX10.zeros]
+      tempL:= affineAlgSet( idealT )$SPWRES
+      if tempL case "failed" then
+        print("failed with resultant"::OF)
+        print("The finte alg. set  will be computed using grobner basis"::OF)
+        tempL := affineAlgSet( idealT )$SPWGRO
+      tempL case "Infinite" =>      
+        error("------- Infinite number of points ------")
+      tempL case Integer => 
+        print(("You need an extension of degree")::OF)
+        print(tempL ::OF)
+        error("-------------Have a nice day-------------")
+      listPtsIdl2:List(ProjPt)
+      if tempL case List(ProjPt) then 
+        listPtsIdl2:= ( tempL :: List(ProjPt) )
+      else 
+        error" From ProjectiveAlgebraicSetPackage: this should not hapen"
+      listPtsIdl := concat( listPtsIdl , listPtsIdl2)
+      if  pointInIdeal?(idealT,projectivePoint([1,0,0]))$PPFC1 then
+        listPtsIdl:=cons(projectivePoint([1,0,0]),listPtsIdl)
+      listPtsIdl
+   
+    if K has FiniteFieldCategory then
+      
+      rationalPoints(crv:PolyRing,extdegree:PI):List(ProjPt) ==
+        --The code of this is almost the same as for algebraicSet
+        --We could just construct the ideal and call algebraicSet
+        --Should we do that? This might be a bit faster.
+        listPtsIdl:List(ProjPt):= empty()
+        x:= monomial(1,1)$SUP(K)
+        if K has PseudoAlgebraicClosureOfFiniteFieldCategory then 
+          setTower!(1$K)$K
+        q:= size()$K 
+        px:= x**(q**extdegree) - x
+        crvX10:= polyToX10 crv
+        recOfZerosX10:=distinguishedCommonRootsOf([crvX10,px],1$K)$RFP(K)
+        listPtsIdl:=[projectivePoint([a,1,0]) for a in recOfZerosX10.zeros]
+        --now we got all of the projective points where z = 0 and y ^= 0
+        ratXY1 : List ProjPt:= affineRationalPoints( crv, extdegree )$SPWGRO
+        listPtsIdl:= concat(ratXY1,listPtsIdl)        
+        if  pointInIdeal?([crv],projectivePoint([1,0,0]))$PPFC1 then
+          listPtsIdl:=cons(projectivePoint([1,0,0]),listPtsIdl)
+        listPtsIdl
+
+    polyToX10(pol)==
+      zero?(pol) => 0
+      dd:= degree pol
+      lc:= leadingCoefficient pol
+      pp:= parts dd
+      lp:= last pp
+      ^zero?(lp) => polyToX10 reductum pol
+      e1:= pp.1
+      monomial(lc,e1)$SUP(K) + polyToX10 reductum pol
+
+    singularPointsWithRestriction(F,lstPol)==
+      Fx:=differentiate(F,index(1)$OV)
+      Fy:=differentiate(F,index(2)$OV)
+      Fz:=differentiate(F,index(3)$OV)
+      idealSingulier:List(PolyRing):=concat([F,Fx,Fy,Fz],lstPol)
+      algebraicSet(idealSingulier)
+

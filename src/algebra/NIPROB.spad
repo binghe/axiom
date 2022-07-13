@@ -1,0 +1,71 @@
+)abbrev domain NIPROB NumericalIntegrationProblem
+++ Author: Brian Dupee
+++ Date Created: December 1997
+++ Date Last Updated: December 1997
+++ References:
+++ Dupe95 Using Computer Algebra to Choose and Apply Numerical Routines
+++ Dewa92 Using Computer Algebra to Select Numerical Algorithms
+++ Description:
+++ \axiomType{NumericalIntegrationProblem} is a \axiom{domain}
+++ for the representation of Numerical Integration problems for use
+++ by ANNA. 
+++
+++ The representation is a Union of two record types - one for integration of
+++ a function of one variable:
+++
+++ \axiomType{Record}(var:\axiomType{Symbol},\br
+++ fn:\axiomType{Expression DoubleFloat},\br
+++ range:\axiomType{Segment OrderedCompletion DoubleFloat},\br
+++ abserr:\axiomType{DoubleFloat},\br
+++ relerr:\axiomType{DoubleFloat},)
+++
+++ and one for multivariate integration:
+++
+++ \axiomType{Record}(fn:\axiomType{Expression DoubleFloat},\br
+++ range:\axiomType{List Segment OrderedCompletion DoubleFloat},\br
+++ abserr:\axiomType{DoubleFloat},\br
+++ relerr:\axiomType{DoubleFloat},).
+ 
+NumericalIntegrationProblem() : SIG == CODE where
+
+ EDFA   ==> Expression DoubleFloat
+ SOCDFA ==> Segment OrderedCompletion DoubleFloat
+ DFA    ==> DoubleFloat
+ NIAA   ==> Record(var:Symbol,fn:EDFA,range:SOCDFA,abserr:DFA,relerr:DFA)
+ MDNIAA ==> Record(fn:EDFA,range:List SOCDFA,abserr:DFA,relerr:DFA)
+
+ SIG ==> SetCategory with
+
+    coerce : NIAA -> %
+      ++ coerce(x) is not documented
+
+    coerce : MDNIAA -> %
+      ++ coerce(x) is not documented
+
+    coerce : Union(nia:NIAA,mdnia:MDNIAA) -> %
+      ++ coerce(x) is not documented
+
+    coerce : % -> OutputForm
+      ++ coerce(x) is not documented
+
+    retract : % -> Union(nia:NIAA,mdnia:MDNIAA)
+      ++ retract(x) is not documented
+
+ CODE ==> add
+
+      Rep := Union(nia:NIAA,mdnia:MDNIAA)
+ 
+      coerce(s:NIAA) == [s]
+
+      coerce(s:MDNIAA) == [s]
+
+      coerce(s:Union(nia:NIAA,mdnia:MDNIAA)) == s
+
+      coerce(x:%):OutputForm ==
+        (x) case nia => (x.nia)::OutputForm
+        (x.mdnia)::OutputForm
+
+      retract(x:%):Union(nia:NIAA,mdnia:MDNIAA) ==
+        (x) case nia => [x.nia]
+        [x.mdnia]
+

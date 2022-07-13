@@ -1,0 +1,9 @@
+)abbrev category ATCANCL CanonicalClosedAttribute
+++ Description:
+++ The class of all integral domains such that 
+++ \spad{unitCanonical(a)*unitCanonical(b) = unitCanonical(a*b)}
+
+CanonicalClosedAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

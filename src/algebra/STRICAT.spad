@@ -1,0 +1,11 @@
+)abbrev category STRICAT StringCategory
+++ Description:
+++ A category for string-like objects
+
+StringCategory() : Category == SIG where
+
+  SIG ==> Join(StringAggregate(), SetCategory, OpenMath) with
+
+    string : Integer -> %
+      ++ string(i) returns the decimal representation of i in a string
+

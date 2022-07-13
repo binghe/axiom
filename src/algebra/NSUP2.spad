@@ -1,0 +1,24 @@
+)abbrev package NSUP2 NewSparseUnivariatePolynomialFunctions2
+++ Description:
+++ This package lifts a mapping from coefficient rings R to S to
+++ a mapping from sparse univariate polynomial over R to
+++ a sparse univariate polynomial over S.
+++ Note that the mapping is assumed
+++ to send zero to zero, since it will only be applied to the non-zero
+++ coefficients of the polynomial.
+
+NewSparseUnivariatePolynomialFunctions2(R,S) : SIG == CODE where
+  R : Ring
+  S : Ring
+
+  SIG ==> with
+
+    map : (R->S,NewSparseUnivariatePolynomial R) -> NewSparseUnivariatePolynomial S
+      ++ \axiom{map(func, poly)} creates a new polynomial by applying func to
+      ++ every non-zero coefficient of the polynomial poly.
+
+  CODE ==> add
+
+    map(f, p) == map(f, p)$UnivariatePolynomialCategoryFunctions2(R,
+             NewSparseUnivariatePolynomial R, S, NewSparseUnivariatePolynomial S)
+

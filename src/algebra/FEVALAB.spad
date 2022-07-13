@@ -1,0 +1,34 @@
+)abbrev category FEVALAB FullyEvalableOver
+++ Date Last Updated: June 3, 1991
+++ Description:
+++ This category provides a selection of evaluation operations
+++ depending on what the argument type R provides.
+
+FullyEvalableOver(R) : Category == SIG where
+  R : SetCategory
+
+  SIG ==> with
+
+    map : (R -> R, $) -> $
+      ++ map(f, ex) evaluates ex, applying f to values of type R in ex.
+
+    if R has Eltable(R, R) then Eltable(R, $)
+
+    if R has Evalable(R) then Evalable(R)
+
+    if R has InnerEvalable(Symbol, R) then InnerEvalable(Symbol, R)
+
+   add
+
+     if R has Eltable(R, R) then
+
+       elt(x:$, r:R) == map(y +-> y(r), x)
+
+     if R has Evalable(R) then
+
+       eval(x:$, l:List Equation R) == map(y +-> eval(y, l), x)
+
+     if R has InnerEvalable(Symbol, R) then
+
+       eval(x:$, ls:List Symbol, lv:List R) == map(y +-> eval(y, ls, lv), x)
+

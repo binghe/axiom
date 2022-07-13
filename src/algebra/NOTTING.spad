@@ -1,0 +1,29 @@
+)abbrev domain NOTTING NottinghamGroup
+++ Author: Mark Botch
+++ Description:
+++ This is an implmenentation of the Nottingham Group
+
+NottinghamGroup(F) : SIG == CODE where
+  F : FiniteFieldCategory
+
+  SIG ==> Group with
+
+    retract : UnivariateFormalPowerSeries F -> %
+
+  CODE ==> add
+
+    Rep:=UnivariateFormalPowerSeries F
+
+    coerce f == coerce(f::Rep)$UnivariateFormalPowerSeries(F)
+
+    retract f ==
+      if zero? coefficient(f,0) and one? coefficient(f,1)
+      then f::Rep
+      else error"The leading term must be x"
+
+    1 == monomial(1,1)
+
+    f*g == f.g
+
+    inv f == revert f
+

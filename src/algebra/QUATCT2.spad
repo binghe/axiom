@@ -1,0 +1,30 @@
+)abbrev package QUATCT2 QuaternionCategoryFunctions2
+++ Author: Robert S. Sutor
+++ Date Created: 23 May 1990
+++ Date Last Updated: 23 May 1990
+++ Description:
+++ \spadtype{QuaternionCategoryFunctions2} implements functions between
+++ two quaternion domains.  The function \spadfun{map} is used by
+++ the system interpreter to coerce between quaternion types.
+ 
+QuaternionCategoryFunctions2(QR,R,QS,S) : SIG == CODE where
+  R  : CommutativeRing
+  S  : CommutativeRing
+  QR : QuaternionCategory R
+  QS : QuaternionCategory S
+
+  SIG ==> with
+
+    map : (R -> S, QR) -> QS
+      ++ map(f,u) maps f onto the component parts of the quaternion u.
+      ++ to convert an expression in Quaterion(R) to Quaternion(S)
+      ++
+      ++X f(a:FRAC(INT)):COMPLEX(FRAC(INT)) == a::COMPLEX(FRAC(INT))
+      ++X q:=quatern(2/11,-8,3/4,1)
+      ++X map(f,q)
+
+  CODE ==> add
+
+      map(fn : R -> S, u : QR): QS ==
+        quatern(fn real u, fn imagI u, fn imagJ u, fn imagK u)$QS
+

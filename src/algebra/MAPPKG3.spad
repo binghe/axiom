@@ -1,0 +1,68 @@
+)abbrev package MAPPKG3 MappingPackage3
+++ Description: 
+++ Various Currying operations.
+
+MappingPackage3(A,B,C) : SIG == CODE where
+  A : SetCategory
+  B : SetCategory
+  C : SetCategory
+
+  NNI   ==>  NonNegativeInteger
+ 
+  SIG ==> with
+
+    curryRight : ((A,B)->C, B) -> (A ->C)
+      ++\spad{curryRight(f,b)} is the function \spad{g} such that
+      ++ \spad{g a = f(a,b)}.
+
+    curryLeft :  ((A,B)->C, A) -> (B ->C)
+      ++\spad{curryLeft(f,a)} is the function \spad{g}
+      ++ such that \spad{g b = f(a,b)}.
+ 
+    constantRight : (A -> C) -> ((A,B)->C)
+      ++\spad{constantRight(f)} is the function \spad{g}
+      ++ such that \spad{g (a,b)= f a}.
+
+    constantLeft : (B -> C) -> ((A,B)->C)
+      ++\spad{constantLeft(f)} is the function \spad{g}
+      ++ such that \spad{g (a,b)= f b}.
+ 
+    twist : ((A,B)->C) -> ((B,A)->C)
+      ++\spad{twist(f)} is the function \spad{g}
+      ++ such that \spad{g (a,b)= f(b,a)}.
+ 
+    "*" : (B->C, A->B) -> (A->C)
+      ++\spad{f*g} is the function \spad{h}
+      ++ such that \spad{h x= f(g x)}.
+ 
+  CODE ==> add
+ 
+    MappingPackageInternalHacks3(A, B, C)
+ 
+    a: A
+    b: B
+    c: C
+    faa:  A -> A
+    f0c:  ()-> C
+    fac:  A -> C
+    fbc:  B -> C
+    fab:  A -> B
+    fabc: (A,B)->C
+    faac: (A,A)->C
+ 
+    -- Fix left and right arguments as constants.
+    curryRight(fabc,b) == (a:A):C +-> fabc(a,b)
+
+    curryLeft(fabc,a)  == (b:B):C +-> fabc(a,b)
+ 
+    -- Add left and right arguments which are ignored.
+    constantRight fac == (a:A, b:B):C +-> fac a
+
+    constantLeft fbc  == (a:A, b:B):C +-> fbc b
+ 
+    -- Combinators to rearrange arguments.
+    twist fabc == (b:B, a:A):C +-> fabc(a,b)
+
+    -- Functional composition
+    fbc*fab == (a:A):C +-> comp(fbc,fab,a)
+

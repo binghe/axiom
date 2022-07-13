@@ -1,0 +1,22 @@
+)abbrev domain TABLE Table
+++ Author: Stephen M. Watt, Barry Trager
+++ Date Created: 1985
+++ Date Last Updated: Sept 15, 1992
+++ Description:
+++ This is the general purpose table type.
+++ The keys are hashed to look up the entries.
+++ This creates a \spadtype{HashTable} if equal for the Key
+++ domain is consistent with Lisp EQUAL otherwise an
+++ \spadtype{AssociationList}
+
+Table(Key,Entry) : SIG == CODE where
+  Key : SetCategory
+  Entry : SetCategory
+
+  SIG ==> TableAggregate(Key, Entry) with
+                     finiteAggregate
+
+  CODE ==> InnerTable(Key, Entry,
+        if hashable(Key)$Lisp then HashTable(Key, Entry, "UEQUAL")
+          else AssociationList(Key, Entry))
+

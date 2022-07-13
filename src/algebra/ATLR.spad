@@ -1,0 +1,8 @@
+)abbrev category ATLR LazyRepresentationAttribute
+++ Description:
+++ The class of all domains which have a lazy representation
+
+LazyRepresentationAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

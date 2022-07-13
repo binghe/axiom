@@ -1,0 +1,8 @@
+)abbrev category REAL RealConstant
+++ Description:
+++ The category of real numeric domains, that is, convertible to floats.
+
+RealConstant() : Category == SIG where
+
+  SIG ==> Join(ConvertibleTo DoubleFloat, ConvertibleTo Float)
+

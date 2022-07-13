@@ -1,0 +1,30 @@
+)abbrev category FVC FortranVectorCategory
+++ Author: Mike Dewar
+++ Date Created: October 1993
+++ Date Last Updated: 18 March 1994
+++ Description:
+++ \axiomType{FortranVectorCategory} provides support for
+++ producing Functions and Subroutines when the input to these
+++ is an AXIOM object of type \axiomType{Vector} or in domains
+++ involving \axiomType{FortranCode}.
+
+FortranVectorCategory() : Category == SIG where
+
+  SIG ==> FortranProgramCategory with
+
+    coerce : Vector MachineFloat -> $
+      ++ coerce(v) produces an ASP which returns the value of \spad{v}.
+
+    coerce : List FortranCode -> $
+      ++ coerce(e) takes an object from \spadtype{List FortranCode} and
+      ++  uses it as the body of an ASP.
+
+    coerce : FortranCode -> $
+      ++ coerce(e) takes an object from \spadtype{FortranCode} and
+      ++  uses it as the body of an ASP.
+
+    coerce : Record(localSymbols:SymbolTable,code:List(FortranCode)) -> $
+      ++ coerce(e) takes the component of \spad{e} from
+      ++ \spadtype{List FortranCode} and uses it as the body of the ASP,
+      ++ making the declarations in the \spadtype{SymbolTable} component.
+

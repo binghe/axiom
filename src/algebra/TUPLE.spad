@@ -1,0 +1,56 @@
+)abbrev domain TUPLE Tuple
+++ Author: Mark Botch
+++ Description:
+++ This domain is used to interface with the interpreter's notion
+++ of comma-delimited sequences of values.
+
+Tuple(S) : SIG == CODE where
+  S : Type
+
+  SIG ==> CoercibleTo(PrimitiveArray S) with
+
+    coerce : PrimitiveArray S -> %
+      ++ coerce(a) makes a tuple from primitive array a
+      ++
+      ++X t1:PrimitiveArray(Integer):= [i for i in 1..10]
+      ++X t2:=coerce(t1)$Tuple(Integer) 
+
+    select : (%, NonNegativeInteger) -> S
+      ++ select(x,n) returns the n-th element of tuple x.
+      ++ tuples are 0-based
+      ++
+      ++X t1:PrimitiveArray(Integer):= [i for i in 1..10]
+      ++X t2:=coerce(t1)$Tuple(Integer)
+      ++X select(t2,3)
+  
+    length : % -> NonNegativeInteger
+      ++ length(x) returns the number of elements in tuple x
+      ++
+      ++X t1:PrimitiveArray(Integer):= [i for i in 1..10]
+      ++X t2:=coerce(t1)$Tuple(Integer)
+      ++X length(t2)
+  
+    if S has SetCategory then SetCategory
+
+  CODE ==> add
+
+    Rep := Record(len : NonNegativeInteger, elts : PrimitiveArray S)
+
+    coerce(x: PrimitiveArray S): %  == [#x, x]
+
+    coerce(x:%): PrimitiveArray(S) == x.elts
+
+    length x == x.len
+
+    select(x, n) ==
+      n >= x.len => error "Index out of bounds"
+      x.elts.n
+
+    if S has SetCategory then
+
+      x = y == (x.len = y.len) and (x.elts =$PrimitiveArray(S) y.elts)
+
+      coerce(x : %): OutputForm ==
+        paren [(x.elts.i)::OutputForm
+               for i in minIndex x.elts .. maxIndex x.elts]$List(OutputForm)
+

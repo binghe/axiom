@@ -1,0 +1,106 @@
+)abbrev domain SCELL SimpleCell
+
+SimpleCell(TheField,ThePols) : SIG == CODE where
+  TheField : RealClosedField
+  ThePols : UnivariatePolynomialCategory(TheField)
+
+  O ==> OutputForm
+  B ==> Boolean
+  Z ==> Integer
+  N ==> NonNegativeInteger
+  VARS ==> RealPolynomialUtilitiesPackage(TheField,ThePols)
+  LF ==> List(TheField)
+
+  SIG ==> CoercibleTo(O) with
+
+     allSimpleCells : (ThePols,Symbol) -> List %
+
+     allSimpleCells : (List(ThePols),Symbol) -> List %
+
+     hasDimension? : % -> B
+
+     samplePoint : % -> TheField
+
+     stablePol : % -> ThePols
+
+     variableOf : % -> Symbol
+
+     separe : (LF,TheField,TheField) -> LF
+
+     pointToCell : (TheField,B,Symbol) -> %
+
+  CODE ==> add
+
+     Rep := Record(samplePoint:TheField,
+                   hasDim:B,
+                   varOf:Symbol)
+
+     samplePoint(c) == c.samplePoint
+
+     stablePol(c) == error "Prout"
+
+     hasDimension?(c) == c.hasDim
+
+     variableOf(c) == c.varOf
+
+     coerce(c:%):O ==
+       o : O := ((c.varOf)::O) = ((c.samplePoint)::O)
+       brace [o,(c.hasDim)::O]
+
+     separe(liste,gauche,droite) ==
+       milieu : TheField := (gauche + droite) / (2::TheField)
+       liste = [] => [milieu]
+       #liste = 1 => [gauche,first(liste),droite]
+       nbe := first(liste)
+       lg :List(TheField) := []
+       ld :List(TheField) := rest(liste)
+       sg := sign(milieu-nbe)
+       while sg > 0 repeat
+         lg := cons(nbe,lg)
+         ld = [] => return(separe(reverse(lg),gauche,milieu))
+         nbe := first(ld)
+         sg := sign(milieu-nbe)
+         ld := rest(ld)
+       sg < 0 =>
+         append(separe(reverse(lg),gauche,milieu),
+                rest(separe(cons(nbe,ld),milieu,droite)))
+       newDroite := (gauche+milieu)/(2::TheField)
+       null lg =>
+           newGauche := (milieu+droite)/(2::TheField)
+           while newGauche >= first(ld) repeat
+             newGauche := (milieu+newGauche)/(2::TheField)
+           append([gauche,milieu],separe(ld,newGauche,droite))
+       while newDroite <= first(lg) repeat
+         newDroite := (newDroite+milieu)/(2::TheField)
+       newGauche := (milieu+droite)/(2::TheField)
+       null ld => append(separe(reverse(lg),gauche,newDroite),[milieu,droite])
+       while newGauche >= first(ld) repeat
+         newGauche := (milieu+newGauche)/(2::TheField)
+       append(separe(reverse(lg),gauche,newDroite),
+              cons(milieu,separe(ld,newGauche,droite)))
+
+     pointToCell(sp,hasDim?,varName) ==
+       [sp,hasDim?,varName]$Rep
+
+     allSimpleCells(p:ThePols,var:Symbol) ==
+       allSimpleCells([p],var)
+
+     PACK ==> CylindricalAlgebraicDecompositionUtilities(TheField,ThePols)
+
+     allSimpleCells(lp:List(ThePols),var:Symbol) ==
+       lp1 := gcdBasis(lp)$PACK
+       null(lp1) => [pointToCell(0,true,var)]
+       b := ("max" / [ boundOfCauchy(p)$VARS for p in lp1 ])::TheField
+       l := "append" / [allRootsOf(makeSUP(unitCanonical(p))) for p in lp1]
+       l := sort(l)
+       l1 := separe(l,-b,b)
+       res : List(%) := [pointToCell(first(l1),true,var)]
+       l1 := rest(l1)
+       while not(null(l1)) repeat
+         res := cons(pointToCell(first(l1),false,var),res)
+         l1 := rest(l1)
+         l1 = [] => return(error "Liste vide")
+         res := cons(pointToCell(first(l1),true,var),res)
+         l1 := rest(l1)
+       reverse! res
+

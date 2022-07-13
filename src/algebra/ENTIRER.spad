@@ -1,0 +1,17 @@
+)abbrev category ENTIRER EntireRing
+++ Description:
+++ Entire Rings (non-commutative Integral Domains), a ring
+++ not necessarily commutative which has no zero divisors.
+++
+++ Axioms\br
+++ \tab{5}\spad{ab=0 => a=0 or b=0}  -- known as noZeroDivisors\br
+++ \tab{5}\spad{not(1=0)}
+
+EntireRing() : Category == SIG where
+
+  SIG ==> Join(Ring,BiModule(%,%)) with
+
+    noZeroDivisors
+      ++ if a product is zero then one of the factors
+      ++ must be zero.
+

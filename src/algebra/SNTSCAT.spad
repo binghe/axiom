@@ -1,0 +1,22 @@
+)abbrev category SNTSCAT SquareFreeNormalizedTriangularSetCategory
+++ Author: Marc Moreno Maza
+++ Date Created: 10/07/1998
+++ Date Last Updated: 12/16/1998
+++ References :
+++ Laza91 A new method for solving algebraic systems of positive dimension
+++ Description:
+++ The category of square-free and normalized triangular sets.
+++ Thus, up to the primitivity axiom of [1], these sets are Lazard
+++ triangular sets.
+
+SquareFreeNormalizedTriangularSetCategory(R,E,V,P) : Category == SIG where
+  R : GcdDomain
+  E : OrderedAbelianMonoidSup
+  V : OrderedSet
+  P : RecursivePolynomialCategory(R,E,V)
+
+  SFRTS ==> SquareFreeRegularTriangularSetCategory(R,E,V,P)
+  NTSC ==> NormalizedTriangularSetCategory(R,E,V,P)
+
+  SIG ==> Join(SFRTS,NTSC)
+

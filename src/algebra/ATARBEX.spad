@@ -1,0 +1,8 @@
+)abbrev category ATARBEX ArbitraryExponentAttribute
+++ Description:
+++ Approximate numbers with arbitrarily large exponents
+
+ArbitraryExponentAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

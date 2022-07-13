@@ -1,0 +1,75 @@
+)abbrev package PARAMP ParametrizationPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+ParametrizationPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc) : SIG == CODE where
+  K : Field
+  symb : List(Symbol)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  OV  ==> OrderedVariableList(symb)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+
+  SIG ==>  with
+
+    parametrize : (PolyRing,List(PCS)) -> PCS
+
+    parametrize : (PolyRing,Plc) -> PCS    
+      ++ parametrize(f,pl) returns the local parametrization of the 
+      ++ polynomial function f at the place pl. Note that local 
+      ++ parametrization of the place must have first been compute and set.
+      ++ For simple point on a curve, this done with \spad{pointToPlace}. 
+      ++ The  local parametrization places corresponding to a leaf in a 
+      ++ desingularization tree are compute at the moment of
+      ++ their "creation". (See package \spad{DesingTreePackage}. 
+
+    parametrize : (PolyRing,PolyRing,Plc) -> PCS    
+      ++ parametrize(f,g,pl) returns the local parametrization of the  
+      ++ rational function f/g at the place pl. Note that local 
+      ++ parametrization of the place must have first been compute and set.
+      ++ For simple point on a curve, this done with \spad{pointToPlace}. 
+      ++ The  local parametrization places corresponding to a leaf in a 
+      ++ desingularization tree are compute at the moment of
+      ++ their "creation". (See package \spad{DesingTreePackage}. 
+
+    parametrize : (PolyRing,Plc,Integer) -> PCS    
+      ++ parametrize(f,pl,n) returns t**n * parametrize(f,p). 
+
+  CODE ==>  add
+
+    import PCS
+    import PolyRing
+    
+    -- the following returns the parametrization in term of 
+    -- the precomputed local parametrization
+    -- of the point pt. Note if pl is a place and pl = pt::PLc then 
+    -- parametrize(f,pt) <> parametrize(pl) unless pt is a simple point
+    parametrize(f:PolyRing,localPar:List(PCS))==
+      zero?(f) => 0
+      lc:K:=leadingCoefficient(f)
+      ld:E:=degree f
+      ldp:List NonNegativeInteger :=parts(ld)
+      if empty?(localPar) then error _
+              "the parametrization of the place or leaf has not been done yet!"
+      monoPar:PCS:=reduce("*",[ s**e for s in localPar for e in ldp])
+      lc* monoPar + parametrize(reductum(f),localPar)
+ 
+    parametrize(f:PolyRing,pt:Plc)==
+      zero?(f) => 0
+      localPar:List PCS:=localParam pt
+      parametrize(f,localPar)
+      
+    parametrize(f:PolyRing,g:PolyRing,pt:Plc)==
+      sf:=parametrize(f,pt)
+      sg:=parametrize(g,pt)
+      sf * inv sg
+
+    parametrize(f:PolyRing,pt:Plc,n:Integer)==
+      s:=parametrize(f,pt)
+      shift(s,n)
+

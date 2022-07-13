@@ -1,0 +1,265 @@
+)abbrev domain GOPT0 GuessOptionFunctions0
+++ Author: Martin Rubey
+++ Description: 
+++ GuessOptionFunctions0 provides operations that extract the
+++ values of options for Guess.
+
+GuessOptionFunctions0() : SIG == CODE where
+
+  LGOPT ==> List GuessOption
+
+  SIG ==> SetCategory with
+
+    maxDerivative : LGOPT -> Union(NonNegativeInteger, "arbitrary")
+      ++ maxDerivative returns the specified maxDerivative.
+
+    maxShift : LGOPT -> Union(NonNegativeInteger, "arbitrary")
+      ++ maxShift returns the specified maxShift.
+
+    maxSubst : LGOPT -> Union(PositiveInteger, "arbitrary")
+      ++ maxSubst returns the specified maxSubst.
+
+    maxPower : LGOPT -> Union(PositiveInteger, "arbitrary")
+      ++ maxPower returns the specified maxPower.
+
+    homogeneous : LGOPT -> Union(PositiveInteger, Boolean)
+      ++ homogeneous returns whether we allow only homogeneous algebraic
+      ++ differential equations, default being false
+
+    Somos : LGOPT -> Union(PositiveInteger, Boolean)
+      ++ Somos returns whether we allow only Somos-like operators, default
+      ++ being false
+
+    maxLevel : LGOPT -> Union(NonNegativeInteger, "arbitrary")
+      ++ maxLevel returns the specified maxLevel.
+
+    maxDegree : LGOPT -> Union(NonNegativeInteger, "arbitrary")
+      ++ maxDegree returns the specified maxDegree.
+
+    maxMixedDegree : LGOPT -> NonNegativeInteger
+      ++ maxMixedDegree returns the specified maxMixedDegree.
+
+    allDegrees : LGOPT -> Boolean
+      ++ allDegrees returns whether all possibilities of the degree vector
+      ++ should be tried, the default being false.
+
+    safety : LGOPT -> NonNegativeInteger
+      ++ safety returns the specified safety or 1 as default.
+
+    check : LGOPT -> Union("skip", "MonteCarlo", "deterministic")
+      ++ check(d) specifies how we want to check the solution.  If
+      ++ the value is "skip", we return the solutions found by the
+      ++ interpolation routine without checking.  If the value is
+      ++ "MonteCarlo", we use a probabilistic check.  The default is
+      ++ "deterministic".
+
+    checkExtraValues : LGOPT -> Boolean
+      ++ checkExtraValues(d) specifies whether we want to check the
+      ++ solution beyond the order given by the degree bounds.  The
+      ++ default is true.
+
+    one : LGOPT -> Boolean
+      ++ one returns whether we need only one solution, default being true.
+
+    functionName : LGOPT -> Symbol
+      ++ functionName returns the name of the function given by the algebraic
+      ++ differential equation, default being f
+
+    variableName : LGOPT -> Symbol
+      ++ variableName returns the name of the variable used in by the
+      ++ algebraic differential equation, default being x
+
+    indexName : LGOPT -> Symbol
+      ++ indexName returns the name of the index variable used for the
+      ++ formulas, default being n
+
+    displayAsGF : LGOPT -> Boolean
+      ++ displayAsGF specifies whether the result is a generating function
+      ++ or a recurrence. This option should not be set by the user, but rather
+      ++ by the HP-specification, therefore, there is no default.
+
+    debug : LGOPT -> Boolean
+      ++ debug returns whether we want additional output on the progress,
+      ++ default being false
+
+    checkOptions : LGOPT -> Void
+      ++ checkOptions checks whether the given options are consistent, and
+      ++ yields an error otherwise
+
+  CODE ==> add
+
+    maxLevel l ==
+      if (opt := option(l, 'maxLevel)) case "failed" then
+        "arbitrary"
+      else
+        retract(opt::Any)$AnyFunctions1(Union(NonNegativeInteger, "arbitrary"))
+
+    maxDerivative l ==
+      if (opt := option(l, 'maxDerivative)) case "failed" then
+        "arbitrary"
+      else
+        retract(opt::Any)$AnyFunctions1(Union(NonNegativeInteger, "arbitrary"))
+
+    maxShift l == maxDerivative l
+
+    maxSubst l ==
+        d := maxDerivative l
+        if d case NonNegativeInteger
+        then (d+1)::PositiveInteger
+        else d
+
+    maxDegree l ==
+      if (opt := option(l, 'maxDegree)) case "failed" then
+        "arbitrary"
+      else
+        retract(opt::Any)$AnyFunctions1(Union(NonNegativeInteger, "arbitrary"))
+
+    maxMixedDegree l ==
+      if (opt := option(l, 'maxMixedDegree)) case "failed" then
+        0
+      else
+        retract(opt :: Any)$AnyFunctions1(NonNegativeInteger)
+
+    allDegrees l ==
+      if (opt := option(l, 'allDegrees)) case "failed" then
+        false
+      else
+        retract(opt :: Any)$AnyFunctions1(Boolean)
+
+    maxPower l ==
+      if (opt := option(l, 'maxPower)) case "failed" then
+        "arbitrary"
+      else
+        retract(opt :: Any)$AnyFunctions1(Union(PositiveInteger, "arbitrary"))
+
+    safety l ==
+      if (opt := option(l, 'safety)) case "failed" then
+        1$NonNegativeInteger
+      else
+        retract(opt :: Any)$AnyFunctions1(NonNegativeInteger)
+
+    check l ==
+       if (opt := option(l, 'check)) case "failed" then
+           "deterministic"
+       else
+           retract(opt::Any)$AnyFunctions1(_
+                                 Union("skip", "MonteCarlo", "deterministic"))
+
+    checkExtraValues l ==
+       if (opt := option(l, 'checkExtraValues)) case "failed" then
+           true
+       else
+           retract(opt :: Any)$AnyFunctions1(Boolean)
+
+    one l ==
+      if (opt := option(l, 'one)) case "failed" then
+        true
+      else
+        retract(opt :: Any)$AnyFunctions1(Boolean)
+
+    debug l ==
+      if (opt := option(l, 'debug)) case "failed" then
+        false
+      else
+        retract(opt :: Any)$AnyFunctions1(Boolean)
+
+    homogeneous l ==
+      if (opt := option(l, 'homogeneous)) case "failed" then
+        false
+      else
+        retract(opt :: Any)$AnyFunctions1(Union(PositiveInteger, Boolean))
+
+    Somos l ==
+      if (opt := option(l, 'Somos)) case "failed" then
+        false
+      else
+        retract(opt :: Any)$AnyFunctions1(Union(PositiveInteger, Boolean))
+
+    variableName l ==
+      if (opt := option(l, 'variableName)) case "failed" then
+        'x
+      else
+        retract(opt :: Any)$AnyFunctions1(Symbol)
+
+    functionName l ==
+      if (opt := option(l, 'functionName)) case "failed" then
+        'f
+      else
+        retract(opt :: Any)$AnyFunctions1(Symbol)
+
+    indexName l ==
+      if (opt := option(l, 'indexName)) case "failed" then
+        'n
+      else
+        retract(opt :: Any)$AnyFunctions1(Symbol)
+
+    displayAsGF l ==
+      if (opt := option(l, 'displayAsGF)) case "failed" then
+        error "GuessOption: displayAsGF not set"
+      else
+        retract(opt :: Any)$AnyFunctions1(Boolean)
+
+    NNI ==> NonNegativeInteger
+
+    PI  ==> PositiveInteger
+
+    checkOptions l ==
+      maxD := maxDerivative l
+      maxP := maxPower l
+      homo := homogeneous l
+      Somo := Somos l
+
+      if Somo case PI then
+          if one? Somo then
+              error "Guess: Somos must be Boolean or at least two"
+
+          if maxP case PI and one? maxP then
+              error "Guess: Somos requires that maxPower is at least two"
+
+          if maxD case NNI and maxD > Somo then
+              err:String:=concat [_
+                "Guess: if Somos is an integer, it should be larger than ",_
+                "maxDerivative/maxShift or at least as big as maxSubst" ]
+              error err
+      else
+          if Somo then
+              if maxP case PI and one? maxP then
+                  error "Guess: Somos requires that maxPower is at least two"
+
+              if not (maxD case NNI) or zero? maxD or one? maxD then
+                  err:String:= concat [_
+                    "Guess: Somos==true requires that maxDerivative/maxShift",_
+                    " is an integer, at least two, or maxSubst is an ",_
+                    "integer, at least three" ]
+                  error err
+
+              if not (maxP case PI) and homo case Boolean and not homo then
+                  err:String:= concat [_
+                    "Guess: Somos requires that maxPower is set or ", _
+                    "homogeneous is not false" ]
+                  error err
+
+      if homo case PI then
+          if maxP case PI and maxP ~= homo then
+              err:String:= _
+                "Guess: only one of homogeneous and maxPower may be an integer"
+              error err
+
+          if maxD case NNI and zero? maxD then
+              err:String:= concat [_
+                "Guess: homogeneous requires that maxShift/maxDerivative ",_
+                "is at least one or maxSubst is at least two" ]
+              error err
+      else
+          if homo then
+              if not maxP case PI then
+                  err:String:= concat [_
+                    "Guess: homogeneous==true requires that maxPower is ", _
+                    "an integer" ]
+                  error err
+
+              if maxD case NNI and zero? maxD then
+                  err:String:= concat [_
+                    "Guess: homogeneous requires that maxShift/maxDerivative",_
+                    " is at least one or maxSubst is at least two" ]
+                  error err

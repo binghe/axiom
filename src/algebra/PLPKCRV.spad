@@ -1,0 +1,90 @@
+)abbrev package PLPKCRV PolynomialPackageForCurve
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+PolynomialPackageForCurve(K,PolyRing,E,dim,ProjPt) : SIG == CODE where
+  K : Field
+  dim : NonNegativeInteger
+  E : DirectProductCategory(dim,NonNegativeInteger)
+  PolyRing : FiniteAbelianMonoidRing(K,E) --   PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+
+  PackPoly ==> PackageForPoly(K,PolyRing,E,dim)
+
+  SIG ==> with
+
+    pointInIdeal? : (List(PolyRing),ProjPt) -> Boolean
+      ++ pointInIdeal? test if the given point is in the algebraic set 
+      ++ defined by the given list of polynomials.
+
+    eval : (PolyRing,ProjPt) -> K
+      ++ eval returns the value at given point.
+
+    translateToOrigin : (PolyRing,ProjPt,Integer) -> PolyRing
+      ++ translateToOrigin translate the polynomial from the given point 
+      ++ to the origin
+
+    translateToOrigin : (PolyRing,ProjPt) -> PolyRing
+      ++ translateToOrigin translate the polynomial from the given point 
+      ++ to the origin
+
+    minimalForm : (PolyRing,ProjPt) -> PolyRing
+      ++ minimalForm returns the minimal form after translation to 
+      ++ the origin.
+
+    minimalForm : (PolyRing,ProjPt,Integer) -> PolyRing
+      ++ minimalForm returns the minimal form after translation to 
+      ++ the origin.
+
+    multiplicity : (PolyRing,ProjPt) -> NonNegativeInteger
+      ++ multiplicity returns the multiplicity of the polynomial at 
+      ++ given point.
+
+    multiplicity : (PolyRing,ProjPt,Integer) -> NonNegativeInteger
+      ++ multiplicity returns the multiplicity of the polynomial at 
+      ++ given point.
+
+  CODE ==> add
+
+    import PolyRing
+    import ProjPt
+    import PackPoly
+
+    translateToOrigin(pol,pt,nV)==
+        zero?(pt.nV) => error "Impossible de translater"
+        pt:=homogenize(pt,nV)
+        lpt:List K:=list(pt)$ProjPt
+        translate(pol,lpt,nV)
+        
+    pointInIdeal?(lstPol,pt)==
+      temp:Boolean:=true()$Boolean
+      for pol in lstPol repeat
+        temp:=(zero?(eval(pol,pt)) and temp)
+      temp
+
+    eval(f,pt)==
+      zero? f => 0
+      lpt:List(K) := list pt
+      dd:List NonNegativeInteger := entries degree f
+      lc:= leadingCoefficient f
+      ee:= reduce( "*" , [ p**e for p in lpt for e in dd | ^zero?(e)], 1$K)
+      lc * ee + eval( reductum f, pt) 
+
+    translateToOrigin(pol,pt)==
+      translateToOrigin(pol,pt,lastNonNull(pt))
+
+    multiplicity(crb,pt)==
+      degreeOfMinimalForm(translateToOrigin(crb,pt))
+
+    multiplicity(crb,pt,nV)==
+      degreeOfMinimalForm(translateToOrigin(crb,pt,nV))
+
+    minimalForm(crb,pt)==
+      minimalForm(translateToOrigin(crb,pt))
+
+    minimalForm(crb,pt,nV)==
+      minimalForm(translateToOrigin(crb,pt,nV))
+

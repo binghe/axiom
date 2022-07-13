@@ -1,0 +1,13 @@
+)abbrev domain BPADIC BalancedPAdicInteger
+++ Author: Clifton J. Williamson
+++ Date Created: 15 May 1990
+++ Date Last Updated: 15 May 1990
+++ Description:
+++ Stream-based implementation of Zp: p-adic numbers are represented as
+++ sum(i = 0.., a[i] * p^i), where the a[i] lie in -(p - 1)/2,...,(p - 1)/2.
+
+BalancedPAdicInteger(p) == CODE where
+  p : Integer
+
+  CODE ==> InnerPAdicInteger(p,false$Boolean)
+

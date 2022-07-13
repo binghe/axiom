@@ -1,0 +1,33 @@
+)abbrev category LIECAT LieAlgebra
+++ Author: Michel Petitot (petitot@lifl.fr).
+++ Date Created: 91
+++ Date Last Updated: 7 Juillet 92
+++ Description:
+++ The category of Lie Algebras.
+++ It is used by the domains of non-commutative algebra,
+++ LiePolynomial and XPBWPolynomial. 
+
+LieAlgebra(R) : Category == SIG where
+  R : CommutativeRing
+
+  SIG ==> Module(R) with
+
+    construct :  ($,$) -> $
+      ++ \axiom{construct(x,y)} returns the Lie bracket of \axiom{x} 
+      ++ and \axiom{y}.
+
+    NullSquare 
+      ++ \axiom{NullSquare} means that \axiom{[x,x] = 0} holds.
+
+    JacobiIdentity 
+      ++ \axiom{JacobiIdentity} means that 
+      ++ \axiom{[x,[y,z]]+[y,[z,x]]+[z,[x,y]] = 0} holds.
+
+    if R has Field then 
+
+       "/" : ($,R) -> $
+         ++ \axiom{x/r} returns the division of \axiom{x} by \axiom{r}.
+   add
+
+      if R has Field then x / r == inv(r)$R * x
+

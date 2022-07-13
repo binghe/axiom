@@ -1,0 +1,26 @@
+)abbrev category SETCAT SetCategory
+++ Date Last Updated: November 10, 2009 tpd happy birthday
+++ Description:
+++ \spadtype{SetCategory} is the basic category for describing a collection
+++ of elements with \spadop{=} (equality) and \spadfun{coerce} to 
+++ output form.
+++
+++ Conditional Attributes\br
+++ \tab{5}canonical\tab{5}data structure equality is the same as \spadop{=}
+
+SetCategory() : Category == SIG where
+
+  SIG ==> Join(BasicType,CoercibleTo OutputForm) with
+
+    hash : % -> SingleInteger  
+      ++ hash(s) calculates a hash code for s.
+  
+    latex : % -> String       
+      ++ latex(s) returns a LaTeX-printable output representation of s.
+
+   add
+
+      hash(s : %):  SingleInteger == SXHASH(s)$Lisp
+
+      latex(s : %): String == "\mbox{\bf Unimplemented}"
+

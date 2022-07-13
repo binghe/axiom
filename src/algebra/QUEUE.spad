@@ -1,0 +1,233 @@
+)abbrev domain QUEUE Queue
+++ Author: Michael Monagan and Stephen Watt
+++ Date Created:June 86 and July 87
+++ Date Last Updated:Feb 92
+++ Description:
+++ Linked List implementation of a Queue
+--% Dequeue and Heap data types
+ 
+Queue(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> QueueAggregate S with
+
+    queue : List S -> %
+      ++ queue([x,y,...,z]) creates a queue with first (top)
+      ++ element x, second element y,...,and last (bottom) element z.
+      ++
+      ++X e:Queue INT:= queue [1,2,3,4,5]
+
+    -- Inherited Signatures repeated for examples documentation
+
+    dequeue_! : % -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X dequeue! a
+      ++X a
+
+    extract_! : % -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X extract! a
+      ++X a
+
+    enqueue_! : (S,%) -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X enqueue! (9,a)
+      ++X a
+
+    insert_! : (S,%) -> %
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X insert! (8,a)
+      ++X a
+
+    inspect : % -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X inspect a
+
+    front : % -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X front a
+
+    back : % -> S
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X back a
+
+    rotate_! : % -> %
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X rotate! a
+
+    length : % -> NonNegativeInteger
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X length a
+
+    less? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X less?(a,9)
+
+    more? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X more?(a,9)
+
+    size? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X size?(a,5)
+
+    bag : List S -> %
+      ++
+      ++X bag([1,2,3,4,5])$Queue(INT)
+
+    empty? : % -> Boolean
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X empty? a
+
+    empty : () -> %
+      ++
+      ++X b:=empty()$(Queue INT)
+
+    sample : () -> %
+      ++
+      ++X sample()$Queue(INT)
+
+    copy : % -> %
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X copy a
+
+    eq? : (%,%) -> Boolean
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X b:=copy a
+      ++X eq?(a,b)
+
+    map :  ((S -> S),%) -> %
+      ++
+      ++X a:Queue INT:= queue [1,2,3,4,5]
+      ++X map(x+->x+10,a)
+      ++X a
+
+    if $ has shallowlyMutable then
+
+      map! :  ((S -> S),%) -> %
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X map!(x+->x+10,a)
+        ++X a
+
+    if S has SetCategory then
+
+      latex : % -> String
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X latex a
+
+      hash : % -> SingleInteger
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X hash a
+
+      coerce : % -> OutputForm
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X coerce a
+
+      "=" : (%,%) -> Boolean
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X b:Queue INT:= queue [1,2,3,4,5]
+        ++X (a=b)@Boolean
+
+      "~=" : (%,%) -> Boolean
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X b:=copy a
+        ++X (a~=b)
+
+    if % has finiteAggregate then
+
+      every? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X every?(x+->(x=4),a)
+
+      any? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X any?(x+->(x=4),a)
+
+      count :  ((S -> Boolean),%) -> NonNegativeInteger
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X count(x+->(x>2),a)
+
+      _# : % -> NonNegativeInteger
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X #a
+
+      parts : % -> List S
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X parts a
+
+      members : % -> List S
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X members a
+
+    if % has finiteAggregate and S has SetCategory then
+
+      member? : (S,%) -> Boolean
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X member?(3,a)
+
+      count : (S,%) -> NonNegativeInteger
+        ++
+        ++X a:Queue INT:= queue [1,2,3,4,5]
+        ++X count(4,a)
+
+  CODE ==> Stack S add
+
+    Rep := Reference List S
+
+    lastTail==> LAST$Lisp
+
+    enqueue_!(e,q) ==
+        if null deref q then setref(q, list e)
+        else lastTail.(deref q).rest := list e
+        e
+
+    insert_!(e,q) == (enqueue_!(e,q);q)
+
+    dequeue_! q ==
+        empty? q => error "empty queue"
+        e := first deref q
+        setref(q,rest deref q)
+        e
+
+    extract_! q == dequeue_! q
+
+    rotate_! q == if empty? q then q else (enqueue_!(dequeue_! q,q); q)
+
+    length q == # deref q
+
+    front q == if empty? q then error "empty queue" else first deref q
+
+    inspect q == front q
+
+    back q == if empty? q then error "empty queue" else last deref q
+
+    queue q == ref copy q
+

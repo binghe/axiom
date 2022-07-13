@@ -1,0 +1,84 @@
+)abbrev domain BINFILE BinaryFile
+++ Author: Barry M. Trager
+++ Date Created: 1993
+++ Description: 
+++ This domain provides an implementation of binary files. Data is
+++ accessed one byte at a time as a small integer.
+
+BinaryFile() : SIG == CODE where
+ 
+  SIG ==> FileCategory(FileName, SingleInteger) with
+
+    readIfCan_! : % -> Union(SingleInteger, "failed")
+      ++ readIfCan!(f) returns a value from the file f, if possible.
+      ++ If f is not open for reading, or if f is at the end of file
+      ++ then \spad{"failed"} is the result.
+
+    position : % -> SingleInteger
+      ++ position(f) returns the current byte-position in the file f.
+
+    position_! : (%, SingleInteger) -> SingleInteger
+      ++ position!(f, i) sets the current byte-position to i.
+
+  CODE ==> File(SingleInteger) add
+
+    FileState ==> SExpression
+ 
+    Rep := Record(fileName:   FileName,    _
+                  fileState:  FileState,   _
+                  fileIOmode: String)
+ 
+    defstream(fn: FileName, mode: String): FileState ==
+      mode = "input"  =>
+        not readable? fn => error ["File is not readable", fn]
+        BINARY__OPEN__INPUT(fn::String)$Lisp
+      mode = "output" =>
+        not writable? fn => error ["File is not writable", fn]
+        BINARY__OPEN__OUTPUT(fn::String)$Lisp
+      error ["IO mode must be input or output", mode]
+
+    open(fname, mode) ==
+      fstream := defstream(fname, mode)
+      [fname, fstream, mode]
+
+    reopen_!(f, mode) ==
+      fname := f.fileName
+      f.fileState := defstream(fname, mode)
+      f.fileIOmode:= mode
+      f
+
+    close_! f ==
+      f.fileIOmode = "output" => 
+           BINARY__CLOSE__OUTPUT()$Lisp
+           f
+      f.fileIOmode = "input" => 
+            BINARY__CLOSE__INPUT()$Lisp
+            f
+      error "file must be in read or write state"
+
+    read! f ==
+      f.fileIOmode ^= "input"  => error "File not in read state"
+      BINARY__SELECT__INPUT(f.fileState)$Lisp 
+      BINARY__READBYTE()$Lisp
+
+    readIfCan_! f ==
+      f.fileIOmode ^= "input"  => error "File not in read state"
+      BINARY__SELECT__INPUT(f.fileState)$Lisp 
+      n:SingleInteger:=BINARY__READBYTE()$Lisp
+      n = -1 => "failed"
+      n::Union(SingleInteger,"failed")
+
+    write_!(f, x) ==
+      f.fileIOmode ^= "output" => error "File not in write state"
+      x < 0 or x>255 => error "integer cannot be represented as a byte"
+      BINARY__PRINBYTE(x)$Lisp
+      x
+
+    position f == 
+      f.fileIOmode ^= "input"  => error "file must be in read state"
+      FILE_-POSITION(f.fileState)$Lisp
+
+    position_!(f,i) == 
+      f.fileIOmode ^= "input"  => error "file must be in read state"
+      (FILE_-POSITION(f.fileState,i)$Lisp ; i) 
+

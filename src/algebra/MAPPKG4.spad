@@ -1,0 +1,64 @@
+)abbrev package MAPPKG4 MappingPackage4
+++ Author: Timothy Daly
+++ Description: 
+++ Functional Composition. 
+++ Given functions f and g, returns the applicable closure
+
+MappingPackage4(A,B) : SIG == CODE where
+  A : SetCategory
+  B : Ring
+
+  SIG ==> with
+
+    "+" : (A->B, A->B) -> (A->B) 
+      ++ \spad(+) does functional addition
+      ++
+      ++X f:=(x:INT):INT +-> 3*x
+      ++X g:=(x:INT):INT +-> 2*x+3
+      ++X (f+g)(4)
+
+    "-" : (A->B, A->B) -> (A->B) 
+      ++ \spad(+) does functional addition
+      ++
+      ++X f:=(x:INT):INT +-> 3*x
+      ++X g:=(x:INT):INT +-> 2*x+3
+      ++X (f-g)(4)
+
+    "*" : (A->B, A->B) -> (A->B) 
+      ++ \spad(+) does functional addition
+      ++
+      ++X f:=(x:INT):INT +-> 3*x
+      ++X g:=(x:INT):INT +-> 2*x+3
+      ++X (f*g)(4)
+
+    "/" : (A->Expression(Integer), A->Expression(Integer)) -> (A->Expression(Integer))
+      ++ \spad(+) does functional addition
+      ++
+      ++X p:=(x:EXPR(INT)):EXPR(INT)+->3*x
+      ++X q:=(x:EXPR(INT)):EXPR(INT)+->2*x+3
+      ++X (p/q)(4)
+      ++X (p/q)(x)
+
+  CODE ==> add
+
+    fab ==> (A -> B)
+
+    faei ==> (A -> Expression(Integer))
+
+    funcAdd(g:fab,h:fab,x:A):B == ((g x) + (h x))$B
+
+    (a:fab)+(b:fab) == c +-> funcAdd(a,b,c)
+
+    funcSub(g:fab,h:fab,x:A):B == ((g x) - (h x))$B
+
+    (a:fab)-(b:fab) == c +-> funcSub(a,b,c)
+
+    funcMul(g:fab,h:fab,x:A):B == ((g x) * (h x))$B
+
+    (a:fab)*(b:fab) == c +-> funcMul(a,b,c)
+
+    funcDiv(g:faei,h:faei,x:A):Expression(Integer)
+           == ((g x) / (h x))$Expression(Integer)
+
+    (a:faei)/(b:faei) == c +-> funcDiv(a,b,c)
+

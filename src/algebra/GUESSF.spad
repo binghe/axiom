@@ -1,0 +1,11 @@
+)abbrev package GUESSF GuessFinite
+++ References: 
+++ Rube06 Extended rate, more GFUN
+++ Hebi10 Extended Rate, more GFUN
+++ Description:
+++ This package exports guessing of sequences of numbers in a finite field
+
+GuessFinite(F:Join(FiniteFieldCategory, ConvertibleTo Integer)) ==
+  Guess(F, F, Expression Integer, Integer, coerce$F,
+        F2EXPRR$GuessFiniteFunctions(F))
+

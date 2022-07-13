@@ -1,0 +1,37 @@
+)abbrev domain INFCLSPS InfinitlyClosePointOverPseudoAlgebraicClosureOfFiniteField
+++ Authors: Gaetan Hache
+++ Date Created: june 1996 
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This domain is part of the PAFF package
+
+InfinitlyClosePointOverPseudoAlgebraicClosureOfFiniteField(K,symb,BLMET) :
+ SIG == CODE where
+  K : FiniteFieldCategory
+  symb : List Symbol
+  BLMET : BlowUpMethodCategory
+
+  E        ==> DirectProduct(#symb,NonNegativeInteger)
+  KK       ==> PseudoAlgebraicClosureOfFiniteField(K)
+  PolyRing ==> DistributedMultivariatePolynomial(symb,KK) 
+  ProjPt   ==> ProjectivePlaneOverPseudoAlgebraicClosureOfFiniteField(K)
+  PCS      ==> NeitherSparseOrDensePowerSeries(KK)
+  Plc      ==> PlacesOverPseudoAlgebraicClosureOfFiniteField(K)
+  DIVISOR  ==> Divisor(Plc)
+
+  SIG ==> InfinitlyClosePointCategory(KK,symb,PolyRing,E,ProjPt,_
+                                         PCS,Plc,DIVISOR,BLMET) with
+  
+    fullOut : % -> OutputForm
+      ++ fullOut(tr) yields a full output of tr (see function fullOutput).
+
+    fullOutput : Boolean -> Boolean
+      ++ fullOutput(b) sets a flag such that when true, a coerce to OutputForm
+      ++  yields the full output of tr, otherwise encode(tr) is output 
+      ++ (see encode function). The default is false.
+
+    fullOutput : () -> Boolean
+      ++ fullOutput returns the value of the flag set by fullOutput(b).   
+     
+  CODE ==> InfinitlyClosePoint(KK,symb,PolyRing,E,ProjPt,_
+                                        PCS,Plc,DIVISOR,BLMET) 

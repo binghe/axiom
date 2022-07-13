@@ -1,0 +1,26 @@
+)abbrev domain VECTOR Vector
+++ Author: Mark Botch
+++ Description:
+++ This type represents vector like objects with varying lengths
+++ and indexed by a finite segment of integers starting at 1.
+ 
+Vector(R) : SIG == CODE where
+  R : Type
+
+  VECTORMININDEX ==> 1       -- if you want to change this, be my guest
+
+  SIG ==> VectorCategory R with 
+
+   vector: List R -> %
+     ++ vector(l) converts the list l to a vector.
+
+  CODE ==> IndexedVector(R, VECTORMININDEX) add 
+
+     vector l == construct l
+
+     if R has ConvertibleTo InputForm then
+
+       convert(x:%):InputForm ==
+          convert [convert("vector"::Symbol)@InputForm,
+                          convert(parts x)@InputForm]
+

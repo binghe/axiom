@@ -1,0 +1,39 @@
+)abbrev category DIFRING DifferentialRing
+++ Description:
+++ An ordinary differential ring, that is, a ring with an operation
+++ \spadfun{differentiate}.
+++
+++ Axioms\br
+++ \tab{5}\spad{differentiate(x+y) = differentiate(x)+differentiate(y)}\br
+++ \tab{5}\spad{differentiate(x*y) = x*differentiate(y) + differentiate(x)*y}
+
+DifferentialRing() : Category == SIG where
+
+  SIG ==> Ring with
+
+    differentiate : % -> %
+      ++ differentiate(x) returns the derivative of x.
+      ++ This function is a simple differential operator
+      ++ where no variable needs to be specified.
+
+    D : % -> %
+      ++ D(x) returns the derivative of x.
+      ++ This function is a simple differential operator
+      ++ where no variable needs to be specified.
+
+    differentiate : (%, NonNegativeInteger) -> %
+      ++ differentiate(x, n) returns the n-th derivative of x.
+
+    D : (%, NonNegativeInteger) -> %
+      ++ D(x, n) returns the n-th derivative of x.
+
+   add
+
+     D r == differentiate r
+
+     differentiate(r, n) ==
+       for i in 1..n repeat r := differentiate r
+       r
+
+     D(r,n) == differentiate(r,n)
+

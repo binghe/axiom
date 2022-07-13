@@ -1,0 +1,172 @@
+)abbrev package AFALGGRO AffineAlgebraicSetComputeWithGroebnerBasis
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ References:
+++ Normxx Notes 13: How to Compute a Groebner Basis
+++ Description:  
+++ The following is part of the PAFF package
+
+AffineAlgebraicSetComputeWithGroebnerBasis(K,symb,PolyRing,E,ProjPt) :
+ SIG == CODE where
+  K   : Field
+  symb: List(Symbol)
+  OV  ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt   : ProjectiveSpaceCategory(K)
+  PCS      : LocalPowerSeriesCategory(K)
+  
+  OF    ==> OutputForm
+  PI    ==> PositiveInteger
+  NNI   ==> NonNegativeInteger
+  RFP   ==> RootsFindingPackage
+  SUP   ==> SparseUnivariatePolynomial
+  PPFC1 ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+
+  SIG ==>  with
+
+    affineAlgSet : List PolyRing -> _
+                   Union(List(ProjPt),"failed","Infinite",Integer)
+
+    affineSingularPoints : PolyRing -> _
+                   Union(List(ProjPt),"failed","Infinite",Integer)
+
+    affineRationalPoints : (PolyRing,PI) -> List ProjPt 
+      ++ \axiom{rationalPoints(f,d)} returns all points on the curve 
+      ++ \axiom{f} in the extension of the ground field of degree \axiom{d}.
+      ++ For \axiom{d > 1} this only works if \axiom{K} is a 
+      ++ \axiomType{LocallyAlgebraicallyClosedField}
+
+  CODE ==>  add
+
+    ss2:List Symbol:= [X1,X2]
+    
+    DD   ==> DistributedMultivariatePolynomial(ss2,K)
+    LexE ==> DirectProduct(#ss2,NonNegativeInteger)
+    OV2  ==> OrderedVariableList(ss2)
+    InGB ==> InterfaceGroebnerPackage(K,ss2,LexE,OV2,DD)
+
+    affineAlgSetLocal : List DD  -> _
+                        Union(List(ProjPt),"failed","Infinite",Integer)
+
+    import PPFC1
+    import PolyRing
+    import ProjPt
+    
+    listVar:List(OV):= [index(i::PI)$OV for i in 1..#symb]
+
+    polyToYX1 : PolyRing ->  DD
+    -- NOTE : polyToYX1 set the last variable to 1 and swap the 1st and 2nd var
+    -- so that a call to grobner will eliminate the second var before the 
+    -- first one 
+    -- 23/10/98 : Ce n'est plus vrai. La fonction a ete "repare'".
+    -- A priori ce la ne creait pas de bug, car on tenait compte de 
+    -- cette particulariite dans la fonction affineAlgSetLocal.
+    -- cette derniere fct a aussi ete "ajuste'"
+    -- 27/10/98 
+    -- Ce n'est pas vraie !!! Il fauit trouve X d'abord et ensuite Y !!
+    -- sinon tout sr la notion de places distinguee fout le camp !!!
+
+    polyToX10 : PolyRing -> SUP(K)
+      
+--fonctions de resolution de sys. alg. de dim 0
+
+    if K has FiniteFieldCategory then
+      
+      affineRationalPoints(crv:PolyRing,extdegree:PI):List(ProjPt) ==
+        --The code of this is almost the same as for algebraicSet
+        --We could just construct the ideal and call algebraicSet
+        --Should we do that? This might be a bit faster.
+        
+        listPtsIdl:List(ProjPt):= empty()
+
+        x:= monomial(1,directProduct(vector([1,0])$Vector(NNI)))$DD
+        y:= monomial(1,directProduct(vector([0,1])$Vector(NNI)))$DD
+
+        if K has PseudoAlgebraicClosureOfFiniteFieldCategory then 
+          setTower!(1$K)$K
+        q:= size()$K 
+        px:= x**(q**extdegree) - x
+        py:= y**(q**extdegree) - y
+
+        crvXY1 := polyToYX1 crv
+        rpts:= affineAlgSetLocal([crvXY1,px,py])
+
+        -- si les  3  tests qui suivent ne sont pas la, 
+        -- alors ca ne compile pas !!! ??? 
+        rpts case "failed" =>_
+          error "failed: From affineRationalPoints in AFALGGRO,"
+        rpts case "Infinite" =>_
+          error "Infinite: From affineRationalPoints in AFALGGRO,"
+        rpts case Integer =>_
+          error "Integer: From affineRationalPoints in AFALGGRO,"
+        rpts case List(ProjPt) => rpts 
+        error "Unknown: From affineRationalPoints in AFALGGRO,"
+
+    affineSingularPoints(crb)==
+      F:= polyToYX1 crb
+      Fx:=differentiate(F,index(1)$OV2)
+      Fy:=differentiate(F,index(2)$OV2)
+      affineAlgSetLocal([F,Fx,Fy]) 
+
+    affineAlgSet(ideal : List PolyRing )==
+      idealXY1 := [polyToYX1 pol for pol in ideal]
+      affineAlgSetLocal idealXY1
+      
+    --fonctions de resolution de sys. alg. de dim 0
+    affineAlgSetLocal(idealToXY1:List DD ) ==
+      listPtsIdl:List(ProjPt)
+      idealGroXY1:=groebner(idealToXY1)$InGB
+      listZeroY:List(K):=empty()
+      listZeroX:List(K):=empty()
+      listOfExtDeg:List(Integer):=empty()
+      polyZeroX:DD:=last(idealGroXY1)
+      member?(index(1)$OV2, variables(polyZeroX)$DD) =>
+        print(("The number of point in the algebraic set is not finite")::OF)
+        print(("or the curve is not absolubtly irreducible.")::OF)
+        error "Have a nice day"
+        --now we find all of the projective points where z ^= 0
+      recOfZerosX:=distinguishedRootsOf(univariate(polyZeroX),1$K)$RFP(K)
+      -- HERE CHANGE
+      degExtX:=recOfZerosX.extDegree
+      listZeroX:List K := recOfZerosX.zeros
+      listOfExtDeg:=cons(degExtX,listOfExtDeg)
+      for a in listZeroX repeat
+        tjeker := [(eval(f,index(2)$OV2,a)$DD) for f in idealGroXY1]
+        idealGroaXb1 := [univariate(f)$DD for f in tjeker]
+        recOfZerosOfIdeal:=distinguishedCommonRootsOf(idealGroaXb1,a)$RFP(K)
+        listZeroY:= recOfZerosOfIdeal.zeros
+        listOfExtDeg:=cons(recOfZerosOfIdeal.extDegree,listOfExtDeg)
+        listPtsIdl:=
+          concat( [projectivePoint([a,b,1]) for b in listZeroY] ,listPtsIdl)
+      degExt:=lcm listOfExtDeg
+      zero?(degExt) =>
+        print(("------- Infinite number of points ------")::OF)
+        "Infinite"
+      ^one?(degExt) =>
+        print(("You need an extension of degree")::OF)
+        print(degExt::OF)
+        degExt
+      listPtsIdl
+          
+    polyToYX1(pol)==
+      zero?(pol) => 0
+      dd:= degree pol
+      lc:= leadingCoefficient pol
+      pp:= parts dd
+      ppr:=  rest reverse pp
+      ppv:Vector(NNI):= vector ppr
+      eppr:=directProduct(ppv)$LexE
+      monomial(lc,eppr)$DD + polyToYX1 reductum pol
+
+    polyToX10(pol)==
+      zero?(pol) => 0
+      dd:= degree pol
+      lc:= leadingCoefficient pol
+      pp:= parts dd
+      lp:= last pp
+      ^zero?(lp) => polyToX10 reductum pol
+      e1:= pp.1
+      monomial(lc,e1)$SUP(K) + polyToX10 reductum pol
+      

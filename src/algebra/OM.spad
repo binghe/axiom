@@ -1,0 +1,32 @@
+)abbrev category OM OpenMath
+++ Author: Mike Dewar & Vilya Harvey
+++ Basic Functions: OMwrite
+++ References:
+++ Corl00 According to Abramowitz and Stegun or arccoth needn't be Uncouth
+++ Fate01a A Critique of OpenMath and Thoughts on Encoding Mathematics
+++ Description:
+++ \spadtype{OpenMath} provides operations for exporting an object
+++ in OpenMath format.
+
+OpenMath() : Category == SIG where
+
+  SIG ==> with
+
+    OMwrite : % -> String
+      ++ OMwrite(u) returns the OpenMath XML encoding of \axiom{u} as a
+      ++ complete OpenMath object.
+  
+    OMwrite : (%, Boolean) -> String
+      ++ OMwrite(u, true) returns the OpenMath XML encoding of \axiom{u}
+      ++ as a complete OpenMath object; OMwrite(u, false) returns the
+      ++ OpenMath XML encoding of \axiom{u} as an OpenMath fragment.
+  
+    OMwrite : (OpenMathDevice, %) -> Void
+      ++ OMwrite(dev, u) writes the OpenMath form of \axiom{u} to the
+      ++ OpenMath device \axiom{dev} as a complete OpenMath object.
+  
+    OMwrite : (OpenMathDevice, %, Boolean) -> Void
+      ++ OMwrite(dev, u, true) writes the OpenMath form of \axiom{u} to
+      ++ the OpenMath device \axiom{dev} as a complete OpenMath object;
+      ++ OMwrite(dev, u, false) writes the object as an OpenMath fragment.
+

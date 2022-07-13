@@ -1,0 +1,11 @@
+)abbrev category FMTC FortranMachineTypeCategory
+++ Author: Mike Dewar
+++ Date Created:  December 1993
+++ Description:
+++ A category of domains which model machine arithmetic
+++ used by machines in the AXIOM-NAG link.
+
+FortranMachineTypeCategory() : Category == SIG where
+
+  SIG ==> Join(IntegralDomain,OrderedSet, RetractableTo(Integer) )
+

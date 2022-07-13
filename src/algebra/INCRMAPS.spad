@@ -1,0 +1,26 @@
+)abbrev package INCRMAPS IncrementingMaps
+++ Date Last Updated: June 4, 1991
+++ Description:
+++ This package provides operations to create incrementing functions.
+
+IncrementingMaps(R) : SIG == CODE where
+  R : Join(Monoid, AbelianSemiGroup)
+
+  SIG ==> with
+
+    increment : () -> (R -> R)
+      ++ increment() produces a function which adds \spad{1} to whatever
+      ++ argument it is given.  For example, if {f := increment()} then
+      ++ \spad{f x} is \spad{x+1}.
+
+    incrementBy : R -> (R -> R)
+      ++ incrementBy(n) produces a function which adds \spad{n} to whatever
+      ++ argument it is given.  For example, if {f := increment(n)} then
+      ++ \spad{f x} is \spad{x+n}.
+
+  CODE ==> add
+
+    increment() == x +-> 1 + x
+
+    incrementBy n == x +-> n + x
+

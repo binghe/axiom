@@ -1,0 +1,21 @@
+)abbrev category OAMONS OrderedAbelianMonoidSup
+++ Description:
+++ This domain is an OrderedAbelianMonoid with a sup 
+++ operation added. The purpose of the sup operator 
+++ in this domain is to act as a supremum with respect to the 
+++ partial order imposed by `-`, rather than with respect to
+++ the total $>$ order (since that is "max").
+++
+++ Axioms\br
+++ \tab{5}sup(a,b)-a \~~= "failed"\br
+++ \tab{5}sup(a,b)-b \~~= "failed"\br
+++ \tab{5}x-a \~~= "failed" and x-b \~~= "failed" => x >= sup(a,b)\br
+
+OrderedAbelianMonoidSup() : Category == SIG where
+
+  SIG ==> OrderedCancellationAbelianMonoid with
+
+    sup : (%,%) -> %
+      ++ sup(x,y) returns the least element from which both
+      ++ x and y can be subtracted.
+

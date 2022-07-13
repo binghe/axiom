@@ -1,0 +1,773 @@
+)abbrev category MATCAT MatrixCategory
+++ Authors: Grabmeier, Gschnitzer, Williamson, Gabriel Dos Reis
+++ Date Created: 1987
+++ Date Last Updated: July 1990
+++ Description:
+++ \spadtype{MatrixCategory} is a general matrix category which allows
+++ different representations and indexing schemes.  Rows and
+++ columns may be extracted with rows returned as objects of
+++ type Row and colums returned as objects of type Col.
+++ A domain belonging to this category will be shallowly mutable.
+++ The index of the 'first' row may be obtained by calling the
+++ function \spadfun{minRowIndex}.  The index of the 'first' column may
+++ be obtained by calling the function \spadfun{minColIndex}.  The index of
+++ the first element of a Row is the same as the index of the
+++ first column in a matrix and vice versa.
+
+MatrixCategory(R,Row,Col) : Category == SIG where
+  R   : Ring
+  Row : FiniteLinearAggregate R
+  Col : FiniteLinearAggregate R
+
+  SIG ==> TwoDimensionalArrayCategory(R,Row,Col) with
+
+    shallowlyMutable
+      ++ One may destructively alter matrices
+
+    finiteAggregate
+      ++ matrices are finite
+
+--% Predicates
+
+    square? : % -> Boolean
+      ++square?(m) returns true if m is a square matrix
+      ++ (if m has the same number of rows as columns) and false otherwise.
+      ++
+      ++X square? matrix [[j**i for i in 0..4] for j in 1..5]
+
+    diagonal? : % -> Boolean
+      ++diagonal?(m) returns true if the matrix m is square and
+      ++ diagonal (that is, all entries of m not on the diagonal are zero) and
+      ++ false otherwise.
+      ++
+      ++X diagonal? matrix [[j**i for i in 0..4] for j in 1..5]
+
+    symmetric? : % -> Boolean
+      ++symmetric?(m) returns true if the matrix m is square and
+      ++ symmetric (that is, \spad{m[i,j] = m[j,i]} for all i and j) and false
+      ++ otherwise.
+      ++
+      ++X symmetric? matrix [[j**i for i in 0..4] for j in 1..5]
+
+    antisymmetric? : % -> Boolean
+      ++antisymmetric?(m) returns true if the matrix m is square and
+      ++ antisymmetric (that is, \spad{m[i,j] = -m[j,i]} for all i and j) 
+      ++ and false otherwise.
+      ++
+      ++X antisymmetric? matrix [[j**i for i in 0..4] for j in 1..5]
+
+    zero? : % -> Boolean
+      ++ \spad{zero?(m)} returns true if m is a zero matrix
+      ++
+      ++ zero? matrix [[0 for i in 0..4] for j in 1..5]
+
+--% Creation
+
+    zero : (NonNegativeInteger,NonNegativeInteger) -> %
+      ++zero(m,n) returns an m-by-n zero matrix.
+      ++
+      ++X z:Matrix(INT):=zero(3,3)
+
+    matrix : List List R -> %
+      ++matrix(l) converts the list of lists l to a matrix, where the
+      ++ list of lists is viewed as a list of the rows of the matrix.
+      ++
+      ++X matrix [[1,2,3],[4,5,6],[7,8,9],[1,1,1]]
+
+    matrix : (NonNegativeInteger,NonNegativeInteger,(Integer,Integer)->R) -> %
+      ++matrix(n,m,f) constructs an \spad{n * m} matrix with
+      ++ the \spad{(i,j)} entry equal to \spad{f(i,j)}
+      ++
+      ++X f(i:INT,j:INT):INT == i+j
+      ++X matrix(3,4,f)
+
+    scalarMatrix : (NonNegativeInteger,R) -> %
+      ++scalarMatrix(n,r) returns an n-by-n matrix with r's on the
+      ++ diagonal and zeroes elsewhere.
+      ++
+      ++X z:Matrix(INT):=scalarMatrix(3,5)
+
+    diagonalMatrix : List R -> %
+      ++diagonalMatrix(l) returns a diagonal matrix with the elements
+      ++ of l on the diagonal.
+      ++
+      ++X diagonalMatrix [1,2,3]
+
+    diagonalMatrix : List % -> %
+      ++diagonalMatrix([m1,...,mk]) creates a block diagonal matrix
+      ++ M with block matrices m1,...,mk down the diagonal,
+      ++ with 0 block matrices elsewhere.
+      ++ More precisly: if \spad{ri := nrows mi}, \spad{ci := ncols mi},
+      ++ then m is an (r1+..+rk) by (c1+..+ck) - matrix  with entries
+      ++ \spad{m.i.j = ml.(i-r1-..-r(l-1)).(j-n1-..-n(l-1))}, if
+      ++ \spad{(r1+..+r(l-1)) < i <= r1+..+rl} and
+      ++ \spad{(c1+..+c(l-1)) < i <= c1+..+cl},
+      ++ \spad{m.i.j} = 0  otherwise.
+      ++
+      ++X diagonalMatrix [matrix [[1,2],[3,4]], matrix [[4,5],[6,7]]]
+
+    coerce : Col -> %
+      ++coerce(col) converts the column col to a column matrix.
+      ++
+      ++X coerce([1,2,3])@Matrix(INT)
+
+    transpose : Row -> %
+      ++transpose(r) converts the row r to a row matrix.
+      ++
+      ++X transpose([1,2,3])@Matrix(INT)
+
+--% Creation of new matrices from old
+
+    transpose : % -> %
+      ++transpose(m) returns the transpose of the matrix m.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X transpose m
+
+    squareTop : % -> %
+      ++squareTop(m) returns an n-by-n matrix consisting of the first
+      ++ n rows of the m-by-n matrix m. Error: if
+      ++ \spad{m < n}.
+      ++
+      ++X m:=matrix [[j**i for i in 0..2] for j in 1..5]
+      ++X squareTop m
+
+    horizConcat : (%,%) -> %
+      ++horizConcat(x,y) horizontally concatenates two matrices with
+      ++ an equal number of rows. The entries of y appear to the right
+      ++ of the entries of x.  Error: if the matrices
+      ++ do not have the same number of rows.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X horizConcat(m,m)
+
+    vertConcat : (%,%) -> %
+      ++vertConcat(x,y) vertically concatenates two matrices with an
+      ++ equal number of columns. The entries of y appear below
+      ++ of the entries of x.  Error: if the matrices
+      ++ do not have the same number of columns.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X vertConcat(m,m)
+
+--% Part extractions/assignments
+
+    listOfLists : % -> List List R
+      ++listOfLists(m) returns the rows of the matrix m as a list
+      ++ of lists.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X listOfLists m
+
+    elt : (%,List Integer,List Integer) -> %
+      ++elt(x,rowList,colList) returns an m-by-n matrix consisting
+      ++ of elements of x, where \spad{m = # rowList} and \spad{n = # colList}
+      ++ If \spad{rowList = [i<1>,i<2>,...,i<m>]} and \spad{colList =
+      ++ [j<1>,j<2>,...,j<n>]}, then the \spad{(k,l)}th entry of
+      ++ \spad{elt(x,rowList,colList)} is \spad{x(i<k>,j<l>)}.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X elt(m,3,3)
+
+    setelt : (%,List Integer,List Integer, %) -> %
+      ++setelt(x,rowList,colList,y) destructively alters the matrix x.
+      ++ If y is \spad{m}-by-\spad{n}, \spad{rowList = [i<1>,i<2>,...,i<m>]}
+      ++ and \spad{colList = [j<1>,j<2>,...,j<n>]}, then \spad{x(i<k>,j<l>)}
+      ++ is set to \spad{y(k,l)} for \spad{k = 1,...,m} and \spad{l = 1,...,n}
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X setelt(m,3,3,10)
+
+    swapRows_! : (%,Integer,Integer) -> %
+      ++swapRows!(m,i,j) interchanges the \spad{i}th and \spad{j}th
+      ++ rows of m. This destructively alters the matrix.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X swapRows!(m,2,4)
+
+    swapColumns_! : (%,Integer,Integer) -> %
+      ++swapColumns!(m,i,j) interchanges the \spad{i}th and \spad{j}th
+      ++ columns of m. This destructively alters the matrix.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X swapColumns!(m,2,4)
+
+    subMatrix : (%,Integer,Integer,Integer,Integer) -> %
+      ++subMatrix(x,i1,i2,j1,j2) extracts the submatrix
+      ++ \spad{[x(i,j)]} where the index i ranges from \spad{i1} to \spad{i2}
+      ++ and the index j ranges from \spad{j1} to \spad{j2}.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X subMatrix(m,1,3,2,4)
+
+    setsubMatrix_! : (%,Integer,Integer,%) -> %
+      ++setsubMatrix!(x,i1,j1,y) destructively alters the
+      ++ matrix x. Here \spad{x(i,j)} is set to \spad{y(i-i1+1,j-j1+1)} for
+      ++ \spad{i = i1,...,i1-1+nrows y} and \spad{j = j1,...,j1-1+ncols y}.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X setsubMatrix!(m,2,2,matrix [[3,3],[3,3]])
+
+--% Arithmetic
+
+    "+" : (%,%) -> %
+      ++\spad{x + y} is the sum of the matrices x and y.
+      ++ Error: if the dimensions are incompatible.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X m+m
+
+    "-" : (%,%) -> %
+      ++\spad{x - y} is the difference of the matrices x and y.
+      ++ Error: if the dimensions are incompatible.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X m-m
+
+    "-" : % -> %
+      ++\spad{-x} returns the negative of the matrix x.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X -m
+
+    "*" : (%,%) -> %
+      ++\spad{x * y} is the product of the matrices x and y.
+      ++ Error: if the dimensions are incompatible.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X m*m
+
+    "*" : (R,%) -> %
+      ++\spad{r*x} is the left scalar multiple of the scalar r and the
+      ++ matrix x.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X 1/3*m
+
+    "*" : (%,R) -> %
+      ++\spad{x * r} is the right scalar multiple of the scalar r and the
+      ++ matrix x.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X m*1/3
+
+    "*" : (Integer,%) -> %
+      ++\spad{n * x} is an integer multiple.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X 3*m
+
+    "*" : (%,Col) -> Col
+      ++\spad{x * c} is the product of the matrix x and the column vector c.
+      ++ Error: if the dimensions are incompatible.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X c:=coerce([1,2,3,4,5])@Matrix(INT)
+      ++X m*c
+
+    "*" : (Row,%) -> Row
+      ++\spad{r * x} is the product of the row vector r and the matrix x.
+      ++ Error: if the dimensions are incompatible.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X r:=transpose([1,2,3,4,5])@Matrix(INT)
+      ++X r*m
+
+    "**" : (%,NonNegativeInteger) -> %
+      ++\spad{x ** n} computes a non-negative integral power of the matrix x.
+      ++ Error: if the matrix is not square.
+      ++
+      ++X m:=matrix [[j**i for i in 0..4] for j in 1..5]
+      ++X m**3
+
+    if R has IntegralDomain then
+
+      "exquo" : (%,R) -> Union(%,"failed")
+        ++\spad{exquo(m,r)} computes the exact quotient of the elements
+        ++ of m by r, returning \axiom{"failed"} if this is not possible.
+        ++
+        ++X m:=matrix [[2**i for i in 2..4] for j in 1..5]
+        ++X exquo(m,2)
+
+    if R has Field then
+      "/" : (%,R) -> %
+        ++\spad{m/r} divides the elements of m by r. Error: if \spad{r = 0}.
+        ++
+        ++X m:=matrix [[2**i for i in 2..4] for j in 1..5]
+        ++X m/4
+
+--% Linear algebra
+
+    if R has EuclideanDomain then
+
+      rowEchelon : % -> %
+        ++\spad{rowEchelon(m)} returns the row echelon form of the matrix m.
+        ++
+        ++X rowEchelon matrix [[j**i for i in 0..4] for j in 1..5]
+
+      columnSpace : % -> List Col
+        ++\spad{columnSpace(m)} returns a sublist of columns of the matrix m
+        ++ forming a basis of its column space
+        ++
+        ++X columnSpace matrix [[1,2,3],[4,5,6],[7,8,9],[1,1,1]]
+
+    if R has IntegralDomain then
+
+      rank : % -> NonNegativeInteger
+        ++\spad{rank(m)} returns the rank of the matrix m.
+        ++
+        ++X rank matrix [[1,2,3],[4,5,6],[7,8,9]]
+
+      nullity : % -> NonNegativeInteger
+        ++\spad{nullity(m)} returns the nullity of the matrix m. This is
+        ++ the dimension of the null space of the matrix m.
+        ++
+        ++X nullity matrix [[1,2,3],[4,5,6],[7,8,9]]
+
+      nullSpace : % -> List Col
+        ++\spad{nullSpace(m)} returns a basis for the null space of
+        ++ the matrix m.
+        ++
+        ++X nullSpace matrix [[1,2,3],[4,5,6],[7,8,9]]
+
+    if R has commutative("*") then
+
+      determinant : % -> R
+        ++\spad{determinant(m)} returns the determinant of the matrix m.
+        ++ Error: if the matrix is not square.
+        ++
+        ++X determinant matrix [[j**i for i in 0..4] for j in 1..5]
+
+      minordet : % -> R
+        ++\spad{minordet(m)} computes the determinant of the matrix m using
+        ++ minors. Error: if the matrix is not square.
+        ++
+        ++X minordet matrix [[j**i for i in 0..4] for j in 1..5]
+
+    if R has CommutativeRing then
+
+      pfaffian : % -> R
+        ++\spad{pfaffian(m)} returns the Pfaffian of the matrix m.
+        ++ Error if the matrix is not antisymmetric
+        ++
+        ++X pfaffian [[0,1,0,0],[-1,0,0,0],[0,0,0,1],[0,0,-1,0]]
+
+    if R has Field then
+
+      inverse : % -> Union(%,"failed")
+        ++\spad{inverse(m)} returns the inverse of the matrix m.
+        ++ If the matrix is not invertible, "failed" is returned.
+        ++ Error: if the matrix is not square.
+        ++
+        ++X inverse matrix [[j**i for i in 0..4] for j in 1..5]
+
+      "**" : (%,Integer) -> %
+        ++\spad{m**n} computes an integral power of the matrix m.
+        ++ Error: if matrix is not square or if the matrix
+        ++ is square but not invertible.
+        ++
+        ++X (matrix [[j**i for i in 0..4] for j in 1..5]) ** 2
+
+   add
+
+     minr ==> minRowIndex
+     maxr ==> maxRowIndex
+     minc ==> minColIndex
+     maxc ==> maxColIndex
+     mini ==> minIndex
+     maxi ==> maxIndex
+
+--% Predicates
+
+     square? x == nrows x = ncols x
+
+     diagonal? x ==
+       not square? x => false
+       for i in minr x .. maxr x repeat
+         for j in minc x .. maxc x | (j - minc x) ^= (i - minr x) repeat
+           not zero? qelt(x, i, j) => return false
+       true
+
+     symmetric? x ==
+       (nRows := nrows x) ^= ncols x => false
+       mr := minRowIndex x; mc := minColIndex x
+       for i in 0..(nRows - 1) repeat
+         for j in (i + 1)..(nRows - 1) repeat
+           qelt(x,mr + i,mc + j) ^= qelt(x,mr + j,mc + i) => return false
+       true
+
+     antisymmetric? x ==
+       (nRows := nrows x) ^= ncols x => false
+       mr := minRowIndex x; mc := minColIndex x
+       for i in 0..(nRows - 1) repeat
+         for j in i..(nRows - 1) repeat
+           qelt(x,mr + i,mc + j) ^= -qelt(x,mr + j,mc + i) =>
+             return false
+       true
+
+     zero?(x) ==
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(x)..maxc(x) repeat
+           if qelt(x,i,j) ^= 0 then return false
+       true
+
+--% Creation of matrices
+
+     zero(rows,cols) == new(rows,cols,0)
+
+     matrix(l: List List R) ==
+       null l => new(0,0,0)
+       -- error check: this is a top level function
+       rows : NonNegativeInteger := 1; cols := # first l
+       cols = 0 => error "matrices with zero columns are not supported"
+       for ll in rest l repeat
+         cols ^= # ll => error "matrix: rows of different lengths"
+         rows := rows + 1
+       ans := new(rows,cols,0)
+       for i in minr(ans)..maxr(ans) for ll in l repeat
+         for j in minc(ans)..maxc(ans) for r in ll repeat
+           qsetelt_!(ans,i,j,r)
+       ans
+
+     matrix(n,m,f) ==
+       mat := new(n,m,0)
+       for i in minr mat..maxr mat repeat
+         for j in minc mat..maxc mat repeat
+           qsetelt!(mat,i,j,f(i,j))
+       mat
+
+     scalarMatrix(n,r) ==
+       ans := zero(n,n)
+       for i in minr(ans)..maxr(ans) for j in minc(ans)..maxc(ans) repeat
+         qsetelt_!(ans,i,j,r)
+       ans
+
+     diagonalMatrix(l: List R) ==
+       n := #l; ans := zero(n,n)
+       for i in minr(ans)..maxr(ans) for j in minc(ans)..maxc(ans) _
+           for r in l repeat qsetelt_!(ans,i,j,r)
+       ans
+
+     diagonalMatrix(list: List %) ==
+       rows : NonNegativeInteger := 0
+       cols : NonNegativeInteger := 0
+       for mat in list repeat
+         rows := rows + nrows mat
+         cols := cols + ncols mat
+       ans := zero(rows,cols)
+       loR := minr ans; loC := minc ans
+       for mat in list repeat
+         hiR := loR + nrows(mat) - 1; hiC := loC + nrows(mat) - 1
+         for i in loR..hiR for k in minr(mat)..maxr(mat) repeat
+           for j in loC..hiC for l in minc(mat)..maxc(mat) repeat
+             qsetelt_!(ans,i,j,qelt(mat,k,l))
+         loR := hiR + 1; loC := hiC + 1
+       ans
+
+     coerce(v:Col) ==
+       x := new(#v,1,0)
+       one := minc(x)
+       for i in minr(x)..maxr(x) for k in mini(v)..maxi(v) repeat
+         qsetelt_!(x,i,one,qelt(v,k))
+       x
+
+     transpose(v:Row) ==
+       x := new(1,#v,0)
+       one := minr(x)
+       for j in minc(x)..maxc(x) for k in mini(v)..maxi(v) repeat
+         qsetelt_!(x,one,j,qelt(v,k))
+       x
+
+     transpose(x:%) ==
+       ans := new(ncols x,nrows x,0)
+       for i in minr(ans)..maxr(ans) repeat
+         for j in minc(ans)..maxc(ans) repeat
+           qsetelt_!(ans,i,j,qelt(x,j,i))
+       ans
+
+     squareTop x ==
+       nrows x < (cols := ncols x) =>
+         error "squareTop: number of columns exceeds number of rows"
+       ans := new(cols,cols,0)
+       for i in minr(x)..(minr(x) + cols - 1) repeat
+         for j in minc(x)..maxc(x) repeat
+           qsetelt_!(ans,i,j,qelt(x,i,j))
+       ans
+
+     horizConcat(x,y) ==
+       (rows := nrows x) ^= nrows y =>
+         error "HConcat: matrices must have same number of rows"
+       ans := new(rows,(cols := ncols x) + ncols y,0)
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(x)..maxc(x) repeat
+           qsetelt_!(ans,i,j,qelt(x,i,j))
+       for i in minr(y)..maxr(y) repeat
+         for j in minc(y)..maxc(y) repeat
+           qsetelt_!(ans,i,j + cols,qelt(y,i,j))
+       ans
+
+     vertConcat(x,y) ==
+       (cols := ncols x) ^= ncols y =>
+         error "HConcat: matrices must have same number of columns"
+       ans := new((rows := nrows x) + nrows y,cols,0)
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(x)..maxc(x) repeat
+           qsetelt_!(ans,i,j,qelt(x,i,j))
+       for i in minr(y)..maxr(y) repeat
+         for j in minc(y)..maxc(y) repeat
+           qsetelt_!(ans,i + rows,j,qelt(y,i,j))
+       ans
+
+--% Part extraction/assignment
+
+     listOfLists x ==
+       ll : List List R := nil()
+       for i in maxr(x)..minr(x) by -1 repeat
+         l : List R := nil()
+         for j in maxc(x)..minc(x) by -1 repeat
+           l := cons(qelt(x,i,j),l)
+         ll := cons(l,ll)
+       ll
+
+     swapRows_!(x,i1,i2) ==
+       (i1 < minr(x)) or (i1 > maxr(x)) or (i2 < minr(x)) or _
+           (i2 > maxr(x)) => error "swapRows!: index out of range"
+       i1 = i2 => x
+       for j in minc(x)..maxc(x) repeat
+         r := qelt(x,i1,j)
+         qsetelt_!(x,i1,j,qelt(x,i2,j))
+         qsetelt_!(x,i2,j,r)
+       x
+
+     swapColumns_!(x,j1,j2) ==
+       (j1 < minc(x)) or (j1 > maxc(x)) or (j2 < minc(x)) or _
+           (j2 > maxc(x)) => error "swapColumns!: index out of range"
+       j1 = j2 => x
+       for i in minr(x)..maxr(x) repeat
+         r := qelt(x,i,j1)
+         qsetelt_!(x,i,j1,qelt(x,i,j2))
+         qsetelt_!(x,i,j2,r)
+       x
+
+     elt(x:%,rowList:List Integer,colList:List Integer) ==
+       for ei in rowList repeat
+         (ei < minr(x)) or (ei > maxr(x)) =>
+           error "elt: index out of range"
+       for ej in colList repeat
+         (ej < minc(x)) or (ej > maxc(x)) =>
+           error "elt: index out of range"
+       y := new(# rowList,# colList,0)
+       for ei in rowList for i in minr(y)..maxr(y) repeat
+         for ej in colList for j in minc(y)..maxc(y) repeat
+           qsetelt_!(y,i,j,qelt(x,ei,ej))
+       y
+
+     setelt(x:%,rowList:List Integer,colList:List Integer,y:%) ==
+       for ei in rowList repeat
+         (ei < minr(x)) or (ei > maxr(x)) =>
+           error "setelt: index out of range"
+       for ej in colList repeat
+         (ej < minc(x)) or (ej > maxc(x)) =>
+           error "setelt: index out of range"
+       ((# rowList) ^= (nrows y)) or ((# colList) ^= (ncols y)) =>
+         error "setelt: matrix has bad dimensions"
+       for ei in rowList for i in minr(y)..maxr(y) repeat
+         for ej in colList for j in minc(y)..maxc(y) repeat
+           qsetelt_!(x,ei,ej,qelt(y,i,j))
+       y
+
+     subMatrix(x,i1,i2,j1,j2) ==
+       (i2 < i1) => error "subMatrix: bad row indices"
+       (j2 < j1) => error "subMatrix: bad column indices"
+       (i1 < minr(x)) or (i2 > maxr(x)) =>
+         error "subMatrix: index out of range"
+       (j1 < minc(x)) or (j2 > maxc(x)) =>
+         error "subMatrix: index out of range"
+       rows := (i2 - i1 + 1) pretend NonNegativeInteger
+       cols := (j2 - j1 + 1) pretend NonNegativeInteger
+       y := new(rows,cols,0)
+       for i in minr(y)..maxr(y) for k in i1..i2 repeat
+         for j in minc(y)..maxc(y) for l in j1..j2 repeat
+           qsetelt_!(y,i,j,qelt(x,k,l))
+       y
+
+     setsubMatrix_!(x,i1,j1,y) ==
+       i2 := i1 + nrows(y) -1
+       j2 := j1 + ncols(y) -1
+       (i1 < minr(x)) or (i2 > maxr(x)) =>
+        error _
+         "setsubMatrix!: inserted matrix too big, use subMatrix to restrict it"
+       (j1 < minc(x)) or (j2 > maxc(x)) =>
+        error _
+         "setsubMatrix!: inserted matrix too big, use subMatrix to restrict it"
+       for i in minr(y)..maxr(y) for k in i1..i2 repeat
+         for j in minc(y)..maxc(y) for l in j1..j2 repeat
+           qsetelt_!(x,k,l,qelt(y,i,j))
+       x
+
+--% Arithmetic
+
+     x + y ==
+       ((r := nrows x) ^= nrows y) or ((c := ncols x) ^= ncols y) =>
+         error "can't add matrices of different dimensions"
+       ans := new(r,c,0)
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(x)..maxc(x) repeat
+           qsetelt_!(ans,i,j,qelt(x,i,j) + qelt(y,i,j))
+       ans
+
+     x - y ==
+       ((r := nrows x) ^= nrows y) or ((c := ncols x) ^= ncols y) =>
+         error "can't subtract matrices of different dimensions"
+       ans := new(r,c,0)
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(x)..maxc(x) repeat
+           qsetelt_!(ans,i,j,qelt(x,i,j) - qelt(y,i,j))
+       ans
+
+     - x == map((r1:R):R +-> - r1,x)
+
+     a:R * x:% == map((r1:R):R +-> a * r1,x)
+
+     x:% * a:R == map((r1:R):R +-> r1 * a,x)
+
+     m:Integer * x:% == map((r1:R):R +-> m * r1,x)
+
+     x:% * y:% ==
+       (ncols x ^= nrows y) =>
+         error "can't multiply matrices of incompatible dimensions"
+       ans := new(nrows x,ncols y,0)
+       for i in minr(x)..maxr(x) repeat
+         for j in minc(y)..maxc(y) repeat
+           entry :=
+             sum : R := 0
+             for k in minr(y)..maxr(y) for l in minc(x)..maxc(x) repeat
+               sum := sum + qelt(x,i,l) * qelt(y,k,j)
+             sum
+           qsetelt_!(ans,i,j,entry)
+       ans
+
+     positivePower:(%,Integer) -> %
+     positivePower(x,n) ==
+--       one? n => x
+       (n = 1) => x
+       odd? n => x * positivePower(x,n - 1)
+       y := positivePower(x,n quo 2)
+       y * y
+
+     x:% ** n:NonNegativeInteger ==
+       not((nn:= nrows x) = ncols x) => error "**: matrix must be square"
+       zero? n => scalarMatrix(nn,1)
+       positivePower(x,n)
+
+     --if R has ConvertibleTo InputForm then
+       --convert(x:%):InputForm ==
+         --convert [convert("matrix"::Symbol)@InputForm,
+                  --convert listOfLists x]$List(InputForm)
+
+     if Col has shallowlyMutable then
+
+       x:% * v:Col ==
+         ncols(x) ^= #v =>
+           error "can't multiply matrix A and vector v if #cols A ^= #v"
+         w : Col := new(nrows x,0)
+         for i in minr(x)..maxr(x) for k in mini(w)..maxi(w) repeat
+           w.k :=
+             sum : R := 0
+             for j in minc(x)..maxc(x) for l in mini(v)..maxi(v) repeat
+               sum := sum + qelt(x,i,j) * v(l)
+             sum
+         w
+
+     if Row has shallowlyMutable then
+
+       v:Row * x:% ==
+         nrows(x) ^= #v =>
+           error "can't multiply vector v and matrix A if #rows A ^= #v"
+         w : Row := new(ncols x,0)
+         for j in minc(x)..maxc(x) for k in mini(w)..maxi(w) repeat
+           w.k :=
+             sum : R := 0
+             for i in minr(x)..maxr(x) for l in mini(v)..maxi(v) repeat
+               sum := sum + qelt(x,i,j) * v(l)
+             sum
+         w
+
+     if R has EuclideanDomain then
+       columnSpace M ==
+         M2 := rowEchelon M
+         basis: List Col := []
+         n: Integer := ncols M
+         m: Integer := nrows M
+         indRow: Integer := 1
+         for k in 1..n while indRow <= m repeat
+           if not zero?(M2.(indRow,k)) then
+             basis := cons(column(M,k),basis)
+             indRow := indRow + 1
+         reverse! basis
+
+     if R has CommutativeRing then
+       skewSymmetricUnitMatrix(n:PositiveInteger):% ==
+         matrix [[(if i=j+1 and odd? j
+                    then -1
+                    else if i=j-1 and odd? i
+                           then 1
+                           else 0) for j in 1..n] for i in 1..n]
+
+       SUPR ==> SparseUnivariatePolynomial R
+  
+       PfChar(A:%):SUPR ==
+         n := nrows A
+         (n = 2) => monomial(1$R,2)$SUPR + qelt(A,1,2)::SUPR
+         M:=subMatrix(A,3,n,3,n)
+         r:=subMatrix(A,1,1,3,n)
+         s:=subMatrix(A,3,n,2,2)
+         p:=PfChar(M)
+         d:=degree(p)$SUPR
+         B:=skewSymmetricUnitMatrix((n-2)::PositiveInteger)
+         C:=r*B
+         g:List R := [qelt(C*s,1,1), qelt(A,1,2), 1]
+         if d >= 4 then
+           B:=M*B
+           for i in 4..d by 2 repeat
+             C:=C*B
+             g:=cons(qelt(C*s,1,1),g)
+         g:=reverse! g
+         res:SUPR := 0
+         for i in 0..d by 2 for j in 2..d+2 repeat
+           c:=coefficient(p,i)
+           for e in first(g,j) for k in 2..-d by -2 repeat
+             res:=res+monomial(c*e,(k+i)::NonNegativeInteger)$SUPR
+         res
+
+       pfaffian a ==
+         if antisymmetric? a
+           then if odd? nrows a
+                  then 0
+                  else PfChar(a).0
+           else 
+             error "pfaffian: only defined for antisymmetric square matrices"
+
+     if R has IntegralDomain then
+       x exquo a ==
+         ans := new(nrows x,ncols x,0)
+         for i in minr(x)..maxr(x) repeat
+           for j in minc(x)..maxc(x) repeat
+             entry :=
+               (r := (qelt(x,i,j) exquo a)) case "failed" =>
+                 return "failed"
+               r :: R
+             qsetelt_!(ans,i,j,entry)
+         ans
+
+     if R has Field then
+       x / r == map((r1:R):R +-> r1 / r,x)
+
+       x:% ** n:Integer ==
+         not((nn:= nrows x) = ncols x) => error "**: matrix must be square"
+         zero? n => scalarMatrix(nn,1)
+         positive? n => positivePower(x,n)
+         (xInv := inverse x) case "failed" =>
+           error "**: matrix must be invertible"
+         positivePower(xInv :: %,-n)
+

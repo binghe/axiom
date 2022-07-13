@@ -1,0 +1,69 @@
+)abbrev domain HEXADEC HexadecimalExpansion
+++ Author: Clifton J. Williamson
+++ Date Created: April 26, 1990
+++ Date Last Updated: May 15, 1991
+++ Description:
+++ This domain allows rational numbers to be presented as repeating
+++ hexadecimal expansions.
+
+HexadecimalExpansion() : SIG == CODE where
+
+  INT ==> Integer
+  CHAR ==> Character
+
+  SIG ==> QuotientFieldCategory(Integer) with
+
+    coerce : % -> Fraction Integer
+      ++ coerce(h) converts a hexadecimal expansion to a rational number.
+
+    coerce : % -> RadixExpansion(16)
+      ++ coerce(h) converts a hexadecimal expansion to a radix expansion
+      ++ with base 16.
+
+    fractionPart : % -> Fraction Integer
+      ++ fractionPart(h) returns the fractional part of a hexadecimal expansion
+
+    hex : Fraction Integer -> %
+      ++ hex(r) converts a rational number to a hexadecimal expansion.
+
+    toint : String -> Integer
+      ++ toint(s) converts a hex string to integer
+      ++
+      ++X toint("FE")
+      ++X toint("BFD25E8C")
+
+  CODE ==> RadixExpansion(16) add
+  
+    hex r == 
+      r :: %
+
+    coerce(x:%):RadixExpansion(16) ==
+      x pretend RadixExpansion(16)
+
+    toint(s) ==
+      dec:Integer := 0
+      for i in 1..#s repeat 
+        if (s.i = char "0")$CHAR then dec := 16*dec
+        if (s.i = char "1")$CHAR then dec := 16*dec+1
+        if (s.i = char "2")$CHAR then dec := 16*dec+2
+        if (s.i = char "3")$CHAR then dec := 16*dec+3
+        if (s.i = char "4")$CHAR then dec := 16*dec+4
+        if (s.i = char "5")$CHAR then dec := 16*dec+5
+        if (s.i = char "6")$CHAR then dec := 16*dec+6
+        if (s.i = char "7")$CHAR then dec := 16*dec+7
+        if (s.i = char "8")$CHAR then dec := 16*dec+8
+        if (s.i = char "9")$CHAR then dec := 16*dec+9
+        if (s.i = char "A")$CHAR then dec := 16*dec+10
+        if (s.i = char "a")$CHAR then dec := 16*dec+10
+        if (s.i = char "B")$CHAR then dec := 16*dec+11
+        if (s.i = char "b")$CHAR then dec := 16*dec+11
+        if (s.i = char "C")$CHAR then dec := 16*dec+12
+        if (s.i = char "c")$CHAR then dec := 16*dec+12
+        if (s.i = char "D")$CHAR then dec := 16*dec+13
+        if (s.i = char "d")$CHAR then dec := 16*dec+13
+        if (s.i = char "E")$CHAR then dec := 16*dec+14
+        if (s.i = char "e")$CHAR then dec := 16*dec+14
+        if (s.i = char "F")$CHAR then dec := 16*dec+15
+        if (s.i = char "f")$CHAR then dec := 16*dec+15
+      dec
+

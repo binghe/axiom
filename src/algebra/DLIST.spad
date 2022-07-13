@@ -1,0 +1,46 @@
+)abbrev domain DLIST DataList
+++ Author: Mark Botch
+++ Description:
+++ This domain provides some nice functions on lists
+
+DataList(S) : SIG == CODE where
+  S : OrderedSet
+
+  SIG ==> ListAggregate(S) with
+
+    coerce : List S -> %
+      ++ coerce(l) creates a datalist from l  
+
+    coerce : % -> List S
+      ++ coerce(x) returns the list of elements in x
+
+    datalist : List S -> %
+      ++ datalist(l) creates a datalist from l 
+
+    elt : (%,"unique") -> %
+      ++ \axiom{l.unique} returns \axiom{l} with duplicates removed.
+      ++ Note: \axiom{l.unique = removeDuplicates(l)}.
+
+    elt : (%,"sort") -> %
+      ++ \axiom{l.sort} returns \axiom{l} with elements sorted.
+      ++ Note: \axiom{l.sort = sort(l)}
+
+    elt : (%,"count") -> NonNegativeInteger
+      ++ \axiom{l."count"} returns the number of elements in \axiom{l}.
+
+  CODE ==> List(S) add
+
+    elt(x,"unique") == removeDuplicates(x)
+
+    elt(x,"sort") == sort(x)
+
+    elt(x,"count") == #x
+
+    coerce(x:List S) == x pretend %
+
+    coerce(x:%):List S == x pretend (List S)
+
+    coerce(x:%): OutputForm == (x :: List S) :: OutputForm
+
+    datalist(x:List S) == x::%
+

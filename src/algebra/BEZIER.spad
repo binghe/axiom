@@ -1,0 +1,59 @@
+)abbrev package BEZIER Bezier
+++ Author: Timothy Daly
+++ Date Created: 14 April 2009
+++ Description: 
+++ Provide linear, quadratic, and cubic spline bezier curves
+
+Bezier(R) : SIG == CODE where
+  R:Ring
+
+  SIG ==> with
+
+    linearBezier : (x:List R,y:List R) -> Mapping(List R,R)
+      ++ linearBezier(x,y) curve is a simple interpolation between the 
+      ++ starting point and the ending point based on a parameter t.
+      ++ Given a start point a=[x1,y1] and an endpoint b=[x2,y2]
+      ++ f(t) == [(1-t)*x1 + t*x2, (1-t)*y1 + t*y2]
+      ++
+      ++X n:=linearBezier([2.0,2.0],[4.0,4.0])
+      ++X [n(t/10.0) for t in 0..10 by 1]
+
+    quadraticBezier : (x:List R,y:List R,z:List R) -> Mapping(List R,R)
+      ++ quadraticBezier(x,y,z) curve is a simple interpolation between the 
+      ++ starting point, a middle point, and the ending point based on 
+      ++ a parameter t.
+      ++ Given a start point a=[x1,y1], a middle point b=[x2,y2], 
+      ++ and an endpoint c=[x3,y3]
+      ++ f(t) == [(1-t)^2 x1 + 2t(1-t) x2 + t^2 x3,
+      ++          (1-t)^2 y1 + 2t(1-t) y2 + t^2 y3]
+      ++
+      ++X n:=quadraticBezier([2.0,2.0],[4.0,4.0],[6.0,2.0])
+      ++X [n(t/10.0) for t in 0..10 by 1]
+
+    cubicBezier : (w:List R,x:List R,y:List R,z:List R) -> Mapping(List R,R)
+      ++ cubicBezier(w,z,y,z) curve is a simple interpolation between the 
+      ++ starting point, a left-middle point, a right-middle point,
+      ++ and the ending point based on a parameter t.
+      ++ Given a start point a=[x1,y1], the left-middle point b=[x2,y2],
+      ++ the right-middle point c=[x3,y3] and an endpoint d=[x4,y4]
+      ++ f(t) == [(1-t)^3 x1 + 3t(1-t)^2 x2 + 3t^2 (1-t) x3 + t^3 x4,
+      ++          (1-t)^3 y1 + 3t(1-t)^2 y2 + 3t^2 (1-t) y3 + t^3 y4]
+      ++
+      ++X n:=cubicBezier([2.0,2.0],[2.0,4.0],[6.0,4.0],[6.0,2.0])
+      ++X [n(t/10.0) for t in 0..10 by 1]
+
+  CODE ==> add
+
+   linearBezier(a,b) == 
+    t +-> [(1-t)*(a.1) + t*(b.1), (1-t)*(a.2) + t*(b.2)]
+
+   quadraticBezier(a,b,c) == 
+    t +-> [(1-t)**2*(a.1) + 2*t*(1-t)*(b.1) + t**2*(c.1),
+           (1-t)**2*(a.2) + 2*t*(1-t)*(b.2) + t**2*(c.2)]
+
+   cubicBezier(a,b,c,d) == 
+    t +-> [(1-t)**3*(a.1) + 3*t*(1-t)**2*(b.1) 
+             + 3*t**2*(1-t)*(c.1) + t**3*(d.1),
+           (1-t)**3*(a.2) + 3*t*(1-t)**2*(b.2)
+             + 3*t**2*(1-t)*(c.2) + t**3*(d.2)]
+     

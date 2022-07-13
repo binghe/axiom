@@ -1,0 +1,75 @@
+)abbrev domain DSTREE DesingTree
+++ Authors: Gaetan Hache
+++ Date Created: jan 1998
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This category is part of the PAFF package
+
+DesingTree(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> DesingTreeCategory(S) with
+ 
+    encode : % -> String
+       ++ encode(t) returns a string indicating the "shape" of the tree
+
+    fullOut : % -> OutputForm
+      ++ fullOut(tr) yields a full output of tr (see function fullOutput).
+
+    fullOutput : Boolean -> Boolean
+      ++ fullOutput(b) sets a flag such that when true,
+      ++ a coerce to OutputForm yields the full output of
+      ++ tr, otherwise encode(tr) is output (see encode function). 
+      ++ The default is false.
+
+    fullOutput : () -> Boolean
+      ++ fullOutput returns the value of the flag set by fullOutput(b).   
+    
+  CODE ==> add
+
+    Rep ==> Record(value: S, args: List %)
+
+    fullOut(t:%): OutputForm ==
+      empty? children t => (value t) ::OutputForm
+      prefix((value t)::OutputForm, [fullOut(tr) for tr in children t])
+
+    fullOutputFlag:Boolean:=false()
+
+    fullOutput(f)== fullOutputFlag:=f
+
+    fullOutput == fullOutputFlag
+    
+    leaves(t)==
+      empty?(chdr:=children(t)) => list(value(t))
+      concat([leaves(subt) for subt in chdr])
+
+    t1=t2 == value t1 = value t2 and children t1 = children t2
+
+    coerce(t:%):OutputForm== 
+      ^fullOutput() => encode(t) :: OutputForm
+      fullOut(t)
+
+    tree(s,ls) == ([s,ls]:Rep):%
+
+    tree(s:S) == ([s,[]]:Rep):%
+
+    tree(ls:List(S))==
+      empty?(ls) => 
+        error "Cannot create a tree with an empty list"
+      f:=first(ls)
+      empty?(rs:=rest(ls)) =>
+        tree(f)
+      tree(f,[tree(rs)])
+
+    value t == (t:Rep).value
+
+    children t == ((t:Rep).args):List %
+
+    setchildren_!(t,ls) == ((t:Rep).args:=ls;t pretend %)
+
+    setvalue_!(t,s) == ((t:Rep).value:=s;s)
+
+    encode(t)==
+      empty?(chtr:=children(t)) => empty()$String
+      concat([concat(["U",encode(arb),"."]) for arb in chtr])
+

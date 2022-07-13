@@ -1,0 +1,46 @@
+)abbrev package MKUCFUNC MakeUnaryCompiledFunction
+++ Author: Manuel Bronstein
+++ Date Created: 1 Dec 1988
+++ Date Last Updated: 5 Mar 1990
+++ Description: 
+++ Tools for making compiled functions from top-level expressions
+++ Transforms top-level objects into compiled functions.
+
+MakeUnaryCompiledFunction(S, D, I) : SIG == CODE where
+  S : ConvertibleTo InputForm
+  D : Type
+  I : Type
+
+  SY  ==> Symbol
+  DI  ==> devaluate(D -> I)$Lisp
+
+  SIG ==> with
+
+    unaryFunction : SY -> (D -> I)
+      ++ unaryFunction(a) is a local function
+
+    compiledFunction : (S, SY) -> (D -> I)
+      ++ compiledFunction(expr, x) returns a function \spad{f: D -> I}
+      ++ defined by \spad{f(x) == expr}. 
+      ++ Function f is compiled and directly
+      ++ applicable to objects of type D.
+      ++
+      ++X MUCF:=MakeUnaryCompiledFunction(POLY(FRAC(INT)),FLOAT,FLOAT)
+      ++X f:=(x+3)^2
+      ++X g:=compiledFunction(f,x)$MUCF
+      ++X g(2.0)
+
+  CODE ==> add
+
+    import MakeFunction(S)
+
+    func: (SY, D) -> I
+
+    func(name, x)       == FUNCALL(name, x, NIL$Lisp)$Lisp
+    unaryFunction name  == (d1:D):I +-> func(name, d1)
+
+    compiledFunction(e:S, x:SY) ==
+      t := [convert([devaluate(D)$Lisp]$List(InputForm))
+           ]$List(InputForm)
+      unaryFunction compile(function(e, declare DI, x), t)
+

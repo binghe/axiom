@@ -1,0 +1,284 @@
+)abbrev package COMMONOP CommonOperators
+++ Author: Manuel Bronstein
+++ Date Created: 25 Mar 1988
+++ Date Last Updated: 2 December 1994
+++ Description:
+++ This package exports the elementary operators, with some semantics
+++ already attached to them. The semantics that is attached here is not
+++ dependent on the set in which the operators will be applied.
+
+CommonOperators() : SIG == CODE where
+
+  OP  ==> BasicOperator
+  O   ==> OutputForm
+  POWER ==> "%power"::Symbol
+  ALGOP ==> "%alg"
+  EVEN  ==> "even"
+  ODD   ==> "odd"
+  DUMMYVAR ==> "%dummyVar"
+
+  SIG ==> with
+
+    operator : Symbol -> OP
+      ++ operator(s) returns an operator with name s, with the
+      ++ appropriate semantics if s is known. If s is not known,
+      ++ the result has no semantics.
+
+  CODE ==> add
+
+    dpi        : List O -> O
+    dgamma     : List O -> O
+    dquote     : List O -> O
+    dexp       : O -> O
+    dfact      : O -> O
+    startUp    : Boolean -> Void
+    setDummyVar: (OP, NonNegativeInteger) -> OP
+
+    brandNew?:Reference(Boolean) := ref true
+
+    opalg   := operator("rootOf"::Symbol, 2)$OP
+
+    oproot  := operator("nthRoot"::Symbol, 2)
+
+    oppi    := operator("pi"::Symbol, 0)
+
+    oplog   := operator("log"::Symbol, 1)
+
+    opexp   := operator("exp"::Symbol, 1)
+
+    opabs   := operator("abs"::Symbol, 1)
+
+    opsin   := operator("sin"::Symbol, 1)
+
+    opcos   := operator("cos"::Symbol, 1)
+
+    optan   := operator("tan"::Symbol, 1)
+
+    opcot   := operator("cot"::Symbol, 1)
+
+    opsec   := operator("sec"::Symbol, 1)
+
+    opcsc   := operator("csc"::Symbol, 1)
+
+    opasin  := operator("asin"::Symbol, 1)
+
+    opacos  := operator("acos"::Symbol, 1)
+
+    opatan  := operator("atan"::Symbol, 1)
+
+    opacot  := operator("acot"::Symbol, 1)
+
+    opasec  := operator("asec"::Symbol, 1)
+
+    opacsc  := operator("acsc"::Symbol, 1)
+
+    opsinh  := operator("sinh"::Symbol, 1)
+
+    opcosh  := operator("cosh"::Symbol, 1)
+
+    optanh  := operator("tanh"::Symbol, 1)
+
+    opcoth  := operator("coth"::Symbol, 1)
+
+    opsech  := operator("sech"::Symbol, 1)
+
+    opcsch  := operator("csch"::Symbol, 1)
+
+    opasinh := operator("asinh"::Symbol, 1)
+
+    opacosh := operator("acosh"::Symbol, 1)
+
+    opatanh := operator("atanh"::Symbol, 1)
+
+    opacoth := operator("acoth"::Symbol, 1)
+
+    opasech := operator("asech"::Symbol, 1)
+
+    opacsch := operator("acsch"::Symbol, 1)
+
+    opbox   := operator("%box"::Symbol)$OP
+
+    oppren  := operator("%paren"::Symbol)$OP
+
+    opquote := operator("applyQuote"::Symbol)$OP
+
+    opdiff  := operator("%diff"::Symbol, 3)
+
+    opsi    := operator("Si"::Symbol, 1)
+
+    opci    := operator("Ci"::Symbol, 1)
+
+    opei    := operator("Ei"::Symbol, 1)
+
+    opli    := operator("li"::Symbol, 1)
+
+    operf   := operator("erf"::Symbol, 1)
+
+    opli2   := operator("dilog"::Symbol, 1)
+
+    opfis   := operator("fresnelS"::Symbol, 1)
+
+    opfic   := operator("fresnelC"::Symbol, 1)
+
+    opGamma     := operator("Gamma"::Symbol, 1)
+
+    opGamma2    := operator("Gamma2"::Symbol, 2)
+
+    opBeta      := operator("Beta"::Symbol, 2)
+
+    opdigamma   := operator("digamma"::Symbol, 1)
+
+    oppolygamma := operator("polygamma"::Symbol, 2)
+
+    opBesselJ   := operator("besselJ"::Symbol, 2)
+
+    opBesselY   := operator("besselY"::Symbol, 2)
+
+    opBesselI   := operator("besselI"::Symbol, 2)
+
+    opBesselK   := operator("besselK"::Symbol, 2)
+
+    opAiryAi    := operator("airyAi"::Symbol,  1)
+
+    opAiryBi    := operator("airyBi"::Symbol , 1)
+
+    opint   := operator("integral"::Symbol, 3)
+
+    opdint  := operator("%defint"::Symbol, 5)
+
+    opfact  := operator("factorial"::Symbol, 1)
+
+    opperm  := operator("permutation"::Symbol, 2)
+
+    opbinom := operator("binomial"::Symbol, 2)
+
+    oppow   := operator(POWER, 2)
+
+    opsum   := operator("summation"::Symbol, 3)
+
+    opdsum  := operator("%defsum"::Symbol, 5)
+
+    opprod  := operator("product"::Symbol, 3)
+
+    opdprod := operator("%defprod"::Symbol, 5)
+
+    algop   := [oproot, opalg]$List(OP)
+
+    rtrigop := [opsin, opcos, optan, opcot, opsec, opcsc,
+                         opasin, opacos, opatan, opacot, opasec, opacsc]
+
+    htrigop := [opsinh, opcosh, optanh, opcoth, opsech, opcsch,
+                   opasinh, opacosh, opatanh, opacoth, opasech, opacsch]
+
+    trigop  := concat(rtrigop, htrigop)
+
+    elemop  := concat(trigop, [oppi, oplog, opexp])
+
+    primop  := [opei, opli, opsi, opci, operf, opli2, opint, opdint,
+                opfis, opfic]
+
+    combop  := [opfact, opperm, opbinom, oppow,
+                                         opsum, opdsum, opprod, opdprod]
+
+    specop  := [opGamma, opGamma2, opBeta, opdigamma, oppolygamma, opabs,
+                opBesselJ, opBesselY, opBesselI, opBesselK, opAiryAi,
+                 opAiryBi]
+
+    anyop   := [oppren, opdiff, opbox, opquote]
+
+    allop   := concat(concat(concat(concat(concat(
+                            algop,elemop),primop),combop),specop),anyop)
+
+    -- odd and even operators, must be maintained current!
+
+    evenop := [opcos, opsec, opcosh, opsech, opabs]
+
+    oddop  := [opsin, opcsc, optan, opcot, opasin, opacsc, opatan,
+               opsinh, opcsch, optanh, opcoth,opasinh, opacsch,opatanh,opacoth,
+                opsi, operf]
+
+    -- operators whose second argument is a dummy variable
+    dummyvarop1 := [opdiff,opalg, opint, opsum, opprod]
+
+    -- operators whose second and third arguments are dummy variables
+    dummyvarop2 := [opdint, opdsum, opdprod]
+
+    operator s ==
+      if (deref brandNew?) then startUp false
+      for op in allop repeat
+        is?(op, s) => return copy op
+      operator(s)$OP
+
+    dpi l    == "%pi"::Symbol::O
+
+    dfact x  == postfix("!"::Symbol::O, (ATOM(x)$Lisp => x; paren x))
+
+    dquote l == prefix(quote(first(l)::O), rest l)
+
+    dgamma l == prefix(hconcat("|"::Symbol::O, overbar(" "::Symbol::O)), l)
+
+    setDummyVar(op, n) == setProperty(op, DUMMYVAR, n pretend None)
+
+    dexp x ==
+      e := "%e"::Symbol::O
+      x = 1::O => e
+      e ** x
+
+    fsupersub(x:List O):O == supersub("A"::Symbol::O, x)
+
+    fbinomial(x:List O):O == binomial(first x, second x)
+
+    fpower(x:List O):O    == first(x) ** second(x)
+
+    fsum(x:List O):O      == sum(first x, second x, third x)
+
+    fprod(x:List O):O     == prod(first x, second x, third x)
+
+    fint(x:List O):O      ==
+       int(first x * hconcat("d"::Symbol::O, second x),empty(), third x)
+
+    fpren(x:List InputForm):InputForm  ==
+       convert concat(convert("("::Symbol)@InputForm,
+                            concat(x, convert(")"::Symbol)@InputForm))
+
+    fpow(x:List InputForm):InputForm  ==
+       convert concat(convert("**"::Symbol)@InputForm, x)
+
+    froot(x:List InputForm):InputForm  ==
+       convert [convert("**"::Symbol)@InputForm, first x, 1 / second x]
+
+    startUp b ==
+      brandNew?() := b
+      display(oppren,   paren)
+      display(opbox,    commaSeparate)
+      display(oppi,     dpi)
+      display(opexp,    dexp)
+      display(opGamma,  dgamma)
+      display(opGamma2, dgamma)
+      display(opfact,   dfact)
+      display(opquote,  dquote)
+      display(opperm,   fsupersub)
+      display(opbinom,  fbinomial)
+      display(oppow,    fpower)
+      display(opsum,    fsum)
+      display(opprod,   fprod)
+      display(opint,    fint)
+      input(oppren,     fpren)
+      input(oppow,      fpow)
+      input(oproot,     froot)
+      for op in algop   repeat assert(op, ALGOP)
+      for op in rtrigop repeat assert(op, "rtrig")
+      for op in htrigop repeat assert(op, "htrig")
+      for op in trigop  repeat assert(op, "trig")
+      for op in elemop  repeat assert(op, "elem")
+      for op in primop  repeat assert(op, "prim")
+      for op in combop  repeat assert(op, "comb")
+      for op in specop  repeat assert(op, "special")
+      for op in anyop   repeat assert(op, "any")
+      for op in evenop  repeat assert(op, EVEN)
+      for op in oddop   repeat assert(op, ODD)
+      for op in dummyvarop1 repeat setDummyVar(op, 1)
+      for op in dummyvarop2 repeat setDummyVar(op, 2)
+      assert(oppren, "linear")
+      void
+

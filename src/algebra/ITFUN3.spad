@@ -1,0 +1,36 @@
+)abbrev package ITFUN3 InfiniteTupleFunctions3
+++ Description:
+++ Functions defined on streams with entries in two sets.
+
+InfiniteTupleFunctions3(A,B,C) : SIG == CODE where
+  A : Type
+  B : Type
+  C : Type
+
+  IT   ==> InfiniteTuple
+  ST   ==> Stream
+  SF3  ==> StreamFunctions3(A,B,C)
+  FUN  ==> ((A,B)->C)
+
+  SIG ==> with
+
+    map: (((A,B)->C), IT A, IT B) -> IT C
+      ++ map(f,a,b) \undocumented
+
+    map: (((A,B)->C), ST A, IT B) -> ST C
+      ++ map(f,a,b) \undocumented
+
+    map: (((A,B)->C), IT A, ST B) -> ST C
+      ++ map(f,a,b) \undocumented
+
+  CODE ==> add
+
+     map(f:FUN, s1:IT A, s2:IT B):IT C ==
+       map(f, s1 pretend Stream(A), s2 pretend Stream(B))$SF3 pretend IT(C)
+
+     map(f:FUN, s1:ST A, s2:IT B):ST C ==
+       map(f, s1, s2 pretend Stream(B))$SF3
+
+     map(f:FUN, s1:IT A, s2:ST B):ST C ==
+       map(f, s1 pretend Stream(A), s2)$SF3
+

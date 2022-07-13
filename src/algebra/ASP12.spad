@@ -1,0 +1,75 @@
+)abbrev domain ASP12 Asp12
+++ Author: Mike Dewar and Godfrey Nolan
+++ Date Created: Oct 1993
+++ Date Last Updated: 21 June 1994 Changed print to printStatement
+++ References:
+++ Hawk95 Two more links to NAG numerics involving CA systems
+++ Kead93 Production of Argument SubPrograms in the AXIOM -- NAG link
+++ Description:
+++ \spadtype{Asp12} produces Fortran for Type 12 ASPs, needed for NAG routine 
+++ d02kef etc., for example: 
+++
+++ \tab{5}SUBROUTINE MONIT (MAXIT,IFLAG,ELAM,FINFO)\br
+++ \tab{5}DOUBLE PRECISION ELAM,FINFO(15)\br
+++ \tab{5}INTEGER MAXIT,IFLAG\br
+++ \tab{5}IF(MAXIT.EQ.-1)THEN\br
+++ \tab{7}PRINT*,"Output from Monit"\br
+++ \tab{5}ENDIF\br
+++ \tab{5}PRINT*,MAXIT,IFLAG,ELAM,(FINFO(I),I=1,4)\br
+++ \tab{5}RETURN\br
+++ \tab{5}END\
+
+Asp12(name) : SIG == CODE where
+  name : Symbol
+
+  O      ==> OutputForm
+  S      ==> Symbol
+  FST    ==> FortranScalarType
+  FT     ==> FortranType
+  FC     ==> FortranCode
+  SYMTAB ==> SymbolTable
+  EXI    ==> Expression Integer
+  RSFC   ==> Record(localSymbols:SymbolTable,code:List(FortranCode))
+  U      ==> Union(I: Expression Integer,F: Expression Float,_
+                   CF: Expression Complex Float,switch:Switch)
+  UFST   ==> Union(fst:FST,void:"void")
+
+  SIG ==> FortranProgramCategory with
+
+     outputAsFortran : () -> Void
+       ++outputAsFortran() generates the default code for \spadtype{ASP12}.
+    
+  CODE ==> add
+
+    import FC
+    import Switch
+
+    real : FST := "real"::FST
+
+    syms : SYMTAB := empty()$SYMTAB
+
+    declare!(MAXIT,fortranInteger()$FT,syms)$SYMTAB
+
+    declare!(IFLAG,fortranInteger()$FT,syms)$SYMTAB
+
+    declare!(ELAM,fortranReal()$FT,syms)$SYMTAB
+
+    fType : FT := construct([real]$UFST,["15"::Symbol],false)$FT
+
+    declare!(FINFO,fType,syms)$SYMTAB
+
+    Rep := FortranProgram(name,["void"]$UFST,[MAXIT,IFLAG,ELAM,FINFO],syms)
+
+    -- eqn : O := (I::O)=(1@Integer::EXI::O)
+    code:=([cond(EQ([MAXIT@S::EXI]$U,[-1::EXI]$U),
+                 printStatement(["_"Output from Monit_""::O])),
+            printStatement([MAXIT::O,IFLAG::O,ELAM::O,_
+             subscript("(FINFO"::S,[I::O])::O,"I=1"::S::O,"4)"::S::O]),
+            returns()]$List(FortranCode))::Rep
+
+    coerce(u:%):OutputForm == coerce(u)$Rep
+
+    outputAsFortran(u:%):Void == outputAsFortran(u)$Rep
+
+    outputAsFortran():Void == outputAsFortran(code)$Rep  
+

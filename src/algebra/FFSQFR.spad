@@ -1,0 +1,106 @@
+)abbrev package FFSQFR FiniteFieldSquareFreeDecomposition
+++ Author: Patrice Naudin and Claude Quitte
+++ Date Created: September 1996
+++ Date Last Updated: April 2010 by Tim Daly
+++ Description:
+++ Part of the package for Algebraic Function Fields in one variable (PAFF)
+
+FiniteFieldSquareFreeDecomposition(K,PolK) : SIG == CODE where
+  K : FiniteFieldCategory
+  PolK : UnivariatePolynomialCategory (K)
+
+  SIG ==> with
+
+    Musser : PolK -> Factored (PolK)
+
+    Yun : PolK -> Factored (PolK)
+
+  CODE ==> add
+    
+    p : NonNegativeInteger := characteristic()$K
+    tableOfSquareFreePolynomials := Table (Integer, PolK)
+    oneYunStep2uple := Record (
+       simpleDecomposition : tableOfSquareFreePolynomials,
+        gcdOfArgumentAndDerivative : PolK
+         )
+    
+    rawMusser (P : PolK) : Factored(PolK) ==
+        Q : PolK := gcd(P, D(P))
+        A : PolK := P quo Q
+        decomposition : Factored(PolK) := 1
+        B : PolK
+    
+        for i in 1 .. repeat
+            if i rem p ^= 0 then
+                B := gcd(A, Q)
+                decomposition := sqfrFactor(A quo B, i) * decomposition
+                if B = 1 then leave
+                A := B
+            Q := Q quo A
+        if Q ^= 1 then
+           decomposition:=decomposition * rawMusser (charthRoot(Q)::PolK) ** p
+        return decomposition
+    
+    Musser (P : PolK) : Factored(PolK) ==
+        degree (P) = 0 => return P::Factored(PolK)
+        if (lcP : K := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+        return lcP::PolK * rawMusser (P)
+    
+    oneYunStep (P : PolK) : oneYunStep2uple ==
+        C : PolK := D (P) ;  A : PolK := gcd(P, C)
+        gcd_P_P' : PolK := A ;  B : PolK := P quo A
+        result : tableOfSquareFreePolynomials := empty ()
+        i : Integer := 1
+    
+        repeat
+            C := (C quo A) - D(B)
+            if C = 0 then leave
+            A := gcd(B, C)
+            if A ^= 1 then
+                result (i) := A
+                B := B quo A
+            i := i + 1
+        result (i) := B
+        return [result, gcd_P_P']
+    
+    rawYun (P : PolK) : tableOfSquareFreePolynomials ==
+        u : oneYunStep2uple := oneYunStep (P)
+        gcd_P_P' : PolK := u.gcdOfArgumentAndDerivative
+        U : tableOfSquareFreePolynomials := u.simpleDecomposition
+    
+        R : PolK := gcd_P_P'
+        for j in indices (U) repeat
+            for k in 1 .. j-1 repeat
+                R := R quo U(j)
+        if R = 1 then return U
+        V : tableOfSquareFreePolynomials := rawYun (charthRoot (R)::PolK)
+    
+        result : tableOfSquareFreePolynomials := empty ()
+        gcd_Uj_Vk : PolK ;
+        for k in indices (V) repeat    -- boucle 1
+        
+            for j in  indices (U) | not (U(j) = 1)  repeat    -- boucle 2
+                gcd_Uj_Vk := gcd (U(j), V(k))
+                if not (gcd_Uj_Vk = 1) then
+                    result (j+p*k) := gcd_Uj_Vk
+                    V (k) := V(k) quo gcd_Uj_Vk
+                    U (j) := U(j) quo gcd_Uj_Vk
+                if V(k) = 1 then leave
+        
+            if not (V(k) = 1) then
+                result (p*k):= V (k)
+        
+        for j in  indices (U) | not (U(j) = 1)  repeat    -- boucle 3
+            result (j) := U (j)
+        
+        return result
+    
+    Yun(P : PolK) : Factored(PolK) ==
+        degree (P) = 0  => P::Factored(PolK)
+        if (lcP := leadingCoefficient (P)) ^= 1 then P := inv (lcP)*P
+        U : tableOfSquareFreePolynomials := rawYun (P)
+        PFactored : Factored(PolK) := 1
+        for i in indices (U) repeat
+            PFactored := PFactored * sqfrFactor (U (i), i)
+        return (lcP::PolK) * PFactored
+    

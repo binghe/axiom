@@ -1,0 +1,44 @@
+)abbrev domain MODMONOM ModuleMonomial
+++ Author: Mark Botch
+++ Description:
+++ This package has no documentation
+
+ModuleMonomial(IS,E,ff) : SIG == CODE where
+  IS : OrderedSet
+  E : SetCategory
+  MM ==> Record(index:IS, exponent:E)
+  ff : (MM, MM) -> Boolean
+
+  SIG ==> OrderedSet  with
+
+    exponent : $ -> E
+      ++ exponent(x) is not documented
+
+    index : $ -> IS
+      ++ index(x) is not documented
+
+    coerce : MM -> $
+      ++ coerce(x) is not documented
+
+    coerce : $ -> MM
+      ++ coerce(x) is not documented
+
+    construct : (IS, E) -> $
+      ++ construct(i,e) is not documented
+
+  CODE ==> MM add
+
+        Rep:= MM
+
+        x:$ < y:$ == ff(x::Rep, y::Rep)
+
+        exponent(x:$):E == x.exponent
+
+        index(x:$): IS == x.index
+
+        coerce(x:$):MM == x::Rep::MM
+
+        coerce(x:MM):$ == x::Rep::$
+
+        construct(i:IS, e:E):$ == [i, e]$MM::Rep::$
+

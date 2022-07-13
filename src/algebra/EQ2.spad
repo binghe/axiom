@@ -1,0 +1,18 @@
+)abbrev package EQ2 EquationFunctions2
+++ Date Last Updated: June 3, 1991
+++ Description:
+++ This package provides operations for mapping the sides of equations.
+
+EquationFunctions2(S, R) : SIG == CODE where
+  S : Type
+  R : Type
+
+  SIG ==> with
+
+    map : (S ->R ,Equation S) -> Equation R
+      ++ map(f,eq) returns an equation where f is applied to the sides of eq
+
+  CODE ==> add
+
+    map(fn, eqn) == equation(fn lhs eqn, fn rhs eqn)
+

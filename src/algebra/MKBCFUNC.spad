@@ -1,0 +1,47 @@
+)abbrev package MKBCFUNC MakeBinaryCompiledFunction
+++ Author: Manuel Bronstein
+++ Date Created: 1 Dec 1988
+++ Date Last Updated: 5 Mar 1990
+++ Description:
+++ Tools and transforms for making compiled functions from 
+++ top-level expressions
+
+MakeBinaryCompiledFunction(S, D1, D2, I) : SIG == CODE where
+  S : ConvertibleTo InputForm
+  D1: Type
+  D2 : Type
+  I : Type
+
+  SY  ==> Symbol
+  DI  ==> devaluate((D1, D2) -> I)$Lisp
+
+  SIG ==> with
+
+    binaryFunction : SY -> ((D1, D2) -> I)
+      ++ binaryFunction(s) is a local function
+
+    compiledFunction : (S, SY, SY) -> ((D1, D2) -> I)
+      ++ compiledFunction(expr,x,y) returns a function \spad{f: (D1, D2) -> I}
+      ++ defined by \spad{f(x, y) == expr}.
+      ++ Function f is compiled and directly
+      ++ applicable to objects of type \spad{(D1, D2)}
+      ++
+      ++X MBCF:=MakeBinaryCompiledFunction(POLY(FRAC(INT)),FLOAT,FLOAT,FLOAT)
+      ++X f:=(x+3)*(y+4)
+      ++X g:=compiledFunction(f,x,y)$MBCF
+      ++X g(2.0,3.0)
+
+  CODE ==> add
+
+    import MakeFunction(S)
+
+    func: (SY, D1, D2) -> I
+
+    func(name, x, y)   == FUNCALL(name, x, y, NIL$Lisp)$Lisp
+
+    binaryFunction name == (d1:D1,d2:D2):I +-> func(name, d1, d2)
+
+    compiledFunction(e, x, y) ==
+      t := [devaluate(D1)$Lisp, devaluate(D2)$Lisp]$List(InputForm)
+      binaryFunction compile(function(e, declare DI, x, y), t)
+

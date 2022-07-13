@@ -1,0 +1,15 @@
+)abbrev domain EQTBL EqTable
+++ Author: Stephen M. Watt
+++ Date Created: 
+++ Date Last Updated: June 21, 1991
+++ Description:
+++ This domain provides tables where the keys are compared using 
+++ \spadfun{eq?}.  Thus keys are considered equal only if they
+++ are the same instance of a structure.
+
+EqTable(Key,Entry) == CODE where
+  Key : SetCategory
+  Entry : SetCategory
+
+  CODE ==> HashTable(Key, Entry, "EQ")
+

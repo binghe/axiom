@@ -1,0 +1,9 @@
+)abbrev category ATARBPR ArbitraryPrecisionAttribute
+++ Description:
+++ Approximate numbers for which the user can set the precision
+++ for subsequent calculations.
+
+ArbitraryPrecisionAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

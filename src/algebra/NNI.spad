@@ -1,0 +1,63 @@
+)abbrev domain NNI NonNegativeInteger
+++ Author: Mark Botch
+++ Description: 
+++ \spadtype{NonNegativeInteger} provides functions for non negative integers.
+
+NonNegativeInteger() : SIG == CODE where
+
+  SIG ==> Join(OrderedAbelianMonoidSup, Monoid) with
+
+    _quo : (%, %) -> %
+      ++ a quo b returns the quotient of \spad{a} and b, forgetting
+      ++ the remainder.
+  
+    _rem : (%, %) -> %
+      ++ a rem b returns the remainder of \spad{a} and b.
+  
+    gcd : (%, %) -> %
+      ++ gcd(a, b) computes the greatest common divisor of two
+      ++ non negative integers \spad{a} and b.
+      ++
+      ++X gcd(2415,945)
+      ++X gcd(945,2415)
+      ++X gcd(2415,0)
+      ++X gcd(0,945)
+      ++X gcd(15,15)
+      ++X gcd(0,0)
+  
+    divide : (%, %) -> Record(quotient : %, remainder : %)
+      ++ divide(a, b) returns a record containing both remainder and quotient.
+  
+    _exquo : (%,%) -> Union(%,"failed")
+      ++ exquo(a,b) returns the quotient of \spad{a} and b, or "failed"
+      ++ if b is zero or \spad{a} rem b is zero.
+  
+    shift : (%, Integer) -> %
+      ++ shift(a, i) shift \spad{a} by i bits.
+  
+    random : % -> %
+      ++ random(n) returns a random integer from 0 to \spad{n-1}.
+  
+    qcoerce : Integer -> %
+      ++ qcoerce(n) coerces \spad{n} to \spad{%} trusting that
+      ++ \spad{n} is nonnegative
+
+  CODE ==> SubDomain(Integer, #1 >= 0) add
+
+    x, y : %
+
+    sup(x, y) == MAX(x, y)$Lisp
+
+    shift(x : %, n : Integer) : % == ASH(x, n)$Lisp
+
+    qcoerce(n) == n pretend %
+
+    subtractIfCan(x, y) ==
+      c : Integer := (x pretend Integer) - (y pretend Integer)
+      c < 0 => "failed"
+      c pretend %
+
+    gcd(x,y) ==
+      zero? x => y
+      gcd(y rem x,x)
+

@@ -1,0 +1,15 @@
+)abbrev domain XPOLY XPolynomial
+++ Author: Michel Petitot petitot@lifl.fr
+++ Date Created: 91
+++ Date Last Updated: 7 Juillet 92
+++ Description:
+++ This type supports multivariate polynomials whose set of variables 
+++ is \spadtype{Symbol}. The representation is recursive.
+++ The coefficient ring may be non-commutative and the variables 
+++ do not commute. However, coefficients and variables commute.
+
+XPolynomial(R) == CODE where
+  R : Ring
+
+  CODE ==> XRecursivePolynomial(Symbol, R)
+

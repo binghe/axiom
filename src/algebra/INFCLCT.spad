@@ -1,0 +1,80 @@
+)abbrev category INFCLCT InfinitlyClosePointCategory
+++ Authors: Gaetan Hache
+++ Date Created: may 1997 
+++ Date Last Updated: April 2010, by Tim Daly
+++ Description: 
+++ This category is part of the PAFF package
+InfinitlyClosePointCategory(K,symb,PolyRing,E,ProjPt,PCS,Plc,Divisor,BLMET) :
+ Category == SIG where
+  K : Field
+  symb : List(Symbol)
+  PolyRing : PolynomialCategory(K,E,OrderedVariableList(symb))
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+  BLMET : BlowUpMethodCategory
+
+  bls ==> ['X,'Y]
+  BlUpRing ==> DistributedMultivariatePolynomial(bls , K)
+  AFP ==> AffinePlane(K)
+
+  SIG ==> SetCategoryWithDegree with
+
+    create : (ProjPt ,  BlUpRing, AFP , NonNegativeInteger,BLMET, _
+              NonNegativeInteger,  DIVISOR,K,Symbol) -> %  
+      ++ create(p,b,a,n1,c,n2,d,k,s) an infinitly close point
+
+    create : (ProjPt,PolyRing) -> %
+      
+    setpoint_! : (%,ProjPt) -> ProjPt
+
+    setcurve_! : (%,BlUpRing) -> BlUpRing
+
+    setlocalPoint_! : (%,AFP) -> AFP
+ 
+    setsubmult_! : (%, NonNegativeInteger) -> NonNegativeInteger
+
+    setmult_! : (%,NonNegativeInteger) -> NonNegativeInteger
+ 
+    setchart_! : (%,BLMET) -> BLMET -- CHH
+
+    setexcpDiv_! : (%,DIVISOR) -> DIVISOR
+
+    setlocalParam_! : (%,List PCS) -> List(PCS)
+
+    setsymbName_! : (%,Symbol) -> Symbol
+ 
+    subMultV : % -> NonNegativeInteger
+
+    localParamV : % -> List PCS
+
+    symbNameV : % -> Symbol
+
+    pointV :  % -> ProjPt
+      ++ pointV(p) returns the infinitly close point.
+
+    curveV :  % -> BlUpRing
+      ++ curveV(p) returns the defining polynomial of the strict transform 
+      ++ on which lies the corresponding infinitly close point.
+
+    localPointV : % -> AFP
+      ++ localPointV(p) returns the coordinates of the local infinitly 
+      ++ close point
+
+    multV : % -> NonNegativeInteger
+      ++ multV(p) returns the multiplicity of the infinitly close point.
+
+    chartV : % -> BLMET -- CHH
+      ++ chartV(p) is the chart of the infinitly close point. The first integer 
+      ++ correspond to variable defining the exceptional line, the last one 
+      ++ the affine  neighboorhood and the second one is the 
+      ++ remaining integer. For example [1,2,3] means that
+      ++ Z=1, X=X and Y=XY. [2,3,1] means that X=1, Y=Y and Z=YZ.     
+
+    excpDivV : % -> DIVISOR
+      ++ excpDivV returns the exceptional divisor of the infinitly close point.
+
+    actualExtensionV : % -> K
+

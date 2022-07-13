@@ -1,0 +1,69 @@
+)abbrev package PDECOMP PolynomialDecomposition
+++ References: 
+++ Dexter Kozen and Susan Landau, ``Polynomial Decomposition Algorithms'' 
+++ Journal of Symbolic Computation (1989) 7, 445-456
+++ Description:
+++ Polynomial composition and decomposition functions\br
+++ If f = g o h then g=leftFactor(f,h) and h=rightFactor(f,g)
+
+PolynomialDecomposition(UP, F) : SIG == CODE where
+  F : Field
+  UP : UnivariatePolynomialCategory F
+
+  NNI ==> NonNegativeInteger
+  LR  ==> Record(left: UP, right: UP)
+ 
+  SIG ==> with
+
+    decompose : UP -> List UP
+      ++ decompose(up) \undocumented
+
+    decompose : (UP, NNI, NNI) -> Union(LR, "failed")
+      ++ decompose(up,m,n) \undocumented
+
+    leftFactor : (UP, UP) -> Union(UP, "failed") 
+      ++ leftFactor(p,q) \undocumented
+
+    rightFactorCandidate : (UP, NNI) -> UP
+      ++ rightFactorCandidate(p,n) \undocumented
+
+  CODE ==> add
+
+        leftFactor(f, h) ==
+             g: UP := 0
+             for i in 0.. while f ^= 0 repeat
+                 fr := divide(f, h)
+                 f := fr.quotient; r := fr.remainder
+                 degree r > 0 => return "failed"
+                 g := g + r * monomial(1, i)
+             g
+ 
+        decompose(f, dg, dh) ==
+            df := degree f
+            dg*dh ^= df => "failed"
+            h := rightFactorCandidate(f, dh)
+            g := leftFactor(f, h)
+            g case "failed" => "failed"
+            [g::UP, h]
+ 
+        decompose f ==
+            df := degree f
+            for dh in 2..df-1 | df rem dh = 0 repeat
+                h := rightFactorCandidate(f, dh)
+                g := leftFactor(f, h)
+                g case UP => return
+                    append(decompose(g::UP), decompose h)
+            [f]
+
+        rightFactorCandidate(f, dh) ==
+            f  := f/leadingCoefficient f
+            df := degree f
+            dg := df quo dh
+            h  := monomial(1, dh)
+            for k in 1..dh repeat
+                hdg:= h**dg
+                c  := (coefficient(f,(df-k)::NNI)-_
+                       coefficient(hdg,(df-k)::NNI))/(dg::F)
+                h  := h + monomial(c, (dh-k)::NNI)
+            h - monomial(coefficient(h, 0), 0) -- drop constant term
+

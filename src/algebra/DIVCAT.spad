@@ -1,0 +1,56 @@
+)abbrev category DIVCAT DivisorCategory
+++ Authors: Gaetan Hache
+++ Date Created: may 1997 
+++ Date Last Updated: April 2010, by Tim Daly
+++ Description: This category exports the function for domains 
+
+DivisorCategory(S) : Category == SIG where
+  S : SetCategory
+
+  INT     ==> Integer
+  BOOLEAN ==> Boolean
+  LIST    ==> List
+  AB      ==> AbelianGroup
+  MI      ==> Module(Integer)
+  FAMC    ==> FreeAbelianMonoidCategory(S,Integer)
+
+  SIG ==> Join(AB,MI,FAMC) with
+
+    degree : % -> INT
+      ++ degree(d) returns the degree of the divisor d
+
+    split : % -> List %
+      ++ split(d) splits the divisor d. For example, 
+      ++ \spad{split( 2 p1 + 3p2 )} returns the list \spad{[ 2 p1, 3 p2 ]}.
+
+    "<=" : (%,%) -> BOOLEAN
+
+    collect : % -> %
+      ++ collect collects the duplicative points in the divisor.
+
+    concat : (%,%) -> %
+      ++ concat(a,b) concats the divisor a and b 
+      ++ without collecting the duplicative points.
+
+    effective? : % -> BOOLEAN
+      ++ effective?(d) returns true if d >= 0.
+
+    supp: % -> LIST(S)
+      ++ supp(d) returns the support of the divisor d.
+
+    suppOfZero : % -> LIST(S)
+      ++ suppOfZero(d) returns the elements of the support of d that 
+      ++ have a positive coefficient.
+
+    suppOfPole : % -> LIST(S)
+      ++ suppOfPole(d) returns the elements of the support of d that 
+      ++ have a negative coefficient.
+
+    divOfZero : % -> %
+      ++ divOfZero(d) returns the positive part of d.
+
+    divOfPole : % -> %
+      ++ divOfPole(d) returns the negative part of d.
+
+    incr : % -> %
+

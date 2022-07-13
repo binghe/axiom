@@ -1,0 +1,47 @@
+)abbrev domain MINT MachineInteger
+++ Author: Mike Dewar
+++ Date Created:  December 1993
+++ Description: 
+++ A domain which models the integer representation
+++ used by machines in the AXIOM-NAG link.
+
+MachineInteger() : SIG == CODE where
+
+  S ==> String
+
+  SIG ==> Join(FortranMachineTypeCategory,IntegerNumberSystem) with
+
+    maxint : PositiveInteger -> PositiveInteger
+     ++ maxint(u) sets the maximum integer in the model to u
+
+    maxint : () -> PositiveInteger
+     ++ maxint() returns the maximum integer in the model
+
+    coerce : Expression Integer -> Expression $
+     ++ coerce(x) returns x with coefficients in the domain
+
+  CODE  ==> Integer add
+
+    MAXINT : PositiveInteger := 2**32
+
+    maxint():PositiveInteger == MAXINT
+
+    maxint(new:PositiveInteger):PositiveInteger ==
+      old := MAXINT
+      MAXINT := new
+      old
+
+    coerce(u:Expression Integer):Expression($) ==
+      map(coerce,u)$ExpressionFunctions2(Integer,$)
+
+    coerce(u:Integer):$ ==
+      import S
+      abs(u) > MAXINT => 
+        message: S := concat [convert(u)@S,"  > MAXINT(",convert(MAXINT)@S,")"]
+        error message
+      u pretend $
+
+    retract(u:$):Integer == u pretend Integer
+
+    retractIfCan(u:$):Union(Integer,"failed") == u pretend Integer
+

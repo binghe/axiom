@@ -1,0 +1,17 @@
+)abbrev domain AFFPLPS AffinePlaneOverPseudoAlgebraicClosureOfFiniteField
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is all the categories and domains related to projective
+++ space and part of the PAFF package
+
+AffinePlaneOverPseudoAlgebraicClosureOfFiniteField(K) : SIG == CODE where
+  K : FiniteFieldCategory
+
+  KK ==> PseudoAlgebraicClosureOfFiniteField(K)
+
+  SIG ==> AffineSpaceCategory(KK)
+
+  CODE ==> AffinePlane(KK)
+

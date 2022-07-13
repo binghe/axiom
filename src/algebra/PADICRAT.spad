@@ -1,0 +1,13 @@
+)abbrev domain PADICRAT PAdicRational
+++ Author: Clifton J. Williamson
+++ Date Created: 15 May 1990
+++ Date Last Updated: 15 May 1990
+++ Description:
+++ Stream-based implementation of Qp: numbers are represented as
+++ sum(i = k.., a[i] * p^i) where the a[i] lie in 0,1,...,(p - 1).
+
+PAdicRational(p) == CODE where
+  p : Integer
+
+  CODE ==> PAdicRationalConstructor(p,PAdicInteger p)
+

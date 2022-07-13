@@ -1,0 +1,23 @@
+)abbrev domain FUNCTION FunctionCalled
+++ Author: Mark Botch
+++ Description:
+++ This domain implements named functions
+
+FunctionCalled(f) : SIG == CODE where
+  f : Symbol
+
+  SIG ==> SetCategory with 
+
+    name : % -> Symbol 
+      ++ name(x) returns the symbol
+
+  CODE ==> add
+
+   name r                 == f
+
+   coerce(r:%):OutputForm == f::OutputForm
+
+   x = y                  == true
+
+   latex(x:%):String      == latex f
+

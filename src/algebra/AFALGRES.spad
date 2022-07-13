@@ -1,0 +1,145 @@
+)abbrev package AFALGRES AffineAlgebraicSetComputeWithResultant
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+AffineAlgebraicSetComputeWithResultant(K,symb,PolyRing,E,ProjPt) :
+ SIG == CODE where
+  K   : Field
+  symb: List(Symbol)
+  OV  ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt   : ProjectiveSpaceCategory(K)
+  PCS      : LocalPowerSeriesCategory(K)
+  
+  SUP  ==> SparseUnivariatePolynomial
+  UPUP ==> SUP(SUP(K))
+  NNI  ==> NonNegativeInteger
+  RFP  ==> RootsFindingPackage
+
+  SIG ==>  with
+
+    affineSingularPoints : PolyRing -> _
+                          Union(List(ProjPt),"failed","Infinite",Integer)
+
+    affineSingularPoints : UPUP -> _
+                          Union(List(ProjPt),"failed","Infinite",Integer)
+
+    affineAlgSetLocal : List UPUP -> _
+                       Union(List(ProjPt),"failed","Infinite",Integer)
+
+    affineAlgSet : List PolyRing  -> _
+                  Union(List ProjPt ,"failed","Infinite",Integer)
+
+    polyRing2UPUP : PolyRing -> UPUP
+
+    allPairsAmong : List UPUP -> List List UPUP
+
+    affineRationalPoints : (PolyRing, PositiveInteger) -> _
+                          Union(List(ProjPt),"failed","Infinite",Integer)
+
+  CODE ==>  add
+    
+    import ProjPt
+        
+    evAtcoef: (UPUP,K) -> SUP(K)
+   
+    evAtcoef(pol,a)==
+      zero?(pol) => 0
+      dd:= degree pol
+      lc:= leadingCoefficient pol
+      monomial( lc(a), dd )$SUP(K)  + evAtcoef( reductum(pol), a )
+
+    polyRing2UPUP(pol)==
+      zero?(pol) => 0
+      dd:= degree pol
+      lc:= leadingCoefficient pol
+      pp:= parts dd
+      monomial(monomial(lc,pp.1)$SUP(K),pp.2)$UPUP+polyRing2UPUP(reductum(pol))
+
+    if K has FiniteFieldCategory then
+      
+      affineRationalPoints(crv:PolyRing,extdegree:PositiveInteger) ==
+        listPtsIdl:List(ProjPt):= empty()
+        x:= monomial(1,directProduct(vector([1,0,0])$Vector(NNI)))$PolyRing
+        y:= monomial(1,directProduct(vector([0,1,0])$Vector(NNI)))$PolyRing
+        if K has PseudoAlgebraicClosureOfFiniteFieldCategory then 
+          setTower!(1$K)$K
+        q:= size()$K 
+        px:= x**(q**extdegree) - x
+        py:= y**(q**extdegree) - y
+        rpts:= affineAlgSet([crv,px,py])
+        -- si les  3  tests qui suivent ne sont pas la, 
+        -- alors ca ne compile pas !!! ??? 
+        rpts case "failed" => _
+          error "case failed: From affineRationalPoints in AFALGRES"
+        rpts case "Infinite" => _
+          error "case infinite: From affineRationalPoints in AFALGRES"
+        rpts case Integer => _
+          error "case Integer: From affineRationalPoints in AFALGRES"
+        rpts case List(ProjPt) => rpts 
+        error "case unknown: From affineRationalPoints in AFALGRES"
+
+    allPairsAmong(lp)==
+      #lp = 2 => [lp]
+      rlp:=rest lp
+      subL:= allPairsAmong rlp
+      pol:=first lp
+      frontL:= [[pol,p] for p in rlp]
+      concat( frontL , subL )
+
+    affineSingularPoints(pol:PolyRing)==
+      affineSingularPoints( polyRing2UPUP pol )
+
+    affineSingularPoints(pol:UPUP)==
+      ground? pol => "failed"
+      lc := coefficients pol
+      lcb := [ ground?( c )$SUP(K) for c in lc ]
+      reduce("and" , lcb) => "failed"
+      dy:=differentiate(pol)
+      dx:=map(differentiate$SUP(K),pol)
+      affineAlgSetLocal( [ pol, dy, dx ] )
+
+    resultantL: List UPUP -> SUP(K)
+    resultantL(lp)==
+      g:=first lp
+      h:= last lp
+      resultant(g,h)
+   
+    affineAlgSet(lpol:List PolyRing)==
+      affineAlgSetLocal( [ polyRing2UPUP pol for pol in lpol ] )
+
+    affineAlgSetLocal(lpol:List UPUP)== 
+      listPtsIdl:List(ProjPt)
+      allP:= allPairsAmong lpol
+      beforGcd:List SUP(K) := [resultantL(lp) for lp in allP]
+      polyZeroX:SUP(K):=gcd beforGcd
+      zero? polyZeroX => "failed"
+      listZeroY:List(K):=empty()
+      listZeroX:List(K):=empty()
+      recOfZerosX:=distinguishedRootsOf(polyZeroX,1$K)$RFP(K)
+      degExtX:=recOfZerosX.extDegree
+      listZeroX:List K := recOfZerosX.zeros
+      listOfExtDeg:List(Integer):=empty()
+      listOfExtDeg:=cons(degExtX,listOfExtDeg)
+      lpolEval:List SUP(K)
+      for a in listZeroX repeat
+        lpolEval := [ evAtcoef(p,a) for p in lpol ]
+        recOfZerosOfIdeal:=distinguishedCommonRootsOf( lpolEval ,a)$RFP(K)
+        listZeroY:= recOfZerosOfIdeal.zeros
+        listOfExtDeg:=cons(recOfZerosOfIdeal.extDegree,listOfExtDeg)
+        listPtsIdl:=
+          concat( [projectivePoint([a,b,1]) for b in listZeroY] ,listPtsIdl)
+      degExt:=lcm listOfExtDeg
+      zero?(degExt) => 
+        print(("AFALGRES:Infinite number of points")::OutputForm)
+        "Infinite" 
+      ^one?(degExt) =>
+        print(("AFALGRES:You need an extension of degree")::OutputForm)
+        print(degExt::OutputForm)
+        degExt
+      listPtsIdl
+

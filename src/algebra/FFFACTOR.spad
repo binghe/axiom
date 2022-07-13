@@ -1,0 +1,217 @@
+)abbrev package FFFACTOR FiniteFieldFactorization
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: March 2013 by Tim Daly
+++ Description:
+++ Part of the PAFF package
+
+FiniteFieldFactorization(K, PolK) : SIG == CODE where
+  K : FiniteFieldCategory
+  PolK : UnivariatePolynomialCategory(K)
+
+  SIG ==> with
+
+     factorSquareFree : PolK -> List(PolK)
+
+     factorCantorZassenhaus : (PolK, NonNegativeInteger) -> List(PolK)
+
+     factor : PolK -> Factored(PolK)
+
+     factorUsingYun : PolK -> Factored(PolK)
+
+     factorUsingMusser : PolK -> Factored(PolK)
+
+     irreducible? : PolK -> Boolean
+
+  CODE ==> add
+
+     import FiniteFieldSquareFreeDecomposition(K, PolK)
+
+     p : NonNegativeInteger := characteristic()$K
+
+     p' : NonNegativeInteger := p quo 2      -- used for odd p : (p-1)/2
+
+     q : NonNegativeInteger := size()$K
+
+     q' : NonNegativeInteger := q quo 2        -- used for odd q : (q-1)/2
+
+     X : PolK := monomial(1, 1)
+
+     primeKdim : NonNegativeInteger :=
+         q_quo_p : NonNegativeInteger := q quo p ;  e : NonNegativeInteger := 1
+         while q_quo_p > 1 repeat (e := e + 1 ; q_quo_p := q_quo_p quo p)
+         e
+     
+     exp(P : PolK, n : NonNegativeInteger, R : PolK) : PolK ==
+        PP : PolK := P rem R ;  Q : PolK := 1
+        repeat
+           if odd?(n) then Q := Q * PP rem R
+           (n := n quo 2) = 0 => leave
+           PP := PP * PP rem  R
+        return Q
+     
+     pPowers(P : PolK) : PrimitiveArray(PolK) ==  -- P is monic
+        n := degree(P)
+        result : PrimitiveArray(PolK) := new(n, 1)
+        result(1) := Qi := Q := exp(X, p, P)
+        for i in 2 .. n-1 repeat (Qi := Qi*Q rem P ; result(i) := Qi)
+        return result
+     
+     pExp(Q : PolK, Xpowers : PrimitiveArray(PolK)) : PolK ==
+         Q' : PolK := 0
+         while Q ^= 0 repeat
+             Q' := Q' +primeFrobenius(leadingCoefficient(Q))*Xpowers(degree(Q))
+             Q := reductum(Q)
+         return Q'
+     
+     pTrace(Q : PolK, d : NonNegativeInteger, P : PolK,
+            Xpowers : PrimitiveArray(PolK)) : PolK ==
+         Q : PolK := Q rem P
+         result : PolK := Q
+         for i in 1 .. d-1 repeat result := Q + pExp(result, Xpowers)
+         return result rem P
+     
+     random(n : NonNegativeInteger) : PolK ==
+        repeat
+           if (deg := (random(n)$Integer)::NonNegativeInteger) > 0 then leave
+        repeat
+           if (x : K := random()$K) ^= 0 then leave
+        result : PolK :=
+           monomial(x, deg) + +/[monomial(random()$K, i) for i in 0 .. deg-1]
+        return result
+     
+     internalFactorCZ(P : PolK,          -- P monic-squarefree
+           d:NonNegativeInteger, Xpowers:PrimitiveArray(PolK)) : List(PolK) ==
+     
+         listOfFactors : List(PolK) := [P]
+         degree(P) = d => return listOfFactors
+         result : List(PolK) := []
+         pDim : NonNegativeInteger := d * primeKdim
+         Q : PolK := P
+     
+         repeat
+             G := pTrace(random(degree(Q)), pDim, Q, Xpowers)
+             if p > 2 then G := exp(G, p', Q) - 1
+             Q1 := gcd(G, Q) ;  d1 := degree(Q1)
+             if d1 > 0 and d1 < degree(Q) then
+                 listOfFactors := rest(listOfFactors)
+                 if d1 = d then result := cons(Q1, result)
+                          else listOfFactors := cons(Q1, listOfFactors)
+                 Q1 := Q quo Q1 ;  d1 := degree(Q1)
+                 if d1 = d then result := cons(Q1, result)
+                          else listOfFactors := cons(Q1, listOfFactors)
+                 if empty?(listOfFactors) then leave
+                 Q := first(listOfFactors)
+         return result
+
+     internalFactorSquareFree(P : PolK):List(PolK) == -- P is monic-squareFree
+         degree(P) = 1 => [P]
+         result : List(PolK) := []
+         Xpowers : PrimitiveArray(PolK) := pPowers(P)
+         S : PolK := Xpowers(1)
+         for j in 1..primeKdim-1 repeat S := pExp(S, Xpowers)
+         for i in 1 .. repeat  -- S = X**(q**i) mod P
+             if degree(R := gcd(S - X, P)) > 0 then
+                 result := concat(internalFactorCZ(R, i, Xpowers), result)
+                 if degree (P) = degree (R) then return result
+                 P := P quo R
+                 if i >= degree(P) quo 2 then return cons(P, result)
+                 for j in 0 .. degree(P)-1 repeat Xpowers(j):=Xpowers(j) rem P
+                 S := S rem P
+             else if i >= degree(P) quo 2 then return cons(P, result)
+             for j in 1 .. primeKdim repeat S := pExp(S, Xpowers)
+     
+     internalFactor(P:PolK, sqrfree:PolK -> Factored(PolK)) : Factored(PolK) ==
+         result : Factored(PolK)
+         if (d := minimumDegree(P)) > 0 then
+             P := P quo monomial(1, d)
+             result := primeFactor(X, d)
+         else
+             result := 1
+         degree(P) = 0 => P * result
+         if (lcP := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+         degree(P) = 1 => lcP::PolK * primeFactor(P, 1) * result
+         sqfP : Factored(PolK) := sqrfree(P)
+         for x in factors(sqfP) repeat
+             xFactors : List(PolK) := internalFactorSquareFree(x.factor)
+             result:= result * */[primeFactor(Q, x.exponent) for Q in xFactors]
+         return lcP::PolK * result
+     
+     factorUsingYun(P : PolK) : Factored(PolK) == internalFactor(P, Yun)
+
+     factorUsingMusser(P : PolK) : Factored(PolK) == internalFactor(P, Musser)
+
+     factor(P : PolK) : Factored(PolK) == factorUsingYun(P)
+     
+     factorSquareFree(P : PolK) : List(PolK) ==
+        degree(P) = 0 => []
+        discriminant(P) = 0 => error("factorSquareFree : non quadratfrei")
+        if (lcP := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+        return internalFactorSquareFree(P)
+     
+     factorCantorZassenhaus(P : PolK, d : NonNegativeInteger) : List(PolK) ==
+        if (lcP := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+        degree(P) = 1 => [P]
+        return internalFactorCZ(P, d, pPowers(P))
+     
+     qExp(Q : PolK, XqPowers : PrimitiveArray(PolK)) : PolK ==
+        Q' : PolK := 0
+        while Q ^= 0 repeat
+           Q' := Q' + leadingCoefficient(Q) * XqPowers(degree(Q))
+           Q := reductum(Q)
+        return Q'
+
+     qPowers (Xq : PolK, P : PolK) : PrimitiveArray(PolK) == -- Xq = X**q mod P
+        n := degree(P)
+        result : PrimitiveArray(PolK) := new(n, 1)
+        result(1) := Q := Xq
+        for i in 2 .. n-1 repeat (Q := Q*Xq rem P ; result(i) := Q)
+        return result
+
+     discriminantTest?(P : PolK) : Boolean ==
+         (delta : K := discriminant(P)) = 0 => true
+         StickelbergerTest : Boolean := (delta ** q' = 1) = even?(degree(P))
+         return StickelbergerTest
+
+     evenCharacteristicIrreducible?(P : PolK) : Boolean ==
+         (n := degree(P)) = 0 => false
+         n = 1 => true
+         degree(gcd(P, D(P))) > 0 => false
+         if (lcP := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+         S : PolK := exp(X, q, P)
+         if degree(gcd(S - X, P)) > 0 then
+            return false
+         if n < 4 then return true
+         maxDegreeToTest : NonNegativeInteger := n quo 2
+         XqPowers : PrimitiveArray(PolK) := qPowers(S, P)
+         for i in 2 .. maxDegreeToTest repeat
+            S := qExp(S, XqPowers)
+            if degree(gcd(S - X, P)) > 0 then
+               return false
+         return true
+
+     oddCharacteristicIrreducible?(P : PolK) : Boolean ==
+         (n := degree(P)) = 0 => false
+         n = 1 => true
+         discriminantTest?(P) => false
+         if (lcP := leadingCoefficient(P)) ^= 1 then P := inv(lcP) * P
+         S : PolK := exp(X, q, P)
+         if degree(gcd(S - X, P)) > 0 then
+            return false
+         if n < 6  then return true
+         maxDegreeToTest : NonNegativeInteger := n quo 3
+         XqPowers : PrimitiveArray(PolK) := qPowers(S, P)
+         for i in 2 .. maxDegreeToTest repeat
+            S := qExp(S, XqPowers)
+            if degree(gcd(S - X, P)) > 0 then
+               return false
+         return true
+
+     if p = 2 then
+
+         irreducible?(P : PolK) : Boolean == evenCharacteristicIrreducible?(P)
+
+     else
+
+         irreducible?(P : PolK) : Boolean == oddCharacteristicIrreducible?(P)
+

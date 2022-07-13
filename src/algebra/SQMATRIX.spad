@@ -1,0 +1,139 @@
+)abbrev domain SQMATRIX SquareMatrix
+++ Author: Grabmeier, Gschnitzer, Williamson
+++ Date Created: 1987
+++ Date Last Updated: July 1990
+++ Description:
+++ \spadtype{SquareMatrix} is a matrix domain of square matrices, where the
+++ number of rows (= number of columns) is a parameter of the type.
+
+SquareMatrix(ndim,R) : SIG == CODE where
+  ndim : NonNegativeInteger
+  R : Ring
+
+  Row ==> DirectProduct(ndim,R)
+  Col ==> DirectProduct(ndim,R)
+  MATLIN ==> MatrixLinearAlgebraFunctions(R,Row,Col,$)
+ 
+  SIG ==> Join(SquareMatrixCategory(ndim,R,Row,Col),_
+                   CoercibleTo Matrix R) with
+ 
+    transpose : $ -> $
+      ++ \spad{transpose(m)} returns the transpose of the matrix m.
+
+    squareMatrix : Matrix R -> $
+      ++ \spad{squareMatrix(m)} converts a matrix of type \spadtype{Matrix}
+      ++ to a matrix of type \spadtype{SquareMatrix}.
+
+    coerce : $ -> Matrix R
+      ++ \spad{coerce(m)} converts a matrix of type \spadtype{SquareMatrix}
+      ++ to a matrix of type \spadtype{Matrix}.
+
+    if R has commutative("*") then central
+      ++ the elements of the Ring R, viewed as diagonal matrices, commute
+      ++ with all matrices and, indeed, are the only matrices which commute
+      ++ with all matrices.
+
+    if R has commutative("*") and R has unitsKnown then unitsKnown
+      ++ the invertible matrices are simply the matrices whose determinants
+      ++ are units in the Ring R.
+
+    if R has ConvertibleTo InputForm then ConvertibleTo InputForm
+ 
+  CODE ==> Matrix R add
+
+    minr ==> minRowIndex
+    maxr ==> maxRowIndex
+    minc ==> minColIndex
+    maxc ==> maxColIndex
+    mini ==> minIndex
+    maxi ==> maxIndex
+ 
+    ZERO := scalarMatrix 0
+
+    0    == ZERO
+
+    ONE  := scalarMatrix 1
+
+    1    == ONE
+
+    characteristic() == characteristic()$R
+ 
+    matrix(l: List List R) ==
+      -- error check: this is a top level function
+      #l ^= ndim => error "matrix: wrong number of rows"
+      for ll in l repeat
+        #ll ^= ndim => error "matrix: wrong number of columns"
+      ans : Matrix R := new(ndim,ndim,0)
+      for i in minr(ans)..maxr(ans) for ll in l repeat
+        for j in minc(ans)..maxc(ans) for r in ll repeat
+          qsetelt_!(ans,i,j,r)
+      ans pretend $
+ 
+    row(x,i)    == directProduct row(x pretend Matrix(R),i)
+
+    column(x,j) == directProduct column(x pretend Matrix(R),j)
+
+    coerce(x:$):OutputForm == coerce(x pretend Matrix R)$Matrix(R)
+ 
+    scalarMatrix r == scalarMatrix(ndim,r)$Matrix(R) pretend $
+ 
+    diagonalMatrix l ==
+      #l ^= ndim =>
+        error "diagonalMatrix: wrong number of entries in list"
+      diagonalMatrix(l)$Matrix(R) pretend $
+ 
+    coerce(x:$):Matrix(R) == copy(x pretend Matrix(R))
+ 
+    squareMatrix x ==
+      (nrows(x) ^= ndim) or (ncols(x) ^= ndim) =>
+        error "squareMatrix: matrix of bad dimensions"
+      copy(x) pretend $
+ 
+    x:$ * v:Col ==
+      directProduct((x pretend Matrix(R)) * (v :: Vector(R)))
+ 
+    v:Row * x:$ ==
+      directProduct((v :: Vector(R)) * (x pretend Matrix(R)))
+ 
+    x:$ ** n:NonNegativeInteger ==
+      ((x pretend Matrix(R)) ** n) pretend $
+ 
+    if R has commutative("*") then
+ 
+      determinant x == determinant(x pretend Matrix(R))
+
+      minordet x    == minordet(x pretend Matrix(R))
+ 
+    if R has EuclideanDomain then
+ 
+      rowEchelon x == rowEchelon(x pretend Matrix(R)) pretend $
+ 
+    if R has IntegralDomain then
+ 
+      rank x    == rank(x pretend Matrix(R))
+
+      nullity x == nullity(x pretend Matrix(R))
+
+      nullSpace x ==
+        [directProduct c for c in nullSpace(x pretend Matrix(R))]
+ 
+    if R has Field then
+ 
+      dimension() == (m * n) :: CardinalNumber
+ 
+      inverse x ==
+        (u := inverse(x pretend Matrix(R))) case "failed" => "failed"
+        (u :: Matrix(R)) pretend $
+ 
+      x:$ ** n:Integer ==
+        ((x pretend Matrix(R)) ** n) pretend $
+ 
+      recip x == inverse x
+ 
+    if R has ConvertibleTo InputForm then
+
+      convert(x:$):InputForm ==
+         convert [convert("squareMatrix"::Symbol)@InputForm,
+                  convert(x::Matrix(R))]$List(InputForm)
+
+

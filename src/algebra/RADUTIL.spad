@@ -1,0 +1,19 @@
+)abbrev package RADUTIL RadixUtilities
+++ Author: Stephen M. Watt
+++ Date Created: October 1986
+++ Date Last Updated: May 15, 1991
+++ Description:
+++ This package provides tools for creating radix expansions.
+
+RadixUtilities() : SIG == CODE where
+
+  SIG ==> with
+
+    radix : (Fraction Integer,Integer) -> Any
+      ++ radix(x,b) converts x to a radix expansion in base b.
+
+  CODE ==> add
+
+    radix(q, b) ==
+      coerce(q :: RadixExpansion(b))$AnyFunctions1(RadixExpansion b)
+

@@ -1,0 +1,18 @@
+)abbrev category LORER LeftOreRing
+++ References: 
+++ Dele06 Noncommutative Symmetric functions and W-polynomials, 
+++ Bron96a An introduction to pseudo-linear algebra
+++ Description:
+++ This is the category of left ore rings, that is noncommutative
+++ rings without zero divisors where we can compute the least left
+++ common multiple.
+
+LeftOreRing() : Category == SIG where
+
+  SIG ==> EntireRing with
+
+    lcmCoef : (%, %) -> Record(llcm_res : %, coeff1 : %, coeff2 : %)
+      ++ lcmCoef(c1, c2) computes (llcm_res, coeff1, coeff2) such that
+      ++ llcm_res is least left common multiple of c1 and c2
+      ++ and llcm_res = coeff1*c1 = coeff2*c2
+

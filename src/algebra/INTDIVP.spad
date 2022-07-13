@@ -1,0 +1,99 @@
+)abbrev package INTDIVP IntersectionDivisorPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+IntersectionDivisorPackage(K,symb,PolyRing,E,ProjPt, PCS,Plc,DIVISOR,
+                       InfClsPoint,DesTree,BLMET) : SIG == CODE where
+
+  K : Field
+  symb : List(Symbol)
+  OV ==> OrderedVariableList(symb)
+  E : DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+  InfClsPoint : InfinitlyClosePointCategory(K,symb,PolyRing,E,ProjPt,_
+                                            PCS,Plc,DIVISOR,BLMET)
+  DesTree : DesingTreeCategory(InfClsPoint)
+  BLMET : BlowUpMethodCategory
+
+  OF          ==> OutputForm
+  PackPoly    ==> PackageForPoly(K,PolyRing,E,#symb)
+  PPFC1       ==> PolynomialPackageForCurve(K,PolyRing,E,#symb,ProjPt)
+  ParamPackFC ==> LocalParametrizationOfSimplePointPackage(K,symb,PolyRing,_
+                                                           E,ProjPt,PCS,Plc)
+  ParamPack   ==> ParametrizationPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc)
+  RatSingPack ==> ProjectiveAlgebraicSetPackage(K,symb,PolyRing,E,ProjPt)
+  DesingPack  ==> DesingTreePackage(K,symb,PolyRing,E,ProjPt,PCS,Plc,_
+                                    DIVISOR,InfClsPoint,DesTree,BLMET)
+
+  SIG ==> with
+
+    intersectionDivisor : (PolyRing,PolyRing,List DesTree,List ProjPt) -> DIVISOR
+      ++ intersectionDivisor(f,pol,listOfTree) returns the intersection 
+      ++ divisor of f with a curve defined by pol. listOfTree must contain 
+      ++ all the desingularisation trees of all singular points on the curve
+      ++  defined by pol.
+
+    placesOfDegree : (PositiveInteger, PolyRing, List ProjPt) -> Void()
+      ++ placesOfDegree(d, f, pts) compute the places of degree
+      ++ dividing d of the curve f. pts should be the singular points
+      ++ of the curve f. For d > 1 this only works if K has 
+      ++ \axiomType{PseudoAlgebraicClosureOfFiniteFieldCategory}.
+
+  CODE ==>  add
+      
+    intersectionDivisor(pol,curve,ltr,listOfSingPt)==
+       intDeg:Integer:=  (totalDegree(pol)$PackPoly * _
+                          totalDegree(curve)$PackPoly) pretend Integer
+       -- compute at places over singular Points 
+       lDivAtSingPt:DIVISOR:=_
+         reduce("+",[divisorAtDesingTree(pol,tr)$DesingPack for tr in ltr],0)
+       -- By Bezout Thorem, if all intersection points with mult. 
+       -- have been found then return the divisor
+       degD:Integer:=degree lDivAtSingPt
+       degD = intDeg  => lDivAtSingPt
+       setOfFdPlc:List Plc:=foundPlaces()$Plc
+       plcFrSplPts:List Plc:=[pl for pl in setOfFdPlc | ^leaf?(pl)]
+       ordAtPlcFrSplPts:List Integer:=_
+         [order(parametrize(pol,pl)$ParamPack)$PCS for pl in plcFrSplPts]
+       divAtSplPts:DIVISOR:=_
+         reduce("+",[o * (pl :: DIVISOR) _
+           for o in ordAtPlcFrSplPts _
+             for pl in plcFrSplPts],0)
+       tDiv:=lDivAtSingPt+divAtSplPts
+       -- By Bezout Thorem, if all intersection points with mult. 
+       -- have been found then return the divisor
+       degD:Integer:=degree tDiv
+       degD = intDeg  => tDiv
+       intPts:List ProjPt:=algebraicSet([pol,curve])$RatSingPack
+       intPtsNotSing:=setDifference(intPts,listOfSingPt)
+       intPls:List(Plc):=_
+         [pointToPlace(pt,curve)$ParamPackFC for pt in intPtsNotSing]
+       remPlc:=setDifference(intPls , plcFrSplPts)   
+       ordAtPlcRem:List Integer:=_
+         [order(parametrize(pol,pl)$ParamPack)$PCS for pl in remPlc]
+       divAtRem:DIVISOR:=_
+        reduce("+",[o*(pl :: DIVISOR) for o in ordAtPlcRem for pl in remPlc],0)
+       theDivisor:= lDivAtSingPt +  divAtSplPts + divAtRem
+       degD:Integer:=degree theDivisor
+       if ^(degD = intDeg) then 
+         print("error while computing the intersection divisor" :: OF )
+         print("Otherwise the Bezout Theoreme is not true !!!! " :: OF)
+         print("Of course its the machine that make the mistake !!!!!" :: OF)
+       theDivisor
+
+    placesOfDegree(d, curve, singPts) ==
+      --Return the number of places of degree i of the functionfield, no 
+      --constant field extension
+      allPoints: List ProjPt:= rationalPoints(curve, d)$RatSingPack
+      remindingSimplePts: List ProjPt :=setDifference(allPoints,singPts)
+      for tpt in remindingSimplePts repeat
+         pointToPlace(tpt,curve)$ParamPackFC
+      Void()
+

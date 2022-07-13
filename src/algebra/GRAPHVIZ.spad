@@ -1,0 +1,114 @@
+)abbrev package GRAPHVIZ Graphviz
+++ Author: Mark Botch
+++ Date Created: September 3, 2014
+++ Description:
+++ Low level tools for creating and viewing graphs using graphviz
+
+Graphviz() : SIG == CODE where
+
+  HEADER   ==> List String
+  BODY     ==> List String
+  GRAPH    ==> List String
+  DOTFILE  ==> List String
+  FILENAME ==> String
+  
+  SIG ==> with 
+
+    standardDotHeader : () -> HEADER
+      ++ standardDotHeader() create the standard dot file header
+      ++
+      ++X header:=standardDotHeader()
+
+    sampleDotGraph : () -> GRAPH
+      ++ sampleDotGraph() creates a sample graph file
+      ++
+      ++X graph:=sampleDotGraph()
+
+    writeDotGraph : (HEADER, GRAPH, FILENAME) -> Void
+      ++ writeDotGraph(h,g,f) creates a graphviz dot file and 
+      ++ writes it out
+      ++
+      ++X header:=standardDotHeader()
+      ++X graph:=sampleDotGraph()
+      ++X writeDotGraph(header,graph,"NeuralNet")
+
+    dot2eps : FILENAME -> Void
+      ++ dot2eps(f) runs dot -T eps filename.dot >filename.eps
+      ++
+      ++X dot2eps "NeuralNet"
+
+    dotview : (String,String) -> Void
+      ++ dotview(str1,str2) runs "viewer filename". 
+      ++ A file extension of ".eps" is added.
+      ++
+      ++X dotview("evince","NeuralNet") -- on Linux
+      ++X dotview("gv","NeuralNet") -- on MAC
+      ++X dotview("firefox","NeuralNet") -- most places
+
+  CODE ==> add
+
+    standardDotHeader() ==
+      ["digraph graphname {",_
+       "graph [rankdir=_"LR_" ranksep=_"3.0_"]",_
+       "node [style=filled];",_
+       "edge [penwidth=_"0.5_" color=_"blue_"];"_
+      ]
+
+    sampleDotGraph() ==
+      ["I1 [fillcolor=_"white_"];",_
+       "I2 [fillcolor=_"white_"];",_
+       "N1 [fillcolor=_"cadetblue_"];",_
+       "N2 [fillcolor=_"coral_"];",_
+       "N3 [fillcolor=_"green_"];",_
+       "N4 [fillcolor=_"gold_"];",_
+       "N5 [fillcolor=_"cyan_"];",_
+       "N6 [fillcolor=_"red_"];",_
+       "N7 [fillcolor=_"yellow_"];",_
+       "N8 [fillcolor=_"orange_"];",_
+       "O1 [fillcolor=_"white_"];",_
+       "O2 [fillcolor=_"white_"];",_
+       "I1 -> N1;",_
+       "I1 -> N2;",_
+       "I1 -> N3;",_
+       "I2 -> N1;",_
+       "I2 -> N2;",_
+       "I2 -> N3;",_
+       "N1 -> N4;",_
+       "N1 -> N5;",_
+       "N1 -> N6;",_
+       "N2 -> N4;",_
+       "N2 -> N5;",_
+       "N2 -> N6;",_
+       "N3 -> N4;",_
+       "N3 -> N5;",_
+       "N3 -> N6 [color=_"red_" penwidth=_"3_"];",_
+       "N4 -> N7;",_
+       "N4 -> N8;",_
+       "N5 -> N7;",_
+       "N5 -> N8;",_
+       "N6 -> N7;",_
+       "N6 -> N8;",_
+       "N7 -> O1;",_
+       "N8 -> O2;"_
+      ]
+
+    writeDotGraph(header:HEADER, graph:GRAPH, name:FILENAME):Void ==
+      file:TextFile:=open(concat(name,".dot")::FileName,"output")
+      for line in header repeat writeLine!(file,line)
+      for line in graph repeat writeLine!(file,line)
+      write!(file,"}")
+      close!(file)
+      void()
+
+    dot2eps(file) ==
+      instr:String:=concat(file,".dot >")
+      outstr:String:=concat(file,".eps")
+      command:=concat("dot -T eps ",concat(instr,outstr))
+      SYSTEM(command)$Lisp
+      void()
+
+    dotview(viewr,file) ==
+      outstr:String:=concat(file,".eps")
+      SYSTEM(concat(viewr,concat(" ",outstr)))$Lisp
+      void()
+ 

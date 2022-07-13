@@ -1,0 +1,30 @@
+)abbrev domain SAOS SingletonAsOrderedSet
+++ Author: Mark Botch
+++ Description:
+++ This trivial domain lets us build Univariate Polynomials
+++ in an anonymous variable
+
+SingletonAsOrderedSet() : SIG == CODE where
+
+  SIG ==> OrderedSet with
+
+            create:() -> %
+
+            convert:% -> Symbol
+
+  CODE ==> add
+
+   create() == "?" pretend %
+
+   a<b == false -- only one element
+
+   coerce(a) == outputForm "?"  -- CJW doesn't like this: change ?
+
+   a=b == true  -- only one element
+
+   min(a,b) == a  -- only one element
+
+   max(a,b) == a  -- only one element
+
+   convert a == coerce("?")
+

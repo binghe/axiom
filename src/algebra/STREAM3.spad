@@ -1,0 +1,41 @@
+)abbrev package STREAM3 StreamFunctions3
+++ Authors: Burge, Watt; updated by Clifton J. Williamson
+++ Date Created: July 1986
+++ Date Last Updated: 29 January 1990
+++ Description:
+++ Functions defined on streams with entries in three sets.
+
+StreamFunctions3(A,B,C) : SIG == CODE where
+  A  : Type
+  B  : Type
+  C  : Type
+
+  ST ==> Stream
+
+  SIG ==> with
+
+    map : ((A,B) -> C,ST A,ST B) -> ST C
+      ++ map(f,st1,st2) returns the stream whose elements are the
+      ++ function f applied to the corresponding elements of st1 and st2.
+      ++ \spad{map(f,[x0,x1,x2,..],[y0,y1,y2,..]) = [f(x0,y0),f(x1,y1),..]}.
+      ++
+      ++S
+      ++X m:=[i for i in 1..]::Stream(Integer)
+      ++X n:=[i for i in 1..]::Stream(Integer)
+      ++X f(i:Integer,j:Integer):Integer == i+j
+      ++X map(f,m,n)
+
+  CODE ==> add
+
+    mapp:((A,B) -> C,ST A,ST B) -> ST C
+    mapp(g,x,y) == delay
+      empty? x or empty? y => empty()
+      concat(g(frst x,frst y), map(g,rst x,rst y))
+
+    map(g,x,y) ==
+      explicitlyEmpty? x => empty()
+      eq?(x,rst x) => map(z +-> g(frst x,z),y)$StreamFunctions2(B,C)
+      explicitlyEmpty? y => empty()
+      eq?(y,rst y) => map(z +-> g(z,frst y),x)$StreamFunctions2(A,C)
+      mapp(g,x,y)
+

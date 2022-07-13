@@ -1,0 +1,25 @@
+)abbrev package UP2 UnivariatePolynomialFunctions2
+++ Description:
+++ This package lifts a mapping from coefficient rings R to S to
+++ a mapping from \spadtype{UnivariatePolynomial}(x,R) to
+++ \spadtype{UnivariatePolynomial}(y,S). Note that the mapping is assumed
+++ to send zero to zero, since it will only be applied to the non-zero
+++ coefficients of the polynomial.
+
+UnivariatePolynomialFunctions2(x,R,y,S) : SIG == CODE where
+  x : Symbol
+  R : Ring
+  y : Symbol
+  S : Ring
+
+  SIG ==> with
+
+    map : (R -> S, UnivariatePolynomial(x,R)) -> UnivariatePolynomial(y,S)
+      ++ map(func, poly) creates a new polynomial by applying func to
+      ++ every non-zero coefficient of the polynomial poly.
+
+  CODE ==> add
+
+    map(f, p) == map(f, p)$UnivariatePolynomialCategoryFunctions2(R,
+                UnivariatePolynomial(x, R), S, UnivariatePolynomial(y, S))
+

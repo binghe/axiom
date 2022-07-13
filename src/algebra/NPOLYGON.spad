@@ -1,0 +1,208 @@
+)abbrev package NPOLYGON NewtonPolygon
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+NewtonPolygon(K,PolyRing,E,dim) : SIG == CODE where
+  K : Ring
+  dim : NonNegativeInteger
+  E : DirectProductCategory(dim,NonNegativeInteger)
+  PolyRing : FiniteAbelianMonoidRing(K,E)
+
+  PackPoly ==> PackageForPoly(K,PolyRing,E,dim)
+
+  recSlope ==> Record( height:Integer, base:Integer, quotient:Integer, _
+                       reste:Integer, _
+                  type:Union("left","center","right","vertical","horizontal"))
+
+  SIG ==> with
+
+    newtonPolygon : (PolyRing,Integer,Integer,Union("left","center", "right",_
+                               "vertical","horizontal")) -> List List PolyRing
+
+    multiplicity : List List PolyRing -> NonNegativeInteger
+
+    negAndPosEdge : (PolyRing, List List PolyRing) -> List List PolyRing
+
+    slope : (PolyRing,PolyRing) -> recSlope
+
+    slope : List PolyRing -> recSlope
+
+  CODE ==> add
+
+    slope(p1,p2)==
+      -- calcule la pente de p1 a p2 et change le signe. 
+      e1:=degree p1
+      e2:=degree p2
+      hgt:= ( e1.2 pretend Integer) - ( e2.2 pretend Integer) 
+      bs:= ( e2.1 pretend Integer) - ( e1.1 pretend Integer )
+      zero? bs =>  [hgt, bs, 0$Integer, 0$Integer, "vertical" ]$recSlope
+      zero? hgt => [hgt, bs, 0$Integer, 0$Integer, "horizontal" ]$recSlope
+      hgt = bs  => [hgt, bs, 1$Integer, 0$Integer, "center" ]$recSlope
+      hgt > bs =>
+         eucl:=divide(hgt,bs)
+         [hgt, bs,  eucl.quotient, eucl.remainder , "left" ]$recSlope
+      eucl:=divide(bs, hgt)
+      [hgt, bs,  eucl.quotient, eucl.remainder , "right" ]$recSlope
+      
+    oneToPos:  List List PolyRing -> List List PolyRing
+    oneToPos(lpol)==
+      fedge:= first lpol
+      sl:= slope fedge
+      one? ( #(lpol) ) =>
+        if sl.height > sl.base then [ fedge, empty() ]
+        else [ empty() , fedge ] 
+      ^( sl.base < sl.height ) => [ empty() , fedge ]
+      restPANE:= oneToPos  rest lpol
+      fedge2 := first restPANE
+      sl2:= slope fedge2
+      ^( sl2.base < sl2.height ) => [ fedge , fedge2 ]
+      restPANE 
+
+    oneToNeg:  List List PolyRing -> List List PolyRing
+
+    oneToNeg(lpol)==
+      fedge:= first lpol
+      sl:= slope fedge
+      one? ( #(lpol) ) =>
+        if sl.height < sl.base then [ empty(), fedge ]
+        else [ fedge , empty()  ] 
+      ( sl.height < sl.base ) => [ empty() , fedge ]
+      restPANE:= oneToNeg  rest lpol
+      fedge2 := first restPANE
+      sl2:= slope fedge2
+      ( sl2.height < sl2.base ) => [ fedge , fedge2 ]
+      restPANE 
+
+    negAndPosEdge(pol, lpol)==
+      -- cette fonction retourne deux liste de polynomes: 
+      -- la premiere est liee a
+      -- la transformation x = x y^l (i.e v(x) >= v(y) ). 
+      -- la deuxieme est liee a la transformation
+      -- y = x^l y (v(x) <= v(y) ). 
+      -- si le degree en Y est inferieur a celui en X on 
+      -- previligie la transformation
+      -- y = x^l y.
+      degree( pol , 2 )$PackPoly < degree( pol, 1 )$PackPoly => oneToPos lpol
+      oneToNeg lpol
+
+    localNewtonPolygon: List PolyRing -> List PolyRing
+
+    slEq: (recSlope, recSlope) -> Boolean
+
+    regroup: List PolyRing -> List List PolyRing
+
+    multiplicity( lpol )==
+      nl:=#(lpol)
+      flpol:= first lpol
+      one? nl=> totalDegree( last flpol)$PackPoly
+      s:=slope flpol
+      s.height < s.base => totalDegree( first flpol )$PackPoly
+      multiplicity( rest lpol )
+
+    slEq(s1,s2)==
+      s1.height * s2.base = s2.height * s1.base
+
+    regroup(lpol)==
+      -- Note : les elements de lpol sont sur la frontiere d'un poly. 
+      -- de Newton et il sont deja trie's. 
+      nl:=#(lpol)
+      one? nl => [lpol]
+      2 = nl => [lpol]
+      f:=first lpol
+      r:= regroup rest lpol
+      -- Note : les listes de "r" contiennent au moins 2 elements !!
+      fg:=first r
+      s1:=slope(f, first fg)
+      s2:=slope(fg.1,fg.2)
+      slEq(s1,s2) => cons( cons(f, fg) , rest r)
+      cons( [f, first fg], r)
+
+-- ================================================
+-- sortMono :  trie les monomes par ordre croissant 
+-- ================================================
+
+    sortMono: (PolyRing, PolyRing) -> Boolean
+    sortMono(p1,p2)==
+      a:= degree p1
+      b:= degree p2
+      a.1 < b.1 => true                  -- p1 est a gauche de p2
+      a.1 = b.1 and  a.2 > b.2 => true   -- p1 est au dessus de p2 
+      false
+    
+-- ===================================================
+-- newtonPolygon :  retourne tous les monomes sur la 
+-- frontiere de du polygone de Newton,
+-- regroupes selon leur pente.
+-- ===================================================
+  
+    properSlope: ( List PolyRing, Integer, Integer, _
+            Union("left","center","right","vertical","horizontal")) -> Boolean
+
+    properSlope(lpol,hgt,bs, tp)==
+      s:=slope lpol
+      tp case "left" and s.height = hgt and s.base = bs => true
+      tp case "right" and s.height = bs and s.base = hgt => true
+      false
+
+
+    newtonPolygon(pol,hgt,bs,tp)==
+      ans:=regroup localNewtonPolygon _
+                              sort( sortMono(#1,#2) , monomials(pol)$PackPoly)
+      zero?(bs) => ans
+      [ l for l in ans | properSlope(l,hgt,bs,tp)] 
+
+    comp2pol: (PolyRing,PolyRing) -> List PolyRing
+    comp2pol(p1,p2)==
+      rs:= slope(p1,p2)
+      zero? rs.base =>               -- p1 et p2 sont alignes verticalement !!
+        zero? rs.height => [p1 + p2] -- les monomes sont identiques !
+        rs.height < 0 => [p1]        -- p2 est au dessus de p1, 
+                                     -- il faut retourner p1 !! 
+        [p2]                         -- sinon p1 est au dessus de p2 .
+      rs.base > 0 =>                 -- p1 est a gauche de p2
+        rs.height > 0 => [p1,p2]     -- p1 est plus haut que p2
+        [p1]                         -- p1 est a la meme hauteur que p2
+                                     -- ici p2 est a gauche de p1
+      rs.height < 0 => [p2,p1]       -- p2 est plus haut que p1 
+      [p2]                           -- p2 est a la meme hauteur que p1.
+
+    slope(lpol) == 
+      ^one?(#lpol) => slope( first lpol, second lpol)
+      f:= first lpol
+      ( degree(f,2)$PackPoly < degree(f,1)$PackPoly ) => _
+                               [ 0$Integer, 1$Integer,0,0, "right" ]$recSlope
+      [1$Integer, 0$Integer,0,0 , "left"  ]$recSlope
+
+    convex_?: (PolyRing,PolyRing,PolyRing) -> Boolean
+    convex_?(p1,p2,p3)==
+      s1:=slope(p1,p2)
+      s2:=slope(p2,p3)
+      s1.type case "horizontal" => true
+      s2.type case "vertical" => true
+      s1.type case "vertical" => false  -- car ici il faut c2 vertical
+      s2.type case "horizontal" => false      
+      (s1.height * s2.base) < (s2.height  * s1.base)
+
+    consBondary: (PolyRing , List PolyRing) -> List PolyRing
+    consBondary(lt, lpol)==
+      -- "lt" est un monome a ajouter ou non a "lpol" qui est une 
+      empty? lpol => [lt]
+      st:=first lpol
+      nl:NonNegativeInteger:= # lpol      
+      one? nl => comp2pol(lt,st)
+      degree(lt).1 = degree(st).1 and degree(lt).2 > degree(st).2 => lpol
+      ^convex?(lt , st , lpol.2) => cons(lt, lpol)
+      consBondary( lt, rest lpol )
+
+    localNewtonPolygon(lpol)==
+      -- lpol doit etre trie' par sortMono 
+      empty? lpol =>  empty() 
+      nl:= #(lpol)
+      one?  nl => lpol
+      lt:=first lpol 
+      polgRest:= localNewtonPolygon rest lpol 
+      consBondary( lt , polgRest )              
+

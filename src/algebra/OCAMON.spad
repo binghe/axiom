@@ -1,0 +1,9 @@
+)abbrev category OCAMON OrderedCancellationAbelianMonoid
+++ Description:
+++ Ordered sets which are also abelian cancellation monoids, 
+++ such that the addition preserves the ordering.
+
+OrderedCancellationAbelianMonoid() : Category == SIG where
+
+  SIG ==> Join(OrderedAbelianMonoid, CancellationAbelianMonoid)
+

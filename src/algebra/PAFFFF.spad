@@ -1,0 +1,599 @@
+)abbrev package PAFFFF PackageForAlgebraicFunctionFieldOverFiniteField
+++ Author: Gaetan Hache
+++ Date created: June 1995
+++ Date Last Updated: May 2010 by Tim Daly
+++ References:
+++ Hach95 Effective construction of algebraic geometry codes
+++ Walk78 Algebraic Curves
+++ Vogl07 Genus of a Plane Curve
+++ Fult08 Algebraic Curves: An Introduction to Algebraic Geometry
+++ Description: 
+++ A package that implements the Brill-Noether algorithm.
+++ Part of the PAFF package
+
+PackageForAlgebraicFunctionFieldOverFiniteField(K,symb,BLMET) : SIG == CODE where
+  K:FiniteFieldCategory -- Field 
+  symb :  List(Symbol)
+  BLMET : BlowUpMethodCategory
+    
+  DK          ==> PseudoAlgebraicClosureOfFiniteField(K)
+  PolyRing    ==> DistributedMultivariatePolynomial(symb,K) 
+  PolyRing2   ==> DistributedMultivariatePolynomial(symb,DK)
+  ProjPt      ==> ProjectivePlaneOverPseudoAlgebraicClosureOfFiniteField(K) 
+  NNI         ==> NonNegativeInteger
+  PI          ==> PositiveInteger
+  UTSZ        ==> UnivariateTaylorSeriesCZero(Integer,t)
+  PAFFPC      ==> GeneralPackageForAlgebraicFunctionField
+  PCS         ==> NeitherSparseOrDensePowerSeries(DK)
+  Plc         ==> PlacesOverPseudoAlgebraicClosureOfFiniteField(K) 
+  DIVISOR     ==> Divisor(Plc)
+  InfClsPoint ==> InfinitlyClosePointOverPseudoAlgebraicClosureOfFiniteField(K,symb,BLMET)
+  DesTree     ==> DesingTree(InfClsPoint)
+  FracPoly    ==> Fraction PolyRing
+  PackPoly    ==> PackageForPoly(DK,PolyRing2,E,#symb)
+  E           ==> DirectProduct(#symb,NNI)
+  BP ==> PAFFPC(DK,symb,PolyRing2,E,ProjPt,PCS,Plc,DIVISOR,InfClsPoint,DesTree,BLMET)
+  
+  SIG ==>  with
+
+    homogenize : (PolyRing,Integer) -> PolyRing
+      ++ homogenize makes the exponents of every term sum to a constant
+      ++ value shared by every term.
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+  
+    fullDesTree : () -> Void
+      ++ fullDesTree
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X desingTree()$P
+      ++X fullDesTree()$P
+      ++X desingTree()$P
+
+    fullInfClsPt : () -> Void
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X desingTree()$P
+      ++X fullDesTree()$P
+      ++X fullInfClsPt()$P
+      ++X desingTree()$P
+
+    setCurve : PolyRing -> PolyRing
+      ++ setCurve sets the defining curve
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+
+    translateToOrigin : (PolyRing, ProjPt) -> PolyRing2
+    
+    goppaCode : (DIVISOR,DIVISOR) -> Matrix K
+
+    goppaCode : (DIVISOR,List(Plc)) -> Matrix K
+
+    pointDominateBy : Plc -> ProjPt
+      ++ pointDominateBy(pl) returns the projective point dominated 
+      ++ by the place pl.
+
+    placesAbove : ProjPt -> List Plc
+      ++ placesAbove
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X ProjPl := PROJPLPS PrimeField p
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X g:=genus()$P
+      ++X divZ := intersectionDivisor(z)$P
+      ++X pInf:= first supp divZ
+      ++X p1:= projectivePoint( [1,0,1] :: List K )$ProjPl
+      ++X pl1:= first placesAbove( p1 )$P
+      ++X p2:= projectivePoint( [2,0,1] :: List K )$ProjPl
+      ++X pl2:= first placesAbove( p2 )$P
+      ++X p3:= projectivePoint( [3,0,1] :: List K )$ProjPl
+      ++X pl3:= first placesAbove( p3 )$P
+      ++X p4:= projectivePoint( [4,0,1] :: List K )$ProjPl
+      ++X pl4:= first placesAbove( p4 )$P
+      ++X p5:= projectivePoint( [5,0,1] :: List K )$ProjPl
+      ++X pl5:= first placesAbove( p5 )$P
+
+    projectivePoint : List DK -> ProjPt
+      ++ projectivePoint
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X ProjPl := PROJPLPS PrimeField p
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X g:=genus()$P
+      ++X divZ := intersectionDivisor(z)$P
+      ++X pInf:= first supp divZ
+      ++X p1:= projectivePoint( [1,0,1] :: List K )$ProjPl
+      ++X pl1:= first placesAbove( p1 )$P
+      ++X p2:= projectivePoint( [2,0,1] :: List K )$ProjPl
+      ++X pl2:= first placesAbove( p2 )$P
+      ++X p3:= projectivePoint( [3,0,1] :: List K )$ProjPl
+      ++X pl3:= first placesAbove( p3 )$P
+      ++X p4:= projectivePoint( [4,0,1] :: List K )$ProjPl
+      ++X pl4:= first placesAbove( p4 )$P
+      ++X p5:= projectivePoint( [5,0,1] :: List K )$ProjPl
+      ++X pl5:= first placesAbove( p5 )$P
+
+    setSingularPoints : List ProjPt -> List ProjPt
+
+    rationalPlaces : () -> List Plc
+      ++ rationalPlaces returns all the rational places of  the
+      ++ curve defined by the polynomial given to the package.
+
+    theCurve : () -> PolyRing
+      ++ theCurve returns the specified polynomial for the package.
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X theCurve()$P
+
+    genus : () -> NNI
+      ++ genus returns the genus of the curve defined by the polynomial 
+      ++ given to the package.
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X g:=genus()$P
+
+    genusNeg : () -> Integer
+      ++ genusNeg
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X genusNeg()$P1
+
+    desingTreeWoFullParam  : () -> List DesTree
+      ++ desingTreeWoFullParam returns the desingularisation trees at all 
+      ++ singular points of the curve defined by the polynomial given to 
+      ++ the package. The local parametrizations are not computed.
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X desingTreeWoFullParam()$P1
+
+    desingTree : () -> List DesTree
+      ++ desingTree returns the desingularisation trees at all singular points
+      ++ of the curve defined by the polynomial given to the package.
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X desingTree()$P
+
+    rationalPoints : () -> List(ProjPt)
+      ++ rationalPoints
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X rationalPoints()$P1
+
+    singularPoints : () -> List(ProjPt)
+      ++ singularPoints() returns the singular points of the
+      ++ curve defined by the polynomial given to the package.
+      ++ If the singular points lie in an extension of the specified 
+      ++ ground field an error message is issued specifying the extension 
+      ++ degree needed to find all singular points.
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X singularPoints()$P
+
+    parametrize : (PolyRing,Plc) -> PCS
+     ++ parametrize(f,pl) returns a local parametrization of f at the place pl.
+
+    lBasis : (DIVISOR,NNI) -> List FracPoly
+
+    lBasis : DIVISOR -> Record(num:List PolyRing, den: PolyRing)
+      ++ lBasis computes a basis associated to the specified divisor
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X plc3:= placesOfDegree(3)$P1
+      ++X D:= 2 * reduce(+,(plc3 :: List DIV PLACESPS PF 2))
+      ++X lB1:= lBasis(D)$P1
+
+    findOrderOfDivisor : (DIVISOR,Integer,Integer) -> _
+      Record(ord:Integer,num:PolyRing,den:PolyRing,upTo:Integer)
+
+    interpolateFormsForFact : (DIVISOR,List PolyRing) -> List(PolyRing2)
+
+    interpolateForms : (DIVISOR,NNI) -> List(PolyRing)
+      ++ interpolateForms(d,n) returns a basis of the interpolate forms of 
+      ++ degree n of the divisor d.
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X plc3:= placesOfDegree(3)$P1
+      ++X D:= 2 * reduce(+,(plc3 :: List DIV PLACESPS PF 2))
+      ++X interpolateForms(D,3)$P1
+
+    eval : (PolyRing,Plc) -> K
+      ++ eval(f,pl) evaluate f at the place pl.
+
+    eval : (PolyRing,PolyRing,Plc) -> K
+      ++ eval(f,g,pl) evaluate the function f/g at the place pl.
+      ++
+      ++X K1:= PF(2)
+      ++X R1:= DMP([X,Y,Z],K1)
+      ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+      ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+      ++X setCurve(C1)$P1
+      ++X plc3:= placesOfDegree(3)$P1
+      ++X a:= elt( first plc3 , 1 ) 
+      ++X definingPolynomial(a)
+      ++X a^3 + a^2 + 1
+      ++X D:= 2 * reduce(+,(plc3 :: List DIV PLACESPS PF 2))
+      ++X lB1:= lBasis(D)$P1
+      ++X K4:= FFCG(2,4)
+      ++X R4:= DMP([X,Y,Z],K4)
+      ++X P4:= PAFFFF(K4,[X,Y,Z],BLQT)
+      ++X C4:R4:=C1 
+      ++X setCurve(C4)$P4
+      ++X plc1 := placesOfDegree(1)$P4
+      ++X mG:=matrix[[eval(f,lB1.den,pl)$P4 for pl in plc1 ] for f in lB1.num]
+      ++X reduce(min,[33 - count(zero?,l) for l in listOfLists rowEchelon mG])
+
+    eval : (FracPoly,Plc) -> K
+      ++ eval(u,pl) evaluate the function u at the place pl.
+
+    evalIfCan : (PolyRing,Plc) -> Union(K,"failed")
+      ++ evalIfCan(f,pl) evaluate f at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    evalIfCan : (PolyRing,PolyRing,Plc) -> Union(K,"failed")
+      ++ evalIfCan(f,g,pl) evaluate the function f/g at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    evalIfCan : (FracPoly,Plc) -> Union(K,"failed")
+      ++ evalIfCan(u,pl) evaluate the function u at the place pl 
+      ++ (returns "failed" if it is a pole).
+
+    intersectionDivisor : PolyRing -> DIVISOR
+      ++ intersectionDivisor(pol) compute the intersection divisor  of the
+      ++ form pol with the curve. 
+      ++ (If pol is not homogeneous an error message is issued).
+      ++
+      ++X p:= nextPrime(2^20)
+      ++X K:=PF p
+      ++X R:=DMP([x,y,z],K)
+      ++X P:=PAFFFF( K, [x,y,z], BLQT)
+      ++X f:R:= y^2 - (x-1)*(x-2)*(x-3)*(x-4)*(x-5)
+      ++X fh:R:= homogenize( f , 3 )$P
+      ++X setCurve(fh)$P
+      ++X divZ := intersectionDivisor(z)$P
+
+    adjunctionDivisor : () -> DIVISOR
+      ++ adjunctionDivisor computes the adjunction divisor of the plane 
+      ++ curve given by the polynomial defined by setCurve.
+
+    if DK has Finite then --should we say LocallyAlgebraicallyClosedField??
+
+      LPolynomial : () -> SparseUnivariatePolynomial Integer
+        ++ LPolynomial() returns the L-Polynomial of the curve.
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X LPolynomial()$P1
+
+      LPolynomial : PI -> SparseUnivariatePolynomial Integer
+        ++ LPolynomial(d) returns the L-Polynomial of the curve in
+        ++ constant field extension of degree d. 
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X LPolynomial(2)$P1
+
+      classNumber : () -> Integer
+        ++ classNumber() returns the class number of the curve.
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X classNumber()$P1
+
+      placesOfDegree : PI -> List Plc
+        ++ placesOfDegree(d) returns all places of degree d of the
+        ++ curve.
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X plc3:= placesOfDegree(3)$P1
+
+      numberOfPlacesOfDegree : PI -> Integer
+        ++ numberOfPlacesOfDegree(pi) returns the number of places 
+        ++ of the given degree
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X plc3:= placesOfDegree(3)$P1
+        ++X numberOfPlacesOfDegree(3)$P1
+
+      numberRatPlacesExtDeg : PI -> Integer
+        ++ numberRatPlacesExtDeg(n) returns the number of rational
+        ++ places in the constant field extenstion of degree n
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X numberRatPlacesExtDeg(3)$P1
+
+      numberPlacesDegExtDeg : (PI, PI) -> Integer
+        ++ numberPlacesDegExtDeg(d, n) returns the number of 
+        ++ places of degree d in the constant field extension of
+        ++ degree n
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X numberPlacesDegExtDeg(3,2)$P1
+
+      ZetaFunction : () -> UTSZ
+        ++ ZetaFunction() returns the Zeta function of the curve. 
+        ++ Calculated by using the L-Polynomial
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X ZetaFunction()$P1
+
+      ZetaFunction : PI -> UTSZ
+        ++ ZetaFunction(pi) returns the Zeta function of the curve in 
+        ++ constant field extension. Calculated by using the L-Polynomial
+        ++
+        ++X K1:= PF(2)
+        ++X R1:= DMP([X,Y,Z],K1)
+        ++X P1:= PAFFFF(K1,[X,Y,Z],BLQT)
+        ++X C1:R1:=X^5 + Y^2*Z^3+Y*Z^4
+        ++X setCurve(C1)$P1
+        ++X ZetaFunction(2)$P1
+        
+  CODE ==>  add
+
+    import BP
+
+    homogenize(pol,n) == homogenize(pol,n)$PackageForPoly(K,PolyRing,E,#symb)
+    
+    toPolyRing2: PolyRing -> PolyRing2
+
+    toPolyRing: PolyRing2 -> PolyRing
+
+    projectivePoint(lpt)==projectivePoint(lpt)$ProjPt
+
+    pointDominateBy(pl)== pointDominateBy(pl)$BP
+
+    placesAbove(pt)== placesAbove(pt)$BP
+
+    setSingularPoints(lspt)==    setSingularPoints(lspt)$BP
+    
+    findOrderOfDivisor(divis,lb,hb) ==
+      ens:=findOrderOfDivisor(divis,lb,hb)$BP
+      [ens.ord, toPolyRing ens.num, toPolyRing ens.den, ens.upTo]      
+    
+    setCurve(pol)==
+      ooo:=setCurve(toPolyRing2 pol)$BP
+      pol
+    
+    ZetaFunction == ZetaFunction()$BP
+
+    ZetaFunction(d) == ZetaFunction(d)$BP
+
+    numberOfPlacesOfDegree(i)==numberOfPlacesOfDegree(i)$BP
+
+    placesOfDegree(i) ==placesOfDegree(i)$BP
+
+    numberRatPlacesExtDeg(extDegree)==numberRatPlacesExtDeg(extDegree)$BP
+
+    numberPlacesDegExtDeg(degree,extDegree)==
+      numberPlacesDegExtDeg(degree,extDegree)$BP
+
+    LPolynomial == LPolynomial()$BP
+
+    LPolynomial(extDeg)==LPolynomial(extDeg)$BP
+
+    classNumber== classNumber()$BP
+
+    rationalPlaces == rationalPlaces()$BP 
+
+    rationalPoints==rationalPoints()$BP
+      
+    goppaCode(d:DIVISOR,lp:List(Plc))==
+      lb:=lBasis(d)
+      dd:=lb.den
+      ll:=[[eval(f,dd,pl) for pl in lp] for f in lb.num]
+      matrix ll
+      
+    goppaCode(d:DIVISOR,p:DIVISOR)==
+      lp:=supp p
+      goppaCode(d,lp)
+
+    toPolyRing(pol)==
+      zero?(pol) => 0$PolyRing
+      lc:=leadingCoefficient pol
+      lce:K:= retract lc
+      lm:=leadingMonomial pol
+      lt:=degree lm
+      monomial(lce,lt)$PolyRing + toPolyRing( reductum pol )
+
+    toPolyRing2(pol)==
+      zero?(pol) => 0$PolyRing2
+      lc:=leadingCoefficient pol
+      lce:DK:= lc :: DK 
+      lm:=leadingMonomial pol
+      lt:=degree lm
+      monomial(lce,lt)$PolyRing2 + toPolyRing2( reductum pol )
+
+    evalIfCan(f:PolyRing,pl:Plc)==
+      dd:= degree pl
+      ^one?(dd) => error " cannot evaluate at place of degree greater than one"
+      ee:=evalIfCan(toPolyRing2 f,pl)$BP
+      ee case "failed" => "failed"
+      retract ee 
+      
+    eval(f:PolyRing,pl:Plc)==
+      dd:= degree pl
+      ^one?(dd) => error " cannot evaluate at place of degree greater than one"
+      ee:=eval(toPolyRing2 f,pl)$BP
+      retract ee 
+      
+    lBasis(divis)==
+      ans:=lBasis(divis)$BP
+      nn:=ans.num
+      dd:=ans.den
+      nnd:=[toPolyRing pol for pol in nn]
+      ddd:=toPolyRing dd
+      [nnd,ddd]
+
+    genus==genus()$BP
+
+    genusNeg==genusNeg()$BP
+
+    theCurve==
+      ccc:= theCurve()$BP
+      toPolyRing ccc
+
+    desingTree==desingTree()$BP
+
+    desingTreeWoFullParam== desingTreeWoFullParam()$BP
+
+    -- compute the adjunction divisor of the curve using 
+    -- adjunctionDivisor from DesingTreePackage
+    adjunctionDivisor == adjunctionDivisor()$BP
+    
+    singularPoints==singularPoints()$BP
+
+    parametrize(f,pl)==
+      ff:= toPolyRing2 f
+      parametrize(ff,pl)$BP
+
+    -- compute the interpolating forms (see package InterpolateFormsPackage)
+    interpolateForms(d,n)==
+      ans:=interpolateForms(d,n)$BP
+      [toPolyRing pol for pol in ans]
+
+    interpolateFormsForFact(d,lm)==
+      lm2:List PolyRing2 := [ toPolyRing2 p for p in lm]
+      interpolateFormsForFact(d,lm2)$BP
+
+    evalIfCan(ff:PolyRing,gg:PolyRing,pl:Plc)==
+      dd:= degree pl
+      ^one?(dd) => error " cannot evaluate at place of degree greater than one"
+      f:=toPolyRing2 ff
+      g:=toPolyRing2 gg
+      ee:=evalIfCan(f,g,pl)$BP
+      ee case "failed" => "failed"
+      retract ee 
+
+    eval(ff:PolyRing,gg:PolyRing,pl:Plc)==
+      dd:= degree pl
+      ^one?(dd) => error " cannot evaluate at place of degree greater than one"
+      f:=toPolyRing2 ff
+      g:=toPolyRing2 gg
+      ee:=eval(f,g,pl)$BP
+      retract ee 
+    
+    evalIfCan(u:FracPoly,pl:Plc)==
+      ff:=numer u
+      gg:=denom u
+      evalIfCan(ff,gg,pl)
+
+    eval(u:FracPoly,pl:Plc)==
+      ff:=numer u
+      gg:=denom u
+      eval(ff,gg,pl)
+    
+    intersectionDivisor(pol)==
+      polu:=toPolyRing2 pol
+      intersectionDivisor(polu)$BP
+
+    fullDesTree==
+      fullOutput()$DesTree => fullOutput(false())$DesTree
+      fullOutput(true())$DesTree
+
+    fullInfClsPt==
+      fullOutput()$InfClsPoint => fullOutput(false())$InfClsPoint
+      fullOutput(true())$InfClsPoint
+

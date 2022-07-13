@@ -1,0 +1,49 @@
+)abbrev category PERMCAT PermutationCategory
+++ Authors:  Holger Gollan, Johannes Grabmeier, Gerhard Schneider
+++ Date Created: 27 July 1989
+++ Date Last Updated: 29 March 1990
+++ Description:
+++ PermutationCategory provides a categorial environment
+++ for subgroups of bijections of a set (that is, permutations)
+
+PermutationCategory(S) : Category == SIG where
+  S : SetCategory
+
+  SIG ==> Group with
+
+    cycle : List S -> %
+      ++ cycle(ls) coerces a cycle ls, that is, a list with not
+      ++ repetitions to a permutation, which maps ls.i to
+      ++ ls.i+1, indices modulo the length of the list.
+      ++ Error: if repetitions occur.
+
+    cycles : List List S -> %
+      ++ cycles(lls) coerces a list list of cycles lls
+      ++ to a permutation, each cycle being a list with not
+      ++ repetitions, is coerced to the permutation, which maps
+      ++ ls.i to ls.i+1, indices modulo the length of the list,
+      ++ then these permutations are mutiplied.
+      ++ Error: if repetitions occur in one cycle.
+
+    eval : (%,S) -> S
+      ++ eval(p, el) returns the image of el under the
+      ++ permutation p.
+
+    elt : (%,S) -> S
+      ++ elt(p, el) returns the image of el under the
+      ++ permutation p.
+
+    orbit : (%,S) -> Set S
+      ++ orbit(p, el) returns the orbit of el under the
+      ++ permutation p, that is, the set which is given by applications of
+      ++ the powers of p to el.
+
+    "<" : (%,%) -> Boolean
+      ++ p < q is an order relation on permutations.
+      ++ Note that this order is only total if and only if S is totally ordered
+      ++ or S is finite.
+
+    if S has OrderedSet then OrderedSet
+
+    if S has Finite then OrderedSet
+

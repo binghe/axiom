@@ -1,0 +1,119 @@
+)abbrev package RFP RootsFindingPackage
+++ Authors: G. Hache
+++ Date Created: 6 0ct 1994
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This pacackage finds all the roots of a polynomial. If the constant field is
+++ not large enough then it returns the list of found zeros and the degree
+++ of the extension need to find the other roots missing. If the return
+++ degree is 1 then all the roots have been found. If 0 is return
+++ for the extension degree then there are an infinite number of zeros,
+++ that is you ask for the zeroes of 0. In the case of infinite field
+++ a list of all found zeros is kept and for each other call of a function
+++ that finds zeroes, a check is made on that list; this is to keep
+++ a kind of "canonical" representation of the elements.
+
+RootsFindingPackage(K) : SIG == CODE where
+  K : Field
+
+  LIST     ==> List
+  INT      ==> Integer
+  NNI      ==> NonNegativeInteger
+  MFINFACT ==> MultFiniteFactorize
+  FFFACTSE ==> FiniteFieldFactorizationWithSizeParseBySideEffect
+  SUP      ==> SparseUnivariatePolynomial
+  REC      ==> Record(zeros:List(K),extDegree:INT)
+
+  SIG ==> with
+
+    distinguishedRootsOf : (SUP(K),K) -> REC
+      ++ distinguishedRootsOf returns a record consisting of a list of zeros 
+      ++ of the input polynomial followed by the smallest extension degree 
+      ++ needed to find all the zeros. If K has 
+      ++ \spad{PseudoAlgebraicClosureOfFiniteFieldCategory} or 
+      ++ \spad{PseudoAlgebraicClosureOfRationalNumberCategory} then 
+      ++ a root is created for each irreducible factor, and only these 
+      ++ roots are returns and not their conjugate.
+
+    distinguishedCommonRootsOf : (List SUP(K),K) -> REC
+      ++ distinguishedCommonRootsOf returns the common zeros of a list of 
+      ++ polynomial. It returns a record as in distinguishedRootsOf. If 0 
+      ++ is returned as extension degree then there are an infinite number 
+      ++ of common zeros (in this case, the polynomial 0 was given in the 
+      ++ list of input polynomials).
+
+    foundZeroes : () -> List K
+      ++ foundZeroes returns the list of already 
+      ++ found zeros by the functions 
+      ++ distinguishedRootsOf  and
+      ++ distinguishedCommonRootsOf.
+
+    setFoundZeroes : List K -> List K
+      ++ setFoundZeroes sets the list of foundZeroes to the given one.
+
+  CODE ==> add
+
+    -- signature of local function
+    zeroOfLinearPoly: SUP(K) -> K
+    -- local variable
+    listOfAllZeros:List(K):=empty()
+
+    foundZeroes==listOfAllZeros
+    
+    if K has PseudoAlgebraicClosureOfPerfectFieldCategory then 
+
+      distinguishedRootsOf(polyZero, theExtension) ==
+        --PRECONDITION: setExtension! is called in K to set the extension to 
+        --the extension of factorization
+        zero?(polyZero) =>
+          [empty(),0]
+        listOfZeros:List(K):=distinguishedRootsOf(polyZero,theExtension)$K
+        [listOfZeros,1]
+
+    if K has FiniteFieldCategory  and _
+     ^(K has PseudoAlgebraicClosureOfFiniteFieldCategory) then
+
+      distinguishedRootsOf(polyZero,dummy)==
+        zero?(polyZero) => [empty(),0]
+        factorpolyZero:=factor(polyZero)$FFFACTSE(K,SUP(K))
+        listOfFactor:=factorList(factorpolyZero)
+        listFact:= [pol.fctr for pol in listOfFactor]
+        degExt:INT:=
+          lcm(([degree(poly) for poly in listFact]) pretend LIST(INT))
+        listOfZeros:List(K):=removeDuplicates_
+          [zeroOfLinearPoly(poly) for poly in listFact | one?(degree(poly))]
+        [listOfZeros,degExt]
+
+    if K has QuotientFieldCategory( Integer ) and _
+     ^(K has PseudoAlgebraicClosureOfRationalNumberCategory) then
+
+      distinguishedRootsOf(polyZero,dummy)==
+        zero?(polyZero) => [empty(),0]
+        factorpolyZero:=factor(polyZero)$RationalFactorize( SUP(K) ) 
+        listOfFactor:=factorList(factorpolyZero)
+        listFact:= [pol.fctr for pol in listOfFactor]
+        degExt:INT:= 
+          lcm(([degree(poly) for poly in listFact]) pretend LIST(INT))
+        listOfZeros:List(K):=removeDuplicates_
+          [zeroOfLinearPoly(poly) for poly in listFact | one?(degree(poly))]
+        [listOfZeros,degExt]
+
+    distinguishedCommonRootsOf(listOfPoly1,theExtension)==
+      listOfPoly:List(SUP(K)):=[pol for pol in listOfPoly1 | ^zero?(pol)]
+      empty?(listOfPoly) ==> [empty(),0]
+      reco:= distinguishedRootsOf(gcd(listOfPoly),theExtension)
+      listOfZeros:= reco.zeros
+      degExt:INT:= reco.extDegree
+      [listOfZeros,degExt]
+
+    zeroOfLinearPoly(pol)==
+      ^one?(degree(pol)) => error "the polynomial is not linear"
+      listCoef:List(K):=coefficients(pol)
+      one?(#listCoef) => 0
+      - last(listCoef) / first(listCoef)
+
+    setFoundZeroes(setlist)==
+      oldListOfAllZeroes:= copy listOfAllZeros
+      listOfAllZeros:=setlist
+      oldListOfAllZeroes
+

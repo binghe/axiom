@@ -1,0 +1,66 @@
+)abbrev package LISYSER LinearSystemFromPowerSeriesPackage
+++ Authors: Gaetan Hache
+++ Date Created:  1996
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ Part of the PAFF package
+
+LinearSystemFromPowerSeriesPackage(K,PCS) : SIG == CODE where
+  K : Field
+  PCS : LocalPowerSeriesCategory(K)
+    
+  INT     ==> Integer
+  TERM    ==> Record(k:INT,c:K)    
+  SER     ==> Stream(TERM)
+  LOpPack ==> LinesOpPack(K)
+    
+  SIG ==> with
+
+    finiteSeries2LinSysWOVectorise : (List PCS, INT) -> Matrix K
+
+    finiteSeries2LinSys : (List PCS, INT) -> Matrix K
+      ++ finiteSeries2LinSys(ls,n) returns a matrix which right kernel 
+      ++ is the solution of the linear combinations of the series in ls 
+      ++ which has order greater or equal to n.
+      ++ NOTE: All the series in ls must be finite and must have order 
+      ++ at least 0: so one must first call on each of them the
+      ++ function filterUpTo(s,n) and apply an appropriate shift 
+      ++ (mult by a power of t).
+
+    finiteSeries2Vector : (PCS, INT) -> List K
+    
+  CODE ==> add
+
+    finiteSeries2ListOfTerms: PCS -> List TERM
+
+    finiteSeries2ListOfTermsStream: SER -> List TERM
+      
+    finiteSeries2ListOfTermsStream(s)==     
+      empty?(s) => empty()
+      cons(frst s , finiteSeries2ListOfTermsStream(rst(s)))
+      
+    finiteSeries2LinSys(ls,n)==
+      ll:List K:=  [0$K]
+      lZero:=new(#ls pretend NonNegativeInteger,ll)$List(List(K))
+      n <= 0  => transpose matrix lZero
+      tMat:=transpose matrix [finiteSeries2Vector(s,n) for s in ls]
+      rowEchWoZeroLines(tMat)$LOpPack
+
+    finiteSeries2LinSysWOVectorise(ls,n)==
+      ll:List K:=  [0$K]
+      lZero:=new(#ls pretend NonNegativeInteger,ll)$List(List(K))
+      n <= 0  => transpose matrix lZero
+      tMat:=transpose matrix [finiteSeries2Vector(s,n) for s in ls]
+      rowEchWoZeroLinesWOVectorise(tMat)$LOpPack
+           
+    finiteSeries2ListOfTerms(s)==
+      ss:SER:= s :: SER
+      finiteSeries2ListOfTermsStream(ss)
+  
+    finiteSeries2Vector(ins,n)==
+      lZero:=new((n pretend NonNegativeInteger),0)$List(K)
+      s:= removeFirstZeroes ins
+      lOfTerm:=finiteSeries2ListOfTerms(s)
+      for t in lOfTerm repeat lZero.((t.k)+1):= t.c
+      lZero
+   

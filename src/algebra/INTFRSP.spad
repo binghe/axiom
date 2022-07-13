@@ -1,0 +1,177 @@
+)abbrev package INTFRSP InterpolateFormsPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+InterpolateFormsPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc,DIVISOR) :
+ SIG == CODE where
+  K:Field
+  symb: List(Symbol)
+  OV ==> OrderedVariableList(symb)
+  E :  DirectProductCategory(#symb,NonNegativeInteger)
+  PolyRing : PolynomialCategory(K,E,OV)
+  ProjPt : ProjectiveSpaceCategory(K)
+  PCS : LocalPowerSeriesCategory(K)
+  Plc : PlacesCategory(K,PCS)
+  DIVISOR : DivisorCategory(Plc)
+
+  INT       ==> Integer
+  NNI       ==> NonNegativeInteger
+  ParamPack ==>  ParametrizationPackage(K,symb,PolyRing,E,ProjPt,PCS,Plc)
+  PackPoly  ==>    PackageForPoly(K,PolyRing,E,#symb)
+  LINPACK   ==> LinearSystemFromPowerSeriesPackage(K,PCS)
+
+  SIG ==>  with
+
+    basisOfInterpolateForms : (DIVISOR,List PolyRing)  -> List(Vector(K))
+
+    basisOfInterpolateFormsForFact : (DIVISOR,List PolyRing)  -> List(Vector(K))
+
+    interpolateFormsForFact : (DIVISOR,List PolyRing) -> List(PolyRing)
+
+    interpolateForms : (DIVISOR,NNI,PolyRing,List PolyRing) -> List(PolyRing)
+      ++ interpolateForms(D,n,pol,base) compute the basis of the sub-vector 
+      ++ space W of V = <base>, such that for all G in W, the 
+      ++ divisor (G) >= D. All the elements in base must be homogeneous 
+      ++ polynomial of degree n. Typicaly, base is the set of all monomial 
+      ++ of degree n: in that case, interpolateForms(D,n,pol,base)
+      ++ returns the basis of the vector space of all forms of degree d that 
+      ++ interpolated D. The argument pol must be the same polynomial that 
+      ++ defined the curve form which the divisor D is defined.
+
+  CODE ==>  add
+
+    import PolyRing
+    import PCS
+
+    sbSpcOfCurve: (NNI,PolyRing) -> List(List(K))
+    
+    exponant2monomial: List(NNI) -> PolyRing
+
+    crtV: (List(K),List(INT),NNI) -> List(K)
+
+    createLinSys: (List Plc, List INT,List PolyRing) -> Matrix(K)
+
+    createLinSysWOVectorise: (List Plc, List INT,List PolyRing) -> Matrix(K)
+
+    basisOfInterpolateFormsForFact(divis,lm)==
+      -- permet d'intepoler un diviseur qui n'est pas rationnel. 
+      -- La partie non rationel
+      -- est dans sptdiv (note: une place de sptdiv est une place qui identidie
+      -- l'ensemble des places qui lui sont conjuguees.
+      -- Note: On utilise ici la fonction createLinSysWOVectorise
+      -- qui ne vectorise pas les elements du corps de base.
+      lstOfPlc:= supp divis
+      lstOfv:= [coefficient(pl,divis)  for pl in lstOfPlc]
+      -- ppsol contiendra la base des formes interpolant ke diviseur divis
+      linSys:Matrix(K)
+      linSysT:Matrix(K)
+      ll:List Matrix K
+      ^empty?(lstOfPlc) => 
+        linSys:=createLinSysWOVectorise(lstOfPlc,lstOfv,lm)
+        nullSpace linSys
+      zeroMat:Matrix(K):=zero(1,#lm)$Matrix(K)
+      nullSpace zeroMat
+      
+    interpolateForms(divis,d,laCrb,lm)==
+      -- ppsol contiendra la base des formes interpolant le diviseur divis
+      -- mieux vaut prendre  divOfZero de divis ?
+      ppsol:= basisOfInterpolateForms(divis,lm)
+      
+      psol:List(List(K)):=[entries(vec) for vec in ppsol]
+      mpsol:=psol
+      sbspc:List(List(K))
+      if ^(totalDegree(laCrb)$PackPoly > d) then
+        -- retourne une base des formes de degres d 
+        -- qui sont un multiple de la courbe
+        sbspc:=sbSpcOfCurve(d,laCrb)
+        mpsol:=quotVecSpaceBasis(psol,sbspc)$LinesOpPack(K)
+        
+      empty?(mpsol) => [0]
+      
+      rowEchmpsol:=rowEchelon(matrix(mpsol)$Matrix(K))
+      npsol:=listOfLists(rowEchmpsol) 
+      [reduce("+",[a*f  for a in ll for f in lm]) for ll in npsol]
+
+    interpolateFormsForFact(divis,lm)==
+      -- ppsol contiendra la base des formes interpolant le diviseur divis
+      ppsol:= basisOfInterpolateFormsForFact(divis,lm)
+      psol:List(List(K)):=[entries(vec) for vec in ppsol]
+      mpsol:=psol
+      empty?(mpsol) => [0]
+      rowEchmpsol:=rowEchelon matrix(mpsol)$Matrix(K) 
+      npsol:=listOfLists(rowEchmpsol) 
+      [reduce("+",[a*f  for a in ll for f in lm]) for ll in npsol]
+
+    createLinSys(lstOfPlc,lstOfv,lm)==
+        lplsT:=[ [parametrize(f,pl)$ParamPack  for f in lm]_
+                   for pl in lstOfPlc]
+        lpls:=[[filterUpTo(s,v) for s in souslplsT] _
+                  for souslplsT in lplsT_
+                  for v in lstOfv]
+        linSys:=reduce("vertConcat",_
+                   [finiteSeries2LinSys(souslplsT,v)$LINPACK_
+                          for souslplsT in lpls_
+                          for v in lstOfv])
+        linSys
+
+    createLinSysWOVectorise(lstOfPlc,lstOfv,lm)==
+        lplsT:=[ [parametrize(f,pl)$ParamPack  for f in lm]_
+                   for pl in lstOfPlc]
+        lpls:=[[filterUpTo(s,v) for s in souslplsT] _
+                  for souslplsT in lplsT_
+                  for v in lstOfv]
+        linSys:=reduce("vertConcat",_
+                   [finiteSeries2LinSysWOVectorise(souslplsT,v)$LINPACK_
+                          for souslplsT in lpls_
+                          for v in lstOfv])
+        linSys
+      
+    basisOfInterpolateForms(divis,lm)==
+      lstOfPlc:= supp divis
+      lstOfv:= [coefficient(pl,divis)  for pl in lstOfPlc]
+      -- ppsol contiendra la base des formes interpolant ke diviseur divis
+      linSys:Matrix(K)
+      ^empty?(lstOfPlc) => 
+        linSys:=createLinSys(lstOfPlc,lstOfv,lm)
+        -- ppsol contient la base des formes passant par le diviseur divv
+        nullSpace(linSys)
+      zeroMat:Matrix(K):=zero(1,#lm)$Matrix(K)
+      nullSpace zeroMat
+
+    listVar:List(OV):= [index(i::PositiveInteger)$OV for i in 1..#symb]
+
+    listMonoPols:List(PolyRing):=[monomial(1,vv,1) for vv in listVar]
+
+    crtV(lcoef,lpos,l)==
+      vvv:List(K):=[0 for i in 1..l]
+      for c in lcoef for p in lpos repeat
+        setelt(vvv,p,c)
+      vvv
+
+    sbSpcOfCurve(m,laCrb)==
+      d:=totalDegree(laCrb)$PackPoly
+      lm:List(PolyRing):=listAllMono(m)$PackPoly
+      m<d => [[0$K for i in 1..#lm]]
+      sd:NNI:=((m pretend INT)-(d pretend INT)) pretend NNI
+      slm:List(PolyRing):=listAllMono(sd)$PackPoly
+      allPol:=[laCrb*f for f in slm]
+      lpos:=[[position(m,lm) for m in primitiveMonomials(f)] for f in allPol]
+      lcoef:=[coefficients(f) for f in allPol]
+      clm:=#lm
+      [crtV(lc,lp,clm) for lc in lcoef for lp in lpos]
+
+    inVecSpace?: (List(K),List(List(K))) -> Boolean
+    inVecSpace?(line,basis)==
+      mat:Matrix(K):=matrix(basis)
+      rmat:=rank(mat)
+      augmat:Matrix(K):=matrix(concat(line,basis))
+      raugmat:=rank(augmat)
+      rmat=raugmat
+
+
+    exponant2monomial(lexp)==
+      reduce("*",[m**e for m in listMonoPols for e in lexp])
+

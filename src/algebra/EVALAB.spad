@@ -1,0 +1,24 @@
+)abbrev category EVALAB Evalable
+++ Date Last Updated: June 3, 1991
+++ Description:
+++ This category provides \spadfun{eval} operations.
+++ A domain may belong to this category if it is possible to make
+++ "evaluation" substitutions.
+
+Evalable(R) : Category == SIG where
+  R : SetCategory
+
+  SIG ==> InnerEvalable(R,R) with
+
+    eval : ($, Equation R) -> $
+      ++ eval(f,x = v) replaces x by v in f.
+
+    eval : ($, List Equation R) -> $
+      ++ eval(f, [x1 = v1,...,xn = vn]) replaces xi by vi in f.
+
+   add
+
+     eval(f:$, eq:Equation R) == eval(f, [eq])
+
+     eval(f:$, xs:List R,vs:List R) == eval(f,[x=v for x in xs for v in vs])
+

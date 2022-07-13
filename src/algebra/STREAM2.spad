@@ -1,0 +1,66 @@
+)abbrev package STREAM2 StreamFunctions2
+++ Authors: Burge, Watt; updated by Clifton J. Williamson
+++ Date Created: July 1986
+++ Date Last Updated: 29 January 1990
+++ Description:
+++ Functions defined on streams with entries in two sets.
+
+StreamFunctions2(A,B) : SIG == CODE where
+  A : Type
+  B : Type
+
+  ST   ==> Stream
+
+  SIG ==> with
+
+    map : ((A -> B),ST A) -> ST B
+      ++ map(f,s) returns a stream whose elements are the function f applied
+      ++ to the corresponding elements of s.
+      ++ Note that \spad{map(f,[x0,x1,x2,...]) = [f(x0),f(x1),f(x2),..]}.
+      ++
+      ++X m:=[i for i in 1..]
+      ++X f(i:PositiveInteger):PositiveInteger==i**2
+      ++X map(f,m)
+
+    scan : (B,((A,B) -> B),ST A) -> ST B
+      ++ scan(b,h,[x0,x1,x2,...]) returns \spad{[y0,y1,y2,...]}, where
+      ++ \spad{y0 = h(x0,b)},
+      ++ \spad{y1 = h(x1,y0)},\spad{...}
+      ++ \spad{yn = h(xn,y(n-1))}.
+      ++
+      ++X m:=[i for i in 1..]::Stream(Integer)
+      ++X f(i:Integer,j:Integer):Integer==i+j
+      ++X scan(1,f,m)
+
+    reduce :  (B,(A,B) -> B,ST A) -> B
+      ++ reduce(b,f,u), where u is a finite stream \spad{[x0,x1,...,xn]},
+      ++ returns the value \spad{r(n)} computed as follows:
+      ++ \spad{r0 = f(x0,b),
+      ++ r1 = f(x1,r0),...,
+      ++ r(n) = f(xn,r(n-1))}.
+      ++
+      ++X m:=[i for i in 1..300]::Stream(Integer)
+      ++X f(i:Integer,j:Integer):Integer==i+j
+      ++X reduce(1,f,m)
+
+  CODE ==> add
+
+    mapp: (A -> B,ST A) -> ST B
+    mapp(f,x)== delay
+      empty? x => empty()
+      concat(f frst x, map(f,rst x))
+
+    map(f,x) ==
+      explicitlyEmpty? x => empty()
+      eq?(x,rst x) => repeating([f frst x])
+      mapp(f, x)
+
+    scan(b,h,x) == delay
+      empty? x => empty()
+      c := h(frst x,b)
+      concat(c,scan(c,h,rst x))
+
+    reduce(b,h,x) ==
+      empty? x => b
+      reduce(h(frst x,b),h,rst x)
+

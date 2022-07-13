@@ -1,0 +1,8 @@
+)abbrev category ATLUNIT LeftUnitaryAttribute
+++ Description:
+++ LeftUnitary is true if \spad{1 * x = x} for all x.
+
+LeftUnitaryAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

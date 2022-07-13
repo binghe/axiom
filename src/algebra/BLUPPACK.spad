@@ -1,0 +1,246 @@
+)abbrev package BLUPPACK BlowUpPackage
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+BlowUpPackage(K,symb,PolyRing,E,  BLMET) : SIG == CODE where 
+  K         : Field
+  symb      : List Symbol
+  PolyRing  : FiniteAbelianMonoidRing(K,E)
+  E         : DirectProductCategory(#symb,NonNegativeInteger)
+  BLMET     : BlowUpMethodCategory
+
+  NNI      ==> NonNegativeInteger
+  RFP      ==> RootsFindingPackage
+  NP       ==> NewtonPolygon( K, BlUpRing, E2 , #bls)
+  PackPoly ==> PackageForPoly(K,BlUpRing,E2,#bls)
+  bls      ==>  ['X,'Y]
+  BlUpRing ==> DistributedMultivariatePolynomial( bls , K )
+  E2       ==> DirectProduct(#bls , NNI) 
+  AFP      ==> AffinePlane(K)
+
+  blowUpRec    ==> Record(recTransStr:BlUpRing,recPoint:AFP,recChart:BLMET,_
+                         definingExtension:K) 
+  blowUpReturn ==> Record(mult:NonNegativeInteger,subMult: NNI, _
+                            blUpRec:List(blowUpRec))
+  recStr    ==> Record( sM: NNI , blRec:List blowUpRec)
+
+  SIG ==>  with
+
+      applyTransform : (PolyRing,BLMET) -> PolyRing 
+        ++ applyTransform(pol,chart) apply the quadratique transformation to 
+        ++ pol specified by chart which consist of 3 integers. The last one 
+        ++ indicates which varibles is set to 1, the first on indicates 
+        ++ which variable remains unchange, and the second one indicates
+        ++ which variable oon which the transformation is applied. 
+        ++ For example, [2,3,1] correspond to the following: 
+        ++ x -> 1, y -> y, z -> yz (here the variable are [x,y,z] in BlUpRing).
+
+      quadTransform : (BlUpRing,NNI,BLMET) -> BlUpRing  -- CHH
+        ++ quadTransform(pol,n,chart) apply the quadratique transformation 
+        ++ to pol specified by chart has in quadTransform(pol,chart) and 
+        ++ extract x**n to it, where x is the variable specified by the 
+        ++ first integer in chart (blow-up exceptional coordinate).
+
+      stepBlowUp : (BlUpRing,AFP,BLMET,K) -> blowUpReturn  -- CHH
+        ++ stepBlowUp(pol,pt,n) blow-up the point pt on the curve defined 
+        ++ by pol in the affine neighbourhood specified by n.
+
+      newtonPolySlope : BlUpRing -> List List(NNI)
+
+      polyRingToBlUpRing : (PolyRing, BLMET) -> BlUpRing
+
+      biringToPolyRing : (BlUpRing, BLMET) -> PolyRing
+
+  CODE ==> add
+
+    import BlUpRing
+    import AFP
+    import RFP(K)
+    import PackPoly
+    import NP
+
+    makeAff( l:List(K) , chart: BLMET ):AFP ==
+          (excepCoord chart) = 1 => affinePoint( l )$AFP
+          affinePoint( reverse l )$AFP
+
+    blowExp: (E2, NNI, BLMET ) -> E2
+
+    maxOf: (K,K) -> K
+
+    getStrTrans: ( BlUpRing , List BlUpRing , BLMET, K ) -> recStr
+
+    stepBlowUp(crb:BlUpRing,pt:AFP,chart:BLMET,actualExtension:K) == 
+      -- next is with Hamburger-Noether method
+      BLMET has HamburgerNoether =>       
+        nV:Integer:= chartCoord chart
+        crbTrans:BlUpRing:=translate(crb, list(pt))$PackPoly
+        newtPol:= newtonPolygon( crbTrans, quotValuation chart, _
+                                 ramifMult chart, type chart )$NP
+        multPt:= multiplicity(newtPol)$NP 
+        one?(multPt) =>
+          [multPt, 0 , empty() ]$blowUpReturn
+        listOfgetTr:List recStr:= _
+          [ getStrTrans( crbTrans , edge , chart , actualExtension ) _
+            for edge in newtPol ]
+        lsubM: List NNI :=  [ ll.sM for ll in listOfgetTr]
+        subM := reduce( "+" , lsubM )
+        llistOfRec: List List blowUpRec :=  [ ll.blRec for ll in listOfgetTr]
+        listOfRec:= concat llistOfRec
+        [ multPt, subM ,listOfRec]$blowUpReturn
+      -- next is with usual quadratic transform.
+
+      BLMET has QuadraticTransform =>        
+        nV:Integer:= chartCoord chart
+        lpt:List(K) := list(pt)$AFP
+        crbTrans:=translate(crb,lpt)
+        minForm:=minimalForm(crbTrans)
+        multPt:=totalDegree( minForm)$PackPoly 
+        listRec:List(blowUpRec):=empty()
+        one?(multPt) => [multPt, 0 , listRec]$blowUpReturn
+        -- now pt is singular !!!!
+        lstInd:=[i::PositiveInteger for i in 1..2 ] 
+        -- la ligne suivante fait un choix judicieux pour minimiser le 
+        -- degre' du transforme' stricte.
+        if degree( crbTrans , 2 )$PackPoly < degree( crbTrans , 1 )$PackPoly _
+           then  lstInd := reverse lstInd
+        ptInf:List(K):=[0$K,0$K]
+        laCarte:BLMET:=
+          ([last(lstInd), first(lstInd),nV] @  List Integer) :: BLMET
+        laCarteInf:BLMET:=
+          ([first(lstInd),last(lstInd),nV] @ List Integer ) :: BLMET
+        transStricte   :=quadTransform(crbTrans,multPt,laCarte)
+        transStricteInf:=quadTransform(crbTrans,multPt,laCarteInf)
+        listPtsSingEcl:List(AFP):=empty()
+        transStricteZero:BlUpRing:= replaceVarByOne(minForm,excepCoord laCarte)
+        recOfZeros:=_
+          distinguishedRootsOf(univariate(transStricteZero)$PackPoly ,_
+                                          actualExtension )$RFP(K)
+        degExt:=recOfZeros.extDegree
+        ^one?(degExt) =>
+          print(("You need an extension of degree")::OutputForm)
+          print(degExt::OutputForm)
+          error("Have a nice day")
+        listPtsSingEcl:=[makeAff([0$K,a]::List(K),laCarte) _ 
+                        for a in recOfZeros.zeros]
+        listRec:=[  
+                    [  transStricte,_
+                       ptS,laCarte,_
+                       maxOf(a,actualExtension)]$blowUpRec_
+                    for ptS in listPtsSingEcl_
+                 for a in recOfZeros.zeros]
+        if zero?(constant(transStricteInf))$K then
+          listRec:= concat(listRec,[transStricteInf,_
+                                    affinePoint(ptInf)$AFP,_
+                                    laCarteInf,_
+                                    actualExtension]$blowUpRec)
+        empty?(listRec) =>
+          error "Something is very wrong in blowing up!!!!!!"
+        [multPt, 0 ,listRec]$blowUpReturn
+      error "Desingularisation is not implemented for the blowing up method chosen, see BlowingUpMethodCategory."
+
+    getStrTrans( crb , inedge , actChart, actualExtension ) == 
+      edge:= copy inedge
+      s := slope(edge)$NP
+      sden:Integer
+      snum:Integer
+      i1:Integer
+      i2:Integer
+      if s.type case "right"  then 
+        sden:= s.base
+        snum:=s.height
+        i1:=1
+        i2:=2
+      else -- interchange les roles de X et Y .
+        sden:= s.height
+        snum:= s.base
+        i1:=2
+        i2:=1
+        edge := copy reverse inedge
+      ee := entries( degree first edge) pretend List Integer
+      euclq: Integer 
+      if one?(snum) then 
+        euclq:=1
+      else 
+        euclq   := s.quotient 
+      -- sMult est la somme des  multiplicite des  points infiniment 
+      -- voisin par une trans. quadratique 
+      sMult: NNI :=  ( ( euclq - 1 )   * ee.i2 ) pretend NNI
+      -- extMult est egal a la plus grande puissance de X que l'on peut 
+      --extraire de la transformee.
+      extMult := (ee.i1 + ee.i2 * euclq) pretend NonNegativeInteger
+      ch: BLMET
+      trStr:BlUpRing
+      listBlRec: List blowUpRec
+      ^zero?(s.reste ) =>  
+         ch:= createHN( i1 , i2 , chartCoord actChart, euclq , s.reste , _
+                       false , s.type)$BLMET
+         trStr:= quadTransform(crb, extMult , ch )
+         listBlRec:= [ [trStr,origin()$AFP,ch,actualExtension ]$blowUpRec ]
+         [ sMult , listBlRec  ]$recStr
+      polEdge := reduce( "+" , edge )
+      unipol:= univariate( replaceVarByOne( polEdge , i1 )$PackPoly )$PackPoly 
+      recOfZeros:= distinguishedRootsOf( unipol , actualExtension )$RFP(K)
+      degExt:=recOfZeros.extDegree
+      ^one?(degExt) =>
+          print(("You need an extension of degree")::OutputForm)
+          print(degExt::OutputForm)
+          error("Have a nice day")
+      listOfZeroes:List K:= [ z for z in recOfZeros.zeros | ^zero?(z) ]
+      empty? listOfZeroes => _
+        error " The curve is not absolutely irreducible since the Newton polygon has no sides "
+      ch:=_
+        createHN( i1 , i2, chartCoord actChart, euclq, 0, false, s.type)$BLMET
+      lsTr:BlUpRing:= quadTransform(crb, extMult , ch ) 
+      lAff:List AFP:=[makeAff([ 0$K, z]:: List K , ch) for z in listOfZeroes ]
+      listBlRec := [ [ lsTr,p,ch,maxOf( actualExtension , z) ]$blowUpRec_
+         for p in lAff for z in listOfZeroes ]
+      [sMult, listBlRec ]$recStr
+
+    blowExp(exp,mult,chart)== -- CHH
+      zero?( excepCoord chart) => exp
+      lexp:List NNI:=parts(exp)
+      ch1:Integer:= excepCoord chart
+      ch2:Integer:= transCoord chart
+      e1:Integer := lexp(ch1) pretend Integer
+      e2:Integer := lexp(ch2) pretend Integer
+      quotVal:Integer := quotValuation chart
+      lbexp:=[0,0] :: List(NNI)
+      lbexp(ch1):= ( e1 + quotVal * e2  - mult ) pretend NonNegativeInteger
+      lbexp(ch2):=lexp(ch2)
+      directProduct(vector(lbexp)$Vector(NNI))$E2
+
+    quadTransform(pol,mult,chart)==  -- CHH
+      mapExponents(blowExp(#1,mult,chart),pol)
+
+    polyRingToBlUpRing(pol,chart)==
+      zero? pol => 0
+      lc:= leadingCoefficient pol
+      d:=entries degree pol
+      ll:= [ d.i for i in 1..3 | ^( i = chartCoord(chart) ) ]
+      e:= directProduct( vector( ll)$Vector(NNI) )$E2
+      monomial(lc , e )$BlUpRing + polyRingToBlUpRing( reductum pol, chart )
+
+    biringToPolyRing(pol,chart)==
+      zero? pol => 0
+      lc:= leadingCoefficient pol
+      d:=entries degree pol
+      nV:= chartCoord chart
+      ll:List NNI:= 
+        nV = 1 => [ 0$NNI , d.1  , d.2 ]
+        nV = 2 => [ d.1  , 0$NNI , d.2 ]
+        [d.1 , d.2 , 0$NNI ]
+      e:= directProduct( vector( ll)$Vector(NNI) )$E
+      monomial(lc , e )$PolyRing  + biringToPolyRing( reductum pol, chart )
+
+    applyTransform(pol,chart)==
+      biringToPolyRing( quadTransform( polyRingToBlUpRing( pol, chart ) ,_
+                         0 , chart) , chart )
+  
+-- K has PseudoAlgebraicClosureOfFiniteFieldCategory => maxTower([a,b])$K
+-- K has PseudoAlgebraicClosureOfRationalNumberCategory  => maxTower([a,b])$K
+    maxOf(a:K,b:K):K ==
+      K has PseudoAlgebraicClosureOfPerfectFieldCategory  => maxTower([a,b])$K
+      1$K

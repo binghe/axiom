@@ -1,0 +1,66 @@
+)abbrev package NTPOLFN NumberTheoreticPolynomialFunctions
+++ Author: Stephen M. Watt
+++ Date Created:  1990
+++ Date Last Updated: June 25, 1991
+++ Description:
+++ This package provides polynomials as functions on a ring.
+
+NumberTheoreticPolynomialFunctions(R) : SIG == CODE where
+  R : CommutativeRing
+
+  NNI ==> NonNegativeInteger
+  RN  ==> Fraction Integer
+
+  SIG ==> with
+
+    cyclotomic : (NNI, R) -> R
+      ++ cyclotomic(n,r) \undocumented
+
+    if R has Algebra RN then
+
+      bernoulliB : (NNI, R) -> R
+        ++ bernoulliB(n,r) \undocumented
+
+      eulerE : (NNI, R) -> R
+        ++ eulerE(n,r) \undocumented
+
+  CODE ==> add
+
+        import PolynomialNumberTheoryFunctions()
+
+        I   ==> Integer
+        SUP ==> SparseUnivariatePolynomial
+
+        -- This is the wrong way to evaluate the polynomial.
+        cyclotomic(k, x) ==
+            p: SUP(I) := cyclotomic(k)
+            r: R      := 0
+            while p ^= 0 repeat
+                d := degree p
+                c := leadingCoefficient p
+                p := reductum p
+                r := c*x**d + r
+            r
+
+        if R has Algebra RN then
+
+            eulerE(k, x) ==
+                p: SUP(RN) := euler(k)
+                r: R       := 0
+                while p ^= 0 repeat
+                    d := degree p
+                    c := leadingCoefficient p
+                    p := reductum p
+                    r := c*x**d + r
+                r
+
+            bernoulliB(k, x) ==
+                p: SUP(RN) := bernoulli(k)
+                r: R       := 0
+                while p ^= 0 repeat
+                    d := degree p
+                    c := leadingCoefficient p
+                    p := reductum p
+                    r := c*x**d + r
+                r
+

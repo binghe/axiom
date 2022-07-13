@@ -1,0 +1,228 @@
+)abbrev domain SD StochasticDifferential
+++ Author: Wilfrid S. Kendall
+++ Last Last Updated: July 26, 1999
+++ Related Domains: BasicStochasticDifferential
+++ References: Ito (1975), Kendall (1991a,b; 1993a,b).
+++ Description:
+++ A basic implementation of StochasticDifferential(R) using the
+++ associated domain BasicStochasticDifferential in the underlying 
+++ representation as sparse multivariate polynomials. The domain is 
+++ a module over Expression(R), and is a ring without identity 
+++ (AXIOM term is "Rng"). Note that separate instances, for example 
+++ using R=Integer and R=Float, have different hidden structure 
+++ (multiplication and drift tables).
+
+StochasticDifferential(R) :  SIG == CODE where
+  R : Join(OrderedSet, IntegralDomain)
+
+  ER ==> Expression(R)
+  PR ==> Polynomial(R)
+  FR ==> Fraction(PR)
+  BSD ==> BasicStochasticDifferential
+  PI ==> PositiveInteger
+  NNI ==> NonNegativeInteger
+  OF  ==> OutputForm
+
+  SIG ==> Join(Rng, Module(ER)) with
+
+   RetractableTo(BSD)
+
+   alterQuadVar! : (BSD,BSD,%) -> Union(%,"failed")
+    ++ alterQuadVar! adds multiplication formula for a
+    ++ pair of stochastic differentials to a private table.
+    ++ Failure occurs if
+    ++  (a) either of first or second arguments is not basic
+    ++  (b) third argument is not exactly of first degree
+
+   alterDrift! : (BSD,%) -> Union(%,"failed")
+    ++ alterDrift! adds drift formula for a 
+    ++ stochastic differential to a private table.
+    ++ Failure occurs if
+    ++  (a) first arguments is not basic
+    ++  (b) second argument is not exactly of first degree
+
+   drift : % -> %
+    ++ drift(dx) returns the drift of \axiom{dx}
+
+   freeOf? : (%,BSD) -> Boolean
+    ++ freeOf?(sd,dX) checks whether \axiom{dX} occurs in
+    ++ \axiom{sd} as a module element
+
+   coefficient : (%,BSD) -> ER
+    ++ coefficient(sd,dX) returns the coefficient of \axiom{dX}
+    ++ in the stochastic differential \axiom{sd}
+
+   listSD : (%) -> List BSD
+    ++ listSD(dx) returns a list of all \axiom{BSD} involved
+    ++ in the generation of \axiom{dx} as a module element
+
+   equation : (%,R) -> Union(Equation %,"failed")
+    ++ equation(dx,0) allows RHS of Equation % to be zero
+   equation:(R,%) -> Union(Equation %,"failed")
+    ++ equation(0,dx) allows LHS of Equation % to be zero
+
+   copyDrift : () -> Table(%,%)
+    ++ copyDrift returns private table of drifts 
+    ++ of basic stochastic differentials for inspection
+
+   copyQuadVar : () -> Table(%,%)
+    ++ copyQuadVar returns private multiplication table
+    ++ of basic stochastic differentials for inspection
+
+   "/" : (%, ER) -> %
+      ++ dx/y divides the stochastic differential dx 
+      ++ by the previsible function y.
+
+   "**" : (%, PI) -> %
+      ++ dx**n is dx multiplied by itself n times.
+
+   "^" : (%, PI) -> %
+      ++ dx^n is dx multiplied by itself n times.
+
+   statusIto : () -> OF
+    ++ statusIto() displays the current state of \axiom{setBSD},
+    ++ \axiom{tableDrift}, and \axiom{tableQuadVar}. Question
+    ++ marks are printed instead of undefined entries
+    ++
+    ++X dt:=introduce!(t,dt)
+    ++X dX:=introduce!(X,dX)
+    ++X dY:=introduce!(Y,dY)
+    ++X copyBSD()
+    ++X copyIto()
+    ++X copyhQuadVar()
+    ++X statusIto()
+
+   uncorrelated? : (%,%) -> Boolean
+    ++ uncorrelated?(dx,dy) checks whether its two arguments
+    ++ have zero quadratic co-variation.
+
+   uncorrelated? : (List %,List %) -> Boolean
+    ++ uncorrelated?(l1,l2) checks whether its two arguments
+    ++ are lists of stochastic differentials of zero inter-list
+    ++ quadratic co-variation.
+
+   uncorrelated? : (List List %) -> Boolean
+    ++ uncorrelated?(ll) checks whether its argument is a list
+    ++ of lists of stochastic differentials of zero inter-list
+    ++ quadratic co-variation.
+
+  CODE ==> SparseMultivariatePolynomial(ER,BSD) add
+
+   Rep:=SparseMultivariatePolynomial(ER,BSD)
+
+   (v:% / s:ER):% == inv(s) * v
+
+   tableQuadVar:Table(%,%)  := table()
+
+   tableDrift:Table(%,%) := table()
+
+   alterQuadVar!(da:BSD,db:BSD,dXdY:%):Union(%,"failed") ==
+    -- next two lines for security only!
+    1 < totalDegree(dXdY)                => "failed"
+    0 ~= coefficient(dXdY,degree(1)$Rep) => "failed"
+    not(0::% = (dXdY*dXdY)::%) => "failed"
+    setelt(tableQuadVar,((da::Rep)*(db::Rep))$Rep,dXdY)$Table(%,%)
+    -- We have to take care here to avoid a bad
+    -- recursion on \axiom{*:(%,%)->%}
+
+   alterDrift!(da:BSD,dx:%):Union(%,"failed") ==
+    1 < totalDegree(dx)                => "failed"
+    0 ~= coefficient(dx,degree(1)$Rep) => "failed"
+    not(0::% = (dx*dx)::%) => "failed"
+    setelt(tableDrift,da::Rep,dx)$Table(%,%)
+
+   multSDOrError(dm:%):% ==
+    c := leadingCoefficient dm
+    (dmm := search(dm/c,tableQuadVar)) 
+      case "failed" =>
+       print hconcat(message("ERROR IN ")$OF,(dm/c)::OF)
+       error "Above product of sd's is not defined"
+    c*dmm
+
+   (dx:% * dy:%) : % ==
+    1 < totalDegree(dx) =>
+     print hconcat(message("ERROR IN ")$OF,dx::OF)
+     error "bad sd in lhs of sd product"
+    1 < totalDegree(dy) =>
+     print hconcat(message("ERROR IN ")$OF,dy::OF)
+     error "bad sd in rhs of sd product"
+    reduce("+",map(multSDOrError,monomials((dx*dy)$Rep)),0)
+    -- We have to take care here to avoid a bad 
+    -- recursion on \axiom{*:(%,%)->%}
+
+   (dx:% ** n:PI) : % ==
+    n = 1 => dx
+    n = 2 => dx*dx
+    n > 2 => 0::%
+
+   (dx:% ^ n:PI) : % == dx**n
+
+   driftSDOrError(dm:%):% ==
+    c := leadingCoefficient dm
+    (dmm := search(dm/c,tableDrift)) 
+      case "failed" =>
+       print hconcat(message("ERROR IN ")$OF,(dm/c)::OF)
+       error "drift of sd is not defined"
+    c*dmm
+
+   drift(dx:%):% ==
+    reduce("+",map(driftSDOrError,monomials(dx)),0)
+
+   freeOf?(sd,dX) == (0 = coefficient(sd,dX,1))
+
+   coefficient(sd:%,dX:BSD):ER == 
+    retract(coefficient(sd,dX,1))@ER
+
+   listSD(sd) == 
+    [retract(dX)@BSD for dX in primitiveMonomials(sd)]
+
+   equation(dx:%,zero:R):Union(Equation %,"failed") ==
+    not(0 = zero) => "failed"
+    equation(dx,0::%)
+
+   equation(zero:R,dx:%):Union(Equation %,"failed") ==
+    not(0 = zero) => "failed"
+    equation(0::%,dx)
+
+   copyDrift() == tableDrift
+   copyQuadVar() == tableQuadVar
+
+   xDrift(dx:BSD):OF ==
+    (xdx := search(dx::Rep,tableDrift)) case "failed" => "?"::OF
+    xdx::OF
+
+   xQV(dx:BSD,dy:BSD):OF ==
+    (xdxdy := search((dx::% * dy::%)$Rep,tableQuadVar)) 
+      case "failed" => "?"::Symbol::OF
+    xdxdy::OF
+
+   statusIto():OF ==
+    bsd  := copyBSD()$BSD
+    bsdo := [dx::OF for dx in bsd]
+    blank:= ""::Symbol::OF
+    colon:= ":"::Symbol::OF
+    bsdh := "B S D "::Symbol::OF
+    dfth := "drift "::Symbol::OF
+    qvh  := "*"::Symbol::OF
+    head := append([bsdh,colon],bsdo)
+    drift:= append([dfth,colon],[xDrift dx for dx in bsd])
+    space:= append([qvh ,blank],[blank for dx in bsd])
+    qv   := [append([dy::OF,colon],[xQV(dx,dy) for dx in bsd]) 
+                                               for dy in bsd]
+    matrix(append([head,drift,space],qv))$OF
+
+   uncorrelated?(dx:%,dy:%): Boolean == (0::% = dx*dy)
+
+   uncorrelated?(l1:List %,l2:List %): Boolean ==
+    reduce("and", [ 
+     reduce("and",[uncorrelated?(dx,dy) for dy in l2],true) 
+      for dx in l1 ],true)
+
+   uncorrelated1?(l1:List %,ll:List List %): Boolean ==
+    reduce("and",[uncorrelated?(l1,l2) for l2 in ll],true)
+
+   uncorrelated?(ll:List List %): Boolean ==
+    (0$Integer = # ll) => true
+    (1 = # ll) => true
+    uncorrelated1?(first ll,rest ll) and uncorrelated?(rest ll)
+

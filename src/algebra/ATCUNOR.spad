@@ -1,0 +1,11 @@
+)abbrev category ATCUNOR CanonicalUnitNormalAttribute
+++ Description:
+++ The class of all integral domains such that we can choose a canonical
+++ representative for each class of associate elements. That is,
+++ \spad{associates?(a,b)} returns true if and only if
+++ \spad{unitCanonical(a)} = \spad{unitCanonical(b)}
+
+CanonicalUnitNormalAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

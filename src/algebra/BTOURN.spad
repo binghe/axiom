@@ -1,0 +1,45 @@
+)abbrev domain BTOURN BinaryTournament
+++ Author: Mark Botch
+++ Description:
+++ BinaryTournament creates a binary tournament with the
+++ elements of ls as values at the nodes.
+
+BinaryTournament(S) : SIG == CODE where
+  S : OrderedSet
+
+  SIG ==> BinaryTreeCategory(S) with
+
+    shallowlyMutable
+
+    binaryTournament : List S -> %
+      ++ binaryTournament(ls) creates a binary tournament with the
+      ++ elements of ls as values at the nodes.
+      ++
+      ++X binaryTournament [1,2,3,4]
+
+    insert_! : (S,%) -> %
+      ++ insert!(x,b) inserts element x as leaves into binary tournament b.
+      ++
+      ++X t1:=binaryTournament [1,2,3,4]
+      ++X insert!(5,t1)
+      ++X t1
+
+  CODE ==> BinaryTree(S) add
+
+    Rep := BinaryTree(S)
+
+    binaryTournament(u:List S) ==
+      null u => empty()
+      tree := binaryTree(first u)
+      for x in rest u repeat insert_!(x,tree)
+      tree
+
+    insert_!(x,t) ==
+      empty? t => binaryTree(x)
+      x > value t =>
+        setleft_!(t,copy t)
+        setvalue_!(t,x)
+        setright_!(t,empty())
+      setright_!(t,insert_!(x,right t))
+      t
+

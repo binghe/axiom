@@ -1,0 +1,50 @@
+)abbrev package ICDEN InnerCommonDenominator
+++ Author: Manuel Bronstein
+++ Date Created: 2 May 1988
+++ Date Last Updated: 22 Nov 1989
+++ Description: 
+++ InnerCommonDenominator provides functions to compute
+++ the common denominator of a finite linear aggregate of elements
+++ of the quotient field of an integral domain.
+
+InnerCommonDenominator(R, Q, A, B) : SIG == CODE where
+  R: IntegralDomain
+  Q: QuotientFieldCategory R
+  A: FiniteLinearAggregate R
+  B: FiniteLinearAggregate Q
+ 
+  SIG ==> with
+
+    commonDenominator : B -> R 
+      ++ commonDenominator([q1,...,qn]) returns a common denominator
+      ++ d for q1,...,qn.
+
+    clearDenominator : B -> A 
+      ++ clearDenominator([q1,...,qn]) returns \spad{[p1,...,pn]} such that
+      ++ \spad{qi = pi/d} where d is a common denominator for the qi's.
+
+    splitDenominator : B -> Record(num: A, den: R)
+      ++ splitDenominator([q1,...,qn]) returns
+      ++ \spad{[[p1,...,pn], d]} such that
+      ++ \spad{qi = pi/d} and d is a common denominator for the qi's.
+ 
+  CODE ==> add
+
+    import FiniteLinearAggregateFunctions2(Q, B, R, A)
+ 
+    clearDenominator l ==
+      d := commonDenominator l
+      map(x +-> numer(d*x), l)
+ 
+    splitDenominator l ==
+      d := commonDenominator l
+      [map(x +-> numer(d*x), l), d]
+ 
+    if R has GcdDomain then
+
+      commonDenominator l == reduce(lcm, map(denom, l),1)
+
+    else
+
+      commonDenominator l == reduce("*", map(denom, l), 1)
+

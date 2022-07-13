@@ -1,0 +1,40 @@
+)abbrev package YSTREAM ParadoxicalCombinatorsForStreams
+++ Author: Burge, Watt (revised by Williamson)
+++ Date Created: 1986
+++ Date Last Updated: 21 October 1989
+++ Description:
+++ Computation of fixed points of mappings on streams
+
+ParadoxicalCombinatorsForStreams(A) : SIG == CODE where
+  A : Type
+
+  ST ==> Stream
+  L  ==> List
+  I  ==> Integer
+ 
+  SIG ==> with
+
+    Y : (ST A -> ST A) -> ST A
+      ++ Y(f) computes a fixed point of the function f.
+
+    Y : (L ST A -> L ST A,I) -> L ST A
+      ++ Y(g,n) computes a fixed point of the function g, where g takes
+      ++ a list of n streams and returns a list of n streams.
+ 
+  CODE ==> add
+ 
+    Y f ==
+      y : ST A := CONS(0$I,0$I)$Lisp
+      j := f y
+      RPLACA(y,frst j)$Lisp
+      RPLACD(y,rst j)$Lisp
+      y
+ 
+    Y(g,n) ==
+      x : L ST A := [CONS(0$I,0$I)$Lisp for i in 1..n]
+      j := g x
+      for xi in x for ji in j repeat
+        RPLACA(xi,frst ji)$Lisp
+        RPLACD(xi,rst ji)$Lisp
+      x
+

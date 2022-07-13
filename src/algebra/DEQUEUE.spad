@@ -1,0 +1,318 @@
+)abbrev domain DEQUEUE Dequeue
+++ Author: Michael Monagan and Stephen Watt
+++ Date Created:June 86 and July 87
+++ Date Last Updated:Feb 92
+++ Description:
+++ Linked list implementation of a Dequeue
+ 
+Dequeue(S) : SIG == CODE where
+  S : SetCategory
+
+  SIG ==> DequeueAggregate S with
+
+    dequeue: List S -> %
+      ++ dequeue([x,y,...,z]) creates a dequeue with first (top or front)
+      ++ element x, second element y,...,and last (bottom or back) element z.
+      ++
+      ++X g:Dequeue INT:= dequeue [1,2,3,4,5]
+
+ -- Inherited Signatures repeated for examples documentation
+
+    dequeue_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X dequeue! a
+      ++X a
+
+    extract_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X extract! a
+      ++X a
+
+    enqueue_! : (S,%) -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X enqueue! (9,a)
+      ++X a
+
+    insert_! : (S,%) -> %
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X insert! (8,a)
+      ++X a
+
+    inspect : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X inspect a
+
+    front : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X front a
+
+    back : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X back a
+
+    rotate_! : % -> %
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X rotate! a
+
+    length : % -> NonNegativeInteger
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X length a
+
+    less? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X less?(a,9)
+
+    more? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X more?(a,9)
+
+    size? : (%,NonNegativeInteger) -> Boolean
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X size?(a,5)
+
+    bag : List S -> %
+      ++
+      ++X bag([1,2,3,4,5])$Dequeue(INT)
+
+    empty? : % -> Boolean
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X empty? a
+
+    empty : () -> %
+      ++
+      ++X b:=empty()$(Dequeue INT)
+
+    sample : () -> %
+      ++
+      ++X sample()$Dequeue(INT)
+
+    copy : % -> %
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X copy a
+
+    eq? : (%,%) -> Boolean
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X b:=copy a
+      ++X eq?(a,b)
+
+    map :  ((S -> S),%) -> %
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X map(x+->x+10,a)
+      ++X a
+
+    depth : % -> NonNegativeInteger       
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X depth a
+
+    dequeue : () -> %                     
+      ++
+      ++X a:Dequeue INT:= dequeue ()
+
+    height : % -> NonNegativeInteger      
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X height a
+
+    top : % -> S                         
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X top a
+
+    bottom_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X bottom! a
+      ++X a
+
+    extractBottom_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X extractBottom! a
+      ++X a
+
+    extractTop_! : % -> S 
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X extractTop! a
+      ++X a
+
+    insertBottom_! : (S,%) -> S           
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X insertBottom! a
+      ++X a
+
+    insertTop_! : (S,%) -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X insertTop! a
+      ++X a
+
+    pop_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X pop! a
+      ++X a
+
+    push_! : (S,%) -> S                   
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X push! a
+      ++X a
+
+    reverse_! : % -> %
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X reverse! a
+      ++X a
+
+    top_! : % -> S
+      ++
+      ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+      ++X top! a
+      ++X a
+
+    if $ has shallowlyMutable then
+
+      map! :  ((S -> S),%) -> %
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X map!(x+->x+10,a)
+        ++X a
+
+    if S has SetCategory then
+
+      latex : % -> String
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X latex a
+
+      hash : % -> SingleInteger
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X hash a
+
+      coerce : % -> OutputForm
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X coerce a
+
+      "=": (%,%) -> Boolean
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X b:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X (a=b)@Boolean
+
+      "~=" : (%,%) -> Boolean
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X b:=copy a
+        ++X (a~=b)
+
+    if % has finiteAggregate then
+
+      every? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X every?(x+->(x=4),a)
+
+      any? : ((S -> Boolean),%) -> Boolean
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X any?(x+->(x=4),a)
+
+      count :  ((S -> Boolean),%) -> NonNegativeInteger
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X count(x+->(x>2),a)
+
+      _# : % -> NonNegativeInteger
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X #a
+
+      parts : % -> List S
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X parts a
+
+      members : % -> List S
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X members a
+
+    if % has finiteAggregate and S has SetCategory then
+
+      member? : (S,%) -> Boolean
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X member?(3,a)
+
+      count : (S,%) -> NonNegativeInteger
+        ++
+        ++X a:Dequeue INT:= dequeue [1,2,3,4,5]
+        ++X count(4,a)
+
+  CODE ==> Queue S add
+
+    Rep := Reference List S
+
+    bottom! d == extractBottom! d
+
+    dequeue d == ref copy d
+
+    extractBottom! d ==
+        if empty? d then error "empty dequeue"
+        p := deref d
+        n := maxIndex p
+        n = 1 =>
+           r := first p
+           setref(d,[])
+           r
+        q := rest(p,(n-2)::NonNegativeInteger)
+        r := first rest q
+        q.rest := []
+        r
+
+    top! d == extractTop! d
+
+    extractTop! d ==
+        if empty? d then error "empty dequeue"
+        e := top d
+        setref(d,rest deref d)
+        e
+
+    height d == # deref d
+
+    depth d == # deref d
+
+    insertTop!(e,d) == (setref(d,cons(e,deref d)); e)
+
+    lastTail==> LAST$Lisp
+
+    insertBottom!(e,d) ==
+        if empty? d then setref(d, list e)
+        else lastTail.(deref d).rest := list e
+        e
+
+    top d == if empty? d then error "empty dequeue" else first deref d
+
+    reverse! d == (setref(d,reverse deref d); d)
+

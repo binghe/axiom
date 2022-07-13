@@ -1,0 +1,294 @@
+)abbrev package PFORP PackageForPoly
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:  
+++ The following is part of the PAFF package
+
+PackageForPoly(R,PolyRing,E,dim) : SIG == CODE where
+  R : Ring -- was Field but change for SolveTree package. 21/01/98 )
+  dim : NonNegativeInteger
+  E : DirectProductCategory(dim,NonNegativeInteger)
+  PolyRing : FiniteAbelianMonoidRing(R,E) 
+
+  Term ==> Record(k:E,c:R)
+  PI   ==> PositiveInteger
+  NNI  ==> NonNegativeInteger
+  INT  ==> Integer
+
+  SIG ==> with
+
+    mapExponents : (E->E, PolyRing) -> PolyRing
+      
+    degree : (PolyRing , Integer) -> NNI
+      
+    univariate : PolyRing -> SparseUnivariatePolynomial(R)
+      
+    totalDegree : PolyRing -> NNI
+      
+    subs1stVar : (PolyRing , PolyRing) -> PolyRing
+      
+    subs2ndVar : (PolyRing , PolyRing) -> PolyRing
+      
+    subsInVar : (PolyRing, PolyRing, Integer) -> PolyRing
+      
+    minimalForm : PolyRing -> PolyRing
+      ++ minimalForm(pol) returns the minimal forms of the polynomial pol.
+
+    firstExponent : PolyRing -> E
+      ++ firstExponent(pol) returns the exponent of the first term in the 
+      ++ representation of pol. Not to be confused with the leadingExponent
+      ++  which is the highest exponent according to the order
+      ++ over the monomial.
+
+    replaceVarByZero : (PolyRing,Integer) -> PolyRing
+      ++ replaceVarByZero(pol,a) evaluate to zero the variable in pol 
+      ++ specified by the integer a.
+
+    replaceVarByOne : (PolyRing,Integer) -> PolyRing
+      ++ replaceVarByOne(pol,a) evaluate to one the variable in pol 
+      ++ specified by the integer a.
+
+    translate : (PolyRing,List R,Integer) -> PolyRing
+      ++ translate(pol,[a,b,c],3) apply to pol the
+      ++ linear change of coordinates, x->x+a, y->y+b, z->1.
+
+    translate : (PolyRing,List R) -> PolyRing
+      ++ translate(pol,[a,b,c]) apply to pol the
+      ++ linear change of coordinates, x->x+a, y->y+b, z->z+c
+
+    degOneCoef : (PolyRing,PI) -> R
+      ++ degOneCoef(pol,n) returns the coefficient in front of the monomial
+      ++ specified by the positive integer.
+
+    constant : PolyRing -> R
+      ++ constant(pol) returns the constant term of the polynomial.
+
+    homogenize : (PolyRing,INT) -> PolyRing
+      ++ homogenize(pol,n) returns the homogenized polynomial of pol 
+      ++ with respect to the n-th variable.
+
+    listAllMonoExp : Integer -> List E
+      ++ listAllMonoExp(l) returns all the exponents of degree l
+
+    listAllMono : NNI -> List PolyRing
+      ++ listAllMono(l) returns all the monomials of degree l
+
+    degreeOfMinimalForm : PolyRing -> NNI
+      ++ degreeOfMinimalForm does what it says
+
+    listVariable : () -> List PolyRing
+      
+    monomials : PolyRing -> List PolyRing
+      
+  CODE ==> add
+
+      import PolyRing
+
+      monomials(pol)==
+        zero? pol => empty()
+        lt:=leadingMonomial pol
+        cons( lt , monomials reductum pol )
+
+      lll: Integer -> E
+      lll(i) == 
+        le:=new( dim , 0$NNI)$List(NNI)
+        le.i := 1
+        directProduct( vector(le)$Vector(NNI) )$E
+
+      listVariable== 
+        [monomial(1,ee)$PolyRing for ee in [lll(i) for i in 1..dim]]
+
+      univariate(pol)==
+        zero? pol => 0
+        d:=degree pol
+        lc:=leadingCoefficient pol
+        td := reduce("+", entries d)
+        monomial(lc,td)$SparseUnivariatePolynomial(R)+univariate(reductum pol)
+      
+      collectExpon: List Term -> PolyRing
+
+      translateLocal: (PolyRing,List R,Integer) -> PolyRing
+
+      lA: (Integer,Integer) -> List List NNI
+
+      toListRep: PolyRing -> List Term
+
+      exponentEntryToZero: (E,Integer) -> E
+
+      exponentEntryZero?: (E,Integer) -> Boolean
+
+      homogenizeExp: (E,NNI,INT) -> E
+
+      translateMonomial: (PolyRing,List R,INT,R) -> PolyRing
+
+      leadingTerm: PolyRing -> Term
+
+      mapExponents(f,pol)==
+        zero?(pol) => 0
+        lt:=leadingTerm pol
+        newExp:E:= f(lt.k)
+        newMono:PolyRing:= monomial(lt.c,newExp)$PolyRing
+        newMono + mapExponents(f,reductum pol)
+        
+      collectExpon(pol)==
+        empty? pol => 0
+        ft:=first pol
+        monomial(ft.c,ft.k) + collectExpon( rest pol )
+
+      subs1stVar(pol, spol)==
+        zero? pol => 0
+        lexpE:E:= degree pol
+        lexp:List NNI:= parts lexpE
+        coef:= leadingCoefficient pol 
+        coef * spol ** lexp.1  * second(listVariable())**lexp.2 _
+           + subs1stVar( reductum pol, spol )
+
+      subs2ndVar(pol, spol)==
+        zero? pol => 0
+        lexpE:E:= degree pol
+        lexp:List NNI:= parts lexpE
+        coef:= leadingCoefficient pol 
+        coef * first(listVariable())**lexp.1   *  spol ** lexp.2 _
+           + subs2ndVar( reductum pol, spol )
+
+      subsInVar( pol, spol, n)==
+        one?( n ) => subs1stVar( pol, spol)
+        subs2ndVar(pol,spol) 
+
+      translate(pol,lpt)==        
+        zero? pol => 0
+        lexpE:E:= degree pol
+        lexp:List NNI:= parts lexpE
+        coef:= leadingCoefficient pol 
+        trVar:=[(listVariable().i + (lpt.i)::PolyRing)**lexp.i for i in 1..dim]
+        coef * reduce("*",trVar,1) + translate(reductum pol , lpt)
+
+      translate(poll,lpt,nV)==
+        pol:=replaceVarByOne(poll,nV)
+        translateLocal(pol,lpt,nV)
+
+      translateLocal(pol,lpt,nV)==
+        zero?(pol) => 0
+        lll:List R:=[l for l in lpt | ^zero?(l)]
+        nbOfNonZero:=# lll
+        ltk:=leadingMonomial pol
+        ltc:=leadingCoefficient pol
+        if one?(nbOfNonZero) then
+          pol
+        else
+          translateMonomial(ltk,lpt,nV,ltc) + _
+           translateLocal(reductum(pol),lpt,nV)
+
+      exponentEntryToZero(exp,nV)==
+        pexp:= parts exp
+        pexp(nV):=0
+        directProduct(vector(pexp)$Vector(NonNegativeInteger))
+
+      exponentEntryZero?(exp,nV)==
+        pexp:= parts exp
+        zero?(pexp(nV))
+
+      replaceVarByZero(pol,nV)==
+        -- surement le collectExpon ici n'est pas necessaire  !!!!
+        zero?(pol) => 0        
+        lRep:=        toListRep pol
+        reduce("+",_
+               [monomial(p.c,p.k)$PolyRing _
+                 for p in lRep | exponentEntryZero?(p.k,nV) ],0)
+
+      replaceVarByOne(pol,nV)==
+        zero?(pol) => 0        
+        lRep:=        toListRep pol
+        reduce("+",_
+         [monomial(p.c,exponentEntryToZero(p.k,nV))$PolyRing for p in lRep],0)
+
+      homogenizeExp(exp,deg,nV)==
+        lv:List NNI:=parts(exp)
+        lv.nV:=(deg+lv.nV - reduce("+",lv)) pretend NNI
+        directProduct(vector(lv)$Vector(NNI))$E
+
+      listTerm: PolyRing -> List E
+      listTerm(pol)==
+        zero? pol => empty
+        cons( degree pol,  listTerm reductum pol )
+
+      degree( a : PolyRing , n : Integer )==
+        zero? a => error "Degree for 0 is not defined for this degree fnc"
+        "max" / [ ee.n for ee in listTerm a ]
+
+      totalDegree p ==
+         zero? p => 0
+         "max"/[reduce("+",t::(Vector NNI), 0) for t in listTerm p]
+
+      homogenize(pol,nV)==
+        degP:=totalDegree(pol)
+        mapExponents(homogenizeExp(#1,degP,nV),pol)
+
+      degOneCoef(p:PolyRing,i:PI)==
+        vv:=new(dim,0)$Vector(NNI)
+        vv.i:=1
+        pd:=directProduct(vv)$E
+        lp:=toListRep p
+        lc:=[t.c for t in lp | t.k=pd]
+        reduce("+",lc,0)
+
+      constant(p)==
+        vv:=new(dim,0)$Vector(NNI)
+        pd:=directProduct(vv)$E
+        lp:=toListRep p
+        lc:=[t.c for t in lp | t.k=pd]
+        reduce("+",lc,0)
+
+      degreeOfMinimalForm(pol)==
+        totalDegree minimalForm pol
+
+      minimalForm(pol)==
+        zero?(pol) => pol
+        lpol:=toListRep pol
+        actTerm:Term:=  first lpol
+        minDeg:NNI:=reduce("+", parts(actTerm.k))
+        actDeg:NNI
+        lminForm:List(Term):= [actTerm]
+        for p in rest(lpol) repeat
+          actDeg:= reduce("+", parts(p.k))
+          if actDeg = minDeg then
+            lminForm := concat(lminForm,p)
+          if actDeg < minDeg then
+            minDeg:=actDeg
+            lminForm:=[p]
+        collectExpon lminForm
+
+    -- le code de collectExponSort a ete emprunte a D. Augot.
+      
+      leadingTerm(pol)==
+        zero?(pol) => error "no leading term for 0  (message from package)"
+        lcoef:R:=leadingCoefficient(pol)$PolyRing
+        lterm:PolyRing:=leadingMonomial(pol)$PolyRing
+        tt:E:=degree(lterm)$PolyRing
+        [tt,lcoef]$Term
+        
+      toListRep(pol)==
+        zero?(pol) => empty()
+        lt:=leadingTerm pol
+        cons(lt, toListRep reductum pol)  
+
+      lA(n,l)==
+        zero?(n) => [new((l pretend NNI),0)$List(NNI)]
+        one?(l) => [[(n pretend NNI)]]
+        concat [[ concat([i],lll) for lll in lA(n-i,l-1)] for i in 0..n]
+
+      listAllMonoExp(l)==
+        lst:=lA(l,(dim pretend Integer))
+        [directProduct(vector(pexp)$Vector(NNI)) for pexp in lst]
+
+      translateMonomial(mono,pt,nV,coef)==
+        lexpE:E:= degree mono
+        lexp:List NNI:= parts lexpE
+        lexp(nV):=0 
+        trVar:=[(listVariable().i + (pt.i)::PolyRing)** lexp.i for i in 1..dim]
+        coef * reduce("*",trVar,1)
+
+      listAllMono(l)==
+        [monomial(1,e)$PolyRing for e in listAllMonoExp(l)]
+

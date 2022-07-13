@@ -1,0 +1,98 @@
+)abbrev package FFFGF FractionFreeFastGaussianFractions
+++ Author: Martin Rubey
+++ Description:
+++ This package lifts the interpolation functions from
+++ \spadtype{FractionFreeFastGaussian} to fractions.
+++ The packages defined in this file provide fast fraction free rational
+++ interpolation algorithms. (see FAMR2, FFFG, FFFGF, NEWTON)
+
+FractionFreeFastGaussianFractions(D, V, VF) : SIG == CODE where
+  D : Join(IntegralDomain, GcdDomain)
+  V : FiniteAbelianMonoidRing(D, NonNegativeInteger)
+  VF : FiniteAbelianMonoidRing(Fraction D, NonNegativeInteger)
+
+  F     ==> Fraction D
+  NNI   ==> NonNegativeInteger
+  SUP   ==> SparseUnivariatePolynomial
+  FFFG  ==> FractionFreeFastGaussian
+  FAMR2 ==> FiniteAbelianMonoidRingFunctions2
+
+  cFunction ==> (NNI, Vector SUP D) -> D
+
+  CoeffAction ==> (NNI, NNI, V) -> D
+  -- coeffAction(k, l, f) is the coefficient of x^k in z^l f(x)
+
+  SIG ==> with
+
+    generalInterpolation : (List D, CoeffAction, Vector VF, List NNI) 
+                          -> Matrix SUP D
+      ++ \spad{generalInterpolation(l, CA, f, eta)} performs Hermite-Pade
+      ++ approximation using the given action CA of polynomials on the elements
+      ++ of f. The result is guaranteed to be correct up to order
+      ++ |eta|-1. Given that eta is a "normal" point, the degrees on the
+      ++ diagonal are given by eta. The degrees of column i are in this case
+      ++ eta + e.i - [1,1,...,1], where the degree of zero is -1.
+
+    generalInterpolation : (List D, CoeffAction, Vector VF, NNI, NNI) 
+                          -> Stream Matrix SUP D
+      ++ \spad{generalInterpolation(l, CA, f, sumEta, maxEta)} applies
+      ++ generalInterpolation(l, CA, f, eta) for all possible eta with maximal
+      ++ entry maxEta and sum of entries sumEta
+
+  CODE ==> add
+
+    multiplyRows!(v: Vector D, M: Matrix SUP D): Matrix SUP D ==
+      n := #v
+      for i in 1..n repeat
+        for j in 1..n repeat
+          M.(i,j) := v.i*M.(i,j)
+
+      M
+
+    generalInterpolation(C: List D, coeffAction: CoeffAction, 
+                         f: Vector VF, eta: List NNI): Matrix SUP D == 
+      n := #f
+      g: Vector V   := new(n, 0)
+      den: Vector D := new(n, 0)
+
+      for i in 1..n repeat
+        c := coefficients(f.i)
+        den.i := commonDenominator(c)$CommonDenominator(D, F, List F)
+        g.i := 
+          map(x +-> retract(x*den.i)@D, f.i)$FAMR2(NNI, Fraction D, VF, D, V)
+
+      M := generalInterpolation(C, coeffAction, g, eta)$FFFG(D, V)
+
+-- The following is necessary since I'm multiplying each row with a factor, not
+-- each column. Possibly I could factor out gcd den, but I'm not sure whether
+-- this is efficient.
+
+      multiplyRows!(den, M)
+
+    generalInterpolation(C: List D, coeffAction: CoeffAction, 
+                         f: Vector VF, sumEta: NNI, maxEta: NNI)
+                          : Stream Matrix SUP D == 
+
+      n := #f
+      g: Vector V   := new(n, 0)
+      den: Vector D := new(n, 0)
+
+      for i in 1..n repeat
+        c := coefficients(f.i)
+        den.i := commonDenominator(c)$CommonDenominator(D, F, List F)
+        g.i := 
+          map(x +-> retract(x*den.i)@D, f.i)$FAMR2(NNI, Fraction D, VF, D, V)
+
+      c: cFunction := 
+       (x,y) +-> generalCoefficient(coeffAction, g, (x-1)::NNI, y)$FFFG(D, V)
+
+
+      MS: Stream Matrix SUP D 
+         := generalInterpolation(C, coeffAction, g, sumEta, maxEta)$FFFG(D, V)
+
+-- The following is necessary since I'm multiplying each row with a factor, not
+-- each column. Possibly I could factor out gcd den, but I'm not sure whether
+-- this is efficient.
+
+      map(x +-> multiplyRows!(den, x), MS)$Stream(Matrix SUP D)
+

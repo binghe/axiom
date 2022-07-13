@@ -1,0 +1,25 @@
+)abbrev category DSTRCAT DesingTreeCategory
+++ Authors: Gaetan Hache
+++ Date Created: jan 1998
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This category is part of the PAFF package
+
+DesingTreeCategory(S) : Category == SIG where
+  S : SetCategory
+
+  SIG ==> RecursiveAggregate(S) with
+
+    shallowlyMutable
+  
+    finiteAggregate
+       
+    tree : (S,List %) -> %
+      ++ tree(nd,ls) creates a tree with value nd, and children ls.
+  
+    tree : S -> %
+      ++ tree(nd) creates a tree with value nd, and no children
+  
+    tree : List(S) -> %
+      ++ tree(l) creates a chain tree from the list l
+

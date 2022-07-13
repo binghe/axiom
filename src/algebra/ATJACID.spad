@@ -1,0 +1,9 @@
+)abbrev category ATJACID JacobiIdentityAttribute
+++ Description:
+++ JacobiIdentity means that \spad{[x,[y,z]]+[y,[z,x]]+[z,[x,y]] = 0} holds.
+++ See LieAlgebra.
+
+JacobiIdentityAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

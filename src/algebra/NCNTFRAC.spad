@@ -1,0 +1,35 @@
+)abbrev package NCNTFRAC NumericContinuedFraction
+++ Author: Clifton J. Williamson
+++ Date Created: 12 April 1990
+++ Description: 
+++ \spadtype{NumericContinuedFraction} provides functions
+++ for converting floating point numbers to continued fractions.
+
+NumericContinuedFraction(F) : SIG == CODE where
+  F : FloatingPointSystem
+
+  CFC ==> ContinuedFraction Integer
+  I   ==> Integer
+  ST  ==> Stream I
+
+  SIG ==> with
+
+    continuedFraction : F -> CFC
+      ++ continuedFraction(f) converts the floating point number
+      ++ \spad{f} to a reduced continued fraction.
+
+  CODE ==> add
+
+    cfc: F -> ST
+    cfc(a) == delay
+      aa := wholePart a
+      zero?(b := a - (aa :: F)) => concat(aa,empty()$ST)
+      concat(aa,cfc inv b)
+
+    continuedFraction a ==
+      aa := wholePart a
+      zero?(b := a - (aa :: F)) =>
+        reducedContinuedFraction(aa,empty()$ST) 
+      if negative? b then (aa := aa - 1; b := b + 1)
+      reducedContinuedFraction(aa,cfc inv b) 
+

@@ -1,0 +1,356 @@
+)abbrev package FFFG FractionFreeFastGaussian
+++ Author: Martin Rubey
+++ Description:
+++ This package implements the interpolation algorithm proposed in Beckermann,
+++ Bernhard and Labahn, George, Fraction-free computation of matrix rational
+++ interpolants and matrix GCDs, SIAM Journal on Matrix Analysis and
+++ Applications 22.
+++ The packages defined in this file provide fast fraction free rational
+++ interpolation algorithms. (see FAMR2, FFFG, FFFGF, NEWTON)
+
+FractionFreeFastGaussian(D, V) : SIG == CODE where
+  D : Join(IntegralDomain, GcdDomain)
+  V : AbelianMonoidRing(D, NonNegativeInteger) -- for example, SUP D
+
+  SUP  ==> SparseUnivariatePolynomial
+
+  cFunction ==> (NonNegativeInteger, Vector SUP D) -> D
+
+  CoeffAction ==> (NonNegativeInteger, NonNegativeInteger, V) -> D
+
+  SIG ==> with
+
+    fffg : (List D, cFunction, List NonNegativeInteger) -> Matrix SUP D
+      ++ \spad{fffg} is the general algorithm as proposed by Beckermann and
+      ++ Labahn.
+      ++
+      ++ The first argument is the list of c_{i,i}.  These are the only values
+      ++ of C explicitely needed in \spad{fffg}.
+      ++
+      ++ The second argument c, computes c_k(M), c_k(.) is the dual basis
+      ++ of the vector space V, but also knows about the special multiplication
+      ++ rule as descibed in Equation (2).  Note that the information about f
+      ++ is therefore encoded in c.
+      ++
+      ++ The third argument is the vector of degree bounds n, as introduced in
+      ++ Definition 2.1.  In particular, the sum of the entries is the order of
+      ++ the Mahler system computed.
+
+    interpolate : (List D, List D, NonNegativeInteger) -> Fraction SUP D
+      ++ \spad{interpolate(xlist, ylist, deg} returns the rational function with
+      ++ numerator degree at most \spad{deg} and denominator degree at most
+      ++ \spad{#xlist-deg-1}  that interpolates the given points using
+      ++ fraction free arithmetic. Note that rational interpolation does not
+      ++ guarantee that all given points are interpolated correctly:
+      ++ unattainable points may make this impossible.
+
+    interpolate: (List Fraction D, List Fraction D, NonNegativeInteger) 
+                -> Fraction SUP D
+      ++ \spad{interpolate(xlist, ylist, deg} returns the rational function with
+      ++ numerator degree \spad{deg} that interpolates the given points using
+      ++ fraction free arithmetic.
+
+    generalInterpolation: (List D, CoeffAction, 
+                           Vector V, List NonNegativeInteger) -> Matrix SUP D
+      ++ \spad{generalInterpolation(C, CA, f, eta)} performs Hermite-Pade
+      ++ approximation using the given action CA of polynomials on the elements
+      ++ of f. The result is guaranteed to be correct up to order
+      ++ |eta|-1. Given that eta is a "normal" point, the degrees on the
+      ++ diagonal are given by eta. The degrees of column i are in this case
+      ++ eta + e.i - [1,1,...,1], where the degree of zero is -1.
+      ++
+      ++ The first argument C is the list of coefficients c_{k,k} in the 
+      ++ expansion <x^k> z g(x) = sum_{i=0}^k c_{k,i} <x^i> g(x).
+      ++
+      ++ The second argument, CA(k, l, f), should return the coefficient of x^k
+      ++ in z^l f(x).
+
+    generalInterpolation: (List D, CoeffAction, 
+                           Vector V, NonNegativeInteger, NonNegativeInteger) 
+                         -> Stream Matrix SUP D
+      ++ \spad{generalInterpolation(C, CA, f, sumEta, maxEta)} applies
+      ++ \spad{generalInterpolation(C, CA, f, eta)} for all possible \spad{eta}
+      ++ with maximal entry \spad{maxEta} and sum of entries at most
+      ++ \spad{sumEta}.
+      ++
+      ++ The first argument C is the list of coefficients c_{k,k} in the 
+      ++ expansion <x^k> z g(x) = sum_{i=0}^k c_{k,i} <x^i> g(x).
+      ++
+      ++ The second argument, CA(k, l, f), should return the coefficient of x^k 
+      ++ in z^l f(x).
+
+    generalCoefficient: (CoeffAction, Vector V, 
+                         NonNegativeInteger, Vector SUP D) -> D
+      ++ \spad{generalCoefficient(action, f, k, p)} gives the coefficient of
+      ++ x^k in p(z)\dot f(x), where the action of z^l on a polynomial in x is
+      ++ given by action, action(k, l, f) should return the coefficient
+      ++ of x^k in z^l f(x).
+
+    ShiftAction: (NonNegativeInteger, NonNegativeInteger, V) -> D
+      ++ \spad{ShiftAction(k, l, g)} gives the coefficient of x^k in z^l g(x),
+      ++ where \spad{z*(a+b*x+c*x^2+d*x^3+...) = (b*x+2*c*x^2+3*d*x^3+...)}. In
+      ++ terms of sequences, z*u(n)=n*u(n).
+
+    ShiftC: NonNegativeInteger -> List D
+      ++ \spad{ShiftC} gives the coefficients c_{k,k} in the expansion <x^k> z
+      ++ g(x) = sum_{i=0}^k c_{k,i} <x^i> g(x), where z acts on g(x) by
+      ++ shifting. In fact, the result is [0,1,2,...]
+
+    DiffAction: (NonNegativeInteger, NonNegativeInteger, V) -> D
+      ++ \spad{DiffAction(k, l, g)} gives the coefficient of x^k in z^l g(x),
+      ++ where z*(a+b*x+c*x^2+d*x^3+...) = (a*x+b*x^2+c*x^3+...),
+      ++ multiplication with x.
+
+    DiffC: NonNegativeInteger -> List D
+      ++ \spad{DiffC} gives the coefficients c_{k,k} in the expansion <x^k> z
+      ++ g(x) = sum_{i=0}^k c_{k,i} <x^i> g(x), where z acts on g(x) by
+      ++ shifting. In fact, the result is [0,0,0,...]
+
+    qShiftAction: (D, NonNegativeInteger, NonNegativeInteger, V) -> D
+      ++ \spad{qShiftAction(q, k, l, g)} gives the coefficient of x^k in z^l
+      ++ g(x), where z*(a+b*x+c*x^2+d*x^3+...) =
+      ++ (a+q*b*x+q^2*c*x^2+q^3*d*x^3+...). In terms of sequences,
+      ++ z*u(n)=q^n*u(n).
+
+    qShiftC: (D, NonNegativeInteger) -> List D
+      ++ \spad{qShiftC} gives the coefficients c_{k,k} in the expansion <x^k> z
+      ++ g(x) = sum_{i=0}^k c_{k,i} <x^i> g(x), where z acts on g(x) by
+      ++ shifting. In fact, the result is [1,q,q^2,...]
+
+  CODE ==> add
+
+-------------------------------------------------------------------------------
+-- Shift Operator
+-------------------------------------------------------------------------------
+
+-- ShiftAction(k, l, f) is the CoeffAction appropriate for the shift operator.
+
+    ShiftAction(k: NonNegativeInteger, l: NonNegativeInteger, f: V): D ==
+      k**l*coefficient(f, k)
+
+
+    ShiftC(total: NonNegativeInteger): List D == 
+      [i::D for i in 0..total-1]
+
+-------------------------------------------------------------------------------
+-- q-Shift Operator
+-------------------------------------------------------------------------------
+
+-- q-ShiftAction(k, l, f) is the CoeffAction appropriate for the q-shift operator.
+
+    qShiftAction(q: D, k: NonNegativeInteger, l: NonNegativeInteger, f: V): D ==
+      q**(k*l)*coefficient(f, k)
+
+
+    qShiftC(q: D, total: NonNegativeInteger): List D == 
+      [q**i for i in 0..total-1]
+
+-------------------------------------------------------------------------------
+-- Differentiation Operator
+-------------------------------------------------------------------------------
+
+-- DiffAction(k, l, f) is the CoeffAction appropriate for the differentiation
+-- operator.
+
+    DiffAction(k: NonNegativeInteger, l: NonNegativeInteger, f: V): D ==
+      coefficient(f, (k-l)::NonNegativeInteger)
+
+
+    DiffC(total: NonNegativeInteger): List D == 
+      [0 for i in 1..total]
+
+-------------------------------------------------------------------------------
+-- general - suitable for functions f
+-------------------------------------------------------------------------------
+
+-- get the coefficient of z^k in the scalar product of p and f, the action
+-- being defined by coeffAction
+
+    generalCoefficient(coeffAction: CoeffAction, f: Vector V, 
+                       k: NonNegativeInteger, p: Vector SUP D): D == 
+      res: D := 0
+      for i in 1..#f repeat
+
+-- Defining a and b and summing only over those coefficients that might be
+-- nonzero makes a huge difference in speed
+        a := f.i
+        b := p.i
+        for l in minimumDegree b..degree b repeat
+            if not zero? coefficient(b, l)
+            then res := res + coefficient(b, l) * coeffAction(k, l, a)
+      res
+
+
+    generalInterpolation(C: List D, coeffAction: CoeffAction, 
+                         f: Vector V, 
+                         eta: List NonNegativeInteger): Matrix SUP D == 
+
+      c: cFunction := (x,y) +-> generalCoefficient(coeffAction, f,
+                                         (x-1)::NonNegativeInteger, y)
+      fffg(C, c, eta)
+
+
+
+-------------------------------------------------------------------------------
+-- general - suitable for functions f - trying all possible degree combinations
+-------------------------------------------------------------------------------
+
+
+    nextVector!(p: NonNegativeInteger, v: List NonNegativeInteger)
+               : Union("failed", List NonNegativeInteger) ==
+      n := #v
+      pos := position(x +-> x < p, v)
+      zero? pos => return "failed"
+      if pos = 1 then
+        sum: Integer := v.1
+        for i in 2..n repeat    
+          if v.i < p and sum > 0 then
+            v.i := v.i + 1
+            sum := sum - 1
+            for j in 1..i-1 repeat
+              if sum > p then
+                v.j := p
+                sum := sum - p
+              else
+                v.j := sum::NonNegativeInteger
+                sum := 0
+            return v
+          else sum := sum + v.i
+        return "failed" 
+      else
+        v.pos     := v.pos + 1    
+        v.(pos-1) := (v.(pos-1) - 1)::NonNegativeInteger
+
+      v
+
+    vectorStream(p: NonNegativeInteger, v: List NonNegativeInteger)
+                : Stream List NonNegativeInteger == delay
+      next := nextVector!(p, copy v)
+      (next case "failed") => empty()$Stream(List NonNegativeInteger)
+      cons(next, vectorStream(p, next))
+
+    vectorStream2(p: NonNegativeInteger, v: List NonNegativeInteger)
+                 : Stream List NonNegativeInteger == delay
+      next := nextVector!(p, copy v)
+      (next case "failed") => empty()$Stream(List NonNegativeInteger)
+      next2 := nextVector!(p, copy next)
+      (next2 case "failed") => cons(next, empty())
+      cons(next2, vectorStream2(p, next2))
+    generalInterpolation(C: List D, coeffAction: CoeffAction, 
+                         f: Vector V, 
+                         sumEta: NonNegativeInteger,
+                         maxEta: NonNegativeInteger)
+                        : Stream Matrix SUP D ==
+
+
+      sum: Integer := sumEta
+      entry: Integer
+      eta: List NonNegativeInteger
+          := [(if sum < maxEta _
+               then (entry := sum; sum := 0) _
+               else (entry := maxEta; sum := sum - maxEta); _
+               entry::NonNegativeInteger) for i in 1..#f]
+
+      if #f = 2 then
+        map(x +-> generalInterpolation(C, coeffAction, f, x), 
+            cons(eta, vectorStream2(maxEta, eta)))
+           $StreamFunctions2(List NonNegativeInteger,
+                             Matrix SUP D)
+      else
+        map(x +-> generalInterpolation(C, coeffAction, f, x), 
+            cons(eta, vectorStream(maxEta, eta)))
+           $StreamFunctions2(List NonNegativeInteger,
+                           Matrix SUP D)
+
+-------------------------------------------------------------------------------
+-- rational interpolation
+-------------------------------------------------------------------------------
+
+    interpolate(x: List Fraction D, y: List Fraction D, d: NonNegativeInteger) 
+               : Fraction SUP D ==
+      gx := splitDenominator(x)$InnerCommonDenominator(D, Fraction D, _
+                                                       List D, _
+                                                       List Fraction D)
+      gy := splitDenominator(y)$InnerCommonDenominator(D, Fraction D, _
+                                                       List D, _
+                                                       List Fraction D)
+      r := interpolate(gx.num, gy.num, d)
+      elt(numer r,monomial(gx.den,1))/(gy.den*elt(denom r, monomial(gx.den,1)))
+
+    interpolate(x: List D, y: List D, d: NonNegativeInteger): Fraction SUP D ==
+      -- berechne Interpolante mit Graden d und N-d-1
+      if (N := #x) ~= #y then
+        error "interpolate: number of points and values must match"
+      if N <= d then
+        error _
+   "interpolate: numerator degree must be smaller than number of data points"
+      c: cFunction := (s,u) +-> y.s * elt(u.2, x.s) - elt(u.1, x.s)
+      eta: List NonNegativeInteger := [d, (N-d)::NonNegativeInteger]
+      M := fffg(x, c, eta)
+      if zero?(M.(2,1)) then M.(1,2)/M.(2,2)
+                        else M.(1,1)/M.(2,1)
+
+-------------------------------------------------------------------------------
+-- fffg
+-------------------------------------------------------------------------------
+
+    -- a major part of the time is spent here
+    recurrence(M: Matrix SUP D, pi: NonNegativeInteger, m: NonNegativeInteger,_
+            r: Vector D, d: D, z: SUP D, Ck: D, p: Vector D): Matrix SUP D ==
+        rPi: D := qelt(r, pi)
+        polyf: SUP D := rPi * (z - Ck::SUP D)
+        for i in 1..m repeat
+            MiPi: SUP D    := qelt(M, i, pi)
+            newMiPi: SUP D := polyf * MiPi
+            -- update columns ~= pi and calculate their sum
+            for l in 1..m | l ~= pi repeat
+                rl: D  := qelt(r, l)
+            -- I need the coercion to SUP D, since exquo returns an element of
+            -- Union("failed", SUP D)...
+                Mil:SUP D := ((qelt(M, i, l) * rPi - MiPi * rl) exquo d)::SUP D
+                qsetelt!(M, i, l, Mil)
+                pl: D  := qelt(p, l)
+                newMiPi := newMiPi - pl * Mil
+            -- update column pi
+            qsetelt!(M, i, pi, (newMiPi exquo d)::SUP D)
+        M
+
+
+    fffg(C: List D,c: cFunction, eta: List NonNegativeInteger): Matrix SUP D ==
+        -- eta is the vector of degrees. 
+        -- We compute M with degrees eta+e_i-1, i=1..m 
+        z: SUP D := monomial(1, 1)
+        m: NonNegativeInteger := #eta
+        M: Matrix SUP D := scalarMatrix(m, 1)
+        d: D := 1
+        K: NonNegativeInteger := reduce(_+, eta)
+        etak: Vector NonNegativeInteger := zero(m)
+        r: Vector D := zero(m)
+        p: Vector D := zero(m)
+        Lambda: List Integer
+        lambdaMax: Integer
+        lambda: NonNegativeInteger
+        for k in 1..K repeat
+            for l in 1..m repeat r.l := c(k, column(M, l))
+            Lambda := [eta.l-etak.l for l in 1..m | r.l ~= 0]
+            -- if Lambda is empty, then M, d and etak remain unchanged. 
+            -- Otherwise, we look for the next closest para-normal point.
+            (empty? Lambda) => "iterate"
+            lambdaMax := reduce(max, Lambda)
+            lambda := 1
+            while eta.lambda-etak.lambda < lambdaMax or r.lambda = 0 repeat 
+                lambda := lambda + 1
+            -- Calculate leading coefficients
+            for l in 1..m | l ~= lambda repeat
+                if etak.l > 0 then
+                    p.l := coefficient(M.(l, lambda), 
+                                       (etak.l-1)::NonNegativeInteger)
+                else 
+                    p.l := 0
+            -- increase order and adjust degree constraints
+            M := recurrence(M, lambda, m, r, d, z, C.k, p)
+            d := r.lambda
+            etak.lambda := etak.lambda + 1
+
+        M
+

@@ -1,0 +1,33 @@
+)abbrev domain HDP HomogeneousDirectProduct
+++ Author: Mark Botch
+++ Description:
+++ This type represents the finite direct or cartesian product of an
+++ underlying ordered component type. The vectors are ordered first
+++ by the sum of their components, and then refined using a reverse
+++ lexicographic ordering. This type is a suitable third argument for
+++ \spadtype{GeneralDistributedMultivariatePolynomial}.
+
+HomogeneousDirectProduct(dim,S) : SIG == CODE where
+  dim : NonNegativeInteger
+  S : OrderedAbelianMonoidSup
+
+  SIG ==> DirectProductCategory(dim,S)
+
+  CODE ==> DirectProduct(dim,S) add
+
+        Rep:=Vector(S)
+
+        -- reverse lexicographical ordering
+        v1:% < v2:% ==
+          n1:S:=0
+          n2:S:=0
+          for i in 1..dim repeat
+            n1:= n1+qelt(v1,i)
+            n2:=n2+qelt(v2,i)
+          n1<n2 => true
+          n2<n1 => false
+          for i in reverse(1..dim) repeat
+            if qelt(v2,i) < qelt(v1,i) then return true
+            if qelt(v1,i) < qelt(v2,i) then return false
+          false
+

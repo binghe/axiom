@@ -1,0 +1,126 @@
+)abbrev package CAD CylindricalAlgebraicDecompositionPackage
+
+CylindricalAlgebraicDecompositionPackage(TheField) : SIG == CODE where
+  TheField : RealClosedField
+
+  ThePols ==> Polynomial(TheField)
+  P       ==> ThePols
+  BUP     ==> SparseUnivariatePolynomial(TheField)
+  RUP     ==> SparseUnivariatePolynomial(ThePols)
+  Z       ==> Integer
+  N       ==> NonNegativeInteger
+  CELL    ==> Cell(TheField)
+  SCELL   ==> SimpleCell(TheField,BUP)
+
+  SIG ==> with
+
+    cylindricalDecomposition : List P -> List CELL
+
+    cylindricalDecomposition : (List(P),List(Symbol)) -> List CELL
+
+    projectionSet : (List RUP) -> List P
+
+    coefficientSet : RUP -> List P
+
+    discriminantSet : List RUP -> List(P)
+
+    resultantSet :  List RUP -> List P 
+
+    principalSubResultantSet : (RUP,RUP) -> List P
+
+    specialise : (List(ThePols),CELL) -> List(BUP)
+
+  CODE ==> add
+
+     cylindricalDecomposition(lpols) ==
+       lv : List(Symbol) := []
+       for pol in lpols repeat
+         ground?(pol) => "next pol"
+         lv := removeDuplicates(append(variables(pol),lv))
+       lv := reverse(sort(lv))
+       cylindricalDecomposition(lpols,lv)
+
+     cylindricalDecomposition(lpols,lvars) ==
+       lvars = [] => error("CAD: cylindricalDecomposition: empty list of vars")
+       mv := first(lvars)
+       lv := rest(lvars)
+       lv = [] =>
+         lp1 := [ univariate(pol) for pol in lpols ]
+         scells := allSimpleCells(lp1,mv)$SCELL
+         [ makeCell([scell]) for scell in scells ]
+       lpols1 := projectionSet [univariate(pol,mv) for pol in lpols]
+       previousCad := cylindricalDecomposition(lpols1,lv)
+       res : List(CELL) := []
+       for cell in previousCad repeat
+         lspec := specialise(lpols,cell)
+         scells := allSimpleCells(lspec,mv)
+         res := append(res,[makeCell(scell,cell) for scell in scells])
+       res
+
+     PACK1 ==> CylindricalAlgebraicDecompositionUtilities(ThePols,RUP)
+     PACK2 ==> CylindricalAlgebraicDecompositionUtilities(TheField,BUP)
+
+     specialise(lpols,cell) ==
+       lpols = [] => error("CAD: specialise: empty list of pols")
+       sp := samplePoint(cell)
+       vl := variablesOf(cell)
+       res : List(BUP) := []
+       for pol in lpols repeat
+         p1 := univariate(eval(pol,vl,sp))
+         degree(p1) = 0 => "next pol"
+         res := cons(p1,res)
+       res
+
+     coefficientSet(pol) ==
+       res : List(ThePols) := []
+       for c in coefficients(pol) repeat
+         ground?(c) => return(res)
+         res := cons(c,res)
+       res
+
+     SUBRES ==> SubResultantPackage(ThePols,RUP)
+     discriminantSet(lpols) ==
+       res : List(ThePols) := []
+       for p in lpols repeat
+         v := subresultantVector(p,differentiate(p))$SUBRES
+         not(zero?(degree(v.0))) => return(error "Bad discriminant")
+         d : ThePols :=  leadingCoefficient(v.0)
+         zero?(d) => return(error "Non Square Free polynomial")
+         if not(ground? d) then res := cons(d,res)
+       res
+
+     principalSubResultantSet(p,q) ==
+        if degree(p) < degree(q)
+        then (p,q) := (q,p)
+        if degree(p) = degree(q)
+        then (p,q) := (q,pseudoRemainder(p, q))
+        v := subresultantVector(p,q)$SUBRES
+        [coefficient(v.i,i) for i in 0..(((#v)-2)::N)]
+
+     resultantSet(lpols) ==
+       res : List(ThePols) := []
+       laux := lpols
+       for p in lpols repeat
+         laux := rest(laux)
+         for q in laux repeat
+           r : ThePols :=  first(principalSubResultantSet(p,q))
+           zero?(r) => return(error "Non relatively prime polynomials")
+           if not(ground? r) then res := cons(r,res)
+       res
+
+     projectionSet(lpols) ==
+       res : List(ThePols) := []
+       for p in lpols repeat
+         c := content(p)
+         ground?(c) => "next p"
+         res := cons(c,res)
+       lp1 := [primitivePart p for p in lpols]
+       f : ((RUP,RUP) -> Boolean) := (degree(#1) <= degree(#2))
+       lp1 := sort(f,lp1)
+       lsqfrb := squareFreeBasis(lp1)$PACK1
+       lsqfrb := sort(f,lsqfrb)
+       for p in lp1 repeat
+         res := append(res,coefficientSet(p))
+       res := append(res,discriminantSet(lsqfrb))
+       append(res,resultantSet(lsqfrb))
+

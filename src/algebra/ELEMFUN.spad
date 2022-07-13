@@ -1,0 +1,29 @@
+)abbrev category ELEMFUN ElementaryFunctionCategory
+++ Category for the elementary functions
+++ Author: Manuel Bronstein
+++ Date Last Updated: 14 May 1991
+++ Description: 
+++ Category for the elementary functions;
+
+ElementaryFunctionCategory() : Category == SIG where
+
+  SIG ==> with
+
+    log : $ -> $
+      ++ log(x) returns the natural logarithm of x. When evaluated
+      ++ into some subset of the complex numbers, the branch cut lies
+      ++ along the negative real axis, continuous with quadrant II. The
+      ++ domain does not contain the origin.
+
+    exp : $ -> $
+      ++ exp(x) returns %e to the power x.
+
+    "**": ($, $) -> $
+      ++ x**y returns x to the power y.
+
+   add
+
+     if $ has Monoid then
+
+       x ** y == exp(y * log x)
+

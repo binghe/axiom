@@ -1,0 +1,51 @@
+)abbrev package UTSSOL TaylorSolve
+++ Description:
+++ This package has no description
+
+TaylorSolve(F, UTSF, UTSSUPF) : SIG == CODE where
+  F : Field
+  SUP  ==> SparseUnivariatePolynomialExpressions
+  UTSF : UnivariateTaylorSeriesCategory F
+  UTSSUPF : UnivariateTaylorSeriesCategory SUP F
+
+  NNI  ==> NonNegativeInteger
+
+  SIG ==> with
+
+    seriesSolve : (UTSSUPF -> UTSSUPF, List F) -> UTSF
+      
+  CODE ==> add
+
+        seriesSolve(f, l) ==
+            c1 := 
+             map((x:F):SUP F +-> x::(SUP F), l)
+                  $ListFunctions2(F, SUP F)::(Stream SUP F)
+            coeffs: Stream SUP F := concat(c1, generate(monomial(1$F,1$NNI)))
+            st: List Stream SUP F := [coeffs, coeffs]
+            next: () -> F := 
+                nr := st.1
+                res: F
+
+                if ground?(coeff: SUP F := nr.1)$(SUP F)
+                then 
+                    res := ground coeff 
+                    st.1 := rest nr
+                else
+                    ns := st.2
+                    eqs: Stream SUP F := coefficients f series ns
+                    while zero? first eqs repeat eqs := rest eqs
+                    eq: SUP F := first eqs
+                    if degree eq > 1 then
+                        if monomial? eq then res := 0
+                        else 
+                            output(hconcat("The equation is: ",eq::OutputForm))
+                                  $OutputPackage
+                            error _
+                             "seriesSolve: equation for coefficient not linear"
+                    else res := (-coefficient(eq, 0$NNI)$(SUP F)
+                                 /coefficient(eq, 1$NNI)$(SUP F))
+                    nr.1 := res::SUP F
+                    st.1 := rest nr
+                res
+            series generate next
+

@@ -1,0 +1,9 @@
+)abbrev category ATCANON CanonicalAttribute
+++ Description:
+++ The class of all domains which have canonical represenntation,
+++ that is, mathematically equal elements have the same data structure.
+
+CanonicalAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

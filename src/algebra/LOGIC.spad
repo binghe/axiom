@@ -1,0 +1,22 @@
+)abbrev category LOGIC Logic
+++ Description:  
+++ Logic provides the basic operations for lattices, 
+++ for example, boolean algebra.
+
+Logic() : Category == SIG where
+
+  SIG ==> BasicType with
+
+    _~ : % -> %
+      ++ ~(x) returns the logical complement of x.
+  
+    _/_\ : (%, %) -> %
+      ++ \spadignore{/\} returns the logical `meet', for example, `and'.
+  
+    _\_/ : (%, %) -> %
+      ++ \spadignore{\/} returns the logical `join', for example, `or'.
+
+   add
+
+     _\_/(x: %,y: %) == _~( _/_\(_~(x), _~(y)))
+

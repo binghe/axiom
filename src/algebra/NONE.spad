@@ -1,0 +1,17 @@
+)abbrev domain NONE None
+++ Author: Mark Botch
+++ Description:
+++ \spadtype{None} implements a type with no objects. It is mainly
+++ used in technical situations where such a thing is needed (for example,
+++ the interpreter and some of the internal \spadtype{Expression} code).
+
+None() : SIG == CODE where
+
+  SIG ==> SetCategory
+
+  CODE ==> add
+
+    coerce(none:%):OutputForm == "NONE" :: OutputForm
+
+    x:% = y:% == EQ(x,y)$Lisp
+

@@ -1,0 +1,13 @@
+)abbrev category SETCATD SetCategoryWithDegree
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:
+++ This is part of the PAFF package, related to projective space.
+
+SetCategoryWithDegree() : Category == SIG where
+
+  SIG ==> SetCategory with
+
+    degree : % -> PositiveInteger
+

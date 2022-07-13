@@ -1,0 +1,131 @@
+)abbrev package FACTRN FactorisationOverPseudoAlgebraicClosureOfRationalNumber
+++ Author: Gaetan Hache
+++ Date Created: September 1996
+++ Date Last Updated: May, 2010, by Tim Daly
+++ Description:
+++ Part of the Package for Algebraic Function Fields in one variable PAFF
+
+FactorisationOverPseudoAlgebraicClosureOfRationalNumber(K) : SIG == CODE where
+  K : PseudoAlgebraicClosureOfRationalNumberCategory
+
+  SUP ==> SparseUnivariatePolynomial
+  Q   ==> Fraction Integer
+  NNI ==> NonNegativeInteger
+  UP ==> SUP(K)
+  UPUP ==> SUP(SUP(K))
+
+  SIG ==> with
+
+    factor : (UP,K) -> Factored UP
+
+    factorSqFree : (UP,K) -> Factored UP
+
+  CODE ==> add
+
+    up2Rat: UP -> SUP(Q)
+    rat2up: SUP(Q) -> UP
+
+    factRat: UP -> Factored UP
+    liftPoly: (UP, K) -> UPUP
+
+    liftDefPoly:  UP -> UPUP
+
+    norm: (UP, K) -> UP
+
+    factParPert: ( UP,K,K) -> Factored UP
+
+    trans: (UP, K) -> UP
+
+    swapCoefWithVar: ( UP , NNI) -> UPUP
+
+    frRat2frUP: Factored SUP(Q) -> Factored UP
+
+    factor(pol,a)==
+      polSF:= squareFree pol
+      reduce("*" , _
+       [ factorSqFree(fr.fctr,a)**(fr.xpnt pretend NNI) _
+           for fr in factorList polSF] , 1)
+
+    factorSqFree(pol,a)==
+      ratPol:SUP(Q)
+      ground? a => 
+        ratPol:= up2Rat pol 
+        frRat2frUP factor( ratPol )$RationalFactorize( SUP(Q) ) :: Factored UP 
+      nPol:= norm(pol,a)
+      ta:=previousTower a
+      factN := factor( nPol , ta )
+      lfactnPol:= factorList factN 
+      G:UP:=1
+      L: Factored UP:= 1
+      for fr in lfactnPol repeat
+        G:= gcd( [ pol , fr.fctr ] )
+        pol:= pol quo$UP G
+        if one? fr.xpnt then 
+          L := L *  flagFactor( G, 1 ,"prime")$Factored(UP) 
+        else
+          L := L *   factParPert( G, a, a ) 
+      L
+      
+    factParPert(pol, a, b)==
+      polt:=trans(pol,b)
+      frpol:= factorList  factor(polt,a) 
+      sl:= [ fr.fctr for fr in frpol ]
+      slt:= [ trans(p , -b) for p in sl ]
+      nfrpol:= [ flagFactor( p, fr.xpnt , fr.flg )$Factored(UP) _
+                   for p in slt for fr in frpol ]
+      reduce("*" , nfrpol)
+
+    frRat2frUP(fr)==
+      frpol:= factorList fr
+      sl:= [ fr.fctr for fr in frpol ]
+      slt:= [ rat2up p  for p in sl ]
+      nfrpol:= [ flagFactor( p, fr.xpnt , fr.flg )$Factored(UP) _
+                   for p in slt for fr in frpol ]
+      reduce("*" , nfrpol)
+
+    up2Rat(pol)== 
+      zero?(pol) => 0
+      d:=degree pol
+      a:Q:= retract(leadingCoefficient pol)@Q
+      monomial(a,d)$SUP(Q) + up2Rat(reductum pol)
+
+    rat2up(pol)==
+      zero?(pol) => 0
+      d:=degree pol
+      a:K:=(leadingCoefficient pol) :: K
+      monomial(a,d)$UP + rat2up(reductum pol)
+      
+    trans(pol,a)==
+      zero? pol => 0
+      lc:=leadingCoefficient pol
+      d:=degree pol
+
+      lc*( monomial(1,1)$UP + monomial(-a,0)$UP )**d + trans(reductum pol , a) 
+ 
+    liftDefPoly(pol)==
+      zero?(pol) => 0
+      lc:= leadingCoefficient pol
+      d:= degree pol
+      monomial( monomial(lc,0)$UP , d )$UPUP + liftDefPoly reductum pol
+
+    norm(pol,a)==
+      lpol:=liftPoly(pol,a)
+      defPol:=definingPolynomial a
+      ldefPol:=liftDefPoly defPol
+      resultant(ldefPol,lpol)
+      
+    swapCoefWithVar(coef,n)==
+      ground? coef => 
+        monomial( monomial( retract coef , n)$SUP(K) , 0)$UPUP
+      lcoef:=leadingCoefficient(coef)
+      d:=degree(coef)
+      monomial( monomial(lcoef,  n )$SUP(K) , d)$UPUP + _
+                 swapCoefWithVar( reductum coef, n )
+
+    liftPoly(pol,a)==
+      zero? pol => 0
+      lcoef:=leadingCoefficient pol
+      n:=degree pol
+      liftCoef:= lift(lcoef,a)$K
+      swapCoefWithVar(liftCoef , n) + liftPoly( reductum pol , a )
+

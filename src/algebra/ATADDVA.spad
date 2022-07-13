@@ -1,0 +1,9 @@
+)abbrev category ATADDVA AdditiveValuationAttribute
+++ Description:
+++ The class of all euclidean domains such that
+++ \spad{euclideanSize(a*b) = euclideanSize(a)+euclideanSize(b)}
+
+AdditiveValuationAttribute() : Category == SIG where
+ 
+  SIG ==> with nil
+

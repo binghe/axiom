@@ -1,0 +1,34 @@
+)abbrev category UFD UniqueFactorizationDomain
+++ Description:
+++ A constructive unique factorization domain, where
+++ we can constructively factor members into a product of
+++ a finite number of irreducible elements.
+
+UniqueFactorizationDomain() : Category == SIG where
+
+  SIG ==> GcdDomain with
+
+    prime? : % -> Boolean
+      ++ prime?(x) tests if x can never be written as the product of two
+      ++ non-units of the ring,
+      ++ x is an irreducible element.
+  
+    squareFree : % -> Factored(%)
+      ++ squareFree(x) returns the square-free factorization of x
+      ++ such that the factors are pairwise relatively prime
+      ++ and each has multiple prime factors.
+  
+    squareFreePart : % -> %
+      ++ squareFreePart(x) returns a product of prime factors of
+      ++ x each taken with multiplicity one.
+  
+    factor : % -> Factored(%)
+      ++ factor(x) returns the factorization of x into irreducibles.
+
+   add
+
+     squareFreePart x ==
+       unit(s := squareFree x) * _*/[f.factor for f in factors s]
+  
+     prime? x == # factorList factor x = 1
+

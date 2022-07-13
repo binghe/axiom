@@ -1,0 +1,20 @@
+)abbrev package SEGBIND2 SegmentBindingFunctions2
+++ Date Last Updated: June 4, 1991
+++ Description:
+++ This package provides operations for mapping functions onto
+++ \spadtype{SegmentBinding}s.
+
+SegmentBindingFunctions2(R,S) : SIG == CODE where
+  R : Type
+  S : Type
+
+  SIG ==> with
+
+    map : (R -> S, SegmentBinding R) -> SegmentBinding S
+      ++ map(f,v=a..b) returns the value given by \spad{v=f(a)..f(b)}.
+
+  CODE ==> add
+
+    map(f, b) ==
+      equation(variable b, map(f, segment b)$SegmentFunctions2(R, S))
+

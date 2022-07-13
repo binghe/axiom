@@ -1,0 +1,35 @@
+)abbrev package RFFACT RationalFunctionFactor
+++ Author: Patrizia Gianni
+++ Description:
+++ Factorization of univariate polynomials with coefficients which
+++ are rational functions with integer coefficients.
+
+RationalFunctionFactor(UP) : SIG == CODE where
+  UP: UnivariatePolynomialCategory Fraction Polynomial Integer
+ 
+  SE ==> Symbol
+  P  ==> Polynomial Integer
+  RF ==> Fraction P
+  UPCF2 ==> UnivariatePolynomialCategoryFunctions2
+ 
+  SIG ==> with
+
+    factor : UP -> Factored UP
+      ++ factor(p) returns a prime factorisation of p.
+ 
+  CODE ==> add
+
+    likuniv: (P, SE, P) -> UP
+ 
+    dummy := new()$SE
+ 
+    likuniv(p, x, d) ==
+      map(y +-> y/d, univariate(p, x))$UPCF2(P,SparseUnivariatePolynomial P,
+                                          RF, UP)
+ 
+    factor p ==
+      d  := denom(q := elt(p,dummy::P :: RF))
+      map(x +-> likuniv(x,dummy,d),
+          factor(numer q)$MultivariateFactorize(SE,
+               IndexedExponents SE,Integer,P))$FactoredFunctions2(P, UP)
+

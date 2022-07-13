@@ -1,0 +1,8 @@
+)abbrev category ATNULSQ NullSquareAttribute
+++ Description:
+++ NullSquare means that \spad{[x,x] = 0} holds. See LieAlgebra.
+
+NullSquareAttribute() : Category == SIG where
+
+  SIG ==> with nil
+

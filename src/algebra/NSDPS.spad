@@ -1,0 +1,231 @@
+)abbrev domain NSDPS NeitherSparseOrDensePowerSeries
+++ Authors: Gaetan Hache
+++ Date Created: june 1996 
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description: 
+++ This domain is part of the PAFF package
+
+NeitherSparseOrDensePowerSeries(K) : SIG == CODE where
+  K : Field
+
+  SI   ==> SingleInteger
+  INT  ==> Integer
+  TERM ==> Record(k:INT,c:K)
+  SER  ==> Stream(TERM)
+  NNI  ==> NonNegativeInteger
+
+  SIG ==> Join(LocalPowerSeriesCategory(K),LazyStreamAggregate(TERM)) with
+  
+    findTerm : (%,Integer) -> TERM
+    
+  CODE ==> SER add
+
+    Rep:=SER
+    
+    var : Symbol := 't
+    
+    multC: (K,INT,%) -> %
+
+    orderIfNegative(s:%)==
+      zero?(s) => "failed"
+      f:=frst(s)
+      f.k >= 0 => "failed"
+      zero?(f.c) => orderIfNegative(rest(s))
+      f.k
+
+    posExpnPart(s)==
+      zero?(s) => 0
+      o:=order s
+      (o >= 0) => s
+      posExpnPart(rst s)
+            
+    findTerm(s,n)==
+      empty?(s) =>  [n,0]$TERM
+      f:=frst(s)
+      f.k > n => [n,0]$TERM
+      f.k = n => f
+      findTerm(rst(s),n)
+    
+    findCoef(s,i)==findTerm(s,i).c
+    
+    coerce(s:%):SER == s::Rep
+
+    coerce(s:SER):%==s
+
+    localVarForPrintInfo:Boolean:=false()
+
+    printInfo==localVarForPrintInfo
+
+    printInfo(flag)==localVarForPrintInfo:=flag
+
+    outTerm: TERM -> OutputForm
+
+    removeZeroes(s)== delay
+      zero?(s) => 0
+      f:=frst(s)
+      zero?(f.c) => removeZeroes(rst(s))
+      concat(f,removeZeroes(rst(s)))
+    
+    inv(ra)==
+      a:=removeFirstZeroes ra
+      o:=-order(a)
+      aa:=shift(a,o)
+      aai:=recip aa
+      aai case "failed" => _
+        error "Big problem in inv function from CreateSeries"
+      shift(aai,o)
+
+    iDiv: (%,%,K) -> %
+    iDiv(x,y,ry0) == delay
+     empty? x => 0$%
+     sx:TERM:=frst x
+     c0:K:=ry0 * sx.c
+     nT:TERM:=[sx.k, c0]
+     tc0:%:=series(sx.k,c0,0$%)
+     concat(nT,iDiv(rst x - tc0 * rst y,y,ry0))
+     
+    recip x ==
+      empty? x => "failed"
+      rh1:TERM:=frst x
+      ^zero?(rh1.k) => "failed"
+      ic:K:= inv(rh1.c)
+      delay
+        concat([0,ic]$TERM,iDiv(- ic * rst x,x,ic))
+
+    removeFirstZeroes(s)==
+      zero?(s) => 0
+      f:=frst(s)
+      zero?(f.c) => removeFirstZeroes(rst(s))
+      s
+      
+    sbt(sa,sbb)== delay
+      sb:=removeFirstZeroes(sbb)
+      o:=order sb
+      ^(o > 0) => _
+         error "Cannot substitute by a series of order less than 1  !!!!!"
+      empty?(sa) or empty?(sb) => 0 
+      fa:TERM:=frst(sa)
+      fb:TERM:=frst(sb)
+      firstElem:TERM:=[fa.k*fb.k, fa.c*(fb.c**fa.k)]
+      zero?(fa.c) => sbt(rst(sa),sb) 
+      concat(firstElem,  rest((fa.c) * sb ** (fa.k)) + sbt(rst(sa),sb)  )
+
+    coerce(s:%):OutputForm==
+      zero?(s) => "0" :: OutputForm
+      count:SI:= _$streamCount$Lisp
+      lstTerm:List TERM:=empty()
+      rs:%:= s
+      for i in 1..count while  ^empty?(rs) repeat
+        fs:=frst rs
+        rs:=rst rs
+        lstTerm:=concat(lstTerm,fs)
+      listOfOutTerm:List OutputForm:=_
+        [outTerm(t) for t in lstTerm | ^zero?(t.c) ]
+      out:OutputForm:=
+        if empty?(listOfOutTerm) then
+          "0" :: OutputForm
+        else
+          reduce("+", listOfOutTerm)
+      empty?(rs) => out
+      out +  ("..." :: OutputForm)
+
+    outTerm(t)==
+      ee:=t.k
+      cc:=t.c
+      oe:OutputForm:=ee::OutputForm
+      oc:OutputForm:=cc::OutputForm
+      symb:OutputForm:= var :: OutputForm
+      one?(cc) and one?(ee) => symb
+      zero?(ee) => oc
+      one?(cc) => symb ** oe
+      one?(ee) => oc * symb
+      oc * symb ** oe
+
+    removeZeroes(n,s)== delay
+      n < 0 => s
+      zero?(s) => 0
+      f:=frst(s)
+      zero?(f.c) => removeZeroes(n-1, rst(s))
+      concat(f,removeZeroes(n-1, rst(s)))
+
+    order(s:%)==
+      zero?(s) => error _
+       "From order (PlaneCurveLocalPowerSeries): cannot compute the order of 0"
+      f:=frst(s)
+      zero?(f.c) => order(rest(s))
+      f.k
+
+    monomial2series(lpar,lexp,sh)==
+      shift(reduce("*",[s**e for s in lpar for e in lexp]),sh)
+
+    coefOfFirstNonZeroTerm(s:%)==
+      zero?(s) => error _
+       "From order (PlaneCurveLocalPowerSeries): cannot find the coefOfFirstNonZeroTerm"
+      f:=frst(s)
+      zero?(f.c) => coefOfFirstNonZeroTerm(rest(s))
+      f.c
+
+    degreeOfTermLower?: (TERM,INT) -> Boolean
+    degreeOfTermLower?(t,n)== t.k < n
+
+    filterUpTo(s,n)==filterWhile(degreeOfTermLower?(#1,n),s)
+
+    series(exp,coef,s)==cons([exp,coef]$TERM,s)
+
+    a:% ** n:NNI == -- delay
+      zero?(n) => 1
+      expt(a,n :: PositiveInteger)$RepeatedSquaring(%)
+
+    0 == empty()
+
+    1 == construct([[0,1]$TERM])
+
+    zero?(a)==empty?(a::Rep)
+
+    shift(s,n)== delay
+      zero?(s) => 0
+      fs:=frst(s)
+      es:=fs.k
+      concat([es+n,fs.c]$TERM,shift(rest(s),n))
+
+    a:% + b:% == delay
+        zero?(a) => b
+        zero?(b) => a
+        fa:=frst(a)
+        fb:=frst(b)
+        ea:=fa.k
+        eb:=fb.k
+        nc:K
+        ea = eb => concat([ea,fa.c+fb.c]$TERM,rest(a) + rest(b))
+        ea > eb => concat([eb,fb.c]$TERM,a + rest(b))
+        eb > ea => concat([ea,fa.c]$TERM,rest(a) + b)
+
+    - a:% == --delay
+      multC( (-1) :: K , 0 , a)
+    
+    a:% - b:% == --delay
+      a+(-b)
+
+    multC(coef,n,s)== delay
+        zero?(coef) => 0
+        zero?(s) => 0
+        f:=frst(s)
+        concat([f.k+n,coef*f.c]$TERM,multC(coef,n,rest(s)))
+
+    coef:K * s:% == delay
+        zero?(coef) => 0
+        zero?(s) => 0
+        f:=frst(s)
+        concat([f.k,coef*f.c]$TERM, coef *$% rest(s))
+
+    s:% * coef:K == coef * s
+    
+    s1:% * s2:%== delay
+        zero?(s1) or zero?(s2) => 0
+        f1:TERM:=frst(s1)
+        f2:TERM:=frst(s2)
+        e1:INT:=f1.k; e2:INT:=f2.k
+        c1:K:=f1.c;   c2:K:=f2.c
+        concat([e1+e2,c1*c2]$TERM,_
+               multC(c1,e1,rest(s2))+multC(c2,e2,rest(s1))+rest(s1)*rest(s2))
+

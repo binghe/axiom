@@ -1,0 +1,56 @@
+)abbrev package EXPRSOL ExpressionSolve
+++ Description:
+++ This package has no description
+
+ExpressionSolve(R, F, UTSF, UTSSUPF) : SIG == CODE where
+  R : Join(OrderedSet, IntegralDomain, ConvertibleTo InputForm)
+  F : FunctionSpace R
+  UTSF : UnivariateTaylorSeriesCategory F
+  SUP ==> SparseUnivariatePolynomialExpressions
+  UTSSUPF : UnivariateTaylorSeriesCategory SUP F
+
+  OP  ==> BasicOperator
+  SY  ==> Symbol
+  NNI ==> NonNegativeInteger
+  MKF ==> MakeBinaryCompiledFunction(F, UTSSUPF, UTSSUPF, UTSSUPF)
+
+  SIG ==> with
+
+    seriesSolve : (F, OP, SY, List F) -> UTSF
+      
+    replaceDiffs : (F, OP, Symbol) -> F
+      
+  CODE ==> add
+
+
+        opelt := operator("elt"::Symbol)$OP
+
+        opdiff := operator("D"::Symbol)$OP
+
+        opcoerce := operator("coerce"::Symbol)$OP
+
+        replaceDiffs (expr, op, sy) ==
+            lk := kernels expr
+            for k in lk repeat
+
+                if is?(k, op) then
+                    arg := first argument k
+                    if arg = sy::F 
+                    then expr := subst(expr, [k], [(name op)::F])
+                    else expr := subst(expr, [k], [opelt [(name op)::F, 
+                                                          replaceDiffs(arg, op,
+                                                          sy)]])
+
+                if is?(k, %diff) then
+                    args := argument k
+                    differentiand := 
+                     replaceDiffs(subst(args.1, args.2 = args.3), op, sy)
+                    expr := subst(expr, [k], [opdiff differentiand])
+            expr
+
+
+        seriesSolve(expr, op, sy, l) ==
+            ex := replaceDiffs(expr, op, sy) 
+            f := compiledFunction(ex, name op, sy)$MKF
+            seriesSolve(x+->f(x, monomial(1,1)$UTSSUPF), l)_
+              $TaylorSolve(F, UTSF, UTSSUPF)

@@ -1,0 +1,23 @@
+)abbrev category ALGEBRA Algebra
+++ Description:
+++ The category of associative algebras (modules which are themselves rings).
+++
+++ Axioms\br
+++ \tab{5}\spad{(b+c)::% = (b::%) + (c::%)}\br
+++ \tab{5}\spad{(b*c)::% = (b::%) * (c::%)}\br
+++ \tab{5}\spad{(1::R)::% = 1::%}\br
+++ \tab{5}\spad{b*x = (b::%)*x}\br
+++ \tab{5}\spad{r*(a*b) = (r*a)*b = a*(r*b)}
+
+Algebra(R) : Category == SIG where
+  R : CommutativeRing
+
+  SIG ==> Join(Ring, Module R) with
+
+    coerce : R -> %
+      ++ coerce(r) maps the ring element r to a member of the algebra.
+
+   add
+
+     coerce(x:R):% == x * 1$%
+

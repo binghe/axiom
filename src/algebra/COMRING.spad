@@ -1,0 +1,12 @@
+)abbrev category COMRING CommutativeRing
+++ Description:
+++ The category of commutative rings with unity, rings where
+++ \spadop{*} is commutative, and which have a multiplicative identity
+++ element.
+
+CommutativeRing() : Category == SIG where
+
+  SIG ==> Join(Ring,BiModule(%,%)) with
+
+    commutative("*")  ++ multiplication is commutative.
+

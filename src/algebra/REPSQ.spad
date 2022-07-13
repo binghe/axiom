@@ -1,0 +1,31 @@
+)abbrev package REPSQ RepeatedSquaring
+++ Description:
+++ Implements exponentiation by repeated squaring
+
+-- the following package is only instantiated over %
+-- thus shouldn't be cached. We prevent it
+-- from being cached by declaring it to be mutableDomains
+
+)bo PUSH('RepeatedSquaring, $mutableDomains) 
+
+RepeatedSquaring(S) : SIG == CODE where
+  S : SetCategory with 
+
+    "*" : (%,%)->%
+      ++ x*y returns the product of x and y
+
+  SIG ==> with
+
+    expt : (S,PositiveInteger) -> S 
+      ++ expt(r, i) computes r**i  by repeated squaring
+
+  CODE ==> add
+
+     x: S
+     n: PositiveInteger
+
+     expt(x, n) ==
+        (n = 1) => x
+        odd?(n)$Integer=> x * expt(x*x,shift(n,-1) pretend PositiveInteger)
+        expt(x*x,shift(n,-1) pretend PositiveInteger)
+

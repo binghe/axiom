@@ -1,0 +1,19 @@
+)abbrev category MODULE Module
+++ Description:
+++ The category of modules over a commutative ring.
+++
+++ Axioms\br
+++ \tab{5}\spad{1*x = x}\br
+++ \tab{5}\spad{(a*b)*x = a*(b*x)}\br
+++ \tab{5}\spad{(a+b)*x = (a*x)+(b*x)}\br
+++ \tab{5}\spad{a*(x+y) = (a*x)+(a*y)}
+
+Module(R) : Category == SIG where
+  R : CommutativeRing
+
+  SIG ==> BiModule(R,R)
+
+   add
+
+     if not(R is %) then x:%*r:R == r*x
+

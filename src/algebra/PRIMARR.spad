@@ -1,0 +1,37 @@
+)abbrev domain PRIMARR PrimitiveArray
+++ Author: Mark Botch
+++ Description:
+++ This provides a fast array type with no bound checking on elt's.
+++ Minimum index is 0 in this type, cannot be changed
+
+PrimitiveArray(S) : SIG == CODE where
+  S : Type
+
+  SIG ==> OneDimensionalArrayAggregate S 
+
+  CODE ==> add
+
+   Qmax ==> QVMAXINDEX$Lisp
+   Qsize ==> QVSIZE$Lisp
+   Qelt ==> ELT$Lisp
+   Qsetelt ==> SETELT$Lisp
+   Qnew ==> MAKE_-ARRAY$Lisp
+
+   #x == Qsize x
+
+   minIndex x == 0
+
+   empty() == Qnew(0$Lisp)
+ 
+   new(n, x) == fill_!(Qnew n, x)
+
+   qelt(x, i) == Qelt(x, i)
+
+   elt(x:%, i:Integer) == Qelt(x, i)
+
+   qsetelt_!(x, i, s) == Qsetelt(x, i, s)
+
+   setelt(x:%, i:Integer, s:S) == Qsetelt(x, i, s)
+
+   fill_!(x, s) == (for i in 0..Qmax x repeat Qsetelt(x, i, s); x)
+

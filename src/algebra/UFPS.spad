@@ -1,0 +1,10 @@
+)abbrev domain UFPS UnivariateFormalPowerSeries
+++ Author: Mark Botch
+++ Description:
+++ This domain has no description
+
+UnivariateFormalPowerSeries(Coef) == CODE where
+  Coef : Ring
+
+  CODE ==> UnivariateTaylorSeries(Coef, 'x, 0$Coef)
+

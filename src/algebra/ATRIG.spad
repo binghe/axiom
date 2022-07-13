@@ -1,0 +1,55 @@
+)abbrev category ATRIG ArcTrigonometricFunctionCategory
+++ Date Last Updated: 14 May 1991
+++ Description:
+++ Category for the inverse trigonometric functions;
+
+ArcTrigonometricFunctionCategory() : Category == SIG where
+
+  SIG ==> with
+
+    acos : $ -> $
+      ++ acos(x) returns the arc-cosine of x. When evaluated
+      ++ into some subset of the complex numbers, one
+      ++ branch cut for acos lies along the negative real axis
+      ++ to the left of -1 (inclusive), continuous with the
+      ++ upper half plane, the other along the positive real axis to
+      ++ the right of 1 (inclusive), continuous with the lower half
+      ++ plane.
+
+    acot : $ -> $
+      ++ acot(x) returns the arc-cotangent of x.
+
+    acsc : $ -> $
+      ++ acsc(x) returns the arc-cosecant of x.
+
+    asec : $ -> $
+      ++ asec(x) returns the arc-secant of x.
+
+    asin : $ -> $
+      ++ asin(x) returns the arc-sine of x. When evaluated into some
+      ++ subset of the complex numbers, one branch cut for asin lies
+      ++ along the negative real axis to the left of -1 (inclusive),
+      ++ continuous with the upper half plane, the other along the
+      ++ positive real axis to the right of 1 (inclusive), continuous
+      ++ with the lower half plane.
+
+    atan : $ -> $
+      ++ atan(x) returns the arc-tangent of x. When evaluated into some
+      ++ subset of the complex numbers, one branch cut for atan lies
+      ++ along the positive imaginary axis above %i (exclusive),
+      ++ continuous with the left half plane, the other along the
+      ++ negative imaginary axis below -%i (exclusive) continuous
+      ++ with the right half plane. The domain does not contain %i and -%i
+
+   add
+
+     if $ has Ring then
+
+       asec(x) ==
+         (a := recip x) case "failed" => error "asec: no reciprocal"
+         acos(a::$)
+
+       acsc(x) == 
+         (a := recip x) case "failed" => error "acsc: no reciprocal"
+         asin(a::$)
+

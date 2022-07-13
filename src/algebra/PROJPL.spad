@@ -1,0 +1,14 @@
+)abbrev domain PROJPL ProjectivePlane
+++ Author: Gaetan Hache
+++ Date Created: 17 nov 1992
+++ Date Last Updated: May 2010 by Tim Daly
+++ Description:
+++ This is part of the PAFF package, related to projective space.
+
+ProjectivePlane(K) : SIG == CODE where
+  K : Field
+  
+  SIG ==> ProjectiveSpaceCategory(K)
+
+  CODE ==> ProjectiveSpace(3,K)
+  

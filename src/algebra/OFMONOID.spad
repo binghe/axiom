@@ -1,0 +1,246 @@
+)abbrev domain OFMONOID OrderedFreeMonoid
+++ Author: Michel Petitot petitot@lifl.fr
+++ Date Created: 91
+++ Date Last Updated: 7 Juillet 92
+++ Fix History: compilation v 2.1 le 13 dec 98
+++ Description:
+++ The free monoid on a set \spad{S} is the monoid of finite products of
+++ the form \spad{reduce(*,[si ** ni])} where the si's are in S, and the ni's
+++ are non-negative integers. The multiplication is not commutative.
+++ For two elements \spad{x} and \spad{y} the relation \spad{x < y}
+++ holds if either \spad{length(x) < length(y)} holds or if these lengths
+++ are equal and if \spad{x} is smaller than \spad{y} w.r.t. the 
+++ lexicographical ordering induced by \spad{S}.
+++ This domain inherits implementation from \spadtype{FreeMonoid}.
+
+OrderedFreeMonoid(S) : SIG == CODE where
+  S : OrderedSet
+
+  NNI ==> NonNegativeInteger
+  REC ==> Record(gen:S, exp:NNI)
+  RESULT ==> Union(Record(lm:Union(%,"failed"),rm:Union(%,"failed")),"failed")
+ 
+  SIG ==> Join(OrderedMonoid, RetractableTo S) with
+
+    "*": (S, %) -> %
+      ++ \spad{s*x} returns the product of \spad{x} by \spad{s} on the left.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X x*m1
+
+    "*" : (%, S) -> %
+      ++ \spad{x*s} returns the product of \spad{x} by \spad{s} on the right.
+      ++
+      ++X m1:=(y**3)$OFMONOID(Symbol)
+      ++X m1*x
+
+    "**" : (S, NNI) -> %
+      ++ \spad{s**n} returns the product of \spad{s} by itself \spad{n} times.
+      ++
+      ++X m1:=(y**3)$OFMONOID(Symbol)
+
+    first : % -> S
+      ++ \spad{first(x)} returns the first letter of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X first m1
+
+    rest :  % -> %
+      ++ \spad{rest(x)} returns \spad{x} except the first letter.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X rest m1
+
+    mirror : % -> %
+      ++ \spad{mirror(x)} returns the reversed word of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X mirror m1
+
+    lexico : (%,%) -> Boolean
+      ++ \spad{lexico(x,y)} returns \spad{true} 
+      ++ iff \spad{x} is smaller than \spad{y}
+      ++ w.r.t. the pure lexicographical ordering induced by \spad{S}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X m2:=(x*y)$OFMONOID(Symbol)
+      ++X lexico(m1,m2)
+      ++X lexico(m2,m1)
+
+    hclf : (%, %) -> %
+      ++ \spad{hclf(x, y)} returns the highest common left factor 
+      ++ of \spad{x} and \spad{y},
+      ++ that is the largest \spad{d} such that \spad{x = d a} 
+      ++ and \spad{y = d b}.
+      ++
+      ++X m1:=(x*y*z)$OFMONOID(Symbol)
+      ++X m2:=(x*y)$OFMONOID(Symbol)
+      ++X hclf(m1,m2)
+
+    hcrf : (%, %) -> %
+      ++ \spad{hcrf(x, y)} returns the highest common right 
+      ++ factor of \spad{x} and \spad{y},
+      ++ that is the largest \spad{d} such that \spad{x = a d} 
+      ++ and \spad{y = b d}.
+      ++
+      ++X m1:=(x*y*z)$OFMONOID(Symbol)
+      ++X m2:=(y*z)$OFMONOID(Symbol)
+      ++X hcrf(m1,m2)
+
+    lquo : (%, %) -> Union(%, "failed")
+      ++ \spad{lquo(x, y)} returns the exact left quotient of \spad{x}
+      ++  by \spad{y} that is \spad{q} such that \spad{x = y * q},
+      ++ "failed" if \spad{x} is not of the form \spad{y * q}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X m2:=(x*y)$OFMONOID(Symbol)
+      ++X lquo(m1,m2)
+
+    rquo : (%, %) -> Union(%, "failed")
+      ++ \spad{rquo(x, y)} returns the exact right quotient of \spad{x} 
+      ++ by \spad{y} that is \spad{q} such that \spad{x = q * y},
+      ++ "failed" if \spad{x} is not of the form \spad{q * y}.
+      ++
+      ++X m1:=(q*y^3)$OFMONOID(Symbol)
+      ++X m2:=(y^2)$OFMONOID(Symbol)
+      ++X lquo(m1,m2)
+
+    lquo : (%, S) -> Union(%, "failed")
+      ++ \spad{lquo(x, s)} returns the exact left quotient of \spad{x} 
+      ++ by \spad{s}. 
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X lquo(m1,x)
+
+    rquo : (%, S) -> Union(%, "failed")
+      ++ \spad{rquo(x, s)} returns the exact right quotient 
+      ++ of \spad{x} by \spad{s}.
+      ++
+      ++X m1:=(x*y)$OFMONOID(Symbol)
+      ++X div(m1,y)
+
+    divide : (%, %) -> RESULT
+      ++ \spad{divide(x,y)} returns the left and right exact quotients of
+      ++ \spad{x} by \spad{y}, that is \spad{[l,r]} such that \spad{x = l*y*r}.
+      ++ "failed" is returned iff \spad{x} is not of the form \spad{l * y * r}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X m2:=(x*y)$OFMONOID(Symbol)
+      ++X divide(m1,m2)
+
+    overlap : (%, %) -> Record(lm: %, mm: %, rm: %)
+      ++ \spad{overlap(x, y)} returns \spad{[l, m, r]} such that
+      ++ \spad{x = l * m} and \spad{y = m * r} hold and such that 
+      ++ \spad{l} and \spad{r} have no overlap,
+      ++ that is \spad{overlap(l, r) = [l, 1, r]}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X m2:=(x*y)$OFMONOID(Symbol)
+      ++X overlap(m1,m2)
+
+    size : % -> NNI
+      ++ \spad{size(x)} returns the number of monomials in \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X size(m1,2)
+
+    nthExpon : (%, Integer) -> NNI
+      ++ \spad{nthExpon(x, n)} returns the exponent of the 
+      ++ \spad{n-th} monomial of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X nthExpon(m1,2)
+
+    nthFactor : (%, Integer) -> S
+      ++ \spad{nthFactor(x, n)} returns the factor of the \spad{n-th} 
+      ++ monomial of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X nthFactor(m1,2)
+
+    factors : % -> List REC
+      ++ \spad{factors(a1\^e1,...,an\^en)} returns 
+      ++ \spad{[[a1, e1],...,[an, en]]}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X factors m1
+
+    length : % -> NNI
+      ++ \spad{length(x)} returns the length of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X length m1
+
+    varList : % -> List S
+      ++ \spad{varList(x)} returns the list of variables of \spad{x}.
+      ++
+      ++X m1:=(x*y*y*z)$OFMONOID(Symbol)
+      ++X varList m1
+
+  CODE ==> FreeMonoid(S) add
+
+    Rep := ListMonoidOps(S, NNI, 1)
+        
+    -- definitions
+    lquo(w:%, l:S) == 
+      x: List REC := listOfMonoms(w)$Rep
+      null x        => "failed"
+      fx: REC := first x
+      fx.gen ^= l  => "failed"
+      fx.exp = 1   => makeMulti rest(x)
+      makeMulti [[fx.gen, (fx.exp - 1)::NNI ]$REC, :rest x]
+       
+    rquo(w:%, l:S) ==
+      u:% := reverse w
+      (r := lquo (u,l)) case "failed" => "failed"
+      reverse_! (r::%)
+
+    divide(left:%,right:%) == 
+      a:=lquo(left,right) 
+      b:=rquo(left,right)
+      [a,b]
+
+    length x == reduce("+" ,[f.exp for f in listOfMonoms x], 0)
+
+    varList x ==
+      le: List S := [t.gen for t in listOfMonoms x]
+      sort_! removeDuplicates(le)
+ 
+    first w ==
+      x: List REC := listOfMonoms w
+      null x => error "empty word !!!"
+      x.first.gen
+
+    rest w ==
+      x: List REC := listOfMonoms w
+      null x => error "empty word !!!"
+      fx: REC := first x
+      fx.exp = 1 => makeMulti rest x
+      makeMulti [[fx.gen , (fx.exp - 1)::NNI ]$REC , :rest x]
+
+    lexico(a,b) ==         --  ordre lexicographique
+      la := listOfMonoms a
+      lb := listOfMonoms b
+      while (not null la) and (not null lb) repeat
+        la.first.gen > lb.first.gen => return false
+        la.first.gen < lb.first.gen => return true
+        if la.first.exp = lb.first.exp then
+          la:=rest la
+          lb:=rest lb
+        else if la.first.exp > lb.first.exp then
+          la:=concat([la.first.gen,
+                 (la.first.exp - lb.first.exp)::NNI], rest lb)
+          lb:=rest lb
+        else
+          lb:=concat([lb.first.gen,
+                   (lb.first.exp-la.first.exp)::NNI], rest la)
+          la:=rest la
+      empty? la and not empty? lb
+
+    a < b ==               --  ordre lexicographique par longueur
+      la:NNI := length a; lb:NNI := length b
+      la = lb =>  lexico(a,b)
+      la < lb 
+
+    mirror x == reverse(x)$Rep
+

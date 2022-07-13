@@ -1,0 +1,17 @@
+)abbrev domain IARRAY2 IndexedTwoDimensionalArray
+++ Author: Mark Botch
+++ Description:
+++ This domain implements two dimensional arrays
+
+IndexedTwoDimensionalArray(R,mnRow,mnCol) : SIG == CODE where
+  R : Type
+  mnRow : Integer
+  mnCol : Integer
+
+  Row ==> IndexedOneDimensionalArray(R,mnCol)
+  Col ==> IndexedOneDimensionalArray(R,mnRow)
+
+  SIG ==> TwoDimensionalArrayCategory(R,Row,Col)
+
+  CODE ==> InnerIndexedTwoDimensionalArray(R,mnRow,mnCol,Row,Col)
+

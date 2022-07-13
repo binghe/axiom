@@ -1,0 +1,23 @@
+)abbrev package SAERFFC SAERationalFunctionAlgFactor
+++ Author: Patrizia Gianni
+++ Description:
+++ Factorization of univariate polynomials with coefficients in an
+++ algebraic extension of \spadtype{Fraction Polynomial Integer}.
+ 
+SAERationalFunctionAlgFactor(UP, SAE, UPA) : SIG == CODE where
+  UP : UnivariatePolynomialCategory Fraction Polynomial Integer
+  SAE : Join(Field, CharacteristicZero,
+                      MonogenicAlgebra(Fraction Polynomial Integer, UP))
+  UPA: UnivariatePolynomialCategory SAE
+ 
+  SIG ==> with
+
+    factor : UPA -> Factored UPA
+      ++ factor(p) returns a prime factorisation of p.
+ 
+  CODE ==> add
+
+    factor q ==
+      factor(q, factor$RationalFunctionFactor(UP)
+              )$InnerAlgFactor(Fraction Polynomial Integer, UP, SAE, UPA)
+
