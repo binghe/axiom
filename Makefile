@@ -348,7 +348,6 @@ clean:
 	@ rm -f src/Makefile.dvi
 	@ rm -f src/Makefile.pdf
 	@ rm -f src/algebra/book*pamphlet
-	@ rm -f src/algebra/*.spad
 	@ rm -f src/algebra/Makefile
 	@ rm -f src/etc/axiom.sty
 	@ rm -f src/etc/Makefile src/etc/Makefile.dvi src/etc/Makefile.pdf
@@ -358,6 +357,7 @@ clean:
 	@ rm -f src/share/axiom.sty
 	@ rm -f src/share/Makefile src/share/Makefile.dvi 
 	@ rm -f src/share/Makefile.pdf
+	@ rm -rf src/sman
 	@ rm -rf int
 	@ rm -rf obj
 	@ rm -rf mnt
