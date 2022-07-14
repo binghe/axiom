@@ -2256,7 +2256,7 @@ constructions of Axiom.
 
 Now that we have {\tt FourierComponent}, we can define {\tt FourierSeries}.
 We chose again to use method (4), basing the definition on
-{\tt FreeModule(R,FourierComponent(E)). Hence the start of the definition
+{\tt FreeModule(R,FourierComponent(E))}. Hence the start of the definition
 looks as follows.
 \begin{verbatim}
  == FreeModule(R,FourierComponent(E)) add
