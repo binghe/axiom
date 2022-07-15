@@ -237,7 +237,7 @@ then they are given values, which are added. As we said earlier, $a + a = 4$,
 whereas $b + b = 1$. This may appear confusing, so let's run though
 the same session, but asking Axiom to print out the domains of the
 various values. This is done by means of the system command 
-{\tt )set message type on}.
+{\tt )set message type on}\footnote{This is now the default behavior.}.
 
 {\bf Convention 2 (borrowed from APL)}. {\sl All system commands,
 i.e. those that do not perform, or affect the performance of, algebraic
@@ -581,7 +581,7 @@ could differentiate the elements of that list.
 \end{verbatim}
 
 {\bf Convention 6 (Of the library authors)}. {\sl The notation}
-\[list\thinspace{} of\thinspace{} variables +-> expression\]
+\[list\, of\, variables\; \text{\texttt{+->}} \;expression\]
 {\sl defines an anonymous function of those variables. It corresponds 
 to the lambda-calculus expression ``$\lambda$variables.expression''.}
 
