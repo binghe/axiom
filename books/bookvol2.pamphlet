@@ -1533,7 +1533,7 @@ an element $p$ of {\tt UnivariatePolynomial(x,R)} computes
 
 \subsection{The problem definition}
 
-Our aim iere is to emulate CAMAL's (Fitch\cite{Fitc74}) handling of
+Our aim here is to emulate CAMAL's (Fitch\cite{Fitc74}) handling of
 ``weighted polynomials'', a concept which is also found in Reduce
 (Hearn\cite{Hear87}) via the commands {\tt weight} and 
 {\tt wtlevel}. For those not familiar with the idea, we give a quick
