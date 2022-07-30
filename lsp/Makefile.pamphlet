@@ -881,14 +881,13 @@ in the zips subdirectory named {\tt gcl-2.6.12.gmp4.mpn.k8.fix}
 
 GCC has changed the default behavior of C programs (who knows why?)
 to have different semantics for inline. This breaks GCL. We change
-the compile command line to add "-std=89". We also turn off warnings
+the compile command line to add "-std=gnu89". We also turn off warnings
 so they do not show up during compiles, especially in a running Axiom.
+
+For GCL 2.6.13pre, there is a new solution before calling {\tt ./configure},
+see the chunk {\tt gclConfigureMake} for more details.
+
 \begin{chunk}{gcl-2.6.12.configure.patch}
-	@(cd ${GCLVERSION} ; \
-	  echo 12a applying configure patch ; \
-	  ${PATCH} <${SPD}/zips/${GCLVERSION}.configure.patch )
-\end{chunk}
-\begin{chunk}{gcl-2.6.13pre.configure.patch}
 	@(cd ${GCLVERSION} ; \
 	  echo 12a applying configure patch ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.configure.patch )
@@ -937,7 +936,7 @@ This means that all other lisp derived images will know how to tangle.
 
 \begin{chunk}{gclConfigureMake}
 	@(cd ${GCLVERSION} ; \
-	./configure ${GCLOPTS} ; \
+	CFLAGS="-w -std=gnu89" ./configure ${GCLOPTS} ; \
 	${ENV} ${MAKE} ; \
 	echo '(progn (load "cmpnew/gcl_collectfn.lsp")' \
          '(load "lsp/sys-proclaim.lisp") (compiler::emit-fn t)' \
@@ -1800,50 +1799,7 @@ gcldir:
 \getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
 \getchunk{gcl-2.6.13pre.collectfn.fix}
 \getchunk{gcl-2.6.13pre.gmp4.mpn.k8.fix}
-\getchunk{gcl-2.6.13pre.configure.patch}
 \getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
-\getchunk{gclConfigureMake}
-	@echo 13 finished system build on `date` | tee >gcldir
-
-ccldir: ${LSP}/ccl/Makefile
-	@echo 14 building CCL
-	@( cd ccl ; ${ENV} ${MAKE} )
-
-${LSP}/ccl/Makefile: ${LSP}/ccl/Makefile.pamphlet
-	@echo 15 making ${LSP}/ccl/Makefile from ${LSP}/ccl/Makefile.pamphlet
-	@( cd ccl ; ${DOCUMENT} ${NOISE} Makefile )
-
-document:
-	@echo 16 making docs in ${LSP}
-	@( cd ccl ; ${ENV} ${MAKE} document )
-
-clean:
-	@echo 17 cleaning ${LSP}/ccl
-	@( cd ccl ; ${ENV} ${MAKE} clean )
-
-\end{chunk}
-
-\subsection{The GCL-2.6.13pre114 stanza}
-This stanza will be written when the GCLVERSION variable is
-``gcl-2.6.13pre114''. It will overwrite the default version. See the 
-top level Makefile.pamphlet.
-\begin{chunk}{gcl-2.6.13pre114}
-# gcl version 2.6.13pre114
-OUT=${OBJ}/${SYS}/bin
-
-all:
-	@echo 1 building ${LSP} ${GCLVERSION}
-
-gcldir: 
-	@echo 2 building ${GCLVERSION}
-	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
-\getchunk{gcl-2.6.13pre.h.linux.defs.patch}
-\getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
-\getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
-\getchunk{gcl-2.6.13pre.unixport.makefile.patch}
-\getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
-\getchunk{gcl-2.6.13pre.collectfn.fix}
-\getchunk{gcl-2.6.13pre.configure.patch}
 \getchunk{gclConfigureMake}
 	@echo 13 finished system build on `date` | tee >gcldir
 

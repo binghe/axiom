@@ -1,11 +1,11 @@
---- gcl_cmpmain.lsp	2017-05-12 16:29:38.000000000 -0400
-+++ gcl_cmpmain.lsp.tpd	2017-05-12 17:30:34.245850266 -0400
-@@ -486,7 +486,7 @@
+--- gcl-2.6.13pre.orig/cmpnew/gcl_cmpmain.lsp	2021-12-25 17:38:35.000000000 +0100
++++ gcl-2.6.13pre/cmpnew/gcl_cmpmain.lsp	2022-07-30 11:06:21.000000000 +0200
+@@ -479,7 +479,7 @@
+ 	  (t (setq dir ".")))
      (setq na  (namestring
  	       (make-pathname :name name :type (pathname-type(first args)))))
-    #+(or dos winnt)
--      (format nil "~a -I~a ~a ~a -c -w ~a -o ~a"
-+      (format nil "~a -I~a ~a ~a -w -std=gnu89 -c -w ~a -o ~a"
- 	      *cc*
- 	      (concatenate 'string si::*system-directory* "../h")
- 	      (if (and (boundp '*c-debug*) *c-debug*) " -g " "")
+-   (format nil  "~a ~a -I~a ~a ~a -c ~a -o ~a ~a"
++   (format nil  "~a ~a -I~a ~a ~a -std=gnu89 -c ~a -o ~a ~a"
+ 	   (if *prof-p* (remove-flag "-fomit-frame-pointer" *cc*) *cc*)
+ 	   (if *prof-p* " -pg " "")
+ 	   (concatenate 'string si::*system-directory* "../h")

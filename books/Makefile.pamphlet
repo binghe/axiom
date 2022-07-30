@@ -518,93 +518,93 @@ ${PDF}/toc.pdf: ${BOOKPDF}
 	echo "\\newpage" >>toc.toc ; \
 	echo "\\tableofcontents" >>toc.tex ; \
 	echo "\\end{document}" >>toc.tex ; \
-	echo "\\section*{Volume 0: Axiom Jenks and Sutor}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 0: Axiom Jenks and Sutor}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol0.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 1: Axiom Tutorial}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 1: Axiom Tutorial}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol1.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 2: Axiom Users Guide}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 2: Axiom Users Guide}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol2.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 3: Axiom Programmers Guide}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 3: Axiom Programmers Guide}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol3.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 4: Axiom Developers Guide}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 4: Axiom Developers Guide}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol4.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 5: Axiom Interpreter}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 5: Axiom Interpreter}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol5.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 6: Axiom Command}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 6: Axiom Command}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol6.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 7: Axiom Hyperdoc}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 7: Axiom Hyperdoc}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol7.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 7.1: Axiom Hyperdoc}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 7.1: Axiom Hyperdoc}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol7.1.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 8: Axiom Graphics}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 8: Axiom Graphics}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol8.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 8.1: Axiom Gallery}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 8.1: Axiom Gallery}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol8.1.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 9: Axiom Compiler}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 9: Axiom Compiler}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol9.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10: Axiom Algebra: Implementation}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10: Axiom Algebra: Implementation}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10.1: Axiom Algebra: Theory}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10.1: Axiom Algebra: Theory}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.1.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10.2: Axiom Algebra: Categories}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10.2: Axiom Algebra: Categories}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.2.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10.3: Axiom Algebra: Domains}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10.3: Axiom Algebra: Domains}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.3.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10.4: Axiom Algebra: Packages}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10.4: Axiom Algebra: Packages}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.4.toc >>toc.toc ; \
             <bookvol10.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 10.5: Axiom Algebra: Numerics}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 10.5: Axiom Algebra: Numerics}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol10.5.toc >>toc.toc ; \
             <bookvol10.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 11: Axiom Browser}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 11: Axiom Browser}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol11.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 12: Axiom Crystal}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 12: Axiom Crystal}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol12.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Volume 13: Proving Axiom Correct}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Volume 13: Proving Axiom Correct}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvol13.toc >>toc.toc ; \
 	echo "\\newpage" >>toc.toc ; \
-	echo "\\section*{Bibliography: Axiom Bibliography}" >>toc.toc ; \
+	echo "\\mbox{\\section*{Bibliography: Axiom Bibliography}}" >>toc.toc ; \
 \getchunk{sed pattern}
             <bookvolbib.toc >>toc.toc ; \
 	if [ -z "${NOISE}" ] ; then \
