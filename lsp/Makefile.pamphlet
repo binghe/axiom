@@ -936,7 +936,9 @@ This means that all other lisp derived images will know how to tangle.
 
 \begin{chunk}{gclConfigureMake}
 	@(cd ${GCLVERSION} ; \
-	LDFLAGS="-w -std=gnu89" ./configure ${GCLOPTS} ; \
+	export CFLAGS="${CCF}" ; \
+	export LDFLAGS="-w -std=gnu89" ; \
+	./configure ${GCLOPTS} ; \
 	${ENV} ${MAKE} ; \
 	echo '(progn (load "cmpnew/gcl_collectfn.lsp")' \
          '(load "lsp/sys-proclaim.lisp") (compiler::emit-fn t)' \
