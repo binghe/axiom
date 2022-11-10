@@ -200,7 +200,7 @@ for various parts of the system. The {\bf patches.lisp} \cite{5}
 file contains last-minute changes to various functions and
 constants.
 \begin{chunk}{environment}
-INOBJS=	 ${OUT}/patches.${O}
+INOBJS= ${OUT}/patches.${O}
 
 \end{chunk}
 
@@ -231,7 +231,7 @@ OCOBJS=
 The {\bf BROBJS} list contains files only used by the hypertex
 browser. These files should probably be autoloaded.
 \begin{chunk}{environment}
-BROBJS=	${AUTO}/br-con.${O}	\
+BROBJS= ${AUTO}/br-con.${O} \
 	${AUTO}/topics.${O}     
 
 \end{chunk}
@@ -564,7 +564,7 @@ The save depsys image was supposed to read:
 	 '"(setq si::*collect-binary-modules* t)' \
 	  '(let ((si::*load-path* (cons ~S si::*load-path*))' \
 	          '(si::*load-types* ~S))' \
-	  	  '(compiler::emit-fn t))' \
+	          '(compiler::emit-fn t))' \
 	  '(load \"$(OUT)/makedep.lisp\")' \
 	  '(gbc t)' \
 	  '(when si::*binary-modules*' \
@@ -590,9 +590,9 @@ of the form:
   first defined here
 \end{verbatim}
 \begin{chunk}{depsys}
-${DEPSYS}:	${DEP} ${OUT}/sys-pkg.${LISP} ${OUT}/nocompil.${LISP} \
+${DEPSYS}:      ${DEP} ${OUT}/sys-pkg.${LISP} ${OUT}/nocompil.${LISP} \
 	        ${OUT}/bookvol5.${LISP} ${OUT}/bookvol9.${LISP} \
-                ${OUT}/util.${LISP} \
+	        ${OUT}/util.${LISP} \
 	        ${OUT}/parsing.${LISP} \
 	        ${OUT}/g-boot.lisp ${OUT}/c-util.lisp \
 	        ${OUT}/g-util.lisp \
@@ -644,14 +644,14 @@ tail-recursive call. This happens when the last form in a function
 is a call to the same function. In general, we don't care so we set
 compiler::*suppress-compiler-notes* to true in order to reduce the noise.
 \begin{chunk}{savesys}
-${SAVESYS}:	${DEPSYS} ${OBJS} ${OUT}/bookvol5.${O} ${OUT}/util.${O} \
+${SAVESYS}:     ${DEPSYS} ${OBJS} ${OUT}/bookvol5.${O} ${OUT}/util.${O} \
                 ${OUT}/nocompil.${LISP} ${OUT}/sys-pkg.${LISP} \
-	        ${OUTINTERP} ${BROBJS} \
-		${OUT}/database.date ${INOBJS} ${ASCOMP} \
-		${NAGBROBJS} \
-	        ${LOADSYS} \
-		${SRC}/doc/msgs/s2-us.msgs \
-	        ${INT}/algebra/warm.data
+                ${OUTINTERP} ${BROBJS} \
+                ${OUT}/database.date ${INOBJS} ${ASCOMP} \
+                ${NAGBROBJS} \
+                ${LOADSYS} \
+                ${SRC}/doc/msgs/s2-us.msgs \
+                ${INT}/algebra/warm.data
 	@ echo si004 invoking make in `pwd` with parms:
 	@ echo SYS= ${SYS} 
 	@ echo LSP= ${LSP} 
@@ -796,14 +796,14 @@ clean:
 ${MID}/bookvol5.${LISP}: ${IN}/bookvol5.pamphlet
 	@ echo si125 making ${MID}/bookvol5.${LISP} from ${IN}/bookvol5.pamphlet
 	@ (cd ${MID} ; \
-  echo '(tangle "${IN}/bookvol5.pamphlet" "Interpreter" "bookvol5.${LISP}")' \
-        | ${OBJ}/${SYS}/bin/lisp )  1>/dev/null 2>/dev/null
+        echo '(tangle "${IN}/bookvol5.pamphlet" "Interpreter" "bookvol5.${LISP}")' \
+        | ${LISPTANGLE} )  1>/dev/null 2>/dev/null
 
 ${MID}/bookvol9.${LISP}: ${IN}/bookvol9.pamphlet
 	@ echo si128 making ${MID}/bookvol9.${LISP} from ${IN}/bookvol9.pamphlet
 	@ (cd ${MID} ; \
-     echo '(tangle "${IN}/bookvol9.pamphlet" "Compiler" "bookvol9.${LISP}")' \
-        | ${OBJ}/${SYS}/bin/lisp ) 1>/dev/null 2>/dev/null
+        echo '(tangle "${IN}/bookvol9.pamphlet" "Compiler" "bookvol9.${LISP}")' \
+        | ${LISPTANGLE} ) 1>/dev/null 2>/dev/null
 
 ${MID}/bookvol10.5.${LISP}: ${IN}/bookvol10.5.pamphlet
 	@ echo si131 making ${MID}/bookvol10.5.${LISP} from ${IN}/bookvol10.5.pamphlet
@@ -828,7 +828,7 @@ ${OUT}/%.lisp: ${IN}/%.lisp.pamphlet
 	@ rm -f ${OUT}/$*.${O}
 	@( cd ${OUT} ; \
           echo '(tangle "${IN}/$*.lisp.pamphlet" "*" "$*.lisp")' \
-        | ${OBJ}/${SYS}/bin/lisp ) 1>/dev/null 
+        | ${LISPTANGLE} ) 1>/dev/null
 
 ${OUT}/%.o: ${MID}/%.lisp
 	@ echo siOUTfromMID making ${OUT}/$*.o from ${MID}/$*.lisp
@@ -839,7 +839,7 @@ ${OUT}/%.o: ${MID}/%.lisp
 	   else \
 	    (cd ${MID} ; \
 	     echo '(progn  (compile-file "$*.lisp"' \
-             ':output-file "${OUT}/$I.o") (${BYE}))' | ${DEPSYS} ) \
+             ':output-file "${OUT}/$*.o") (${BYE}))' | ${DEPSYS} ) \
               1>/dev/null 2>/dev/null ; \
 	   fi 
 
@@ -847,7 +847,7 @@ ${MID}/%.lisp: ${IN}/%.lisp.pamphlet
 	@ echo siMIDfromIN making ${MID}/$*.lisp from ${IN}/$*.lisp.pamphlet
 	@ (cd ${MID} ; \
           ( echo '(tangle "${IN}/$*.lisp.pamphlet" "*" "$*.lisp")' \
-          | ${OBJ}/${SYS}/bin/lisp 1>/dev/null ) )
+          | ${LISPTANGLE} 1>/dev/null ) )
 
 ${AUTO}/%.${O}: ${OUT}/%.${O}
 	@ echo siAUTOfromOUT making ${AUTO}/$*.${O} from ${OUT}/$*.${O}
