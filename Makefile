@@ -27,7 +27,7 @@ DESTDIR:=/usr/local/axiom
 COMMAND:=${DESTDIR}/mnt/${SYS}/bin/axiom
 
 ##### functions we need
-AWK:=gawk 
+AWK:=gawk
 PATCH:=patch
 RANLIB:=ranlib
 TAR:=tar
@@ -40,7 +40,7 @@ LATEX:=latex
 PLF=${SYS}platform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -std=gnu89 -w" 
+     -std=gnu89 -w"
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -49,21 +49,6 @@ O:=o
 
 ##### lisp related variables
 BYE:=bye
-#GCLVERSION=gcl-2.4.1
-#GCLVERSION=gcl-2.5
-#GCLVERSION=gcl-2.5.2
-#GCLVERSION=gcl-2.6.1
-#GCLVERSION=gcl-2.6.2
-#GCLVERSION=gcl-2.6.2a
-#GCLVERSION=gcl-2.6.3
-#GCLVERSION=gcl-2.6.5
-#GCLVERSION=gcl-2.6.6
-#GCLVERSION=gcl-2.6.7pre
-#GCLVERSION=gcl-2.6.7
-#GCLVERSION=gcl-2.6.8pre
-#GCLVERSION=gcl-2.6.8pre2
-#GCLVERSION=gcl-2.6.8pre3 
-#GCLVERSION=gcl-2.6.8pre4
 #GCLVERSION=gcl-2.6.8pre7
 #GCLVERSION=gcl-cygwin
 #GCLVERSION=gcl-2.6.9
@@ -74,7 +59,6 @@ GCLVERSION=gcl-2.6.13pre
 GCLDIR:=${LSP}/${GCLVERSION}
 GCLOPTS="--enable-vssize=65536*2 --enable-ihssize=65536*2 \
          --disable-xgcl --disable-tkconfig \
-         --disable-dlopen \
          --disable-tclconfig --disable-readline"
 LISP:=lsp
 
@@ -139,7 +123,7 @@ UNCOMPRESS=${UNCOMPRESS} \
 VERSION=${VERSION} \
 WEAVE=${WEAVE} \
 XLIB=${XLIB} \
-ZIPS=${ZIPS} 
+ZIPS=${ZIPS}
 
 all: rootdirs axiom.sty tanglec libspad lspdir
 	@ echo 1 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
@@ -191,7 +175,7 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	      ${ENV} ${MAKE} ; fi ) ; \
 	  fi
 	@ echo p7 starting make of src
-	@ ${ENV} $(MAKE) -f Makefile.${SYS} 
+	@ ${ENV} $(MAKE) -f Makefile.${SYS}
 	@ echo 3 finished system build on `date` | tee >lastBuildDate
 
 lspdir: ${LSP}/Makefile
@@ -201,7 +185,7 @@ lspdir: ${LSP}/Makefile
 	@echo =====================================
 	@echo lsp BUILDING GCL COMMON LISP
 	@echo =====================================
-	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir ) 
+	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir )
 	@(cp ${GCLDIR}/unixport/saved_gcl ${SPADBIN}/${GCLVERSION})
 
 ${LSP}/Makefile: ${LSP}/Makefile.pamphlet
@@ -222,7 +206,7 @@ lspclean:
 	@rm -f ${LSP}/Makefile ${LSP}/Makefile.dvi
 
 
-libspad: 
+libspad:
 	@ echo 11a making libspad
 	@ ( cd ${OBJ}/${SYS}/lib ; \
 	    ${BOOKS}/tanglec ${BOOKS}/bookvol8.pamphlet Makefile >Makefile ; \
@@ -282,7 +266,7 @@ input:
 	     rm -f *.aux ) ; fi
 
 book:
-	@ echo 79 building the book as ${MNT}/${SYS}/doc/book.dvi 
+	@ echo 79 building the book as ${MNT}/${SYS}/doc/book.dvi
 	@ cp ${SRC}/doc/book.pamphlet ${MNT}/${SYS}/doc
 	@ cp -pr ${SRC}/doc/ps ${MNT}/${SYS}/doc
 	@ (cd ${MNT}/${SYS}/doc ; \
@@ -297,7 +281,7 @@ book:
 	  rm book.toc ; \
 	  rm book.log ; \
 	  rm book.aux )
-	@ echo 80 The book is at ${MNT}/${SYS}/doc/book.dvi 
+	@ echo 80 The book is at ${MNT}/${SYS}/doc/book.dvi
 
 
 tanglec: books/tanglec.c
@@ -319,17 +303,17 @@ install:
 	@echo
 	@echo Please add $(shell dirname ${COMMAND}) to your PATH variable
 	@echo Start Axiom with the command $(shell basename ${COMMAND})
-	@echo 
+	@echo
 
 
-document: 
+document:
 	@ echo 4 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 5 Environment ${ENV}
 	@ ${BOOKS}/tanglec Makefile.pamphlet "Makefile.${SYS}" >Makefile.${SYS}
 	@ ${ENV} $(MAKE) -f Makefile.${SYS} document
 	@echo 6 finished system build on `date` | tee >lastBuildDate
 
-clean: 
+clean:
 	@ echo 7 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 8 Environment ${ENV}
 	@ rm -f axiom.sty
@@ -356,7 +340,7 @@ clean:
 	@ rm -f src/interp/axiom.sty
 	@ rm -f src/input/axiom.sty
 	@ rm -f src/share/axiom.sty
-	@ rm -f src/share/Makefile src/share/Makefile.dvi 
+	@ rm -f src/share/Makefile src/share/Makefile.dvi
 	@ rm -f src/share/Makefile.pdf
 	@ rm -rf src/sman
 	@ rm -rf int
@@ -366,11 +350,11 @@ clean:
 	@ rm -f lastBuildDate
 	@ rm -f books/tanglec
 	@ rm -f src/input/Makefile src/input/Makefile.dvi
-	@ rm -f src/input/Makefile.pdf 
+	@ rm -f src/input/Makefile.pdf
 	@ rm -f src/interp/Makefile src/interp/Makefile.dvi
-	@ rm -f src/interp/Makefile.pdf 
+	@ rm -f src/interp/Makefile.pdf
 	@ rm -f src/share/Makefile src/share/Makefile.dvi
-	@ rm -f src/share/Makefile.pdf 
+	@ rm -f src/share/Makefile.pdf
 	@ rm -f Makefile.aux
 	@ rm -f Makefile.log
 
