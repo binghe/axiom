@@ -137,12 +137,12 @@ all: rootdirs axiom.sty tanglec libspad lspdir
 	      ${ENV} ${MAKE} ; fi ) ; \
 	  fi
 	@ echo p7 starting make of src
-	@ ${ENV} $(MAKE) -f Makefile.${SYS} 
+	@ ${ENV} $(MAKE) -f Makefile.${SYS}
 	@ echo 3 finished system build on `date` | tee >lastBuildDate
 
 \getchunk{lsp}
 
-libspad: 
+libspad:
 	@ echo 11a making libspad
 	@ ( cd ${OBJ}/${SYS}/lib ; \
 	    ${BOOKS}/tanglec ${BOOKS}/bookvol8.pamphlet Makefile >Makefile ; \
@@ -212,14 +212,14 @@ input:
 \getchunk{literate commands}
 \getchunk{install}
 
-document: 
+document:
 	@ echo 4 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 5 Environment ${ENV}
 	@ ${BOOKS}/tanglec Makefile.pamphlet "Makefile.${SYS}" >Makefile.${SYS}
 	@ ${ENV} $(MAKE) -f Makefile.${SYS} document
 	@echo 6 finished system build on `date` | tee >lastBuildDate
 
-clean: 
+clean:
 	@ echo 7 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 8 Environment ${ENV}
 	@ rm -f axiom.sty
@@ -246,7 +246,7 @@ clean:
 	@ rm -f src/interp/axiom.sty
 	@ rm -f src/input/axiom.sty
 	@ rm -f src/share/axiom.sty
-	@ rm -f src/share/Makefile src/share/Makefile.dvi 
+	@ rm -f src/share/Makefile src/share/Makefile.dvi
 	@ rm -f src/share/Makefile.pdf
 	@ rm -rf src/sman
 	@ rm -rf int
@@ -256,11 +256,11 @@ clean:
 	@ rm -f lastBuildDate
 	@ rm -f books/tanglec
 	@ rm -f src/input/Makefile src/input/Makefile.dvi
-	@ rm -f src/input/Makefile.pdf 
+	@ rm -f src/input/Makefile.pdf
 	@ rm -f src/interp/Makefile src/interp/Makefile.dvi
-	@ rm -f src/interp/Makefile.pdf 
+	@ rm -f src/interp/Makefile.pdf
 	@ rm -f src/share/Makefile src/share/Makefile.dvi
-	@ rm -f src/share/Makefile.pdf 
+	@ rm -f src/share/Makefile.pdf
 	@ rm -f Makefile.aux
 	@ rm -f Makefile.log
 
@@ -271,7 +271,7 @@ clean:
 \subsubsection{VERSION}
 The VERSION variable is a unique string intended to show up
 in the banner at startup time. I can be anything but is intended
-to be a unique way of identifying the CVS version so we can 
+to be a unique way of identifying the CVS version so we can
 reference bug reports to versions.
 
 The VERSION variable is used in the src/interp/Makefile
@@ -279,10 +279,10 @@ to set a lisp variable boot::*build-version*. This variable
 is used by the {\tt yearweek} function to construct the banner.
 
 The banner also contains a build timestamp so we can determine
-when the image is compiled. We touch the file 
+when the image is compiled. We touch the file
 called \verb|${MNT}/${SYS}/timestamp| and using a formatted form
 of its file information. See the YEARWEEK variable in the
-src/interp/Makefile.pamphlet and the {\tt yearweek} function in 
+src/interp/Makefile.pamphlet and the {\tt yearweek} function in
 src/interp/util.lisp.pamphlet.
 
 \subsubsection{SPAD}
@@ -306,31 +306,31 @@ system source tree. All Makefiles form environment variables based
 on this value.
 
 Next we see the six top-level directories discussed above being
-defined using the SPD variable. 
+defined using the SPD variable.
 
 \subsubsection{LSP}
 This variable specifies where the LSP subdirectory lives.
 It is normally a directory at the top level of the system but
 we do not assume that to be true. Other lisps might require it
-to be elsewhere. 
+to be elsewhere.
 
 \subsubsection{GCLDIR}
 This file contained the only mention of the AKCLDIR variable which
 gives the path to the version of AKCL. Now that the system is running
 on GCL this variable has been renamed to GCLDIR. This cannot be eliminated
-entirely because the system uses this variable to look up a file 
+entirely because the system uses this variable to look up a file
 called collectfn.lsp which is part of the GCL distribution. This
-file lookup is in conditional lisp code so other lisps will not 
+file lookup is in conditional lisp code so other lisps will not
 see the file load. The collectfn.lsp code is used by GCL to generate
 the ``.fn'' files which are used to optimize function calling.
 
-Also, lsp/sys-proclaims.lisp is a file generated 
+Also, lsp/sys-proclaims.lisp is a file generated
 during the GCL build which contains type information about lisp
-functions, allowing fast-function calling behavior. 
+functions, allowing fast-function calling behavior.
 
 When defining the environment, the SPD variable is defined as the
 current directory. SYS is taken as the last non-directory part of
-the environment variable \verb|$AXIOM| (e.g. if 
+the environment variable \verb|$AXIOM| (e.g. if
 \verb|$AXIOM=/(a-path)/mnt/linux|
 then SYS=linux). It is {\bf mandatory} that \verb|$AXIOM| does
 {\bf not} contain any trailing slash, because the {\tt notdir} function
@@ -338,7 +338,7 @@ will return the string following the final slash and would thus return
 the empty string.
 
 \subsubsection{SRC}
-The SRC subdirectory is a hand-generated, read-only top level 
+The SRC subdirectory is a hand-generated, read-only top level
 directory containing the source code. This is assumed to be completely
 system-independent and, in general, it can reside on a CD or NFS
 mounted file system. This is useful for building several different
@@ -350,7 +350,7 @@ source tree.
 The INT subdirectory is a machine-generated, system-independent
 top-level directory containing source code. Axiom builds from literate
 sources.  This work only needs to be done once at the first build. The
-INT directory is a cache of work. It can be erased at will. 
+INT directory is a cache of work. It can be erased at will.
 However steps such as generating lisp code from spad code, while
 done by machine, are system-independent. Therefore this subdirectory,
 once built, can reside with the SRC subdirectory on CD or NFS as a
@@ -359,9 +359,9 @@ read-only branch.
 \subsubsection{OBJ}
 The OBJ subdirectory is a machine-generated, system-dependent
 top level directory containing things like compiler binaries. The
-OBJ directory is a cache of work. It can be erased at will. 
+OBJ directory is a cache of work. It can be erased at will.
 Because it is system-dependent it needs to be written at build
-time by compilers for each specific system. 
+time by compilers for each specific system.
 
 \subsubsection{MNT}
 The MNT subdirectory is a complete, working copy of Axiom.
@@ -390,7 +390,7 @@ document file then check this file. It will contain the output
 of the latex command and the likely error in the tex file.
 
 \subsubsection{SPADBIN}
-The SPADBIN directory is the path to the executable 
+The SPADBIN directory is the path to the executable
 binary directory of the shipped system. The directory contains
 all of the executable commands, such as the {\tt document}
 command. The {\tt document} command lives in the SRC/SCRIPTS
@@ -436,7 +436,7 @@ PART=foo
 \end{verbatim}
 will look for a stanza in the Makefile as:
 \begin{verbatim}
-\${PART}dir 
+\${PART}dir
 \end{verbatim}
 which expands to:
 \begin{verbatim}
@@ -447,7 +447,7 @@ Variable PART can be specified (environment or command-line) as
 one of:
 
 \begin{verbatim}
- (all | lib | install | lisp | interp | comp | graph | hyper 
+ (all | lib | install | lisp | interp | comp | graph | hyper
       | input | sman | boot | include | doc | algebra )
 \end{verbatim}
 
@@ -455,7 +455,7 @@ It is possible to be more specific with a directory using SUBPART.
 
 
 \subsubsection{DESTDIR and COMMAND}
-The install directory is /usr/local/axiom by default 
+The install directory is /usr/local/axiom by default
 but this can be changed on the command line by typing:
 \begin{verbatim}
 make DESTDIR=/yourabsolutepath COMMAND=fullPathAndCommand install
@@ -498,7 +498,7 @@ DESTDIR:=/usr/local/axiom
 COMMAND:=${DESTDIR}/mnt/${SYS}/bin/axiom
 
 ##### functions we need
-AWK:=gawk 
+AWK:=gawk
 PATCH:=patch
 RANLIB:=ranlib
 TAR:=tar
@@ -511,7 +511,7 @@ LATEX:=latex
 PLF=${SYS}platform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -std=gnu89 -w" 
+     -std=gnu89 -w"
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -590,20 +590,20 @@ UNCOMPRESS=${UNCOMPRESS} \
 VERSION=${VERSION} \
 WEAVE=${WEAVE} \
 XLIB=${XLIB} \
-ZIPS=${ZIPS} 
+ZIPS=${ZIPS}
 
 \end{chunk}
 
 \subsection{book}
 This stanza constructs the book from the original pamphlet file.
 At this time there is no difference between the pamphlet file
-and straight latex (intentionally). Thus we just need to make 
+and straight latex (intentionally). Thus we just need to make
 sure the correct directories are in place, copy the files, and
 run latex over the pamphlet file.
 
 \begin{chunk}{book}
 book:
-	@ echo 79 building the book as ${MNT}/${SYS}/doc/book.dvi 
+	@ echo 79 building the book as ${MNT}/${SYS}/doc/book.dvi
 	@ cp ${SRC}/doc/book.pamphlet ${MNT}/${SYS}/doc
 	@ cp -pr ${SRC}/doc/ps ${MNT}/${SYS}/doc
 	@ (cd ${MNT}/${SYS}/doc ; \
@@ -618,7 +618,7 @@ book:
 	  rm book.toc ; \
 	  rm book.log ; \
 	  rm book.aux )
-	@ echo 80 The book is at ${MNT}/${SYS}/doc/book.dvi 
+	@ echo 80 The book is at ${MNT}/${SYS}/doc/book.dvi
 
 \end{chunk}
 
@@ -644,7 +644,7 @@ We should recompile the world with the .fn information but not here.
 
 \begin{chunk}{src}
 srcdir: ${SPD}/src/Makefile
-	@echo 15 making ${SPD}/src 
+	@echo 15 making ${SPD}/src
 	@( cd src ; ${ENV} ${MAKE} )
 
 ${SPD}/src/Makefile: ${SPD}/src/Makefile.pamphlet
@@ -654,8 +654,8 @@ ${SPD}/src/Makefile: ${SPD}/src/Makefile.pamphlet
 	   cp Makefile.pdf ${MNT}/${SYS}/doc/src/src.Makefile.pdf )
 
 libspadclean:
-	@echo 17 cleaning ${OBJ}/${SYS}/lib	
-	@rm -rf ${OBJ}/${SYS}/lib	
+	@echo 17 cleaning ${OBJ}/${SYS}/lib
+	@rm -rf ${OBJ}/${SYS}/lib
 	@( cd src ; ${EXTRACT} Makefile )
 	@( cd src ; ${ENV} ${MAKE} clean )
 	@rm -f ${SPD}/src/Makefile ${SPD}/src/Makefile.dvi
@@ -665,7 +665,7 @@ libspadclean:
 \subsection{src setup}
 \begin{chunk}{srcsetup}
 srcsetup: ${SPD}/src/Makefile
-	@echo 18 making ${SPD}/src 
+	@echo 18 making ${SPD}/src
 	@( cd src ; ${ENV} ${MAKE} setup )
 
 \end{chunk}
@@ -711,7 +711,7 @@ information during a compile-file. This information gets written out
 to a .fn file. These .fn files can be loaded and written out
 as a file containing proclaims information. If this proclaims information
 is available at compile time then the resulting function calls are much
-more efficient. The sys-proclaims file contains type information 
+more efficient. The sys-proclaims file contains type information
 about standard common lisp function calls.
 \begin{chunk}{lsp}
 lspdir: ${LSP}/Makefile
@@ -721,7 +721,7 @@ lspdir: ${LSP}/Makefile
 	@echo =====================================
 	@echo lsp BUILDING GCL COMMON LISP
 	@echo =====================================
-	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir ) 
+	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir )
 	@(cp ${GCLDIR}/unixport/saved_gcl ${SPADBIN}/${GCLVERSION})
 
 \getchunk{LSPMakefile}
@@ -752,7 +752,7 @@ install:
 	@echo
 	@echo Please add $(shell dirname ${COMMAND}) to your PATH variable
 	@echo Start Axiom with the command $(shell basename ${COMMAND})
-	@echo 
+	@echo
 
 \end{chunk}
 
@@ -769,7 +769,7 @@ files live in either the LSP or SRC subdirectories we make
 sure the INT/DOC/LSP and INT/DOC/SRC directories exist.
 
 \begin{chunk}{document}
-document: 
+document:
 	@echo 22 documenting files
 	@(cd lsp ; ${ENV} ${MAKE} document )
 	@(cd src ; ${ENV} ${MAKE} document )
@@ -778,7 +778,7 @@ document:
 
 \subsection{clean}
 \begin{chunk}{clean}
-clean: 
+clean:
 	@ echo 7 making a ${SYS} system, PART=${PART} SUBPART=${SUBPART}
 	@ echo 8 Environment ${ENV}
 	@ rm -f lsp/Makefile.dvi
@@ -798,7 +798,7 @@ clean:
 
 The Top Level Makefile examines the SPAD variable to determine
 the target build platform. It sets up the general structure
-of the world. Then it invokes one of these platform Makefiles. 
+of the world. Then it invokes one of these platform Makefiles.
 Each of these Makefiles sets several
 environment variables that are specific to this platform.
 
@@ -807,7 +807,7 @@ environment variables that are specific to this platform.
 The LDF variable is the generic loader flags. This gives information
 about where various libraries are located on specific platforms. On
 linux, for instance, the library libXpm.a is used by the graphics
-routines. This library is usually found in /usr/X11R6/bin/libXpm.a. 
+routines. This library is usually found in /usr/X11R6/bin/libXpm.a.
 Thus, on the linux platform LDF is defined as
 \begin{verbatim}
 LDF=" -L/usr/X11R6/lib -L/usr/lib ${XLIB}/libXpm.a -lXpm"
@@ -850,7 +850,7 @@ When the system is being built from scratch these databases
 need to exist. However, they get dynamically rebuilt after
 the algebra files are compiled. The bootstrap versions of these
 databases live in the src/share subdirectory. Axiom will
-use the value of the shell variable DAASE to find its 
+use the value of the shell variable DAASE to find its
 databases. If this variable is unbound it uses the standard
 \verb|${MNT}/${SYS}| path. Note that Axiom will append the string
 /algebra to the value of DAASE. The default value setting
@@ -869,7 +869,7 @@ Axiom needs to use libXpm.a to build the graph subdirectory.
 The SRCDIRS variable is used in the src/Makefile.pamphlet
 to decide what directories to build on a given platform. This is
 needed at the moment because certain functions do not yet work on
-all platforms. 
+all platforms.
 
 \subsubsection{The GCLVERSION variable }
 GCLVERSION is the name of the GCL version. The one we used to
@@ -895,21 +895,6 @@ lsp/Makefile.pamphlet file and get the correct version. If you
 forget to erase the lsp/Makefile the wrong patches will be applied.
 
 \begin{chunk}{GCLVERSION}
-#GCLVERSION=gcl-2.4.1
-#GCLVERSION=gcl-2.5
-#GCLVERSION=gcl-2.5.2
-#GCLVERSION=gcl-2.6.1
-#GCLVERSION=gcl-2.6.2
-#GCLVERSION=gcl-2.6.2a
-#GCLVERSION=gcl-2.6.3
-#GCLVERSION=gcl-2.6.5
-#GCLVERSION=gcl-2.6.6
-#GCLVERSION=gcl-2.6.7pre
-#GCLVERSION=gcl-2.6.7
-#GCLVERSION=gcl-2.6.8pre
-#GCLVERSION=gcl-2.6.8pre2
-#GCLVERSION=gcl-2.6.8pre3 
-#GCLVERSION=gcl-2.6.8pre4
 #GCLVERSION=gcl-2.6.8pre7
 #GCLVERSION=gcl-cygwin
 #GCLVERSION=gcl-2.6.9
@@ -920,7 +905,7 @@ GCLVERSION=gcl-2.6.13pre
 \end{chunk}
 
 \subsubsection{The GCLOPTS configure variable}
-The GCLOPTS lisp requires some parameters 
+The GCLOPTS lisp requires some parameters
 for building which vary from system
 to system. We create an environment variable here so we can add options
 to the configure command in the lsp/Makefile.pamphlet.
@@ -937,8 +922,9 @@ to the configure command in the lsp/Makefile.pamphlet.
   repeating'' issue, which is now fixed by ``--disable-readline''.
 \end{remark}
 
-\begin{chunk}{GCLOPTS} 
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+\begin{chunk}{GCLOPTS}
+GCLOPTS="--enable-vssize=65536*2 --enable-ihsize=65536*2 \
+         --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
 It turns out that we can successfully build GCL on many more systems
@@ -950,15 +936,17 @@ with the message
 Error: Cannot get relocated section contents
 \end{verbatim}
 \begin{chunk}{GCLOPTS-LOCBFD}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+GCLOPTS="--enable-vssize=65536*2 --enable-ihsize=65536*2 \
+         --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
 For the gcl-2.6.8pre7 version we move to using the custreloc option.
 \begin{chunk}{GCLOPTS-CUSTRELOC}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+GCLOPTS="--enable-vssize=65536*2 --enable-ihsize=65536*2 \
+         --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
-For the MACOSX port we need the following options. The ``--disable-nls'' means 
+For the MACOSX port we need the following options. The ``--disable-nls'' means
 that we will not be supporting natural language internationalization.
 The ``--enable-maxpage'' has been eliminated because it causes build failures.
 The ``--enable-machine'' parameter appears to be used by configure from the
@@ -966,7 +954,8 @@ setting of the ``canonical'' variable, which is in turn set by a shell script.
 We need to add ``--enable-locbfd'' and ``--disable-dlopen'' due to the error
 ``unexec: not enough room for load commands for new \_\_DATA segments''.
 \begin{chunk}{GCLOPTS-MACPORT}
-GCLOPTS="--enable-vssize=65536*2 --disable-xgcl --disable-tkconfig \
+GCLOPTS="--enable-vssize=65536*2 --enable-ihsize=65536*2 \
+         --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
 
@@ -988,7 +977,7 @@ O:=o
 
 all: srcsetup srcdir
 	@echo 45 Makefile.FreeBSD called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1028,7 +1017,7 @@ SRCDIRS="bootdir interpdir sharedir algebradir etcdir docdir inputdir"
 
 all: srcsetup srcdir
 	@echo 45 Makefile.windows called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1058,7 +1047,7 @@ O:=o
 
 all: srcsetup srcdir
 	@echo 45 Makefile.slackware called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1071,8 +1060,13 @@ all: srcsetup srcdir
 \getchunk{clean}
 \end{chunk}
 
-\subsection{Makefile.linux}
-\begin{chunk}{Makefile.linux}
+\subsection{Makefile.LINUX}
+
+The previous default \texttt{Makefile.LINUX} should now work on most Linux distributions.
+To prevent setting \texttt{PLF=LINUXplatform} explicitly, now this Makefile is
+renamed to \texttt{Makefile.LINUX}.
+
+\begin{chunk}{Makefile.LINUX}
 \getchunk{ENVDEFAULTS}
 
 ####4 C related variables
@@ -1088,8 +1082,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1120,7 +1114,7 @@ O:=o
 
 all: srcsetup srcdir
 	@echo 45 Makefile.mandriva called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1150,8 +1144,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1181,8 +1175,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1212,8 +1206,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1243,8 +1237,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1274,8 +1268,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1305,8 +1299,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1336,8 +1330,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1367,8 +1361,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1398,8 +1392,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1431,7 +1425,7 @@ O:=o
 
 all: srcsetup srcdir
 	@echo 45 Makefile.macosxppc called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1463,7 +1457,7 @@ O:=o
 
 all: srcsetup srcdir
 	@echo 45 Makefile.fedora called
-	@echo 46 Environment : ${ENV} 
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1474,83 +1468,6 @@ all: srcsetup srcdir
 \getchunk{lsp}
 \getchunk{document}
 \getchunk{clean}
-\end{chunk}
-
-\subsection{Makefile.fedora5}
-\begin{chunk}{Makefile.fedora5}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora6}
-\begin{chunk}{Makefile.fedora6}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora7}
-\begin{chunk}{Makefile.fedora7}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora8}
-\begin{chunk}{Makefile.fedora8}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora8-64}
-Fedora 8 on a 64 bit machine requires gcl-2.6.8pre2
-\begin{chunk}{Makefile.fedora8-64}
-\getchunk{ENVDEFAULTS}
-
-####H C Related variables
-INC:=${SPD}/src/include
-PLF:=LINUXplatform
-CCF:="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} -I/usr/X11/include -std=gnu89 -w"
-CC:=gcc
-XLIB:=/usr/X11R6/lib
-LDF:=" -L/usr/X11R6/lib -L/usr/lib -lXpm"
-O:=o
-
-\getchunk{GCLOPTS-CUSTRELOC}
-\getchunk{ENVAR}
-
-all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
-	@echo 47 finished system build on `date` | tee >lastBuildDate
-	@- if [ "${TESTSET}" != "notests" ] ; \
-	    then  grep "result FAILED" int/input/*.regress || true ; fi
-
-\getchunk{literate commands}
-\getchunk{srcsetup}
-\getchunk{src}
-\getchunk{lsp}
-\getchunk{document}
-\getchunk{clean}
-\end{chunk}
-
-\subsection{Makefile.fedora9}
-\begin{chunk}{Makefile.fedora9}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora10}
-\begin{chunk}{Makefile.fedora10}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora11}
-\begin{chunk}{Makefile.fedora11}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora12}
-\begin{chunk}{Makefile.fedora12}
-\getchunk{Makefile.fedora}
-\end{chunk}
-
-\subsection{Makefile.fedora13}
-\begin{chunk}{Makefile.fedora13}
-\getchunk{Makefile.fedora}
 \end{chunk}
 
 \subsection{Makefile.gentoo}
@@ -1559,8 +1476,8 @@ all: srcsetup srcdir
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1590,40 +1507,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
-	@echo 47 finished system build on `date` | tee >lastBuildDate
-	@- if [ "${TESTSET}" != "notests" ] ; \
-	    then  grep "result FAILED" int/input/*.regress || true ; fi
-
-\getchunk{literate commands}
-\getchunk{srcsetup}
-\getchunk{src}
-\getchunk{lsp}
-\getchunk{document}
-\getchunk{clean}
-\end{chunk}
-
-\subsection{Makefile.fedora3}
-Fedora Core 3 needs special GCL options for local bfd.
-\begin{chunk}{Makefile.fedora3}
-\getchunk{ENVDEFAULTS}
-####J C Related variables
-INC:=${SPD}/src/include
-PLF:=LINUXplatform
-CCF:="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} -I/usr/X11/include -std=gnu89 -w"
-CC:=gcc
-XLIB:=/usr/X11R6/lib
-LDF="-L/usr/X11R6/lib64 -L/usr/local/lib64 -L/usr/openwin/lib64 -L/usr/lib64 "
-O:=o
-
-\getchunk{GCLOPTS-LOCBFD}
-\getchunk{ENVAR}
-
-
-all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1637,13 +1522,14 @@ all: srcsetup srcdir
 \end{chunk}
 
 \subsection{Makefile.MACOSX}
+
 On the Mac OS X someone decided (probably a BSDism) to rename the
-SIGCLD signal to SIGCHLD. In order to handle this in the 
+SIGCLD signal to SIGCHLD. In order to handle this in the
 low level C socket code (in particular, in \verb|src/lib/fnct_key.c|)
 we change the platform variable to be MACOSXplatform and create
 this new stanza.
 
-It appears that the Mac OS X does not include gawk or nawk by 
+It appears that the Mac OS X does not include gawk or nawk by
 default so we change the AWK variable to use awk.
 
 \begin{chunk}{Makefile.MACOSX}
@@ -1655,7 +1541,7 @@ AWK=awk
 PLF=MACOSXplatform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -std=gnu89 -w" 
+     -std=gnu89 -w"
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -1666,8 +1552,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1682,12 +1568,12 @@ all: srcsetup srcdir
 
 \subsection{Makefile.BSD}
 On the MAC OSX someone decided (probably a BSDism) to rename the
-SIGCLD signal to SIGCHLD. In order to handle this in the 
+SIGCLD signal to SIGCHLD. In order to handle this in the
 low level C socket code (in particular, in \verb|src/lib/fnct_key.c|)
 we change the platform variable to be MACOSXplatform and create
 this new stanza.
 
-It appears that the MAC OSX does not include gawk or nawk by 
+It appears that the MAC OSX does not include gawk or nawk by
 default so we change the AWK variable to use awk.
 
 \begin{chunk}{Makefile.BSD}
@@ -1698,7 +1584,7 @@ AWK=awk
 PLF=BSDplatform
 CCF="-O2 -fno-strength-reduce -D_GNU_SOURCE -D${PLF} \
      -I/usr/X11/include \
-     -std=gnu89 -w" 
+     -std=gnu89 -w"
 INC:=${SPD}/src/include
 CC:=gcc
 XLIB:=/usr/X11R6/lib
@@ -1709,8 +1595,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1752,8 +1638,8 @@ O:=o
 \getchunk{ENVAR}
 
 all: srcsetup srcdir
-	@echo 45 Makefile.linux called
-	@echo 46 Environment : ${ENV} 
+	@echo 45 Makefile.LINUX called
+	@echo 46 Environment : ${ENV}
 	@echo 47 finished system build on `date` | tee >lastBuildDate
 	@- if [ "${TESTSET}" != "notests" ] ; \
 	    then  grep "result FAILED" int/input/*.regress || true ; fi
@@ -1771,7 +1657,7 @@ all: srcsetup srcdir
 \bibitem{1} CMUCL {\bf http://www.cons.org/cmucl}
 \bibitem{2} GCL {\bf http://savannah.gnu.org/projects/gcl}
 \bibitem{3} Codemist Ltd, ``Alta'', Horsecombe Vale Combs Down
-Bath BA2 5QR UK Tel. +44-1225-837430 
+Bath BA2 5QR UK Tel. +44-1225-837430
 {\bf http://www.codemist.co.uk}
 \bibitem{5} \$SPAD/zips/advi-1.2.0.tar.gz, the advi source tree
 \end{thebibliography}
