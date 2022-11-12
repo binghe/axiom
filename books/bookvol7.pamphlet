@@ -8941,7 +8941,7 @@ int gXScreenNumber;
 Sock *sessionServer = NULL;
 Sock *spadSocket = NULL;
 int still_reading; 
-int str_len;
+extern int str_len;
 
 \end{chunk}
 \section{The Shared Code}
