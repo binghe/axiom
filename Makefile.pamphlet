@@ -722,7 +722,7 @@ lspdir: ${LSP}/Makefile
 	@echo lsp BUILDING GCL COMMON LISP
 	@echo =====================================
 	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir )
-	@(cp ${GCLDIR}/unixport/saved_gcl ${SPADBIN}/${GCLVERSION})
+	@(cp ${OBJ}/${SYS}/bin/lisp ${SPADBIN}/${GCLVERSION})
 
 \getchunk{LSPMakefile}
 lspclean:
