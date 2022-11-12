@@ -8940,7 +8940,7 @@ int gXScreenNumber;
 
 Sock *sessionServer = NULL;
 Sock *spadSocket = NULL;
-int still_reading; 
+extern int still_reading; 
 extern int str_len;
 
 \end{chunk}
