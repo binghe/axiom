@@ -25594,7 +25594,7 @@ zzopen(char *file,char * mode)
 /* returns true if the file exists */
 
 int
-file_exists(char *file)
+ax_file_exists(char *file)
 {
     FILE *f;
 
@@ -25609,10 +25609,10 @@ file_exists(char *file)
 {
     char com[512], zfile[512];
 
-    if (file_exists(file))
+    if (ax_file_exists(file))
         return fopen(file, mode);
     sprintf(zfile, "%s.Z", file);
-    if (file_exists(zfile)) {
+    if (ax_file_exists(zfile)) {
         sprintf(com, "gunzip -c %s.Z 2>/dev/null", file);
         return popen(com, mode);
     }
