@@ -941,10 +941,8 @@ Unrecoverable error: frame stack overflow.
 \end{verbatim}
 
 \begin{chunk}{GCLOPTS}
-GCLOPTS="--enable-vssize=65536*3 \
-         --enable-ihssize=65536*2 \
-         --enable-bdssize=65536*2 \
-         --enable-frssize=65536*2 \
+GCLOPTS="--enable-vssize=65536*2 \
+         --disable-ansi \
          --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
@@ -957,19 +955,15 @@ with the message
 Error: Cannot get relocated section contents
 \end{verbatim}
 \begin{chunk}{GCLOPTS-LOCBFD}
-GCLOPTS="--enable-vssize=65536*3 \
-         --enable-ihssize=65536*2 \
-         --enable-bdssize=65536*2 \
-         --enable-frssize=65536*2 \
+GCLOPTS="--enable-vssize=65536*2 \
+         --disable-ansi \
          --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
 For the gcl-2.6.8pre7 version we move to using the custreloc option.
 \begin{chunk}{GCLOPTS-CUSTRELOC}
-GCLOPTS="--enable-vssize=65536*3 \
-         --enable-ihssize=65536*2 \
-         --enable-bdssize=65536*2 \
-         --enable-frssize=65536*2 \
+GCLOPTS="--enable-vssize=65536*2 \
+         --disable-ansi \
          --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 \end{chunk}
@@ -981,10 +975,8 @@ setting of the ``canonical'' variable, which is in turn set by a shell script.
 We need to add ``--enable-locbfd'' and ``--disable-dlopen'' due to the error
 ``unexec: not enough room for load commands for new \_\_DATA segments''.
 \begin{chunk}{GCLOPTS-MACPORT}
-GCLOPTS="--enable-vssize=65536*3 \
-         --enable-ihssize=65536*2 \
-         --enable-bdssize=65536*2 \
-         --enable-frssize=65536*2 \
+GCLOPTS="--enable-vssize=65536*2 \
+         --disable-ansi \
          --disable-xgcl --disable-tkconfig \
          --disable-dlopen \
          --disable-tclconfig --disable-readline"
