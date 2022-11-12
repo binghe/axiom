@@ -26967,8 +26967,11 @@ int
 make_server_name(char *name,char * base)
 {
   char *num;
+  /* Crude attempt to prevent name from overflowing sa_data field on connect */
+  struct sockaddr addr; /* added by Camm Maguire <camm@debian.org> */
   if (spad_server_number != -1) {
-    sprintf(name, "%s%d", base, spad_server_number);
+    /* sprintf(name, "%s%d", base, spad_server_number); */
+    snprintf(name, sizeof(addr.sa_data), "%s%d", base, spad_server_number);
     return 0;
   }
   num = getenv("SPADNUM");
@@ -26978,7 +26981,8 @@ make_server_name(char *name,char * base)
 */
     return -1;
   }
-  sprintf(name, "%s%s", base, num);
+  /* sprintf(name, "%s%s", base, num); */
+  snprintf(name, sizeof(addr.sa_data), "%s%s", base, num);
   return 0;
 }
 
