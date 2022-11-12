@@ -14287,7 +14287,7 @@ Camm Maguire                                        address@hidden
                            (rpages 1000)
                            (hole 2000) )
   ;; initialize AKCL memory allocation parameters
-  #+:AKCL ; GCL
+  #+:nil ; disabled by Camm Maguire <camm@debian.org>)
   (progn
     (system:allocate 'cons cons)
     (system:allocate 'fixnum fixnum)
@@ -14298,8 +14298,8 @@ Camm Maguire                                        address@hidden
     (system:allocate 'cfun cfun)
     (system:allocate-contiguous-pages cpages)
     (system:allocate-relocatable-pages rpages)
-    (system:set-starting-hole-divisor hole)) ; 2.6.10+ (was: set-hole-size)
-  #-:AKCL
+    (system:set-hole-size hole))
+  #-:nil
   nil)
 
 \end{chunk}
