@@ -27134,7 +27134,7 @@ redirect_stdio(Sock *sock)
     perror("Error connecting stdin to socket\n");
     return;
   }
-  perror(stderr, "Redirected standard IO\n");
+  perror("Redirected standard IO\n");
   FD_CLR(sock->socket, &socket_mask);
 }
 
