@@ -1,0 +1,17 @@
+--- gcl-2.6.13pre.orig/o/unixfsys.c	2022-11-09 01:43:51.000000000 +0100
++++ gcl-2.6.13pre/o/unixfsys.c	2022-11-12 18:22:01.000000000 +0100
+@@ -268,7 +268,13 @@
+   memcpy(FN1,s->st.st_self,z1);
+   FN1[z1]=0;
+ #ifndef __MINGW32__
+-  massert((l=readlinkat(d ? dirfd((DIR *)d) : AT_FDCWD,FN1,FN2,sizeof(FN2)))>=0 && l<sizeof(FN2));
++  /* AT_FDCWD is not available in some old *nix systems, call readlink() instead. */
++  if (d) {
++    l=readlinkat(dirfd((DIR *)d),FN1,FN2,sizeof(FN2));
++  } else {
++    l=readlink(FN1,FN2,sizeof(FN2));
++  }
++  massert(l>=0 && l<sizeof(FN2));
+ #else
+   l=0;
+ #endif

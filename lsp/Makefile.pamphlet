@@ -344,6 +344,18 @@ hangs waiting for a response.
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.o.read.d.patch )
 \end{chunk}
 
+\subsubsection{unixfsys.c patch}
+
+When calling \texttt{readlinkat()}, the special value for \texttt{dired},
+\texttt{AT\_FDCWD}, is not available in some old *nix systems like
+Mac OS X 10.6. We should call \texttt{readlink()} in this case.
+
+\begin{chunk}{gcl-2.6.13pre.o.unixfsys.c.patch}
+	@(cd ${GCLVERSION}/o ; \
+	  echo 100 applying unixfsys.c patch to o/unixfsys.c ; \
+	  ${PATCH} <${SPD}/zips/${GCLVERSION}.o.unixfsys.c.patch )
+\end{chunk}
+
 \subsubsection{fortran patch}
 Communication over sockets (basically to the NAG fortran library)
 requires us to have XDR enabled.
@@ -1796,6 +1808,7 @@ gcldir:
 \getchunk{gcl-2.6.13pre.h.linux.defs.patch}
 \getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
 \getchunk{gcl-2.6.13pre.o.read.d.patch}
+\getchunk{gcl-2.6.13pre.o.unixfsys.c.patch}
 \getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
 \getchunk{gcl-2.6.13pre.unixport.makefile.patch}
 \getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
