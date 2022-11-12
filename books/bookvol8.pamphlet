@@ -26988,6 +26988,8 @@ make_server_name(char *name,char * base)
 
 /* client Spad server sockets.  Two sockets are created: server[0]
    is the internet server socket, and server[1] is a UNIX domain socket. */
+#include <sys/un.h>
+
 int 
 open_server(char *server_name)
 {
@@ -27030,12 +27032,11 @@ open_server(char *server_name)
     server[1].socket = 0;
     return -2;
   } else {
-    server[1].addr.u_addr.sa_family = AF_UNIX;
-    memset(server[1].addr.u_addr.sa_data, 0,
-           sizeof(server[1].addr.u_addr.sa_data));
-    strcpy(server[1].addr.u_addr.sa_data, name);
-    if (bind(server[1].socket, &server[1].addr.u_addr,
-             sizeof(server[1].addr.u_addr))) {
+    struct sockaddr_un nn;
+    memset(&nn, 0, sizeof(nn));
+    nn.sun_family = AF_UNIX;
+    strncpy(nn.sun_path, name, sizeof(nn.sun_path) - 1);
+    if (bind(server[1].socket,(const struct sockaddr *) &nn,sizeof(nn))) {
       perror("binding UNIX server socket");
       server[1].socket = 0;
       return -2;
