@@ -1763,11 +1763,16 @@ typedef struct {
 
 /* table of dedicated socket types */
 
+#ifndef GCL_SOURCE
+#define STATIC
 extern Sock *purpose_table[];
 extern Sock server[];
 extern Sock clients[];
 extern fd_set socket_mask;
 extern fd_set server_mask;
+#else
+#define STATIC static
+#endif
 
 /* Commands sent over the AXIOM session manager or menu socket */
 
@@ -26260,15 +26265,17 @@ back_over_current_char(void)
   ( purpose_table[purpose] == NULL ? sock_accept_connection(purpose) : 1 )
 
 
-Sock clients[MaxClients];       /* socket description of spad clients */
-Sock server[2];                 /* AF_UNIX and AF_INET sockets for server */
-Sock *purpose_table[TotalMaxPurposes]; /* table of dedicated socket types */
-fd_set socket_mask;             /* bit mask of active sockets */
-fd_set server_mask;             /* bit mask of server sockets */
-int socket_closed;              /* used to identify closed socket on SIGPIPE */
-int spad_server_number = -1;    /* spad server number used in sman */
-int str_len = 0;
-int still_reading  = 0;
+STATIC Sock clients[MaxClients];       /* socket description of spad clients */
+STATIC Sock server[2];                 /* AF_UNIX and AF_INET sockets for server */
+STATIC Sock *purpose_table[TotalMaxPurposes]; /* table of dedicated socket types */
+STATIC fd_set socket_mask;             /* bit mask of active sockets */
+STATIC fd_set server_mask;             /* bit mask of server sockets */
+STATIC int socket_closed;              /* used to identify closed socket on SIGPIPE */
+STATIC int spad_server_number = -1;    /* spad server number used in sman */
+STATIC int str_len = 0;
+#ifndef GCL_SOURCE
+STATIC int still_reading  = 0;
+#endif
 
 \getchunk{include/bsdsignal.h1}
 \getchunk{include/sockio-c.h1}
@@ -26898,7 +26905,11 @@ remote_stdio(Sock *sock)
       return;
     }
     if (FD_ISSET(0, &rd)) {
+#ifdef GCL_SOURCE
+      gcl_gets(buf,1024);
+#else
       fgets(buf,1024,stdin);
+#endif
       len = strlen(buf);
       /*
           gets(buf);
@@ -26914,8 +26925,12 @@ remote_stdio(Sock *sock)
         return;
       else {
         *(buf + len) = '\0';
+#ifdef GCL_SOURCE
+        gcl_puts(buf);
+#else
         fputs(buf, stdout);
         fflush(stdout);
+#endif
       }
     }
   }
@@ -27106,15 +27121,15 @@ redirect_stdio(Sock *sock)
 /*  setbuf(stdout, NULL);  */
   fd = dup2(sock->socket, 1);
   if (fd != 1) {
-    fprintf(stderr, "Error connecting stdout to socket\n");
+    perror("Error connecting stdout to socket\n");
     return;
   }
   fd = dup2(sock->socket, 0);
   if (fd != 0) {
-    fprintf(stderr, "Error connecting stdin to socket\n");
+    perror("Error connecting stdin to socket\n");
     return;
   }
-  fprintf(stderr, "Redirected standard IO\n");
+  perror(stderr, "Redirected standard IO\n");
   FD_CLR(sock->socket, &socket_mask);
 }
 
