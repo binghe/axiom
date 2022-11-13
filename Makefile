@@ -187,7 +187,7 @@ lspdir: ${LSP}/Makefile
 	@echo lsp BUILDING GCL COMMON LISP
 	@echo =====================================
 	(cd lsp ; ${ENV} DESTDIR= ${MAKE} gcldir )
-	@(cp ${GCLDIR}/unixport/saved_gcl ${SPADBIN}/${GCLVERSION})
+	@(cp ${OBJ}/${SYS}/bin/lisp ${SPADBIN}/${GCLVERSION})
 
 ${LSP}/Makefile: ${LSP}/Makefile.pamphlet
 	@echo 20 making ${LSP}/Makefile from ${LSP}/Makefile.pamphlet
