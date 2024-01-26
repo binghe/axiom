@@ -13,7 +13,7 @@ algebra code that gets shipped with the system needs to undergo this
 process. User code can be compiled once the distributed algebra exists
 and does not need either this Makefile or this installation process.
 
-Since understanding is the key to making correct changes to this file
+Since understanding is the key to making correct changes to this file,
 I'll work on explaining the details of why things need to exist. 
 
 The first idea that you need to understand is the overall process
