@@ -1,0 +1,11 @@
+--- gcl-2.6.14.orig/cmpnew/gcl_cmpmain.lsp	2023-01-14 02:48:26
++++ gcl-2.6.14/cmpnew/gcl_cmpmain.lsp	2024-01-26 21:37:15
+@@ -483,7 +483,7 @@
+ 	  (t (setq dir ".")))
+     (setq na  (namestring
+ 	       (make-pathname :name name :type (pathname-type(first args)))))
+-   (format nil  "~a ~a -I~a ~a ~a -c ~a -o ~a ~a"
++   (format nil  "~a ~a -I~a ~a ~a -std=gnu89 -c ~a -o ~a ~a"
+ 	   (concatenate 'string
+ 			(if *prof-p* (remove-flag "-fomit-frame-pointer" *cc*) *cc*)
+ 			#+large-memory-model(if *large-memory-model-p* " -mcmodel=large " "")

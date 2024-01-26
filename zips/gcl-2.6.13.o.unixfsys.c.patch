@@ -1,0 +1,14 @@
+--- gcl-2.6.14.orig/o/unixfsys.c	2023-01-14 02:48:26
++++ gcl-2.6.14/o/unixfsys.c	2024-01-26 21:44:10
+@@ -269,7 +269,11 @@
+   memcpy(FN1,s->st.st_self,z1);
+   FN1[z1]=0;
+ #ifndef __MINGW32__
++#if _POSIX_C_SOURCE >= 200809L
+   massert((l=readlinkat(d ? dirfd((DIR *)d) : AT_FDCWD,FN1,FN2,sizeof(FN2)))>=0 && l<sizeof(FN2));
++#else
++  massert((l=readlink(FN1,FN2,sizeof(FN2)))>=0 && l<sizeof(FN2));
++#endif
+ #else
+   l=0;
+ #endif
