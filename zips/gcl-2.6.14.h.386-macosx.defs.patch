@@ -1,0 +1,12 @@
+--- gcl-2.6.14.orig/h/386-macosx.defs	2023-01-14 02:48:26
++++ gcl-2.6.14/h/386-macosx.defs	2024-01-26 21:38:34
+@@ -1,5 +1,9 @@
+ # powerpc-macosx.defs
+ 
++# 20170416000 tpd link Axiom's code per Camm's instruction
++SYSTEM_OBJS = ${OBJ}/${SYS}/lib/cfuns-c.o ${OBJ}/${SYS}/lib/sockio-c.o
++OFLAG = -O
++
+ # Disable Apple's custom C preprocessor which gets confused when
+ # preprocessing some of the *.d files in the o/ subdirectory.
+ CC = gcc $(CPPFLAGS)

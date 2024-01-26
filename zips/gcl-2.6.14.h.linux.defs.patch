@@ -1,0 +1,13 @@
+--- gcl-2.6.14.orig/h/linux.defs	2023-01-14 02:48:26
++++ gcl-2.6.14/h/linux.defs	2024-01-26 21:39:11
+@@ -8,6 +8,10 @@
+ 
+ # Machine dependent makefile definitions for intel 386,486 running linux
+ 
++# 20120407000 tpd link Axiom's code per Camm's instruction
++SYSTEM_OBJS = ${OBJ}/${SYS}/lib/cfuns-c.o ${OBJ}/${SYS}/lib/sockio-c.o
++OFLAG = -O
++
+ LBINDIR=/usr/local/bin
+ 
+ #OFLAG	=  -g -Wall

@@ -1,0 +1,28 @@
+--- gcl-2.6.14.orig/configure	2023-01-14 02:48:26
++++ gcl-2.6.14/configure	2024-01-26 21:59:16
+@@ -2904,8 +2904,8 @@
+ 
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
++ac_compile='$CC -c -w -std=gnu89 $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++ac_link='$CC -o conftest$ac_exeext -w -std=gnu89 $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+@@ -4670,10 +4670,14 @@
+ 	assert_arg_to_ldflags -Wl,-no_pie
+ 	if test "$build_cpu" = "x86_64" ; then
+ 	    assert_arg_to_cflags -m64
++	    assert_arg_to_cflags -w
++	    assert_arg_to_cflags -std=gnu89
+ 	    assert_arg_to_ldflags -m64
+ 	    assert_arg_to_ldflags -Wl,-headerpad,72
+         else
+ 	    assert_arg_to_cflags -m32
++	    assert_arg_to_cflags -w
++	    assert_arg_to_cflags -std=gnu89
+ 	    assert_arg_to_ldflags -m32
+ 	    assert_arg_to_ldflags -Wl,-headerpad,56
+         fi;;

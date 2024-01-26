@@ -1,0 +1,11 @@
+--- gcl-2.6.14.orig/unixport/makefile	2023-01-14 02:48:26
++++ gcl-2.6.14/unixport/makefile	2024-01-26 21:44:48
+@@ -21,7 +21,7 @@
+ LD_FLAGS:=$(LD_FLAGS) $(ODIR)/$(FIRST_FILE)
+ endif
+ LD_LIBS_PRE:=$(addprefix -u ,$(PATCHED_SYMBOLS))
+-LD_LIBS_POST:=$(LIBS) $(LIBC) -lgclp
++LD_LIBS_POST:=$(LIBS) $(LIBC) -lgclp ${OBJ}/${SYS}/lib/libspad.a
+ ifneq ($(LAST_FILE),)
+ LD_LIBS_POST:=$(LD_LIBS_POST) $(ODIR)/$(LAST_FILE)
+ endif

@@ -267,7 +267,7 @@ This has been changed to use the SYSTEM\_OBJS variable, per Camm (Apr 6,2012)
 	  touch ${OBJ}/${SYS}/lib/cfuns-c.ini ; \
 	  touch ${OBJ}/${SYS}/lib/sockio-c.ini )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.h.linux.defs.patch}
+\begin{chunk}{gcl-2.6.14.h.linux.defs.patch}
 	@(cd ${GCLVERSION}/h ; \
 	  echo 3 applying EXTRAS patch to h/linux.defs ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.h.linux.defs.patch )
@@ -289,7 +289,7 @@ this patch links the cfuns-c and sockio-c files into GCL.
 	  touch ${OBJ}/${SYS}/lib/cfuns-c.ini ; \
 	  touch ${OBJ}/${SYS}/lib/sockio-c.ini )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.h.386-macosx.defs.patch}
+\begin{chunk}{gcl-2.6.14.h.386-macosx.defs.patch}
 	@(cd ${GCLVERSION}/h ; \
 	  echo 3 applying EXTRAS patch to h/386-macosx.defs ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.h.386-macosx.defs.patch )
@@ -338,7 +338,7 @@ hangs waiting for a response.
 	  echo 100 applying read.d patch to o/read.d ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.o.read.d.patch )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.o.read.d.patch}
+\begin{chunk}{gcl-2.6.14.o.read.d.patch}
 	@(cd ${GCLVERSION}/o ; \
 	  echo 100 applying read.d patch to o/read.d ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.o.read.d.patch )
@@ -350,7 +350,7 @@ When calling \texttt{readlinkat()}, the special value for \texttt{dired},
 \texttt{AT\_FDCWD}, is not available in some old *nix systems like
 Mac OS X 10.6. We should call \texttt{readlink()} in this case.
 
-\begin{chunk}{gcl-2.6.13pre.o.unixfsys.c.patch}
+\begin{chunk}{gcl-2.6.14.o.unixfsys.c.patch}
 	@(cd ${GCLVERSION}/o ; \
 	  echo 100 applying unixfsys.c patch to o/unixfsys.c ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.o.unixfsys.c.patch )
@@ -472,7 +472,7 @@ The for-loop change has been included in the sources.
 	  echo 6 applying libspad.a patch to unixport/makefile ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.unixport.makefile.patch )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.unixport.makefile.patch}
+\begin{chunk}{gcl-2.6.14.unixport.makefile.patch}
 	@(cd ${GCLVERSION}/unixport ; \
 	  echo 6 applying libspad.a patch to unixport/makefile ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.unixport.makefile.patch )
@@ -484,7 +484,7 @@ The for-loop change has been included in the sources.
 	  echo 30 applying gcl_top.lsp patch to lsp/gcl_top.lsp ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.lsp.gcl_top.lsp.patch )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
+\begin{chunk}{gcl-2.6.14.lsp.gcltop.lsp.patch}
 	@(cd ${GCLVERSION}/lsp ; \
 	  echo 30 applying gcl_top.lsp patch to lsp/gcl_top.lsp ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.lsp.gcl_top.lsp.patch )
@@ -590,7 +590,7 @@ We no-op this (per William Schelter's permission)
 	  echo 7 applying toploop patch to lsp/gcl_mislib.lsp ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.lsp.gcl_mislib.lsp.patch )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
+\begin{chunk}{gcl-2.6.14.lsp.gcl.mislib.lsp.patch}
 	@(cd ${GCLVERSION}/lsp ; \
 	  echo 7 applying toploop patch to lsp/gcl_mislib.lsp ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.lsp.gcl_mislib.lsp.patch )
@@ -869,7 +869,7 @@ file contains the proclaims for GCL's function definitions.
 	  echo 27 copy sys-proclaim.lisp to ${OBJ}/${SYS}/lsp/sys-proclaim.lisp ; \
 	  cp sys-proclaim.lisp ${OBJ}/${SYS}/lsp/sys-proclaim.lisp )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.collectfn.fix}
+\begin{chunk}{gcl-2.6.14.collectfn.fix}
 	@(cd ${GCLVERSION}/cmpnew ; \
 	  echo 26 copy gcl_collectfn.lsp to ${OBJ}/${SYS}/lsp/collectfn.lsp ; \
 	  cp gcl_collectfn.lsp ${OBJ}/${SYS}/lsp/collectfn.lsp )
@@ -886,8 +886,8 @@ in the zips subdirectory named {\tt gcl-2.6.12.gmp4.mpn.k8.fix}
 	@ cp ${ZIPS}/gcl-2.6.12.gmp4.mpn.k8.fix \
              ${GCLVERSION}/gmp4/mpn/x86_64/k8/redc_1.asm
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.gmp4.mpn.k8.fix}
-	@ cp ${ZIPS}/gcl-2.6.13pre.gmp4.mpn.k8.fix \
+\begin{chunk}{gcl-2.6.14.gmp4.mpn.k8.fix}
+	@ cp ${ZIPS}/gcl-2.6.14.gmp4.mpn.k8.fix \
              ${GCLVERSION}/gmp4/mpn/x86_64/k8/redc_1.asm
 \end{chunk}
 
@@ -896,7 +896,7 @@ to have different semantics for inline. This breaks GCL. We change
 the compile command line to add "-std=gnu89". We also turn off warnings
 so they do not show up during compiles, especially in a running Axiom.
 
-For GCL 2.6.13pre, there is a new solution before calling {\tt ./configure},
+For GCL 2.6.14, there is a new solution before calling {\tt ./configure},
 see the chunk {\tt gclConfigureMake} for more details.
 
 \begin{chunk}{gcl-2.6.12.configure.patch}
@@ -910,7 +910,7 @@ see the chunk {\tt gclConfigureMake} for more details.
 	  echo 12b applying gcl compile command patch ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.cmpnew.gcl_cmpmain.lsp.patch )
 \end{chunk}
-\begin{chunk}{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
+\begin{chunk}{gcl-2.6.14.cmpnew.gclcmpmain.lsp.patch}
 	@(cd ${GCLVERSION}/cmpnew ; \
 	  echo 12b applying gcl compile command patch ; \
 	  ${PATCH} <${SPD}/zips/${GCLVERSION}.cmpnew.gcl_cmpmain.lsp.patch )
@@ -1791,12 +1791,12 @@ clean:
 
 \end{chunk}
 
-\subsection{The GCL-2.6.13pre stanza}
+\subsection{The GCL-2.6.14 stanza}
 This stanza will be written when the GCLVERSION variable is
-``gcl-2.6.13pre''. It will overwrite the default version. See the 
+``gcl-2.6.14''. It will overwrite the default version. See the 
 top level Makefile.pamphlet.
-\begin{chunk}{gcl-2.6.13pre}
-# gcl version 2.6.13pre
+\begin{chunk}{gcl-2.6.14}
+# gcl version 2.6.14
 OUT=${OBJ}/${SYS}/bin
 
 all:
@@ -1805,16 +1805,16 @@ all:
 gcldir: 
 	@echo 2 building ${GCLVERSION}
 	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
-\getchunk{gcl-2.6.13pre.h.linux.defs.patch}
-\getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
-\getchunk{gcl-2.6.13pre.o.read.d.patch}
-\getchunk{gcl-2.6.13pre.o.unixfsys.c.patch}
-\getchunk{gcl-2.6.13pre.lsp.gcl.mislib.lsp.patch}
-\getchunk{gcl-2.6.13pre.unixport.makefile.patch}
-\getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
-\getchunk{gcl-2.6.13pre.collectfn.fix}
-\getchunk{gcl-2.6.13pre.gmp4.mpn.k8.fix}
-\getchunk{gcl-2.6.13pre.cmpnew.gclcmpmain.lsp.patch}
+\getchunk{gcl-2.6.14.h.linux.defs.patch}
+\getchunk{gcl-2.6.14.h.386-macosx.defs.patch}
+\getchunk{gcl-2.6.14.o.read.d.patch}
+\getchunk{gcl-2.6.14.o.unixfsys.c.patch}
+\getchunk{gcl-2.6.14.lsp.gcl.mislib.lsp.patch}
+\getchunk{gcl-2.6.14.unixport.makefile.patch}
+\getchunk{gcl-2.6.14.lsp.gcltop.lsp.patch}
+\getchunk{gcl-2.6.14.collectfn.fix}
+\getchunk{gcl-2.6.14.gmp4.mpn.k8.fix}
+\getchunk{gcl-2.6.14.cmpnew.gclcmpmain.lsp.patch}
 \getchunk{gclConfigureMake}
 	@echo 13 finished system build on `date` | tee >gcldir
 
@@ -1851,12 +1851,12 @@ all:
 gcldir: 
 	@echo 2 building ${GCLVERSION}
 	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
-\getchunk{gcl-2.6.13pre.h.linux.defs.patch}
-\getchunk{gcl-2.6.13pre.h.386-macosx.defs.patch}
-\getchunk{gcl-2.6.13pre.unixport.makefile.patch}
-\getchunk{gcl-2.6.13pre.lsp.gcltop.lsp.patch}
-\getchunk{gcl-2.6.13pre.collectfn.fix}
-\getchunk{gcl-2.6.13pre.configure.patch}
+\getchunk{gcl-2.6.14.h.linux.defs.patch}
+\getchunk{gcl-2.6.14.h.386-macosx.defs.patch}
+\getchunk{gcl-2.6.14.unixport.makefile.patch}
+\getchunk{gcl-2.6.14.lsp.gcltop.lsp.patch}
+\getchunk{gcl-2.6.14.collectfn.fix}
+\getchunk{gcl-2.6.14.configure.patch}
 \getchunk{gclConfigureMake}
 	@echo 13 finished system build on `date` | tee >gcldir
 
