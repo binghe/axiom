@@ -58,7 +58,6 @@ BYE:=bye
 GCLVERSION=gcl-2.6.14
 GCLDIR:=${LSP}/${GCLVERSION}
 GCLOPTS="--enable-vssize=65536*2 \
-         --disable-ansi \
          --disable-xgcl --disable-tkconfig \
          --disable-tclconfig --disable-readline"
 LISP:=lsp
