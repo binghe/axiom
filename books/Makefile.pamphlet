@@ -340,7 +340,7 @@ ${PDF}/bookvol15.pdf: ${IN}/bookvol15.pamphlet \
 	    ${BIBTEX} bookvol15.aux ; \
 	    ${LATEX} bookvol15.pamphlet >/dev/null ; \
 	    ${BOOKS}/tanglec ${BOOKS}/bookvol15.pamphlet defun.SigSort >SigSort.lisp ; \
-	    sbcl --noinform --eval '(load "SigSort")' ; \
+	    sbcl --no-userinit --eval '(load "SigSort")' ; \
 	    detex -w bookvol15.pamphlet | sort -uf >bookvol15.words ; \
 	    ${LATEX} bookvol15.pamphlet >/dev/null ; \
 	    ${DVIPS} bookvol15.dvi 2>/dev/null ; \
@@ -357,7 +357,7 @@ ${PDF}/bookvol15.pdf: ${IN}/bookvol15.pamphlet \
 	    ${BIBTEX} bookvol15.aux  1>/dev/null 2>/dev/null ; \
 	    ${LATEX} bookvol15.pamphlet >${TMP}/trace ; \
 	    ${BOOKS}/tanglec ${BOOKS}/bookvol15.pamphlet defun.SigSort >SigSort.lisp ; \
-	    sbcl --noinform --eval '(load "SigSort")' ; \
+	    sbcl --no-userinit --eval '(load "SigSort")' ; \
 	    detex -w bookvol15.pamphlet | sort -uf >bookvol15.words ; \
 	    ${LATEX} bookvol15.pamphlet >${TMP}/trace ; \
 	    ${DVIPS} bookvol15.dvi >${TMP}/trace ; \
