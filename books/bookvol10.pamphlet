@@ -13,12 +13,12 @@ algebra code that gets shipped with the system needs to undergo this
 process. User code can be compiled once the distributed algebra exists
 and does not need either this Makefile or this installation process.
 
-Since understanding is the key to making correct changes to this file
+Since understanding is the key to making correct changes to this file,
 I'll work on explaining the details of why things need to exist. 
 
 The first idea that you need to understand is the overall process
 of adding algebra code. Lets assume that you have a brand new spad
-file, called bsd.spad containing a simple domain BSD. The
+file, called \verb|BSD.spad| containing a simple domain {\bf BSD}. The
 steps in the process of adding this file are:
 \begin{enumerate}
 \item Find out where the algebra code lives in the lattice.
@@ -26,14 +26,14 @@ steps in the process of adding this file are:
 \item Start a new interpsys session. This will give you a clean build.
 \item )set mes auto on -- This will allow us to see what algebra files
 get loaded during compile
-\item )co BAR.spad       
-\item We collect all the names of the algebra files BSD loaded. Look for
+\item )co BSD.spad       
+\item We collect all the names of the algebra files \verb|BSD| loaded. Look for
 lines that say a file is loaded. Collect all of the names of those files.
 \item For each of the loaded files determine which layer contains the 
-loaded file by searching this file. For instance, if BAR.spad required
+loaded file by searching this file. For instance, if \verb|BSD.spad| required
 FSAGG then look for /FSAGG.o, which resides in layer 13. 
 \item Determine the highest layer (e.g. 13) that contains the required files
-and add the new algebra file (e.g. BSD.o) in the next layer (e.g. 14).
+and add the new algebra file (e.g. \verb|BSD.o|) in the next layer (e.g. 14).
 \item Next we need to create the graph structure information. This involves
 creating a two part stanza of information. For instance,
 \begin{verbatim}
@@ -506,8 +506,8 @@ these targets to be out of date. The rest of the loop is left
 up to the student.
 
 The bootstrap process works because first we ask for the compiled
-lisp code stanzas (the \verb|\${MID}/BAR.o| files), THEN we ask for
-the final algebra code stanzas (the \verb|\${OUT}/BAR.o| files). This
+lisp code stanzas (the \verb|\${MID}/BSD.o| files), THEN we ask for
+the final algebra code stanzas (the \verb|\${OUT}/BSD.o| files). This
 is a very subtle point so think it through carefully. Notice that
 this is the only layer calling for \verb|\${MID}| files. All other 
 layers call for \verb|\${OUT}| files. If you break this the world
