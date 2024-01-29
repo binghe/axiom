@@ -1102,8 +1102,8 @@ In Coq an arithmetic expression can be defined as:
 \begin{verbatim}
 Inductive AExp :=
   | var  : string -> AExp
-  | con  : Z -> Aexp
-  | plus : Aexp -> AExp -> AExp
+  | con  : Z -> AExp
+  | plus : AExp -> AExp -> AExp
 \end{verbatim}
 where variables use constructor {\bf var} applied to a string,
 constants use constructor {\bf con} applied to an integer (Z

@@ -13221,7 +13221,7 @@ type and {\tt +} is applied, yielding the answer, an object of type
 When possible, Axiom completely determines the type of every object in
 a function, then translates the function definition to Common Lisp or
 to machine code (see the next section).  This translation,
-\index{function!compiler} called compilation, happens the first time
+\index{function!compiler} called {\em compilation}, happens the first time
 you call the function and results in a computational delay.
 Subsequent function calls with the same argument types use the
 compiled version of the code without delay.
