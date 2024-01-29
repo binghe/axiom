@@ -1,27 +1,154 @@
-\usepackage{etex} % solution for too many packages
-\usepackage[dvips,final,colorlinks=true,pdfstartview=FitH]{hyperref}
-%\usepackage[utf8]{inputenc} % handle unicode
-\usepackage[toc,page]{appendix}
+% Latex open file limits exceeded. Allocate more
+\usepackage{etex}    % fix No room for a new \dimen
+\reserveinserts{30}  % fix No room for a new \dimen
+
+% We want an index by type of information
+\usepackage{imakeidx} 
+
+% We make a new index for figures 'fig'.
+% This gives index references to all of the figures.
+
+% We want letters before each alphabet change so we
+% dynamically make an '.mst' file. Note that this
+% will NOT overwrite an existing file.
+\makeindex[name=fig,intoc=false] % figures
+\begin{filecontents*}{fig.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for documentation 'doc'
+% This gives index references to terms mentioned in the text.
+\makeindex[name=doc,intoc=false] % documentation
+\begin{filecontents*}{doc.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for error messages 'err'
+% This gives index references to error message in code
+\makeindex[name=err,intoc=false] % error messages
+\begin{filecontents*}{err.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for code definitions 'code'
+% This gives index references to function definitions,
+% macros, etc.
+\makeindex[name=code,intoc=false] % source code
+\begin{filecontents*}{code.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for categories 'cat'
+% This gives index references to each category.
+\makeindex[name=cat,intoc=false] % categories
+\begin{filecontents*}{cat.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for categories 'dom'
+% This gives index references to each domain.
+\makeindex[name=dom,intoc=false] % domains
+\begin{filecontents*}{dom.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We make a new index for categories 'pkg'
+% This gives index references to each package..
+\makeindex[name=pkg,intoc=false] % packages
+\begin{filecontents*}{pkg.mst}
+headings_flag 1
+heading_prefix "{==== \\textbf{"
+heading_suffix " ====\\newline}}\\nopagebreak\n"
+\end{filecontents*}
+
+% We want hyperlinks to everything so we can move
+% around the document and reference web citations
+\usepackage{hyperref} % for hyperlinks
+\hypersetup{colorlinks=true,linkcolor=blue,pdfborderstyle={/S/U/W 1},citecolor=red}
+
+% We need to adjust chapter numbers for the appendix
+\usepackage[toc,page]{appendix} 
+
 \usepackage{mathtools}
+
+% We need some standard math symbols
 \usepackage{amssymb}
-\usepackage{axiom}
-\usepackage{makeidx}
+
+% We define the 'chunk' environment
+% This wraps source code and provides a name.
+% It also provides 'getchunk' to gather code.
+\usepackage{axiom} % for chunk macros
+
+% Long itemizations use too much space. This compresses them
 \usepackage{enumitem} % for noitemsep in itemize
-\usepackage{bussproofs} % for prooftree environment
-\usepackage[margin=1in]{geometry} % for white pages
+
+% We need the ability to write proofs using the 'prooftree' environment
+\usepackage{bussproofs} 
+
+% Set how wide the page margins are
+\usepackage[margin=1in]{geometry}
+
 \usepackage{catmac} % for Weber chapter in vol 10.1
 \usepackage{dissdef} % for Weber chapter in vol 10.1
-\usepackage{stmaryrd} % for llbracket
-\usepackage{tikz}     % for finite state diagrams
+
+% We want brackets to grow large in mathmode using llbracket
+\usepackage{stmaryrd} 
+
+% We want diagrams!
+\usepackage{tikz}     
+
+% We want to draw finite state diagrams
 \usetikzlibrary{automata, positioning, arrows}
 \tikzset{
  ->,                     % make the edges directed
  >=stealth',             % make arrow heads bold
- node distance=2cm,      % min distance between nodes
+ node distance=3cm,      % min distance between nodes
  every state/.style={thick,fill=gray!10},
  initial text=$\epsilon$ % set text on start arrow
 }
 
+% We want to draw railroad diagrams
+\usetikzlibrary{chains,matrix,scopes,decorations.shapes,arrows,shapes}
+
+\tikzset{
+  nonterminal/.style={
+    rectangle,
+    minimum size=6mm,
+    very thick,
+    draw=red!50!black!50,
+    top color=white,
+    bottom color=red!50!black!20,
+    font=\itshape
+  },
+  terminal/.style={
+    rounded rectangle,
+    minimum size=6mm,
+    very thick,draw=black!50,
+    top color=white,
+    bottom color=black!20,
+    font=\ttfamily},
+  skip loop/.style={to path={-- ++(0,#1)-| (\tikztotarget)}}
+}
+{
+\tikzset{terminal/.append style={text height=1.5ex,text depth=.25ex}}
+\tikzset{nonterminal/.append style={text height=1.5ex,text depth=.25ex}}
+}
+\renewcommand\familydefault{\sfdefault}
+
+% We want to highlight various proof terms and include them
+% in the table of contents.
 \newtheorem{DoyeTheorem}[subsection]{Theorem}
 \newtheorem{DoyeDefinition}[subsection]{Definition}
 \newtheorem{DoyeExample}[subsection]{Example}
@@ -31,22 +158,39 @@
 \newtheorem{DoyeLemma}[subsection]{Lemma}
 \newtheorem{DoyeAssumption}[subsection]{Assumption}
 \newtheorem{DoyeAlgorithm}[subsection]{Algorithm}
+
+% We want the black square tombstone on proof endings.
 \newcommand*{\QED}{\hfill\ensuremath{\blacksquare}} % for qed
 
+% We want to use a little longer line
 \setlength{\textwidth}{400pt}
-\makeindex
-\usepackage{graphicx}
-\usepackage{changepage} % for adjustwidth environment
-\usepackage{pst-node} % for commutative diagrams
-\newwrite\sigfile
 
+% We want to include images
+\usepackage{graphicx}
+
+% We want the adjustwidth environment
+\usepackage{changepage} 
+
+% We want commutative diagrams
+\usepackage{pst-node} 
+
+% We create a signature index file
+\newwrite\sigfile % for signature index
+
+% We need to handle long URLs
 %\usepackage{breakurl}
-%\def\UrlBreaks{\do\/\do\-} % line-breaking urls
+%\def\UrlBreaks{\do\/\do\-}
 
 \begin{document}
+
+% open the signature file.
 \immediate\openout\sigfile=signatures.tex
+
 \frontmatter
+
+% say now many levels of subsection we want in TOC.
 \setcounter{secnumdepth}{2}
+
 \begin{titlepage}
 \center{\includegraphics{ps/axiomfront.ps}}
 \vskip 0.1in
@@ -71,7 +215,10 @@ $$
 \vskip 0.1in
 \center{\input{master}}
 \end{titlepage}
+
+% Use traditional roman numerals in header text
 \pagenumbering{roman}
+
 \begin{verbatim}
 Portions Copyright (c) 2005 Timothy Daly
 
@@ -198,6 +345,7 @@ Larry Lambe            & Magnus Larsson         & Kaj Laurson\\
 \end{tabular}
 \vfill
 \newpage
+
 \begin{tabular}{lll}
 Charles Lawson         & George L. Legendre     & Franz Lehner\\
 Frederic Lehobey       & Michel Levaud          & Howard Levy\\
@@ -321,5 +469,8 @@ CAISS, City College of New York\\
 November 10, 2003 ((iHy))
 \vfill
 \eject
-%\pagenumbering{arabic}
+
+% Now we want arabic numerals, not roman numerals from above
+% \pagenumbering{arabic}
+
 \setcounter{chapter}{1} % Chapter 1
