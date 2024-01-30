@@ -6674,16 +6674,64 @@ ${OUT}/sman: ${LIB}/libspad.a
 	   ${CC} ${CCF} -o ${OUT}/sman sman.c libspad.a )
 
 \end{chunk}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{Bibliography}
+
+\chapter{Bibliography}
+We have made every effort to consult and reference primary
+sources. (See \cite{Rekd14}).
 \bibliographystyle{axiom}
 \bibliography{axiom}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage
+
+\newpage
 \phantomsection
-\addcontentsline{toc}{chapter}{Index}
-\printindex
+{\huge Signatures Index}
+\addcontentsline{toc}{chapter}{Signatures Index}
+\immediate\closeout\sigfile
+\vskip 1cm
+\input{signatures.sort}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Figure Index}
+\renewcommand{\indexname}{Figure Index}
+\printindex[fig]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Documentation Index}
+\renewcommand{\indexname}{Documentation Index}
+\printindex[doc]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Code Index}
+\renewcommand{\indexname}{Code Index}
+\printindex[code]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Error Index}
+\renewcommand{\indexname}{Error Index}
+\printindex[err]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Category Index}
+\renewcommand{\indexname}{Category Index}
+\printindex[cat]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Domain Index}
+\renewcommand{\indexname}{Domain Index}
+\printindex[dom]
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Package Index}
+\renewcommand{\indexname}{Package Index}
+\printindex[pkg]
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
