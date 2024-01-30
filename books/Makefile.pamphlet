@@ -88,9 +88,8 @@ PROVE=${PROOFS}/acl2.lisp ${PROOFS}/coq.lisp
 
 OTHER=  ${PDF}/refcard.pdf     ${PDF}/endpaper.pdf    ${PDF}/rosetta.pdf
 
-# NOTE: ${PDF}/toc.pdf cannot be built in recent TeXlive versions, disabled
 all: announce tanglecopy ${PDF}/axiom.bib ${PDF}/master ${PROVE} ${OTHER} \
-     ${COOKPAGES} ${BOOKPDF} spadedit axbook news design
+     ${COOKPAGES} ${BOOKPDF} ${PDF}/toc.pdf spadedit axbook news design
 	@(cd ${PDF} ; ${RM} *.out *.toc *.sty *.def *.png *.bbl *.blg)
 
 ${PDF}/master: 
@@ -628,13 +627,14 @@ ${PDF}/toc.pdf: ${BOOKPDF}
 \getchunk{sed pattern}
             <bookvolbib.toc >>toc.toc ; \
 	if [ -z "${NOISE}" ] ; then \
-	  ${LATEX} toc.tex ; \
+          # NOTE: "-interaction=nonstopmode" is from Debian patch, by Camm Maguire
+	  ${LATEX} -interaction=nonstopmode toc.tex ; \
 	  ${DVIPS} toc.dvi 2>/dev/null ; \
 	  ${PS2PDF} toc.ps 2>/dev/null ; \
 	  ${RM} -f toc.aux toc.dvi toc.log toc.ps toc.tex toc.toc ; \
 	  ${RM} -f bluebayou.ps axiomfront.ps ; \
 	else \
-	  ${LATEX} toc.tex >${TMP}/trace ; \
+	  ${LATEX} -interaction=nonstopmode toc.tex >${TMP}/trace ; \
 	  ${DVIPS} toc.dvi 2>${TMP}/trace ; \
 	  ${PS2PDF} toc.ps 2>${TMP}/trace ; \
 	  ${RM} -f toc.aux toc.dvi toc.log toc.ps toc.tex toc.toc ; \
