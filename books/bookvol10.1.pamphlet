@@ -1616,7 +1616,7 @@ such as $\sqrt{0}$ ca be carried out in exact real arithmetic.
 \chapter{Integration}
 
 An {\sl elementary function}\cite{Bro98b}
-\index{elementary function}
+\index[doc]{elementary function}
 of a variable $x$ is a function that can
 be obtained from the rational functions in $x$ by repeatedly adjoining
 a finite number of nested logarithms, exponentials, and algebraic
@@ -1637,7 +1637,7 @@ t=\frac{1-e^{2\sqrt{-1}(x^3-\sqrt{x^3-x+1})}}
 \]
 This tutorial describes recent algorithmic solutions to the {\sl
 problem of integration in finite terms}: 
-\index{integration in finite terms}
+\index[doc]{integration in finite terms}
 to decide in a finite number
 of steps whether a given elementary funcction has an elementary
 indefinite integral, and to compute it explicitly if it exists. While
@@ -10544,9 +10544,9 @@ and will write $t_1 \subtype t_2$ if there is a coercion $\phi: t_1
 \subsection{General Notation}
 
 As usual we will use {\em ``iff''} for {\em ``if, and only
-if''}.\index{iff|ii}
+if''}.\index[doc]{iff|ii}
 
-The non-negative integers will be denoted by $\NN$. \index{
+The non-negative integers will be denoted by $\NN$. \index[doc]{
 N@$\NN$|ii} The integers will be denoted by $\ZZ$ and the rationals by
 $\QQ$. For $n \in \NN$ we will denote the integers modulo $n$ by
 $\ZZ_n$.  We will use these symbols both for the algebras (of the
@@ -10559,25 +10559,25 @@ show how some of them can be treated in a clean formal way accessible
 to machines, sometimes causing computationally hard problems.
 
 The set of strings over a set $L$ --- i.\,e.\ the set of finite
-sequences of elements of $L$ --- will be $L^*$,\index{ Lstar@$L^*$|ii}
-where $\varepsilon$ is the empty string. \index{
+sequences of elements of $L$ --- will be $L^*$,\index[doc]{ Lstar@$L^*$|ii}
+where $\varepsilon$ is the empty string. \index[doc]{
 epsilon@$\varepsilon$|ii}
 
-The length of a string $s \in L^*$ will be denoted by $|s|$. \index{
+The length of a string $s \in L^*$ will be denoted by $|s|$. \index[doc]{
 "| "|@$"|\cdot"|$|ii} We will also denote the cardinality of a set $A$
-by $|A|$.\index{ "| "|@$"|\cdot"|$|ii}
+by $|A|$.\index[doc]{ "| "|@$"|\cdot"|$|ii}
 
 \subsection{Partial Orders and Quasi-Lattices}
 
 {\bf Definition 1. (Preorder)}.
-\index{preorder|ii}
-\index{order!preorder|ii}
+\index[doc]{preorder|ii}
+\index[doc]{order!preorder|ii}
 {\sl A binary relation which is reflexive and
 transitive is a {\em preorder}.}
 
 A  preorder which is also antisymmetric is a partial order.
-\index{partial order|ii}
-\index{order!partial|ii}
+\index[doc]{partial order|ii}
+\index[doc]{order!partial|ii}
 
 {\bf Definition 2.}
 {\sl Let $\langle M ,\leq \rangle$ be a partially ordered set.
@@ -10770,11 +10770,11 @@ signature can be viewed as a finite bottom-up tree automaton.
 
 {\bf Definition 6. (Order-Sorted Signature)}
 {\sl An {\em order-sorted signature}  
-\index{order-sorted signature|ii}
-\index{signature!order-sorted|ii}
+\index[doc]{order-sorted signature|ii}
+\index[doc]{signature!order-sorted|ii}
 is a triple
 $(S, \leq, \Sigma)$, where $S$
-is a set of sorts, $\leq$ a preorder on \index{preorder}
+is a set of sorts, $\leq$ a preorder on \index[doc]{preorder}
 $S$, and $\Sigma$ a family}
 $$\{ \Sigma_{\omega,\sigma} \mid \omega \in S^*, \: \sigma \in S \}$$
 {\sl of not necessarily disjoint sets of operator symbols.}
@@ -10783,11 +10783,11 @@ $$\{ \Sigma_{\omega,\sigma} \mid \omega \in S^*, \: \sigma \in S \}$$
 
 {\sl For notational convenience, we often write $f: (\omega)\sigma $
 instead of $f \in \Sigma_{\omega,\sigma}$; $(\omega)\sigma$ is called
-an {\em arity} \index{arity|ii} and $f: (\omega)\sigma$ a {\em
-declaration}. \index{declaration|ii} The signature $(S, \leq, \Sigma)$
+an {\em arity} \index[doc]{arity|ii} and $f: (\omega)\sigma$ a {\em
+declaration}. \index[doc]{declaration|ii} The signature $(S, \leq, \Sigma)$
 is often identified with $\Sigma$.  If $|\omega|=n$ then $f$ is called
-a $n$-ary operator symbol.  \index{operator symbol|ii} $0$-ary
-operator symbols are {\em constant symbols}.  \index{constant
+a $n$-ary operator symbol.  \index[doc]{operator symbol|ii} $0$-ary
+operator symbols are {\em constant symbols}.  \index[doc]{constant
 symbols|ii} As in \cite{Smol89} we will assume in the following
 that for any $f$ there is only a single $n \in \NN$ such that $f$ is a
 $n$-ary operator symbol.}
@@ -10796,7 +10796,7 @@ $n$-ary operator symbol.}
 $$V= \{V_\sigma \mid \sigma \in S\}$$
 {\sl of disjoint, nonempty sets. For $x \in V_\sigma$ we also 
 write $x:\sigma$ or $x_\sigma$.}
-\index{variable set!s-sorted@$\sigma$-sorted|ii}
+\index[doc]{variable set!s-sorted@$\sigma$-sorted|ii}
 
 In \cite{Gogu89} the following monotonicity condition
 must be fulfilled by any order-sorted signature.
@@ -10804,7 +10804,7 @@ must be fulfilled by any order-sorted signature.
 {\bf Definition 7.}
 {\sl An order-sorted signature $(S, \leq, \Sigma)$  fulfills the
 {\em monotonicity condition}, 
-\index{monotonicity condition|ii}
+\index[doc]{monotonicity condition|ii}
 if}
 $$f \in \Sigma_{\omega_1,\sigma_1} \cap \Sigma_{\omega_2,\sigma_2}
 \mbox{ and } \omega_1 \leq \omega_2 \mbox{ imply } \sigma_1 \leq \sigma_2.$$
@@ -10817,7 +10817,7 @@ fulfill the monotonicity condition.
 {\bf Definition 8. (Order-Sorted Terms)}
 \label{defordsortterm}
 {\sl The set of {\em order-sorted terms} 
-\index{order-sorted terms!set of|ii}
+\index[doc]{order-sorted terms!set of|ii}
 of sort $\sigma$ freely  generated by $V$,
 $T_\Sigma(V)_\sigma$, is the least set satisfying}
 \begin{itemize}
@@ -10846,12 +10846,12 @@ $$T_\Sigma(V) := \bigcup_{\sigma \in S} T_\Sigma(V)_\sigma .$$
 The set of all 
 {\em ground terms} over $\Sigma$ is
 $T_\Sigma := T_\Sigma(\{\})$.
-\index{ground term|ii}\index{term!ground|ii}
+\index[doc]{ground term|ii}\index[doc]{term!ground|ii}
 
 {\bf Definition 9. (Regularity)}
 {\sl A signature is {\em regular}, 
-\index{signature!order-sorted!regular|see{signature!regular}}
-\index{signature!regular|ii}
+\index[doc]{signature!order-sorted!regular|see{signature!regular}}
+\index[doc]{signature!regular|ii}
 if the subsort preorder
 of $\Sigma$ is antisymmetric, and if each term
 $t \in T_\Sigma(V)$ has a least sort.}
@@ -10881,8 +10881,8 @@ not have a minimal sort.
 
 {\bf Definition 10.}
 {\sl The {\em complexity\/}
-\index{complexity of a term|ii}
-\index{term!complexity|ii}
+\index[doc]{complexity of a term|ii}
+\index[doc]{term!complexity|ii}
  of a term $t\in T_\Sigma(V)$, $\com(t)$ is inductively
 defined as follows:
 \begin{itemize}
@@ -10894,7 +10894,7 @@ $$\com(f(t_1,\ldots,t_n))= \max(\com(t_1), \ldots, \com(t_n)) + 1.$$
 \end{itemize}}
 
 {\bf Definition 11.}
-{\sl A {\em substitution} $\theta$ \index{substitution|ii}
+{\sl A {\em substitution} $\theta$ \index[doc]{substitution|ii}
 from a variable set $Y$ into the term algebra $T_\Sigma(V)$ is a mapping from
 $Y$ to $T_\Sigma(V)$, which additionally satisfies
 $\theta(x) \in T_\Sigma(V)_\sigma$ if $x \in V_\sigma$
@@ -10909,7 +10909,7 @@ $\theta(t)$.
 If, for $t, t' \in T_\Sigma(V)$, there is a substitution
 $\theta$ such that
 $t'=\theta(t)$, then $t'$ is called
-an {\em instance} of $t$.\index{instance|ii}
+an {\em instance} of $t$.\index[doc]{instance|ii}
 Similarly, a substitution $\theta'$ is called an
 instance of a substitution
 $\theta$ with respect to a set of variables $W$, written
@@ -10919,25 +10919,25 @@ $\theta'(x)=\gamma(\theta(x))$ for all
 $x \in W$.}
 
 {\bf Definition 12.}
-{\sl A {\em unifier}\index{unifier|ii} of a set of equations
+{\sl A {\em unifier}\index[doc]{unifier|ii} of a set of equations
 $\Gamma$ is a substitution $\theta$ such that
 $\theta(s)=\theta(t)$ for all equations
 $s=^{\rm ?} t$ in $\Gamma$. 
 A set of unifiers $U$ of $\Gamma$ is called {\em complete}
-\index{complete set of unifiers|ii}\index{unifier!complete set|ii}
-(and denoted by CSU),\index{CSU|ii} if for every unifier
+\index[doc]{complete set of unifiers|ii}\index[doc]{unifier!complete set|ii}
+(and denoted by CSU),\index[doc]{CSU|ii} if for every unifier
 $\theta'$ of $\Gamma$ there exists $\theta \in U$ such that
 $\theta'$ is an instance of
 $\theta$ with respect to the variables in 
 $\Gamma$. As usual, a signature is called
 {\em unitary (unifying)},
-\index{unitary unifying|ii}\index{signature!unitary unifying|ii}
-\index{unifying!unitary|ii}
+\index[doc]{unitary unifying|ii}\index[doc]{signature!unitary unifying|ii}
+\index[doc]{unifying!unitary|ii}
 if for all equation sets $\Gamma$ there is a complete set of
 unifiers containing at most one element;
 it is called {\em finitary (unifying)},
-\index{finitary unifying|ii}\index{signature!finitary unifying|ii}
-\index{unifying!finitary|ii}
+\index[doc]{finitary unifying|ii}\index[doc]{signature!finitary unifying|ii}
+\index[doc]{unifying!finitary|ii}
 if there is always a finite and complete set of unifiers.}
 
 For non-regular signatures, unifications can be infinitary, 
@@ -10954,12 +10954,12 @@ See \cite[Theorem~15]{Smol89}.\qed
 
 {\bf Definition 13.}
 {\sl A signature $(S, \leq, \Sigma)$ is {\em downward complete}
-\index{downward complete|ii}
-\index{signature!downward complete|ii}
+\index[doc]{downward complete|ii}
+\index[doc]{signature!downward complete|ii}
 if any two sorts have either no lower bound or an infimum,
 and {\em coregular}
-\index{coregular|ii}
-\index{signature!coregular|ii}
+\index[doc]{coregular|ii}
+\index[doc]{signature!coregular|ii}
 if for any operator symbol $f$ and any sort $\sigma \in S$
 the set
 $$D(f,\sigma)=\{ \omega \mid \exists  \sigma'  \in S \:.\;
@@ -11002,24 +11002,24 @@ theory can also be found in several books which use category theory as
 a tool for computer science, e.\,g.\ in \cite{Ehri85}.
 
 {\bf Definition 15. (Category)} 
-\index{category|ii}
+\index[doc]{category|ii}
 {\sl A {\em category} $\cat{C}$  consists of a class of
-{\em objects\/} \index{objects|ii}
+{\em objects\/} \index[doc]{objects|ii}
 $\obj{\cat{C}}$, for each pair
 $(A,B) \in \obj{\cat{C}} \times \obj{\cat{C}}$ a  set
 $\mor{\cat{C}}{A,B}$ of {\em morphisms} (or {\em arrows}), written
 $f: A \longrightarrow B$ for 
 $f \in \mor{\cat{C}}{A,B}$,
 and a {\em  composition}}
-\index{composition|ii}
-\index{  composition@$\circ$|ii}
-\index{arrows!composition of|ii}
+\index[doc]{composition|ii}
+\index[doc]{  composition@$\circ$|ii}
+\index[doc]{arrows!composition of|ii}
 $$\begin{array}{l}
 \circ: \mor{C}{A,B} \times \mor{C}{B,C} \longrightarrow \mor{C}{A,C}\\
 (f: A \longrightarrow B, \; g: B \longrightarrow C)
 \mapsto (g \circ f : A \longrightarrow C)
 \end{array}
-\index{arrows|ii} \index{morphisms|ii} \index{objects|ii}
+\index[doc]{arrows|ii} \index[doc]{morphisms|ii} \index[doc]{objects|ii}
 $$
 {\sl (more precisely a family of functions
 $\circ_{A,B,C}$ for all objects $A,B,C$) such that the following
@@ -11035,8 +11035,8 @@ $f: A \longrightarrow B$ and
 $g: C \longrightarrow A$ with $B,C \in \obj{C}$\\
 $f \circ {\rm id}_A = f \mbox{ and } {\rm id}_A \circ g =g$ 
 \hfill {\em (identity)}.
-\index{identity|ii}\index{category!identity|ii}
-\index{ id@${\rm id}_A$|ii}
+\index[doc]{identity|ii}\index[doc]{category!identity|ii}
+\index[doc]{ id@${\rm id}_A$|ii}
 \end{enumerate}}
 
 {\sl Frequently we will write}
@@ -11045,8 +11045,8 @@ $$A \stackrel{f}{\longrightarrow} B$$
 $$f: A \longrightarrow B .$$
 
 {\bf Definition 16. (Opposite Category)}
-\index{dual category|ii}\index{category!opposite|ii}
-\index{opposite category|ii}\index{category!dual|ii}
+\index[doc]{dual category|ii}\index[doc]{category!opposite|ii}
+\index[doc]{opposite category|ii}\index[doc]{category!dual|ii}
 {\sl Let $\cat{C}$ be a category. Then
 $\cat{C}^{\rm op}$, the {\em opposite category} of
 $\cat{C}$, is the category which is
@@ -11062,7 +11062,7 @@ Clearly, $\cat{(C^{\rm op})^{\rm op}}= \cat{C}$.
 
 For any categories $\cat{C}$ and $\cat{D}$ 
 we will write
-$\cat{C} \times \cat{D}$\index{  product@$\times$|ii}
+$\cat{C} \times \cat{D}$\index[doc]{  product@$\times$|ii}
 for the category which is defined by
 \begin{enumerate}
 \item $\obj{C \times D}= \obj{C} \times \obj{D}$,
@@ -11080,7 +11080,7 @@ Moreover,
 $$\cat{C}^n= \underbrace{\cat{C} \times \cdots \times \cat{C}}_{n}.$$  
 
 {\bf Definition 17. (Functors)}
-\index{functor|ii}
+\index[doc]{functor|ii}
 {\sl Let $\cat{C}$ and $\cat{D}$ be categories.
 A mapping $F: \cat{C} \longrightarrow \cat{D}$ is
 called {\em functor}, if
@@ -11111,21 +11111,21 @@ $G \circ F : \cat{C} \longrightarrow \cat{E}$.}
 ${\rm ID}_{\cat{C}}: \cat{C} \longrightarrow \cat{C}$ is
 defined by 
 ${\rm ID}_{\cat{C}}(A) = A$ and
-${\rm ID}_{\cat{C}}(f) = f$.\index{ ID@${\rm ID}_{\cat{C}}$|ii}}
+${\rm ID}_{\cat{C}}(f) = f$.\index[doc]{ ID@${\rm ID}_{\cat{C}}$|ii}}
 
 {\sl A functor $F: \cat{C} \longrightarrow \cat{D}$ is
 also called a {\em covariant functor}
-from $\cat{C}$ into $\cat{D}$.\index{covariant!functor|ii}
-\index{functor!covariant|ii}
+from $\cat{C}$ into $\cat{D}$.\index[doc]{covariant!functor|ii}
+\index[doc]{functor!covariant|ii}
 A functor $F: \cat{C}^{\rm op} \longrightarrow \cat{D}$ is
  called a {\em contravariant functor} from 
 $\cat{C}$ into $\cat{D}$.}
-\index{contravariant!functor|ii}
-\index{functor!contravariant|ii}
+\index[doc]{contravariant!functor|ii}
+\index[doc]{functor!contravariant|ii}
 
 {\bf Definition 18. (Natural Transformations)}
-\index{natural transformation|ii}
-\index{transformation!natural|ii}
+\index[doc]{natural transformation|ii}
+\index[doc]{transformation!natural|ii}
 {\sl Let $S, T :\cat{C} \longrightarrow \cat{D}$
 be functors.
 A {\em natural transformation} $\tau: S \longrightarrow T$ 
@@ -12897,7 +12897,7 @@ Relying on the set theoretic semantics for our types and coercion
 functions we can give the following definition of coherence.
 
 {\bf Definition 20. (Coherence)}
-\index{coherence|ii} 
+\index[doc]{coherence|ii} 
 \label{defcoh} 
 {\sl A type system is {\em coherent} if the following condition is satisfied:
 
@@ -12955,8 +12955,8 @@ t_1 \longrightarrow t_2$ are coercions then $\phi=\psi$.
 {\sl The $n$-ary type
 constructor ($n \geq 1$) $f$ induces a {\em structural coercion\/}, if
 there are sets ${\cal A}_f \subseteq \{1, \ldots, n \}$ and ${\cal
-M}_f \subseteq \{1, \ldots, n \}$ such that \index{ Af@${\cal
-A}_f$|ii}\index{ Mf@${\cal M}_f$|ii} the following condition is
+M}_f \subseteq \{1, \ldots, n \}$ such that \index[doc]{ Af@${\cal
+A}_f$|ii}\index[doc]{ Mf@${\cal M}_f$|ii} the following condition is
 satisfied:}
 
 {\sl Whenever there are declarations $f: (\sigma_1 \cdots \sigma_n)\sigma$
@@ -12974,10 +12974,10 @@ $${\cal F}_f(t_1,\ldots,t_n,t'_1, \ldots, t'_n, \phi_1,
 f(t'_1,\ldots,t'_n).$$
 
 {\sl The type constructor $f$ is {\em covariant in its $i$-th argument}, if
-$i \in {\cal M}_f$.  \index{covariant!type constructor|ii}\index{type
+$i \in {\cal M}_f$.  \index[doc]{covariant!type constructor|ii}\index[doc]{type
 constructor!covariant|ii} It is {\em contravariant in its $i$-th
-argument}, if $i \in {\cal A}_f$.  \index{contravariant!type
-constructor|ii} \index{type constructor!contravariant|ii}}
+argument}, if $i \in {\cal A}_f$.  \index[doc]{contravariant!type
+constructor|ii} \index[doc]{type constructor!contravariant|ii}}
 
 Instead of the adjective ``covariant'' we will sometimes use the
 adjective ``monotonic'', and instead of ``contravariant'' we will
@@ -13110,8 +13110,8 @@ such class of groups is that of the finite polycyclic groups
 
 {\bf Definition 22. (Direct Embeddings)}
 \label{defdiem}
-\index{direct embedding|ii}
-\index{embedding!direct|ii} 
+\index[doc]{direct embedding|ii}
+\index[doc]{embedding!direct|ii} 
 {\sl Let $f:(\sigma_1, \ldots, \sigma_n)\sigma$ be a $n$-ary type
 constructor.  If for some ground types $t_1:\sigma_1, \ldots,
 t_n:\sigma_n$ there is a coercion
@@ -13120,7 +13120,7 @@ f(t_1,\ldots,t_n),$$ then we say that {\em $f$ has a direct embedding
 at its $i$-th position}.}
 
 {\sl Moreover, let $${\cal D}_f= \{i \mid \mbox{$f$ has a direct embedding
-at its $i$-th position}\}$$ \index{ Df@${\cal D}_f$|ii} be the {\em
+at its $i$-th position}\}$$ \index[doc]{ Df@${\cal D}_f$|ii} be the {\em
 set of direct embedding positions of $f$}.}
 
 \begin{remark} 
@@ -29123,7 +29123,7 @@ write this as
 since partial derivatives commute.
 
 Poincar\'e Lemma: ${\bf d}^2\omega=0$ where $\omega$ is an arbitrary $p$-form.
-\index{Poincar\'e Lemma}
+\index[doc]{Poincar\'e Lemma}
 
 Next, consider the effect on {\bf d} on an arbitrary 1-form. We have
 \[\begin{array}{rcl}
@@ -29173,7 +29173,7 @@ so that the exterior derivative can also reproduce the divergence.
 To truly have the curl we need a way to turn a 2-form into a vector, i.e.,
 a 1-form and a way to turn a 3-form into a 0-form. This leads us to 
 introduce the Hodge dual
-\index{Hodge dual}, or star, operator $\star$.
+\index[doc]{Hodge dual}, or star, operator $\star$.
 
 Notice that in 3-dim, both 1-forms and 2-forms have three independent
 components, while both 0- and 3-forms have one component. This suggests

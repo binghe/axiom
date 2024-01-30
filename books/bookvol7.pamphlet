@@ -315,7 +315,7 @@ Usage: htadd [-s|-l|-f db-directory] [-d|-n] filenames
   \indent{0}
   \indented
   \indentrel{3}
-  \index{axiom}
+  \index[doc]{axiom}
   \ind
   \infty 
   \inputbitmap{/usr/include/X11/bitmaps/1x1}
@@ -4213,13 +4213,13 @@ in general, have the file extension of 'h1' rather than 'h'.
 \end{chunk}
 
 \section{include/rgb.h}
-\index{rgb.h}
-\index{struct!RGB}
-\index{RGB struct}
-\index{struct!HSV}
-\index{HSV struct}
-\index{struct!HLS}
-\index{HLS struct}
+\index[doc]{rgb.h}
+\index[doc]{struct!RGB}
+\index[doc]{RGB struct}
+\index[doc]{struct!HSV}
+\index[doc]{HSV struct}
+\index[doc]{struct!HLS}
+\index[doc]{HLS struct}
 \begin{chunk}{include/rgb.h}
 /* from bookvol7 chunk include/rgb.h */
 typedef struct _RGB {
@@ -4236,7 +4236,7 @@ typedef struct _HLS {
 
 \end{chunk}
 \section{include/spadcolors.h}
-\index{spadcolors.h}
+\index[doc]{spadcolors.h}
 \begin{chunk}{include/spadcolors.h}
 /* from bookvol7 chunk include/spadcolors.h */
 #define numOfColors 240
@@ -5563,8 +5563,8 @@ extern void  find_wct(void);
 
 \chapter{Shared Code}
 \subsection{BeStruct}
-\index{struct!BeStruct}
-\index{BeStruct struct}
+\index[doc]{struct!BeStruct}
+\index[doc]{BeStruct struct}
 \begin{chunk}{BeStruct}
 typedef struct be_struct {
     int type;
@@ -5577,8 +5577,8 @@ BeStruct *top_be_stack;
 \end{chunk}
 \section{Shared Code for file handling}
 \subsection{strpostfix}
-\index{shared!strpostfix}
-\index{strpostfix shared}
+\index[doc]{shared!strpostfix}
+\index[doc]{strpostfix shared}
 \begin{chunk}{strpostfix}
 static int strpostfix(char *s, char *t) {
     int slen = strlen(s), tlen = strlen(t);
@@ -5601,8 +5601,8 @@ when hyperdoc is running without Axiom.
 
 For system pages we hand generate the paste files and add
 them to the hyperdoc volume.
-\index{shared!extendHT}
-\index{extendHT shared}
+\index[doc]{shared!extendHT}
+\index[doc]{extendHT shared}
 \begin{chunk}{extendHT}
 void extendHT(char *name) {
     if (!strpostfix(name, ".pamphlet") && 
@@ -5619,8 +5619,8 @@ filename, this it returns in the fullname variable. If the file is not
 found, then it returns a -1. The fname is the fullpath name for the file,
 including the .ht extension. The aname is the filename minus the added .ht
 extension, and the pathname.
-\index{shared!buildHtFilename}
-\index{buildHtFilename shared}
+\index[doc]{shared!buildHtFilename}
+\index[doc]{buildHtFilename shared}
 \begin{chunk}{buildHtFilename}
 static int buildHtFilename(char *fname, char *aname, char *name) {
     char cdir[256];
@@ -5719,8 +5719,8 @@ static int buildHtFilename(char *fname, char *aname, char *name) {
 
 \end{chunk}
 \subsection{pathname}
-\index{shared!pathname}
-\index{pathname shared}
+\index[doc]{shared!pathname}
+\index[doc]{pathname shared}
 \begin{chunk}{pathname}
 static int pathname(char *name) {
     while (*name)
@@ -5732,8 +5732,8 @@ static int pathname(char *name) {
 \end{chunk}
 \subsection{htFileOpen}
 This procedure opens the proper HT file
-\index{htFileOpen!main}
-\index{main htFileOpen}
+\index[doc]{htFileOpen!main}
+\index[doc]{main htFileOpen}
 \begin{chunk}{htFileOpen}
 FILE *htFileOpen(char *fname, char *aname, char *name) {
     FILE *ht_fp;
@@ -5767,8 +5767,8 @@ it initially loads up the path name into a static variable. Then upon
 every trip, it gets the next ht.db found. It returns NULL when no ht.db is
 found. -JMW
 
-\index{shared!dbFileOpen}
-\index{dbFileOpen shared}
+\index[doc]{shared!dbFileOpen}
+\index[doc]{dbFileOpen shared}
 \begin{chunk}{dbFileOpen}
 FILE *dbFileOpen(char *dbFile) {
     static char *db_path_trace = NULL;
@@ -5822,8 +5822,8 @@ FILE *dbFileOpen(char *dbFile) {
 
 \end{chunk}
 \subsection{tempFileOpen}
-\index{shared!tempFileOpen}
-\index{tempFileOpen shared}
+\index[doc]{shared!tempFileOpen}
+\index[doc]{tempFileOpen shared}
 \begin{chunk}{tempFileOpen}
 FILE *tempFileOpen(char *temp_dbFile) {
     FILE *temp_db_fp;
@@ -5841,8 +5841,8 @@ FILE *tempFileOpen(char *temp_dbFile) {
 \section{Shared Code for Hash Table Handling}
 \subsection{halloc}
 Allocate memory and bomb if none left (HyperDoc alloc)
-\index{shared!halloc}
-\index{halloc shared}
+\index[doc]{shared!halloc}
+\index[doc]{halloc shared}
 \begin{chunk}{halloc}
 char *halloc(int bytes, char *msg) {
     static char buf[200];
@@ -5869,8 +5869,8 @@ char *halloc(int bytes, char *msg) {
 
 \subsection{hashInit}
 Initialize a hash table.
-\index{shared!hashInit}
-\index{hashInit shared}
+\index[doc]{shared!hashInit}
+\index[doc]{hashInit shared}
 \begin{chunk}{hashInit}
 void hashInit(HashTable *table, int size, EqualFunction equal,
                HashcodeFunction hash_code) {
@@ -5887,8 +5887,8 @@ void hashInit(HashTable *table, int size, EqualFunction equal,
 
 \end{chunk}
 \subsection{freeHash}
-\index{shared!freeHash}
-\index{freeHash shared}
+\index[doc]{shared!freeHash}
+\index[doc]{freeHash shared}
 \begin{chunk}{freeHash}
 void freeHash(HashTable *table, FreeFunction free_fun) {
   if (table) {
@@ -5910,8 +5910,8 @@ void freeHash(HashTable *table, FreeFunction free_fun) {
 \end{chunk}
 \subsection{hashInsert}
 Insert an entry into a hash table.
-\index{shared!hashInsert}
-\index{hashInsert shared}
+\index[doc]{shared!hashInsert}
+\index[doc]{hashInsert shared}
 \begin{chunk}{hashInsert}
 void hashInsert(HashTable *table, char *data, char *key) {
     HashEntry *entry = (HashEntry *) halloc(sizeof(HashEntry), "HashEntry");
@@ -5929,8 +5929,8 @@ void hashInsert(HashTable *table, char *data, char *key) {
 
 \end{chunk}
 \subsection{hashFind}
-\index{shared!hashFind}
-\index{hashFind shared}
+\index[doc]{shared!hashFind}
+\index[doc]{hashFind shared}
 \begin{chunk}{hashFind}
 char *hashFind(HashTable *table, char *key) {
     HashEntry *entry;
@@ -5943,8 +5943,8 @@ char *hashFind(HashTable *table, char *key) {
 
 \end{chunk}
 \subsection{hashReplace}
-\index{shared!hashReplace}
-\index{hashReplace shared}
+\index[doc]{shared!hashReplace}
+\index[doc]{hashReplace shared}
 \begin{chunk}{hashReplace}
 char *hashReplace(HashTable *table, char *data, char *key) {
     HashEntry *entry;
@@ -5960,8 +5960,8 @@ char *hashReplace(HashTable *table, char *data, char *key) {
 
 \end{chunk}
 \subsection{hashDelete}
-\index{shared!hashDelete}
-\index{hashDelete shared}
+\index[doc]{shared!hashDelete}
+\index[doc]{hashDelete shared}
 \begin{chunk}{hashDelete}
 void hashDelete(HashTable *table, char *key) {
     HashEntry **entry;
@@ -5976,8 +5976,8 @@ void hashDelete(HashTable *table, char *key) {
 
 \end{chunk}
 \subsection{hashMap}
-\index{shared!hashMap}
-\index{hashMap shared}
+\index[doc]{shared!hashMap}
+\index[doc]{hashMap shared}
 \begin{chunk}{hashMap}
 void hashMap(HashTable *table, MappableFunction func) {
     int i;
@@ -5991,8 +5991,8 @@ void hashMap(HashTable *table, MappableFunction func) {
 
 \end{chunk}
 \subsection{hashCopyEntry}
-\index{shared!hashCopyEntry}
-\index{hashCopyEntry shared}
+\index[doc]{shared!hashCopyEntry}
+\index[doc]{hashCopyEntry shared}
 \begin{chunk}{hashCopyEntry}
 HashEntry *hashCopyEntry(HashEntry *e) {
     HashEntry *ne;
@@ -6008,8 +6008,8 @@ HashEntry *hashCopyEntry(HashEntry *e) {
 /* copy a hash table */
 \end{chunk}
 \subsection{hashCopyTable}
-\index{shared!hashCopyTable}
-\index{hashCopyTable shared}
+\index[doc]{shared!hashCopyTable}
+\index[doc]{hashCopyTable shared}
 \begin{chunk}{hashCopyTable}
 HashTable *hashCopyTable(HashTable *table) {
     HashTable *nt = (HashTable *) halloc(sizeof(HashTable), "copy hash table");
@@ -6028,8 +6028,8 @@ HashTable *hashCopyTable(HashTable *table) {
 \end{chunk}
 \subsection{stringHash}
 Hash code function for strings.
-\index{shared!stringHash}
-\index{stringHash shared}
+\index[doc]{shared!stringHash}
+\index[doc]{stringHash shared}
 \begin{chunk}{stringHash}
 int stringHash(char *s, int size) {
     int c = 0;
@@ -6042,8 +6042,8 @@ int stringHash(char *s, int size) {
 \end{chunk}
 \subsection{stringEqual}
 Test strings for equality.
-\index{shared!stringEqual}
-\index{stringEqual shared}
+\index[doc]{shared!stringEqual}
+\index[doc]{stringEqual shared}
 \begin{chunk}{stringEqual}
 int stringEqual(char *s1, char *s2) {
     return (strcmp(s1, s2) == 0);
@@ -6052,8 +6052,8 @@ int stringEqual(char *s1, char *s2) {
 \end{chunk}
 \subsection{allocString}
 Make a fresh copy of the given string.
-\index{shared!allocString}
-\index{allocString shared}
+\index[doc]{shared!allocString}
+\index[doc]{allocString shared}
 \begin{chunk}{allocString}
 char *allocString(char *str) {
     char * result;
@@ -6065,8 +6065,8 @@ char *allocString(char *str) {
 \end{chunk}
 \section{Shared Code for Error Handling}
 \subsection{jump}
-\index{shared!jump}
-\index{jump shared}
+\index[doc]{shared!jump}
+\index[doc]{jump shared}
 \begin{chunk}{jump}
 void jump(void) {
     if (gWindow == NULL)
@@ -6086,8 +6086,8 @@ token to be printed. For instance, a call would look like:
   dumpToken("fnname",token)
 \end{verbatim}
 There is no return value.
-\index{shared!dumpToken}
-\index{dumpToken shared}
+\index[doc]{shared!dumpToken}
+\index[doc]{dumpToken shared}
 \begin{chunk}{dumpToken}
 void dumpToken(char *caller, Token t) { 
   fprintf(stderr,"TPDHERE:%s:dumpToken type=%s id=%s\n",
@@ -6096,8 +6096,8 @@ void dumpToken(char *caller, Token t) {
 
 \end{chunk}
 \subsection{printPageAndFilename}
-\index{shared!printPageAndFilename}
-\index{printPageAndFilename shared}
+\index[doc]{shared!printPageAndFilename}
+\index[doc]{printPageAndFilename shared}
 \begin{chunk}{printPageAndFilename}
 void printPageAndFilename(void) {
     char obuff[128];
@@ -6128,8 +6128,8 @@ void printPageAndFilename(void) {
 
 \end{chunk}
 \subsection{printNextTenTokens}
-\index{shared!printNextTenTokens}
-\index{printNextTenTokens shared}
+\index[doc]{shared!printNextTenTokens}
+\index[doc]{printNextTenTokens shared}
 \begin{chunk}{printNextTenTokens}
 void printNextTenTokens(void) {
     int i;
@@ -6147,8 +6147,8 @@ void printNextTenTokens(void) {
 \end{chunk}
 \subsection{printToken}
 Print out a token value.
-\index{shared!printToken}
-\index{printToken shared}
+\index[doc]{shared!printToken}
+\index[doc]{printToken shared}
 \begin{chunk}{printToken}
 void printToken(void) {
     if (token.type == Word)
@@ -6162,8 +6162,8 @@ void printToken(void) {
 
 \end{chunk}
 \subsection{tokenName}
-\index{shared!tokenName}
-\index{tokenName shared}
+\index[doc]{shared!tokenName}
+\index[doc]{tokenName shared}
 \begin{chunk}{tokenName}
 void tokenName(int type) {
     if (type <= NumberUserTokens)
@@ -6246,8 +6246,8 @@ appropriate error message can be printed.
 
 The prints out the page name, and then the filename in which the error
 occurred. If possible it also tries to print out the next ten tokens.
-\index{shared!htperror}
-\index{htperror shared}
+\index[doc]{shared!htperror}
+\index[doc]{htperror shared}
 \begin{chunk}{htperror}
 void tpderror(char *msg, int errn) {
     char obuff[256];
@@ -6288,8 +6288,8 @@ value of the variable ``inputType''.  If this variable is:
 
 \subsection{parserInit}
 Initialize the parser keyword hash table.
-\index{shared!parserInit}
-\index{parserInit shared}
+\index[doc]{shared!parserInit}
+\index[doc]{parserInit shared}
 \begin{chunk}{parserInit}
 void parserInit(void) {
     int i;
@@ -6312,8 +6312,8 @@ void parserInit(void) {
 \subsection{initScanner}
 \label{initScanner}
 Initialize the lexical scanner to read from a file.
-\index{shared!initScanner}
-\index{initScanner shared}
+\index[doc]{shared!initScanner}
+\index[doc]{initScanner shared}
 \begin{chunk}{initScanner}
 void initScanner(void) {
     if (getenv("HTASCII")) {
@@ -6337,8 +6337,8 @@ void initScanner(void) {
 \subsection{saveScannerState}
 These variables save the current state of scanner.  Currently only one 
 level of saving is allowed. In the future we should allow nested saves.
-\index{shared!saveScannerState}
-\index{saveScannerState shared}
+\index[doc]{shared!saveScannerState}
+\index[doc]{saveScannerState shared}
 \begin{chunk}{saveScannerState}
 void saveScannerState(void) {
     StateNode *new_item=(StateNode *)halloc((sizeof(StateNode)), "StateNode");
@@ -6359,8 +6359,8 @@ void saveScannerState(void) {
 \end{chunk}
 \subsection{restoreScannerState}
 Restore the saved scanner state.
-\index{shared!restoreScannerState}
-\index{restoreScannerState shared}
+\index[doc]{shared!restoreScannerState}
+\index[doc]{restoreScannerState shared}
 \begin{chunk}{restoreScannerState}
 void restoreScannerState(void) {
     StateNode *x = top_state_node;
@@ -6388,8 +6388,8 @@ void restoreScannerState(void) {
 \end{chunk}
 \subsection{ungetChar}
 Return the character to the input stream.
-\index{shared!ungetChar}
-\index{ungetChar shared}
+\index[doc]{shared!ungetChar}
+\index[doc]{ungetChar shared}
 \begin{chunk}{ungetChar}
 void ungetChar(int c) {
     if (c == '\n')
@@ -6399,8 +6399,8 @@ void ungetChar(int c) {
 
 \end{chunk}
 \subsection{getChar}
-\index{shared!getChar}
-\index{getChar shared}
+\index[doc]{shared!getChar}
+\index[doc]{getChar shared}
 \begin{chunk}{getChar}
 int getChar(void) {
     int c;
@@ -6450,8 +6450,8 @@ int getChar(void) {
 \end{chunk}
 \subsection{getChar1}
 Return the next character in the input stream.
-\index{shared!getChar1}
-\index{getChar1 shared}
+\index[doc]{shared!getChar1}
+\index[doc]{getChar1 shared}
 \begin{chunk}{getChar1}
 static int getChar1(void) {
     int c;
@@ -6513,8 +6513,8 @@ AGAIN:
 \end{chunk}
 \subsection{ungetToken}
 Return current token to the input stream.
-\index{shared!ungetToken}
-\index{ungetToken shared}
+\index[doc]{shared!ungetToken}
+\index[doc]{ungetToken shared}
 \begin{chunk}{ungetToken}
 void ungetToken(void) {
     last_token = 1;
@@ -6524,8 +6524,8 @@ void ungetToken(void) {
 
 \end{chunk}
 \subsection{getToken}
-\index{shared!getToken}
-\index{getToken shared}
+\index[doc]{shared!getToken}
+\index[doc]{getToken shared}
 \begin{chunk}{getToken}
 int getToken(void) {
     int c, ws;
@@ -6683,8 +6683,8 @@ int getToken(void) {
 
 \end{chunk}
 \subsection{pushBeStack}
-\index{shared!pushBeStack}
-\index{pushBeStack shared}
+\index[doc]{shared!pushBeStack}
+\index[doc]{pushBeStack shared}
 \begin{chunk}{pushBeStack}
 void pushBeStack(int type,char * id) {
     BeStruct *be = (BeStruct *) halloc(sizeof(BeStruct), "BeginENd stack");
@@ -6702,8 +6702,8 @@ void pushBeStack(int type,char * id) {
 This routine pops the be stack and compares types. If they are
 the same then I am okay and return a 1. Else I return a two and try to
 print a meaningful message.
-\index{shared!checkAndPopBeStack}
-\index{checkAndPopBeStack shared}
+\index[doc]{shared!checkAndPopBeStack}
+\index[doc]{checkAndPopBeStack shared}
 \begin{chunk}{checkAndPopBeStack}
 void checkAndPopBeStack(int type,char * id) {
     BeStruct *x;
@@ -6731,8 +6731,8 @@ void checkAndPopBeStack(int type,char * id) {
 
 \end{chunk}
 \subsection{clearBeStack}
-\index{shared!clearBeStack}
-\index{clearBeStack shared}
+\index[doc]{shared!clearBeStack}
+\index[doc]{clearBeStack shared}
 \begin{chunk}{clearBeStack}
 int clearBeStack(void) {
     BeStruct *x = top_be_stack, *y;
@@ -6747,8 +6747,8 @@ int clearBeStack(void) {
 
 \end{chunk}
 \subsection{beType}
-\index{shared!beType}
-\index{beType shared}
+\index[doc]{shared!beType}
+\index[doc]{beType shared}
 \begin{chunk}{beType}
 int beType(char *which) {
     Token store;
@@ -6825,8 +6825,8 @@ read the word it tries to assign it a type. Once that is done it sends
 the word id, and the type to pushBeStack and then returns the type.
 For the moment I cannot even going to use a hashTable, although in the
 future this may be needed.
-\index{shared!beginType}
-\index{beginType shared}
+\index[doc]{shared!beginType}
+\index[doc]{beginType shared}
 \begin{chunk}{beginType}
 int beginType(void) {
     /*Token store;*/
@@ -6859,8 +6859,8 @@ This routine gets the end type just as the beginType routine does,
 But then it checks to see if recieved the proper endType. By a clever
 trick, the proper end type is 3000 + type. When environments this will
 have to change.
-\index{shared!endType}
-\index{endType shared}
+\index[doc]{shared!endType}
+\index[doc]{endType shared}
 \begin{chunk}{endType}
 int endType(void) {
     int ret;
@@ -6901,8 +6901,8 @@ int endType(void) {
 
 \end{chunk}
 \subsection{keywordType}
-\index{shared!keywordType}
-\index{keywordType shared}
+\index[doc]{shared!keywordType}
+\index[doc]{keywordType shared}
 \begin{chunk}{keywordType}
 int keywordType(void) {
     Token *token_ent;
@@ -6944,8 +6944,8 @@ int keywordType(void) {
 \end{chunk}
 \subsection{getExpectedToken}
 Read a token, and report a syntax error if it has the wrong type.
-\index{shared!getExpectedToken}
-\index{getExpectedToken shared}
+\index[doc]{shared!getExpectedToken}
+\index[doc]{getExpectedToken shared}
 \begin{chunk}{getExpectedToken}
 void getExpectedToken(int type) {
     getToken();
@@ -6970,8 +6970,8 @@ void getExpectedToken(int type) {
 
 \end{chunk}
 \subsection{spadErrorHandler}
-\index{shared!spadErrorHandler}
-\index{spadErrorHandler shared}
+\index[doc]{shared!spadErrorHandler}
+\index[doc]{spadErrorHandler shared}
 \begin{chunk}{spadErrorHandler}
 static void spadErrorHandler(void) {
     /* fprintf(stderr, "got a spad error\n"); */
@@ -6982,8 +6982,8 @@ static void spadErrorHandler(void) {
 
 \end{chunk}
 \subsection{resetConnection}
-\index{shared!resetConnection}
-\index{resetConnection shared}
+\index[doc]{shared!resetConnection}
+\index[doc]{resetConnection shared}
 \begin{chunk}{resetConnection}
 void resetConnection(void) {
     if (spadSocket) {
@@ -7004,8 +7004,8 @@ void resetConnection(void) {
 \end{chunk}
 \subsection{spadBusy}
 Returns true if spad is currently computing.
-\index{shared!spadBusy}
-\index{spadBusy shared}
+\index[doc]{shared!spadBusy}
+\index[doc]{spadBusy shared}
 \begin{chunk}{spadBusy}
 int spadBusy(void) {
     if (sessionServer == NULL)
@@ -7017,8 +7017,8 @@ int spadBusy(void) {
 /* connect to AXIOM , return 0 if succesful, 1 if not */
 \end{chunk}
 \subsection{connectSpad}
-\index{shared!connectSpad}
-\index{connectSpad shared}
+\index[doc]{shared!connectSpad}
+\index[doc]{connectSpad shared}
 \begin{chunk}{connectSpad}
 int connectSpad(void) {
     if (!MenuServerOpened) {
@@ -7040,7 +7040,7 @@ int connectSpad(void) {
 }
 \end{chunk}
 \section{htadd shared code}
-\index{htadd shared code}
+\index[doc]{htadd shared code}
 \begin{chunk}{htadd shared code}
 \getchunk{include/bsdsignal.h}
 \getchunk{include/bsdsignal.h1}
@@ -7241,7 +7241,7 @@ char *token_table[] = {
 
 \end{chunk}
 \section{hypertex shared code}
-\index{hypertex shared code}
+\index[doc]{hypertex shared code}
 \begin{chunk}{hypertex shared code}
 \getchunk{include/bsdsignal.h}
 \getchunk{include/bsdsignal.h1}
@@ -8103,8 +8103,8 @@ char *buff_name = NULL;    /* name for the aixterm */
 This routine used to be used to send sigint onto spad, but now they go
 through just fine on their own reinstated for AIX V3.2
 \subsection{spadbufInterHandler}
-\index{spadbuf!spadbufInterHandler}
-\index{spadbufInterHandler spadbuf}
+\index[doc]{spadbuf!spadbufInterHandler}
+\index[doc]{spadbufInterHandler spadbuf}
 \begin{chunk}{spadbuf}
 static void spadbufInterHandler(int sig) {
     send_signal(session_sock, SIGUSR2);
@@ -8112,8 +8112,8 @@ static void spadbufInterHandler(int sig) {
 
 \end{chunk}
 \subsection{spadbufFunctionChars}
-\index{spadbuf!spadbufFunctionChars}
-\index{spadbufFunctionChars spadbuf}
+\index[doc]{spadbuf!spadbufFunctionChars}
+\index[doc]{spadbufFunctionChars spadbuf}
 \begin{chunk}{spadbuf}
 static void spadbufFunctionChars(void) {
     /** once I have that get the special characters         ****/
@@ -8130,8 +8130,8 @@ static void spadbufFunctionChars(void) {
 \subsection{interpIO}
 Act as terminal session for sock connected to stdin 
 and stdout of another process.
-\index{spadbuf!interpIO}
-\index{interpIO spadbuf}
+\index[doc]{spadbuf!interpIO}
+\index[doc]{interpIO spadbuf}
 \begin{chunk}{spadbuf}
 static void interpIO(void) {
     char buf[1024];
@@ -8181,8 +8181,8 @@ static void interpIO(void) {
 
 \end{chunk}
 \subsection{}
-\index{spadbuf!initParent}
-\index{initParent spadbuf}
+\index[doc]{spadbuf!initParent}
+\index[doc]{initParent spadbuf}
 \begin{chunk}{spadbuf}
 static void initParent(void) {
     /** get the original termio settings, so I never have to check again **/
@@ -8226,8 +8226,8 @@ that the usage should be.
 \begin{verbatim}
      spadbuf page_name [completion_ files]
 \end{verbatim}
-\index{spadbuf!main}
-\index{main spadbuf}
+\index[doc]{spadbuf!main}
+\index[doc]{main spadbuf}
 \begin{chunk}{spadbuf}
 int main(int argc,char **  argv) {
     FILE *fopen();
@@ -8354,8 +8354,8 @@ FILE *coverFile;
 \end{chunk}
 \section{Code}
 \subsection{allocString}
-\index{ex2ht!allocString}
-\index{allocString ex2ht}
+\index[doc]{ex2ht!allocString}
+\index[doc]{allocString ex2ht}
 \begin{chunk}{ex2ht}
 char *allocString(char *s) {
     char *t = (char *) malloc(strlen(s) + 1);
@@ -8365,8 +8365,8 @@ char *allocString(char *s) {
 
 \end{chunk}
 \subsection{strPrefix}
-\index{ex2ht!strPrefix}
-\index{strPrefix ex2ht}
+\index[doc]{ex2ht!strPrefix}
+\index[doc]{strPrefix ex2ht}
 \begin{chunk}{ex2ht}
 char *strPrefix(char *prefix, char *s) {
     while (*prefix != '\0' && *prefix == *s) {
@@ -8380,8 +8380,8 @@ char *strPrefix(char *prefix, char *s) {
 
 \end{chunk}
 \subsection{getExTitle}
-\index{ex2ht!getExTitle}
-\index{getExTitle ex2ht}
+\index[doc]{ex2ht!getExTitle}
+\index[doc]{getExTitle ex2ht}
 \begin{chunk}{ex2ht}
 char *getExTitle(FILE *inFile, char *line) {
     char *title;
@@ -8396,8 +8396,8 @@ char *getExTitle(FILE *inFile, char *line) {
 
 \end{chunk}
 \subsection{exToHt}
-\index{ex2ht!exToHt}
-\index{exToHt ex2ht}
+\index[doc]{ex2ht!exToHt}
+\index[doc]{exToHt ex2ht}
 \begin{chunk}{ex2ht}
 void exToHt(char *filename) {
     char line[MaxLineLength], *line2;
@@ -8457,8 +8457,8 @@ void exToHt(char *filename) {
 
 \end{chunk}
 \subsection{emitHeader}
-\index{ex2ht!emitHeader}
-\index{emitHeader ex2ht}
+\index[doc]{ex2ht!emitHeader}
+\index[doc]{emitHeader ex2ht}
 \begin{chunk}{ex2ht}
 void emitHeader(FILE *outFile, char *pageName, char *pageTitle) {
     fprintf(outFile, "\\begin{page}{%s}{%s}\n", pageName, pageTitle);
@@ -8467,8 +8467,8 @@ void emitHeader(FILE *outFile, char *pageName, char *pageTitle) {
 
 \end{chunk}
 \subsection{emitFooter}
-\index{ex2ht!emitFooter}
-\index{emitFooter ex2ht}
+\index[doc]{ex2ht!emitFooter}
+\index[doc]{emitFooter ex2ht}
 \begin{chunk}{ex2ht}
 void emitFooter(FILE *outFile) {
     fprintf(outFile, "\\endmenu\\endscroll\\end{page}\n");
@@ -8477,8 +8477,8 @@ void emitFooter(FILE *outFile) {
 \end{chunk}
 \subsection{emitMenuEntry}
 s is ``pageName\}\{title\}''
-\index{ex2ht!emitMenuEntry}
-\index{emitMenuEntry ex2ht}
+\index[doc]{ex2ht!emitMenuEntry}
+\index[doc]{emitMenuEntry ex2ht}
 \begin{chunk}{ex2ht}
 void emitMenuEntry(char *line, FILE *outFile) {
     char pageName[MaxLineLength], title[MaxLineLength];
@@ -8495,8 +8495,8 @@ void emitMenuEntry(char *line, FILE *outFile) {
 
 \end{chunk}
 \subsection{emitSpadCommand}
-\index{ex2ht!emitSpadCommand}
-\index{emitSpadCommand ex2ht}
+\index[doc]{ex2ht!emitSpadCommand}
+\index[doc]{emitSpadCommand ex2ht}
 \begin{chunk}{ex2ht}
 void emitSpadCommand(char *line, char *prefix, FILE *outFile) {
     int braceCount = 1;
@@ -8516,8 +8516,8 @@ void emitSpadCommand(char *line, char *prefix, FILE *outFile) {
 
 \end{chunk}
 \subsection{openCoverPage}
-\index{ex2ht!openCoverPage}
-\index{openCoverPage ex2ht}
+\index[doc]{ex2ht!openCoverPage}
+\index[doc]{openCoverPage ex2ht}
 \begin{chunk}{ex2ht}
 void openCoverPage(void) {
     coverFile = fopen("coverex.ht", "w");
@@ -8532,8 +8532,8 @@ void openCoverPage(void) {
 
 \end{chunk}
 \subsection{closeCoverPage}
-\index{ex2ht!closeCoverPage}
-\index{closeCoverPage ex2ht}
+\index[doc]{ex2ht!closeCoverPage}
+\index[doc]{closeCoverPage ex2ht}
 \begin{chunk}{ex2ht}
 void closeCoverPage(void) {
     fprintf(coverFile, "}\\endscroll\\end{page}\n\n");
@@ -8541,8 +8541,8 @@ void closeCoverPage(void) {
 
 \end{chunk}
 \subsection{closeCoverFile}
-\index{ex2ht!closeCoverFile}
-\index{closeCoverFile ex2ht}
+\index[doc]{ex2ht!closeCoverFile}
+\index[doc]{closeCoverFile ex2ht}
 \begin{chunk}{ex2ht}
 void closeCoverFile(void) {
     fclose(coverFile);
@@ -8551,8 +8551,8 @@ void closeCoverFile(void) {
 
 \end{chunk}
 \subsection{emitCoverLink}
-\index{ex2ht!emitCoverLink}
-\index{emitCoverLink ex2ht}
+\index[doc]{ex2ht!emitCoverLink}
+\index[doc]{emitCoverLink ex2ht}
 \begin{chunk}{ex2ht}
 void emitCoverLink(char *name, char *title) {
     fprintf(coverFile, "{\\downlink{%s}{%s}}\n", title, name);
@@ -8560,8 +8560,8 @@ void emitCoverLink(char *name, char *title) {
 
 \end{chunk}
 \subsection{addFile}
-\index{ex2ht!addFile}
-\index{addFile ex2ht}
+\index[doc]{ex2ht!addFile}
+\index[doc]{addFile ex2ht}
 \begin{chunk}{ex2ht}
 void addFile(char *filename) {
     FILE *file = fopen(filename, "r");
@@ -8580,8 +8580,8 @@ void addFile(char *filename) {
 
 \end{chunk}
 \subsection{main}
-\index{ex2ht!main}
-\index{main ex2ht}
+\index[doc]{ex2ht!main}
+\index[doc]{main ex2ht}
 \begin{chunk}{ex2ht}
 int main(int argc, char **argv){
     int i;
@@ -8954,8 +8954,8 @@ extern int str_len;
 This routine parses the command line arguments. It parses
 the command line arguments. It returns a flag which tells the calling
 routine what database file to use, and whether or not to delete files.
-\index{htadd!parseArgs}
-\index{parseArgs htadd}
+\index[doc]{htadd!parseArgs}
+\index[doc]{parseArgs htadd}
 \begin{chunk}{htadd}
 static void parseArgs(char **argv, char *db_dir, char **filenames, short *fl) {
     *fl = 0;
@@ -8996,8 +8996,8 @@ static void parseArgs(char **argv, char *db_dir, char **filenames, short *fl) {
 \end{chunk}
 \subsection{writable}
 Check to see if the user has permission
-\index{htadd!writable}
-\index{writable htadd}
+\index[doc]{htadd!writable}
+\index[doc]{writable htadd}
 \begin{chunk}{htadd}
 static int writable(struct stat buff) {
 #ifdef DEBUG
@@ -9020,8 +9020,8 @@ static int writable(struct stat buff) {
 \subsection{buildDBFilename}
 This procedure builds the db filename. Subsequently, it is passed onto all
 the add files that are called.
-\index{htadd!buildDBFilename}
-\index{buildDBFilename htadd}
+\index[doc]{htadd!buildDBFilename}
+\index[doc]{buildDBFilename htadd}
 \begin{chunk}{htadd}
 static int buildDBFilename(short flag, char *db_dir, char *dbfilename) {
     int ret_status;
@@ -9086,8 +9086,8 @@ paths mentioned are used.
 \item If not, then the \$AXIOM environment variable is used.
 \end{itemize}
 \end{enumerate}
-\index{htadd!addfile}
-\index{addfile htadd}
+\index[doc]{htadd!addfile}
+\index[doc]{addfile htadd}
 \begin{chunk}{htadd}
 static void addfile(char *dbname, char *name, int fresh) {
     char fullname[256];
@@ -9133,8 +9133,8 @@ static void addfile(char *dbname, char *name, int fresh) {
 
 \end{chunk}
 \subsection{updateDB}
-\index{htadd!updateDB}
-\index{updateDB htadd}
+\index[doc]{htadd!updateDB}
+\index[doc]{updateDB htadd}
 \begin{chunk}{htadd}
 static void updateDB(FILE *db, FILE *temp_db, FILE *new_file,
           char *addname, char *fullname, int fresh) {
@@ -9189,8 +9189,8 @@ static void updateDB(FILE *db, FILE *temp_db, FILE *new_file,
 
 \end{chunk}
 \subsection{addNewPages}
-\index{htadd!addNewPages}
-\index{addNewPages htadd}
+\index[doc]{htadd!addNewPages}
+\index[doc]{addNewPages htadd}
 \begin{chunk}{htadd}
 static void addNewPages(FILE *temp_db, FILE *new_file, 
                         char *addname, char *fullname) {
@@ -9245,8 +9245,8 @@ static void addNewPages(FILE *temp_db, FILE *new_file,
 
 \end{chunk}
 \subsection{copyFile}
-\index{htadd!copyFile}
-\index{copyFile htadd}
+\index[doc]{htadd!copyFile}
+\index[doc]{copyFile htadd}
 \begin{chunk}{htadd}
 static void copyFile(char *f1, char *f2) {
     FILE *fp1, *fp2;
@@ -9262,8 +9262,8 @@ static void copyFile(char *f1, char *f2) {
 
 \end{chunk}
 \subsection{getFilename}
-\index{htadd!getFilename}
-\index{getFilename htadd}
+\index[doc]{htadd!getFilename}
+\index[doc]{getFilename htadd}
 \begin{chunk}{htadd}
 
 static void getFilename(void) {
@@ -9299,8 +9299,8 @@ static void getFilename(void) {
 
 \end{chunk}
 \subsection{deleteFile}
-\index{htadd!deleteFile}
-\index{deleteFile htadd}
+\index[doc]{htadd!deleteFile}
+\index[doc]{deleteFile htadd}
 \begin{chunk}{htadd}
 static int deleteFile(char *dbname, char *name) {
     char temp_dbFile[256];
@@ -9326,8 +9326,8 @@ static int deleteFile(char *dbname, char *name) {
 
 \end{chunk}
 \subsection{deleteDB}
-\index{htadd!deleteDB}
-\index{deleteDB htadd}
+\index[doc]{htadd!deleteDB}
+\index[doc]{deleteDB htadd}
 \begin{chunk}{htadd}
 static void deleteDB(FILE *db, FILE *temp_db, char *name) {
     char *fname;
@@ -9364,8 +9364,8 @@ static void deleteDB(FILE *db, FILE *temp_db, char *name) {
 
 \end{chunk}
 \subsection{main}
-\index{htadd!main}
-\index{main htadd}
+\index[doc]{htadd!main}
+\index[doc]{main htadd}
 \begin{chunk}{htadd}
 int main(int argc, char **argv) {
     /*int i;*/
@@ -9501,8 +9501,8 @@ cflow --emacs -l -n -b -T --omit-arguments hthits.c
 
 \end{chunk}
 \subsection{structs}
-\index{struct!PgInfo}
-\index{PgInfo struct}
+\index[doc]{struct!PgInfo}
+\index[doc]{PgInfo struct}
 \begin{chunk}{hthits}
 typedef struct pgInfo {
     char name[MAX_ENTRY_NAME];
@@ -9526,8 +9526,8 @@ regex_t reg_pattern;
 
 \end{chunk}
 \subsection{cmdline}
-\index{hthits!cmdline}
-\index{cmdline hthits}
+\index[doc]{hthits!cmdline}
+\index[doc]{cmdline hthits}
 \begin{chunk}{hthits}
 void cmdline(int argc,char ** argv) {
     progName = argv[0];
@@ -9541,8 +9541,8 @@ void cmdline(int argc,char ** argv) {
 
 \end{chunk}
 \subsection{handleHtdb}
-\index{hthits!handleHtdb}
-\index{handleHtdb hthits}
+\index[doc]{hthits!handleHtdb}
+\index[doc]{handleHtdb hthits}
 \begin{chunk}{hthits}
 void handleHtdb(void) {
     FILE *htdbFile;
@@ -9561,8 +9561,8 @@ void handleHtdb(void) {
 
 \end{chunk}
 \subsection{handleFile}
-\index{hthits!handleFile}
-\index{handleFile hthits}
+\index[doc]{hthits!handleFile}
+\index[doc]{handleFile hthits}
 \begin{chunk}{hthits}
 void handleFile(FILE *htdbFile) {
     static PgInfo *pgInfoV = 0;
@@ -9651,8 +9651,8 @@ void handleFile(FILE *htdbFile) {
 
 \end{chunk}
 \subsection{handleFilePages}
-\index{hthits!handleFilePages}
-\index{handleFilePages hthits}
+\index[doc]{hthits!handleFilePages}
+\index[doc]{handleFilePages hthits}
 \begin{chunk}{hthits}
 void handleFilePages(char *fname, int pgc, PgInfo *pgv) {
     FILE *infile;
@@ -9669,8 +9669,8 @@ void handleFilePages(char *fname, int pgc, PgInfo *pgv) {
 
 \end{chunk}
 \subsection{handlePage}
-\index{hthits!handlePage}
-\index{handlePage hthits}
+\index[doc]{hthits!handlePage}
+\index[doc]{handlePage hthits}
 \begin{chunk}{hthits}
 void handlePage(FILE *infile,PgInfo * pg) {
     static char *pgBuf = 0;
@@ -9702,8 +9702,8 @@ void handlePage(FILE *infile,PgInfo * pg) {
 
 \end{chunk}
 \subsection{searchPage}
-\index{hthits!searchPage}
-\index{searchPage hthits}
+\index[doc]{hthits!searchPage}
+\index[doc]{searchPage hthits}
 \begin{chunk}{hthits}
 void searchPage(char *pgname,char * pgtitle,char * pgbody) {
     char *bodyrest;
@@ -9728,8 +9728,8 @@ void searchPage(char *pgname,char * pgtitle,char * pgbody) {
 Given string s and length n, output ` followed by the first n characters
 of s with ` and newline converted to blanks. This function destructively
 modifies s.
-\index{hthits!squirt}
-\index{squirt hthits}
+\index[doc]{hthits!squirt}
+\index[doc]{squirt hthits}
 \begin{chunk}{hthits}
 void squirt(char *s, int n) {
     register char *t, *e;
@@ -9748,8 +9748,8 @@ void squirt(char *s, int n) {
 \end{chunk}
 \subsection{splitpage}
 Any newlines and separator characters in the title are changed to blanks.
-\index{hthits!splitpage}
-\index{splitpage hthits}
+\index[doc]{hthits!splitpage}
+\index[doc]{splitpage hthits}
 \begin{chunk}{hthits}
 void splitpage(char *buf, char **ptitle, char **pbody) {
     int n, depth, tno;
@@ -9782,8 +9782,8 @@ void splitpage(char *buf, char **ptitle, char **pbody) {
 
 \end{chunk}
 \subsection{untexbuf}
-\index{hthits!untexbuf}
-\index{untexbuf hthits}
+\index[doc]{hthits!untexbuf}
+\index[doc]{untexbuf hthits}
 \begin{chunk}{hthits}
 void untexbuf(register char *s) {
     register char *d = s;
@@ -9816,8 +9816,8 @@ void untexbuf(register char *s) {
 
 \end{chunk}
 \subsection{badDB}
-\index{hthits!badDB}
-\index{badDB hthits}
+\index[doc]{hthits!badDB}
+\index[doc]{badDB hthits}
 \begin{chunk}{hthits}
 void badDB(void) {
     fprintf(stderr, "%s:  bad database file %s\n", progName, htdbFName);
@@ -9826,8 +9826,8 @@ void badDB(void) {
 
 \end{chunk}
 \subsection{regerr}
-\index{hthits!regerr}
-\index{regerr hthits}
+\index[doc]{hthits!regerr}
+\index[doc]{regerr hthits}
 \begin{chunk}{hthits}
 void regerr(int code) {
     fprintf(stderr, "%s: regular expression error %d for \"%s\"\n",
@@ -9836,8 +9836,8 @@ void regerr(int code) {
 
 \end{chunk}
 \subsection{main}
-\index{hthits!main}
-\index{main hthits}
+\index[doc]{hthits!main}
+\index[doc]{main hthits}
 \begin{chunk}{hthits}
 int main(int argc,char ** argv) {
     cmdline(argc, argv);
@@ -9851,7 +9851,7 @@ int main(int argc,char ** argv) {
 This is the main module of the HyperDoc program. It contains the main
 routine which initializes all the X stuff, and the tables. Then it passes
 control over to the main event loop.
-\index{hypertex}
+\index[doc]{hypertex}
 \section{Constants and Headers}
 \subsection{System includes}
 \begin{chunk}{hypertex}
@@ -10679,8 +10679,8 @@ int vbuf_size = 0;
 \subsection{sigusr2Handler}
 SIGUSR2 is raised by the spadbuf program when it is done with the current
 command
-\index{hypertex!sigusr2Handler}
-\index{sigusr2Handler hypertex}
+\index[doc]{hypertex!sigusr2Handler}
+\index[doc]{sigusr2Handler hypertex}
 \begin{chunk}{hypertex}
 void sigusr2Handler(int sig) {
   gIsEndOfOutput = 1;
@@ -10691,8 +10691,8 @@ void sigusr2Handler(int sig) {
 \subsection{sigcldHandler}
 Why were we waiting after the child had already died?
 Because we don't want zombies 
-\index{hypertex!sigcldHandler}
-\index{sigcldHandler hypertex}
+\index[doc]{hypertex!sigcldHandler}
+\index[doc]{sigcldHandler hypertex}
 \begin{chunk}{hypertex}
 void sigcldHandler(int sig) {
   int x;
@@ -10702,8 +10702,8 @@ void sigcldHandler(int sig) {
 \end{chunk}
 \subsection{cleanSocket}
 Clean up spad sockets on exit.
-\index{hypertex!cleanSocket}
-\index{cleanSocket hypertex}
+\index[doc]{hypertex!cleanSocket}
+\index[doc]{cleanSocket hypertex}
 \begin{chunk}{hypertex}
 void cleanSocket(void) {
     char name[256];
@@ -10714,8 +10714,8 @@ void cleanSocket(void) {
 \end{chunk}
 \subsection{initHash}
 Initializes the hash table for Files, and Windows
-\index{hypertex!initHash}
-\index{initHash hypertex}
+\index[doc]{hypertex!initHash}
+\index[doc]{initHash hypertex}
 \begin{chunk}{hypertex}
 static void initHash(void) {
     hashInit(&gFileHashTable, 
@@ -10735,8 +10735,8 @@ static void initHash(void) {
 \end{chunk}
 \subsection{initPageStructs}
 Initialize the HyperDoc page hierarchy data structures
-\index{hypertex!initPageStructs}
-\index{initPageStructs hypertex}
+\index[doc]{hypertex!initPageStructs}
+\index[doc]{initPageStructs hypertex}
 \begin{chunk}{hypertex}
 void initPageStructs(HDWindow *w) {
     int i;
@@ -10752,8 +10752,8 @@ void initPageStructs(HDWindow *w) {
 
 \end{chunk}
 \subsection{checkArguments}
-\index{hypertex!checkArguments}
-\index{checkArguments hypertex}
+\index[doc]{hypertex!checkArguments}
+\index[doc]{checkArguments hypertex}
 \begin{chunk}{hypertex}
 static void checkArguments(void) {
   int i;
@@ -10805,8 +10805,8 @@ static void checkArguments(void) {
 
 \end{chunk}
 \subsection{makeServerConnections}
-\index{hypertex!makeServerConnections}
-\index{makeServerConnections hypertex}
+\index[doc]{hypertex!makeServerConnections}
+\index[doc]{makeServerConnections hypertex}
 \begin{chunk}{hypertex}
 static void makeServerConnections(void) {
     int i, wait_time;
@@ -10896,8 +10896,8 @@ static void makeServerConnections(void) {
 \subsection{insertCond}
 This routine creates a new cond node and inserts it into the
 current cond table
-\index{hypertex!insertCond}
-\index{insertCond hypertex}
+\index[doc]{hypertex!insertCond}
+\index[doc]{insertCond hypertex}
 \begin{chunk}{hypertex}
 void insertCond(char *label, char *cond) {
     CondNode *condnode = (CondNode *) hashFind(gWindow->fCondHashTable, label);
@@ -10916,8 +10916,8 @@ void insertCond(char *label, char *cond) {
 
 \end{chunk}
 \subsection{changeCond}
-\index{hypertex!changeCond}
-\index{changeCond hypertex}
+\index[doc]{hypertex!changeCond}
+\index[doc]{changeCond hypertex}
 \begin{chunk}{hypertex}
 void changeCond(char *label, char *newcond) {
     CondNode *condnode = (CondNode *) hashFind(gWindow->fCondHashTable, label);
@@ -10933,8 +10933,8 @@ void changeCond(char *label, char *newcond) {
 
 \end{chunk}
 \subsection{checkMemostack}
-\index{hypertex!checkMemostack}
-\index{checkMemostack hypertex}
+\index[doc]{hypertex!checkMemostack}
+\index[doc]{checkMemostack hypertex}
 \begin{chunk}{hypertex}
 static int checkMemostack(TextNode *node) {
     char *buffer;
@@ -10957,8 +10957,8 @@ static int checkMemostack(TextNode *node) {
 \end{chunk}
 \subsection{checkCondition}
 Checks the condition presented and returns a 1 or a 0.
-\index{hypertex!checkCondition}
-\index{checkCondition hypertex}
+\index[doc]{hypertex!checkCondition}
+\index[doc]{checkCondition hypertex}
 \begin{chunk}{hypertex}
 int checkCondition(TextNode *node) {
     CondNode *cond;
@@ -10998,8 +10998,8 @@ int checkCondition(TextNode *node) {
 
 \section{Dialog Handling}
 \subsection{redrawWin}
-\index{hypertex!redrawWin}
-\index{redrawWin hypertex}
+\index[doc]{hypertex!redrawWin}
+\index[doc]{redrawWin hypertex}
 \begin{chunk}{hypertex}
 static void redrawWin(void) {
     XUnmapSubwindows(gXDisplay, gWindow->fMainWindow);
@@ -11012,8 +11012,8 @@ static void redrawWin(void) {
 \subsection{mystrncpy}
 Copies the characters from buff1 to buff2 starting at position 
 buff2+n and buff1+n
-\index{hypertex!mystrncpy}
-\index{mystrncpy hypertex}
+\index[doc]{hypertex!mystrncpy}
+\index[doc]{mystrncpy hypertex}
 \begin{chunk}{hypertex}
 static char *mystrncpy(char *buff1, char *buff2, int n) {
     int i;
@@ -11024,8 +11024,8 @@ static char *mystrncpy(char *buff1, char *buff2, int n) {
 
 \end{chunk}
 \subsection{incLineNumbers}
-\index{hypertex!incLineNumbers}
-\index{incLineNumbers hypertex}
+\index[doc]{hypertex!incLineNumbers}
+\index[doc]{incLineNumbers hypertex}
 \begin{chunk}{hypertex}
 static void incLineNumbers(LineStruct *line) {
     for (; line != NULL; line = line->next)
@@ -11034,8 +11034,8 @@ static void incLineNumbers(LineStruct *line) {
 
 \end{chunk}
 \subsection{decLineNumbers}
-\index{hypertex!decLineNumbers}
-\index{decLineNumbers hypertex}
+\index[doc]{hypertex!decLineNumbers}
+\index[doc]{decLineNumbers hypertex}
 \begin{chunk}{hypertex}
 static void decLineNumbers(LineStruct *line) {
     for (; line != NULL; line = line->next)
@@ -11045,8 +11045,8 @@ static void decLineNumbers(LineStruct *line) {
 
 \end{chunk}
 \subsection{decreaseLineNumbers}
-\index{hypertex!decreaseLineNumbers}
-\index{decreaseLineNumbers hypertex}
+\index[doc]{hypertex!decreaseLineNumbers}
+\index[doc]{decreaseLineNumbers hypertex}
 \begin{chunk}{hypertex}
 static void decreaseLineNumbers(LineStruct *line, int am) {
     for (; line != NULL; line = line->next)
@@ -11055,8 +11055,8 @@ static void decreaseLineNumbers(LineStruct *line, int am) {
 
 \end{chunk}
 \subsection{overwriteBuffer}
-\index{hypertex!overwriteBuffer}
-\index{overwriteBuffer hypertex}
+\index[doc]{hypertex!overwriteBuffer}
+\index[doc]{overwriteBuffer hypertex}
 \begin{chunk}{hypertex}
 static void overwriteBuffer(char *buffer, InputItem *item) {
     LineStruct *newline;
@@ -11132,8 +11132,8 @@ static void overwriteBuffer(char *buffer, InputItem *item) {
 This routine takes the current line and moves it num forward. The
 only way I have to move any other lines forward is if this line has 
 length > size
-\index{hypertex!moveSymForward}
-\index{moveSymForward hypertex}
+\index[doc]{hypertex!moveSymForward}
+\index[doc]{moveSymForward hypertex}
 \begin{chunk}{hypertex}
 static int moveSymForward(LineStruct *line, int num, int size, 
                             InputItem *sym) {
@@ -11180,8 +11180,8 @@ static int moveSymForward(LineStruct *line, int num, int size,
 
 \end{chunk}
 \subsection{clearCursorline}
-\index{hypertex!clearCursorline}
-\index{clearCursorline hypertex}
+\index[doc]{hypertex!clearCursorline}
+\index[doc]{clearCursorline hypertex}
 \begin{chunk}{hypertex}
 static void clearCursorline(InputItem *sym) {
     XCharStruct extents;
@@ -11201,8 +11201,8 @@ static void clearCursorline(InputItem *sym) {
 
 \end{chunk}
 \subsection{insertBuffer}
-\index{hypertex!insertBuffer}
-\index{insertBuffer hypertex}
+\index[doc]{hypertex!insertBuffer}
+\index[doc]{insertBuffer hypertex}
 \begin{chunk}{hypertex}
 static void insertBuffer(char *buffer, InputItem *sym) {
     /*int num = strlen(buffer);*/
@@ -11293,8 +11293,8 @@ static void insertBuffer(char *buffer, InputItem *sym) {
 
 \end{chunk}
 \subsection{addBufferToSym}
-\index{hypertex!addBufferToSym}
-\index{addBufferToSym hypertex}
+\index[doc]{hypertex!addBufferToSym}
+\index[doc]{addBufferToSym hypertex}
 \begin{chunk}{hypertex}
 void addBufferToSym(char *buffer,InputItem *sym) {
     if (gInInsertMode)
@@ -11305,8 +11305,8 @@ void addBufferToSym(char *buffer,InputItem *sym) {
 
 \end{chunk}
 \subsection{drawInputsymbol}
-\index{hypertex!drawInputsymbol}
-\index{drawInputsymbol hypertex}
+\index[doc]{hypertex!drawInputsymbol}
+\index[doc]{drawInputsymbol hypertex}
 \begin{chunk}{hypertex}
 void drawInputsymbol(InputItem *sym) {
     int y_spot = start_y;
@@ -11341,8 +11341,8 @@ void drawInputsymbol(InputItem *sym) {
 
 \end{chunk}
 \subsection{updateInputsymbol}
-\index{hypertex!updateInputsymbol}
-\index{updateInputsymbol hypertex}
+\index[doc]{hypertex!updateInputsymbol}
+\index[doc]{updateInputsymbol hypertex}
 \begin{chunk}{hypertex}
 void updateInputsymbol(InputItem *sym) {
     int y_spot = start_y;
@@ -11383,8 +11383,8 @@ void updateInputsymbol(InputItem *sym) {
 
 \end{chunk}
 \subsection{drawCursor}
-\index{hypertex!drawCursor}
-\index{drawCursor hypertex}
+\index[doc]{hypertex!drawCursor}
+\index[doc]{drawCursor hypertex}
 \begin{chunk}{hypertex}
 static void drawCursor(InputItem *sym) {
     int cursor_y;
@@ -11418,8 +11418,8 @@ static void drawCursor(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveCursorHome}
-\index{hypertex!moveCursorHome}
-\index{moveCursorHome hypertex}
+\index[doc]{hypertex!moveCursorHome}
+\index[doc]{moveCursorHome hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorHome(InputItem *sym) {
     LineStruct *trace = sym->curr_line;
@@ -11434,8 +11434,8 @@ static void moveCursorHome(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveCursorEnd}
-\index{hypertex!moveCursorEnd}
-\index{moveCursorEnd hypertex}
+\index[doc]{hypertex!moveCursorEnd}
+\index[doc]{moveCursorEnd hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorEnd(InputItem *sym) {
     LineStruct *trace = sym->curr_line;
@@ -11450,8 +11450,8 @@ static void moveCursorEnd(InputItem *sym) {
 
 \end{chunk}
 \subsection{void moveCursorForward}
-\index{hypertex!void moveCursorForward}
-\index{void moveCursorForward hypertex}
+\index[doc]{hypertex!void moveCursorForward}
+\index[doc]{void moveCursorForward hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorForward(InputItem *sym) {
     if (sym->curr_line->buff_pntr == sym->curr_line->len &&
@@ -11482,8 +11482,8 @@ static void moveCursorForward(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveCursorDown}
-\index{hypertex!moveCursorDown}
-\index{moveCursorDown hypertex}
+\index[doc]{hypertex!moveCursorDown}
+\index[doc]{moveCursorDown hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorDown(InputItem *sym) {
     int bp = sym->curr_line->buff_pntr;
@@ -11507,8 +11507,8 @@ static void moveCursorDown(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveCursorUp}
-\index{hypertex!moveCursorUp}
-\index{moveCursorUp hypertex}
+\index[doc]{hypertex!moveCursorUp}
+\index[doc]{moveCursorUp hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorUp(InputItem *sym) {
     int bp = sym->curr_line->buff_pntr;
@@ -11534,8 +11534,8 @@ static void moveCursorUp(InputItem *sym) {
 
 \end{chunk}
 \subsection{clearCursor}
-\index{hypertex!clearCursor}
-\index{clearCursor hypertex}
+\index[doc]{hypertex!clearCursor}
+\index[doc]{clearCursor hypertex}
 \begin{chunk}{hypertex}
 static void clearCursor(InputItem *sym) {
     XCharStruct extents;
@@ -11556,8 +11556,8 @@ static void clearCursor(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveCursorBackward}
-\index{hypertex!moveCursorBackward}
-\index{moveCursorBackward hypertex}
+\index[doc]{hypertex!moveCursorBackward}
+\index[doc]{moveCursorBackward hypertex}
 \begin{chunk}{hypertex}
 static void moveCursorBackward(InputItem *sym) {
     if (sym->curr_line->buff_pntr == 0) {
@@ -11585,8 +11585,8 @@ static void moveCursorBackward(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveRestBack}
-\index{hypertex!moveRestBack}
-\index{moveRestBack hypertex}
+\index[doc]{hypertex!moveRestBack}
+\index[doc]{moveRestBack hypertex}
 \begin{chunk}{hypertex}
 static char moveRestBack(LineStruct *line, int size) {
     char c = '\000';
@@ -11620,8 +11620,8 @@ static char moveRestBack(LineStruct *line, int size) {
 
 \end{chunk}
 \subsection{deleteRestOfLine}
-\index{hypertex!deleteRestOfLine}
-\index{deleteRestOfLine hypertex}
+\index[doc]{hypertex!deleteRestOfLine}
+\index[doc]{deleteRestOfLine hypertex}
 \begin{chunk}{hypertex}
 static void deleteRestOfLine(InputItem *sym) {
     LineStruct *curr_line = sym->curr_line;
@@ -11685,8 +11685,8 @@ static void deleteRestOfLine(InputItem *sym) {
 
 \end{chunk}
 \subsection{backOverEoln}
-\index{hypertex!backOverEoln}
-\index{backOverEoln hypertex}
+\index[doc]{hypertex!backOverEoln}
+\index[doc]{backOverEoln hypertex}
 \begin{chunk}{hypertex}
 static void backOverEoln(InputItem *sym) {
     /*
@@ -11758,8 +11758,8 @@ static void backOverEoln(InputItem *sym) {
 
 \end{chunk}
 \subsection{moveBackOneChar}
-\index{hypertex!moveBackOneChar}
-\index{moveBackOneChar hypertex}
+\index[doc]{hypertex!moveBackOneChar}
+\index[doc]{moveBackOneChar hypertex}
 \begin{chunk}{hypertex}
 static int moveBackOneChar(InputItem *sym) {
     char c = '\000', d = '\000';
@@ -11851,8 +11851,8 @@ static int moveBackOneChar(InputItem *sym) {
 
 \end{chunk}
 \subsection{backOverChar}
-\index{hypertex!backOverChar}
-\index{backOverChar hypertex}
+\index[doc]{hypertex!backOverChar}
+\index[doc]{backOverChar hypertex}
 \begin{chunk}{hypertex}
 static void backOverChar(InputItem *sym) {
     if (moveBackOneChar(sym))
@@ -11861,8 +11861,8 @@ static void backOverChar(InputItem *sym) {
 
 \end{chunk}
 \subsection{deleteEoln}
-\index{hypertex!deleteEoln}
-\index{deleteEoln hypertex}
+\index[doc]{hypertex!deleteEoln}
+\index[doc]{deleteEoln hypertex}
 \begin{chunk}{hypertex}
 static void deleteEoln(InputItem *sym) {
     /* much the same as back_over eoln except my perspective has changed */
@@ -11928,8 +11928,8 @@ static void deleteEoln(InputItem *sym) {
 
 \end{chunk}
 \subsection{deleteOneChar}
-\index{hypertex!deleteOneChar}
-\index{deleteOneChar hypertex}
+\index[doc]{hypertex!deleteOneChar}
+\index[doc]{deleteOneChar hypertex}
 \begin{chunk}{hypertex}
 static int deleteOneChar(InputItem *sym) {
     char c = '\000';
@@ -11982,8 +11982,8 @@ static int deleteOneChar(InputItem *sym) {
 
 \end{chunk}
 \subsection{deleteChar}
-\index{hypertex!deleteChar}
-\index{deleteChar hypertex}
+\index[doc]{hypertex!deleteChar}
+\index[doc]{deleteChar hypertex}
 \begin{chunk}{hypertex}
 static void deleteChar(InputItem *sym) {
     if (deleteOneChar(sym))
@@ -11995,8 +11995,8 @@ static void deleteChar(InputItem *sym) {
 This routine takes all the characters from the current cursor
 on, and copies them into a temp buffer, from which they are recopied
 back starting at the next line.
-\index{hypertex!toughEnter}
-\index{toughEnter hypertex}
+\index[doc]{hypertex!toughEnter}
+\index[doc]{toughEnter hypertex}
 \begin{chunk}{hypertex}
 static void toughEnter(InputItem *sym) {
     char buff[1024];
@@ -12068,8 +12068,8 @@ static void toughEnter(InputItem *sym) {
 \subsection{enterNewLine}
 At this point the user has hit a return. Let me just be naive, and
 take everything from the current spot on, and put it on a new line
-\index{hypertex!enterNewLine}
-\index{enterNewLine hypertex}
+\index[doc]{hypertex!enterNewLine}
+\index[doc]{enterNewLine hypertex}
 \begin{chunk}{hypertex}
 static void enterNewLine(InputItem *sym) {
     LineStruct *newline;
@@ -12146,8 +12146,8 @@ static void enterNewLine(InputItem *sym) {
 
 \end{chunk}
 \subsection{dialog}
-\index{hypertex!dialog}
-\index{dialog hypertex}
+\index[doc]{hypertex!dialog}
+\index[doc]{dialog hypertex}
 \begin{chunk}{hypertex}
 void dialog(XEvent *event, KeySym keysym, char *buffer) {
     InputItem *item;
@@ -12280,8 +12280,8 @@ use the value of page->y\_off as an offset into the scrolling
 region to compute what is actually to be displayed on the page.
 
 \subsection{showPage}
-\index{hypertex!showPage}
-\index{showPage hypertex}
+\index[doc]{hypertex!showPage}
+\index[doc]{showPage hypertex}
 \begin{chunk}{hypertex}
 void showPage(HyperDocPage *page) {
     XWindowChanges wc;
@@ -12371,8 +12371,8 @@ void showPage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{exposePage}
-\index{hypertex!exposePage}
-\index{exposePage hypertex}
+\index[doc]{hypertex!exposePage}
+\index[doc]{exposePage hypertex}
 \begin{chunk}{hypertex}
 void exposePage(HyperDocPage *page) {
     int width, height, doShowScrollBars = 1;
@@ -12422,8 +12422,8 @@ void exposePage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{scrollPage}
-\index{hypertex!scrollPage}
-\index{scrollPage hypertex}
+\index[doc]{hypertex!scrollPage}
+\index[doc]{scrollPage hypertex}
 \begin{chunk}{hypertex}
 void scrollPage(HyperDocPage *page) {
     initTopGroup();
@@ -12443,8 +12443,8 @@ void scrollPage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{pastePage}
-\index{hypertex!pastePage}
-\index{pastePage hypertex}
+\index[doc]{hypertex!pastePage}
+\index[doc]{pastePage hypertex}
 \begin{chunk}{hypertex}
 void pastePage(TextNode *node) {
     int width, height;
@@ -12497,8 +12497,8 @@ window can die is through an event, it never actually end. One of the
 subroutines it calls is responsible for killing everything.
 
 \subsection{mainEventLoop}
-\index{hypertex!mainEventLoop}
-\index{mainEventLoop hypertex}
+\index[doc]{hypertex!mainEventLoop}
+\index[doc]{mainEventLoop hypertex}
 \begin{chunk}{hypertex}
 void mainEventLoop(void) {
     XEvent event;
@@ -12572,8 +12572,8 @@ void mainEventLoop(void) {
 
 \end{chunk}
 \subsection{handleEvent}
-\index{hypertex!handleEvent}
-\index{handleEvent hypertex}
+\index[doc]{hypertex!handleEvent}
+\index[doc]{handleEvent hypertex}
 \begin{chunk}{hypertex}
 static void handleEvent(XEvent * event) {
     XWindowAttributes wa;
@@ -12688,8 +12688,8 @@ static void handleEvent(XEvent * event) {
 
 \end{chunk}
 \subsection{createWindow}
-\index{hypertex!createWindow}
-\index{createWindow hypertex}
+\index[doc]{hypertex!createWindow}
+\index[doc]{createWindow hypertex}
 \begin{chunk}{hypertex}
 static void createWindow(void) {
     XWindowAttributes wa;
@@ -12712,8 +12712,8 @@ static void createWindow(void) {
 \subsection{quitHyperDoc}
 This routine is called when the quitbutton is hit. For the moment I am
 just going to leave it all behind.
-\index{hypertex!quitHyperDoc}
-\index{quitHyperDoc hypertex}
+\index[doc]{hypertex!quitHyperDoc}
+\index[doc]{quitHyperDoc hypertex}
 \begin{chunk}{hypertex}
 void quitHyperDoc(void) {
     HyperDocPage *page;
@@ -12745,8 +12745,8 @@ void quitHyperDoc(void) {
 \subsection{findPage}
 findPage takes as an argument the HyperDoc for a page name and returns
 the associated page.
-\index{hypertex!findPage}
-\index{findPage hypertex}
+\index[doc]{hypertex!findPage}
+\index[doc]{findPage hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *findPage(TextNode * node) {
     char *page_name;
@@ -12774,8 +12774,8 @@ static HyperDocPage *findPage(TextNode * node) {
 \end{chunk}
 \subsection{downlink}
 Pushes a page onto the down link stack.
-\index{hypertex!downlink}
-\index{downlink hypertex}
+\index[doc]{hypertex!downlink}
+\index[doc]{downlink hypertex}
 \begin{chunk}{hypertex}
 static void downlink(void) {
     if (gWindow->fDownLinkStackIndex == MaxDownlinkDepth)
@@ -12786,8 +12786,8 @@ static void downlink(void) {
 
 \end{chunk}
 \subsection{memolink}
-\index{hypertex!memolink}
-\index{memolink hypertex}
+\index[doc]{hypertex!memolink}
+\index[doc]{memolink hypertex}
 \begin{chunk}{hypertex}
 static void memolink(void) {
     if (gWindow->fMemoStackIndex == MaxMemoDepth)
@@ -12801,8 +12801,8 @@ static void memolink(void) {
 
 \end{chunk}
 \subsection{killAxiomPage}
-\index{hypertex!killAxiomPage}
-\index{killAxiomPage hypertex}
+\index[doc]{hypertex!killAxiomPage}
+\index[doc]{killAxiomPage hypertex}
 \begin{chunk}{hypertex}
 static void killAxiomPage(HyperDocPage * page) {
     char command[512];
@@ -12812,8 +12812,8 @@ static void killAxiomPage(HyperDocPage * page) {
 
 \end{chunk}
 \subsection{killPage}
-\index{hypertex!killPage}
-\index{killPage hypertex}
+\index[doc]{hypertex!killPage}
+\index[doc]{killPage hypertex}
 \begin{chunk}{hypertex}
 static void killPage(HyperDocPage * page) {
     page->scroll_off = 0;
@@ -12827,8 +12827,8 @@ static void killPage(HyperDocPage * page) {
 \end{chunk}
 \subsection{returnlink}
 Pops the memo stack.
-\index{hypertex!returnlink}
-\index{returnlink hypertex}
+\index[doc]{hypertex!returnlink}
+\index[doc]{returnlink hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *returnlink(void) {
     int i;
@@ -12854,8 +12854,8 @@ static HyperDocPage *returnlink(void) {
 
 \end{chunk}
 \subsection{uplink}
-\index{hypertex!uplink}
-\index{uplink hypertex}
+\index[doc]{hypertex!uplink}
+\index[doc]{uplink hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *uplink(void) {
     if (gWindow->fDownLinkStackIndex == 0)
@@ -12868,8 +12868,8 @@ static HyperDocPage *uplink(void) {
 
 \end{chunk}
 \subsection{windowlinkHandler}
-\index{hypertex!windowlinkHandler}
-\index{windowlinkHandler hypertex}
+\index[doc]{hypertex!windowlinkHandler}
+\index[doc]{windowlinkHandler hypertex}
 \begin{chunk}{hypertex}
 static void windowlinkHandler(TextNode * node) {
     char *page_name;
@@ -12883,8 +12883,8 @@ static void windowlinkHandler(TextNode * node) {
 
 \end{chunk}
 \subsection{makeWindowLink}
-\index{hypertex!makeWindowLink}
-\index{makeWindowLink hypertex}
+\index[doc]{hypertex!makeWindowLink}
+\index[doc]{makeWindowLink hypertex}
 \begin{chunk}{hypertex}
 void makeWindowLink(char *name) {
     if (initTopWindow(name) != -1)
@@ -12896,8 +12896,8 @@ void makeWindowLink(char *name) {
 \subsection{lispwindowlinkHandler}
 Since we are popping up a new window, then we had better change all
 the cursors right away. We won't get another chance at it.
-\index{hypertex!lispwindowlinkHandler}
-\index{lispwindowlinkHandler hypertex}
+\index[doc]{hypertex!lispwindowlinkHandler}
+\index[doc]{lispwindowlinkHandler hypertex}
 \begin{chunk}{hypertex}
 static void lispwindowlinkHandler(HyperLink * link) {
     if (initTopWindow(NULL) != -1) {
@@ -12913,8 +12913,8 @@ static void lispwindowlinkHandler(HyperLink * link) {
 
 \end{chunk}
 \subsection{pasteButton}
-\index{hypertex!pasteButton}
-\index{pasteButton hypertex}
+\index[doc]{hypertex!pasteButton}
+\index[doc]{pasteButton hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *pasteButton(PasteNode * paste) {
     HyperDocPage *page = NULL;
@@ -12938,8 +12938,8 @@ static HyperDocPage *pasteButton(PasteNode * paste) {
 
 \end{chunk}
 \subsection{helpForHyperDoc}
-\index{hypertex!helpForHyperDoc}
-\index{helpForHyperDoc hypertex}
+\index[doc]{hypertex!helpForHyperDoc}
+\index[doc]{helpForHyperDoc hypertex}
 \begin{chunk}{hypertex}
 void helpForHyperDoc(void) {
     HyperDocPage *page = NULL;
@@ -12962,8 +12962,8 @@ void helpForHyperDoc(void) {
 
 \end{chunk}
 \subsection{findButtonInList}
-\index{hypertex!findButtonInList}
-\index{findButtonInList hypertex}
+\index[doc]{hypertex!findButtonInList}
+\index[doc]{findButtonInList hypertex}
 \begin{chunk}{hypertex}
 static HyperLink *findButtonInList(HDWindow * window, int x, int y) {
     ButtonList *bl;
@@ -12980,8 +12980,8 @@ static HyperLink *findButtonInList(HDWindow * window, int x, int y) {
 
 \end{chunk}
 \subsection{getHyperLink}
-\index{hypertex!getHyperLink}
-\index{getHyperLink hypertex}
+\index[doc]{hypertex!getHyperLink}
+\index[doc]{getHyperLink hypertex}
 \begin{chunk}{hypertex}
 static HyperLink *getHyperLink(XButtonEvent * event) {
  HyperLink *l1, *l2;
@@ -12997,8 +12997,8 @@ static HyperLink *getHyperLink(XButtonEvent * event) {
 \subsection{handleButton}
 Handle a button pressed event. window is the subwindow in which the event
 occured, and button is the button which was pressed.
-\index{hypertex!handleButton}
-\index{handleButton hypertex}
+\index[doc]{hypertex!handleButton}
+\index[doc]{handleButton hypertex}
 \begin{chunk}{hypertex}
 static void handleButton(int button, XButtonEvent * event) {
     HyperLink *link;
@@ -13172,8 +13172,8 @@ static void handleButton(int button, XButtonEvent * event) {
 
 \end{chunk}
 \subsection{exitHyperDoc}
-\index{hypertex!exitHyperDoc}
-\index{exitHyperDoc hypertex}
+\index[doc]{hypertex!exitHyperDoc}
+\index[doc]{exitHyperDoc hypertex}
 \begin{chunk}{hypertex}
 void exitHyperDoc(void) {
     XEvent event;
@@ -13210,8 +13210,8 @@ void exitHyperDoc(void) {
 
 \end{chunk}
 \subsection{setWindow}
-\index{hypertex!setWindow}
-\index{setWindow hypertex}
+\index[doc]{hypertex!setWindow}
+\index[doc]{setWindow hypertex}
 \begin{chunk}{hypertex}
 static int setWindow(Window window) {
     Window root, parent, *children, grandparent,myarg;
@@ -13266,8 +13266,8 @@ ERROR:
  */
 \end{chunk}
 \subsection{clearExposures}
-\index{hypertex!clearExposures}
-\index{clearExposures hypertex}
+\index[doc]{hypertex!clearExposures}
+\index[doc]{clearExposures hypertex}
 \begin{chunk}{hypertex}
 static void clearExposures(Window w) {
     XEvent report;
@@ -13277,8 +13277,8 @@ static void clearExposures(Window w) {
 
 \end{chunk}
 \subsection{getNewWindow}
-\index{hypertex!getNewWindow}
-\index{getNewWindow hypertex}
+\index[doc]{hypertex!getNewWindow}
+\index[doc]{getNewWindow hypertex}
 \begin{chunk}{hypertex}
 void getNewWindow(void) {
     int val;
@@ -13394,8 +13394,8 @@ void getNewWindow(void) {
 
 \end{chunk}
 \subsection{setCursor}
-\index{hypertex!setCursor}
-\index{setCursor hypertex}
+\index[doc]{hypertex!setCursor}
+\index[doc]{setCursor hypertex}
 \begin{chunk}{hypertex}
 static void setCursor(HDWindow *window,Cursor state) {
     if (state == gBusyCursor)
@@ -13409,8 +13409,8 @@ static void setCursor(HDWindow *window,Cursor state) {
 
 \end{chunk}
 \subsection{changeCursor}
-\index{hypertex!changeCursor}
-\index{changeCursor hypertex}
+\index[doc]{hypertex!changeCursor}
+\index[doc]{changeCursor hypertex}
 \begin{chunk}{hypertex}
 static void changeCursor(Cursor state, HDWindow *window) {
     if (window->fDisplayedCursor == state)
@@ -13421,8 +13421,8 @@ static void changeCursor(Cursor state, HDWindow *window) {
 
 \end{chunk}
 \subsection{handleMotionEvent}
-\index{hypertex!handleMotionEvent}
-\index{handleMotionEvent hypertex}
+\index[doc]{hypertex!handleMotionEvent}
+\index[doc]{handleMotionEvent hypertex}
 \begin{chunk}{hypertex}
 static void handleMotionEvent(XMotionEvent *event) {
     if (!gWindow)
@@ -13435,8 +13435,8 @@ static void handleMotionEvent(XMotionEvent *event) {
 
 \end{chunk}
 \subsection{initCursorState}
-\index{hypertex!initCursorState}
-\index{initCursorState hypertex}
+\index[doc]{hypertex!initCursorState}
+\index[doc]{initCursorState hypertex}
 \begin{chunk}{hypertex}
 static void initCursorState(HDWindow *window) {
     if (window) {
@@ -13453,8 +13453,8 @@ static void initCursorState(HDWindow *window) {
 
 \end{chunk}
 \subsection{initCursorStates}
-\index{hypertex!initCursorStates}
-\index{initCursorStates hypertex}
+\index[doc]{hypertex!initCursorStates}
+\index[doc]{initCursorStates hypertex}
 \begin{chunk}{hypertex}
 static void initCursorStates(void) {
     hashMap(&gSessionHashTable,(MappableFunction) initCursorState);
@@ -13462,8 +13462,8 @@ static void initCursorStates(void) {
 
 \end{chunk}
 \subsection{makeBusyCursor}
-\index{hypertex!makeBusyCursor}
-\index{makeBusyCursor hypertex}
+\index[doc]{hypertex!makeBusyCursor}
+\index[doc]{makeBusyCursor hypertex}
 \begin{chunk}{hypertex}
 static void makeBusyCursor(HDWindow *window) {
     changeCursor(gBusyCursor, window);
@@ -13471,8 +13471,8 @@ static void makeBusyCursor(HDWindow *window) {
 
 \end{chunk}
 \subsection{makeBusyCursors}
-\index{hypertex!makeBusyCursors}
-\index{makeBusyCursors hypertex}
+\index[doc]{hypertex!makeBusyCursors}
+\index[doc]{makeBusyCursors hypertex}
 \begin{chunk}{hypertex}
 static void makeBusyCursors(void) {
     hashMap(&gSessionHashTable, (MappableFunction)makeBusyCursor);
@@ -13480,8 +13480,8 @@ static void makeBusyCursors(void) {
 
 \end{chunk}
 \subsection{HyperDocErrorHandler}
-\index{hypertex!HyperDocErrorHandler}
-\index{HyperDocErrorHandler hypertex}
+\index[doc]{hypertex!HyperDocErrorHandler}
+\index[doc]{HyperDocErrorHandler hypertex}
 \begin{chunk}{hypertex}
 static int HyperDocErrorHandler(Display *display, XErrorEvent *xe) {
     if (xe->request_code != 15) {
@@ -13500,8 +13500,8 @@ static int HyperDocErrorHandler(Display *display, XErrorEvent *xe) {
 
 \end{chunk}
 \subsection{setErrorHandlers}
-\index{hypertex!setErrorHandlers}
-\index{setErrorHandlers hypertex}
+\index[doc]{hypertex!setErrorHandlers}
+\index[doc]{setErrorHandlers hypertex}
 \begin{chunk}{hypertex}
 static void setErrorHandlers(void) {
     XSetErrorHandler(HyperDocErrorHandler);
@@ -13511,8 +13511,8 @@ static void setErrorHandlers(void) {
 \section{Line Extent Computation}
 \subsection{computeInputExtent}
 Computes the extent of the input string or box.
-\index{hypertex!computeInputExtent}
-\index{computeInputExtent hypertex}
+\index[doc]{hypertex!computeInputExtent}
+\index[doc]{computeInputExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeInputExtent(TextNode * node) {
     InputItem *item;
@@ -13545,8 +13545,8 @@ static void computeInputExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computePunctuationExtent}
-\index{hypertex!computePunctuationExtent}
-\index{computePunctuationExtent hypertex}
+\index[doc]{hypertex!computePunctuationExtent}
+\index[doc]{computePunctuationExtent hypertex}
 \begin{chunk}{hypertex}
 static void computePunctuationExtent(TextNode * node) {
     int twidth;
@@ -13598,8 +13598,8 @@ static void computePunctuationExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computeWordExtent}
-\index{hypertex!computeWordExtent}
-\index{computeWordExtent hypertex}
+\index[doc]{hypertex!computeWordExtent}
+\index[doc]{computeWordExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeWordExtent(TextNode * node) {
     int twidth;
@@ -13645,8 +13645,8 @@ static void computeWordExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computeVerbatimExtent}
-\index{hypertex!computeVerbatimExtent}
-\index{computeVerbatimExtent hypertex}
+\index[doc]{hypertex!computeVerbatimExtent}
+\index[doc]{computeVerbatimExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeVerbatimExtent(TextNode *node) {
     node->height = normal_textHeight;
@@ -13659,8 +13659,8 @@ static void computeVerbatimExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeSpadsrctxtExtent}
-\index{hypertex!computeSpadsrctxtExtent}
-\index{computeSpadsrctxtExtent hypertex}
+\index[doc]{hypertex!computeSpadsrctxtExtent}
+\index[doc]{computeSpadsrctxtExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeSpadsrctxtExtent(TextNode *node) {
     node->height = normal_textHeight;
@@ -13677,8 +13677,8 @@ static void computeSpadsrctxtExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeDashExtent}
-\index{hypertex!computeDashExtent}
-\index{computeDashExtent hypertex}
+\index[doc]{hypertex!computeDashExtent}
+\index[doc]{computeDashExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeDashExtent(TextNode *node) {
     int num_dashes;
@@ -13727,8 +13727,8 @@ static void computeDashExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeTextExtent}
-\index{hypertex!computeTextExtent}
-\index{computeTextExtent hypertex}
+\index[doc]{hypertex!computeTextExtent}
+\index[doc]{computeTextExtent hypertex}
 \begin{chunk}{hypertex}
 void computeTextExtent(TextNode *node) {
     for (; node != NULL; node = node->next) {
@@ -14052,8 +14052,8 @@ void computeTextExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeBeginItemsExtent}
-\index{hypertex!computeBeginItemsExtent}
-\index{computeBeginItemsExtent hypertex}
+\index[doc]{hypertex!computeBeginItemsExtent}
+\index[doc]{computeBeginItemsExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeBeginItemsExtent(TextNode * node) {
     int store_x, store_y, lh;
@@ -14088,8 +14088,8 @@ static void computeBeginItemsExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computeItemExtent}
-\index{hypertex!computeItemExtent}
-\index{computeItemExtent hypertex}
+\index[doc]{hypertex!computeItemExtent}
+\index[doc]{computeItemExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeItemExtent(TextNode * node) {
     if (gInLine)
@@ -14099,8 +14099,8 @@ static void computeItemExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computeMitemExtent}
-\index{hypertex!computeMitemExtent}
-\index{computeMitemExtent hypertex}
+\index[doc]{hypertex!computeMitemExtent}
+\index[doc]{computeMitemExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeMitemExtent(TextNode *node) {
     if (gInLine) {
@@ -14111,8 +14111,8 @@ static void computeMitemExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{endifExtent}
-\index{hypertex!endifExtent}
-\index{endifExtent hypertex}
+\index[doc]{hypertex!endifExtent}
+\index[doc]{endifExtent hypertex}
 \begin{chunk}{hypertex}
 static void endifExtent(TextNode *node) {
     /*
@@ -14128,8 +14128,8 @@ static void endifExtent(TextNode *node) {
 \subsection{computeIfcondExtent}
 This routine checks the value of the condition and swaps in the {\tt else}
 or the {\tt then} depending.
-\index{hypertex!computeIfcondExtent}
-\index{computeIfcondExtent hypertex}
+\index[doc]{hypertex!computeIfcondExtent}
+\index[doc]{computeIfcondExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeIfcondExtent(TextNode *node) {
     TextNode *condnode = node->data.ifnode->cond;
@@ -14191,8 +14191,8 @@ static void computeIfcondExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeCenterExtent}
-\index{hypertex!computeCenterExtent}
-\index{computeCenterExtent hypertex}
+\index[doc]{hypertex!computeCenterExtent}
+\index[doc]{computeCenterExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeCenterExtent(TextNode * node) {
     if (gInLine)
@@ -14209,8 +14209,8 @@ static void computeCenterExtent(TextNode * node) {
 
 \end{chunk}
 \subsection{computeBfExtent}
-\index{hypertex!computeBfExtent}
-\index{computeBfExtent hypertex}
+\index[doc]{hypertex!computeBfExtent}
+\index[doc]{computeBfExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeBfExtent(TextNode *node) {
     if (gInLine && node->space)
@@ -14222,8 +14222,8 @@ static void computeBfExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeEmExtent}
-\index{hypertex!computeEmExtent}
-\index{computeEmExtent hypertex}
+\index[doc]{hypertex!computeEmExtent}
+\index[doc]{computeEmExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeEmExtent(TextNode *node) {
     if (gInLine && node->space)
@@ -14238,8 +14238,8 @@ static void computeEmExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeItExtent}
-\index{hypertex!computeItExtent}
-\index{computeItExtent hypertex}
+\index[doc]{hypertex!computeItExtent}
+\index[doc]{computeItExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeItExtent(TextNode *node) {
     if (gInLine && node->space)
@@ -14250,8 +14250,8 @@ static void computeItExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeRmExtent}
-\index{hypertex!computeRmExtent}
-\index{computeRmExtent hypertex}
+\index[doc]{hypertex!computeRmExtent}
+\index[doc]{computeRmExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeRmExtent(TextNode *node) {
     if (gInLine && node->space)
@@ -14263,8 +14263,8 @@ static void computeRmExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeButtonExtent}
-\index{hypertex!computeButtonExtent}
-\index{computeButtonExtent hypertex}
+\index[doc]{hypertex!computeButtonExtent}
+\index[doc]{computeButtonExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeButtonExtent(TextNode *node) {
     int twidth;
@@ -14290,8 +14290,8 @@ static void computeButtonExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{endbuttonExtent}
-\index{hypertex!endbuttonExtent}
-\index{endbuttonExtent hypertex}
+\index[doc]{hypertex!endbuttonExtent}
+\index[doc]{endbuttonExtent hypertex}
 \begin{chunk}{hypertex}
 static void endbuttonExtent(TextNode *node) {
     int temp;
@@ -14327,8 +14327,8 @@ static void endbuttonExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computePastebuttonExtent}
-\index{hypertex!computePastebuttonExtent}
-\index{computePastebuttonExtent hypertex}
+\index[doc]{hypertex!computePastebuttonExtent}
+\index[doc]{computePastebuttonExtent hypertex}
 \begin{chunk}{hypertex}
 static void computePastebuttonExtent(TextNode *node) {
     int twidth;
@@ -14351,8 +14351,8 @@ static void computePastebuttonExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{endpastebuttonExtent}
-\index{hypertex!endpastebuttonExtent}
-\index{endpastebuttonExtent hypertex}
+\index[doc]{hypertex!endpastebuttonExtent}
+\index[doc]{endpastebuttonExtent hypertex}
 \begin{chunk}{hypertex}
 static void endpastebuttonExtent(TextNode *node) {
     int temp;
@@ -14381,8 +14381,8 @@ static void endpastebuttonExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computePasteExtent}
-\index{hypertex!computePasteExtent}
-\index{computePasteExtent hypertex}
+\index[doc]{hypertex!computePasteExtent}
+\index[doc]{computePasteExtent hypertex}
 \begin{chunk}{hypertex}
 static void computePasteExtent(TextNode *node) {
     if (gInLine) {
@@ -14397,8 +14397,8 @@ static void computePasteExtent(TextNode *node) {
 \end{chunk}
 \subsection{computeSpadcommandExtent}
 Compute the text extent of a spadcommand node.
-\index{hypertex!computeSpadcommandExtent}
-\index{computeSpadcommandExtent hypertex}
+\index[doc]{hypertex!computeSpadcommandExtent}
+\index[doc]{computeSpadcommandExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeSpadcommandExtent(TextNode *node) {
     /*
@@ -14427,8 +14427,8 @@ static void computeSpadcommandExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeSpadsrcExtent}
-\index{hypertex!computeSpadsrcExtent}
-\index{computeSpadsrcExtent hypertex}
+\index[doc]{hypertex!computeSpadsrcExtent}
+\index[doc]{computeSpadsrcExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeSpadsrcExtent(TextNode *node) {
     /*
@@ -14451,8 +14451,8 @@ static void computeSpadsrcExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{endSpadcommandExtent}
-\index{hypertex!endSpadcommandExtent}
-\index{endSpadcommandExtent hypertex}
+\index[doc]{hypertex!endSpadcommandExtent}
+\index[doc]{endSpadcommandExtent hypertex}
 \begin{chunk}{hypertex}
 static void endSpadcommandExtent(TextNode *node) {
     int temp;
@@ -14482,8 +14482,8 @@ static void endSpadcommandExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{endSpadsrcExtent}
-\index{hypertex!endSpadsrcExtent}
-\index{endSpadsrcExtent hypertex}
+\index[doc]{hypertex!endSpadsrcExtent}
+\index[doc]{endSpadsrcExtent hypertex}
 \begin{chunk}{hypertex}
 static void endSpadsrcExtent(TextNode *node) {
     int temp;
@@ -14513,8 +14513,8 @@ static void endSpadsrcExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeMboxExtent}
-\index{hypertex!computeMboxExtent}
-\index{computeMboxExtent hypertex}
+\index[doc]{hypertex!computeMboxExtent}
+\index[doc]{computeMboxExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeMboxExtent(TextNode *node) {
     node->width = textWidth(node->next, Endmbox);
@@ -14530,8 +14530,8 @@ static void computeMboxExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeBoxExtent}
-\index{hypertex!computeBoxExtent}
-\index{computeBoxExtent hypertex}
+\index[doc]{hypertex!computeBoxExtent}
+\index[doc]{computeBoxExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeBoxExtent(TextNode *node) {
     int t_width;
@@ -14557,8 +14557,8 @@ static void computeBoxExtent(TextNode *node) {
 
 \end{chunk}
 \subsection{computeIrExtent}
-\index{hypertex!computeIrExtent}
-\index{computeIrExtent hypertex}
+\index[doc]{hypertex!computeIrExtent}
+\index[doc]{computeIrExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeIrExtent(TextNode *node) {
     int t_width;
@@ -14590,8 +14590,8 @@ static void computeIrExtent(TextNode *node) {
 \end{chunk}
 \subsection{computeImageExtent}
 Read a bitmap file into memory.
-\index{hypertex!computeImageExtent}
-\index{computeImageExtent hypertex}
+\index[doc]{hypertex!computeImageExtent}
+\index[doc]{computeImageExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeImageExtent(TextNode *node) {
     if (text_x + node->width > right_margin) {
@@ -14613,8 +14613,8 @@ static void computeImageExtent(TextNode *node) {
 \end{chunk}
 \subsection{computeTableExtent}
 Compute the coordinates of the entries in a table.
-\index{hypertex!computeTableExtent}
-\index{computeTableExtent hypertex}
+\index[doc]{hypertex!computeTableExtent}
+\index[doc]{computeTableExtent hypertex}
 \begin{chunk}{hypertex}
 static void computeTableExtent(TextNode **node) {
     int num_cols, num_lines;
@@ -14674,8 +14674,8 @@ static void computeTableExtent(TextNode **node) {
 
 \end{chunk}
 \subsection{computeTitleExtent}
-\index{hypertex!computeTitleExtent}
-\index{computeTitleExtent hypertex}
+\index[doc]{hypertex!computeTitleExtent}
+\index[doc]{computeTitleExtent hypertex}
 \begin{chunk}{hypertex}
 void computeTitleExtent(HyperDocPage *page) {
     right_margin_space = non_scroll_right_margin_space;
@@ -14692,8 +14692,8 @@ void computeTitleExtent(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{computeHeaderExtent}
-\index{hypertex!computeHeaderExtent}
-\index{computeHeaderExtent hypertex}
+\index[doc]{hypertex!computeHeaderExtent}
+\index[doc]{computeHeaderExtent hypertex}
 \begin{chunk}{hypertex}
 void computeHeaderExtent(HyperDocPage *page) {
     /*
@@ -14724,8 +14724,8 @@ void computeHeaderExtent(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{computeFooterExtent}
-\index{hypertex!computeFooterExtent}
-\index{computeFooterExtent hypertex}
+\index[doc]{hypertex!computeFooterExtent}
+\index[doc]{computeFooterExtent hypertex}
 \begin{chunk}{hypertex}
 void computeFooterExtent(HyperDocPage * page) {
     if (page->footer) {
@@ -14751,8 +14751,8 @@ void computeFooterExtent(HyperDocPage * page) {
 
 \end{chunk}
 \subsection{computeScrollingExtent}
-\index{hypertex!computeScrollingExtent}
-\index{computeScrollingExtent hypertex}
+\index[doc]{hypertex!computeScrollingExtent}
+\index[doc]{computeScrollingExtent hypertex}
 \begin{chunk}{hypertex}
 void computeScrollingExtent(HyperDocPage *page) {
     /* Check to see if there is a scrolling region  */
@@ -14788,8 +14788,8 @@ The startNewline function updates the current header node, and also
 allocates if needed memory for the next Line Header. It also assigns
 the first TextNode on the line to the structure, because this is the
 last time I will be able to do this.
-\index{hypertex!startNewline}
-\index{startNewline hypertex}
+\index[doc]{hypertex!startNewline}
+\index[doc]{startNewline hypertex}
 \begin{chunk}{hypertex}
 void startNewline(int distance, TextNode * node) {
     if (gLineNode != NULL) {
@@ -14807,8 +14807,8 @@ void startNewline(int distance, TextNode * node) {
 \subsection{centerNodes}
 The centerNodes goes through and centers all the text between the two
 given nodes.
-\index{hypertex!centerNodes}
-\index{centerNodes hypertex}
+\index[doc]{hypertex!centerNodes}
+\index[doc]{centerNodes hypertex}
 \begin{chunk}{hypertex}
 static void centerNodes(TextNode * begin_node, TextNode * end_node) {
     int begin_x, end_x, wmid_x, offset, mid_x;
@@ -14828,8 +14828,8 @@ static void centerNodes(TextNode * begin_node, TextNode * end_node) {
 
 \end{chunk}
 \subsection{punctuationWidth}
-\index{hypertex!punctuationWidth}
-\index{punctuationWidth hypertex}
+\index[doc]{hypertex!punctuationWidth}
+\index[doc]{punctuationWidth hypertex}
 \begin{chunk}{hypertex}
 static int punctuationWidth(TextNode * node) {
     int twidth, width = strlen(node->data.text);
@@ -14842,8 +14842,8 @@ static int punctuationWidth(TextNode * node) {
 
 \end{chunk}
 \subsection{inputStringWidth}
-\index{hypertex!inputStringWidth}
-\index{inputStringWidth hypertex}
+\index[doc]{hypertex!inputStringWidth}
+\index[doc]{inputStringWidth hypertex}
 \begin{chunk}{hypertex}
 static int inputStringWidth(TextNode * node) {
     InputItem *item;
@@ -14858,8 +14858,8 @@ static int inputStringWidth(TextNode * node) {
 
 \end{chunk}
 \subsection{wordWidth}
-\index{hypertex!wordWidth}
-\index{wordWidth hypertex}
+\index[doc]{hypertex!wordWidth}
+\index[doc]{wordWidth hypertex}
 \begin{chunk}{hypertex}
 static int wordWidth(TextNode * node) {
     int twidth, len = strlen(node->data.text);
@@ -14871,8 +14871,8 @@ static int wordWidth(TextNode * node) {
 
 \end{chunk}
 \subsection{verbatimWidth}
-\index{hypertex!verbatimWidth}
-\index{verbatimWidth hypertex}
+\index[doc]{hypertex!verbatimWidth}
+\index[doc]{verbatimWidth hypertex}
 \begin{chunk}{hypertex}
 static int verbatimWidth(TextNode * node) {
     int twidth, len = strlen(node->data.text);
@@ -14884,8 +14884,8 @@ static int verbatimWidth(TextNode * node) {
 
 \end{chunk}
 \subsection{widthOfDash}
-\index{hypertex!widthOfDash}
-\index{widthOfDash hypertex}
+\index[doc]{hypertex!widthOfDash}
+\index[doc]{widthOfDash hypertex}
 \begin{chunk}{hypertex}
 static int widthOfDash(TextNode * node) {
     int num_dashes, twidth;
@@ -14903,8 +14903,8 @@ static int widthOfDash(TextNode * node) {
 \end{chunk}
 \subsection{textWidth}
 Return the gWindow->width in pixels of the given text node, when displayed
-\index{hypertex!textWidth}
-\index{textWidth hypertex}
+\index[doc]{hypertex!textWidth}
+\index[doc]{textWidth hypertex}
 \begin{chunk}{hypertex}
 int textWidth(TextNode * node, int Ender) {
     int twidth = 0, num_words;
@@ -15095,8 +15095,8 @@ int textWidth(TextNode * node, int Ender) {
 The totalWidth function traces through the nodes, until it finds a blank 
 space. It is used by computeWordExtent, and computePunctuation extent 
 to determine. How far we go before we actually see white space.
-\index{hypertex!totalWidth}
-\index{totalWidth hypertex}
+\index[doc]{hypertex!totalWidth}
+\index[doc]{totalWidth hypertex}
 \begin{chunk}{hypertex}
 int totalWidth(TextNode * node, int Ender) {
     int twidth = 0;
@@ -15188,8 +15188,8 @@ int totalWidth(TextNode * node, int Ender) {
 \end{chunk}
 \subsection{initExtents}
 The initExtents function initialize some text size variables
-\index{hypertex!initExtents}
-\index{initExtents hypertex}
+\index[doc]{hypertex!initExtents}
+\index[doc]{initExtents hypertex}
 \begin{chunk}{hypertex}
 void initExtents(void) {
     present_line_height = line_height;
@@ -15209,8 +15209,8 @@ void initExtents(void) {
 \end{chunk}
 \subsection{initTitleExtents}
 The initTitleExtents function initialize some title text size variables.
-\index{hypertex!initTitleExtents}
-\index{initTitleExtents hypertex}
+\index[doc]{hypertex!initTitleExtents}
+\index[doc]{initTitleExtents hypertex}
 \begin{chunk}{hypertex}
 void initTitleExtents(HyperDocPage * page) {
     present_line_height = line_height;
@@ -15230,8 +15230,8 @@ void initTitleExtents(HyperDocPage * page) {
 \end{chunk}
 \subsection{initText}
 The initText function initialize some text size variables.
-\index{hypertex!initText}
-\index{initText hypertex}
+\index[doc]{hypertex!initText}
+\index[doc]{initText hypertex}
 \begin{chunk}{hypertex}
 void initText(void) {
     normal_textHeight = gRmFont->ascent + gRmFont->descent;
@@ -15244,8 +15244,8 @@ void initText(void) {
 \subsection{textHeight}
 The textHeight function returns the height of a piece of formatted text 
 in pixels.
-\index{hypertex!textHeight}
-\index{textHeight hypertex}
+\index[doc]{hypertex!textHeight}
+\index[doc]{textHeight hypertex}
 \begin{chunk}{hypertex}
 int textHeight(TextNode * node, int Ender) {
     cur_height = 0;
@@ -15255,8 +15255,8 @@ int textHeight(TextNode * node, int Ender) {
 \end{chunk}
 \subsection{textHeight1}
 The textHeight1 function is the recursive part of textHeight.
-\index{hypertex!textHeight1}
-\index{textHeight1 hypertex}
+\index[doc]{hypertex!textHeight1}
+\index[doc]{textHeight1 hypertex}
 \begin{chunk}{hypertex}
 static int textHeight1(TextNode * node, int Ender) {
     for (; node != NULL; node = node->next) {
@@ -15380,8 +15380,8 @@ static int textHeight1(TextNode * node, int Ender) {
 \end{chunk}
 \subsection{maxX}
 The maxX function returns the height of a piece of formatted text in pixels.
-\index{hypertex!maxX}
-\index{maxX hypertex}
+\index[doc]{hypertex!maxX}
+\index[doc]{maxX hypertex}
 \begin{chunk}{hypertex}
 int maxX(TextNode * node, int Ender) {
     maxXvalue = 0;
@@ -15461,8 +15461,8 @@ int maxX(TextNode * node, int Ender) {
 
 \end{chunk}
 \subsection{Xvalue}
-\index{hypertex!Xvalue}
-\index{Xvalue hypertex}
+\index[doc]{hypertex!Xvalue}
+\index[doc]{Xvalue hypertex}
 \begin{chunk}{hypertex}
 static int Xvalue(TextNode * node) {
     for (; node != NULL; node = node->next) {
@@ -15518,8 +15518,8 @@ static int Xvalue(TextNode * node) {
 \subsection{trailingSpace}
 The trailingSpace function computes the length of the trailing spaces 
 of a node.
-\index{hypertex!trailingSpace}
-\index{trailingSpace hypertex}
+\index[doc]{hypertex!trailingSpace}
+\index[doc]{trailingSpace hypertex}
 \begin{chunk}{hypertex}
 int trailingSpace(TextNode * node) {
     int space = 0;
@@ -15533,8 +15533,8 @@ int trailingSpace(TextNode * node) {
 \end{chunk}
 \subsection{insertBitmapFile}
 The insertBitmapFile function reads a bitmap file into memory.
-\index{hypertex!insertBitmapFile}
-\index{insertBitmapFile hypertex}
+\index[doc]{hypertex!insertBitmapFile}
+\index[doc]{insertBitmapFile hypertex}
 \begin{chunk}{hypertex}
 void insertBitmapFile(TextNode * node) {
     char *filename = node->data.text;
@@ -15573,8 +15573,8 @@ void insertBitmapFile(TextNode * node) {
 \end{chunk}
 \subsection{insertPixmapFile}
 The insertPixmapFile function reads a pixmap file into memory.
-\index{hypertex!insertPixmapFile}
-\index{insertPixmapFile hypertex}
+\index[doc]{hypertex!insertPixmapFile}
+\index[doc]{insertPixmapFile hypertex}
 \begin{chunk}{hypertex}
 void insertPixmapFile(TextNode * node) {
     char *filename = node->data.text;
@@ -15622,8 +15622,8 @@ void insertPixmapFile(TextNode * node) {
 \end{chunk}
 \subsection{plh}
 The  plh function calculates the closet value of line\_height > height.
-\index{hypertex!plh}
-\index{plh hypertex}
+\index[doc]{hypertex!plh}
+\index[doc]{plh hypertex}
 \begin{chunk}{hypertex}
 int plh(int height) {
     int rheight = height;
@@ -15641,8 +15641,8 @@ A few routines used to help with form extents
 \subsection{computeFormPage}
 To solve the problem of improperly nested \verb|\em|, I will have to keep and
 always initialize the top of the stack.
-\index{hypertex!computeFormPage}
-\index{computeFormPage hypertex}
+\index[doc]{hypertex!computeFormPage}
+\index[doc]{computeFormPage hypertex}
 \begin{chunk}{hypertex}
 void computeFormPage(HyperDocPage *page) {
     while (popGroupStack() >= 0);
@@ -15659,8 +15659,8 @@ void computeFormPage(HyperDocPage *page) {
 \subsection{windowWidth}
 A simple function that returns the width needed to store show the number
 of columns given.
-\index{hypertex!windowWidth}
-\index{windowWidth hypertex}
+\index[doc]{hypertex!windowWidth}
+\index[doc]{windowWidth hypertex}
 \begin{chunk}{hypertex}
 int windowWidth(int cols) {
     return (left_margin + cols * space_width + non_scroll_right_margin_space);
@@ -15668,8 +15668,8 @@ int windowWidth(int cols) {
 
 \end{chunk}
 \subsection{windowHeight}
-\index{hypertex!windowHeight}
-\index{windowHeight hypertex}
+\index[doc]{hypertex!windowHeight}
+\index[doc]{windowHeight hypertex}
 \begin{chunk}{hypertex}
 static int windowHeight(HyperDocPage *page) {
     int temp;
@@ -15681,8 +15681,8 @@ static int windowHeight(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{formHeaderExtent}
-\index{hypertex!formHeaderExtent}
-\index{formHeaderExtent hypertex}
+\index[doc]{hypertex!formHeaderExtent}
+\index[doc]{formHeaderExtent hypertex}
 \begin{chunk}{hypertex}
 static void formHeaderExtent(HyperDocPage *page) {
     /*
@@ -15702,8 +15702,8 @@ static void formHeaderExtent(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{formFooterExtent}
-\index{hypertex!formFooterExtent}
-\index{formFooterExtent hypertex}
+\index[doc]{hypertex!formFooterExtent}
+\index[doc]{formFooterExtent hypertex}
 \begin{chunk}{hypertex}
 static void formFooterExtent(HyperDocPage *page) {
     if (page->footer) {
@@ -15724,8 +15724,8 @@ static void formFooterExtent(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{formScrollingExtent}
-\index{hypertex!formScrollingExtent}
-\index{formScrollingExtent hypertex}
+\index[doc]{hypertex!formScrollingExtent}
+\index[doc]{formScrollingExtent hypertex}
 \begin{chunk}{hypertex}
 static void formScrollingExtent(HyperDocPage *page) {
     /*
@@ -15752,8 +15752,8 @@ static void formScrollingExtent(HyperDocPage *page) {
 \section{Managing the HyperDoc group stack}
 \subsection{popGroupStack}
 This routine pops the top of the current group stack.
-\index{hypertex!popGroupStack}
-\index{popGroupStack hypertex}
+\index[doc]{hypertex!popGroupStack}
+\index[doc]{popGroupStack hypertex}
 \begin{chunk}{hypertex}
 int popGroupStack(void) {
     GroupItem *junk;
@@ -15775,8 +15775,8 @@ int popGroupStack(void) {
 
 \end{chunk}
 \subsection{pushGroupStack}
-\index{hypertex!pushGroupStack}
-\index{pushGroupStack hypertex}
+\index[doc]{hypertex!pushGroupStack}
+\index[doc]{pushGroupStack hypertex}
 \begin{chunk}{hypertex}
 void pushGroupStack(void) {
     /*
@@ -15793,8 +15793,8 @@ void pushGroupStack(void) {
 
 \end{chunk}
 \subsection{initGroupStack}
-\index{hypertex!initGroupStack}
-\index{initGroupStack hypertex}
+\index[doc]{hypertex!initGroupStack}
+\index[doc]{initGroupStack hypertex}
 \begin{chunk}{hypertex}
 void initGroupStack(void) {
     gTopOfGroupStack =
@@ -15807,8 +15807,8 @@ void initGroupStack(void) {
 
 \end{chunk}
 \subsection{emTopGroup}
-\index{hypertex!emTopGroup}
-\index{emTopGroup hypertex}
+\index[doc]{hypertex!emTopGroup}
+\index[doc]{emTopGroup hypertex}
 \begin{chunk}{hypertex}
 void emTopGroup(void) {
     if (! gTopOfGroupStack->next)
@@ -15820,8 +15820,8 @@ void emTopGroup(void) {
 
 \end{chunk}
 \subsection{rmTopGroup}
-\index{hypertex!rmTopGroup}
-\index{rmTopGroup hypertex}
+\index[doc]{hypertex!rmTopGroup}
+\index[doc]{rmTopGroup hypertex}
 \begin{chunk}{hypertex}
 void rmTopGroup(void) {
     if (! gTopOfGroupStack->next)
@@ -15833,8 +15833,8 @@ void rmTopGroup(void) {
 
 \end{chunk}
 \subsection{lineTopGroup}
-\index{hypertex!lineTopGroup}
-\index{lineTopGroup hypertex}
+\index[doc]{hypertex!lineTopGroup}
+\index[doc]{lineTopGroup hypertex}
 \begin{chunk}{hypertex}
 void lineTopGroup(void) {
     if (! gTopOfGroupStack->next)
@@ -15847,8 +15847,8 @@ void lineTopGroup(void) {
 
 \end{chunk}
 \subsection{bfTopGroup}
-\index{hypertex!bfTopGroup}
-\index{bfTopGroup hypertex}
+\index[doc]{hypertex!bfTopGroup}
+\index[doc]{bfTopGroup hypertex}
 \begin{chunk}{hypertex}
 void bfTopGroup(void) {
     /*
@@ -15863,8 +15863,8 @@ void bfTopGroup(void) {
 
 \end{chunk}
 \subsection{ttTopGroup}
-\index{hypertex!ttTopGroup}
-\index{ttTopGroup hypertex}
+\index[doc]{hypertex!ttTopGroup}
+\index[doc]{ttTopGroup hypertex}
 \begin{chunk}{hypertex}
 void ttTopGroup(void) {
     if (! gTopOfGroupStack->next)
@@ -15876,8 +15876,8 @@ void ttTopGroup(void) {
 
 \end{chunk}
 \subsection{pushActiveGroup}
-\index{hypertex!pushActiveGroup}
-\index{pushActiveGroup hypertex}
+\index[doc]{hypertex!pushActiveGroup}
+\index[doc]{pushActiveGroup hypertex}
 \begin{chunk}{hypertex}
 void pushActiveGroup(void) {
     pushGroupStack();
@@ -15888,8 +15888,8 @@ void pushActiveGroup(void) {
 
 \end{chunk}
 \subsection{pushSpadGroup}
-\index{hypertex!pushSpadGroup}
-\index{pushSpadGroup hypertex}
+\index[doc]{hypertex!pushSpadGroup}
+\index[doc]{pushSpadGroup hypertex}
 \begin{chunk}{hypertex}
 void pushSpadGroup(void) {
     pushGroupStack();
@@ -15900,8 +15900,8 @@ void pushSpadGroup(void) {
 
 \end{chunk}
 \subsection{initTopGroup}
-\index{hypertex!initTopGroup}
-\index{initTopGroup hypertex}
+\index[doc]{hypertex!initTopGroup}
+\index[doc]{initTopGroup hypertex}
 \begin{chunk}{hypertex}
 void initTopGroup(void) {
     /* clear the group stack */
@@ -15915,8 +15915,8 @@ void initTopGroup(void) {
 
 \end{chunk}
 \subsection{centerTopGroup}
-\index{hypertex!centerTopGroup}
-\index{centerTopGroup hypertex}
+\index[doc]{hypertex!centerTopGroup}
+\index[doc]{centerTopGroup hypertex}
 \begin{chunk}{hypertex}
 void centerTopGroup(void) {
     pushGroupStack();
@@ -15925,8 +15925,8 @@ void centerTopGroup(void) {
 
 \end{chunk}
 \subsection{copyGroupStack}
-\index{hypertex!copyGroupStack}
-\index{copyGroupStack hypertex}
+\index[doc]{hypertex!copyGroupStack}
+\index[doc]{copyGroupStack hypertex}
 \begin{chunk}{hypertex}
 GroupItem *copyGroupStack(void) {
     GroupItem *newgp = NULL;
@@ -15952,8 +15952,8 @@ GroupItem *copyGroupStack(void) {
 
 \end{chunk}
 \subsection{freeGroupStack}
-\index{hypertex!freeGroupStack}
-\index{freeGroupStack hypertex}
+\index[doc]{hypertex!freeGroupStack}
+\index[doc]{freeGroupStack hypertex}
 \begin{chunk}{hypertex}
 void freeGroupStack(GroupItem *g) {
     GroupItem *trace = g;
@@ -15966,8 +15966,8 @@ void freeGroupStack(GroupItem *g) {
 \end{chunk}
 \section{Handle input, output, and Axiom communication}
 \subsection{makeRecord}
-\index{hypertex!makeRecord}
-\index{makeRecord hypertex}
+\index[doc]{hypertex!makeRecord}
+\index[doc]{makeRecord hypertex}
 \begin{chunk}{hypertex}
 void makeRecord(void) {
   int i;
@@ -15990,8 +15990,8 @@ void makeRecord(void) {
 
 \end{chunk}
 \subsection{verifyRecord}
-\index{hypertex!verifyRecord}
-\index{verifyRecord hypertex}
+\index[doc]{hypertex!verifyRecord}
+\index[doc]{verifyRecord hypertex}
 \begin{chunk}{hypertex}
 void verifyRecord(void) {
   int i;
@@ -16014,8 +16014,8 @@ void verifyRecord(void) {
 
 \end{chunk}
 \subsection{ht2Input}
-\index{hypertex!ht2Input}
-\index{ht2Input hypertex}
+\index[doc]{hypertex!ht2Input}
+\index[doc]{ht2Input hypertex}
 \begin{chunk}{hypertex}
 void ht2Input(void) {
   HashTable *table;
@@ -16038,8 +16038,8 @@ void ht2Input(void) {
 
 \end{chunk}
 \subsection{makeInputFileName}
-\index{hypertex!makeInputFileName}
-\index{makeInputFileName hypertex}
+\index[doc]{hypertex!makeInputFileName}
+\index[doc]{makeInputFileName hypertex}
 \begin{chunk}{hypertex}
 static char *makeInputFileName(char *buf, char *filename) {
     char *b, *c;
@@ -16054,8 +16054,8 @@ static char *makeInputFileName(char *buf, char *filename) {
 
 \end{chunk}
 \subsection{makePasteFileName}
-\index{hypertex!makePasteFileName}
-\index{makePasteFileName hypertex}
+\index[doc]{hypertex!makePasteFileName}
+\index[doc]{makePasteFileName hypertex}
 \begin{chunk}{hypertex}
 static char *makePasteFileName(char *buf, char *filename) {
     char *b, *c;
@@ -16070,8 +16070,8 @@ static char *makePasteFileName(char *buf, char *filename) {
 
 \end{chunk}
 \subsection{makeTheInputFile}
-\index{hypertex!makeTheInputFile}
-\index{makeTheInputFile hypertex}
+\index[doc]{hypertex!makeTheInputFile}
+\index[doc]{makeTheInputFile hypertex}
 \begin{chunk}{hypertex}
 static void makeTheInputFile(UnloadedPage *page) {
     char buf[1024], *b;
@@ -16092,8 +16092,8 @@ static void makeTheInputFile(UnloadedPage *page) {
 
 \end{chunk}
 \subsection{makeInputFileFromPage}
-\index{hypertex!makeInputFileFromPage}
-\index{makeInputFileFromPage hypertex}
+\index[doc]{hypertex!makeInputFileFromPage}
+\index[doc]{makeInputFileFromPage hypertex}
 \begin{chunk}{hypertex}
 static void makeInputFileFromPage(HyperDocPage *page) {
   TextNode *node;
@@ -16175,8 +16175,8 @@ static void makeInputFileFromPage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{strCopy}
-\index{hypertex!strCopy}
-\index{strCopy hypertex}
+\index[doc]{hypertex!strCopy}
+\index[doc]{strCopy hypertex}
 \begin{chunk}{hypertex}
 char *strCopy(char *s) {
     char *b = halloc(strlen(s) + 1,"String");
@@ -16186,8 +16186,8 @@ char *strCopy(char *s) {
 
 \end{chunk}
 \subsection{inListAndNewer}
-\index{hypertex!inListAndNewer}
-\index{inListAndNewer hypertex}
+\index[doc]{hypertex!inListAndNewer}
+\index[doc]{inListAndNewer hypertex}
 \begin{chunk}{hypertex}
 static int inListAndNewer(char *inputFile, char *htFile) {
     int ret_val, found = 0, i;
@@ -16243,8 +16243,8 @@ static int inListAndNewer(char *inputFile, char *htFile) {
 
 \end{chunk}
 \subsection{makeInputFileList}
-\index{hypertex!makeInputFileList}
-\index{makeInputFileList hypertex}
+\index[doc]{hypertex!makeInputFileList}
+\index[doc]{makeInputFileList hypertex}
 \begin{chunk}{hypertex}
 static void makeInputFileList(void) {
     int i;
@@ -16258,8 +16258,8 @@ static void makeInputFileList(void) {
 
 \end{chunk}
 \subsection{printPasteLine}
-\index{hypertex!printPasteLine}
-\index{printPasteLine hypertex}
+\index[doc]{hypertex!printPasteLine}
+\index[doc]{printPasteLine hypertex}
 \begin{chunk}{hypertex}
 void printPasteLine(FILE *pfile,char *str) {
     char *free = "\\free", *bound = "\\bound", *f = free, *b = bound;
@@ -16291,8 +16291,8 @@ void printPasteLine(FILE *pfile,char *str) {
 
 \end{chunk}
 \subsection{getSpadOutput}
-\index{hypertex!getSpadOutput}
-\index{getSpadOutput hypertex}
+\index[doc]{hypertex!getSpadOutput}
+\index[doc]{getSpadOutput hypertex}
 \begin{chunk}{hypertex}
 void getSpadOutput(FILE *pfile,char *command,int com_type) {
     int n, i;
@@ -16314,8 +16314,8 @@ the whole thing will collapse maybe BEFORE the writing out has finished.
 Fix: Call a Lisp function that checks 
 (with \verb|\axiomOp{key}| ps and grep) the
 health of the viewport. We do this after the (|close|).
-\index{hypertex!getGraphOutput}
-\index{getGraphOutput hypertex}
+\index[doc]{hypertex!getGraphOutput}
+\index[doc]{getGraphOutput hypertex}
 \begin{chunk}{hypertex}
 void getGraphOutput(char *command,char *pagename,int com_type) {
     int n, i;
@@ -16338,8 +16338,8 @@ void getGraphOutput(char *command,char *pagename,int com_type) {
 
 \end{chunk}
 \subsection{sendCommand}
-\index{hypertex!sendCommand}
-\index{sendCommand hypertex}
+\index[doc]{hypertex!sendCommand}
+\index[doc]{sendCommand hypertex}
 \begin{chunk}{hypertex}
 static void sendCommand(char *command,int com_type) {
     char buf[1024];
@@ -16366,8 +16366,8 @@ static void sendCommand(char *command,int com_type) {
 
 \end{chunk}
 \subsection{printPaste}
-\index{hypertex!printPaste}
-\index{printPaste hypertex}
+\index[doc]{hypertex!printPaste}
+\index[doc]{printPaste hypertex}
 \begin{chunk}{hypertex}
 static void printPaste(FILE *pfile,char *realcom,char *command,
             char *pagename,int com_type) {
@@ -16398,8 +16398,8 @@ static void printPaste(FILE *pfile,char *realcom,char *command,
 
 \end{chunk}
 \subsection{printGraphPaste}
-\index{hypertex!printGraphPaste}
-\index{printGraphPaste hypertex}
+\index[doc]{hypertex!printGraphPaste}
+\index[doc]{printGraphPaste hypertex}
 \begin{chunk}{hypertex}
 static void printGraphPaste(FILE *pfile,char *realcom,
                   char *command,char *pagename,int com_type) {
@@ -16435,8 +16435,8 @@ static void printGraphPaste(FILE *pfile,char *realcom,
 \section{X Window window initialization code}
 Initialize the X Window System.
 \subsection{initializeWindowSystem}
-\index{hypertex!initializeWindowSystem}
-\index{initializeWindowSystem hypertex}
+\index[doc]{hypertex!initializeWindowSystem}
+\index[doc]{initializeWindowSystem hypertex}
 \begin{chunk}{hypertex}
 void initializeWindowSystem(void) {
     char *display_name = NULL;
@@ -16500,8 +16500,8 @@ children.
 The initTopWindow function tries to start up a window with the page
 name. If the page name is NULL, it doesn't try to find it in the Hash
 Table, but rather just allocates a page of no name
-\index{hypertex!initTopWindow}
-\index{initTopWindow hypertex}
+\index[doc]{hypertex!initTopWindow}
+\index[doc]{initTopWindow hypertex}
 \begin{chunk}{hypertex}
 int initTopWindow(char *name) {
     HyperDocPage *page;
@@ -16548,8 +16548,8 @@ int initTopWindow(char *name) {
 \end{chunk}
 \subsection{openFormWindow}
 Create and initialize a form HyperDoc window.
-\index{hypertex!openFormWindow}
-\index{openFormWindow hypertex}
+\index[doc]{hypertex!openFormWindow}
+\index[doc]{openFormWindow hypertex}
 \begin{chunk}{hypertex}
 static void openFormWindow(void) {
     int x, y, width, height;
@@ -16609,8 +16609,8 @@ static void openFormWindow(void) {
 
 \end{chunk}
 \subsection{initFormWindow}
-\index{hypertex!initFormWindow}
-\index{initFormWindow hypertex}
+\index[doc]{hypertex!initFormWindow}
+\index[doc]{initFormWindow hypertex}
 \begin{chunk}{hypertex}
 int initFormWindow(char *name, int cols) {
     XSetWindowAttributes wa;    /* The X attributes structure */
@@ -16641,8 +16641,8 @@ int initFormWindow(char *name, int cols) {
 
 \end{chunk}
 \subsection{setNameAndIcon}
-\index{hypertex!setNameAndIcon}
-\index{setNameAndIcon hypertex}
+\index[doc]{hypertex!setNameAndIcon}
+\index[doc]{setNameAndIcon hypertex}
 \begin{chunk}{hypertex}
 static void setNameAndIcon(void) {
     char *icon_name = "HyperDoc";
@@ -16673,8 +16673,8 @@ static void setNameAndIcon(void) {
 
 \end{chunk}
 \subsection{getBorderProperties}
-\index{hypertex!getBorderProperties}
-\index{getBorderProperties hypertex}
+\index[doc]{hypertex!getBorderProperties}
+\index[doc]{getBorderProperties hypertex}
 \begin{chunk}{hypertex}
 static int getBorderProperties(void) {
     char *bwidth;
@@ -16706,8 +16706,8 @@ static int getBorderProperties(void) {
 \end{chunk}
 \subsection{openWindow}
 Create and initialize the HyperDoc window.
-\index{hypertex!openWindow}
-\index{openWindow hypertex}
+\index[doc]{hypertex!openWindow}
+\index[doc]{openWindow hypertex}
 \begin{chunk}{hypertex}
 static void openWindow(Window w) {
     int x = 0, y = 0;
@@ -16757,8 +16757,8 @@ paramter is null, it means that this is the initial window. Thus the
 user preferences are checked. If this is not the first window, then
 the window w is used as a guidline, and the new window is placed on
 top of it.
-\index{hypertex!setSizeHints}
-\index{setSizeHints hypertex}
+\index[doc]{hypertex!setSizeHints}
+\index[doc]{setSizeHints hypertex}
 \begin{chunk}{hypertex}
 static void setSizeHints(Window w) {
     int x, y;
@@ -16833,8 +16833,8 @@ static void setSizeHints(Window w) {
 \end{chunk}
 \subsection{getGCs}
 Create the graphics contexts to be used for all drawing operations.
-\index{hypertex!getGCs}
-\index{getGCs hypertex}
+\index[doc]{hypertex!getGCs}
+\index[doc]{getGCs hypertex}
 \begin{chunk}{hypertex}
 static void getGCs(HDWindow *window) {
     /*unsigned long valuemask = 0;*/
@@ -16871,8 +16871,8 @@ static void getGCs(HDWindow *window) {
 \end{chunk}
 \subsection{loadFont}
 Load a font and store the information in the fontInfo parameter.
-\index{hypertex!loadFont}
-\index{loadFont hypertex}
+\index[doc]{hypertex!loadFont}
+\index[doc]{loadFont hypertex}
 \begin{chunk}{hypertex}
 static void loadFont(XFontStruct **fontInfo, char *fontname) {
    if ((*fontInfo = XLoadQueryFont(gXDisplay, fontname)) == NULL) {
@@ -16902,8 +16902,8 @@ use. It checks for all the following properties in \verb|$HOME/.Xdefaults.|
 \item Axiom.hyperdoc.SpadColor
 \item Axiom.hyperdoc.SpadFont
 \end{itemize}
-\index{hypertex!ingItColorsAndFonts}
-\index{ingItColorsAndFonts hypertex}
+\index[doc]{hypertex!ingItColorsAndFonts}
+\index[doc]{ingItColorsAndFonts hypertex}
 \begin{chunk}{hypertex}
 static void ingItColorsAndFonts(void) {
     char property[256];
@@ -17073,8 +17073,8 @@ static void ingItColorsAndFonts(void) {
 
 \end{chunk}
 \subsection{changeText}
-\index{hypertex!changeText}
-\index{changeText hypertex}
+\index[doc]{hypertex!changeText}
+\index[doc]{changeText hypertex}
 \begin{chunk}{hypertex}
 void changeText(int color, XFontStruct *font) {
     if (font) {
@@ -17094,8 +17094,8 @@ This routine checks the .Xdefaults file of the user for the
 specified color. If found it allocates a place in the color map for it. If
 not found, or if an error occurrs, it writes an error message, and
 uses the given default value.
-\index{hypertex!getColor}
-\index{getColor hypertex}
+\index[doc]{hypertex!getColor}
+\index[doc]{getColor hypertex}
 \begin{chunk}{hypertex}
 static int getColor(char *name, char *class, int def, Colormap *map) {
     char fullname[256];
@@ -17143,8 +17143,8 @@ static int getColor(char *name, char *class, int def, Colormap *map) {
 \end{chunk}
 \subsection{mergeDatabases}
 \label{mergeDatabases}
-\index{hypertex!mergeDatabases}
-\index{mergeDatabases hypertex}
+\index[doc]{hypertex!mergeDatabases}
+\index[doc]{mergeDatabases hypertex}
 \begin{chunk}{hypertex}
 static void mergeDatabases(void) {
     XrmDatabase homeDB, serverDB, applicationDB;
@@ -17191,8 +17191,8 @@ static void mergeDatabases(void) {
 
 \end{chunk}
 \subsection{isIt850}
-\index{hypertex!isIt850}
-\index{isIt850 hypertex}
+\index[doc]{hypertex!isIt850}
+\index[doc]{isIt850 hypertex}
 \begin{chunk}{hypertex}
 int isIt850(XFontStruct *fontarg) {
  char *s;
@@ -17218,8 +17218,8 @@ int isIt850(XFontStruct *fontarg) {
 \end{chunk}
 \section{Handling user page interaction}
 \subsection{fillBox}
-\index{hypertex!fillBox}
-\index{fillBox hypertex}
+\index[doc]{hypertex!fillBox}
+\index[doc]{fillBox hypertex}
 \begin{chunk}{hypertex}
 void fillBox(Window w,ImageStruct * image) {
     XClearWindow(gXDisplay, w);
@@ -17231,8 +17231,8 @@ void fillBox(Window w,ImageStruct * image) {
 
 \end{chunk}
 \subsection{toggleInputBox}
-\index{hypertex!toggleInputBox}
-\index{toggleInputBox hypertex}
+\index[doc]{hypertex!toggleInputBox}
+\index[doc]{toggleInputBox hypertex}
 \begin{chunk}{hypertex}
 void toggleInputBox(HyperLink *link) {
     InputBox *box;
@@ -17249,8 +17249,8 @@ void toggleInputBox(HyperLink *link) {
 
 \end{chunk}
 \subsection{toggleRadioBox}
-\index{hypertex!toggleRadioBox}
-\index{toggleRadioBox hypertex}
+\index[doc]{hypertex!toggleRadioBox}
+\index[doc]{toggleRadioBox hypertex}
 \begin{chunk}{hypertex}
 void toggleRadioBox(HyperLink *link) {
     InputBox *box;
@@ -17270,8 +17270,8 @@ void toggleRadioBox(HyperLink *link) {
 
 \end{chunk}
 \subsection{clearRbs}
-\index{hypertex!clearRbs}
-\index{clearRbs hypertex}
+\index[doc]{hypertex!clearRbs}
+\index[doc]{clearRbs hypertex}
 \begin{chunk}{hypertex}
 static void clearRbs(InputBox *list) {
     InputBox *trace = list;
@@ -17285,8 +17285,8 @@ static void clearRbs(InputBox *list) {
 
 \end{chunk}
 \subsection{changeInputFocus}
-\index{hypertex!changeInputFocus}
-\index{changeInputFocus hypertex}
+\index[doc]{hypertex!changeInputFocus}
+\index[doc]{changeInputFocus hypertex}
 \begin{chunk}{hypertex}
 void changeInputFocus(HyperLink *link) {
     InputItem *new_item = link->reference.string;
@@ -17313,8 +17313,8 @@ void changeInputFocus(HyperLink *link) {
 
 \end{chunk}
 \subsection{nextInputFocus}
-\index{hypertex!nextInputFocus}
-\index{nextInputFocus hypertex}
+\index[doc]{hypertex!nextInputFocus}
+\index[doc]{nextInputFocus hypertex}
 \begin{chunk}{hypertex}
 void nextInputFocus(void) {
     InputItem *old_item = gWindow->page->currentItem, *new_item, *trace;
@@ -17340,8 +17340,8 @@ void nextInputFocus(void) {
 
 \end{chunk}
 \subsection{prevInputFocus}
-\index{hypertex!prevInputFocus}
-\index{prevInputFocus hypertex}
+\index[doc]{hypertex!prevInputFocus}
+\index[doc]{prevInputFocus hypertex}
 \begin{chunk}{hypertex}
 void prevInputFocus(void) {
     InputItem *old_item = gWindow->page->currentItem, *new_item, *trace;
@@ -17375,8 +17375,8 @@ void prevInputFocus(void) {
 
 \end{chunk}
 \subsection{returnItem}
-\index{hypertex!returnItem}
-\index{returnItem hypertex}
+\index[doc]{hypertex!returnItem}
+\index[doc]{returnItem hypertex}
 \begin{chunk}{hypertex}
 InputItem *returnItem(char *name) {
     InputItem *list;
@@ -17391,8 +17391,8 @@ InputItem *returnItem(char *name) {
 
 \end{chunk}
 \subsection{deleteItem}
-\index{hypertex!deleteItem}
-\index{deleteItem hypertex}
+\index[doc]{hypertex!deleteItem}
+\index[doc]{deleteItem hypertex}
 \begin{chunk}{hypertex}
 int deleteItem(char *name) {
     InputItem *list;
@@ -17420,8 +17420,8 @@ int deleteItem(char *name) {
 \end{chunk}
 \section{Manipulate the item stack}
 \subsection{pushItemStack}
-\index{hypertex!pushItemStack}
-\index{pushItemStack hypertex}
+\index[doc]{hypertex!pushItemStack}
+\index[doc]{pushItemStack hypertex}
 \begin{chunk}{hypertex}
 void pushItemStack(void) {
     ItemStack *is = (ItemStack *) halloc(sizeof(ItemStack), "Item stack");
@@ -17435,8 +17435,8 @@ void pushItemStack(void) {
 
 \end{chunk}
 \subsection{clearItemStack}
-\index{hypertex!clearItemStack}
-\index{clearItemStack hypertex}
+\index[doc]{hypertex!clearItemStack}
+\index[doc]{clearItemStack hypertex}
 \begin{chunk}{hypertex}
 void clearItemStack(void) {
     ItemStack *is = gTopOfItemStack, *chuck;
@@ -17450,8 +17450,8 @@ void clearItemStack(void) {
 
 \end{chunk}
 \subsection{popItemStack}
-\index{hypertex!popItemStack}
-\index{popItemStack hypertex}
+\index[doc]{hypertex!popItemStack}
+\index[doc]{popItemStack hypertex}
 \begin{chunk}{hypertex}
 void popItemStack(void) {
     ItemStack *chuck;
@@ -17469,8 +17469,8 @@ void popItemStack(void) {
 
 \end{chunk}
 \subsection{copyItemStack}
-\index{hypertex!copyItemStack}
-\index{copyItemStack hypertex}
+\index[doc]{hypertex!copyItemStack}
+\index[doc]{copyItemStack hypertex}
 \begin{chunk}{hypertex}
 ItemStack *copyItemStack(void) {
     ItemStack *new = NULL;
@@ -17496,8 +17496,8 @@ ItemStack *copyItemStack(void) {
 
 \end{chunk}
 \subsection{freeItemStack}
-\index{hypertex!freeItemStack}
-\index{freeItemStack hypertex}
+\index[doc]{hypertex!freeItemStack}
+\index[doc]{freeItemStack hypertex}
 \begin{chunk}{hypertex}
 void freeItemStack(ItemStack *is) {
     ItemStack *junk = NULL;
@@ -17512,8 +17512,8 @@ void freeItemStack(ItemStack *is) {
 \end{chunk}
 \section{Keyboard handling}
 \subsection{handleKey}
-\index{hypertex!handleKey}
-\index{handleKey hypertex}
+\index[doc]{hypertex!handleKey}
+\index[doc]{handleKey hypertex}
 \begin{chunk}{hypertex}
 void handleKey(XEvent *event) {
   char key_buffer[20];
@@ -17657,8 +17657,8 @@ void handleKey(XEvent *event) {
 \end{chunk}
 \subsection{getModifierMask}
 This routine returns the modifier mask associated to a key symbol.
-\index{hypertex!getModifierMask}
-\index{getModifierMask hypertex}
+\index[doc]{hypertex!getModifierMask}
+\index[doc]{getModifierMask hypertex}
 \begin{chunk}{hypertex}
 static unsigned int getModifierMask(KeySym sym) {
     unsigned int       i, mask;
@@ -17688,8 +17688,8 @@ static unsigned int getModifierMask(KeySym sym) {
 \subsection{initKeyin}
 This routine initializes some of the variables needed by the input
 strings, and boxes.
-\index{hypertex!initKeyin}
-\index{initKeyin hypertex}
+\index[doc]{hypertex!initKeyin}
+\index[doc]{initKeyin hypertex}
 \begin{chunk}{hypertex}
 void initKeyin(void) {
     char *prop;
@@ -17734,8 +17734,8 @@ void initKeyin(void) {
 \subsection{scanHyperDoc}
 This routine keeps scanning until it reaches it pops off 1 more
 right brace then left brace.
-\index{hypertex!scanHyperDoc}
-\index{scanHyperDoc hypertex}
+\index[doc]{hypertex!scanHyperDoc}
+\index[doc]{scanHyperDoc hypertex}
 \begin{chunk}{hypertex}
 void scanHyperDoc(void) {
     HDWindow *twin = gWindow;
@@ -17771,8 +17771,8 @@ void scanHyperDoc(void) {
 
 \end{chunk}
 \subsection{number}
-\index{hypertex!number}
-\index{number hypertex}
+\index[doc]{hypertex!number}
+\index[doc]{number hypertex}
 \begin{chunk}{hypertex}
 int number(char *str) {
     char *t = str;
@@ -17785,8 +17785,8 @@ int number(char *str) {
 \end{chunk}
 \subsection{loadMacro}
 Parse a given macro given the pointer to the unloaded macro.
-\index{hypertex!loadMacro}
-\index{loadMacro hypertex}
+\index[doc]{hypertex!loadMacro}
+\index[doc]{loadMacro hypertex}
 \begin{chunk}{hypertex}
 static char *loadMacro(MacroStore *macro) {
     int ret_val;
@@ -17853,8 +17853,8 @@ static char *loadMacro(MacroStore *macro) {
 
 \end{chunk}
 \subsection{initParameterElem}
-\index{hypertex!initParameterElem}
-\index{initParameterElem hypertex}
+\index[doc]{hypertex!initParameterElem}
+\index[doc]{initParameterElem hypertex}
 \begin{chunk}{hypertex}
 ParameterList initParameterElem(int number) {
     ParameterList new;
@@ -17875,8 +17875,8 @@ ParameterList initParameterElem(int number) {
 
 \end{chunk}
 \subsection{pushParameters}
-\index{hypertex!pushParameters}
-\index{pushParameters hypertex}
+\index[doc]{hypertex!pushParameters}
+\index[doc]{pushParameters hypertex}
 \begin{chunk}{hypertex}
 int pushParameters(ParameterList new) {
     if (new == NULL) {
@@ -17892,8 +17892,8 @@ int pushParameters(ParameterList new) {
 \subsection{popParameters}
 Simply pops the top of the parameter list, being good and freeing
 all the memory.
-\index{hypertex!popParameters}
-\index{popParameters hypertex}
+\index[doc]{hypertex!popParameters}
+\index[doc]{popParameters hypertex}
 \begin{chunk}{hypertex}
 int popParameters(void) {
     ParameterList old;
@@ -17916,8 +17916,8 @@ int popParameters(void) {
 \end{chunk}
 \subsection{parseMacro}
 This routine loads a macro if needed, and then parses it from the string.
-\index{hypertex!parseMacro}
-\index{parseMacro hypertex}
+\index[doc]{hypertex!parseMacro}
+\index[doc]{parseMacro hypertex}
 \begin{chunk}{hypertex}
 int parseMacro(void) {
     MacroStore *macro;
@@ -17957,8 +17957,8 @@ int parseMacro(void) {
 
 \end{chunk}
 \subsection{getParameterStrings}
-\index{hypertex!getParameterStrings}
-\index{getParameterStrings hypertex}
+\index[doc]{hypertex!getParameterStrings}
+\index[doc]{getParameterStrings hypertex}
 \begin{chunk}{hypertex}
 static void getParameterStrings(int number,char * macro_name) {
     static char buffer[4096];
@@ -18046,8 +18046,8 @@ static void getParameterStrings(int number,char * macro_name) {
 
 \end{chunk}
 \subsection{parseParameters}
-\index{hypertex!parseParameters}
-\index{parseParameters hypertex}
+\index[doc]{hypertex!parseParameters}
+\index[doc]{parseParameters hypertex}
 \begin{chunk}{hypertex}
 void parseParameters(void) {
     int value;
@@ -18071,8 +18071,8 @@ void parseParameters(void) {
 \end{chunk}
 \section{Memory management routines}
 \subsection{freeIfNonNULL}
-\index{hypertex!freeIfNonNULL}
-\index{freeIfNonNULL hypertex}
+\index[doc]{hypertex!freeIfNonNULL}
+\index[doc]{freeIfNonNULL hypertex}
 \begin{chunk}{hypertex}
 static void freeIfNonNULL(void *p) {
   if (p){
@@ -18083,8 +18083,8 @@ static void freeIfNonNULL(void *p) {
 \end{chunk}
 \subsection{allocHdWindow}
 Allocate an HDWindow Structure and initialize it.
-\index{hypertex!allocHdWindow}
-\index{allocHdWindow hypertex}
+\index[doc]{hypertex!allocHdWindow}
+\index[doc]{allocHdWindow hypertex}
 \begin{chunk}{hypertex}
 HDWindow *allocHdWindow(void) {
   HDWindow *w = (HDWindow *) halloc(sizeof(HDWindow), "HDWindow");
@@ -18120,8 +18120,8 @@ HDWindow *allocHdWindow(void) {
 
 \end{chunk}
 \subsection{freeHdWindow}
-\index{hypertex!freeHdWindow}
-\index{freeHdWindow hypertex}
+\index[doc]{hypertex!freeHdWindow}
+\index[doc]{freeHdWindow hypertex}
 \begin{chunk}{hypertex}
 void freeHdWindow(HDWindow *w) {
   if (w) {
@@ -18152,8 +18152,8 @@ void freeHdWindow(HDWindow *w) {
 \end{chunk}
 \subsection{allocNode}
 Allocate an empty text node.
-\index{hypertex!allocNode}
-\index{allocNode hypertex}
+\index[doc]{hypertex!allocNode}
+\index[doc]{allocNode hypertex}
 \begin{chunk}{hypertex}
 TextNode *allocNode(void) {
   TextNode *temp_node;
@@ -18173,8 +18173,8 @@ TextNode *allocNode(void) {
 
 \end{chunk}
 \subsection{freeNode}
-\index{hypertex!freeNode}
-\index{freeNode hypertex}
+\index[doc]{hypertex!freeNode}
+\index[doc]{freeNode hypertex}
 \begin{chunk}{hypertex}
 void freeNode(TextNode *node, short int des) {
   if (node == NULL)
@@ -18346,8 +18346,8 @@ void freeNode(TextNode *node, short int des) {
 
 \end{chunk}
 \subsection{allocIfnode}
-\index{hypertex!allocIfnode}
-\index{allocIfnode hypertex}
+\index[doc]{hypertex!allocIfnode}
+\index[doc]{allocIfnode hypertex}
 \begin{chunk}{hypertex}
 IfNode *allocIfnode(void) {
   IfNode *tempif;
@@ -18358,8 +18358,8 @@ IfNode *allocIfnode(void) {
 
 \end{chunk}
 \subsection{allocCondnode}
-\index{hypertex!allocCondnode}
-\index{allocCondnode hypertex}
+\index[doc]{hypertex!allocCondnode}
+\index[doc]{allocCondnode hypertex}
 \begin{chunk}{hypertex}
 CondNode *allocCondnode(void) {
   CondNode *temp;
@@ -18370,8 +18370,8 @@ CondNode *allocCondnode(void) {
 
 \end{chunk}
 \subsection{freeCond}
-\index{hypertex!freeCond}
-\index{freeCond hypertex}
+\index[doc]{hypertex!freeCond}
+\index[doc]{freeCond hypertex}
 \begin{chunk}{hypertex}
 static void freeCond(CondNode *cond) {
   if (cond) {
@@ -18385,8 +18385,8 @@ static void freeCond(CondNode *cond) {
 \end{chunk}
 \subsection{allocPage}
 Allocate a new HyperDoc page.
-\index{hypertex!allocPage}
-\index{allocPage hypertex}
+\index[doc]{hypertex!allocPage}
+\index[doc]{allocPage hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *allocPage(char *name) {
   HyperDocPage *page;
@@ -18414,8 +18414,8 @@ HyperDocPage *allocPage(char *name) {
 This routine now checks for an environment variable NOFREE. If found
 it returns. At least, that's what the comment claims but I see no
 code to implement this. It's not a bad idea though.
-\index{hypertex!freePage}
-\index{freePage hypertex}
+\index[doc]{hypertex!freePage}
+\index[doc]{freePage hypertex}
 \begin{chunk}{hypertex}
 void freePage(HyperDocPage *page) {
   if (page == NULL)
@@ -18466,8 +18466,8 @@ void freePage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{freePaste}
-\index{hypertex!freePaste}
-\index{freePaste hypertex}
+\index[doc]{hypertex!freePaste}
+\index[doc]{freePaste hypertex}
 \begin{chunk}{hypertex}
 static void freePaste(PasteNode *paste, short int des) {
   if (paste) {
@@ -18480,8 +18480,8 @@ static void freePaste(PasteNode *paste, short int des) {
 
 \end{chunk}
 \subsection{freePastebutton}
-\index{hypertex!freePastebutton}
-\index{freePastebutton hypertex}
+\index[doc]{hypertex!freePastebutton}
+\index[doc]{freePastebutton hypertex}
 \begin{chunk}{hypertex}
 static void freePastebutton(TextNode *node, short int des) {
   /*
@@ -18509,8 +18509,8 @@ static void freePastebutton(TextNode *node, short int des) {
 
 \end{chunk}
 \subsection{freePastearea}
-\index{hypertex!freePastearea}
-\index{freePastearea hypertex}
+\index[doc]{hypertex!freePastearea}
+\index[doc]{freePastearea hypertex}
 \begin{chunk}{hypertex}
 static void freePastearea(TextNode *node, short int des) {
   if (des) {
@@ -18531,8 +18531,8 @@ static void freePastearea(TextNode *node, short int des) {
 
 \end{chunk}
 \subsection{freeString}
-\index{hypertex!freeString}
-\index{freeString hypertex}
+\index[doc]{hypertex!freeString}
+\index[doc]{freeString hypertex}
 \begin{chunk}{hypertex}
 void freeString(char *str) {
   freeIfNonNULL(str);
@@ -18540,8 +18540,8 @@ void freeString(char *str) {
 
 \end{chunk}
 \subsection{freeDepend}
-\index{hypertex!freeDepend}
-\index{freeDepend hypertex}
+\index[doc]{hypertex!freeDepend}
+\index[doc]{freeDepend hypertex}
 \begin{chunk}{hypertex}
 static void freeDepend(SpadcomDepend *sd) {
   freeIfNonNULL((char *) sd);
@@ -18549,8 +18549,8 @@ static void freeDepend(SpadcomDepend *sd) {
 
 \end{chunk}
 \subsection{dontFree}
-\index{hypertex!dontFree}
-\index{dontFree hypertex}
+\index[doc]{hypertex!dontFree}
+\index[doc]{dontFree hypertex}
 \begin{chunk}{hypertex}
 static void dontFree(void  *link) {
   return;
@@ -18558,8 +18558,8 @@ static void dontFree(void  *link) {
 
 \end{chunk}
 \subsection{freeLines}
-\index{hypertex!freeLines}
-\index{freeLines hypertex}
+\index[doc]{hypertex!freeLines}
+\index[doc]{freeLines hypertex}
 \begin{chunk}{hypertex}
 static void freeLines(LineStruct *lines) {
   if (lines->prev != NULL)
@@ -18575,8 +18575,8 @@ static void freeLines(LineStruct *lines) {
 
 \end{chunk}
 \subsection{freeInputItem}
-\index{hypertex!freeInputItem}
-\index{freeInputItem hypertex}
+\index[doc]{hypertex!freeInputItem}
+\index[doc]{freeInputItem hypertex}
 \begin{chunk}{hypertex}
 void freeInputItem(InputItem *sym, short int des) {
   freeIfNonNULL(sym->name);
@@ -18587,8 +18587,8 @@ void freeInputItem(InputItem *sym, short int des) {
 
 \end{chunk}
 \subsection{freeInputList}
-\index{hypertex!freeInputList}
-\index{freeInputList hypertex}
+\index[doc]{hypertex!freeInputList}
+\index[doc]{freeInputList hypertex}
 \begin{chunk}{hypertex}
 void freeInputList(InputItem *il) {
   while (il) {
@@ -18601,8 +18601,8 @@ void freeInputList(InputItem *il) {
 
 \end{chunk}
 \subsection{freeInputBox}
-\index{hypertex!freeInputBox}
-\index{freeInputBox hypertex}
+\index[doc]{hypertex!freeInputBox}
+\index[doc]{freeInputBox hypertex}
 \begin{chunk}{hypertex}
 static void freeInputBox(InputBox *box) {
   if (box) {
@@ -18613,8 +18613,8 @@ static void freeInputBox(InputBox *box) {
 
 \end{chunk}
 \subsection{freeRadioBoxes}
-\index{hypertex!freeRadioBoxes}
-\index{freeRadioBoxes hypertex}
+\index[doc]{hypertex!freeRadioBoxes}
+\index[doc]{freeRadioBoxes hypertex}
 \begin{chunk}{hypertex}
 static void freeRadioBoxes(RadioBoxes *radio) {
   if (radio) {
@@ -18626,8 +18626,8 @@ static void freeRadioBoxes(RadioBoxes *radio) {
 
 \end{chunk}
 \subsection{allocInputline}
-\index{hypertex!allocInputline}
-\index{allocInputline hypertex}
+\index[doc]{hypertex!allocInputline}
+\index[doc]{allocInputline hypertex}
 \begin{chunk}{hypertex}
 LineStruct *allocInputline(int size) {
   int i;
@@ -18643,8 +18643,8 @@ LineStruct *allocInputline(int size) {
 
 \end{chunk}
 \subsection{allocPasteNode}
-\index{hypertex!allocPasteNode}
-\index{allocPasteNode hypertex}
+\index[doc]{hypertex!allocPasteNode}
+\index[doc]{allocPasteNode hypertex}
 \begin{chunk}{hypertex}
 PasteNode *allocPasteNode(char *name) {
   PasteNode *pastenode =
@@ -18660,8 +18660,8 @@ PasteNode *allocPasteNode(char *name) {
 
 \end{chunk}
 \subsection{allocPatchstore}
-\index{hypertex!allocPatchstore}
-\index{allocPatchstore hypertex}
+\index[doc]{hypertex!allocPatchstore}
+\index[doc]{allocPatchstore hypertex}
 \begin{chunk}{hypertex}
 PatchStore *allocPatchstore(void) {
   PatchStore *p = (PatchStore *) halloc(sizeof(PatchStore), "PatchStore");
@@ -18672,8 +18672,8 @@ PatchStore *allocPatchstore(void) {
 
 \end{chunk}
 \subsection{freePatch}
-\index{hypertex!freePatch}
-\index{freePatch hypertex}
+\index[doc]{hypertex!freePatch}
+\index[doc]{freePatch hypertex}
 \begin{chunk}{hypertex}
 void freePatch(PatchStore *p) {
   if (p) {
@@ -18689,8 +18689,8 @@ void freePatch(PatchStore *p) {
 
 \end{chunk}
 \subsection{allocInputbox}
-\index{hypertex!allocInputbox}
-\index{allocInputbox hypertex}
+\index[doc]{hypertex!allocInputbox}
+\index[doc]{allocInputbox hypertex}
 \begin{chunk}{hypertex}
 InputBox *allocInputbox(void) {
   InputBox *box = (InputBox *) halloc(sizeof(InputBox), "InputBox");
@@ -18702,8 +18702,8 @@ InputBox *allocInputbox(void) {
 
 \end{chunk}
 \subsection{allocRbs}
-\index{hypertex!allocRbs}
-\index{allocRbs hypertex}
+\index[doc]{hypertex!allocRbs}
+\index[doc]{allocRbs hypertex}
 \begin{chunk}{hypertex}
 RadioBoxes *allocRbs(void) {
   RadioBoxes *newrb = (RadioBoxes *) halloc(sizeof(RadioBoxes), "Radio Boxes");
@@ -18714,8 +18714,8 @@ RadioBoxes *allocRbs(void) {
 
 \end{chunk}
 \subsection{allocButtonList}
-\index{hypertex!allocButtonList}
-\index{allocButtonList hypertex}
+\index[doc]{hypertex!allocButtonList}
+\index[doc]{allocButtonList hypertex}
 \begin{chunk}{hypertex}
 ButtonList *allocButtonList(void) {
   ButtonList *newbl = (ButtonList *) halloc(sizeof(ButtonList), "Button List");
@@ -18727,8 +18727,8 @@ ButtonList *allocButtonList(void) {
 
 \end{chunk}
 \subsection{freeButtonList}
-\index{hypertex!freeButtonList}
-\index{freeButtonList hypertex}
+\index[doc]{hypertex!freeButtonList}
+\index[doc]{freeButtonList hypertex}
 \begin{chunk}{hypertex}
 void freeButtonList(ButtonList *bl) {
   while (bl) {
@@ -18741,8 +18741,8 @@ void freeButtonList(ButtonList *bl) {
 \end{chunk}
 \subsection{resizeBuffer}
 Resizable static buffers.
-\index{hypertex!resizeBuffer}
-\index{resizeBuffer hypertex}
+\index[doc]{hypertex!resizeBuffer}
+\index[doc]{resizeBuffer hypertex}
 \begin{chunk}{hypertex}
 char *resizeBuffer(int size, char *oldBuf, int *oldSize) {
   char *newBuf;
@@ -18763,8 +18763,8 @@ char *resizeBuffer(int size, char *oldBuf, int *oldSize) {
 \end{chunk}
 \section{Page parsing routines}
 \subsection{PushMR}
-\index{hypertex!PushMR}
-\index{PushMR hypertex}
+\index[doc]{hypertex!PushMR}
+\index[doc]{PushMR hypertex}
 \begin{chunk}{hypertex}
 static void PushMR(void) {
     MR_Stack *newStackItem = 
@@ -18777,8 +18777,8 @@ static void PushMR(void) {
 
 \end{chunk}
 \subsection{PopMR}
-\index{hypertex!PopMR}
-\index{PopMR hypertex}
+\index[doc]{hypertex!PopMR}
+\index[doc]{PopMR hypertex}
 \begin{chunk}{hypertex}
 static void PopMR(void) {
     MR_Stack *old = top_mr_stack;
@@ -18797,8 +18797,8 @@ static void PopMR(void) {
 
 \end{chunk}
 \subsection{loadPage}
-\index{hypertex!loadPage}
-\index{loadPage hypertex}
+\index[doc]{hypertex!loadPage}
+\index[doc]{loadPage hypertex}
 \begin{chunk}{hypertex}
 void loadPage(HyperDocPage *page) {
     if (page->type == UnloadedPageType) {
@@ -18814,8 +18814,8 @@ void loadPage(HyperDocPage *page) {
 \end{chunk}
 \subsection{displayPage}
 Display a HyperDoc page with the given name, parsing it if needed.
-\index{hypertex!displayPage}
-\index{displayPage hypertex}
+\index[doc]{hypertex!displayPage}
+\index[doc]{displayPage hypertex}
 \begin{chunk}{hypertex}
 void displayPage(HyperDocPage *page) {
     HyperDocPage *new_page;
@@ -18856,8 +18856,8 @@ void displayPage(HyperDocPage *page) {
 \end{chunk}
 \subsection{formatPage}
 Parse a given HyperDoc Page, from the top.
-\index{hypertex!formatPage}
-\index{formatPage hypertex}
+\index[doc]{hypertex!formatPage}
+\index[doc]{formatPage hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *formatPage(UnloadedPage *ulpage) {
     /*int ret_val;*/
@@ -18879,8 +18879,8 @@ static HyperDocPage *formatPage(UnloadedPage *ulpage) {
 
 \end{chunk}
 \subsection{parseFromString}
-\index{hypertex!parseFromString}
-\index{parseFromString hypertex}
+\index[doc]{hypertex!parseFromString}
+\index[doc]{parseFromString hypertex}
 \begin{chunk}{hypertex}
 void parseFromString(char *str) {
     saveScannerState();
@@ -18894,8 +18894,8 @@ void parseFromString(char *str) {
 
 \end{chunk}
 \subsection{parseTitle}
-\index{hypertex!parseTitle}
-\index{parseTitle hypertex}
+\index[doc]{hypertex!parseTitle}
+\index[doc]{parseTitle hypertex}
 \begin{chunk}{hypertex}
 static void parseTitle(HyperDocPage *page) {
     TextNode *node;
@@ -18932,8 +18932,8 @@ static void parseTitle(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{parseHeader}
-\index{hypertex!parseHeader}
-\index{parseHeader hypertex}
+\index[doc]{hypertex!parseHeader}
+\index[doc]{parseHeader hypertex}
 \begin{chunk}{hypertex}
 static void parseHeader(HyperDocPage *page) {
     TextNode *node;
@@ -18954,8 +18954,8 @@ static void parseHeader(HyperDocPage *page) {
 \end{chunk}
 \subsection{initParsePage}
 Parse a page from the top level.
-\index{hypertex!initParsePage}
-\index{initParsePage hypertex}
+\index[doc]{hypertex!initParsePage}
+\index[doc]{initParsePage hypertex}
 \begin{chunk}{hypertex}
 static void initParsePage(HyperDocPage *page) {
     gEndedPage = gInDesc = gStringValueOk = gInIf =
@@ -18981,8 +18981,8 @@ static void initParsePage(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{initParsePatch}
-\index{hypertex!initParsePatch}
-\index{initParsePatch hypertex}
+\index[doc]{hypertex!initParsePatch}
+\index[doc]{initParsePatch hypertex}
 \begin{chunk}{hypertex}
 void initParsePatch(HyperDocPage *page) {
     gEndedPage = gInDesc = gStringValueOk = gInIf =
@@ -18999,8 +18999,8 @@ void initParsePatch(HyperDocPage *page) {
 
 \end{chunk}
 \subsection{parsePage}
-\index{hypertex!parsePage}
-\index{parsePage hypertex}
+\index[doc]{hypertex!parsePage}
+\index[doc]{parsePage hypertex}
 \begin{chunk}{hypertex}
 static void parsePage(HyperDocPage *page) {
     initParsePage(page);
@@ -19032,8 +19032,8 @@ function will parse until it sees either:
 \item An end of file 
 \item a closing bracket ``\verb|}|''
 \end{enumerate}
-\index{hypertex!parseHyperDoc}
-\index{parseHyperDoc hypertex}
+\index[doc]{hypertex!parseHyperDoc}
+\index[doc]{parseHyperDoc hypertex}
 \begin{chunk}{hypertex}
 void parseHyperDoc(void) {
     TextNode *node = NULL /*, *save_node = NULL, *arg_node = NULL*/ ;
@@ -19361,8 +19361,8 @@ void parseHyperDoc(void) {
 \end{chunk}
 \subsection{parsePageFromSocket}
 Parse a page from a socket source.
-\index{hypertex!parsePageFromSocket}
-\index{parsePageFromSocket hypertex}
+\index[doc]{hypertex!parsePageFromSocket}
+\index[doc]{parsePageFromSocket hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *parsePageFromSocket(void) {
     HyperDocPage *page = allocPage((char *) NULL);
@@ -19408,8 +19408,8 @@ HyperDocPage *parsePageFromSocket(void) {
 
 \end{chunk}
 \subsection{parsePageFromUnixfd}
-\index{hypertex!parsePageFromUnixfd}
-\index{parsePageFromUnixfd hypertex}
+\index[doc]{hypertex!parsePageFromUnixfd}
+\index[doc]{parsePageFromUnixfd hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *parsePageFromUnixfd(void) {
     HyperDocPage *page = allocPage((char *) NULL);
@@ -19439,8 +19439,8 @@ HyperDocPage *parsePageFromUnixfd(void) {
 
 \end{chunk}
 \subsection{startScrolling}
-\index{hypertex!startScrolling}
-\index{startScrolling hypertex}
+\index[doc]{hypertex!startScrolling}
+\index[doc]{startScrolling hypertex}
 \begin{chunk}{hypertex}
 static void startScrolling(void) {
     /*
@@ -19467,8 +19467,8 @@ static void startScrolling(void) {
 
 \end{chunk}
 \subsection{startFooter}
-\index{hypertex!startFooter}
-\index{startFooter hypertex}
+\index[doc]{hypertex!startFooter}
+\index[doc]{startFooter hypertex}
 \begin{chunk}{hypertex}
 static void startFooter(void) {
     /*
@@ -19497,8 +19497,8 @@ static void startFooter(void) {
 
 \end{chunk}
 \subsection{endAPage}
-\index{hypertex!endAPage}
-\index{endAPage hypertex}
+\index[doc]{hypertex!endAPage}
+\index[doc]{endAPage hypertex}
 \begin{chunk}{hypertex}
 static void endAPage(void) {
     if (gParserRegion == Scrolling) {
@@ -19527,8 +19527,8 @@ static void endAPage(void) {
 
 \end{chunk}
 \subsection{parseReplacepage}
-\index{hypertex!parseReplacepage}
-\index{parseReplacepage hypertex}
+\index[doc]{hypertex!parseReplacepage}
+\index[doc]{parseReplacepage hypertex}
 \begin{chunk}{hypertex}
 static void parseReplacepage(void) {
     getExpectedToken(Lbrace);
@@ -19540,8 +19540,8 @@ static void parseReplacepage(void) {
 \end{chunk}
 \subsection{windowEqual}
 Hash functions for active link windows.
-\index{hypertex!windowEqual}
-\index{windowEqual hypertex}
+\index[doc]{hypertex!windowEqual}
+\index[doc]{windowEqual hypertex}
 \begin{chunk}{hypertex}
 int windowEqual(Window *w1, Window *w2) {
     return *w1 == *w2;
@@ -19550,8 +19550,8 @@ int windowEqual(Window *w1, Window *w2) {
 \end{chunk}
 \subsection{windowCode}
 Hash code for a window.
-\index{hypertex!windowCode}
-\index{windowCode hypertex}
+\index[doc]{hypertex!windowCode}
+\index[doc]{windowCode hypertex}
 \begin{chunk}{hypertex}
 int windowCode(Window *w, int size) {
     return (*w) % size;
@@ -19559,8 +19559,8 @@ int windowCode(Window *w, int size) {
 
 \end{chunk}
 \subsection{windowId}
-\index{hypertex!windowId}
-\index{windowId hypertex}
+\index[doc]{hypertex!windowId}
+\index[doc]{windowId hypertex}
 \begin{chunk}{hypertex}
 char *windowId(Window w) {
     char *ret;
@@ -19578,8 +19578,8 @@ char *windowId(Window w) {
 This procedure reads the ht database. It makes repeated calls to
 dbFileOpen, and while the returned pointer is not null, it continues to
 read the presented data base files.
-\index{hypertex!readHtDb}
-\index{readHtDb hypertex}
+\index[doc]{hypertex!readHtDb}
+\index[doc]{readHtDb hypertex}
 \begin{chunk}{hypertex}
 void readHtDb(HashTable *page_hash, HashTable *macro_hash, 
                 HashTable *patch_hash) {
@@ -19627,8 +19627,8 @@ This procedure reads a single HyperDoc database file. It is passed an already
 initilaized file pointer. It reads the whole file, updating the
 page hash, or the macro hash only when a previous entry with the same name
 is not found
-\index{hypertex!readHtFile}
-\index{readHtFile hypertex}
+\index[doc]{hypertex!readHtFile}
+\index[doc]{readHtFile hypertex}
 \begin{chunk}{hypertex}
 static void readHtFile(HashTable *page_hash, HashTable *macro_hash, 
                          HashTable *patch_hash, FILE *db_fp, char *dbFile) {
@@ -19804,8 +19804,8 @@ static void readHtFile(HashTable *page_hash, HashTable *macro_hash,
 \end{chunk}
 \subsection{makeLinkWindow}
 Create an unmapped input-only window for an active screen area.
-\index{hypertex!makeLinkWindow}
-\index{makeLinkWindow hypertex}
+\index[doc]{hypertex!makeLinkWindow}
+\index[doc]{makeLinkWindow hypertex}
 \begin{chunk}{hypertex}
 HyperLink *makeLinkWindow(TextNode *link_node, int type, int isSubWin) {
     HyperLink *link;
@@ -19852,8 +19852,8 @@ HyperLink *makeLinkWindow(TextNode *link_node, int type, int isSubWin) {
 
 \end{chunk}
 \subsection{makePasteWindow}
-\index{hypertex!makePasteWindow}
-\index{makePasteWindow hypertex}
+\index[doc]{hypertex!makePasteWindow}
+\index[doc]{makePasteWindow hypertex}
 \begin{chunk}{hypertex}
 HyperLink *makePasteWindow(PasteNode *paste) {
     HyperLink *link;
@@ -19884,8 +19884,8 @@ HyperLink *makePasteWindow(PasteNode *paste) {
 \end{chunk}
 \subsection{makeSpecialPage}
 Create a HyperDoc page structure with the given type and name.
-\index{hypertex!makeSpecialPage}
-\index{makeSpecialPage hypertex}
+\index[doc]{hypertex!makeSpecialPage}
+\index[doc]{makeSpecialPage hypertex}
 \begin{chunk}{hypertex}
 static HyperDocPage *makeSpecialPage(int type, char *name) {
     HyperDocPage *page = allocPage(name);
@@ -19902,8 +19902,8 @@ static HyperDocPage *makeSpecialPage(int type, char *name) {
 \end{chunk}
 \subsection{main}
 Insert the special button page types into the page hash table.
-\index{hypertex!main}
-\index{main hypertex}
+\index[doc]{hypertex!main}
+\index[doc]{main hypertex}
 \begin{chunk}{hypertex}
 void makeSpecialPages(HashTable *pageHashTable) {
     hashInsert(pageHashTable, 
@@ -19921,8 +19921,8 @@ void makeSpecialPages(HashTable *pageHashTable) {
 \subsection{addDependencies}
 Here is where I put the item into the pages linked list.
 Parse the \verb|\bound{varlist}| command, and add vars to dependency table.
-\index{hypertex!addDependencies}
-\index{addDependencies hypertex}
+\index[doc]{hypertex!addDependencies}
+\index[doc]{addDependencies hypertex}
 \begin{chunk}{hypertex}
 void addDependencies(void) {
     TextNode *bound_node = curr_node;
@@ -19967,8 +19967,8 @@ void addDependencies(void) {
 \end{chunk}
 \subsection{isNumber}
 Returns true iff the TextNode contains a single integer.
-\index{hypertex!isNumber}
-\index{isNumber hypertex}
+\index[doc]{hypertex!isNumber}
+\index[doc]{isNumber hypertex}
 \begin{chunk}{hypertex}
 int isNumber(char * str) {
     char *s;
@@ -19984,8 +19984,8 @@ int isNumber(char * str) {
 This procedure is called by the parser when an error occurs. It prints
 the error message, followed by the next 10 tokens to ease finding the
 error for the user.
-\index{hypertex!parserError}
-\index{parserError hypertex}
+\index[doc]{hypertex!parserError}
+\index[doc]{parserError hypertex}
 \begin{chunk}{hypertex}
 void parserError(char *str) {
     int i, v;
@@ -20004,8 +20004,8 @@ void parserError(char *str) {
 \end{chunk}
 \subsection{getFilename}
 Advance token to the next token in the input stream.
-\index{hypertex!getFilename}
-\index{getFilename hypertex}
+\index[doc]{hypertex!getFilename}
+\index[doc]{getFilename hypertex}
 \begin{chunk}{hypertex}
 int getFilename(void) {
     int c, ws;
@@ -20051,8 +20051,8 @@ int getFilename(void) {
 
 \end{chunk}
 \subsection{getInputString}
-\index{hypertex!getInputString}
-\index{getInputString hypertex}
+\index[doc]{hypertex!getInputString}
+\index[doc]{getInputString hypertex}
 \begin{chunk}{hypertex}
 char *getInputString(void) {
     char *string;
@@ -20074,8 +20074,8 @@ char *getInputString(void) {
 \subsection{getWhere}
 Tries to determine if there is an optional argument for where I should be
 parsing from. If so it then tries to determine which.
-\index{hypertex!getWhere}
-\index{getWhere hypertex}
+\index[doc]{hypertex!getWhere}
+\index[doc]{getWhere hypertex}
 \begin{chunk}{hypertex}
 int getWhere(void) {
     int tw;
@@ -20104,8 +20104,8 @@ int getWhere(void) {
 
 \end{chunk}
 \subsection{findFp}
-\index{hypertex!findFp}
-\index{findFp hypertex}
+\index[doc]{hypertex!findFp}
+\index[doc]{findFp hypertex}
 \begin{chunk}{hypertex}
 FILE *findFp(FilePosition fp) {
     FILE *lfile;
@@ -20133,8 +20133,8 @@ FILE *findFp(FilePosition fp) {
 \section{Handle InputString, SimpleBox, RadioBox input}
 
 \subsection{makeInputWindow}
-\index{hypertex!makeInputWindow}
-\index{makeInputWindow hypertex}
+\index[doc]{hypertex!makeInputWindow}
+\index[doc]{makeInputWindow hypertex}
 \begin{chunk}{hypertex}
 HyperLink *makeInputWindow(InputItem * item) {
   HyperLink *link;
@@ -20167,8 +20167,8 @@ HyperLink *makeInputWindow(InputItem * item) {
 /* create an unmapped input window for boxes */
 \end{chunk}
 \subsection{makeBoxWindow}
-\index{hypertex!makeBoxWindow}
-\index{makeBoxWindow hypertex}
+\index[doc]{hypertex!makeBoxWindow}
+\index[doc]{makeBoxWindow hypertex}
 \begin{chunk}{hypertex}
 HyperLink *makeBoxWindow(InputBox * box, int type) {
   HyperLink *link = 0;
@@ -20198,8 +20198,8 @@ HyperLink *makeBoxWindow(InputBox * box, int type) {
 
 \end{chunk}
 \subsection{initializeDefault}
-\index{hypertex!initializeDefault}
-\index{initializeDefault hypertex}
+\index[doc]{hypertex!initializeDefault}
+\index[doc]{initializeDefault hypertex}
 \begin{chunk}{hypertex}
 void initializeDefault(InputItem *item,char * buff) {
   LineStruct *newline;
@@ -20245,8 +20245,8 @@ void initializeDefault(InputItem *item,char * buff) {
 \end{chunk}
 \subsection{parseInputstring}
 Parse the input string statement.
-\index{hypertex!parseInputstring}
-\index{parseInputstring hypertex}
+\index[doc]{hypertex!parseInputstring}
+\index[doc]{parseInputstring hypertex}
 \begin{chunk}{hypertex}
 void parseInputstring(void) {
   TextNode *input_node = curr_node;
@@ -20296,8 +20296,8 @@ void parseInputstring(void) {
 
 \end{chunk}
 \subsection{parseSimplebox}
-\index{hypertex!parseSimplebox}
-\index{parseSimplebox hypertex}
+\index[doc]{hypertex!parseSimplebox}
+\index[doc]{parseSimplebox hypertex}
 \begin{chunk}{hypertex}
 void parseSimplebox(void) {
   InputBox *box;
@@ -20381,8 +20381,8 @@ void parseSimplebox(void) {
 
 \end{chunk}
 \subsection{parseRadiobox}
-\index{hypertex!parseRadiobox}
-\index{parseRadiobox hypertex}
+\index[doc]{hypertex!parseRadiobox}
+\index[doc]{parseRadiobox hypertex}
 \begin{chunk}{hypertex}
 void parseRadiobox(void) {
   InputBox *box;
@@ -20470,8 +20470,8 @@ void parseRadiobox(void) {
 
 \end{chunk}
 \subsection{addBoxToRbList}
-\index{hypertex!addBoxToRbList}
-\index{addBoxToRbList hypertex}
+\index[doc]{hypertex!addBoxToRbList}
+\index[doc]{addBoxToRbList hypertex}
 \begin{chunk}{hypertex}
 static void addBoxToRbList(char *name,InputBox *box) {
   RadioBoxes *trace = gPageBeingParsed->radio_boxes;
@@ -20502,8 +20502,8 @@ static void addBoxToRbList(char *name,InputBox *box) {
 
 \end{chunk}
 \subsection{checkOthers}
-\index{hypertex!checkOthers}
-\index{checkOthers hypertex}
+\index[doc]{hypertex!checkOthers}
+\index[doc]{checkOthers hypertex}
 \begin{chunk}{hypertex}
 static int checkOthers(InputBox *list) {
   InputBox *trace = list;
@@ -20518,8 +20518,8 @@ static int checkOthers(InputBox *list) {
 \end{chunk}
 \subsection{insertItem}
 Inserts an item into the current input list.
-\index{hypertex!insertItem}
-\index{insertItem hypertex}
+\index[doc]{hypertex!insertItem}
+\index[doc]{insertItem hypertex}
 \begin{chunk}{hypertex}
 static void insertItem(InputItem *item) {
   InputItem *trace = gPageBeingParsed->input_list;
@@ -20543,7 +20543,7 @@ static void insertItem(InputItem *item) {
 \end{chunk}
 \subsection{initPasteItem}
 {hypertex!initPasteItem}
-\index{initPasteItem hypertex}
+\index[doc]{initPasteItem hypertex}
 \begin{chunk}{hypertex}
 void initPasteItem(InputItem *item) {
   InputItem *trace = gPageBeingParsed->input_list;
@@ -20560,8 +20560,8 @@ void initPasteItem(InputItem *item) {
 
 \end{chunk}
 \subsection{repasteItem}
-\index{hypertex!repasteItem}
-\index{repasteItem hypertex}
+\index[doc]{hypertex!repasteItem}
+\index[doc]{repasteItem hypertex}
 \begin{chunk}{hypertex}
 void repasteItem(void) {
   InputItem *trace;
@@ -20581,8 +20581,8 @@ void repasteItem(void) {
 
 \end{chunk}
 \subsection{currentItem}
-\index{hypertex!currentItem}
-\index{currentItem hypertex}
+\index[doc]{hypertex!currentItem}
+\index[doc]{currentItem hypertex}
 \begin{chunk}{hypertex}
 InputItem *currentItem(void) {
   InputItem *trace = gPageBeingParsed->input_list;
@@ -20596,8 +20596,8 @@ InputItem *currentItem(void) {
 
 \end{chunk}
 \subsection{alreadyThere}
-\index{hypertex!alreadyThere}
-\index{alreadyThere hypertex}
+\index[doc]{hypertex!alreadyThere}
+\index[doc]{alreadyThere hypertex}
 \begin{chunk}{hypertex}
 int alreadyThere(char *name) {
   RadioBoxes *trace = gPageBeingParsed->radio_boxes;
@@ -20611,8 +20611,8 @@ int alreadyThere(char *name) {
 
 \end{chunk}
 \subsection{parseRadioboxes}
-\index{hypertex!parseRadioboxes}
-\index{parseRadioboxes hypertex}
+\index[doc]{hypertex!parseRadioboxes}
+\index[doc]{parseRadioboxes hypertex}
 \begin{chunk}{hypertex}
 void parseRadioboxes(void) {
   TextNode *return_node = curr_node;
@@ -20671,8 +20671,8 @@ void parseRadioboxes(void) {
 \end{chunk}
 \section{Routines for paste-in areas}
 \subsection{parsePaste}
-\index{hypertex!parsePaste}
-\index{parsePaste hypertex}
+\index[doc]{hypertex!parsePaste}
+\index[doc]{parsePaste hypertex}
 \begin{chunk}{hypertex}
 void parsePaste(void) {
     TextNode *pn = curr_node;
@@ -20756,8 +20756,8 @@ void parsePaste(void) {
 
 \end{chunk}
 \subsection{parsePastebutton}
-\index{hypertex!parsePastebutton}
-\index{parsePastebutton hypertex}
+\index[doc]{hypertex!parsePastebutton}
+\index[doc]{parsePastebutton hypertex}
 \begin{chunk}{hypertex}
 void parsePastebutton(void) {
     PasteNode *paste;
@@ -20815,8 +20815,8 @@ This routine is responsible for parsing a patch from a file. To do this I
 guess er will initScanner, then parse, the parsed piece of text
 will replace the current PasteNode which will be squashed down to
 nothing, and then discarded.
-\index{hypertex!parsePatch}
-\index{parsePatch hypertex}
+\index[doc]{hypertex!parsePatch}
+\index[doc]{parsePatch hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *parsePatch(PasteNode *paste) {
     TextNode *new;
@@ -20939,8 +20939,8 @@ HyperDocPage *parsePatch(PasteNode *paste) {
 
 \end{chunk}
 \subsection{loadPatch}
-\index{hypertex!loadPatch}
-\index{loadPatch hypertex}
+\index[doc]{hypertex!loadPatch}
+\index[doc]{loadPatch hypertex}
 \begin{chunk}{hypertex}
 static void loadPatch(PatchStore *patch) {
     long start_fpos;
@@ -20978,8 +20978,8 @@ static void loadPatch(PatchStore *patch) {
 \end{chunk}
 \section{parsing routines for node types}
 \subsection{parseIfcond}
-\index{hypertex!parseIfcond}
-\index{parseIfcond hypertex}
+\index[doc]{hypertex!parseIfcond}
+\index[doc]{parseIfcond hypertex}
 \begin{chunk}{hypertex}
 void parseIfcond(void) {
     TextNode *ifnode = curr_node;
@@ -21049,8 +21049,8 @@ void parseIfcond(void) {
 
 \end{chunk}
 \subsection{parseCondnode}
-\index{hypertex!parseCondnode}
-\index{parseCondnode hypertex}
+\index[doc]{hypertex!parseCondnode}
+\index[doc]{parseCondnode hypertex}
 \begin{chunk}{hypertex}
 static void parseCondnode(void) {
     getToken();
@@ -21085,8 +21085,8 @@ static void parseCondnode(void) {
 
 \end{chunk}
 \subsection{parseHasreturnto}
-\index{hypertex!parseHasreturnto}
-\index{parseHasreturnto hypertex}
+\index[doc]{hypertex!parseHasreturnto}
+\index[doc]{parseHasreturnto hypertex}
 \begin{chunk}{hypertex}
 static void parseHasreturnto(void) {
     TextNode *hrt = curr_node, *arg_node = allocNode();
@@ -21101,8 +21101,8 @@ static void parseHasreturnto(void) {
 
 \end{chunk}
 \subsection{parseNewcond}
-\index{hypertex!parseNewcond}
-\index{parseNewcond hypertex}
+\index[doc]{hypertex!parseNewcond}
+\index[doc]{parseNewcond hypertex}
 \begin{chunk}{hypertex}
 void parseNewcond(void) {
     char label[256];
@@ -21116,8 +21116,8 @@ void parseNewcond(void) {
 
 \end{chunk}
 \subsection{parseSetcond}
-\index{hypertex!parseSetcond}
-\index{parseSetcond hypertex}
+\index[doc]{hypertex!parseSetcond}
+\index[doc]{parseSetcond hypertex}
 \begin{chunk}{hypertex}
 void parseSetcond(void) {
     char label[256], cond[256];
@@ -21135,8 +21135,8 @@ void parseSetcond(void) {
 
 \end{chunk}
 \subsection{parseBeginItems}
-\index{hypertex!parseBeginItems}
-\index{parseBeginItems hypertex}
+\index[doc]{hypertex!parseBeginItems}
+\index[doc]{parseBeginItems hypertex}
 \begin{chunk}{hypertex}
 void parseBeginItems(void) {
     TextNode *bi = curr_node;
@@ -21168,8 +21168,8 @@ void parseBeginItems(void) {
 
 \end{chunk}
 \subsection{parseItem}
-\index{hypertex!parseItem}
-\index{parseItem hypertex}
+\index[doc]{hypertex!parseItem}
+\index[doc]{parseItem hypertex}
 \begin{chunk}{hypertex}
 void parseItem(void) {
     if (!gInItems) {
@@ -21205,8 +21205,8 @@ void parseItem(void) {
 
 \end{chunk}
 \subsection{parseMitem}
-\index{hypertex!parseMitem}
-\index{parseMitem hypertex}
+\index[doc]{hypertex!parseMitem}
+\index[doc]{parseMitem hypertex}
 \begin{chunk}{hypertex}
 void parseMitem(void) {
     if (!gInItems) {
@@ -21220,8 +21220,8 @@ void parseMitem(void) {
 
 \end{chunk}
 \subsection{parseVerbatim}
-\index{hypertex!parseVerbatim}
-\index{parseVerbatim hypertex}
+\index[doc]{hypertex!parseVerbatim}
+\index[doc]{parseVerbatim hypertex}
 \begin{chunk}{hypertex}
 void parseVerbatim(int type) {
     int size = 0, c;
@@ -21274,8 +21274,8 @@ void parseVerbatim(int type) {
 
 \end{chunk}
 \subsection{parseInputPix}
-\index{hypertex!parseInputPix}
-\index{parseInputPix hypertex}
+\index[doc]{hypertex!parseInputPix}
+\index[doc]{parseInputPix hypertex}
 \begin{chunk}{hypertex}
 void parseInputPix(void) {
     TextNode *pixnode;
@@ -21313,8 +21313,8 @@ void parseInputPix(void) {
 
 \end{chunk}
 \subsection{parseCenterline}
-\index{hypertex!parseCenterline}
-\index{parseCenterline hypertex}
+\index[doc]{hypertex!parseCenterline}
+\index[doc]{parseCenterline hypertex}
 \begin{chunk}{hypertex}
 void parseCenterline(void) {
     curr_node->type = token.type;
@@ -21336,8 +21336,8 @@ void parseCenterline(void) {
 
 \end{chunk}
 \subsection{parseCommand}
-\index{hypertex!parseCommand}
-\index{parseCommand hypertex}
+\index[doc]{hypertex!parseCommand}
+\index[doc]{parseCommand hypertex}
 \begin{chunk}{hypertex}
 void parseCommand(void) {
     TextNode *link_node, *save_node, *arg_node;
@@ -21373,8 +21373,8 @@ void parseCommand(void) {
 
 \end{chunk}
 \subsection{parseButton}
-\index{hypertex!parseButton}
-\index{parseButton hypertex}
+\index[doc]{hypertex!parseButton}
+\index[doc]{parseButton hypertex}
 \begin{chunk}{hypertex}
 void parseButton(void) {
     TextNode *link_node, *save_node;
@@ -21414,8 +21414,8 @@ void parseButton(void) {
 
 \end{chunk}
 \subsection{parseSpadcommand}
-\index{hypertex!parseSpadcommand}
-\index{parseSpadcommand hypertex}
+\index[doc]{hypertex!parseSpadcommand}
+\index[doc]{parseSpadcommand hypertex}
 \begin{chunk}{hypertex}
 void parseSpadcommand(TextNode *spad_node) {
     example_number++;
@@ -21435,8 +21435,8 @@ void parseSpadcommand(TextNode *spad_node) {
 
 \end{chunk}
 \subsection{parseSpadsrc}
-\index{hypertex!parseSpadsrc}
-\index{parseSpadsrc hypertex}
+\index[doc]{hypertex!parseSpadsrc}
+\index[doc]{parseSpadsrc hypertex}
 \begin{chunk}{hypertex}
 void parseSpadsrc(TextNode *spad_node) {
     char buf[512], *c = buf;
@@ -21471,8 +21471,8 @@ void parseSpadsrc(TextNode *spad_node) {
 
 \end{chunk}
 \subsection{parseEnv}
-\index{hypertex!parseEnv}
-\index{parseEnv hypertex}
+\index[doc]{hypertex!parseEnv}
+\index[doc]{parseEnv hypertex}
 \begin{chunk}{hypertex}
 void parseEnv(TextNode *node) {
     char *env;
@@ -21504,8 +21504,8 @@ void parseEnv(TextNode *node) {
 \subsection{parseValue1}
 This parseValue routine accepts an empty \verb|{}| but makes it a zero 
 instead of a one. Thus \verb|\indent{}| is equivelant to \verb|\indent{0}|.
-\index{hypertex!parseValue1}
-\index{parseValue1 hypertex}
+\index[doc]{hypertex!parseValue1}
+\index[doc]{parseValue1 hypertex}
 \begin{chunk}{hypertex}
 void parseValue1(void) {
     TextNode *value_node, *ocn = curr_node;
@@ -21532,8 +21532,8 @@ void parseValue1(void) {
 \subsection{parseValue2}
 This command accepts an empty argument command. Thus \verb|\space{}| is
 equivelant \verb|\space{1}|
-\index{hypertex!parseValue2}
-\index{parseValue2 hypertex}
+\index[doc]{hypertex!parseValue2}
+\index[doc]{parseValue2 hypertex}
 \begin{chunk}{hypertex}
 void parseValue2(void) {
     TextNode *value_node, *ocn = curr_node;
@@ -21560,8 +21560,8 @@ void parseValue2(void) {
 \end{chunk}
 \subsection{parseTable}
 Parse a \verb|\table| command.
-\index{hypertex!parseTable}
-\index{parseTable hypertex}
+\index[doc]{hypertex!parseTable}
+\index[doc]{parseTable hypertex}
 \begin{chunk}{hypertex}
 void parseTable(void) {
     TextNode *tn = curr_node;
@@ -21607,8 +21607,8 @@ void parseTable(void) {
 
 \end{chunk}
 \subsection{parseBox}
-\index{hypertex!parseBox}
-\index{parseBox hypertex}
+\index[doc]{hypertex!parseBox}
+\index[doc]{parseBox hypertex}
 \begin{chunk}{hypertex}
 void parseBox(void) {
     curr_node->type = token.type;
@@ -21623,8 +21623,8 @@ void parseBox(void) {
 
 \end{chunk}
 \subsection{parseMbox}
-\index{hypertex!parseMbox}
-\index{parseMbox hypertex}
+\index[doc]{hypertex!parseMbox}
+\index[doc]{parseMbox hypertex}
 \begin{chunk}{hypertex}
 void parseMbox(void) {
     curr_node->type = token.type;
@@ -21639,8 +21639,8 @@ void parseMbox(void) {
 
 \end{chunk}
 \subsection{parseFree}
-\index{hypertex!parseFree}
-\index{parseFree hypertex}
+\index[doc]{hypertex!parseFree}
+\index[doc]{parseFree hypertex}
 \begin{chunk}{hypertex}
 void parseFree(void) {
     TextNode *freeNode = curr_node;
@@ -21657,8 +21657,8 @@ void parseFree(void) {
 
 \end{chunk}
 \subsection{parseHelp}
-\index{hypertex!parseHelp}
-\index{parseHelp hypertex}
+\index[doc]{hypertex!parseHelp}
+\index[doc]{parseHelp hypertex}
 \begin{chunk}{hypertex}
 void parseHelp(void) {
     curr_node->type = Noop;
@@ -21689,8 +21689,8 @@ This file was produced by J.M. Wiley with some help from the bitmap editor
 routine. It reads in a bitmap file, and calls XCreatePixmapFromBitmapData
 to transform it into a Pixmap. He did this because the routine
 XReadBitmapFile does not seeem to work too well (whatever that means).
-\index{hypertex!HTReadBitmapFile}
-\index{HTReadBitmapFile hypertex}
+\index[doc]{hypertex!HTReadBitmapFile}
+\index[doc]{HTReadBitmapFile hypertex}
 \begin{chunk}{hypertex}
 XImage *HTReadBitmapFile(Display *display,int screen,char * filename, 
                          int *width, int *height) {
@@ -21788,8 +21788,8 @@ XImage *HTReadBitmapFile(Display *display,int screen,char * filename,
 
 \end{chunk}
 \subsection{readHot}
-\index{hypertex!readHot}
-\index{readHot hypertex}
+\index[doc]{hypertex!readHot}
+\index[doc]{readHot hypertex}
 \begin{chunk}{hypertex}
 static int readHot(FILE *fd,char Line[],int *x_hot,int *y_hot) {
     char Buff[256];
@@ -21809,8 +21809,8 @@ static int readHot(FILE *fd,char Line[],int *x_hot,int *y_hot) {
 
 \end{chunk}
 \subsection{readWandH}
-\index{hypertex!readWandH}
-\index{readWandH hypertex}
+\index[doc]{hypertex!readWandH}
+\index[doc]{readWandH hypertex}
 \begin{chunk}{hypertex}
 static int readWandH(FILE *fd,unsigned int *width,unsigned int *height) {
     char Line[256], Buff[256];
@@ -21837,8 +21837,8 @@ static int readWandH(FILE *fd,unsigned int *width,unsigned int *height) {
 \end{chunk}
 \subsection{insertImageStruct}
 Read a bitmap file into memory.
-\index{hypertex!insertImageStruct}
-\index{insertImageStruct hypertex}
+\index[doc]{hypertex!insertImageStruct}
+\index[doc]{insertImageStruct hypertex}
 \begin{chunk}{hypertex}
 ImageStruct *insertImageStruct(char *filename) {
     int bm_width, bm_height;
@@ -21907,8 +21907,8 @@ See the routines
 \end{itemize}
 
 \subsection{makeScrollBarWindows}
-\index{hypertex!makeScrollBarWindows}
-\index{makeScrollBarWindows hypertex}
+\index[doc]{hypertex!makeScrollBarWindows}
+\index[doc]{makeScrollBarWindows hypertex}
 \begin{chunk}{hypertex}
 void makeScrollBarWindows(void) {
     XSetWindowAttributes at;
@@ -21986,8 +21986,8 @@ void makeScrollBarWindows(void) {
 
 \end{chunk}
 \subsection{drawScroller3DEffects}
-\index{hypertex!drawScroller3DEffects}
-\index{drawScroller3DEffects hypertex}
+\index[doc]{hypertex!drawScroller3DEffects}
+\index[doc]{drawScroller3DEffects hypertex}
 \begin{chunk}{hypertex}
 static void drawScroller3DEffects(HDWindow * hdWindow, int x1, int y1, 
                                   int x2, int y2) {
@@ -22014,8 +22014,8 @@ static void drawScroller3DEffects(HDWindow * hdWindow, int x1, int y1,
 
 \end{chunk}
 \subsection{showScrollBars}
-\index{hypertex!showScrollBars}
-\index{showScrollBars hypertex}
+\index[doc]{hypertex!showScrollBars}
+\index[doc]{showScrollBars hypertex}
 \begin{chunk}{hypertex}
 void showScrollBars(HDWindow * hdWindow) {
     XWindowChanges wc;
@@ -22070,8 +22070,8 @@ void showScrollBars(HDWindow * hdWindow) {
 \end{chunk}
 \subsection{moveScroller}
 Moves the scroller to it's proper place.
-\index{hypertex!moveScroller}
-\index{moveScroller hypertex}
+\index[doc]{hypertex!moveScroller}
+\index[doc]{moveScroller hypertex}
 \begin{chunk}{hypertex}
 void moveScroller(HDWindow * hdWindow) {
     XWindowChanges wc;
@@ -22092,8 +22092,8 @@ void moveScroller(HDWindow * hdWindow) {
 Checks the pageFlags to see if we need a top, or a bottom line.
 These are the horizontal lines framing a scrolling region when the
 scrolling region is not the entire window.
-\index{hypertex!drawScrollLines}
-\index{drawScrollLines hypertex}
+\index[doc]{hypertex!drawScrollLines}
+\index[doc]{drawScrollLines hypertex}
 \begin{chunk}{hypertex}
 void drawScrollLines(void) {
     if (!(gWindow->page->pageFlags & NOLINES)) {
@@ -22125,8 +22125,8 @@ void drawScrollLines(void) {
 \end{chunk}
 \subsection{calculateScrollBarMeasures}
 Calculates all the measures for the scrollbars.
-\index{hypertex!calculateScrollBarMeasures}
-\index{calculateScrollBarMeasures hypertex}
+\index[doc]{hypertex!calculateScrollBarMeasures}
+\index[doc]{calculateScrollBarMeasures hypertex}
 \begin{chunk}{hypertex}
 void calculateScrollBarMeasures(void) {
     int t;
@@ -22192,8 +22192,8 @@ void calculateScrollBarMeasures(void) {
 
 \end{chunk}
 \subsection{linkScrollBars}
-\index{hypertex!linkScrollBars}
-\index{linkScrollBars hypertex}
+\index[doc]{hypertex!linkScrollBars}
+\index[doc]{linkScrollBars hypertex}
 \begin{chunk}{hypertex}
 void linkScrollBars(void) {
     HyperLink *uplink = (HyperLink *) halloc(sizeof(HyperLink), "HyperLink");
@@ -22217,8 +22217,8 @@ void linkScrollBars(void) {
 
 \end{chunk}
 \subsection{scrollUp}
-\index{hypertex!scrollUp}
-\index{scrollUp hypertex}
+\index[doc]{hypertex!scrollUp}
+\index[doc]{scrollUp hypertex}
 \begin{chunk}{hypertex}
 void scrollUp(void) {
     if (gWindow->page->scroll_off == 0);       /* BeepAtTheUser(); *//* The
@@ -22240,8 +22240,8 @@ void scrollUp(void) {
 
 \end{chunk}
 \subsection{scrollUpPage}
-\index{hypertex!scrollUpPage}
-\index{scrollUpPage hypertex}
+\index[doc]{hypertex!scrollUpPage}
+\index[doc]{scrollUpPage hypertex}
 \begin{chunk}{hypertex}
 void scrollUpPage(void) {
     if (gWindow->page->scroll_off == 0);       /* BeepAtTheUser(); */
@@ -22257,8 +22257,8 @@ void scrollUpPage(void) {
 
 \end{chunk}
 \subsection{scrollToFirstPage}
-\index{hypertex!scrollToFirstPage}
-\index{scrollToFirstPage hypertex}
+\index[doc]{hypertex!scrollToFirstPage}
+\index[doc]{scrollToFirstPage hypertex}
 \begin{chunk}{hypertex}
 void scrollToFirstPage(void) {
     if (gWindow->page->scroll_off == 0);       /* BeepAtTheUser(); */
@@ -22271,8 +22271,8 @@ void scrollToFirstPage(void) {
 
 \end{chunk}
 \subsection{scrollDown}
-\index{hypertex!scrollDown}
-\index{scrollDown hypertex}
+\index[doc]{hypertex!scrollDown}
+\index[doc]{scrollDown hypertex}
 \begin{chunk}{hypertex}
 void scrollDown(void) {
     if (-(gWindow->page->scroll_off) >=
@@ -22295,8 +22295,8 @@ void scrollDown(void) {
 
 \end{chunk}
 \subsection{scrollDownPage}
-\index{hypertex!scrollDownPage}
-\index{scrollDownPage hypertex}
+\index[doc]{hypertex!scrollDownPage}
+\index[doc]{scrollDownPage hypertex}
 \begin{chunk}{hypertex}
 void scrollDownPage(void) {
     if (gWindow->page->scrolling == NULL || (-(gWindow->page->scroll_off) >=
@@ -22319,8 +22319,8 @@ void scrollDownPage(void) {
 This routine checks to see where in the window the button press
 occured. It then tries to move the scroller so that the top of the
 scroller is at the spot of the event
-\index{hypertex!scrollScroller}
-\index{scrollScroller hypertex}
+\index[doc]{hypertex!scrollScroller}
+\index[doc]{scrollScroller hypertex}
 \begin{chunk}{hypertex}
 void scrollScroller(XButtonEvent * event) {
     int y = event->y;
@@ -22354,8 +22354,8 @@ void scrollScroller(XButtonEvent * event) {
 
 \end{chunk}
 \subsection{hideScrollBars}
-\index{hypertex!hideScrollBars}
-\index{hideScrollBars hypertex}
+\index[doc]{hypertex!hideScrollBars}
+\index[doc]{hideScrollBars hypertex}
 \begin{chunk}{hypertex}
 void hideScrollBars(HDWindow * hdWindow) {
     XUnmapWindow(gXDisplay, hdWindow->fScrollDownWindow);
@@ -22366,8 +22366,8 @@ void hideScrollBars(HDWindow * hdWindow) {
 
 \end{chunk}
 \subsection{getScrollBarMinimumSize}
-\index{hypertex!getScrollBarMinimumSize}
-\index{getScrollBarMinimumSize hypertex}
+\index[doc]{hypertex!getScrollBarMinimumSize}
+\index[doc]{getScrollBarMinimumSize hypertex}
 \begin{chunk}{hypertex}
 void getScrollBarMinimumSize(int *width, int *height) {
     (*width)  = sup_width + 4;
@@ -22376,8 +22376,8 @@ void getScrollBarMinimumSize(int *width, int *height) {
 
 \end{chunk}
 \subsection{ch}
-\index{hypertex!ch}
-\index{ch hypertex}
+\index[doc]{hypertex!ch}
+\index[doc]{ch hypertex}
 \begin{chunk}{hypertex}
 static int ch(int height) {
     int rem = height % line_height;
@@ -22388,8 +22388,8 @@ static int ch(int height) {
 
 \end{chunk}
 \subsection{changeWindowBackgroundPixmap}
-\index{hypertex!changeWindowBackgroundPixmap}
-\index{changeWindowBackgroundPixmap hypertex}
+\index[doc]{hypertex!changeWindowBackgroundPixmap}
+\index[doc]{changeWindowBackgroundPixmap hypertex}
 \begin{chunk}{hypertex}
 static void changeWindowBackgroundPixmap(Window window, Pixmap pixmap) {
     if (pixmap) {
@@ -22408,8 +22408,8 @@ static void changeWindowBackgroundPixmap(Window window, Pixmap pixmap) {
  */
 
 \subsection{showText}
-\index{hypertex!showText}
-\index{showText hypertex}
+\index[doc]{hypertex!showText}
+\index[doc]{showText hypertex}
 \begin{chunk}{hypertex}
 void showText(TextNode *node, int Ender) {
     for (; node != NULL; node = node->next) {
@@ -22656,8 +22656,8 @@ void showText(TextNode *node, int Ender) {
 
 \end{chunk}
 \subsection{showLink}
-\index{hypertex!showLink}
-\index{showLink hypertex}
+\index[doc]{hypertex!showLink}
+\index[doc]{showLink hypertex}
 \begin{chunk}{hypertex}
 static void showLink(TextNode *node) {
     XWindowChanges wc;
@@ -22726,8 +22726,8 @@ static void showLink(TextNode *node) {
 
 \end{chunk}
 \subsection{showPaste}
-\index{hypertex!showPaste}
-\index{showPaste hypertex}
+\index[doc]{hypertex!showPaste}
+\index[doc]{showPaste hypertex}
 \begin{chunk}{hypertex}
 static void showPaste(TextNode *node) {
     PasteNode *paste;
@@ -22748,8 +22748,8 @@ static void showPaste(TextNode *node) {
 
 \end{chunk}
 \subsection{showPastebutton}
-\index{hypertex!showPastebutton}
-\index{showPastebutton hypertex}
+\index[doc]{hypertex!showPastebutton}
+\index[doc]{showPastebutton hypertex}
 \begin{chunk}{hypertex}
 static void showPastebutton(TextNode *node) {
     XWindowChanges wc;
@@ -22770,8 +22770,8 @@ static void showPastebutton(TextNode *node) {
 \end{chunk}
 \subsection{showInput}
 Display an input string window.
-\index{hypertex!showInput}
-\index{showInput hypertex}
+\index[doc]{hypertex!showInput}
+\index[doc]{showInput hypertex}
 \begin{chunk}{hypertex}
 static void showInput(TextNode *node) {
     XWindowChanges wc;
@@ -22796,8 +22796,8 @@ static void showInput(TextNode *node) {
 
 \end{chunk}
 \subsection{showSimpleBox}
-\index{hypertex!showSimpleBox}
-\index{showSimpleBox hypertex}
+\index[doc]{hypertex!showSimpleBox}
+\index[doc]{showSimpleBox hypertex}
 \begin{chunk}{hypertex}
 static void showSimpleBox(TextNode *node) {
     XWindowChanges wc;
@@ -22823,8 +22823,8 @@ static void showSimpleBox(TextNode *node) {
 \end{chunk}
 \subsection{showSpadcommand}
 Display a spad command node.
-\index{hypertex!showSpadcommand}
-\index{showSpadcommand hypertex}
+\index[doc]{hypertex!showSpadcommand}
+\index[doc]{showSpadcommand hypertex}
 \begin{chunk}{hypertex}
 static void showSpadcommand(TextNode *node) {
     XWindowChanges wc;
@@ -22849,8 +22849,8 @@ static void showSpadcommand(TextNode *node) {
 \end{chunk}
 \subsection{showImage}
 Display a pixmap.
-\index{hypertex!showImage}
-\index{showImage hypertex}
+\index[doc]{hypertex!showImage}
+\index[doc]{showImage hypertex}
 \begin{chunk}{hypertex}
 static void showImage(TextNode *node, GC gc) {
     int src_x, src_y, src_width, src_height, dest_x, dest_y, ret_val;
@@ -22914,8 +22914,8 @@ Still a problem with closeClient.
 
 \subsection{issueSpadcommand}
 Issue a AXIOM command to the buffer associated with a page.
-\index{hypertex!issueSpadcommand}
-\index{issueSpadcommand hypertex}
+\index[doc]{hypertex!issueSpadcommand}
+\index[doc]{issueSpadcommand hypertex}
 \begin{chunk}{hypertex}
 void issueSpadcommand(HyperDocPage *page, TextNode *command, 
                        int immediate, int type) {
@@ -22951,8 +22951,8 @@ void issueSpadcommand(HyperDocPage *page, TextNode *command,
 \end{chunk}
 \subsection{sendPile}
 \label{sendPile}
-\index{hypertex!sendPile}
-\index{sendPile hypertex}
+\index[doc]{hypertex!sendPile}
+\index[doc]{sendPile hypertex}
 \begin{chunk}{hypertex}
 static void sendPile(Sock *sock,char * str) {
     FILE *f;
@@ -22971,8 +22971,8 @@ static void sendPile(Sock *sock,char * str) {
 
 \end{chunk}
 \subsection{issueDependentCommands}
-\index{hypertex!issueDependentCommands}
-\index{issueDependentCommands hypertex}
+\index[doc]{hypertex!issueDependentCommands}
+\index[doc]{issueDependentCommands hypertex}
 \begin{chunk}{hypertex}
 static void issueDependentCommands(HyperDocPage *page, 
                                      TextNode *command,int type) {
@@ -23006,8 +23006,8 @@ static void issueDependentCommands(HyperDocPage *page,
 
 \end{chunk}
 \subsection{markAsExecuted}
-\index{hypertex!markAsExecuted}
-\index{markAsExecuted hypertex}
+\index[doc]{hypertex!markAsExecuted}
+\index[doc]{markAsExecuted hypertex}
 \begin{chunk}{hypertex}
 static void markAsExecuted(HyperDocPage *page, TextNode *command,int type) {
     TextNode *node, *depend_label;
@@ -23033,8 +23033,8 @@ static void markAsExecuted(HyperDocPage *page, TextNode *command,int type) {
 \end{chunk}
 \subsection{startUserBuffer}
 Start a spad buffer for the page associated with the give.
-\index{hypertex!startUserBuffer}
-\index{startUserBuffer hypertex}
+\index[doc]{hypertex!startUserBuffer}
+\index[doc]{startUserBuffer hypertex}
 \begin{chunk}{hypertex}
 static void startUserBuffer(HyperDocPage *page) {
     char buf[1024], *title;
@@ -23094,8 +23094,8 @@ static void startUserBuffer(HyperDocPage *page) {
 \end{chunk}
 \subsection{clearExecutionMarks}
 Clears the execution marks in a hash table when a buffer has been killed.
-\index{hypertex!clearExecutionMarks}
-\index{clearExecutionMarks hypertex}
+\index[doc]{hypertex!clearExecutionMarks}
+\index[doc]{clearExecutionMarks hypertex}
 \begin{chunk}{hypertex}
 static void clearExecutionMarks(HashTable *depend_hash) {
     int i;
@@ -23112,8 +23112,8 @@ static void clearExecutionMarks(HashTable *depend_hash) {
 
 \end{chunk}
 \subsection{acceptMenuConnection}
-\index{hypertex!acceptMenuConnection}
-\index{acceptMenuConnection hypertex}
+\index[doc]{hypertex!acceptMenuConnection}
+\index[doc]{acceptMenuConnection hypertex}
 \begin{chunk}{hypertex}
 Sock *acceptMenuConnection(Sock *server_sock) {
     int sock_fd;
@@ -23150,8 +23150,8 @@ Sock *acceptMenuConnection(Sock *server_sock) {
 TTT thinks this code should just provide a Sock to the page. The only
 client assumed is a spadbuf. Since spadbuf was invoked with the page
 name, it just passes it back here as a check (\verb|get_string| line).
-\index{hypertex!acceptMenuServerConnection}
-\index{acceptMenuServerConnection hypertex}
+\index[doc]{hypertex!acceptMenuServerConnection}
+\index[doc]{acceptMenuServerConnection hypertex}
 \begin{chunk}{hypertex}
 static void acceptMenuServerConnection(HyperDocPage *page) {
     int ret_code/*, i*/;
@@ -23209,8 +23209,8 @@ static void acceptMenuServerConnection(HyperDocPage *page) {
 This routine takes a text node and creates a string out of it. This is for
 use with things such as spad commands. There are  a very limited set of
 node types it can handle, so be careful.
-\index{hypertex!printToString}
-\index{printToString hypertex}
+\index[doc]{hypertex!printToString}
+\index[doc]{printToString hypertex}
 \begin{chunk}{hypertex}
 char *printToString(TextNode *command) {
     int len = 0;
@@ -23221,8 +23221,8 @@ char *printToString(TextNode *command) {
 
 \end{chunk}
 \subsection{printToString1}
-\index{hypertex!printToString1}
-\index{printToString1 hypertex}
+\index[doc]{hypertex!printToString1}
+\index[doc]{printToString1 hypertex}
 \begin{chunk}{hypertex}
 char *printToString1(TextNode *command,int * sizeBuf) {
     char *c = p2sBuf;
@@ -23462,8 +23462,8 @@ char *printToString1(TextNode *command,int * sizeBuf) {
 
 \end{chunk}
 \subsection{issueServerCommand}
-\index{hypertex!issueServerCommand}
-\index{issueServerCommand hypertex}
+\index[doc]{hypertex!issueServerCommand}
+\index[doc]{issueServerCommand hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *issueServerCommand(HyperLink *link) {
     TextNode *command = (TextNode *) link->reference.node;
@@ -23514,8 +23514,8 @@ HyperDocPage *issueServerCommand(HyperLink *link) {
 
 \end{chunk}
 \subsection{issueServerpaste}
-\index{hypertex!issueServerpaste}
-\index{issueServerpaste hypertex}
+\index[doc]{hypertex!issueServerpaste}
+\index[doc]{issueServerpaste hypertex}
 \begin{chunk}{hypertex}
 int issueServerpaste(TextNode *command) {
     char *buf;
@@ -23532,8 +23532,8 @@ int issueServerpaste(TextNode *command) {
 
 \end{chunk}
 \subsection{issueUnixcommand}
-\index{hypertex!issueUnixcommand}
-\index{issueUnixcommand hypertex}
+\index[doc]{hypertex!issueUnixcommand}
+\index[doc]{issueUnixcommand hypertex}
 \begin{chunk}{hypertex}
 void issueUnixcommand(TextNode *node) {
     char *buf;
@@ -23550,8 +23550,8 @@ void issueUnixcommand(TextNode *node) {
 
 \end{chunk}
 \subsection{issueUnixlink}
-\index{hypertex!issueUnixlink}
-\index{issueUnixlink hypertex}
+\index[doc]{hypertex!issueUnixlink}
+\index[doc]{issueUnixlink hypertex}
 \begin{chunk}{hypertex}
 HyperDocPage *issueUnixlink(TextNode *node) {
     HyperDocPage *page;
@@ -23569,8 +23569,8 @@ HyperDocPage *issueUnixlink(TextNode *node) {
 
 \end{chunk}
 \subsection{issueUnixpaste}
-\index{hypertex!issueUnixpaste}
-\index{issueUnixpaste hypertex}
+\index[doc]{hypertex!issueUnixpaste}
+\index[doc]{issueUnixpaste hypertex}
 \begin{chunk}{hypertex}
 int issueUnixpaste(TextNode *node) {
     char *buf;
@@ -23585,8 +23585,8 @@ int issueUnixpaste(TextNode *node) {
 \end{chunk}
 \subsection{serviceSessionSocket}
 Called when sessionServer selects.
-\index{hypertex!serviceSessionSocket}
-\index{serviceSessionSocket hypertex}
+\index[doc]{hypertex!serviceSessionSocket}
+\index[doc]{serviceSessionSocket hypertex}
 \begin{chunk}{hypertex}
 void serviceSessionSocket(void) {
     int cmd, pid;
@@ -23607,8 +23607,8 @@ void serviceSessionSocket(void) {
 \end{chunk}
 \subsection{switchFrames}
 Let spad know which frame to issue command via
-\index{hypertex!switchFrames}
-\index{switchFrames hypertex}
+\index[doc]{hypertex!switchFrames}
+\index[doc]{switchFrames hypertex}
 \begin{chunk}{hypertex}
 static void switchFrames(void) {
     if (sessionServer == NULL) {
@@ -23626,8 +23626,8 @@ static void switchFrames(void) {
 
 \end{chunk}
 \subsection{sendLispCommand}
-\index{hypertex!sendLispCommand}
-\index{sendLispCommand hypertex}
+\index[doc]{hypertex!sendLispCommand}
+\index[doc]{sendLispCommand hypertex}
 \begin{chunk}{hypertex}
 void sendLispCommand(char *command) {
     int ret_val;
@@ -23641,8 +23641,8 @@ void sendLispCommand(char *command) {
 
 \end{chunk}
 \subsection{escapeString}
-\index{hypertex!escapeString}
-\index{escapeString hypertex}
+\index[doc]{hypertex!escapeString}
+\index[doc]{escapeString hypertex}
 \begin{chunk}{hypertex}
 void escapeString(char *s) {
     char *st;
@@ -23652,8 +23652,8 @@ void escapeString(char *s) {
 
 \end{chunk}
 \subsection{unescapeString}
-\index{hypertex!unescapeString}
-\index{unescapeString hypertex}
+\index[doc]{hypertex!unescapeString}
+\index[doc]{unescapeString hypertex}
 \begin{chunk}{hypertex}
 void unescapeString(char *s) {
     char *st;
@@ -23663,8 +23663,8 @@ void unescapeString(char *s) {
 
 \end{chunk}
 \subsection{closeClient}
-\index{hypertex!closeClient}
-\index{closeClient hypertex}
+\index[doc]{hypertex!closeClient}
+\index[doc]{closeClient hypertex}
 \begin{chunk}{hypertex}
 static void closeClient(int pid) {
     Sock_List *pSock, *locSock;
@@ -23709,8 +23709,8 @@ static void closeClient(int pid) {
 
 \end{chunk}
 \subsection{printSourceToString}
-\index{hypertex!printSourceToString}
-\index{printSourceToString hypertex}
+\index[doc]{hypertex!printSourceToString}
+\index[doc]{printSourceToString hypertex}
 \begin{chunk}{hypertex}
 char *printSourceToString(TextNode *command) {
     int len = 0;
@@ -23721,8 +23721,8 @@ char *printSourceToString(TextNode *command) {
 
 \end{chunk}
 \subsection{printSourceToString1}
-\index{hypertex!printSourceToString1}
-\index{printSourceToString1 hypertex}
+\index[doc]{hypertex!printSourceToString1}
+\index[doc]{printSourceToString1 hypertex}
 \begin{chunk}{hypertex}
 char *printSourceToString1(TextNode *command,int * sizeBuf) {
     char *c = p2sBuf;
@@ -24105,8 +24105,8 @@ we close the brace then */
 \end{chunk}
 \section{Produce titlebar}
 \subsection{makeTitleBarWindows}
-\index{hypertex!makeTitleBarWindows}
-\index{makeTitleBarWindows hypertex}
+\index[doc]{hypertex!makeTitleBarWindows}
+\index[doc]{makeTitleBarWindows hypertex}
 \begin{chunk}{hypertex}
 void makeTitleBarWindows(void) {
     XSetWindowAttributes at;
@@ -24140,8 +24140,8 @@ void makeTitleBarWindows(void) {
 
 \end{chunk}
 \subsection{showTitleBar}
-\index{hypertex!showTitleBar}
-\index{showTitleBar hypertex}
+\index[doc]{hypertex!showTitleBar}
+\index[doc]{showTitleBar hypertex}
 \begin{chunk}{hypertex}
 void showTitleBar(void) {
     XWindowChanges wc;
@@ -24206,8 +24206,8 @@ void showTitleBar(void) {
 
 \end{chunk}
 \subsection{linkTitleBarWindows}
-\index{hypertex!linkTitleBarWindows}
-\index{linkTitleBarWindows hypertex}
+\index[doc]{hypertex!linkTitleBarWindows}
+\index[doc]{linkTitleBarWindows hypertex}
 \begin{chunk}{hypertex}
 void linkTitleBarWindows(void) {
     HyperLink *tw1link = (HyperLink *) halloc(sizeof(HyperLink), "HyperLink"),
@@ -24238,8 +24238,8 @@ void linkTitleBarWindows(void) {
 
 \end{chunk}
 \subsection{readTitleBarImages}
-\index{hypertex!readTitleBarImages}
-\index{readTitleBarImages hypertex}
+\index[doc]{hypertex!readTitleBarImages}
+\index[doc]{readTitleBarImages hypertex}
 \begin{chunk}{hypertex}
 static void readTitleBarImages(void) {
     int w, h;
@@ -24280,8 +24280,8 @@ static void readTitleBarImages(void) {
 
 \end{chunk}
 \subsection{getTitleBarMinimumSize}
-\index{hypertex!getTitleBarMinimumSize}
-\index{getTitleBarMinimumSize hypertex}
+\index[doc]{hypertex!getTitleBarMinimumSize}
+\index[doc]{getTitleBarMinimumSize hypertex}
 \begin{chunk}{hypertex}
 void getTitleBarMinimumSize(int *width, int *height) {
     (*width)  = 4 * twwidth + 40;
@@ -24292,8 +24292,8 @@ void getTitleBarMinimumSize(int *width, int *height) {
 \subsection{main}
 Initialize hash tables, signal handlers and windows, then call the main
 event handling loop
-\index{hypertex!main}
-\index{main hypertex}
+\index[doc]{hypertex!main}
+\index[doc]{main hypertex}
 \begin{chunk}{hypertex}
 int main(int argc, char **argv) {
     int ret_status;

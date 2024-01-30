@@ -3973,7 +3973,7 @@ Equation(S: Type): public == private where
 \section{preparse}
 
 The first large transformation of this input occurs in the function
-preparse \index{preparse}. The preparse function reads the source file
+preparse \index[doc]{preparse}. The preparse function reads the source file
 and breaks the input into a list of pairs. The first part of the pair
 is the line number of the input file and the second part of the pair
 is the actual source text as a string. 
@@ -23105,7 +23105,7 @@ will look for the file {\tt dh.spad} and issue a call
 \begin{verbatim}
 (|compilerDoitWithScreenedLisplib| (|DenavitHartenbergMatrix|) (|c| |lib|))
 \end{verbatim}
-\index{compilerDoitWithScreenedLisplib}
+\index[doc]{compilerDoitWithScreenedLisplib}
 
 The argument to this function, as noted above, is a list containing
 the string pathname to the file.
@@ -23118,7 +23118,7 @@ Again we find a lot of redundant work. We finally end up calling
 \begin{verbatim}
     2> (|compilerDoit| NIL (|rq| |lib|))
 \end{verbatim}
-\index{compilerDoit}
+\index[doc]{compilerDoit}
 
 
 \seebook{compileSpad2Cmd}{pathname}{5}

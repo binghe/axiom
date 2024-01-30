@@ -923,7 +923,7 @@ However, the moColor macro IS used but not included.
 #define moColor_BG(h,s) ((mono)?backgroundColor:XSolidColor(h,s))
 \end{chunk}
 \section{component.h}
-\index{component.h}
+\index[doc]{component.h}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 /* 
@@ -932,7 +932,7 @@ However, the moColor macro IS used but not included.
    */
 
 \end{chunk}
-\index{tube.h}
+\index[doc]{tube.h}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 \getchunk{include/tube.h}
@@ -947,8 +947,8 @@ However, the moColor macro IS used but not included.
 #define refPt3D(v,x) ( (x)>(v).numOfPoints?traverse(resMax - ((x)-((v).numOfPoints-1))):(v).points + (x) )
 
 \end{chunk}
-\index{componentProp struct}
-\index{struct!componentProp}
+\index[doc]{componentProp struct}
+\index[doc]{struct!componentProp}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 typedef struct _componentProp {
@@ -957,8 +957,8 @@ typedef struct _componentProp {
 } componentProp;
 
 \end{chunk}
-\index{struct!LPoint}
-\index{LPoint struct}
+\index[doc]{struct!LPoint}
+\index[doc]{LPoint struct}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 typedef struct _LPoint { /* meaning list of points */
@@ -968,8 +968,8 @@ typedef struct _LPoint { /* meaning list of points */
 } LPoint;
 
 \end{chunk}
-\index{struct!LLPoint}
-\index{LLPoint struct}
+\index[doc]{struct!LLPoint}
+\index[doc]{LLPoint struct}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 typedef struct _LLPoint { /* meaning list of list of points */
@@ -985,8 +985,8 @@ typedef struct _LLPoint { /* meaning list of list of points */
 } LLPoint;
 
 \end{chunk}
-\index{struct!LLLPoint}
-\index{LLLPoint struct}
+\index[doc]{struct!LLLPoint}
+\index[doc]{LLLPoint struct}
 \begin{chunk}{include/component.h}
 /* from bookvol8 chunk include/component.h */
 typedef struct _LLLPoint { /* meaning list of list of list of points */
@@ -1000,7 +1000,7 @@ typedef struct _LLLPoint { /* meaning list of list of list of points */
 
 \end{chunk}
 \section{g.h}
-\index{g.h}
+\index[doc]{g.h}
 \begin{chunk}{include/g.h}
 /* from bookvol8 chunk include/g.h */
 #define Xoption		0	/* Gdraw routine option */
@@ -1046,10 +1046,10 @@ typedef struct _LLLPoint { /* meaning list of list of list of points */
  */
 
 \end{chunk}
-\index{struct!GCstruct}
-\index{GCstruct struct}
-\index{struct!GCptr}
-\index{GCptr struct}
+\index[doc]{struct!GCstruct}
+\index[doc]{GCstruct struct}
+\index[doc]{struct!GCptr}
+\index[doc]{GCptr struct}
 \begin{chunk}{include/g.h}
 /* from bookvol8 chunk include/g.h */
 typedef struct _GCstruct {
@@ -1060,15 +1060,15 @@ typedef struct _GCstruct {
 
 \end{chunk}
 \section{nox10.h}
-\index{nox10.h}
+\index[doc]{nox10.h}
 \begin{chunk}{include/nox10.h}
 /* from bookvol8 chunk include/nox10.h */
 
 /* Used in XDraw and XDrawFilled */
 
 \end{chunk}
-\index{struct!Vertex}
-\index{Vertex struct}
+\index[doc]{struct!Vertex}
+\index[doc]{Vertex struct}
 \begin{chunk}{include/nox10.h}
 /* from bookvol8 chunk include/nox10.h */
 typedef struct _Vertex {
@@ -1093,8 +1093,8 @@ typedef struct _Vertex {
 {\tt XAssoc} - Associations used in the XAssocTable data structure.  The 
 associations are used as circular queue entries in the association table
 which is contains an array of circular queues (buckets).
-\index{struct!XAssoc}
-\index{XAssoc struct}
+\index[doc]{struct!XAssoc}
+\index[doc]{XAssoc struct}
 \begin{chunk}{include/nox10.h}
 /* from bookvol8 chunk include/nox10.h */
 typedef struct _XAssoc {
@@ -1113,8 +1113,8 @@ XAssoc's which are the circular queue headers (bucket headers).
 An XAssocTable consists an XAssoc pointer that points to the first
 bucket in the bucket array and an integer that indicates the number
 of buckets in the array.
-\index{struct!XAssocTable}
-\index{XAssocTable struct}
+\index[doc]{struct!XAssocTable}
+\index[doc]{XAssocTable struct}
 \begin{chunk}{include/nox10.h}
 /* from bookvol8 chunk include/nox10.h */
 typedef struct _XAssocTable {
@@ -1124,7 +1124,7 @@ typedef struct _XAssocTable {
 
 \end{chunk}
 \section{override.h}
-\index{override.h}
+\index[doc]{override.h}
 \begin{chunk}{include/override.h}
 /* from bookvol8 chunk include/override.h */
 #define overrideManager False   
@@ -1140,13 +1140,13 @@ typedef struct _XAssocTable {
 
 \end{chunk}
 \section{rgb.h}
-\index{rgb.h}
-\index{struct!RGB}
-\index{RGB struct}
-\index{struct!HSV}
-\index{HSV struct}
-\index{struct!HLS}
-\index{HLS struct}
+\index[doc]{rgb.h}
+\index[doc]{struct!RGB}
+\index[doc]{RGB struct}
+\index[doc]{struct!HSV}
+\index[doc]{HSV struct}
+\index[doc]{struct!HLS}
+\index[doc]{HLS struct}
 \begin{chunk}{include/rgb.h}
 /* from bookvol8 chunk include/rgb.h */
 typedef struct _RGB {
@@ -1163,7 +1163,7 @@ typedef struct _HLS {
 
 \end{chunk}
 \section{spadcolors.h}
-\index{spadcolors.h}
+\index[doc]{spadcolors.h}
 \begin{chunk}{include/spadcolors.h}
 /* from bookvol8 chunk include/spadcolors.h */
 #define numOfColors 240
@@ -1197,15 +1197,15 @@ extern int       num;
 \getchunk{include/rgb.h}
 \end{chunk}
 \section{tube.h}
-\index{tube.h}
+\index[doc]{tube.h}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 #define openTube 1
 #define closedTube 0
 
 \end{chunk}
-\index{struct!triple}
-\index{triple struct}
+\index[doc]{struct!triple}
+\index[doc]{triple struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _triple {    /* used for normals */
@@ -1213,16 +1213,16 @@ typedef struct _triple {    /* used for normals */
 } triple;
 
 \end{chunk}
-\index{rgb.h}
+\index[doc]{rgb.h}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 \getchunk{include/rgb.h}
 
 \end{chunk}
-\index{struct!viewTriple}
-\index{viewTriple struct}
-\index{struct!viewTriplePtr}
-\index{viewTriplePtr struct}
+\index[doc]{struct!viewTriple}
+\index[doc]{viewTriple struct}
+\index[doc]{struct!viewTriplePtr}
+\index[doc]{viewTriplePtr struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _viewTriple { /* used for points in 3 space */
@@ -1245,8 +1245,8 @@ typedef struct _viewTriple { /* used for points in 3 space */
 #define surfaceComponent 4
 
 \end{chunk}
-\index{struct!poly}
-\index{poly struct}
+\index[doc]{struct!poly}
+\index[doc]{poly struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _poly {
@@ -1271,8 +1271,8 @@ typedef struct _poly {
 } poly;
 
 \end{chunk}
-\index{struct!polyList}
-\index{polyList struct}
+\index[doc]{struct!polyList}
+\index[doc]{polyList struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _polyList {
@@ -1282,8 +1282,8 @@ typedef struct _polyList {
 } polyList;
 
 \end{chunk}
-\index{struct!slice}
-\index{slice struct}
+\index[doc]{struct!slice}
+\index[doc]{slice struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _slice {
@@ -1293,8 +1293,8 @@ typedef struct _slice {
 } slice;
 
 \end{chunk}
-\index{struct!tubeModel}
-\index{tubeModel struct}
+\index[doc]{struct!tubeModel}
+\index[doc]{tubeModel struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _tubeModel {
@@ -1306,8 +1306,8 @@ typedef struct _tubeModel {
 } tubeModel;
 
 \end{chunk}
-\index{struct!pointInfo}
-\index{pointInfo struct}
+\index[doc]{struct!pointInfo}
+\index[doc]{pointInfo struct}
 \begin{chunk}{include/tube.h}
 /* from bookvol8 chunk include/tube.h */
 typedef struct _pointInfo {
@@ -1318,15 +1318,15 @@ typedef struct _pointInfo {
 
 \end{chunk}
 \section{view2d.h}
-\index{view2d.h}
+\index[doc]{view2d.h}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 #include <X11/Xlib.h>
 #define maxGraphs 9
 
 \end{chunk}
-\index{struct!viewManager}
-\index{viewManager struct}
+\index[doc]{struct!viewManager}
+\index[doc]{viewManager struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _viewManager {
@@ -1340,8 +1340,8 @@ typedef struct _viewManager {
 } viewManager;
 
 \end{chunk}
-\index{struct!viewWithThisGraph}
-\index{viewWithThisGraph struct}
+\index[doc]{struct!viewWithThisGraph}
+\index[doc]{viewWithThisGraph struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _viewsWithThisGraph {
@@ -1350,8 +1350,8 @@ typedef struct _viewsWithThisGraph {
 } viewsWithThisGraph;
 
 \end{chunk}
-\index{struct!pointStruct}
-\index{pointStruct struct}
+\index[doc]{struct!pointStruct}
+\index[doc]{pointStruct struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _pointStruct {
@@ -1359,8 +1359,8 @@ typedef struct _pointStruct {
 } pointStruct;
 
 \end{chunk}
-\index{struct!pointListStruct}
-\index{pointListStruct struct}
+\index[doc]{struct!pointListStruct}
+\index[doc]{pointListStruct struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _pointListStruct {
@@ -1371,8 +1371,8 @@ typedef struct _pointListStruct {
 } pointListStruct;
 
 \end{chunk}
-\index{struct!graphStruct}
-\index{graphStruct struct}
+\index[doc]{struct!graphStruct}
+\index[doc]{graphStruct struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _graphStruct {
@@ -1389,8 +1389,8 @@ typedef struct _graphStruct {
 } graphStruct;
 
 \end{chunk}
-\index{struct!view2DStruct}
-\index{view2DStruct struct}
+\index[doc]{struct!view2DStruct}
+\index[doc]{view2DStruct struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _view2DStruct {
@@ -1403,8 +1403,8 @@ typedef struct _view2DStruct {
 } view2DStruct;
 
 \end{chunk}
-\index{struct!graphStateStruct}
-\index{graphStateStruct struct}
+\index[doc]{struct!graphStateStruct}
+\index[doc]{graphStateStruct struct}
 \begin{chunk}{include/view2d.h}
 /* from bookvol8 chunk include/view2d.h */
 typedef struct _graphStateStruct {
@@ -1418,8 +1418,8 @@ typedef struct _graphStateStruct {
 /* need spline color, axes color, units color... */
 \end{chunk}
 \section{view3d.h}
-\index{view3d.h}
-\index{component.h}
+\index[doc]{view3d.h}
+\index[doc]{component.h}
 \begin{chunk}{include/view3d.h}
 /* from bookvol8 chunk include/view3d.h */
 \getchunk{include/component.h}
@@ -1430,8 +1430,8 @@ typedef struct _graphStateStruct {
 #define maxGraphs 9
 
 \end{chunk}
-\index{struct!fun2VarModel}
-\index{fun2VarModel struct}
+\index[doc]{struct!fun2VarModel}
+\index[doc]{fun2VarModel struct}
 \begin{chunk}{include/view3d.h}
 /* from bookvol8 chunk include/view3d.h */
 typedef struct _fun2VarModel {
@@ -1440,8 +1440,8 @@ typedef struct _fun2VarModel {
 } fun2VarModel;
 
 \end{chunk}
-\index{union!kindOf}
-\index{kindOf union}
+\index[doc]{union!kindOf}
+\index[doc]{kindOf union}
 \begin{chunk}{include/view3d.h}
 /* from bookvol8 chunk include/view3d.h */
 union kindOf {
@@ -1451,8 +1451,8 @@ union kindOf {
 };
 
 \end{chunk}
-\index{struct!view3DStruct}
-\index{view3DStruct struct}
+\index[doc]{struct!view3DStruct}
+\index[doc]{view3DStruct struct}
 \begin{chunk}{include/view3d.h}
 /* from bookvol8 chunk include/view3d.h */
 typedef struct _view3DStruct {
@@ -1496,8 +1496,8 @@ typedef struct _view3DStruct {
 } view3DStruct;
 
 \end{chunk}
-\index{struct!boxSideStruct}
-\index{boxSideStruct struct}
+\index[doc]{struct!boxSideStruct}
+\index[doc]{boxSideStruct struct}
 for drawing the region box
 \begin{chunk}{include/view3d.h}
 /* from bookvol8 chunk include/view3d.h */
@@ -1508,7 +1508,7 @@ typedef struct _boxSideStruct {
 
 \end{chunk}
 \section{viewcommand.h}
-\index{viewcommand.h}
+\index[doc]{viewcommand.h}
 \begin{chunk}{include/viewcommand.h}
 /* from bookvol8 chunk include/viewcommand.h */
 /* Commands that the viewports could send to the viewport manager */
@@ -1516,7 +1516,7 @@ typedef struct _boxSideStruct {
 #define viewportClosing 1
 \end{chunk}
 \section{view.h}
-\index{view.h}
+\index[doc]{view.h}
 \begin{chunk}{include/view.h}
 /* from bookvol8 chunk include/view.h */
 /* This file is to be included by all the viewport files */
@@ -1578,7 +1578,7 @@ exitWithAck(RootWindow(dsply,scrn),Window,-1); \
 
 \end{chunk}
 \section{write.h}
-\index{write.h}
+\index[doc]{write.h}
 \begin{chunk}{include/write.h}
 /* from bookvol8 chunk include/write.h */
 /* These are types of files that the viewports would
@@ -1592,7 +1592,7 @@ exitWithAck(RootWindow(dsply,scrn),Window,-1); \
 #define anImage	4
 \end{chunk}
 \section{xdefs.h}
-\index{xdefs.h}
+\index[doc]{xdefs.h}
 \begin{chunk}{include/xdefs.h}
 /* from bookvol8 chunk include/xdefs.h */
 /***      default fonts      ***/
@@ -3467,7 +3467,7 @@ extern void XSpadFillArcs(Display *, Drawable, XArc *, int, int, int );
 
 \chapter{viewman}
 \label{viewman}
-\index{viewman}
+\index[doc]{viewman}
 \section{viewman Call Graph}
 This was generated by the GNU cflow program with the argument list.
 Note that the line:NNNN numbers refer to the line in the code after
@@ -3594,7 +3594,7 @@ cflow --emacs -l -n -b -T --omit-arguments viewman.c
 \end{verbatim}
 \section{Constants and Headers}
 \subsection{defines}
-\index{defines}
+\index[doc]{defines}
 \begin{chunk}{viewman}
       /* Viewport Commands */
 #define makeViewport -1
@@ -3630,10 +3630,10 @@ cflow --emacs -l -n -b -T --omit-arguments viewman.c
 
 \end{chunk}
 \subsection{Local includes}
-\index{actions.h}
-\index{view2d.h}
-\index{view3d.h}
-\index{viewcommand.h}
+\index[doc]{actions.h}
+\index[doc]{view2d.h}
+\index[doc]{view3d.h}
+\index[doc]{viewcommand.h}
 \begin{chunk}{viewman}
 \getchunk{include/actions.h}
 \getchunk{include/view2d.h}
@@ -3714,8 +3714,8 @@ char        *s1,
 \end{chunk}
 \section{Code}
 \subsection{endChild}
-\index{viewman!endChild}
-\index{endChild viewman}
+\index[doc]{viewman!endChild}
+\index[doc]{endChild viewman}
 \begin{chunk}{viewman}
 void endChild(int sig) {
   checkClosedChild = yes;
@@ -3725,8 +3725,8 @@ void endChild(int sig) {
 \subsection{rmViewMgr}
 Given a pointer to a viewManager, this procedure removes it
 from the viewport list.
-\index{viewman!rmViewMgr}
-\index{rmViewMgr viewman}
+\index[doc]{viewman!rmViewMgr}
+\index[doc]{rmViewMgr viewman}
 \begin{chunk}{viewman}
 void rmViewMgr(viewManager *slotPtr) {
   int i,throwAway,code;
@@ -3806,8 +3806,8 @@ void rmViewMgr(viewManager *slotPtr) {
 Given a pointer to a viewport structure (viewManager) this 
 procedure first waits for the actual process to die and then 
 removes it from the list of viewports via rmViewMgr(). 
-\index{viewman!closeChildViewport}
-\index{closeChildViewport viewman}
+\index[doc]{viewman!closeChildViewport}
+\index[doc]{closeChildViewport viewman}
 \begin{chunk}{viewman}
 void closeChildViewport(viewManager *slotPtr) {
   int status;
@@ -3818,8 +3818,8 @@ void closeChildViewport(viewManager *slotPtr) {
 \end{chunk}
 \subsection{goodbye}
 Kill all children (how mean) and then kill self.
-\index{viewman!goodbye}
-\index{goodbye viewman}
+\index[doc]{viewman!goodbye}
+\index[doc]{goodbye viewman}
 \begin{chunk}{viewman}
 void goodbye(int sig) {
   viewManager *v;
@@ -3834,8 +3834,8 @@ void goodbye(int sig) {
 
 \end{chunk}
 \subsection{funView2D}
-\index{viewman!funView2D}
-\index{funView2D viewman}
+\index[doc]{viewman!funView2D}
+\index[doc]{funView2D viewman}
 \begin{chunk}{viewman}
 void funView2D(int viewCommand) {
   int code;
@@ -3935,8 +3935,8 @@ void funView2D(int viewCommand) {
 
 \end{chunk}
 \subsection{forkView2D}
-\index{viewman!forkView2D}
-\index{forkView2D viewman}
+\index[doc]{viewman!forkView2D}
+\index[doc]{forkView2D viewman}
 \begin{chunk}{viewman}
 void forkView2D(void) {
   viewManager      *viewport;
@@ -4036,8 +4036,8 @@ void forkView2D(void) {
 
 \end{chunk}
 \subsection{sendGraphToView2D}
-\index{viewman!sendGraphToView2D}
-\index{sendGraphToView2D viewman}
+\index[doc]{viewman!sendGraphToView2D}
+\index[doc]{sendGraphToView2D viewman}
 \begin{chunk}{viewman}
 void sendGraphToView2D(int i,int there,viewManager *viewport,
                        graphStateStruct *doGraphStateArray) {
@@ -4117,8 +4117,8 @@ void sendGraphToView2D(int i,int there,viewManager *viewport,
 
 \end{chunk}
 \subsection{funView3D}
-\index{viewman!funView3D}
-\index{funView3D viewman}
+\index[doc]{viewman!funView3D}
+\index[doc]{funView3D viewman}
 \begin{chunk}{viewman}
 void funView3D(int viewCommand) {
   int code;
@@ -4264,8 +4264,8 @@ void funView3D(int viewCommand) {
 
 \end{chunk}
 \subsection{forkView3D}
-\index{viewman!forkView3D}
-\index{forkView3D viewman}
+\index[doc]{viewman!forkView3D}
+\index[doc]{forkView3D viewman}
 \begin{chunk}{viewman}
 void forkView3D(int typeOfViewport) {
   viewManager *viewport;
@@ -4389,8 +4389,8 @@ void forkView3D(int typeOfViewport) {
 
 \end{chunk}
 \subsection{makeView2DFromSpadData}
-\index{viewman!makeView2DFromSpadData}
-\index{makeView2DFromSpadData viewman}
+\index[doc]{viewman!makeView2DFromSpadData}
+\index[doc]{makeView2DFromSpadData viewman}
 \begin{chunk}{viewman}
 void makeView2DFromSpadData(view2DStruct *viewdata,
                             graphStateStruct graphState[])
@@ -4423,8 +4423,8 @@ void makeView2DFromSpadData(view2DStruct *viewdata,
 
 \end{chunk}
 \subsection{makeView3DFromSpadData}
-\index{viewman!makeView3DFromSpadData}
-\index{makeView3DFromSpadData viewman}
+\index[doc]{viewman!makeView3DFromSpadData}
+\index[doc]{makeView3DFromSpadData viewman}
 \begin{chunk}{viewman}
 void makeView3DFromSpadData(view3DStruct *viewdata,int typeOfViewport) {
   int i,j,k;
@@ -4531,8 +4531,8 @@ void makeView3DFromSpadData(view3DStruct *viewdata,int typeOfViewport) {
 
 \end{chunk}
 \subsection{makeGraphFromSpadData}
-\index{viewman!makeGraphFromSpadData}
-\index{makeGraphFromSpadData viewman}
+\index[doc]{viewman!makeGraphFromSpadData}
+\index[doc]{makeGraphFromSpadData viewman}
 \begin{chunk}{viewman}
 graphStruct *makeGraphFromSpadData(void) {
   graphStruct     *graphData;
@@ -4595,8 +4595,8 @@ graphStruct *makeGraphFromSpadData(void) {
   
 \end{chunk}
 \subsection{discardGraph}
-\index{viewman!discardGraph}
-\index{discardGraph viewman}
+\index[doc]{viewman!discardGraph}
+\index[doc]{discardGraph viewman}
 \begin{chunk}{viewman}
 void discardGraph(graphStruct *theGraph) {
   pointListStruct *pL;
@@ -4610,8 +4610,8 @@ void discardGraph(graphStruct *theGraph) {
 
 \end{chunk}
 \subsection{readViewport}
-\index{viewman!readViewport}
-\index{readViewport viewman}
+\index[doc]{viewman!readViewport}
+\index[doc]{readViewport viewman}
 \begin{chunk}{viewman}
 int readViewport(viewManager *viewPort,void *info,int size) {
   int canRead;
@@ -4627,8 +4627,8 @@ The function superselect!, if select returns a -1
 due to an interrupt (EINTR), this routine checks to see if it's a
 child viewport that has closed. Expected global variables: 
 {\tt checkClosedChild}
-\index{viewman!superSelect}
-\index{superSelect viewman}
+\index[doc]{viewman!superSelect}
+\index[doc]{superSelect viewman}
 \begin{chunk}{viewman}
 int superSelect(int n,int *rd,int *wr,int *ex,char *timeout) {
   int waiting;
@@ -4662,8 +4662,8 @@ int superSelect(int n,int *rd,int *wr,int *ex,char *timeout) {
 
 \end{chunk}
 \subsection{brokenPipe}
-\index{viewman!brokenPipe}
-\index{brokenPipe viewman}
+\index[doc]{viewman!brokenPipe}
+\index[doc]{brokenPipe viewman}
 \begin{chunk}{viewman}
 void brokenPipe(int sig) {
   fprintf(stderr,
@@ -4676,8 +4676,8 @@ The function superselect!, if select returns a -1
 due to an interrupt (EINTR), this routine checks to see if it's a
 child viewport that has closed. Expected global variables: 
 {\tt checkClosedChild}
-\index{viewman!main}
-\index{main viewman}
+\index[doc]{viewman!main}
+\index[doc]{main viewman}
 \begin{chunk}{viewman}
 int main(void) {
   graphStruct *aGraph;
@@ -4902,10 +4902,10 @@ cflow --emacs -l -n -b -T --omit-arguments viewalone.c
 
 \end{chunk}
 \subsection{Local includes}
-\index{view3d.h}
-\index{view2d.h}
-\index{actions.h}
-\index{viewcommand.h}
+\index[doc]{view3d.h}
+\index[doc]{view2d.h}
+\index[doc]{actions.h}
+\index[doc]{viewcommand.h}
 \begin{chunk}{viewalone}
 \getchunk{include/view3d.h}
 \getchunk{include/view2d.h}
@@ -4981,8 +4981,8 @@ int viewType;
 \end{chunk}
 \section{Code}
 \subsection{sendGraphToView2D}
-\index{viewalone!sendGraphToView2D}
-\index{sendGraphToView2D viewalone}
+\index[doc]{viewalone!sendGraphToView2D}
+\index[doc]{sendGraphToView2D viewalone}
 \begin{chunk}{viewalone}
 void sendGraphToView2D(int i,int there,viewManager *viewP) {
   graphStruct      *gPtr;
@@ -5040,8 +5040,8 @@ void sendGraphToView2D(int i,int there,viewManager *viewP) {
 
 \end{chunk}
 \subsection{makeView2DFromFileData}
-\index{viewalone!makeView2DFromFileData}
-\index{makeView2DFromFileData viewalone}
+\index[doc]{viewalone!makeView2DFromFileData}
+\index[doc]{makeView2DFromFileData viewalone}
 \begin{chunk}{viewalone}
 void makeView2DFromFileData(view2DStruct *doView2D) {  
   int i,j,k;
@@ -5201,8 +5201,8 @@ void makeView2DFromFileData(view2DStruct *doView2D) {
 
 \end{chunk}
 \subsection{makeView3DFromFileData}
-\index{viewalone!makeView3DFromFileData}
-\index{makeView3DFromFileData viewalone}
+\index[doc]{viewalone!makeView3DFromFileData}
+\index[doc]{makeView3DFromFileData viewalone}
 \begin{chunk}{viewalone}
 void makeView3DFromFileData(int type) {
   int i,j,k;
@@ -5303,8 +5303,8 @@ void makeView3DFromFileData(int type) {
 
 \end{chunk}
 \subsection{spoonView2D}
-\index{viewalone!spoonView2D}
-\index{spoonView2D viewalone}
+\index[doc]{viewalone!spoonView2D}
+\index[doc]{spoonView2D viewalone}
 \begin{chunk}{viewalone}
 void spoonView2D(void) {
   int  i,code,pipe0[2],pipe1[2],there;
@@ -5390,8 +5390,8 @@ void spoonView2D(void) {
 This file forks a child process and exits the parent. It 
 has the same general form as ../viewman/funView3D() and so 
 changes there may require similar changes here. 
-\index{viewalone!spoonView2D}
-\index{spoonView2D viewalone}
+\index[doc]{viewalone!spoonView2D}
+\index[doc]{spoonView2D viewalone}
 \begin{chunk}{viewalone}
 void spoonView3D(int type) {
   int  i,j,k,code,pipe0[2],pipe1[2];
@@ -5489,8 +5489,8 @@ void spoonView3D(int type) {
 
 \end{chunk}
 \subsection{main}
-\index{viewalone!main}
-\index{main viewalone}
+\index[doc]{viewalone!main}
+\index[doc]{main viewalone}
 \begin{chunk}{viewalone}
 int main(int argc,char *argv[])
 {       printf("viewalone called with argc=%d\n",argc);
@@ -6002,15 +6002,15 @@ cflow --emacs -l -n -b -T --omit-arguments view2d.c
 
 \end{chunk}
 \subsection{local includes}
-\index{actions.h}
-\index{g.h}
-\index{nox10.h}
-\index{override.h}
-\index{view.h}
-\index{viewcommand.h}
-\index{view2d.h}
-\index{write.h}
-\index{xdefs.h}
+\index[doc]{actions.h}
+\index[doc]{g.h}
+\index[doc]{nox10.h}
+\index[doc]{override.h}
+\index[doc]{view.h}
+\index[doc]{viewcommand.h}
+\index[doc]{view2d.h}
+\index[doc]{write.h}
+\index[doc]{xdefs.h}
 \begin{chunk}{view2d}
 \getchunk{include/bsdsignal.h}
 \getchunk{include/bsdsignal.h1}
@@ -6039,8 +6039,8 @@ static int doit=0;  /* globish variable for picking/dropping/clearing */
 
 \end{chunk}
 \subsection{structs}
-\index{struct!buttonStruct}
-\index{buttonStruct struct}
+\index[doc]{struct!buttonStruct}
+\index[doc]{buttonStruct struct}
 \begin{chunk}{view2d}
 typedef struct _buttonStruct {
   int buttonKey, pot, mask, graphNum, graphSelect;
@@ -6051,8 +6051,8 @@ typedef struct _buttonStruct {
 } buttonStruct;
 
 \end{chunk}
-\index{struct!controlPanelStruct}
-\index{controlPanelStruct struct}
+\index[doc]{struct!controlPanelStruct}
+\index[doc]{controlPanelStruct struct}
 \begin{chunk}{view2d}
 typedef struct _controlPanelStruct {
   int                  numOfButtons;
@@ -6062,16 +6062,16 @@ typedef struct _controlPanelStruct {
 } controlPanelStruct;
 
 \end{chunk}
-\index{struct!mouseCoord}
-\index{mouseCoord struct}
+\index[doc]{struct!mouseCoord}
+\index[doc]{mouseCoord struct}
 \begin{chunk}{view2d}
 typedef struct _mouseCoord {
     float x,y;
 } mouseCoord;
 
 \end{chunk}
-\index{struct!viewPoints}
-\index{viewPoints struct}
+\index[doc]{struct!viewPoints}
+\index[doc]{viewPoints struct}
 \begin{chunk}{view2d}
 typedef struct _viewPoints {
   int                 viewportKey;
@@ -6085,16 +6085,16 @@ typedef struct _viewPoints {
 } viewPoints;
 
 \end{chunk}
-\index{struct!controlXY}
-\index{controlXY struct}
+\index[doc]{struct!controlXY}
+\index[doc]{controlXY struct}
 \begin{chunk}{view2d}
 typedef struct _controlXY {
   int putX,putY;
 } controlXY;
 
 \end{chunk}
-\index{struct!xPointStruct}
-\index{xPointStruct struct}
+\index[doc]{struct!xPointStruct}
+\index[doc]{xPointStruct struct}
 \begin{chunk}{view2d}
 typedef struct _xPointStruct {
   XPoint *xPoint;
@@ -6589,9 +6589,9 @@ char *envAXIOM;    /* environment variable AXIOM or DEVE */
 Creates the fields for each button window in the
 two dimensional control panel, and returns the
 number of buttons created.
-\index{view2d!initButtons}
-\index{initButtons view2d}
-\index{gfun.c}
+\index[doc]{view2d!initButtons}
+\index[doc]{initButtons view2d}
+\index[doc]{gfun.c}
 \begin{chunk}{view2d}
 \getchunk{gfun.c}
 int initButtons(buttonStruct *buttons) {
@@ -7205,8 +7205,8 @@ int initButtons(buttonStruct *buttons) {
 
 \end{chunk}
 \subsection{writeControlTitle}
-\index{view2d!writeControlTitle}
-\index{writeControlTitle view2d}
+\index[doc]{view2d!writeControlTitle}
+\index[doc]{writeControlTitle view2d}
 \begin{chunk}{view2d}
 void writeControlTitle(void) {
   int strlength;
@@ -7221,8 +7221,8 @@ void writeControlTitle(void) {
 
 \end{chunk}
 \subsection{makeMessageFromData}
-\index{view2d!makeMessageFromData}
-\index{makeMessageFromData view2d}
+\index[doc]{view2d!makeMessageFromData}
+\index[doc]{makeMessageFromData view2d}
 \begin{chunk}{view2d}
 void makeMessageFromData(int whichGraph) {
   if (viewport->haveControl) {
@@ -7261,8 +7261,8 @@ void makeMessageFromData(int whichGraph) {
 
 \end{chunk}
 \subsection{writeControlMessage}
-\index{view2d!writeControlMessage}
-\index{writeControlMessage view2d}
+\index[doc]{view2d!writeControlMessage}
+\index[doc]{writeControlMessage view2d}
 \begin{chunk}{view2d}
 void writeControlMessage(void) {
   int		     strlength;
@@ -7279,8 +7279,8 @@ void writeControlMessage(void) {
 
 \end{chunk}
 \subsection{drawControlPanel}
-\index{view2d!drawControlPanel}
-\index{drawControlPanel view2d}
+\index[doc]{view2d!drawControlPanel}
+\index[doc]{drawControlPanel view2d}
 \begin{chunk}{view2d}
 void drawControlPanel(void) {
   controlPanelStruct *cp;
@@ -7464,8 +7464,8 @@ void drawControlPanel(void) {
 
 \end{chunk}
 \subsection{getControlXY}
-\index{view2d!getControlXY}
-\index{getControlXY view2d}
+\index[doc]{view2d!getControlXY}
+\index[doc]{getControlXY view2d}
 \begin{chunk}{view2d}
 controlXY getControlXY(int whereDoYouWantPanel) {
   XWindowAttributes wAttr, wAttrib;
@@ -7524,8 +7524,8 @@ controlXY getControlXY(int whereDoYouWantPanel) {
 
 \end{chunk}
 \subsection{makeControlPanel}
-\index{view2d!makeControlPanel}
-\index{makeControlPanel view2d}
+\index[doc]{view2d!makeControlPanel}
+\index[doc]{makeControlPanel view2d}
 \begin{chunk}{view2d}
 controlPanelStruct *makeControlPanel(void) {
   Window cw;
@@ -7617,8 +7617,8 @@ there isn't enough room there, it tries the bottom and so on going
 clockwise. If the viewport is too big and there is no room to put the
 control panel outside of it, it placed the control panel in the bottom
 right hand corner of the viewport window. 
-\index{view2d!putControlPanelSomewhere}
-\index{putControlPanelSomewhere view2d}
+\index[doc]{view2d!putControlPanelSomewhere}
+\index[doc]{putControlPanelSomewhere view2d}
 \begin{chunk}{view2d}
 void putControlPanelSomewhere(int whereDoesPanelGo) {
   controlPanelStruct *control;
@@ -7639,8 +7639,8 @@ void putControlPanelSomewhere(int whereDoesPanelGo) {
 
 \end{chunk}
 \subsection{clearControlMessage}
-\index{view2d!clearControlMessage}
-\index{clearControlMessage view2d}
+\index[doc]{view2d!clearControlMessage}
+\index[doc]{clearControlMessage view2d}
 \begin{chunk}{view2d}
 void clearControlMessage(void) {
   strcpy(viewport->controlPanel->message,"");
@@ -7652,8 +7652,8 @@ void clearControlMessage(void) {
 \subsection{getGraphFromViewman}
 This routine should be called right after a read of the graph key 
 was made from the viewport manager (or defined in some other way).
-\index{view2d!getGraphFromViewman}
-\index{getGraphFromViewman view2d}
+\index[doc]{view2d!getGraphFromViewman}
+\index[doc]{getGraphFromViewman view2d}
 \begin{chunk}{view2d}
 void getGraphFromViewman(int i) {
   int j,k,xPointsNeeded;
@@ -7741,8 +7741,8 @@ void getGraphFromViewman(int i) {
 
 \end{chunk}
 \subsection{freeGraph}
-\index{view2d!freeGraph}
-\index{freeGraph view2d}
+\index[doc]{view2d!freeGraph}
+\index[doc]{freeGraph view2d}
 \begin{chunk}{view2d}
 void freeGraph(int i) {
   int j;
@@ -7760,8 +7760,8 @@ void freeGraph(int i) {
 
 \end{chunk}
 \subsection{mergeDatabases}
-\index{view2d!mergeDatabases}
-\index{mergeDatabases view2d}
+\index[doc]{view2d!mergeDatabases}
+\index[doc]{mergeDatabases view2d}
 \begin{chunk}{view2d}
 void mergeDatabases(void) {
   /* using global
@@ -7801,8 +7801,8 @@ void mergeDatabases(void) {
 
 \end{chunk}
 \subsection{getPotValue}
-\index{view2d!getPotValue}
-\index{getPotValue view2d}
+\index[doc]{view2d!getPotValue}
+\index[doc]{getPotValue view2d}
 \begin{chunk}{view2d}
 mouseCoord getPotValue(short eX,short eY,short xH,short yH) {
   mouseCoord whereMouse;
@@ -7817,8 +7817,8 @@ mouseCoord getPotValue(short eX,short eY,short xH,short yH) {
 
 \end{chunk}
 \subsection{doPick}
-\index{view2d!doPick}
-\index{doPick view2d}
+\index[doc]{view2d!doPick}
+\index[doc]{doPick view2d}
 \begin{chunk}{view2d}
 void doPick(int i,int bKey) {
   int vCommand=pick2D;
@@ -7838,8 +7838,8 @@ void doPick(int i,int bKey) {
 
 \end{chunk}
 \subsection{doDrop}
-\index{view2d!doDrop}
-\index{doDrop view2d}
+\index[doc]{view2d!doDrop}
+\index[doc]{doDrop view2d}
 \begin{chunk}{view2d}
 void doDrop(int i,int bKey) {
   int vCommand=drop2D;
@@ -7870,8 +7870,8 @@ void doDrop(int i,int bKey) {
 
 \end{chunk}
 \subsection{clickedOnGraphSelect}
-\index{view2d!clickedOnGraphSelect}
-\index{clickedOnGraphSelect view2d}
+\index[doc]{view2d!clickedOnGraphSelect}
+\index[doc]{clickedOnGraphSelect view2d}
 \begin{chunk}{view2d}
 void clickedOnGraphSelect(int i,int bKey) {
   int strlength;
@@ -7925,8 +7925,8 @@ void clickedOnGraphSelect(int i,int bKey) {
 
 \end{chunk}
 \subsection{drawControlPushButton}
-\index{view2d!drawControlPushButton}
-\index{drawControlPushButton view2d}
+\index[doc]{view2d!drawControlPushButton}
+\index[doc]{drawControlPushButton view2d}
 \begin{chunk}{view2d}
 static void drawControlPushButton(int isOn, int index) {
   GDrawPushButton(dsply, processGC, processGC, processGC,
@@ -7944,8 +7944,8 @@ static void drawControlPushButton(int isOn, int index) {
 
 \end{chunk}
 \subsection{buttonAction}
-\index{view2d!buttonAction}
-\index{buttonAction view2d}
+\index[doc]{view2d!buttonAction}
+\index[doc]{buttonAction view2d}
 \begin{chunk}{view2d}
 void buttonAction(int bKey) {
   int i;
@@ -8195,8 +8195,8 @@ void buttonAction(int bKey) {
 
 \end{chunk}
 \subsection{processEvents}
-\index{view2d!processEvents}
-\index{processEvents view2d}
+\index[doc]{view2d!processEvents}
+\index[doc]{processEvents view2d}
 \begin{chunk}{view2d}
 void processEvents(void) {
   XEvent                  *event,
@@ -8507,8 +8507,8 @@ void processEvents(void) {
 
 \end{chunk}
 \subsection{clickedOnGraph}
-\index{view2d!clickedOnGraph}
-\index{clickedOnGraph view2d}
+\index[doc]{view2d!clickedOnGraph}
+\index[doc]{clickedOnGraph view2d}
 \begin{chunk}{view2d}
 void clickedOnGraph(int i,int bKey) {  
   switch (doit) {
@@ -8568,8 +8568,8 @@ void clickedOnGraph(int i,int bKey) {
 
 \end{chunk}
 \subsection{readViewman}
-\index{view2d!readViewman}
-\index{readViewman view2d}
+\index[doc]{view2d!readViewman}
+\index[doc]{readViewman view2d}
 \begin{chunk}{view2d}
 int readViewman(void * info,int size) {
   int mold = 0;
@@ -8581,8 +8581,8 @@ int readViewman(void * info,int size) {
 
 \end{chunk}
 \subsection{spadAction}
-\index{view2d!spadAction}
-\index{spadAction view2d}
+\index[doc]{view2d!spadAction}
+\index[doc]{spadAction view2d}
 \begin{chunk}{view2d}
 int spadAction(void) {
   int code,viewCommand;
@@ -8779,8 +8779,8 @@ int spadAction(void) {
 
 \end{chunk}
 \subsection{absolute}
-\index{view2d!absolute}
-\index{absolute view2d}
+\index[doc]{view2d!absolute}
+\index[doc]{absolute view2d}
 \begin{chunk}{view2d}
 float absolute(float x) {
   if (x<0.0) {
@@ -8792,8 +8792,8 @@ float absolute(float x) {
 
 \end{chunk}
 \subsection{goodbye}
-\index{view2d!goodbye}
-\index{goodbye view2d}
+\index[doc]{view2d!goodbye}
+\index[doc]{goodbye view2d}
 \begin{chunk}{view2d}
 void goodbye(int sig) {
   int Command,i;
@@ -8829,8 +8829,8 @@ void goodbye(int sig) {
 
 \end{chunk}
 \subsection{writeTitle}
-\index{view2d!writeTitle}
-\index{writeTitle view2d}
+\index[doc]{view2d!writeTitle}
+\index[doc]{writeTitle view2d}
 \begin{chunk}{view2d}
 void writeTitle(void) {
   int strlength;
@@ -8847,8 +8847,8 @@ void writeTitle(void) {
 
 \end{chunk}
 \subsection{drawTheViewport}
-\index{view2d!drawTheViewport}
-\index{drawTheViewport view2d}
+\index[doc]{view2d!drawTheViewport}
+\index[doc]{drawTheViewport view2d}
 \begin{chunk}{view2d}
 void drawTheViewport(int dFlag) {
   Window            vw;
@@ -9249,8 +9249,8 @@ void drawTheViewport(int dFlag) {
 
 \end{chunk}
 \subsection{makeViewport}
-\index{view2d!makeViewport}
-\index{makeViewport view2d}
+\index[doc]{view2d!makeViewport}
+\index[doc]{makeViewport view2d}
 \begin{chunk}{view2d}
 viewPoints *makeViewport(char *title,int vX,int vY,int vW,int vH,int showCP) {
   Pixmap               spadbits,spadmask;
@@ -9343,8 +9343,8 @@ viewPoints *makeViewport(char *title,int vX,int vY,int vW,int vH,int showCP) {
 
 \end{chunk}
 \subsection{makeView2D}
-\index{view2d!makeView2D}
-\index{makeView2D view2d}
+\index[doc]{view2d!makeView2D}
+\index[doc]{makeView2D view2d}
 \begin{chunk}{view2d}
 viewPoints *makeView2D(view2DStruct *viewdata) {
   viewPoints *vPoints;  
@@ -9362,8 +9362,8 @@ viewPoints *makeView2D(view2DStruct *viewdata) {
 
 \end{chunk}
 \subsection{writeViewport}
-\index{view2d!writeViewport}
-\index{writeViewport view2d}
+\index[doc]{view2d!writeViewport}
+\index[doc]{writeViewport view2d}
 \begin{chunk}{view2d}
 int writeViewport(int thingsToWrite) {
   FILE              *viewDataFile;
@@ -9528,8 +9528,8 @@ own version. See \ref{XCreateAssocTable} on page~\pageref{XCreateAssocTable}.
 This table is used to hold an association between the control panel buttons
 and the window they control.
 \end{enumerate}
-\index{view2d!main}
-\index{main view2d}
+\index[doc]{view2d!main}
+\index[doc]{main view2d}
 \begin{chunk}{view2d}
 int main(void) {
   XGCValues    controlGCVals;
@@ -10419,14 +10419,14 @@ cflow --emacs -l -n -b -T --omit-arguments view3d.c
 
 \end{chunk}
 \subsection{Local includes}
-\index{view3d.h}
-\index{actions.h}
-\index{g.h}
-\index{override.h}
-\index{view.h}
-\index{viewcommand.h}
-\index{write.h}
-\index{xdefs.h}
+\index[doc]{view3d.h}
+\index[doc]{actions.h}
+\index[doc]{g.h}
+\index[doc]{override.h}
+\index[doc]{view.h}
+\index[doc]{viewcommand.h}
+\index[doc]{write.h}
+\index[doc]{xdefs.h}
 \begin{chunk}{view3d}
 \getchunk{include/bsdsignal.h}
 \getchunk{include/bsdsignal.h1}
@@ -11207,8 +11207,8 @@ static float labels[basicScreen][7] = {
 
 \end{chunk}
 \subsection{structs}
-\index{struct!buttonStruct}
-\index{buttonStruct struct}
+\index[doc]{struct!buttonStruct}
+\index[doc]{buttonStruct struct}
 \begin{chunk}{view3d}
 typedef struct _buttonStruct {
   int           buttonKey, pot, mask;
@@ -11219,8 +11219,8 @@ typedef struct _buttonStruct {
 } buttonStruct;
 
 \end{chunk}
-\index{struct!controlPanelStruct}
-\index{controlPanelStruct struct}
+\index[doc]{struct!controlPanelStruct}
+\index[doc]{controlPanelStruct struct}
 \begin{chunk}{view3d}
 typedef struct _controlPanelStruct {
   Window        controlWindow, messageWindow, colormapWindow;
@@ -11229,24 +11229,24 @@ typedef struct _controlPanelStruct {
 } controlPanelStruct;
 
 \end{chunk}
-\index{struct!mouseCoord}
-\index{mouseCoord struct}
+\index[doc]{struct!mouseCoord}
+\index[doc]{mouseCoord struct}
 \begin{chunk}{view3d}
 typedef struct _mouseCoord {
     float       x, y;
 } mouseCoord;
 
 \end{chunk}
-\index{struct!meshStruct}
-\index{meshStruct struct}
+\index[doc]{struct!meshStruct}
+\index[doc]{meshStruct struct}
 \begin{chunk}{view3d}
 typedef struct _meshStruct {
   float         N0[4], N1[4];   /* the fourth element is Zmin */
 } meshStruct;
 
 \end{chunk}
-\index{struct!points3D}
-\index{points3D struct}
+\index[doc]{struct!points3D}
+\index[doc]{points3D struct}
 \begin{chunk}{view3d}
 typedef struct _points3D {
   float         xmin, xmax,
@@ -11262,8 +11262,8 @@ typedef struct _points3D {
 } points3D;
 
 \end{chunk}
-\index{struct!colorBuffer}
-\index{colorBuffer struct}
+\index[doc]{struct!colorBuffer}
+\index[doc]{colorBuffer struct}
 \begin{chunk}{view3d}
 typedef struct _colorBuffer {
   int      indx;
@@ -11271,8 +11271,8 @@ typedef struct _colorBuffer {
 } colorBuffer;
 
 \end{chunk}
-\index{struct!point}
-\index{point struct}
+\index[doc]{struct!point}
+\index[doc]{point struct}
 \begin{chunk}{view3d}
 typedef struct _point {
   float         x, y, z;
@@ -11280,8 +11280,8 @@ typedef struct _point {
 } point;
 
 \end{chunk}
-\index{struct!viewPoints}
-\index{viewPoints struct}
+\index[doc]{struct!viewPoints}
+\index[doc]{viewPoints struct}
 One of the (many) sloppy things that need to be
 cleaned up is the viewPoints structure. a lot of
 stuff in it is used solely for the function of
@@ -11314,8 +11314,8 @@ typedef struct _viewPoints {
 } viewPoints;
 
 \end{chunk}
-\index{struct!controlXY}
-\index{controlXY struct}
+\index[doc]{struct!controlXY}
+\index[doc]{controlXY struct}
 \begin{chunk}{view3d}
 typedef struct _controlXY {
   int           putX, putY;
@@ -11850,9 +11850,9 @@ int zoomed=yes;
 Creates the fields for each button window in the
 three dimensional control panel, and returns the
 number of buttons created.
-\index{view3d!initButtons}
-\index{initButtons view3d}
-\index{gfun.c}
+\index[doc]{view3d!initButtons}
+\index[doc]{initButtons view3d}
+\index[doc]{gfun.c}
 \begin{chunk}{view3d}
 \getchunk{gfun.c}
 int initButtons(buttonStruct *buttons) {  
@@ -12186,8 +12186,8 @@ This closes all of the windows created for the
 control panel window and the viewport window of
 the current graph being displayed.
 It does not currently return a specified value.
-\index{view3d!closeViewport}
-\index{closeViewport view3d}
+\index[doc]{view3d!closeViewport}
+\index[doc]{closeViewport view3d}
 \begin{chunk}{view3d}
 void closeViewport(void) {
   int i;
@@ -12216,8 +12216,8 @@ void closeViewport(void) {
 
 \end{chunk}
 \subsection{scaleComponents}
-\index{view3d!scaleComponents}
-\index{scaleComponents view3d}
+\index[doc]{view3d!scaleComponents}
+\index[doc]{scaleComponents view3d}
 \begin{chunk}{view3d}
 void scaleComponents(void) {
   double xRange,yRange,zRange;
@@ -12295,8 +12295,8 @@ Given three indices to three points, a triangular polygon is created
 and inserted into the polygon list of viewData. If two or more of the 
 points are coincidental, no polygon is created since that would be a 
 degenerate (collapsed) polygon.
-\index{view3d!makeTriangle}
-\index{makeTriangle view3d}
+\index[doc]{view3d!makeTriangle}
+\index[doc]{makeTriangle view3d}
 \begin{chunk}{view3d}
 void makeTriangle(int a, int b, int c) {
   poly *aPoly;
@@ -12329,8 +12329,8 @@ the other, we construct triangles. If one list is shorter, then its last
 point becomes the vertex for the remaining pairs of points from the other
 list.  It turns out that any distribution of points in the two lists 
 (preserving cyclic order) will produce the same desired polygon.
-\index{view3d!triangulate}
-\index{triangulate view3d}
+\index[doc]{view3d!triangulate}
+\index[doc]{triangulate view3d}
 \begin{chunk}{view3d}
 void triangulate(void) {
   int u,l;
@@ -12420,8 +12420,8 @@ void triangulate(void) {
 
 \end{chunk}
 \subsection{readComponentsFromViewman}
-\index{view3d!readComponentsFromViewman}
-\index{readComponentsFromViewman view3d}
+\index[doc]{view3d!readComponentsFromViewman}
+\index[doc]{readComponentsFromViewman view3d}
 \begin{chunk}{view3d}
 void readComponentsFromViewman(void) {
   int i,j,k;
@@ -12487,8 +12487,8 @@ Also finds the fourth coefficient to the plane equation:
 $A$, $B$, and $C$ are in the normal $N[3]$ and $D$ is the planeConst.
 Figures out the color as well (from the average of the points) and 
 resets the moved flag    
-\index{view3d!calcNormData}
-\index{calcNormData view3d}
+\index[doc]{view3d!calcNormData}
+\index[doc]{calcNormData view3d}
 \begin{chunk}{view3d}
 void calcNormData(void) {  
   poly *aPoly;
@@ -12542,8 +12542,8 @@ boolean for this level is False and the closed boolean for each sublist
 is False as well. For 3D parameterized curves of one variable, the 
 closed boolean for this level is defined by the user from Axiom , 
 (which defaults to False) and the closed boolean for each sublist is True.
-\index{view3d!make3DComponents}
-\index{make3DComponents view3d}
+\index[doc]{view3d!make3DComponents}
+\index[doc]{make3DComponents view3d}
 \begin{chunk}{view3d}
 viewPoints *make3DComponents(void) {
   viewPoints *graphData;
@@ -12587,8 +12587,8 @@ viewPoints *make3DComponents(void) {
 
 \end{chunk}
 \subsection{draw3DComponents}
-\index{view3d!draw3DComponents}
-\index{draw3DComponents view3d}
+\index[doc]{view3d!draw3DComponents}
+\index[doc]{draw3DComponents view3d}
 \begin{chunk}{view3d}
 void draw3DComponents(int dFlag) {
   int	     i, j, k, hue, x1, y1, x2, y2;
@@ -12959,8 +12959,8 @@ Here's the convention used to figure that out:
 
 \end{chunk}
 \subsection{drawColorMap}
-\index{view3d!drawColorMap}
-\index{drawColorMap view3d}
+\index[doc]{view3d!drawColorMap}
+\index[doc]{drawColorMap view3d}
 \begin{chunk}{view3d}
 void drawColorMap (void) {  
   controlPanelStruct *cp;
@@ -13024,8 +13024,8 @@ void drawColorMap (void) {
 \subsection{writeControlTitle}
 We need the window argument here because there are multiple control 
 panels in 3D.
-\index{view3d!writeControlTitle}
-\index{writeControlTitle view3d}
+\index[doc]{view3d!writeControlTitle}
+\index[doc]{writeControlTitle view3d}
 \begin{chunk}{view3d}
 void writeControlTitle(Window w) {
   int strlength;
@@ -13039,8 +13039,8 @@ void writeControlTitle(Window w) {
 
 \end{chunk}
 \subsection{clearControlMessage}
-\index{view3d!clearControlMessage}
-\index{clearControlMessage view3d}
+\index[doc]{view3d!clearControlMessage}
+\index[doc]{clearControlMessage view3d}
 \begin{chunk}{view3d}
 void clearControlMessage(void) {
   int strlength;
@@ -13055,8 +13055,8 @@ void clearControlMessage(void) {
 
 \end{chunk}
 \subsection{writeControlMessage}
-\index{view3d!writeControlMessage}
-\index{writeControlMessage view3d}
+\index[doc]{view3d!writeControlMessage}
+\index[doc]{writeControlMessage view3d}
 \begin{chunk}{view3d}
 void writeControlMessage(void) { 
   int strlength;
@@ -13076,8 +13076,8 @@ void writeControlMessage(void) {
 
 \end{chunk}
 \subsection{drawControlPanel}
-\index{view3d!drawControlPanel}
-\index{drawControlPanel view3d}
+\index[doc]{view3d!drawControlPanel}
+\index[doc]{drawControlPanel view3d}
 \begin{chunk}{view3d}
 void drawControlPanel(void) {
   int			offShade=14;
@@ -13609,8 +13609,8 @@ void drawControlPanel(void) {
 Determines the x and y coordinate where the control panel is to be
 placed, based upon where the mouse button was pressed within the graph
 viewport window.
-\index{view3d!getControlXY}
-\index{getControlXY view3d}
+\index[doc]{view3d!getControlXY}
+\index[doc]{getControlXY view3d}
 \begin{chunk}{view3d}
 controlXY getControlXY(int whereDoYouWantPanel) {
   XWindowAttributes wAttrib;
@@ -13676,8 +13676,8 @@ controlXY getControlXY(int whereDoYouWantPanel) {
 
 \end{chunk}
 \subsection{makeControlPanel}
-\index{view3d!makeControlPanel}
-\index{makeControlPanel view3d}
+\index[doc]{view3d!makeControlPanel}
+\index[doc]{makeControlPanel view3d}
 \begin{chunk}{view3d}
 controlPanelStruct *makeControlPanel(void) { 
   Window		cw;
@@ -13773,8 +13773,8 @@ in. It first tries to put it to the right of the viewport.  If there isn't
 enough room, it tries the bottom and so on going clockwise. If the viewport
 is too big and there is no room to put the control panel outside of it, the
 control panel is placed on the bottom right hand corner of the viewport.
-\index{view3d!putControlPanelSomewhere}
-\index{putControlPanelSomewhere view3d}
+\index[doc]{view3d!putControlPanelSomewhere}
+\index[doc]{putControlPanelSomewhere view3d}
 \begin{chunk}{view3d}
 void putControlPanelSomewhere(int whereDoesPanelGo) {
   controlPanelStruct *control;
@@ -13799,8 +13799,8 @@ void putControlPanelSomewhere(int whereDoesPanelGo) {
 \subsection{phong}
 A general routine for determining the intensity values at
 a particular point using the Phong illumination model with Phong shading
-\index{view3d!phong}
-\index{phong view3d}
+\index[doc]{view3d!phong}
+\index[doc]{phong view3d}
 \begin{chunk}{view3d}
 float phong(triple pt,float N[3]) {
   float     dotLN, dotHN, H[3], E[3], P[3], NM[3], L[3];
@@ -13846,8 +13846,8 @@ float phong(triple pt,float N[3]) {
 
 \end{chunk}
 \subsection{hueValue}
-\index{view3d!hueValue}
-\index{hueValue view3d}
+\index[doc]{view3d!hueValue}
+\index[doc]{hueValue view3d}
 \begin{chunk}{view3d}
 int hueValue(float val) {
   int hue;
@@ -13858,8 +13858,8 @@ int hueValue(float val) {
 
 \end{chunk}
 \subsection{getHue}
-\index{view3d!getHue}
-\index{getHue view3d}
+\index[doc]{view3d!getHue}
+\index[doc]{getHue view3d}
 \begin{chunk}{view3d}
 int getHue(float val) {
   int hue;
@@ -13876,8 +13876,8 @@ int getHue(float val) {
 
 \end{chunk}
 \subsection{Value}
-\index{view3d!Value}
-\index{Value view3d}
+\index[doc]{view3d!Value}
+\index[doc]{Value view3d}
 \begin{chunk}{view3d}
 float Value(float n1, float n2, float hue) {
   float v;
@@ -13901,8 +13901,8 @@ float Value(float n1, float n2, float hue) {
 
 \end{chunk}
 \subsection{hlsTOrgb}
-\index{view3d!hlsTOrgb}
-\index{hlsTOrgb view3d}
+\index[doc]{view3d!hlsTOrgb}
+\index[doc]{hlsTOrgb view3d}
 \begin{chunk}{view3d}
 RGB hlsTOrgb(float h,float l,float s) {
   RGB rgb;
@@ -13924,8 +13924,8 @@ RGB hlsTOrgb(float h,float l,float s) {
 \subsection{initLightButtons}
 Creates the fields for each button window in the three dimensional 
 lighting subpanel, and returns the number of buttons created.
-\index{view3d!initLightButtons}
-\index{initLightButtons view3d}
+\index[doc]{view3d!initLightButtons}
+\index[doc]{initLightButtons view3d}
 \begin{chunk}{view3d}
 int initLightButtons(buttonStruct *lightButtons) {
   int ii;
@@ -14015,8 +14015,8 @@ int initLightButtons(buttonStruct *lightButtons) {
 
 \end{chunk}
 \subsection{makeLightingPanel}
-\index{view3d!makeLightingPanel}
-\index{makeLightingPanel view3d}
+\index[doc]{view3d!makeLightingPanel}
+\index[doc]{makeLightingPanel view3d}
 \begin{chunk}{view3d}
 int makeLightingPanel(void) {
   int i;
@@ -14097,8 +14097,8 @@ int makeLightingPanel(void) {
 
 \end{chunk}
 \subsection{drawLightingAxes}
-\index{view3d!drawLightingAxes}
-\index{drawLightingAxes view3d}
+\index[doc]{view3d!drawLightingAxes}
+\index[doc]{drawLightingAxes view3d}
 \begin{chunk}{view3d}
 void drawLightingAxes(void) {
   XWindowAttributes laInfo;
@@ -14180,8 +14180,8 @@ void drawLightingAxes(void) {
 
 \end{chunk}
 \subsection{drawLightTransArrow}
-\index{view3d!drawLightTransArrow}
-\index{drawLightTransArrow view3d}
+\index[doc]{view3d!drawLightTransArrow}
+\index[doc]{drawLightTransArrow view3d}
 \begin{chunk}{view3d}
 void drawLightTransArrow(void) {
   int i;
@@ -14254,8 +14254,8 @@ void drawLightTransArrow(void) {
 
 \end{chunk}
 \subsection{drawLightingPanel}
-\index{view3d!drawLightingPanel}
-\index{drawLightingPanel view3d}
+\index[doc]{view3d!drawLightingPanel}
+\index[doc]{drawLightingPanel view3d}
 \begin{chunk}{view3d}
 void drawLightingPanel(void) {
   char *s;
@@ -14462,8 +14462,8 @@ void drawLightingPanel(void) {
 
 \end{chunk}
 \subsection{theHandler}
-\index{view3d!theHandler}
-\index{theHandler view3d}
+\index[doc]{view3d!theHandler}
+\index[doc]{theHandler view3d}
 \begin{chunk}{view3d}
 int theHandler(Display *display,XErrorEvent *event) {
   char buffer[512];
@@ -14474,8 +14474,8 @@ int theHandler(Display *display,XErrorEvent *event) {
 
 \end{chunk}
 \subsection{mergeDatabases}
-\index{view3d!mergeDatabases}
-\index{mergeDatabases view3d}
+\index[doc]{view3d!mergeDatabases}
+\index[doc]{mergeDatabases view3d}
 \begin{chunk}{view3d}
 void mergeDatabases(void) {
   XrmDatabase homeDB,serverDB,applicationDB;
@@ -14513,8 +14513,8 @@ void mergeDatabases(void) {
 
 \end{chunk}
 \subsection{getMeshNormal}
-\index{view3d!getMeshNormal}
-\index{getMeshNormal view3d}
+\index[doc]{view3d!getMeshNormal}
+\index[doc]{getMeshNormal view3d}
 \begin{chunk}{view3d}
 void getMeshNormal(float x0,float y0,float z0,float x1,float y1,float z1,
       float x2,float y2,float z2,float zMin,float zRange,float Normal[3]) {
@@ -14542,8 +14542,8 @@ void getMeshNormal(float x0,float y0,float z0,float x1,float y1,float z1,
 
 \end{chunk}
 \subsection{normalizeVector}
-\index{view3d!normalizeVector}
-\index{normalizeVector view3d}
+\index[doc]{view3d!normalizeVector}
+\index[doc]{normalizeVector view3d}
 \begin{chunk}{view3d}
 void normalizeVector(float *v) {
    /* v should be a triple (ignoring the rest of the array if necessary) */
@@ -14560,8 +14560,8 @@ void normalizeVector(float *v) {
 
 \end{chunk}
 \subsection{dotProduct}
-\index{view3d!dotProduct}
-\index{dotProduct view3d}
+\index[doc]{view3d!dotProduct}
+\index[doc]{dotProduct view3d}
 \begin{chunk}{view3d}
 float dotProduct(float * a,float *b,int size) {
   int i;
@@ -14608,8 +14608,8 @@ pointer pointing to a sorted list.
 \end{verbatim}
 
 \subsection{merge}
-\index{view3d!merge}
-\index{merge view3d}
+\index[doc]{view3d!merge}
+\index[doc]{merge view3d}
 \begin{chunk}{view3d}
 linkThing *merge(linkThing *p, linkThing *q,
                  int (*compare)(linkThing *, linkThing *)) {
@@ -14646,8 +14646,8 @@ linkThing *merge(linkThing *p, linkThing *q,
 
 \end{chunk}
 \subsection{msort}
-\index{view3d!msort}
-\index{msort view3d}
+\index[doc]{view3d!msort}
+\index[doc]{msort view3d}
 \begin{chunk}{view3d}
 linkThing *msort(linkThing *p,int min,int max,
                  int (*compare)(linkThing *, linkThing *)) {
@@ -14669,8 +14669,8 @@ linkThing *msort(linkThing *p,int min,int max,
 
 \end{chunk}
 \subsection{getPotValue}
-\index{view3d!getPotValue}
-\index{getPotValue view3d}
+\index[doc]{view3d!getPotValue}
+\index[doc]{getPotValue view3d}
 \begin{chunk}{view3d}
 mouseCoord getPotValue(short eX,short eY,short xH,short yH) {
   mouseCoord whereMouse;
@@ -14689,8 +14689,8 @@ mouseCoord getPotValue(short eX,short eY,short xH,short yH) {
 
 \end{chunk}
 \subsection{getLinearPotValue}
-\index{view3d!getLinearPotValue}
-\index{getLinearPotValue view3d}
+\index[doc]{view3d!getLinearPotValue}
+\index[doc]{getLinearPotValue view3d}
 \begin{chunk}{view3d}
 mouseCoord getLinearPotValue(short eX,short eY,short xH,short yH) {
   mouseCoord whereMouse;
@@ -14701,8 +14701,8 @@ mouseCoord getLinearPotValue(short eX,short eY,short xH,short yH) {
 
 \end{chunk}
 \subsection{buttonAction}
-\index{view3d!buttonAction}
-\index{buttonAction view3d}
+\index[doc]{view3d!buttonAction}
+\index[doc]{buttonAction view3d}
 \begin{chunk}{view3d}
 void buttonAction(int bKey) {
   char *s1, *s2;
@@ -15412,8 +15412,8 @@ void buttonAction(int bKey) {
 \end{chunk}
 \subsection{processEvents}
 X Event Processing
-\index{view3d!processEvents}
-\index{processEvents view3d}
+\index[doc]{view3d!processEvents}
+\index[doc]{processEvents view3d}
 \begin{chunk}{view3d}
 void processEvents(void) {
   XEvent		*event, tempEvent;
@@ -16131,8 +16131,8 @@ void processEvents(void) {
 \end{chunk}
 \subsection{project}
 Orthogonal projection for a point setting the ith Xpoint as well.
-\index{view3d!project}
-\index{project view3d}
+\index[doc]{view3d!project}
+\index[doc]{project view3d}
 \begin{chunk}{view3d}
 void project(viewTriple * aViewTriple,XPoint *someXpoints,int i) {
   float Vtmp[4], V[4], V1[4];
@@ -16168,8 +16168,8 @@ void project(viewTriple * aViewTriple,XPoint *someXpoints,int i) {
 \subsection{projectAPoint}
 Orthogonal projection for a point. sort of like the above, 
 but no Xpoint assignment.
-\index{view3d!projectAPoint}
-\index{projectAPoint view3d}
+\index[doc]{view3d!projectAPoint}
+\index[doc]{projectAPoint view3d}
 \begin{chunk}{view3d}
 void projectAPoint(viewTriple *aViewTriple) {
   float Vtmp[4], V[4], V1[4];
@@ -16203,8 +16203,8 @@ void projectAPoint(viewTriple *aViewTriple) {
 
 \end{chunk}
 \subsection{projectAllPoints}
-\index{view3d!projectAllPoints}
-\index{projectAllPoints view3d}
+\index[doc]{view3d!projectAllPoints}
+\index[doc]{projectAllPoints view3d}
 \begin{chunk}{view3d}
 void projectAllPoints(void) {
   int i,j,k;
@@ -16229,8 +16229,8 @@ Orthogonal projection of all the polygons in a given list in one
 go. pz holds the projected depth info for hidden surface removal. 
 Polygons totally outside of the window dimensions after projection 
 are discarded from the list.
-\index{view3d!projectAllPolys}
-\index{projectAllPolys view3d}
+\index[doc]{view3d!projectAllPolys}
+\index[doc]{projectAllPolys view3d}
 \begin{chunk}{view3d}
 void projectAllPolys(poly *pList) {
   int i,clipped,clippedPz;
@@ -16291,8 +16291,8 @@ void projectAllPolys(poly *pList) {
 \subsection{projectAPoly}
 Orthogonal projection of all a polygon. pz holds the projected depth info
 for hidden surface removal.
-\index{view3d!projectAPoly}
-\index{projectAPoly view3d}
+\index[doc]{view3d!projectAPoly}
+\index[doc]{projectAPoly view3d}
 \begin{chunk}{view3d}
 void projectAPoly(poly *p) {
   int i,clipped,clippedPz;
@@ -16356,8 +16356,8 @@ void projectAPoly(poly *p) {
 Sort of like the project stuff in tube.c but used exclusively for the
 functions of two variables. probably will need to be changed later to
 be more general (i.e. have everybody use the viewTriple point structure).
-\index{view3d!projectStuff}
-\index{projectStuff view3d}
+\index[doc]{view3d!projectStuff}
+\index[doc]{projectStuff view3d}
 \begin{chunk}{view3d}
 void projectStuff(float x,float y,float z,int *px,int *py,float *Pz) {
   float tempx,tempy,tempz,temps,V[4],V1[4],stuffScale=100.0;
@@ -16395,8 +16395,8 @@ void projectStuff(float x,float y,float z,int *px,int *py,float *Pz) {
 
 \end{chunk}
 \subsection{makeQuitPanel}
-\index{view3d!makeQuitPanel}
-\index{makeQuitPanel view3d}
+\index[doc]{view3d!makeQuitPanel}
+\index[doc]{makeQuitPanel view3d}
 \begin{chunk}{view3d}
 int makeQuitPanel(void) {
   int i;
@@ -16454,8 +16454,8 @@ int makeQuitPanel(void) {
 
 \end{chunk}
 \subsection{drawQuitPanel}
-\index{view3d!drawQuitPanel}
-\index{drawQuitPanel view3d}
+\index[doc]{view3d!drawQuitPanel}
+\index[doc]{drawQuitPanel view3d}
 \begin{chunk}{view3d}
 void drawQuitPanel(void) {
   char *s;
@@ -16490,8 +16490,8 @@ void drawQuitPanel(void) {
 
 \end{chunk}
 \subsection{initQuitButtons}
-\index{view3d!initQuitButtons}
-\index{initQuitButtons view3d}
+\index[doc]{view3d!initQuitButtons}
+\index[doc]{initQuitButtons view3d}
 \begin{chunk}{view3d}
 int initQuitButtons(buttonStruct *quitButtons) {
   int ii;
@@ -16527,8 +16527,8 @@ int initQuitButtons(buttonStruct *quitButtons) {
 
 \end{chunk}
 \subsection{makeSavePanel}
-\index{view3d!makeSavePanel}
-\index{makeSavePanel view3d}
+\index[doc]{view3d!makeSavePanel}
+\index[doc]{makeSavePanel view3d}
 \begin{chunk}{view3d}
 int makeSavePanel(void) {
   int i;
@@ -16586,8 +16586,8 @@ int makeSavePanel(void) {
 
 \end{chunk}
 \subsection{drawSavePanel}
-\index{view3d!drawSavePanel}
-\index{drawSavePanel view3d}
+\index[doc]{view3d!drawSavePanel}
+\index[doc]{drawSavePanel view3d}
 \begin{chunk}{view3d}
 void drawSavePanel(void) {
   char *s;
@@ -16616,8 +16616,8 @@ void drawSavePanel(void) {
 
 \end{chunk}
 \subsection{initSaveButtons}
-\index{view3d!initSaveButtons}
-\index{initSaveButtons view3d}
+\index[doc]{view3d!initSaveButtons}
+\index[doc]{initSaveButtons view3d}
 \begin{chunk}{view3d}
 int initSaveButtons(buttonStruct *saveButtons) {
   int ii;
@@ -16665,8 +16665,8 @@ int initSaveButtons(buttonStruct *saveButtons) {
 
 \end{chunk}
 \subsection{getCBufferAxes}
-\index{view3d!getCBufferAxes}
-\index{getCBufferAxes view3d}
+\index[doc]{view3d!getCBufferAxes}
+\index[doc]{getCBufferAxes view3d}
 \begin{chunk}{view3d}
 char getCBufferAxes(int ix) {
   if( ix >=0 && ix <ARRAY_WIDTH) return (cBuffer[ix].axes);
@@ -16675,8 +16675,8 @@ char getCBufferAxes(int ix) {
 
 \end{chunk}
 \subsection{putCBufferAxes}
-\index{view3d!putCBufferAxes}
-\index{putCBufferAxes view3d}
+\index[doc]{view3d!putCBufferAxes}
+\index[doc]{putCBufferAxes view3d}
 \begin{chunk}{view3d}
 void putCBufferAxes(int ix,char val) {
   if( ix >=0 && ix <ARRAY_WIDTH) cBuffer[ix].axes = val;
@@ -16684,8 +16684,8 @@ void putCBufferAxes(int ix,char val) {
 
 \end{chunk}
 \subsection{getCBufferIndx}
-\index{view3d!getCBufferIndx}
-\index{getCBufferIndx view3d}
+\index[doc]{view3d!getCBufferIndx}
+\index[doc]{getCBufferIndx view3d}
 \begin{chunk}{view3d}
 int getCBufferIndx(int ix) {
   if( ix >=0 && ix <ARRAY_WIDTH) return (cBuffer[ix].indx);
@@ -16694,8 +16694,8 @@ int getCBufferIndx(int ix) {
 
 \end{chunk}
 \subsection{putCBufferIndx}
-\index{view3d!putCBufferIndx}
-\index{putCBufferIndx view3d}
+\index[doc]{view3d!putCBufferIndx}
+\index[doc]{putCBufferIndx view3d}
 \begin{chunk}{view3d}
 void putCBufferIndx(int ix,int val) {
   if( ix >=0 && ix <ARRAY_WIDTH) cBuffer[ix].indx = val;
@@ -16703,8 +16703,8 @@ void putCBufferIndx(int ix,int val) {
 
 \end{chunk}
 \subsection{putZBuffer}
-\index{view3d!putZBuffer}
-\index{putZBuffer view3d}
+\index[doc]{view3d!putZBuffer}
+\index[doc]{putZBuffer view3d}
 \begin{chunk}{view3d}
 void putZBuffer(int ix,float val) {
   if (ix >=0 && ix <ARRAY_WIDTH) zBuffer[ix] = val;
@@ -16712,8 +16712,8 @@ void putZBuffer(int ix,float val) {
 
 \end{chunk}
 \subsection{getZBuffer}
-\index{view3d!getZBuffer}
-\index{getZBuffer view3d}
+\index[doc]{view3d!getZBuffer}
+\index[doc]{getZBuffer view3d}
 \begin{chunk}{view3d}
 float getZBuffer(int ix) {
   return (zBuffer[ix]);
@@ -16721,8 +16721,8 @@ float getZBuffer(int ix) {
 
 \end{chunk}
 \subsection{putImageX}
-\index{view3d!putImageX}
-\index{putImageX view3d}
+\index[doc]{view3d!putImageX}
+\index[doc]{putImageX view3d}
 \begin{chunk}{view3d}
 void putImageX(int ix,char val) {
   if (ix <=0 && ix <vwInfo.width) imageX->data[ix] = val;
@@ -16732,8 +16732,8 @@ void putImageX(int ix,char val) {
 \subsection{drawPhongSpan}
 This routine sets the buffer values for each span of pixels which
 intersect the current scanline.
-\index{view3d!drawPhongSpan}
-\index{drawPhongSpan view3d}
+\index[doc]{view3d!drawPhongSpan}
+\index[doc]{drawPhongSpan view3d}
 \begin{chunk}{view3d}
 void drawPhongSpan(triple pt,float N[3],int dFlag) {
   int		     xpixel,hue,shade;
@@ -16808,8 +16808,8 @@ void drawPhongSpan(triple pt,float N[3],int dFlag) {
 This routine takes all polygons that intersect with the current scanline 
 and calculates the intersecting x and z points as well as the color at 
 each point.  Interpolation is done according to Phong.
-\index{view3d!scanPhong}
-\index{scanPhong view3d}
+\index[doc]{view3d!scanPhong}
+\index[doc]{scanPhong view3d}
 \begin{chunk}{view3d}
 void scanPhong(int dFlag) {
   viewTriple *p1, *p2;
@@ -16925,8 +16925,8 @@ void scanPhong(int dFlag) {
 \end{chunk}
 \subsection{boxTObuffer}
 boxTObuffer() writes the projection of the x,y  bounding box to the z-buffer.
-\index{view3d!boxTObuffer}
-\index{boxTObuffer view3d}
+\index[doc]{view3d!boxTObuffer}
+\index[doc]{boxTObuffer view3d}
 \begin{chunk}{view3d}
 void boxTObuffer(void) {
   int	 xpix,i,j,k,count,decision;
@@ -16993,8 +16993,8 @@ void boxTObuffer(void) {
 \subsection{clipboxTObuffer}
 clipboxTObuffer() writes the projection of the x,y,z clipping region
 box to the z-buffer.
-\index{view3d!clipboxTObuffer}
-\index{clipboxTObuffer view3d}
+\index[doc]{view3d!clipboxTObuffer}
+\index[doc]{clipboxTObuffer view3d}
 \begin{chunk}{view3d}
 void clipboxTObuffer(void) {
   int	 xpix,i,j,k,count,decision;
@@ -17061,8 +17061,8 @@ void clipboxTObuffer(void) {
 \end{chunk}
 \subsection{axesTObuffer}
 axesTObuffer() writes the projection of the x,y,z axes to the z-buffer.
-\index{view3d!axesTObuffer}
-\index{axesTObuffer view3d}
+\index[doc]{view3d!axesTObuffer}
+\index[doc]{axesTObuffer view3d}
 \begin{chunk}{view3d}
 void axesTObuffer(void) {
   int	 xpix,i,count,decision;
@@ -17126,8 +17126,8 @@ void axesTObuffer(void) {
 \subsection{scanLines}
 scanLines() scanline z-buffer algorithm initialize z-buffer and color
 buffer for all scanlines.
-\index{view3d!scanLines}
-\index{scanLines view3d}
+\index[doc]{view3d!scanLines}
+\index[doc]{scanLines view3d}
 \begin{chunk}{view3d}
 void scanLines(int dFlag) {
   unsigned long pixColor;
@@ -17282,8 +17282,8 @@ void scanLines(int dFlag) {
 \end{chunk}
 \subsection{freePolyList}
 frees up the global scanList l-l
-\index{view3d!freePolyList}
-\index{freePolyList view3d}
+\index[doc]{view3d!freePolyList}
+\index[doc]{freePolyList view3d}
 \begin{chunk}{view3d}
 void freePolyList(void) {
   polyList *P, *nextP;
@@ -17301,8 +17301,8 @@ void freePolyList(void) {
 \end{chunk}
 \subsection{showAxesLabels}
 showAxesLabels() writes the axes labels onto the viewmap of a graph.
-\index{view3d!showAxesLabels}
-\index{showAxesLabels view3d}
+\index[doc]{view3d!showAxesLabels}
+\index[doc]{showAxesLabels view3d}
 \begin{chunk}{view3d}
 void showAxesLabels(int dFlag) {
   int  xcoord2,ycoord2;
@@ -17357,8 +17357,8 @@ void showAxesLabels(int dFlag) {
 \subsection{makeTriangle}
 changeColorMap() modifies the color map for moving in and out of
 smooth shading.
-\index{view3d!makeTriangle}
-\index{makeTriangle view3d}
+\index[doc]{view3d!makeTriangle}
+\index[doc]{makeTriangle view3d}
 \begin{chunk}{view3d}
 void changeColorMap(void) {
   int	      okay, i, hue, *index;
@@ -17424,8 +17424,8 @@ void changeColorMap(void) {
 \subsection{drawPhong}
 A general routine for displaying a list of polygons using a simple
 scanline z-buffer algorithm with phong shading.
-\index{view3d!drawPhong}
-\index{drawPhong view3d}
+\index[doc]{view3d!drawPhong}
+\index[doc]{drawPhong view3d}
 \begin{chunk}{view3d}
 void drawPhong(int dFlag) {
     poly	  *p, *head;
@@ -17561,8 +17561,8 @@ void drawPhong(int dFlag) {
 \end{chunk}
 
 \subsection{readViewman}
-\index{view3d!readViewman}
-\index{readViewman view3d}
+\index[doc]{view3d!readViewman}
+\index[doc]{readViewman view3d}
 \begin{chunk}{view3d}
 int readViewman(void *info,int size) {
   int m = 0;
@@ -17573,8 +17573,8 @@ int readViewman(void *info,int size) {
 
 \end{chunk}
 \subsection{scalePoint}
-\index{view3d!scalePoint}
-\index{scalePoint view3d}
+\index[doc]{view3d!scalePoint}
+\index[doc]{scalePoint view3d}
 \begin{chunk}{view3d}
 void scalePoint(viewTriple *p) {
   p->x *= viewData.scaleToView;
@@ -17588,8 +17588,8 @@ void scalePoint(viewTriple *p) {
 
 \end{chunk}
 \subsection{spadAction}
-\index{view3d!spadAction}
-\index{spadAction view3d}
+\index[doc]{view3d!spadAction}
+\index[doc]{spadAction view3d}
 \begin{chunk}{view3d}
 int spadAction(void) {
   int code, viewCommand;
@@ -17870,8 +17870,8 @@ int spadAction(void) {
 \end{chunk}
 \subsection{traverse}
 Returns the nth point in a point resevoir.
-\index{view3d!traverse}
-\index{traverse view3d}
+\index[doc]{view3d!traverse}
+\index[doc]{traverse view3d}
 \begin{chunk}{view3d}
 viewTriple *traverse(int n) {
   int i;
@@ -17883,8 +17883,8 @@ viewTriple *traverse(int n) {
 
 \end{chunk}
 \subsection{absolute}
-\index{view3d!absolute}
-\index{absolute view3d}
+\index[doc]{view3d!absolute}
+\index[doc]{absolute view3d}
 \begin{chunk}{view3d}
 float absolute(float x) {
   if (x<0.0) return(-x);
@@ -17893,8 +17893,8 @@ float absolute(float x) {
 
 \end{chunk}
 \subsection{getRandom}
-\index{view3d!getRandom}
-\index{getRandom view3d}
+\index[doc]{view3d!getRandom}
+\index[doc]{getRandom view3d}
 \begin{chunk}{view3d}
 float getRandom(void) {
   float x;
@@ -17904,8 +17904,8 @@ float getRandom(void) {
 
 \end{chunk}
 \subsection{normDist}
-\index{view3d!normDist}
-\index{normDist view3d}
+\index[doc]{view3d!normDist}
+\index[doc]{normDist view3d}
 \begin{chunk}{view3d}
 triple normDist(void) {
   float   u1, u2, v1, v2, ss, rad;
@@ -17926,8 +17926,8 @@ triple normDist(void) {
 
 \end{chunk}
 \subsection{goodbye}
-\index{view3d!goodbye}
-\index{goodbye view3d}
+\index[doc]{view3d!goodbye}
+\index[doc]{goodbye view3d}
 \begin{chunk}{view3d}
 void goodbye(int sig) {
   int Command;
@@ -17943,8 +17943,8 @@ void goodbye(int sig) {
 
 \end{chunk}
 \subsection{drawLineComponent}
-\index{view3d!drawLineComponent}
-\index{drawLineComponent view3d}
+\index[doc]{view3d!drawLineComponent}
+\index[doc]{drawLineComponent view3d}
 \begin{chunk}{view3d}
 void drawLineComponent(poly * p, int dFlag) {
   int i, hue;
@@ -17987,8 +17987,8 @@ void drawLineComponent(poly * p, int dFlag) {
 
 \end{chunk}
 \subsection{drawOpaquePolygon}
-\index{view3d!drawOpaquePolygon}
-\index{drawOpaquePolygon view3d}
+\index[doc]{view3d!drawOpaquePolygon}
+\index[doc]{drawOpaquePolygon view3d}
 \begin{chunk}{view3d}
 void drawOpaquePolygon(poly *p,GC aGC,GC anotherGC,int dFlag) {
   int *anIndex, i, hue, isNaN = 0;
@@ -18051,8 +18051,8 @@ void drawOpaquePolygon(poly *p,GC aGC,GC anotherGC,int dFlag) {
 \end{chunk}
 \subsection{copyPolygons}
 Copies the given list of polygons into a newly allocated list
-\index{view3d!copyPolygons}
-\index{copyPolygons view3d}
+\index[doc]{view3d!copyPolygons}
+\index[doc]{copyPolygons view3d}
 \begin{chunk}{view3d}
 poly *copyPolygons(poly *polygonList) {
   int i;
@@ -18127,8 +18127,8 @@ poly *copyPolygons(poly *polygonList) {
 \end{chunk}
 \subsection{minMaxPolygons}
 Sets up the xmin, etc, for each polygon for sorting and extent checking.
-\index{view3d!minMaxPolygons}
-\index{minMaxPolygons view3d}
+\index[doc]{view3d!minMaxPolygons}
+\index[doc]{minMaxPolygons view3d}
 \begin{chunk}{view3d}
 void minMaxPolygons(poly *aPoly) {
   int *anIndex;
@@ -18179,8 +18179,8 @@ returns -1 if p1 < p2
 \end{verbatim}
 Note that this is the reverse of what the msort requested.
 This is so that the list will be sorted from max to min.
-\index{view3d!polyCompare}
-\index{polyCompare view3d}
+\index[doc]{view3d!polyCompare}
+\index[doc]{polyCompare view3d}
 \begin{chunk}{view3d}
 int polyCompare(poly *p1,poly *p2) {
   if (p1->pzmax > p2->pzmax) return(-1);
@@ -18191,8 +18191,8 @@ int polyCompare(poly *p1,poly *p2) {
 \end{chunk}
 \subsection{makeTriangle}
 Sets the global variable eyePoint[] to where the viewer is pointed towards.
-\index{view3d!makeTriangle}
-\index{makeTriangle view3d}
+\index[doc]{view3d!makeTriangle}
+\index[doc]{makeTriangle view3d}
 \begin{chunk}{view3d}
 void calcEyePoint(void) {
   eyePoint[0] = sinPhi * (sinTheta);
@@ -18207,8 +18207,8 @@ with the proper hidden surfaces removed. Assumes the
 list of polygons is in viewData.polygons. Needs a 
 routine to split intersecting polygons in object space.
 Calculate the color for the polygon p and draw it.
-\index{view3d!makeTriangle}
-\index{makeTriangle view3d}
+\index[doc]{view3d!makeTriangle}
+\index[doc]{makeTriangle view3d}
 \begin{chunk}{view3d}
 void drawRenderedPolygon(poly *p,int dFlag) {
   int	     i,hue,shade, isNaN = 0;
@@ -18346,8 +18346,8 @@ void drawRenderedPolygon(poly *p,int dFlag) {
 
 \end{chunk}
 \subsection{freePointResevoir}
-\index{view3d!freePointResevoir}
-\index{freePointResevoir view3d}
+\index[doc]{view3d!freePointResevoir}
+\index[doc]{freePointResevoir view3d}
 \begin{chunk}{view3d}
 void freePointResevoir(void) {
   viewTriple *v;
@@ -18361,8 +18361,8 @@ void freePointResevoir(void) {
 \end{chunk}
 \subsection{freeListOfPolygons}
 Frees up a list of polygons.
-\index{view3d!freeListOfPolygons}
-\index{freeListOfPolygons view3d}
+\index[doc]{view3d!freeListOfPolygons}
+\index[doc]{freeListOfPolygons view3d}
 \begin{chunk}{view3d}
 void freeListOfPolygons(poly *pList) {
   poly *nextP;
@@ -18375,8 +18375,8 @@ void freeListOfPolygons(poly *pList) {
 
 \end{chunk}
 \subsection{drawPolygons}
-\index{view3d!drawPolygons}
-\index{drawPolygons view3d}
+\index[doc]{view3d!drawPolygons}
+\index[doc]{drawPolygons view3d}
 \begin{chunk}{view3d}
 void drawPolygons(int dFlag) {
   poly *p,*head;
@@ -18511,8 +18511,8 @@ void drawPolygons(int dFlag) {
 \subsection{lessThan}
 Compares two floating point numbers for	precision of up to one
 place in a thousand. Returns 1 if true 0 otherwise.
-\index{view3d!lessThan}
-\index{lessThan view3d}
+\index[doc]{view3d!lessThan}
+\index[doc]{lessThan view3d}
 \begin{chunk}{view3d}
 int lessThan(float x,float y) {
   int xI,yI;
@@ -18525,8 +18525,8 @@ int lessThan(float x,float y) {
 \subsection{greaterThan}
 Compares two floating point numbers for	precision of up to one
 place in a thousand. Returns 1 if true 0 otherwise.
-\index{view3d!greaterThan}
-\index{greaterThan view3d}
+\index[doc]{view3d!greaterThan}
+\index[doc]{greaterThan view3d}
 \begin{chunk}{view3d}
 int greaterThan(float x,float y) {
   int xI,yI;
@@ -18537,8 +18537,8 @@ int greaterThan(float x,float y) {
 
 \end{chunk}
 \subsection{isNaN}
-\index{view3d!isNaN}
-\index{isNaN view3d}
+\index[doc]{view3d!isNaN}
+\index[doc]{isNaN view3d}
 \begin{chunk}{view3d}
 int isNaN(float v) {
   return (v != v);
@@ -18546,8 +18546,8 @@ int isNaN(float v) {
 
 \end{chunk}
 \subsection{isNaNPoint}
-\index{view3d!isNaNPoint}
-\index{isNaNPoint view3d}
+\index[doc]{view3d!isNaNPoint}
+\index[doc]{isNaNPoint view3d}
 \begin{chunk}{view3d}
 int isNaNPoint(float x,float y,float z) {
   return (isNaN(x) || isNaN(y) || isNaN(z));
@@ -18555,8 +18555,8 @@ int isNaNPoint(float x,float y,float z) {
 
 \end{chunk}
 \subsection{equal}
-\index{view3d!equal}
-\index{equal view3d}
+\index[doc]{view3d!equal}
+\index[doc]{equal view3d}
 \begin{chunk}{view3d}
 int equal(float x,float y) {
   int xI,yI;
@@ -18567,8 +18567,8 @@ int equal(float x,float y) {
 
 \end{chunk}
 \subsection{matrixMultiply4x4}
-\index{view3d!matrixMultiply4x4}
-\index{matrixMultiply4x4 view3d}
+\index[doc]{view3d!matrixMultiply4x4}
+\index[doc]{matrixMultiply4x4 view3d}
 \begin{chunk}{view3d}
 void matrixMultiply4x4(float xxA[4][4],float xxB[4][4],float array[4][4]) {
   array[0][0] = xxA[0][0]*xxB[0][0] + xxA[0][1]*xxB[1][0] + 
@@ -18607,8 +18607,8 @@ void matrixMultiply4x4(float xxA[4][4],float xxB[4][4],float array[4][4]) {
 
 \end{chunk}
 \subsection{vectorMatrix4}
-\index{view3d!vectorMatrix4}
-\index{vectorMatrix4 view3d}
+\index[doc]{view3d!vectorMatrix4}
+\index[doc]{vectorMatrix4 view3d}
 \begin{chunk}{view3d}
 void vectorMatrix4(float xxD[4],float xxE[4][4],float xxF[4]) {
   xxF[0]=xxD[0]*xxE[0][0]+xxD[1]*xxE[1][0]+xxD[2]*xxE[2][0]+xxD[3]*xxE[3][0]; 
@@ -18619,8 +18619,8 @@ void vectorMatrix4(float xxD[4],float xxE[4][4],float xxF[4]) {
 
 \end{chunk}
 \subsection{ROTATE}
-\index{view3d!ROTATE}
-\index{ROTATE view3d}
+\index[doc]{view3d!ROTATE}
+\index[doc]{ROTATE view3d}
 \begin{chunk}{view3d}
 void ROTATE(float xxR[4][4]) {
   xxR[0][0]= -(cosTheta); 
@@ -18643,8 +18643,8 @@ void ROTATE(float xxR[4][4]) {
 
 \end{chunk}
 \subsection{ROTATE1}
-\index{view3d!ROTATE1}
-\index{ROTATE1 view3d}
+\index[doc]{view3d!ROTATE1}
+\index[doc]{ROTATE1 view3d}
 \begin{chunk}{view3d}
 void ROTATE1(float xxR[4][4]) {
   xxR[0][0]= (cosTheta); 
@@ -18667,8 +18667,8 @@ void ROTATE1(float xxR[4][4]) {
 
 \end{chunk}
 \subsection{SCALE}
-\index{view3d!SCALE}
-\index{SCALE view3d}
+\index[doc]{view3d!SCALE}
+\index[doc]{SCALE view3d}
 \begin{chunk}{view3d}
 void SCALE(float x,float y,float z,float xxS[4][4]) {
   xxS[0][0] = x;   xxS[0][1] = 0.0; xxS[0][2] = 0.0; xxS[0][3] = 0.0; 
@@ -18679,8 +18679,8 @@ void SCALE(float x,float y,float z,float xxS[4][4]) {
 
 \end{chunk}
 \subsection{TRANSLATE}
-\index{view3d!TRANSLATE}
-\index{TRANSLATE view3d}
+\index[doc]{view3d!TRANSLATE}
+\index[doc]{TRANSLATE view3d}
 \begin{chunk}{view3d}
 void TRANSLATE(float x,float y,float z,float xxT[4][4]) {
   xxT[0][0] = 1.0; xxT[0][1] = 0.0; xxT[0][2] = 0.0;  xxT[0][3] = 0.0; 
@@ -18698,8 +18698,8 @@ drawing of the mesh is aborted when an appropriate X event occurs.
 The mesh should be scaled to the range of [-100..100] in all
 directions.  axisRange defines the range...change the stuff below
 if that has changed. 
-\index{view3d!writeTitle}
-\index{writeTitle view3d}
+\index[doc]{view3d!writeTitle}
+\index[doc]{writeTitle view3d}
 \begin{chunk}{view3d}
 void writeTitle(void) {
   int			strlength;
@@ -18721,8 +18721,8 @@ void writeTitle(void) {
 \subsection{drawPreViewport}
 Draws the axes and boxes before the actual stuff. All incoming signals
 should be block and no check for pending X events are made.
-\index{view3d!drawPreViewport}
-\index{drawPreViewport view3d}
+\index[doc]{view3d!drawPreViewport}
+\index[doc]{drawPreViewport view3d}
 \begin{chunk}{view3d}
 void drawPreViewport(int dFlag) {
   int i, j, vPx0, vPy0, vPx1, vPy1;
@@ -18992,8 +18992,8 @@ void drawPreViewport(int dFlag) {
 
 \end{chunk}
 \subsection{drawTheViewport}
-\index{view3d!drawTheViewport}
-\index{drawTheViewport view3d}
+\index[doc]{view3d!drawTheViewport}
+\index[doc]{drawTheViewport view3d}
 \begin{chunk}{view3d}
 void drawTheViewport(int dFlag) {
   int	 i,j;
@@ -19082,8 +19082,8 @@ void drawTheViewport(int dFlag) {
 
 \end{chunk}
 \subsection{makeViewport}
-\index{view3d!makeViewport}
-\index{makeViewport view3d}
+\index[doc]{view3d!makeViewport}
+\index[doc]{makeViewport view3d}
 \begin{chunk}{view3d}
 viewPoints *makeViewport(void) {
   Pixmap	       spadbits,spadmask;
@@ -19296,8 +19296,8 @@ viewPoints *makeViewport(void) {
 \subsection{postMakeViewport}
 Post processing when creating a viewport.
 Assign min,max values for the box volume.
-\index{view3d!postMakeViewport}
-\index{postMakeViewport view3d}
+\index[doc]{view3d!postMakeViewport}
+\index[doc]{postMakeViewport view3d}
 \begin{chunk}{view3d}
 void postMakeViewport(void) {
   corners[0].x = viewData.xmin; corners[0].y = viewData.ymin;
@@ -19369,8 +19369,8 @@ void postMakeViewport(void) {
 
 \end{chunk}
 \subsection{keepDrawingViewport}
-\index{view3d!keepDrawingViewport}
-\index{keepDrawingViewport view3d}
+\index[doc]{view3d!keepDrawingViewport}
+\index[doc]{keepDrawingViewport view3d}
 \begin{chunk}{view3d}
 int keepDrawingViewport(void) {
   XEvent peekEvent;
@@ -19408,8 +19408,8 @@ int keepDrawingViewport(void) {
 
 \end{chunk}
 \subsection{initVolumeButtons}
-\index{view3d!initVolumeButtons}
-\index{initVolumeButtons view3d}
+\index[doc]{view3d!initVolumeButtons}
+\index[doc]{initVolumeButtons view3d}
 \begin{chunk}{view3d}
 int initVolumeButtons(buttonStruct *volumeButtons) {
   int ii, num = 0;
@@ -19535,8 +19535,8 @@ int initVolumeButtons(buttonStruct *volumeButtons) {
 
 \end{chunk}
 \subsection{makeVolumePanel}
-\index{view3d!makeVolumePanel}
-\index{makeVolumePanel view3d}
+\index[doc]{view3d!makeVolumePanel}
+\index[doc]{makeVolumePanel view3d}
 \begin{chunk}{view3d}
 void makeVolumePanel(void) {
   int i;
@@ -19595,8 +19595,8 @@ void makeVolumePanel(void) {
 
 \end{chunk}
 \subsection{drawClipXBut}
-\index{view3d!drawClipXBut}
-\index{drawClipXBut view3d}
+\index[doc]{view3d!drawClipXBut}
+\index[doc]{drawClipXBut view3d}
 \begin{chunk}{view3d}
 void drawClipXBut(void) {
   XClearArea(dsply,volumeWindow,clipXButX,clipXButY,
@@ -19657,8 +19657,8 @@ void drawClipXBut(void) {
 
 \end{chunk}
 \subsection{drawClipYBut}
-\index{view3d!drawClipYBut}
-\index{drawClipYBut view3d}
+\index[doc]{view3d!drawClipYBut}
+\index[doc]{drawClipYBut view3d}
 \begin{chunk}{view3d}
 void drawClipYBut(void) {
   XClearArea(dsply,volumeWindow,clipYButX,clipYButY,
@@ -19720,8 +19720,8 @@ void drawClipYBut(void) {
 
 \end{chunk}
 \subsection{drawClipZBut}
-\index{view3d!drawClipZBut}
-\index{drawClipZBut view3d}
+\index[doc]{view3d!drawClipZBut}
+\index[doc]{drawClipZBut view3d}
 \begin{chunk}{view3d}
 void drawClipZBut(void) {
   XClearArea(dsply,volumeWindow,clipZButX,clipZButY,
@@ -19752,8 +19752,8 @@ void drawClipZBut(void) {
 
 \end{chunk}
 \subsection{drawClipVolume}
-\index{view3d!drawClipVolume}
-\index{drawClipVolume view3d}
+\index[doc]{view3d!drawClipVolume}
+\index[doc]{drawClipVolume view3d}
 \begin{chunk}{view3d}
 void drawClipVolume(void) {
   float xminL,xmaxL,yminL,ymaxL,zminL,zmaxL;
@@ -19807,8 +19807,8 @@ void drawClipVolume(void) {
 
 \end{chunk}
 \subsection{drawHitherControl}
-\index{view3d!drawHitherControl}
-\index{drawHitherControl view3d}
+\index[doc]{view3d!drawHitherControl}
+\index[doc]{drawHitherControl view3d}
 \begin{chunk}{view3d}
 void drawHitherControl(void) {
   float xx,b,slope;
@@ -19857,8 +19857,8 @@ void drawHitherControl(void) {
 
 \end{chunk}
 \subsection{drawEyeControl}
-\index{view3d!drawEyeControl}
-\index{drawEyeControl view3d}
+\index[doc]{view3d!drawEyeControl}
+\index[doc]{drawEyeControl view3d}
 \begin{chunk}{view3d}
 void drawEyeControl(void) {
   float here;
@@ -19900,8 +19900,8 @@ void drawEyeControl(void) {
 
 \end{chunk}
 \subsection{drawFrustrum}
-\index{view3d!drawFrustrum}
-\index{drawFrustrum view3d}
+\index[doc]{view3d!drawFrustrum}
+\index[doc]{drawFrustrum view3d}
 \begin{chunk}{view3d}
 void drawFrustrum(void) {
   float normalizedEyeDistance;
@@ -19932,8 +19932,8 @@ void drawFrustrum(void) {
 
 \end{chunk}
 \subsection{drawVolumePanel}
-\index{view3d!drawVolumePanel}
-\index{drawVolumePanel view3d}
+\index[doc]{view3d!drawVolumePanel}
+\index[doc]{drawVolumePanel view3d}
 \begin{chunk}{view3d}
 void drawVolumePanel(void) {
   int i,strlength;
@@ -20064,8 +20064,8 @@ void drawVolumePanel(void) {
 
 \end{chunk}
 \subsection{writeViewport}
-\index{view3d!writeViewport}
-\index{writeViewport view3d}
+\index[doc]{view3d!writeViewport}
+\index[doc]{writeViewport view3d}
 \begin{chunk}{view3d}
 int writeViewport(int thingsToWrite) {
   int               i, j, k, ii, code, *anIndex;
@@ -20211,8 +20211,8 @@ int writeViewport(int thingsToWrite) {
 
 \end{chunk}
 \subsection{main}
-\index{view3d!main}
-\index{main view3d}
+\index[doc]{view3d!main}
+\index[doc]{main view3d}
 \begin{chunk}{view3d}
 int main(void) {
   XGCValues     controlGCVals;
@@ -20623,7 +20623,7 @@ The order of these defined variables are very important; they are used
 to create the OUTPUT file.  Essentially, PSCreateFile() loops through the
 index of 0 to psDrawNo and checks if the file/procedure is used.  If so,
 the file is copied to the output file.
-\index{gfun.c}
+\index[doc]{gfun.c}
 \begin{chunk}{gfun.c}
 
 #define output		0		/* output file */
@@ -20652,7 +20652,7 @@ the file is copied to the output file.
 \end{chunk}
 PostScript structures
 \label{psStruct}
-\index{psStruct}
+\index[doc]{psStruct}
 \begin{chunk}{gfun.c}
 typedef struct _psStruct {	/* data structure for ps routines info */
 	int	flag;
@@ -20664,7 +20664,7 @@ psStruct psData[psDrawNo];	/* need psDrawNo of them */
 \end{chunk}
 \subsection{filecopy}
 \label{filecopy}
-\index{gdraws!filecopy}
+\index[doc]{gdraws!filecopy}
 Given 2 file pointers, this function copies file ifp to file ofp
 \begin{chunk}{gfun.c}
 
@@ -20677,7 +20677,7 @@ static void filecopy(FILE * ifp, FILE * ofp)
 \end{chunk}
 \subsection{PSCreateFile}
 \label{PSCreateFile}
-\index{gdraws!PSCreateFile}
+\index[doc]{gdraws!PSCreateFile}
 PSCreateFile generates the output file by using the order of defined
 variables; they are used to create the OUTPUT file.  Essentially,
 PSCreateFile() loop through the index of 0 to psDrawNo and checks if the
@@ -20729,7 +20729,7 @@ int PSCreateFile(
 \end{chunk}
 \subsection{GdrawsDrawFrame}
 \label{GdrawsDrawFrame}
-\index{gdraws!GdrawsDrawFrame}
+\index[doc]{gdraws!GdrawsDrawFrame}
 This function draws the frame of the picture, which corresponds to the
 picture frame on the X display.  In addition, it draws the title window as
 well as the title of the picture.
@@ -20763,7 +20763,7 @@ int GdrawsDrawFrame(
 \end{chunk}
 \subsection{GdrawsSetDimension}
 \label{GdrawsSetDimension}
-\index{gdraws!GdrawsSetDimension}
+\index[doc]{gdraws!GdrawsSetDimension}
 GdrawsSetDimension sets the dimension of the picture.
 \begin{chunk}{gfun.c}
 
@@ -20803,7 +20803,7 @@ int GdrawsSetDimension(Window viewWindow, Window titleWindow) {
 \end{chunk}
 \subsection{GDrawImageString}
 \label{GDrawImageString}
-\index{gdraws!GDrawImageString}
+\index[doc]{gdraws!GDrawImageString}
 GDrawImageString draws an image text string 
 See \ref{XDrawImageString} on page~\pageref{XDrawImageString}
 \begin{chunk}{gfun.c}
@@ -20843,7 +20843,7 @@ int GDrawImageString(
 \end{chunk}
 \subsection{GDrawArc}
 \label{GDrawArc}
-\index{gdraws!GDrawArc}
+\index[doc]{gdraws!GDrawArc}
 GDrawArc draws an arc.
 See \ref{XDrawArc} on page~\pageref{XDrawArc}
 \begin{chunk}{gfun.c}
@@ -20882,7 +20882,7 @@ int GDrawArc(
 \end{chunk}
 \subsection{GDrawLine}
 \label{GDrawLine}
-\index{gdraws!GDrawLine}
+\index[doc]{gdraws!GDrawLine}
 GDrawLine draws a line.
 See \ref{XDrawLine} on page~\pageref{XDrawLine}
 \begin{chunk}{gfun.c}
@@ -20919,7 +20919,7 @@ int GDrawLine(
 \end{chunk}
 \subsection{GDrawLines}
 \label{GDrawLines}
-\index{gdraws!GDrawLines}
+\index[doc]{gdraws!GDrawLines}
 GDrawLines draws lines.
 \begin{chunk}{gfun.c}
 
@@ -20964,7 +20964,7 @@ int GDrawLines(
 \end{chunk}
 \subsection{GDrawPoint}
 \label{GDrawPoint}
-\index{gdraws!GDrawPoint}
+\index[doc]{gdraws!GDrawPoint}
 GDrawPoint draws a point.
 (See Section \ref{XDrawPoint} on page~\pageref{XDrawPoint}),
 \begin{chunk}{gfun.c}
@@ -21001,7 +21001,7 @@ int GDrawPoint(
 \end{chunk}
 \subsection{GDrawRectangle}
 \label{GDrawRectangle}
-\index{gdraws!GDrawRectangle}
+\index[doc]{gdraws!GDrawRectangle}
 GDrawRectangle draws a rectangle.
 \begin{chunk}{gfun.c}
 
@@ -21038,7 +21038,7 @@ int GDrawRectangle(
 \end{chunk}
 \subsection{GDraw3DButtonIn}
 \label{GDraw3DButtonIn}
-\index{gdraws!GDraw3DButtonIn}
+\index[doc]{gdraws!GDraw3DButtonIn}
 GDraw3DButtonOut draws a rectangle with 3D shading on rhs and bottom
 \begin{chunk}{gfun.c}
 
@@ -21059,7 +21059,7 @@ int GDraw3DButtonOut(
 \end{chunk}
 \subsection{GDraw3DButtonIn}
 \label{GDraw3DButtonIn}
-\index{gdraws!GDraw3DButtonIn}
+\index[doc]{gdraws!GDraw3DButtonIn}
 GDraw3DButtonIn draws a rectangle with 3D shading on lhs and top
 \begin{chunk}{gfun.c}
 
@@ -21081,7 +21081,7 @@ int GDraw3DButtonIn(
 \end{chunk}
 \subsection{GDrawPushButton}
 \label{GDrawPushButton}
-\index{gdraws!GDrawPushButton}
+\index[doc]{gdraws!GDrawPushButton}
 GDrawPushButton draws a push button whose appearance depends on ``isOn.''
 \begin{chunk}{gfun.c}
 
@@ -21112,7 +21112,7 @@ int GDrawPushButton(
 \end{chunk}
 \subsection{GDrawString}
 \label{GDrawString}
-\index{gdraws!GDrawString}
+\index[doc]{gdraws!GDrawString}
 Draws a string.
 See \ref{XDrawString} on page~\pageref{XDrawString}.
 \begin{chunk}{gfun.c}
@@ -21151,7 +21151,7 @@ int GDrawString(
 \end{chunk}
 \subsection{GFillArc}
 \label{GFillArc}
-\index{gdraws!GFillArc}
+\index[doc]{gdraws!GFillArc}
 Draws and fills an arc with foreground color.
 See \ref{XFillArc} on page~\pageref{XFillArc}.
 \begin{chunk}{gfun.c}
@@ -21191,7 +21191,7 @@ int GFillArc(
 \end{chunk}
 \subsection{PSGlobalInit}
 \label{PSGlobalInit}
-\index{gdraws!PSGlobalInit}
+\index[doc]{gdraws!PSGlobalInit}
 Initializes the path and files to be used.
 This needs to be called only once each session.
 \begin{chunk}{gfun.c}
@@ -21292,7 +21292,7 @@ int PSGlobalInit(void) {
 \end{chunk}
 \subsection{PSInit}
 \label{PSInit}
-\index{gdraws!PSInit}
+\index[doc]{gdraws!PSInit}
 This needs to be called for every postscript file generated.
 It initializes the procedure flags.
 \begin{chunk}{gfun.c}
@@ -21327,7 +21327,7 @@ int PSInit(Window vw, Window tw) {
 \end{chunk}
 \subsection{PSCreateContext}
 \label{PSCreateContext}
-\index{gdraws!PSCreateContext}
+\index[doc]{gdraws!PSCreateContext}
 This procedure sets the line attributes; notice that lineWidth is not set
 for PS, this is because lineWidth of 0, the thinest line on the ps device,
 is device-dependent, thus, we'll leave it and use default. Also lineStyle
@@ -21375,7 +21375,7 @@ int PSCreateContext(
 \end{chunk}
 \subsection{PSfindGC}
 \label{PSfindGC}
-\index{gdraws!PSfindGC}
+\index[doc]{gdraws!PSfindGC}
 Looks into GC linked list with gc (unsigned long) as index to find the
 character name.
 \begin{chunk}{gfun.c}
@@ -21396,7 +21396,7 @@ char *PSfindGC(GC gc) {
 \end{chunk}
 \subsection{GSetForeground}
 \label{GSetForeground}
-\index{gdraws!GSetForeground}
+\index[doc]{gdraws!GSetForeground}
 Sets foreground color.
 See \ref{XSetForeground} on page~\pageref{XSetForeground}.
 \begin{chunk}{gfun.c}
@@ -21433,7 +21433,7 @@ int GSetForeground(
 \end{chunk}
 \subsection{GSetBackground}
 \label{GSetBackground}
-\index{gdraws!GSetBackground}
+\index[doc]{gdraws!GSetBackground}
 Sets background color.
 See \ref{XSetBackground} on page~\pageref{XSetBackground}.
 \begin{chunk}{gfun.c}
@@ -21470,7 +21470,7 @@ int GSetBackground(
 \end{chunk}
 \subsection{GSetLineAttributes}
 \label{GSetLineAttributes}
-\index{gdraws!GSetLineAttributes}
+\index[doc]{gdraws!GSetLineAttributes}
 (See \ref{XSetLineAttributes} on page~\pageref{XSetLineAttributes}),
 Notice that we'll not setting line style for
 postscript.  This is because solid is the ls in ps and in view3d and 2d,
@@ -21544,7 +21544,7 @@ int GSetLineAttributes(
 \end{chunk}
 \subsection{PSClose}
 \label{PSClose}
-\index{gdraws!PSClose}
+\index[doc]{gdraws!PSClose}
 This procedure frees the data structure used for GC information, and also
 unlinks the GC dictionary file.
 \begin{chunk}{gfun.c}
@@ -21564,7 +21564,7 @@ int PSClose(void) {
 \end{chunk}
 \subsection{centerX}
 \label{centerX}
-\index{gdraws!centerX}
+\index[doc]{gdraws!centerX}
 \begin{chunk}{gfun.c}
 
 int centerX(GC viewGCx,char * theString,int strlength,int windowWidth)
@@ -21583,7 +21583,7 @@ int centerX(GC viewGCx,char * theString,int strlength,int windowWidth)
 \end{chunk}
 \subsection{centerY}
 \label{centerY}
-\index{gdraws!centerY}
+\index[doc]{gdraws!centerY}
 \begin{chunk}{gfun.c}
 
 int centerY(GC viewGCy,int windowHeight) {
@@ -21604,7 +21604,7 @@ int centerY(GC viewGCy,int windowHeight) {
 \end{chunk}
 \subsection{PSColorPolygon}
 \label{PSColorPolygon}
-\index{gdraws!PSColorPolygon}
+\index[doc]{gdraws!PSColorPolygon}
 PSColorPolygon draws and fills a polygon given data in XPoint.
 (See \ref{XFillPolygon} on page~\pageref{XFillPolygon})
 \begin{chunk}{gfun.c}
@@ -21638,7 +21638,7 @@ int PSColorPolygon(
 \end{chunk}
 \subsection{PSColorwOutline}
 \label{PSColorwOutline}
-\index{gdraws!PSColorwOutline}
+\index[doc]{gdraws!PSColorwOutline}
 PSColorwOutline draws and also outlines the colored polygon.
 \begin{chunk}{gfun.c}
 
@@ -21669,7 +21669,7 @@ int PSColorwOutline(
 \end{chunk}
 \subsection{PSDrawColor}
 \label{PSDrawColor}
-\index{gdraws!PSDrawColor}
+\index[doc]{gdraws!PSDrawColor}
 This function does what XDraw would do, notice that only a subset of
 attributes in GC is implemented -- adequate for our purpose now
 \begin{chunk}{gfun.c}
@@ -21701,7 +21701,7 @@ int PSDrawColor(
 \end{chunk}
 \subsection{PSFillPolygon}
 \label{PSFillPolygon}
-\index{gdraws!PSFillPolygon}
+\index[doc]{gdraws!PSFillPolygon}
 PSFillPolygon draws and fills a polygon given data in XPoint.
 (See \ref{XFillPolygon} on page~\pageref{XFillPolygon}).
 \begin{chunk}{gfun.c}
@@ -21733,7 +21733,7 @@ int PSFillPolygon(
 \end{chunk}
 \subsection{PSFillwOutline}
 \label{PSFillwOutline}
-\index{gdraws!PSFillwOutline}
+\index[doc]{gdraws!PSFillwOutline}
 PSFillwOutline draws and also outlines the filled polygon.
 \begin{chunk}{gfun.c}
 
@@ -21762,7 +21762,7 @@ int PSFillwOutline(
 \end{chunk}
 \subsection{TrivEqual}
 \label{TrivEqual}
-\index{gdraws!TrivEqual}
+\index[doc]{gdraws!TrivEqual}
 \begin{chunk}{gfun.c}
 
 static int TrivEqual(Window s1,Window s2) {
@@ -21772,7 +21772,7 @@ static int TrivEqual(Window s1,Window s2) {
 \end{chunk}
 \subsection{TrivHashCode}
 \label{TrivHashCode}
-\index{gdraws!TrivHashCode}
+\index[doc]{gdraws!TrivHashCode}
 \begin{chunk}{gfun.c}
 
 static int TrivHashCode(Window s,int size) {
@@ -21782,7 +21782,7 @@ static int TrivHashCode(Window s,int size) {
 \end{chunk}
 \subsection{XCreateAssocTable}
 \label{XCreateAssocTable}
-\index{gdraws!XCreateAssocTable}
+\index[doc]{gdraws!XCreateAssocTable}
 \begin{chunk}{gfun.c}
 
 HashTable *XCreateAssocTable(int size) {
@@ -21796,7 +21796,7 @@ HashTable *XCreateAssocTable(int size) {
 \end{chunk}
 \subsection{XMakeAssoc}
 \label{XMakeAssoc}
-\index{gdraws!XMakeAssoc}
+\index[doc]{gdraws!XMakeAssoc}
 \begin{chunk}{gfun.c}
 
 void XMakeAssoc(Display * dsp, HashTable *table, Window w, int * p) {
@@ -21806,7 +21806,7 @@ void XMakeAssoc(Display * dsp, HashTable *table, Window w, int * p) {
 \end{chunk}
 \subsection{XLookUpAssoc}
 \label{XLookUpAssoc}
-\index{gdraws!XLookUpAssoc}
+\index[doc]{gdraws!XLookUpAssoc}
 \begin{chunk}{gfun.c}
 
 int *XLookUpAssoc(Display * dsp, HashTable *table,Window w) {
@@ -21816,7 +21816,7 @@ int *XLookUpAssoc(Display * dsp, HashTable *table,Window w) {
 \end{chunk}
 \subsection{XDeleteAssoc}
 \label{XDeleteAssoc}
-\index{gdraws!XDeleteAssoc}
+\index[doc]{gdraws!XDeleteAssoc}
 \begin{chunk}{gfun.c}
 
 void XDeleteAssoc(Display * dsp,HashTable * table, Window w) {
@@ -21839,8 +21839,8 @@ operand stack configuration in order to use psColorPoly:
 this draws a polygon by connecting all the points and fills the
 region with foreground color
 \end{verbatim}
-\index{psfiles!colorpoly}
-\index{colorpoly psfiles}
+\index[doc]{psfiles!colorpoly}
+\index[doc]{colorpoly psfiles}
 \begin{chunk}{psfiles/colorpoly}
 /psColorPoly
         {	gsave
@@ -21869,8 +21869,8 @@ operand stack configuration in order to use psDrawFilled:
 this draws lines connecting all the points and fills the
 region with background color (default: 1, or white).
 \end{verbatim}
-\index{psfiles!colorwol}
-\index{colorwol psfiles}
+\index[doc]{psfiles!colorwol}
+\index[doc]{colorwol psfiles}
 \begin{chunk}{psfiles/colorwol}
 /psColorwOutline
         {	gsave
@@ -21901,8 +21901,8 @@ and height specifies the rectangle which encases the arc.
 Origin is at upper left corner of rectangle.
 This function uses "scale" to make cricles and ellipses.
 \end{verbatim}
-\index{psfiles!drawarc}
-\index{drawarc psfiles}
+\index[doc]{psfiles!drawarc}
+\index[doc]{drawarc psfiles}
 \begin{chunk}{psfiles/drawarc}
 /psDrawArc 
         {	gsave
@@ -21937,8 +21937,8 @@ operand stack configuration in order to use psDrawColor:
 	graphics-context dictionary
 to draw lines connecting points in vlist[0] to vlist[n]
 \end{verbatim}
-\index{psfiles!drawcolor}
-\index{drawcolor psfiles}
+\index[doc]{psfiles!drawcolor}
+\index[doc]{drawcolor psfiles}
 \begin{chunk}{psfiles/drawcolor}
 /psDrawColor
         {	gsave
@@ -21964,8 +21964,8 @@ operand stack configuration in order to use psDrawIStr:
 it draws a text string in foreground color on top of bounding box of
 string, which is in background color.
 \end{verbatim}
-\index{psfiles!drawIstr}
-\index{drawIstr psfiles}
+\index[doc]{psfiles!drawIstr}
+\index[doc]{drawIstr psfiles}
 \begin{chunk}{psfiles/drawIstr}
 /psDrawIStr
         {	gsave
@@ -22016,8 +22016,8 @@ operand stack configuration in order to use psDrawLine:
 	graphics-context dictionary
 this draws a line from (x0, y0) to (x1, y1).
 \end{verbatim}
-\index{psfiles!drawline}
-\index{drawline psfiles}
+\index[doc]{psfiles!drawline}
+\index[doc]{drawline psfiles}
 \begin{chunk}{psfiles/drawline}
 /psDrawLine
         {	gsave
@@ -22042,8 +22042,8 @@ operand stack configuration in order to use psDrawLines:
 	graphics-context dictionary
 this draws lines connecting all the points.
 \end{verbatim}
-\index{psfiles!drawlines}
-\index{drawlines psfiles}
+\index[doc]{psfiles!drawlines}
+\index[doc]{drawlines psfiles}
 \begin{chunk}{psfiles/drawlines}
 /psDrawLines
         {	gsave
@@ -22066,8 +22066,8 @@ operand stack configuration in order to use psDrawPoint:
 	graphics-context dictionary
 this draws a point at (x0, y0).
 \end{verbatim}
-\index{psfiles!drawpoint}
-\index{drawpoint psfiles}
+\index[doc]{psfiles!drawpoint}
+\index[doc]{drawpoint psfiles}
 \begin{chunk}{psfiles/drawpoint}
 /psDrawPoint
         {	gsave
@@ -22092,8 +22092,8 @@ operand stack configuration in order to use psDraw:
 	graphics-context dictionary
 to draw lines connecting points in vlist[0] to vlist[n]
 \end{verbatim}
-\index{psfiles!draw}
-\index{draw psfiles}
+\index[doc]{psfiles!draw}
+\index[doc]{draw psfiles}
 \begin{chunk}{psfiles/draw}
 /psDraw
         {	gsave
@@ -22119,8 +22119,8 @@ operand stack configuration in order to use psDrawRect:
 this draws an outline of a rectangle whose origin is at (x,y) and is width
 + 1 wide and height + 1 tall.
 \end{verbatim}
-\index{psfiles!drawrect}
-\index{drawrect psfiles}
+\index[doc]{psfiles!drawrect}
+\index[doc]{drawrect psfiles}
 \begin{chunk}{psfiles/drawrect}
 /psDrawRect
         {	gsave
@@ -22141,8 +22141,8 @@ operand stack configuration in order to use psDrawStr:
 	graphics-context dictionary
 this function draws a text string at (x,y).
 \end{verbatim}
-\index{psfiles!drawstr}
-\index{drawstr psfiles}
+\index[doc]{psfiles!drawstr}
+\index[doc]{drawstr psfiles}
 \begin{chunk}{psfiles/drawstr}
 /psDrawStr
         {	gsave
@@ -22168,8 +22168,8 @@ operand stack configuration in order to use psDrawFilled:
 this draws lines connecting all the points and fills the
 region with background color (default: 1, or white).
 \end{verbatim}
-\index{psfiles!drwfilled}
-\index{drwfilled psfiles}
+\index[doc]{psfiles!drwfilled}
+\index[doc]{drwfilled psfiles}
 \begin{chunk}{psfiles/drwfilled}
 /psDrawFilled
         {	gsave
@@ -22184,8 +22184,8 @@ region with background color (default: 1, or white).
 
 \end{chunk}
 \subsection{end}
-\index{psfiles!end}
-\index{end psfiles}
+\index[doc]{psfiles!end}
+\index[doc]{end psfiles}
 \begin{chunk}{psfiles/end}
 
    cleartomark					%% clearing operand stack
@@ -22214,8 +22214,8 @@ and height specifies the rectangle which encases the arc.
 Origin is at upper left corner of rectangle.
 This function uses "scale" to make cricles and ellipses.
 \end{verbatim}
-\index{psfiles!fillarc}
-\index{fillarc psfiles}
+\index[doc]{psfiles!fillarc}
+\index[doc]{fillarc psfiles}
 \begin{chunk}{psfiles/fillarc}
 /psFillArc
         {	gsave
@@ -22252,8 +22252,8 @@ operand stack configuration in order to use psDrawFilled:
 this draws a polygon by connecting all the points and fills the
 region with foreground color
 \end{verbatim}
-\index{psfiles!fillpoly}
-\index{fillpoly psfiles}
+\index[doc]{psfiles!fillpoly}
+\index[doc]{fillpoly psfiles}
 \begin{chunk}{psfiles/fillpoly}
 /psFillPoly
         {	gsave
@@ -22282,8 +22282,8 @@ operand stack configuration in order to use psDrawFilled:
 this draws lines connecting all the points and fills the
 region with background color (default: 1, or white).
 \end{verbatim}
-\index{psfiles!fillwol}
-\index{fillwol psfiles}
+\index[doc]{psfiles!fillwol}
+\index[doc]{fillwol psfiles}
 \begin{chunk}{psfiles/fillwol}
 /psFillwOutline
         {	gsave
@@ -22302,8 +22302,8 @@ region with background color (default: 1, or white).
 \subsection{header}
 \begin{verbatim}
 \end{verbatim}
-\index{psfiles!header}
-\index{header psfiles}
+\index[doc]{psfiles!header}
+\index[doc]{header psfiles}
 \begin{chunk}{psfiles/header}
 %!PS-Adobe-2.0
 %%DocumentFonts: Times-Roman
@@ -22463,8 +22463,8 @@ region with background color (default: 1, or white).
 
 \end{chunk}
 \subsection{setup}
-\index{psfiles!setup}
-\index{setup psfiles}
+\index[doc]{psfiles!setup}
+\index[doc]{setup psfiles}
 \begin{chunk}{psfiles/setup}
 %-------------------------- script --------------------------%
 
@@ -22479,7 +22479,7 @@ region with background color (default: 1, or white).
 
 \subsection{XDrawString}
 \label{XDrawString}
-\index{X11!XDrawString}
+\index[doc]{X11!XDrawString}
 XDrawString draws an 8-bit text string, foreground only. 
 \begin{verbatim}
 XDrawString (Display *display, Drawable drawable, GC gc, 
@@ -22518,7 +22518,7 @@ drawable.
 
 \subsection{XDrawPoint}
 \label{XDrawPoint}
-\index{X11!XDrawPoint}
+\index[doc]{X11!XDrawPoint}
 From the Xlib Drawing Primitives, XDrawPoint draws a point.
 \begin{verbatim}
 XDrawPoint (Display *display, Drawable drawable, GC gc, int x, int y);
@@ -22545,7 +22545,7 @@ and clip\_mask.
 
 \subsection{XDrawLine}
 \label{XDrawLine}
-\index{X11!XDrawLine}
+\index[doc]{X11!XDrawLine}
 From the Xlib Drawing Primitives, XDrawLine draws a line between two points. 
 \begin{verbatim}
 XDrawLine(Display *display, Drawable drawable, GCgc, 
@@ -22585,7 +22585,7 @@ affected by tile or stipple in the GC.
 
 \subsection{XDrawImageString}
 \label{XDrawImageString}
-\index{X11!XDrawImageString}
+\index[doc]{X11!XDrawImageString}
 XDrawlmageString draws image text characters. 
 \begin{verbatim}
 XDrawImageString(Display *display, Drawable drawable, GC gc, int x, int y,
@@ -22624,7 +22624,7 @@ string.
 
 \subsection{XFillArc}
 \label{XFillArc}
-\index{X11!XFillArc}
+\index[doc]{X11!XFillArc}
 From the Xlib Drawing Primitives, XFillArc fills an arc. 
 \begin{verbatim}
 XFillArc (Display *display, Drawable drawable, GC gc, 
@@ -22677,7 +22677,7 @@ x origin, and ts\_y\_ origin.
 
 \subsection{XDrawArc}
 \label{XDrawArc}
-\index{X11!XDrawArc}
+\index[doc]{X11!XDrawArc}
 From the Xlib Drawing Primitives, XDrawArc draws an arc fitting inside
 a rectangle.
 
@@ -22740,7 +22740,7 @@ stipple in the GC.
 
 \subsection{XSetForeground}
 \label{XSetForeground}
-\index{X11!XSetForeground}
+\index[doc]{X11!XSetForeground}
 In Xlib, in the Graphics Context,
 XSetForeground m set the foreground pixel value in a graphics context. 
 \begin{verbatim}
@@ -22757,7 +22757,7 @@ Specifies the foreground you want to set for the specified graphics context.
 
 \subsection{XSetBackground}
 \label{XSetBackground}
-\index{X11!XSetBackground}
+\index[doc]{X11!XSetBackground}
 In Xlib, in the Graphics Context,
 XSetBackground m set the background pixel value in a graphics context. 
 \begin{verbatim}
@@ -22774,7 +22774,7 @@ Specifies the background you want to set for the specified graphics context.
 
 \subsection{XSetLineAttributes}
 \label{XSetLineAttributes}
-\index{X11!XSetLineAttributes}
+\index[doc]{X11!XSetLineAttributes}
 In Xlib, in the Graphics Context, the function XSetLineAttributes 
 sets four types of line characteristics in the GC: line\_width, 
 line\_style, cap\_style, and join\_style. 
@@ -22798,17 +22798,17 @@ text. Possible values are JoinMiter, JoinRound, or JoinBevel.
 
 \subsection{DefaultScreen}
 \label{DefaultScreen}
-\index{X11!DefaultScreen}
+\index[doc]{X11!DefaultScreen}
 The DefaultScreen macro returns the default screen number referenced in
 the XOpenDisplay routine.
 
 \subsection{RootWindow}
 \label{RootWindow}
-\index{X11!RootWindow}
+\index[doc]{X11!RootWindow}
  The RootWindow macro returns the root window.
 
 \subsection{XCreateAssocTable}
-\index{X11!XCreateAssocTable}
+\index[doc]{X11!XCreateAssocTable}
 Create a new association table (X10). Note that we have our own version
 of this function. 
 \begin{verbatim}
@@ -22841,7 +22841,7 @@ typedef struct {
 
 \subsection{XOpenDisplay}
 \label{XOpenDisplay}
-\index{X11!XOpenDisplay}
+\index[doc]{X11!XOpenDisplay}
 To open a connection to the X server that controls a display, 
 use XOpenDisplay().
 \begin{verbatim}

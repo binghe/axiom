@@ -768,18 +768,18 @@ and return the result
 \section{Acknowledgement}
 
 In addition to the authors, Richard Jenks and Robert Sutor, three people
-\index{Jenks, Richard}
-\index{Sutor, Robert}
+\index[doc]{Jenks, Richard}
+\index[doc]{Sutor, Robert}
 have contributed significantly to the development of the Axiom interpreter.
 Scott C. Morrison
-\index{Morrison, Scott C.}
+\index[doc]{Morrison, Scott C.}
 (University of California, Berkeley) is responsible for the overall
 structure of the interpreter as it is today, having largely rewritten
 this part of the system in 1984. Albrecht Fortenbacher
-\index{Fortenbacher, Albrecht}
+\index[doc]{Fortenbacher, Albrecht}
 (University of Karlsruhe) rewrote and greatly extended the resolve 
 and coerce facilities in 1985. Michael Lucks
-\index{Lucks, Michael}
+\index[doc]{Lucks, Michael}
 (Southern Methodist University) contributed to the coerce and modemap
 selection facilities in 1986.
 
@@ -2974,9 +2974,9 @@ This is the size limit of output during tracing. See \ref{smallEnough}
 
 \defun{augmentTraceNames}{augmentTraceNames}
 If we have values on the {\bf localModemap} property of 
-\index{localModemap}
+\index[doc]{localModemap}
 \verb|$InteractiveFrame| we collect the names, otherwise we
-\index{InteractiveFrame}
+\index[doc]{InteractiveFrame}
 simply add the arguments to the result.
 \calls{augmentTraceNames}{get}
 \usesdollar{augmentTraceNames}{InteractiveFrame}
@@ -8757,7 +8757,7 @@ of the delay. Thus, all of the functions we packaged into the
 delay will be evaluated.
 
 The result of each function call, e.g the result of calling \bfref{next1}
-will be a pair, which we call a ParsePair \index{ParsePair}. 
+will be a pair, which we call a ParsePair \index[doc]{ParsePair}. 
 The car of the ParsePair is rplaca'd into the delay and
 the cdr of the ParsePair is rplacd'd into the delay. 
 So the delay is gradually reduced by each function call.
@@ -26761,9 +26761,9 @@ This is called from parameter list of nc message functions
 \chapter{The Interpreter Syntax}
 \section{syntax assignment}
 \label{assignment}
-\index{assignment}
-\index{syntax!assignment}
-\index{assignment!syntax}
+\index[doc]{assignment}
+\index[doc]{syntax!assignment}
+\index[doc]{assignment!syntax}
 \begin{chunk}{assignment.help}
 
 Immediate, Delayed, and Multiple Assignment
@@ -26921,9 +26921,9 @@ There is no syntactic form for multiple delayed assignments.
 
 \section{syntax blocks}
 \label{blocks}
-\index{blocks}
-\index{syntax!blocks}
-\index{blocks!syntax}
+\index[doc]{blocks}
+\index[doc]{syntax!blocks}
+\index[doc]{blocks!syntax}
 \begin{chunk}{blocks.help}
 ====================================================================
 Blocks
@@ -27021,9 +27021,9 @@ o )help lists
 
 \section{system clef}
 \label{clef}
-\index{clef}
-\index{syntax!clef}
-\index{clef!syntax}
+\index[doc]{clef}
+\index[doc]{syntax!clef}
+\index[doc]{clef!syntax}
 \begin{chunk}{clef.help}
 
 Entering printable keys generally inserts new text into the buffer (unless
@@ -27074,9 +27074,9 @@ DOS and ANSI terminal arrow key sequences are recognized, and act like:
 
 \section{syntax collection}
 \label{collection}
-\index{collection}
-\index{syntax!collection}
-\index{collection!syntax}
+\index[doc]{collection}
+\index[doc]{syntax!collection}
+\index[doc]{collection!syntax}
 \begin{chunk}{collection.help}
 ====================================================================
 Collection -- Creating Lists and Streams with Iterators
@@ -27149,9 +27149,9 @@ ten terms.
 
 \section{syntax for}
 \label{for}
-\index{for}
-\index{syntax!for}
-\index{for!syntax}
+\index[doc]{for}
+\index[doc]{syntax!for}
+\index[doc]{for!syntax}
 \begin{chunk}{for.help}
 ====================================================================
 for loops
@@ -27358,9 +27358,9 @@ This displays each of the factors of 2400000:
 
 \section{syntax if}
 \label{if}
-\index{if}
-\index{syntax!if}
-\index{if!syntax}
+\index[doc]{if}
+\index[doc]{syntax!if}
+\index[doc]{if!syntax}
 \begin{chunk}{if.help}
 ====================================================================
 If-then-else
@@ -27463,9 +27463,9 @@ These are both equivalent to the following:
 
 \section{syntax iterate}
 \label{iterate}
-\index{iterate}
-\index{syntax!iterate}
-\index{iterate!syntax}
+\index[doc]{iterate}
+\index[doc]{syntax!iterate}
+\index[doc]{iterate!syntax}
 \begin{chunk}{iterate.help}
 ====================================================================
 iterate in loops
@@ -27494,9 +27494,9 @@ Display the even integers from 2 to 5:
 
 \section{syntax leave}
 \label{leave}
-\index{leave}
-\index{syntax!leave}
-\index{leave!syntax}
+\index[doc]{leave}
+\index[doc]{syntax!leave}
+\index[doc]{leave!syntax}
 \begin{chunk}{leave.help}
 ====================================================================
 leave in loops
@@ -27573,9 +27573,9 @@ lets you simulate the action of leave.
 
 \section{syntax parallel}
 \label{parallel}
-\index{parallel}
-\index{syntax!parallel}
-\index{parallel!syntax}
+\index[doc]{parallel}
+\index[doc]{syntax!parallel}
+\index[doc]{parallel!syntax}
 \begin{chunk}{parallel.help}
 ====================================================================
 parallel iteration
@@ -27683,9 +27683,9 @@ Here are useful rules for composing loop expressions:
 
 \section{syntax repeat}
 \label{repeat}
-\index{repeat}
-\index{syntax!repeat}
-\index{repeat!syntax}
+\index[doc]{repeat}
+\index[doc]{syntax!repeat}
+\index[doc]{repeat!syntax}
 \begin{chunk}{repeat.help}
 ====================================================================
 Repeat Loops
@@ -27882,9 +27882,9 @@ o )help lists
 
 \section{syntax suchthat}
 \label{suchthat}
-\index{suchthat}
-\index{syntax!suchthat}
-\index{suchthat!syntax}
+\index[doc]{suchthat}
+\index[doc]{syntax!suchthat}
+\index[doc]{suchthat!syntax}
 \begin{chunk}{suchthat.help}
 ====================================================================
 Such that predicates
@@ -27953,9 +27953,9 @@ where feature is one of:
 \end{chunk}
 
 \section{syntax while}
-\index{while}
-\index{syntax!while}
-\index{while!syntax}
+\index[doc]{while}
+\index[doc]{syntax!while}
+\index[doc]{while!syntax}
 \begin{chunk}{while.help}
 ====================================================================
 while loops
@@ -40659,9 +40659,9 @@ naglink      show NAGLink messages                      on
 
 TPDHERE: This is a duplicate of )set mes bot on because both use the
 \verb|$reportBottomUpFlag| flag
-\index{\$reportBottomUpFlag}
-\index{defvar!\$reportBottomUpFlag}
-\index{\$reportBottomUpFlag!defvar}
+\index[doc]{\$reportBottomUpFlag}
+\index[doc]{defvar!\$reportBottomUpFlag}
+\index[doc]{\$reportBottomUpFlag!defvar}
 \begin{chunk}{messagesselection}
      (|selection|
       "display function selection msgs"
@@ -41077,9 +41077,9 @@ double       enforce DOUBLE PRECISION ASPs              on
 
 \end{verbatim}
 TPDHERE: this is the same as )set nag mes on
-\index{\$nagMessages}
-\index{defvar!\$nagMessages}
-\index{\$nagMessages!defvar}
+\index[doc]{\$nagMessages}
+\index[doc]{defvar!\$nagMessages}
+\index[doc]{\$nagMessages!defvar}
 \begin{chunk}{naglinkmessages}
      (|messages|
       "show NAGLink messages"
