@@ -1,3 +1,4 @@
+%%%% -*- Mode: LaTeX; -*-
 \documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume 2: Axiom Users Guide}
 \input{bookheader.tex}

@@ -1,3 +1,4 @@
+%%%% -*- Mode: LaTeX; -*-
 \documentclass[dvips]{book}
 \newcommand{\VolumeName}{Volume 0: Axiom Jenks and Sutor}
 \input{bookheader.tex}

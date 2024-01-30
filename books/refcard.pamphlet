@@ -1,3 +1,4 @@
+%%%% -*- Mode: LaTeX; -*-
 \documentclass{article}
 \usepackage[landscape]{geometry}
 \usepackage{multicol}
