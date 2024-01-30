@@ -627,7 +627,6 @@ ${PDF}/toc.pdf: ${BOOKPDF}
 \getchunk{sed pattern}
             <bookvolbib.toc >>toc.toc ; \
 	if [ -z "${NOISE}" ] ; then \
-          # NOTE: "-interaction=nonstopmode" is from Debian patch, by Camm Maguire
 	  ${LATEX} -interaction=nonstopmode toc.tex ; \
 	  ${DVIPS} toc.dvi 2>/dev/null ; \
 	  ${PS2PDF} toc.ps 2>/dev/null ; \
