@@ -33,8 +33,8 @@ Macsyma & embarked on the, ultimately futile, ``new rational function''
 project, which was to have re-written much of the algebraic kernel in
 a more mathematically structured way, but which was unable to maintain
 backwards compatibility.\\
-Reduce & developed into Reduce 3, with its concept of domains , which
-meant that new constant domains could be added relatively simply
+Reduce & developed into Reduce 3, with its concept of domains, which
+meant that new constant domains could be added relatively simply.
 See Bradford et al.\cite{Brad86}\\
 Waterloo's & emerging team decided that none of the existing solutions
 was right, and opted for a new design based round a very small kernel,
@@ -383,7 +383,7 @@ algebra system.
 
 We note that the second use of integrate did not require, and indeed
 can not be given, a variable. Since the expression is a series in 
-$x-\pi/2$, it can only be integrated with respect to $x$ , and the type system
+$x-\pi/2$, it can only be integrated with respect to $x$, and the type system
 ensures this. In fact the domains of these results are, respectively,
 {\tt Expression Integer}, which is the workhorse for much of calculus,
 {\tt Union(Expression Integer,List Expression Integer)} and\\
@@ -430,13 +430,13 @@ data types are defined, the definition includes some coerce functions
 between the new type and some existing types.  However, the {\bf ::}
 operator is more than just one of these programmed conversions: it is
 at least what an algebraist would call the transitive closure of these
-operations, so that if there are {\tt coerce} functions from A to B , and
-from B to C , then {\bf ::} can convert from A to C . In fact, it is more
+operations, so that if there are {\tt coerce} functions from A to B, and
+from B to C, then {\bf ::} can convert from A to C . In fact, it is more
 than this: if a functor, such as {\tt List} possesses a {\tt map} operation 
 of signature
 \[( A \rightarrow B , List\thinspace{} A ) \rightarrow List\thinspace{} B\]
 
-and it is possible to coerce objects from A to B , then the system
+and it is possible to coerce objects from A to B, then the system
 will be able to coerce objects from {\tt List A} to {\tt List B}. 
 More details are given in Sutor \& Jenks \cite{Jenk92}.
 
@@ -527,7 +527,7 @@ branch and are equal in that branch;}
 \item {\sl coercion from each $D_i$ to the union domain;}
 \item {\sl coercion to each $D_i$ from the union domain, which may fail if 
 the union object is not in the correct branch;}
-\item {\sl an in x predicate case , for testing if the union object 
+\item {\sl an in x predicate case, for testing if the union object 
 actually is in a particular branch or not.}
 \end{itemize}
 {\sl These union domains correspond to what some other languages call 
@@ -683,10 +683,10 @@ symbols (such as $+$) or complete english words strung together. In this
 case, every word after the first is capitalised. Thus {\tt integrate}
 but {\tt complexIntegrate}. In addition:}
 \begin{itemize}
-\item {\sl all boolean predicates end in a {\bf ?} , as in {\tt odd?}, 
+\item {\sl all boolean predicates end in a {\bf ?}, as in {\tt odd?}, 
 which tests if a number is odd}
 \item {\sl all destructive functions which operate on data structures 
-end in a {\bf !} , as in {\tt reverse!}, which reverses a list destructively.}
+end in a {\bf !}, as in {\tt reverse!}, which reverses a list destructively.}
 \end{itemize}
 {\sl Conversely, the names of domains (and other constructors we will come 
 to later) consist of english words strung together, all of which are 
@@ -694,7 +694,7 @@ capitalised, as in {\tt IntegerMod} or {\tt UnivariatePuiseuxSeries}.}
 
 One can search (case-insensitively) for all functions whose name contains 
 a particular word by using the system command {\tt )what operations}, 
-contractible to {\tt )w o} , as in
+contractible to {\tt )w o}, as in
 \begin{verbatim}
 ->)what operations series
 
@@ -702,7 +702,7 @@ Operations whose names satisfy the above pattern(s):
 
 series        seriesSolve
 
-  To get more information about an operation, say series , issue the
+  To get more information about an operation, say series, issue the
   command )display op series
 \end{verbatim}
 
@@ -838,7 +838,7 @@ of {\tt SetCategory} is.
 \end{verbatim}
 
 This output shows that there are two operations defined on any domain, 
-denoted by \pct{} , which belongs to the category {\tt SetCategory}: 
+denoted by \pct{}, which belongs to the category {\tt SetCategory}: 
 an infix operation $=$ which takes two arguments from \pct{} and
 yields a {\tt Boolean} result, and an operation called {\tt coerce}, 
 which takes an element of \pct{}, and yields an {\tt OutputForm}. 
@@ -1135,7 +1135,7 @@ upper-case letters (seven in the case of categories). These serve
 two purposes: they can be used on input and output in order to make the 
 names of the types shorter, and they denote the directory in which the 
 corresponding Axiom library lives. The defaults for category {\tt Cat}, 
-with abbreviation {\tt CAT}, are called {\tt Cat\&} , 
+with abbreviation {\tt CAT}, are called {\tt Cat\&}, 
 with abbreviation {\tt CAT-}.}
 
 For example, the abbreviation for {\tt Integer} is {\tt INT}, and 
@@ -3003,7 +3003,7 @@ branch and are equal in that branch;}
 \item {\sl coercion from each $D_i$ to the union domain;}
 \item {\sl coercion to each $D_i$ from the union domain, which may fail if 
 the union object is not in the correct branch;}
-\item {\sl an in x predicate case , for testing if the union object 
+\item {\sl an in x predicate case, for testing if the union object 
 actually is in a particular branch or not.}
 \end{itemize}
 {\sl These union domains correspond to what some other languages call 
@@ -3079,10 +3079,10 @@ symbols (such as $+$) or complete english words strung together. In this
 case, every word after the first is capitalised. Thus {\tt integrate}
 but {\tt complexIntegrate}. In addition:}
 \begin{itemize}
-\item {\sl all boolean predicates end in a {\bf ?} , as in {\tt odd?}, 
+\item {\sl all boolean predicates end in a {\bf ?}, as in {\tt odd?}, 
 which tests if a number is odd}
 \item {\sl all destructive functions which operate on data structures 
-end in a {\bf !} , as in {\tt reverse!}, which reverses a list destructively.}
+end in a {\bf !}, as in {\tt reverse!}, which reverses a list destructively.}
 \end{itemize}
 {\sl Conversely, the names of domains (and other constructors we will come 
 to later) consist of english words strung together, all of which are 
@@ -3105,7 +3105,7 @@ upper-case letters (seven in the case of categories). These serve
 two purposes: they can be used on input and output in order to make the 
 names of the types shorter, and they denote the directory in which the 
 corresponding Axiom library lives. The defaults for category {\tt Cat}, 
-with abbreviation {\tt CAT}, are called {\tt Cat\&} , 
+with abbreviation {\tt CAT}, are called {\tt Cat\&}, 
 with abbreviation {\tt CAT-}.}
 
 \chapter{Example Code}
