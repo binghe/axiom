@@ -594,7 +594,7 @@ omitted for common types in the interactive language.
 So much for the nutshell.
 Here are these basic ideas described by ten design principles:
 
-\subsection{Types are Defined by Abstract Datatype Programs}
+\section{Types are Defined by Abstract Datatype Programs}
 
 Basic types are called {\it domains of computation}, or,
 simply, {\it domains.}
@@ -644,7 +644,7 @@ objects of the domain. Thus the operation of adding two vectors of
 real numbers can be described and implemented using the addition
 operation from {\tt Float}. 
 
-\subsection{The Type of Basic Objects is a Domain or Subdomain}
+\section{The Type of Basic Objects is a Domain or Subdomain}
 
 Every Axiom object belongs to a {\it unique} domain.  The domain
 of an object is also called its {\it type.}  Thus the integer $7$
@@ -665,7 +665,7 @@ however, must list a subset of the exports of the domain.  The {\tt
 Implementation} part optionally gives special definitions for
 subdomain objects.
 
-\subsection{Domains Have Types Called Categories}
+\section{Domains Have Types Called Categories}
 
 Domains and subdomains in Axiom are themselves objects that have
 types.  The type of a domain or subdomain is called a {\it category}.
@@ -698,7 +698,7 @@ but ``matrix of lists'' is not.
 Categories say nothing about representation. Domains, which are
 instances of category types, specify representations.
 
-\subsection{Operations Can Refer To Abstract Types}
+\section{Operations Can Refer To Abstract Types}
 
 All operations have prescribed source and target types.  Types can be
 denoted by symbols that stand for domains, called ``symbolic
@@ -722,7 +722,7 @@ $power("oxford",2)$ however fails since $"oxford"$ has type
 Using symbolic domains, algorithms can be defined in their most
 natural or general setting.
 
-\subsection{Categories Form Hierarchies}
+\section{Categories Form Hierarchies}
 
 Categories form hierarchies (technically, directed-acyclic graphs).  A
 simplified hierarchical world of algebraic categories is shown below.
@@ -744,7 +744,7 @@ SetCategory +---- Ring       ---- IntegralDomain ---- Field
 Figure 1.  A  simplified category hierarchy.
 \end{center}
 
-\subsection{Domains Belong to Categories by Assertion}
+\section{Domains Belong to Categories by Assertion}
 
 A category designates a class of domains.  Which domains?  You might
 think that {\tt Ring} designates the class of all domains that
@@ -790,7 +790,7 @@ definition for {\tt abs} in Axiom is protected by context:
 argument $x$ is required to be a member of a domain of category
 {\tt OrderedSet}.
 
-\subsection{Packages Are Clusters of Polymorphic Operations}
+\section{Packages Are Clusters of Polymorphic Operations}
 
 In Axiom, facilities for symbolic integration, solution of
 equations, and the like are placed in ``packages''.  A {\it package}
@@ -813,7 +813,7 @@ compiled your package, your algorithms can then be used for any {\tt F}:
 floating-point numbers, rational numbers, complex rational functions,
 and power series, to name a few.
 
-\subsection{The Interpreter Builds Domains Dynamically}
+\section{The Interpreter Builds Domains Dynamically}
 
 The Axiom interpreter reads user input then builds whatever types
 it needs to perform the indicated computations.
@@ -865,7 +865,7 @@ the argument of {\tt Matrix} is required to be a {\tt Ring},
 Axiom will not build nonsensical types such as ``matrices of
 input files''.
 
-\subsection{Axiom Code is Compiled}
+\section{Axiom Code is Compiled}
 
 Axiom programs are statically compiled to machine code, then
 placed into library modules.  Categories provide an important role in
@@ -878,7 +878,7 @@ obtaining efficient object code by enabling:
 though {\tt R} is unknown).
 \end{itemize}
 
-\subsection{Axiom is Extensible}
+\section{Axiom is Extensible}
 
 Users and system implementers alike use the Axiom language to
 add facilities to the Axiom library.  The entire Axiom
@@ -910,7 +910,6 @@ then the objects of that domain can be used as parameters to any algorithm
 using field objects defined in the system; past, present, or future.
 \end{itemize}
 
-
 Before embarking on the tour, we need to brief those readers working
 interactively with Axiom on some details. 
 
@@ -926,6 +925,7 @@ of numbers, to data types (like lists, arrays, and sets) and
 mathematical objects (like matrices, integrals, and differential
 equations).  We include a discussion of system commands and an
 interactive ``undo.''
+
 \section{Starting Up and Winding Down}
 \label{sec:Starting Up and Winding Down}
 You need to know how to start the Axiom system and how to stop it.
