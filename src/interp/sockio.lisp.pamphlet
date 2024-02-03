@@ -48,6 +48,12 @@
 
 ;; load C socket functions
 
+(clines "
+#define GCL_SOURCE
+#include \"../lib/sockio-c.c\"
+#include \"../lib/bsdsignal.c\"
+")
+
 (in-package "BOOT")
 
 #+(and :Lucid (not :ibm/370))
@@ -90,25 +96,25 @@ string with data read from connection, therefore needs address of
 actual string buffer. We use [[sock_get_string_buf_wrapper]] to
 resolve the problem
 \begin{chunk}{*}
-  (clines "int sock_get_string_buf_wrapper(int i, object x, int j)"
+  (clines "fixnum sock_get_string_buf_wrapper(int i, object x, int j)"
           "{ char *sock_get_string_buf(int purpose, char * buf, int buf_len);"
           "  if (type_of(x)!=t_string) FEwrong_type_argument(sLstring,x);"
           "  if (x->st.st_fillp<j)"
           "    FEerror(\"string too small in sock_get_string_buf_wrapper\",0);"
-          "  return (int)sock_get_string_buf(i, x->st.st_self, j); }")
+          "  return (fixnum)sock_get_string_buf(i, x->st.st_self, j); }")
   (defentry open_server (string) (int "open_server"))
   (defentry sock_get_int (int) (int "sock_get_int"))
   (defentry sock_send_int (int int) (int "sock_send_int"))
   (defentry sock_get_string_buf (int object int) 
-     (int "sock_get_string_buf_wrapper"))
+     (fixnum "sock_get_string_buf_wrapper"))
   (defentry sock_send_string_len (int string int) (int "sock_send_string_len"))
   (defentry sock_get_float (int) (double "sock_get_float"))
   (defentry sock_send_float (int double) (int "sock_send_float"))
-  (defentry sock_send_wakeup (int int) (int "sock_send_wakeup"))
+  (defentry sock_send_wakeup (int) (int "sock_send_wakeup"))
   (defentry server_switch () (int "server_switch"))
-  (defentry flush_stdout () (int "flush_stdout"))
+  (defentry flush_stdout () (void "flush_stdout"))
   (defentry sock_send_signal (int int) (int "sock_send_signal"))
-  (defentry print_line (string) (int "print_line"))
+  (defentry print_line (string) (void "print_line"))
   (defentry plus_infinity () (double "plus_infinity"))
   (defentry minus_infinity () (double "minus_infinity"))
   (defentry NANQ () (double "NANQ"))

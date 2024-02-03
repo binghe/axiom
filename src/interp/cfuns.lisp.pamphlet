@@ -45,6 +45,10 @@
 \end{verbatim}
 \begin{chunk}{*}
 
+(clines "
+#define GCL_SOURCE
+#include \"../lib/cfuns-c.c\"
+")
 
 (in-package "BOOT")
 
