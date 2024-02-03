@@ -30040,7 +30040,7 @@ PSFiles= ${PS}/colorpoly.ps ${PS}/colorwol.ps  ${PS}/draw.ps      \
          ${PS}/end.ps       ${PS}/fillarc.ps   ${PS}/fillpoly.ps  \
          ${PS}/fillwol.ps   ${PS}/header.ps    ${PS}/setup.ps
 
-CFLAGS  = ${CCF} -I${SRC}/include -I{SYS}platform
+CFLAGS  = ${CCF} -I${SRC}/include -I${SYS}platform
 LDFLAGS = ${LDF} -lX11 -lm -lXpm
 
 VLIBS=${LIB}/sockio-c.o ${LIB}/util.o  ${LIB}/bsdsignal.o 
