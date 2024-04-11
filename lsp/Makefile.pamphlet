@@ -1951,55 +1951,6 @@ clean:
 
 \end{chunk}
 
-\subsection{The GCL-2.7.0 stanza}
-This stanza will be written when the GCLVERSION variable is
-``gcl-2.7.0''. It will overwrite the default version. See the 
-top level Makefile.pamphlet.
-\begin{chunk}{gcl-2.7.0}
-# gcl version 2.7.0
-OUT=${OBJ}/${SYS}/bin
-
-all:
-	@echo 1 building ${LSP} ${GCLVERSION}
-
-${BOOKS}/tangle1.lisp: ${BOOKS}/tangle.lisp
-	cp $< $@
-
-GCL?=$(GCLVERSION)/bin/gcl
-
-$(GCLVERSION)/bin/gcl:
-	@echo 2 building ${GCLVERSION}
-	@${TAR} -zxf ${ZIPS}/${GCLVERSION}.tgz
-	cd ${GCLVERSION} && ./configure ${GCLOPTS} && ${ENV} DESTDIR= ${MAKE}
-
-${OUT}/lisp: ${GCL} ${BOOKS}/tangle1.lisp
-	echo "(progn \
-		(load (compile-file \"${BOOKS}/tangle1.lisp\"))\
-		(compiler::emit-fn t)\
-                (setq si::*code-block-reserve* (make-array 40000000 :element-type 'character :static t))\
-		(when (fboundp 'si::sgc-on)(si::sgc-on nil))\
-		(si::save-system \"${OUT}/lisp\"))" | ${GCL}
-
-gcldir: ${OUT}/lisp
-
-ccldir: ${LSP}/ccl/Makefile
-	@echo 14 building CCL
-	@( cd ccl ; ${ENV} ${MAKE} )
-
-${LSP}/ccl/Makefile: ${LSP}/ccl/Makefile.pamphlet
-	@echo 15 making ${LSP}/ccl/Makefile from ${LSP}/ccl/Makefile.pamphlet
-	@( cd ccl ; ${DOCUMENT} ${NOISE} Makefile )
-
-document:
-	@echo 16 making docs in ${LSP}
-	@( cd ccl ; ${ENV} ${MAKE} document )
-
-clean:
-	@echo 17 cleaning ${LSP}/ccl
-	@( cd ccl ; ${ENV} ${MAKE} clean )
-
-\end{chunk}
-
 \section{Gnu Common Lisp 2.5}
 GCL 2.5 requires a different Makefile. In particular, GCL 2.5
 has a different method of building the lisp image. And, just to
